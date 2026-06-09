@@ -538,6 +538,23 @@ time = 1
 ;== screen -- the confirm routes are built around it.                      ==
 ;===========================================================================
 
+; --- 0. JUMP VETO : cancel reckless neutral jumps that feed anti-airs ------
+; Engine CPU mashes 'up' in neutral; vs a grounded foe that just fed her to
+; fast anti-airs. Intercept the prejump (40): abort-to-stand if the foe is
+; attacking (so the guard logic engages) else turn it into a grounded dash.
+; Jumps vs airborne / hitstun / knocked-down foes are kept (air-to-air, oki).
+[State -1, AI Jump Veto]
+type = changestate
+value = ifelse(p2movetype = A, 0, 100)
+triggerall = AILevel > 0
+trigger1 = stateno = 40
+trigger1 = p2statetype != A
+trigger1 = p2statetype != L
+trigger1 = p2movetype != H
+trigger1 = p2bodydist x < 150
+trigger1 = random < 900
+
+
 ; --- 1. ANTI-AIR (super) : metered punish vs jump-ins -----------------------
 [State -1, AI AA Super]
 type = varset
@@ -564,6 +581,31 @@ trigger1 = enemynear,vel y > -2
 trigger1 = p2bodydist x < 48
 trigger1 = random < 650
 
+; --- 2b. GUARD (high) : stand-block jump-ins / overheads -------------------
+[State -1, AI Guard High]
+type = changestate
+value = 130
+triggerall = AILevel > 0
+triggerall = var(38) = 0
+triggerall = stateno = [90,93]
+trigger1 = inguarddist
+trigger1 = enemynear,statetype = A
+trigger1 = random < 850
+
+; --- 2c. GUARD (low) : crouch-block grounded pressure ----------------------
+; Holds until the threat leaves range (see AILevel gates in chun-li.cns).
+; Crouch-guard covers lows + mids; overheads/jump-ins beat it on purpose.
+[State -1, AI Guard Low]
+type = changestate
+value = 131
+triggerall = AILevel > 0
+triggerall = var(38) = 0
+triggerall = stateno = [90,93]
+trigger1 = inguarddist
+trigger1 = enemynear,statetype != A
+trigger1 = random < 850
+
+
 ; --- 3. HIT-CONFIRM into Super (metered) : cancel any poke that landed -----
 [State -1, AI Confirm Super]
 type = varset
@@ -587,6 +629,24 @@ triggerall = stateno = [90,93]
 trigger1 = p2movetype = H
 trigger1 = p2bodydist x < 42
 trigger1 = random < 850
+
+; --- 4b. PUNISH : whiff/recovery punish, confirms into legs/super ----------
+; Anti-turtle piece: foe stuck in recovery (can't act, not attacking, not
+; down) and in range -> c.MK, which the confirm routes above cancel into
+; Lightning Legs / Super. Blocking flows into offense instead of a shell.
+[State -1, AI Punish Recovery]
+type = varset
+var(38) = 440
+triggerall = AILevel > 0
+triggerall = var(38) = 0
+triggerall = stateno = [90,93]
+trigger1 = enemynear,ctrl = 0
+trigger1 = enemynear,movetype = I
+trigger1 = enemynear,statetype != L
+trigger1 = enemynear,statetype != A
+trigger1 = p2bodydist x < 78
+trigger1 = random < 600
+
 
 ; --- 5. REVERSAL : occasional super to interrupt pressure (read) -----------
 [State -1, AI Reversal Super]
@@ -636,6 +696,23 @@ trigger1 = p2statetype != A
 trigger1 = p2movetype != H
 trigger1 = p2bodydist x < 22
 trigger1 = random < 220
+
+; --- 8b. ANTI-THROW : contest grabs at point-blank -------------------------
+; She has NO throw-tech state, so she can't tech. Partial mitigation only:
+; at point-blank vs an idle actionable foe she sometimes jabs (c.LP) to beat
+; a throw startup. Lower the random if she mashes into counter-hits.
+[State -1, AI Anti-throw Jab]
+type = varset
+var(38) = 400
+triggerall = AILevel > 0
+triggerall = var(38) = 0
+triggerall = stateno = [90,93]
+trigger1 = enemynear,ctrl
+trigger1 = enemynear,movetype = I
+trigger1 = enemynear,statetype = S
+trigger1 = p2bodydist x < 24
+trigger1 = random < 230
+
 
 ; --- 9. THROW : point-blank tick throw -------------------------------------
 [State -1, AI Throw]

@@ -1832,6 +1832,7 @@ value = 131
 type = ChangeState
 trigger1 = Anim = 130
 trigger1 = command != "holdback"
+trigger1 = AILevel = 0          ;<-- AI holds guard; human release unchanged
 trigger2 = Anim = 130
 trigger2 = !inguarddist
 trigger3 = Anim = 90 && AnimElemTime(4) = 0
@@ -1859,12 +1860,14 @@ value = 131
 [State 131, Lo to Hi]
 type = ChangeState
 trigger1 = command != "holddown"
+trigger1 = AILevel = 0          ;<-- AI holds guard; human release unchanged
 value = 130
 
 [State 131, Stop Guarding]
 type = ChangeState
 trigger1 = Anim = 131
 trigger1 = command != "holdback"
+trigger1 = AILevel = 0          ;<-- AI holds guard; human release unchanged
 trigger2 = Anim = 131
 trigger2 = !inguarddist
 trigger3 = Anim = 90 && AnimElemTime(4) = 0
