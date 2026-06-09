@@ -3,7 +3,7 @@
 name = "Tifa Lockhart"        
 displayname = "Tifa Lockhart" 
 versiondate = 05,27,2009      
-mugenversion = 06,14,2003     
+mugenversion = 1.0     
 author = "YAMAKICHI"          
 pal.defaults = 1,2          
 

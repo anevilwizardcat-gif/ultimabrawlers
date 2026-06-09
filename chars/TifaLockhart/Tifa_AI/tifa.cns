@@ -7,7 +7,7 @@
 life = 1000              ;‘Ì—ÍƒQ[ƒW‚Ì‰Šú’l
 attack = 100             ;UŒ‚—Íi‚±‚êˆÈã‚Éİ’è‚·‚é‚Æ‹­‚­‚È‚éj
 defence = 100            ;–hŒä—Íi‚±‚êˆÈã‚Éİ’è‚·‚é‚Æ‹­‚­‚È‚éj
-fall.defence_up = 50     ;ƒRƒ“ƒ{‚ğ‚­‚ç‚Á‚Ä‚¢‚é‚É‚ ‚ª‚é–hŒä—Í
+fall.defence_up = 50     ;ƒRƒ“ƒ{‚ğ‚­‚ç‚Á‚Ä‚¢‚é‚É‚ ‚ª‚é–hŒä—Í
 liedown.time = 60        ;“|‚ê‚Ä‚©‚ç‹Nã‚ª‚é‚Ü‚Å‚ÌƒtƒŒ[ƒ€”
 airjuggle = 15           ;‹ó’†‚Å‚Ç‚ê‚¾‚¯ƒRƒ“ƒ{‚ªŒq‚ª‚é‚©i‚‚­‚·‚é‚Æ–³ŒÀƒRƒ“ƒ{‚É‚È‚é‚Ì‚Å’ˆÓj
 sparkno = 2              ;hitdef‚Åİ’è‚µ‚Ä‚¢‚È‚¢‚ÌŠî–{ƒqƒbƒgƒXƒp[ƒNƒiƒ“ƒo[
@@ -55,6 +55,30 @@ yaccel = .44             ;d—Í
 stand.friction = .85     ;—§‚¿ó‘Ô‚Ì–€CŒW”
 crouch.friction = .82    ;‹ü‚İó‘Ô‚Ì–€CŒW”
 
+[Quotes]
+victory0 = "Feel the power of Nibelheim-style martial arts!"
+victory1 = "Hey! Look up here! See THIS? It's my face! Those things you were staring at? NOT my face! Got it?"
+victory2 = "Ooh, it's rush hour! Gotta get back to 7th Heaven and get ready for business!"
+victory3 = "I've got knuckles of steel!"
+victory4 = "...Whoops. That was a bit too much, huh?"
+victory5 = "When it comes down to might or magic, might's always got it!"
+victory6 = "Ahh.... All done."
+victory7 = "Let's spar again when you're stronger."
+victory8 = "Too strong for ya, huh?"
+victory9 = "That was rather underwhelming."
+victory10 = "You need to train more! Just kidding."
+victory11 = "I wonder if this is what people call a miracle...?"
+victory12 = "Looks like my training paid off!"
+victory13 = "Ah...that was a close call!"
+victory14 = "Well, gee! If you're not going to even try, just go home!"
+victory15 = "Would kill for a shower."
+
+victory30 = "Every day, Cloud, you get stronger. Don't ever give up, OK? I believe in you." ;Cloud
+victory31 = "Thought you could copy me and get away with it? I don't think so!" ;Mirror match 
+victory32 = "You've caused us enough pain, Sephiroth! It ends now!" ;Sephiroth
+victory33 = "Strongest woman in the world? Don't think so." ;Chun-Li
+ 
+
 ;===========================================================================
 ; g—pVar
 ;===========================================================================
@@ -86,6 +110,44 @@ time = 1
 ;---------------------------------------------------------------------------
 [Statedef 180]
 type = S
+
+[State 180, Victory Quotes(non-specific)]
+type=VictoryQuote
+trigger1=1
+value=random%18
+
+[State -3, Vs. Cloud]
+type = VictoryQuote
+triggerall = NumEnemy
+trigger1 = EnemyNear, Name = "Cloud Strife"
+trigger2 = EnemyNear, Name = "Cloud"
+trigger3 = EnemyNear, Name = "ZeroCloud"
+trigger4 = EnemyNear, Name = "Cloud_S"
+value = 30
+
+[State -3, Mirror]
+type = VictoryQuote
+triggerall = NumEnemy
+trigger1 = EnemyNear, Name = "Tifa Lockhart"
+trigger2 = EnemyNear, Name = "Tifa"
+trigger3 = EnemyNear, Name = "ZeroTifa"
+trigger4 = EnemyNear, Name = "Tifa_L"
+value = 31
+
+[State -3, Vs. Sephiroth]
+type = VictoryQuote
+triggerall = NumEnemy
+trigger1 = EnemyNear, Name = "Sephiroth"
+value = 32
+
+[State -3, Vs. Chun-Li]
+type = VictoryQuote
+triggerall = NumEnemy
+trigger1 = EnemyNear, Name = "Chun-Li"
+trigger2 = EnemyNear, Name = "Chun Li"
+trigger3 = EnemyNear, Name = "ChunLi"
+trigger4 = EnemyNear, Name = "cvschunli" 
+value = 33
 
 [State 180,01]
 type = ChangeState
