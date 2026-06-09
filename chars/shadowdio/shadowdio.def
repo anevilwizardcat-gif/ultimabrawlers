@@ -1,0 +1,42 @@
+;***************************************************************************;
+;******************* Created in Fighter Factory Ultimate *******************;
+;*******************      http://www.virtualltek.com     *******************;
+;***************************************************************************;
+
+[Info]
+name = "shadow dio"
+displayname = "Shadow DIO"
+versiondate = 09,08,2011
+mugenversion = 06,14,2003
+author = "Warusaki3"
+pal.defaults = 4,5
+
+[Files]
+sprite = shadowdio.sff
+anim = shadowdio.air
+sound = shadowdio.snd
+cmd = shadowdio.cmd
+cns = shadowdio.cns
+stcommon = common1.cns
+st = shadowdio.cns
+st1 = shadowdio_system.cns
+st2 = shadowdio_damage.cns
+st3 = config.txt
+;st4 = m-ism.act
+st5 = AI_Helpers.st
+pal1 = act004.act
+pal2 = act005.act
+pal3 = act006.act
+pal4 = act001.act
+pal5 = act002.act
+pal6 = act003.act
+pal7 = act010.act
+pal8 = act011.act
+pal9 = act012.act
+pal10 = act007.act
+pal11 = act008.act
+pal12 = act009.act
+
+[Arcade]
+intro.storyboard = 
+;ending.storyboard = 
