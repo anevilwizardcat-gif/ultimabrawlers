@@ -527,24 +527,32 @@ time = 1
 
 ;===========================================================================
 ;== CHUN-LI AI  (SF3 3rd Strike footsie / hit-confirm brain)              ==
-;== Added by request. ALL logic gated on AILevel > 0 -> zero effect on    ==
-;== human play. Execution uses her own var(38) buffer, so cancels/combos  ==
-;== run through her real engine. To DISABLE: delete this whole banner block.==
-;==                                                                        ==
-;== TUNING: each behaviour ends in 'random < N' (N out of 1000) = its      ==
-;== per-frame chance to fire. Raise N = more aggressive/reactive, lower =  ==
-;== calmer. Reactions (anti-air / confirm) are high so they're reliable.   ==
-;== For best results, select her SUPER ART 2 (Houyokusen) in the select    ==
-;== screen -- the confirm routes are built around it.                      ==
-;===========================================================================
+;== v3.2.                                                                 ==
+;== Architecture: states 90-95 are PARRY states; var(38) buffer is the    ==
+;== parry-cancel only. All offense is direct ChangeState (human-style).   ==
+;== Cancelable normals: 200/205 s.LP, 210 s.MP, 260/265, 400 c.LP,        ==
+;==   420 c.HP, 430 c.LK, 440 c.MK. NOT: 220, 410, 230, 240-245, 250-275. ==
+;== var(19) = cancel countdown (19f, set on contact, ticks during         ==
+;==   hitpause) -> all combo cancels run ignorehitpause = 1 so they fire  ==
+;==   inside the freeze: crisp, never-dropped confirms.                   ==
+;== Guard heights: 130 stand blocks mids/overheads, 131 crouch blocks     ==
+;==   lows -> mirror the attacker's stance (v3.1 crouched vs everything   ==
+;==   and ate every mid).                                                 ==
+;== Dash 100 is ctrl=0 the whole way -> dash-cancel guard added.          ==
+;== Every controller: AILevel-gated + !ishelper.                          ==
 
-; --- 0. JUMP VETO : cancel reckless neutral jumps that feed anti-airs ------
-; Engine CPU mashes 'up' in neutral; vs a grounded foe that just fed her to
-; fast anti-airs. Intercept the prejump (40): abort-to-stand if the foe is
-; attacking (so the guard logic engages) else turn it into a grounded dash.
-; Jumps vs airborne / hitstun / knocked-down foes are kept (air-to-air, oki).
+; --- 0a. NO TAUNT --------------------------------------------------------
+[State -1, AI No Taunt]
+type = changestate
+triggerall = !ishelper
+value = 0
+triggerall = AILevel > 0
+trigger1 = stateno = 195 || stateno = 196
+
+; --- 0b. JUMP VETO -------------------------------------------------------
 [State -1, AI Jump Veto]
 type = changestate
+triggerall = !ishelper
 value = ifelse(p2movetype = A, 0, 100)
 triggerall = AILevel > 0
 trigger1 = stateno = 40
@@ -552,224 +560,455 @@ trigger1 = p2statetype != A
 trigger1 = p2statetype != L
 trigger1 = p2movetype != H
 trigger1 = p2bodydist x < 150
-trigger1 = random < 900
-
-
-; --- 1. ANTI-AIR (super) : metered punish vs jump-ins -----------------------
-[State -1, AI AA Super]
-type = varset
-var(38) = ifelse(var(58)=3,3100,ifelse(var(58)=4,3200,3000))
-triggerall = AILevel > 0
-triggerall = var(38) = 0
-triggerall = stateno = [90,93]
-triggerall = var(58) = [2,4]
-triggerall = power >= ifelse(var(58)=3,1040,ifelse(var(58)=4,720,880))
-trigger1 = enemynear,statetype = A
-trigger1 = enemynear,vel y > -1
-trigger1 = p2bodydist x < 55
-trigger1 = random < 450
-
-; --- 2. ANTI-AIR (Spinning Bird Kick) : default reliable AA -----------------
-[State -1, AI AA SBK]
-type = varset
-var(38) = 1210
-triggerall = AILevel > 0
-triggerall = var(38) = 0
-triggerall = stateno = [90,93]
-trigger1 = enemynear,statetype = A
-trigger1 = enemynear,vel y > -2
-trigger1 = p2bodydist x < 48
-trigger1 = random < 650
-
-; --- 2b. GUARD (high) : stand-block jump-ins / overheads -------------------
-[State -1, AI Guard High]
-type = changestate
-value = 130
-triggerall = AILevel > 0
-triggerall = var(38) = 0
-triggerall = stateno = [90,93]
-trigger1 = inguarddist
-trigger1 = enemynear,statetype = A
 trigger1 = random < 850
 
-; --- 2c. GUARD (low) : crouch-block grounded pressure ----------------------
-; Holds until the threat leaves range (see AILevel gates in chun-li.cns).
-; Crouch-guard covers lows + mids; overheads/jump-ins beat it on purpose.
-[State -1, AI Guard Low]
-type = changestate
-value = 131
-triggerall = AILevel > 0
-triggerall = var(38) = 0
-triggerall = stateno = [90,93]
-trigger1 = inguarddist
-trigger1 = enemynear,statetype != A
-trigger1 = random < 850
-
-
-; --- 3. HIT-CONFIRM into Super (metered) : cancel any poke that landed -----
-[State -1, AI Confirm Super]
+; --- 1. PARRY (deliberate) -----------------------------------------------
+[State -1, AI Parry Arm High]
 type = varset
-var(38) = ifelse(var(58)=3,3100,ifelse(var(58)=4,3200,3000))
+triggerall = !ishelper
+var(21) = 1
+triggerall = AILevel > 0
+triggerall = var(21) = 0
+triggerall = roundstate = 2
+triggerall = statetype != A
+trigger1 = ctrl || stateno = 130 || stateno = 131
+trigger1 = inguarddist
+trigger1 = enemynear,movetype = A
+trigger1 = enemynear,statetype != C
+trigger1 = random < 170
+
+[State -1, AI Parry Arm Low]
+type = varset
+triggerall = !ishelper
+var(23) = 1
+triggerall = AILevel > 0
+triggerall = var(23) = 0
+triggerall = roundstate = 2
+triggerall = statetype != A
+trigger1 = ctrl || stateno = 130 || stateno = 131
+trigger1 = inguarddist
+trigger1 = enemynear,movetype = A
+trigger1 = enemynear,statetype = C
+trigger1 = random < 170
+
+; --- 2. PARRY PUNISH (the one true var(38) use) ---------------------------
+; With meter: buffer the Super Art. Without: c.MK only if it will reach.
+[State -1, AI Parry Punish]
+type = varset
+triggerall = !ishelper
+var(38) = ifelse(var(58) = 2 && power >= 880, 3000, ifelse(var(58) = 3 && power >= 1040, 3100, ifelse(var(58) = 4 && power >= 720, 3200, ifelse(p2bodydist x < 55, 440, 0))))
 triggerall = AILevel > 0
 triggerall = var(38) = 0
-triggerall = stateno = [90,93]
-triggerall = var(58) = [2,4]
-triggerall = power >= ifelse(var(58)=3,1040,ifelse(var(58)=4,720,880))
-trigger1 = p2movetype = H
+trigger1 = stateno = [90,93]
+trigger1 = AnimElemTime(4) < 3
+trigger1 = p2bodydist x < 95
+
+; --- 3. COMBO ENGINE : ignorehitpause cancels = confirms never drop --------
+; 3a. SUPER CANCEL on confirmed hit from any cancelable normal
+[State -1, AI Cancel Super]
+type = changestate
+triggerall = !ishelper
+value = ifelse(var(58) = 2, 3000, ifelse(var(58) = 4, 3200, 3100))
+ignorehitpause = 1
+triggerall = AILevel > 0
+triggerall = (var(58) = 2 && power >= 880) || (var(58) = 3 && power >= 1040) || (var(58) = 4 && power >= 720)
+triggerall = statetype != A
+trigger1 = movehit
+trigger1 = var(19)
+trigger1 = stateno = [200,440]
+trigger1 = stateno != 220 && stateno != 410
+trigger1 = stateno != 230 && (stateno != [240,242]) && stateno != 245
+trigger1 = (stateno != [250,275]) || (stateno = [260,265])
+trigger1 = random < 920
+
+; 3b. LINK c.MK : confirmed c.LK -> c.MK (the classic deep confirm)
+[State -1, AI Link c.MK]
+type = changestate
+triggerall = !ishelper
+value = 440
+ignorehitpause = 1
+triggerall = AILevel > 0
+trigger1 = stateno = 430
+trigger1 = movehit
+trigger1 = p2bodydist x < 38
+trigger1 = random < 480
+
+; 3c. light chain: c.LP / far s.LP / c.LK on contact -> c.LK
+[State -1, AI Chain c.LK]
+type = changestate
+triggerall = !ishelper
+value = 430
+ignorehitpause = 1
+triggerall = AILevel > 0
+trigger1 = stateno = 400 || stateno = 205 || stateno = 430
+trigger1 = movecontact
+trigger1 = p2bodydist x < 36
+trigger1 = random < 820
+
+; 3d. LEGS CANCEL on contact when no meter (safe chip on block too)
+[State -1, AI Cancel Legs]
+type = changestate
+triggerall = !ishelper
+value = 1010
+ignorehitpause = 1
+triggerall = AILevel > 0
+triggerall = statetype != A
+triggerall = p2statetype != A
+trigger1 = movecontact
+trigger1 = var(19)
+trigger1 = stateno = [200,440]
+trigger1 = stateno != 220 && stateno != 410
+trigger1 = stateno != 230 && (stateno != [240,242]) && stateno != 245
+trigger1 = (stateno != [250,275]) || (stateno = [260,265])
 trigger1 = p2bodydist x < 45
 trigger1 = random < 700
 
-; --- 4. HIT-CONFIRM into Lightning Legs (meterless) ------------------------
-[State -1, AI Confirm Legs]
-type = varset
-var(38) = 1010
+; 3e. KIKOKEN CANCEL ender at range (safe fireball finish off c.MK tip)
+[State -1, AI Cancel Kikoken]
+type = changestate
+triggerall = !ishelper
+value = 1110
+ignorehitpause = 1
 triggerall = AILevel > 0
-triggerall = var(38) = 0
-triggerall = stateno = [90,93]
-trigger1 = p2movetype = H
-trigger1 = p2bodydist x < 42
-trigger1 = random < 850
+triggerall = statetype != A
+triggerall = p2statetype != A
+trigger1 = movecontact
+trigger1 = var(19)
+trigger1 = stateno = 440
+trigger1 = p2bodydist x >= 45
+trigger1 = random < 450
 
-; --- 4b. PUNISH : whiff/recovery punish, confirms into legs/super ----------
-; Anti-turtle piece: foe stuck in recovery (can't act, not attacking, not
-; down) and in range -> c.MK, which the confirm routes above cancel into
-; Lightning Legs / Super. Blocking flows into offense instead of a shell.
-[State -1, AI Punish Recovery]
-type = varset
-var(38) = 440
+; 3f. AIR CHAIN: any air normal on contact -> j.HK ender
+[State -1, AI Air Chain]
+type = changestate
+triggerall = !ishelper
+value = 650
+ignorehitpause = 1
 triggerall = AILevel > 0
-triggerall = var(38) = 0
-triggerall = stateno = [90,93]
-trigger1 = enemynear,ctrl = 0
+triggerall = statetype = A
+trigger1 = stateno = [600,645]
+trigger1 = movecontact
+trigger1 = p2statetype = A
+trigger1 = random < 750
+
+; 3g. JUMP-IN: falling near foe -> deep j.HK
+[State -1, AI Jump-in j.HK]
+type = changestate
+triggerall = !ishelper
+value = 650
+triggerall = AILevel > 0
+triggerall = statetype = A
+triggerall = stateno = 50
+trigger1 = vel y > 0
+trigger1 = p2statetype != L
+trigger1 = p2bodydist x < 42
+trigger1 = p2dist y > -25
+trigger1 = random < 880
+
+; 3h. LAND-LINK: touch down off an air hit -> c.MK to keep the string
+[State -1, AI Land Link]
+type = changestate
+triggerall = !ishelper
+value = 440
+triggerall = AILevel > 0
+trigger1 = stateno = 52
+trigger1 = prevstateno = [600,699]
+trigger1 = p2movetype = H
+trigger1 = p2bodydist x < 50
+trigger1 = random < 900
+
+; --- 4. PUNISH GAME ---------------------------------------------------------
+; 4a. RAW SUPER PUNISH: foe stuck in recovery with meter banked -> spend it
+[State -1, AI Punish Super]
+type = changestate
+triggerall = !ishelper
+value = ifelse(var(58) = 2, 3000, ifelse(var(58) = 4, 3200, 3100))
+triggerall = AILevel > 0
+triggerall = (var(58) = 2 && power >= 880) || (var(58) = 3 && power >= 1040) || (var(58) = 4 && power >= 720)
+triggerall = statetype != A
+triggerall = ctrl || (stateno = [130,141]) || (stateno = [150,155])
 trigger1 = enemynear,movetype = I
-trigger1 = enemynear,statetype != L
-trigger1 = enemynear,statetype != A
-trigger1 = p2bodydist x < 78
+trigger1 = enemynear,ctrl = 0
+trigger1 = p2statetype != A
+trigger1 = p2statetype != L
+trigger1 = p2bodydist x < 75
 trigger1 = random < 600
 
-
-; --- 5. REVERSAL : occasional super to interrupt pressure (read) -----------
-[State -1, AI Reversal Super]
-type = varset
-var(38) = ifelse(var(58)=3,3100,ifelse(var(58)=4,3200,3000))
-triggerall = AILevel > 0
-triggerall = var(38) = 0
-triggerall = stateno = [90,93]
-triggerall = var(58) = [2,4]
-triggerall = power >= ifelse(var(58)=3,1040,ifelse(var(58)=4,720,880))
-trigger1 = p2movetype = A
-trigger1 = p2bodydist x < 50
-trigger1 = random < 80
-
-; --- 6. POKE : crouching MK, her signature footsie button ------------------
-[State -1, AI Poke c.MK]
-type = varset
-var(38) = 440
-triggerall = AILevel > 0
-triggerall = var(38) = 0
-triggerall = stateno = [90,93]
-trigger1 = p2statetype != A
-trigger1 = p2movetype != H
-trigger1 = p2bodydist x = [22, 68]
-trigger1 = random < 260
-
-; --- 7. POKE : standing HK as a longer-range check -------------------------
-[State -1, AI Poke s.HK]
-type = varset
-var(38) = 250
-triggerall = AILevel > 0
-triggerall = var(38) = 0
-triggerall = stateno = [90,93]
-trigger1 = p2statetype != A
-trigger1 = p2movetype != H
-trigger1 = p2bodydist x = [55, 95]
-trigger1 = random < 130
-
-; --- 8. CLOSE POKE : crouching LK to start pressure ------------------------
-[State -1, AI Poke c.LK]
-type = varset
-var(38) = 430
-triggerall = AILevel > 0
-triggerall = var(38) = 0
-triggerall = stateno = [90,93]
-trigger1 = p2statetype != A
-trigger1 = p2movetype != H
-trigger1 = p2bodydist x < 22
-trigger1 = random < 220
-
-; --- 8b. ANTI-THROW : contest grabs at point-blank -------------------------
-; She has NO throw-tech state, so she can't tech. Partial mitigation only:
-; at point-blank vs an idle actionable foe she sometimes jabs (c.LP) to beat
-; a throw startup. Lower the random if she mashes into counter-hits.
-[State -1, AI Anti-throw Jab]
-type = varset
-var(38) = 400
-triggerall = AILevel > 0
-triggerall = var(38) = 0
-triggerall = stateno = [90,93]
-trigger1 = enemynear,ctrl
-trigger1 = enemynear,movetype = I
-trigger1 = enemynear,statetype = S
-trigger1 = p2bodydist x < 24
-trigger1 = random < 230
-
-
-; --- 9. THROW : point-blank tick throw -------------------------------------
-[State -1, AI Throw]
-type = varset
-var(38) = 800
-triggerall = AILevel > 0
-triggerall = var(38) = 0
-triggerall = stateno = [90,93]
-trigger1 = p2statetype != A
-trigger1 = p2movetype != H
-trigger1 = p2bodydist x < 14
-trigger1 = random < 150
-
-; --- 10. OVERHEAD MIXUP : Hazanshu to crack a turtling blocker -------------
-[State -1, AI Hazanshu]
-type = varset
-var(38) = 1310
-triggerall = AILevel > 0
-triggerall = var(38) = 0
-triggerall = stateno = [90,93]
-trigger1 = p2movetype != A
-trigger1 = p2bodydist x = [28, 75]
-trigger1 = random < 70
-
-; --- 11. ZONING : Kikoken at range to build meter & control space ---------
-[State -1, AI Kikoken]
-type = varset
-var(38) = 1110
-triggerall = AILevel > 0
-triggerall = var(38) = 0
-triggerall = stateno = [90,93]
-trigger1 = p2statetype != A
-trigger1 = p2bodydist x > 95
-trigger1 = random < 180
-
-; --- 12. APPROACH : forward dash to close into footsie range --------------
-[State -1, AI Approach]
+; 4b. GUARD-EXIT THROW: foe recovering at point blank while/after she blocks
+[State -1, AI Punish Throw]
 type = changestate
+triggerall = !ishelper
+value = 800
+triggerall = AILevel > 0
+triggerall = statetype != A
+triggerall = ctrl || (stateno = [130,141]) || (stateno = [150,155])
+trigger1 = enemynear,movetype = I
+trigger1 = enemynear,ctrl = 0
+trigger1 = p2statetype != A
+trigger1 = p2statetype != L
+trigger1 = p2bodydist x < 17
+trigger1 = random < 550
+
+; 4c. RECOVERY PUNISH: foe in recovery in range -> c.MK (confirms cancel)
+[State -1, AI Punish c.MK]
+type = changestate
+triggerall = !ishelper
+value = 440
+triggerall = AILevel > 0
+triggerall = statetype != A
+triggerall = ctrl || (stateno = [130,141]) || (stateno = [150,155])
+trigger1 = enemynear,movetype = I
+trigger1 = enemynear,ctrl = 0
+trigger1 = p2statetype != A
+trigger1 = p2statetype != L
+trigger1 = p2bodydist x < 70
+trigger1 = random < 650
+
+; 4d. WHIFF PUNISH: foe attacking but OUT of reach -> step on their limb
+[State -1, AI Whiff Punish c.MK]
+type = changestate
+triggerall = !ishelper
+value = 440
+triggerall = AILevel > 0
+triggerall = ctrl
+triggerall = statetype != A
+trigger1 = p2movetype = A
+trigger1 = !inguarddist
+trigger1 = p2statetype != A
+trigger1 = p2bodydist x = [30,75]
+trigger1 = random < 420
+
+; --- 5. GUARD : mirror the attacker's stance --------------------------------
+; Standing foes mostly hit mid (stand-block them); crouching foes hit low
+; (crouch-block). Small random flip keeps her honest vs odd flags.
+[State -1, AI Guard High]
+type = changestate
+triggerall = !ishelper
+value = 130
+triggerall = AILevel > 0
+triggerall = ctrl
+triggerall = statetype != A
+trigger1 = inguarddist
+trigger1 = enemynear,statetype = S || enemynear,statetype = A
+trigger1 = random < 800
+trigger2 = inguarddist
+trigger2 = enemynear,statetype = C
+trigger2 = random < 120
+
+[State -1, AI Guard Low]
+type = changestate
+triggerall = !ishelper
+value = 131
+triggerall = AILevel > 0
+triggerall = ctrl
+triggerall = statetype != A
+trigger1 = inguarddist
+trigger1 = enemynear,statetype = C
+trigger1 = random < 800
+trigger2 = inguarddist
+trigger2 = enemynear,statetype = S
+trigger2 = random < 120
+
+; 5b. DASH-CANCEL GUARD: dash 100 is ctrl=0 (helpless) -> bail into block
+; the moment she's dashing into a live attack.
+[State -1, AI Dash Guard]
+type = changestate
+triggerall = !ishelper
+value = ifelse(enemynear,statetype = C, 131, 130)
+triggerall = AILevel > 0
+trigger1 = stateno = 100
+trigger1 = inguarddist
+trigger1 = enemynear,movetype = A
+trigger1 = random < 750
+
+; --- 6. ANTI-AIR -------------------------------------------------------------
+; 6a. FAST AA: c.HP launcher vs quick jumps (cancelable -> air confirms)
+[State -1, AI Anti-Air c.HP]
+type = changestate
+triggerall = !ishelper
+value = 420
+triggerall = AILevel > 0
+triggerall = ctrl
+triggerall = statetype != A
+trigger1 = p2statetype = A
+trigger1 = p2bodydist x < 55
+trigger1 = p2dist y < -15
+trigger1 = random < 650
+
+; 6b. SBK only for deep, clearly descending jump-ins
+[State -1, AI Anti-Air SBK]
+type = changestate
+triggerall = !ishelper
+value = 1220
+triggerall = AILevel > 0
+triggerall = ctrl
+triggerall = statetype != A
+trigger1 = p2statetype = A
+trigger1 = p2bodydist x < 75
+trigger1 = p2dist y < -30
+trigger1 = enemynear,vel y > 1
+trigger1 = random < 500
+
+[State -1, AI Air-to-Air]
+type = changestate
+triggerall = !ishelper
+value = 620
+triggerall = AILevel > 0
+triggerall = statetype = A
+triggerall = stateno = 50
+trigger1 = p2statetype = A
+trigger1 = p2bodydist x < 55
+trigger1 = random < 500
+
+; --- 7. OKIZEME : own the knockdown -------------------------------------------
+; 7a. close the gap while they're down
+[State -1, AI Oki Approach]
+type = changestate
+triggerall = !ishelper
 value = 100
 triggerall = AILevel > 0
-triggerall = var(38) = 0
-triggerall = stateno = [90,91]
-trigger1 = p2bodydist x = [80, 150]
-trigger1 = p2statetype != A
-trigger1 = random < 140
+triggerall = ctrl
+triggerall = statetype != A
+trigger1 = p2statetype = L
+trigger1 = p2bodydist x > 50
+trigger1 = random < 280
 
-; --- 13. RETREAT : back dash to reset spacing when crowded ----------------
-[State -1, AI Retreat]
+; 7b. MEATY c.MK timed to wake-up (5120 std getup; 5100-5119 variants)
+[State -1, AI Meaty c.MK]
 type = changestate
+triggerall = !ishelper
+value = 440
+triggerall = AILevel > 0
+triggerall = ctrl
+triggerall = statetype != A
+triggerall = p2bodydist x < 40
+trigger1 = enemynear,stateno = 5120
+trigger1 = enemynear,animtime >= -9
+trigger1 = random < 520
+trigger2 = enemynear,stateno = [5100,5119]
+trigger2 = enemynear,animtime >= -9
+trigger2 = random < 520
+
+; 7c. wake-up THROW mixup
+[State -1, AI Meaty Throw]
+type = changestate
+triggerall = !ishelper
+value = 800
+triggerall = AILevel > 0
+triggerall = ctrl
+triggerall = statetype != A
+triggerall = p2bodydist x < 16
+trigger1 = enemynear,stateno = 5120
+trigger1 = enemynear,animtime >= -5
+trigger1 = random < 300
+trigger2 = enemynear,stateno = [5100,5119]
+trigger2 = enemynear,animtime >= -5
+trigger2 = random < 300
+
+; --- 8. NEUTRAL OFFENSE : decisive footsies -----------------------------------
+[State -1, AI Poke c.LK]
+type = changestate
+triggerall = !ishelper
+value = 430
+triggerall = AILevel > 0
+triggerall = ctrl
+triggerall = statetype != A
+trigger1 = p2statetype != A
+trigger1 = p2movetype != H
+trigger1 = p2bodydist x < 28
+trigger1 = random < 300 + (28 - p2bodydist x) * 10
+
+[State -1, AI Close s.MP]
+type = changestate
+triggerall = !ishelper
+value = 210
+triggerall = AILevel > 0
+triggerall = ctrl
+triggerall = statetype != A
+trigger1 = p2statetype = S
+trigger1 = p2movetype != H
+trigger1 = p2movetype != A
+trigger1 = p2bodydist x < 34
+trigger1 = random < 150
+
+[State -1, AI Poke c.MK]
+type = changestate
+triggerall = !ishelper
+value = 440
+triggerall = AILevel > 0
+triggerall = ctrl
+triggerall = statetype != A
+triggerall = p2movetype != H || p2statetype = L
+trigger1 = p2statetype != A
+trigger1 = p2movetype != A
+trigger1 = p2bodydist x = [28,72]
+trigger1 = random < 220
+
+; sweep: PUNISH-ONLY tool (recovering foes) -> free okizeme
+[State -1, AI Sweep]
+type = changestate
+triggerall = !ishelper
+value = 450
+triggerall = AILevel > 0
+triggerall = ctrl
+triggerall = statetype != A
+trigger1 = p2statetype != A
+trigger1 = p2movetype = I
+trigger1 = enemynear,ctrl = 0
+trigger1 = p2bodydist x = [30,58]
+trigger1 = random < 350
+
+[State -1, AI Kikoken]
+type = changestate
+triggerall = !ishelper
+value = 1100
+triggerall = AILevel > 0
+triggerall = ctrl
+triggerall = statetype != A
+trigger1 = p2statetype = S || p2statetype = C
+trigger1 = p2movetype != A
+trigger1 = p2bodydist x > 160
+trigger1 = random < 50
+
+; --- 9. THROW : the close-range answer ----------------------------------------
+[State -1, AI Throw]
+type = changestate
+triggerall = !ishelper
+value = 800
+triggerall = AILevel > 0
+triggerall = ctrl
+triggerall = statetype != A
+trigger1 = p2statetype != A
+trigger1 = p2statetype != L
+trigger1 = p2movetype != H
+trigger1 = p2movetype != A
+trigger1 = p2bodydist x < 17
+trigger1 = random < 380
+
+; --- 10. MOVEMENT ---------------------------------------------------------------
+[State -1, AI Approach Dash]
+type = changestate
+triggerall = !ishelper
+value = 100
+triggerall = AILevel > 0
+triggerall = ctrl
+triggerall = statetype != A
+trigger1 = p2bodydist x > 110
+trigger1 = p2movetype != A
+trigger1 = random < 110
+
+[State -1, AI Retreat Dash]
+type = changestate
+triggerall = !ishelper
 value = 105
 triggerall = AILevel > 0
-triggerall = var(38) = 0
-triggerall = stateno = [90,91]
-trigger1 = p2bodydist x < 18
+triggerall = ctrl
+triggerall = statetype != A
+trigger1 = p2bodydist x < 20
+trigger1 = p2statetype != L
 trigger1 = p2movetype != A
-trigger1 = random < 70
-;===========================================================================
+trigger1 = random < 30
+
 ;== END CHUN-LI AI =========================================================
 ;===========================================================================
 
