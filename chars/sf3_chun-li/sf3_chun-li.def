@@ -1,0 +1,31 @@
+[Info]
+name = "chun-li"
+displayname = "chun-li"
+versiondate = 12,11,2007
+mugenversion = 04,14,2002
+author = "muteki"
+pal.defaults = 1
+
+[Files]
+cmd     = chun-li.cmd
+cns     = chun-li.cns
+st      = chun-li.cns
+st2      = chun-li2.cns
+stcommon = common1.cns
+sprite  = chun-li.sff
+anim    = chun-li.air
+sound   = chun-li.snd
+pal1    = chun-li04.act
+pal2    = chun-li05.act
+pal3    = chun-li06.act
+pal4    = chun-li01.act
+pal5    = chun-li02.act
+pal6    = chun-li03.act
+pal7    = chun-li10.act
+pal8    = chun-li11.act
+pal9    = chun-li12.act
+pal10   = chun-li07.act
+pal11   = chun-li08.act
+pal12   = chun-li09.act
+
+[Arcade]

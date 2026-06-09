@@ -1,0 +1,38 @@
+
+[Info]
+name = "Tifa Lockhart"        
+displayname = "Tifa Lockhart" 
+versiondate = 05,27,2009      
+mugenversion = 06,14,2003     
+author = "YAMAKICHI"          
+pal.defaults = 1,2          
+
+[Files]
+cmd      = Tifa_AI/tifa.cmd     ;コマンド
+cns      = Tifa_AI/tifa.cns     ;定数と状態
+st       = Tifa_AI/tifa.cns     ;定数と状態 
+st1      = Tifa_AI/tifa_n.cns   ;特殊動作
+st2      = Tifa_AI/jump.cns     ;ハイジャンプ
+st3      = tifa_a.cns   ;必殺技
+st4      = Tifa_AI/tifa_s.cns   ;超必殺技
+st5      = tifa_s2.cns  ;超必殺技
+st6      = Tifa_AI/power.cns    ;パワー溜
+st7      = away.cns     ;回避
+stcommon = common1.cns  ;
+sprite   = tifa.sff     ;スプライト
+anim     = tifa.air     ;アニメ
+sound    = tifa.snd     ;サウンド
+
+;カラー
+pal1     = tifa1.act     ;ノーマル
+pal2     = tifa2.act     ;
+pal3     = tifa3.act     ;
+pal4     = tifa4.act     ;
+pal5     = tifa5.act     ;
+
+[Arcade]
+;オープニング
+;intro.storyboard = intro.def
+;エンディング
+;ending.storyboard = ending.def
+

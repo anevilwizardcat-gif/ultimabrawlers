@@ -1,0 +1,30 @@
+;lightning from final fantasy
+;madeby armin_iuf
+
+; Player information
+[Info]
+name ="lightning"       
+displayname ="Lightning" 
+versiondate =2017
+mugenversion =2017
+author ="armin_iuf" 
+pal.defaults =1,2,3  
+
+; Files for the player
+[Files]
+cmd     =lightning.cmd
+cns     =lightning.cns
+st      =lightning.cns
+stcommon =common1.cns
+sprite  =lightning.sff
+anim    =lightning.air
+sound   =lightning.snd
+pal1=pals/pl1.act
+pal2=pals/pl2.act
+pal3=pals/pl3.act
+
+
+
+
+
+
