@@ -20475,7 +20475,7 @@ triggerall = root,p2stateno != 5120
 triggerall = root,var(7)
 triggerall = (root,stateno = 200 || root,stateno = 400) && var(41) = 1
 triggerall = !root,var(39) && root,power >= 1000 && root,p2statetype != A
-triggerall = root,p2life >= 100+(119*root,fvar(1))/(enemy,Const(data.defence)/100)+(root,power>=2000)*100-(root,var(42)*10)+100*(root,life>=333)
+triggerall = root,p2life >= 100+(119*root,fvar(1))*100/enemy,Const(data.defence)+(root,power>=2000)*100-(root,var(42)*10)+100*(root,life>=333)
 triggerall = root,life < root,p2life || root,power >= 5500+1000 || root,life < 750
 triggerall = root,var(42) < 20-1 || root,life-root,p2life < 333 || root,power >= 5500+1000
 triggerall = root,p2bodydist x < 30+(enemynear,backedgedist<=0||enemynear,frontedgebodydist<=0)*20
@@ -20483,14 +20483,14 @@ triggerall = (p2stateno != [120,155]) || helper(33333),fvar(9) <= 3-(root,life<7
 trigger1 = root,power >= 3000
 trigger1 = root,p2statetype = S
 trigger1 = root,p2movetype = H && (root,p2stateno != [120,155])
-trigger1 = root,p2life = [100+(119*root,fvar(1))/(enemy,Const(data.defence)/100),500+(119*root,fvar(1))/(enemy,Const(data.defence)/100)]
+trigger1 = root,p2life = [100+(119*root,fvar(1))*100/enemy,Const(data.defence),500+(119*root,fvar(1))*100/enemy,Const(data.defence)]
 trigger1 = root,numhelper(33333) && root,numhelper(22222)
 trigger1 = (helper(22222),rootdist X >= 450+30 && root,facing = 1) || (helper(33333),rootdist X >= 450+30 &&root,facing = -1)
 trigger2 = root,var(12)
 trigger2 = root,power >= 4000
 trigger2 = root,p2statetype = S
 trigger2 = root,p2movetype = H && (root,p2stateno != [120,155])
-trigger2 = root,p2life = [200+(119*root,fvar(1))/(enemy,Const(data.defence)/100),600+(119*root,fvar(1))/(enemy,Const(data.defence)/100)]
+trigger2 = root,p2life = [200+(119*root,fvar(1))*100/enemy,Const(data.defence),600+(119*root,fvar(1))*100/enemy,Const(data.defence)]
 trigger2 = root,numhelper(33333) && root,numhelper(22222)
 trigger2 = (helper(22222),rootdist X >= 500+30 && root,facing = 1) || (helper(33333),rootdist X >= 500+30 && root,facing = -1)
 
@@ -42829,6 +42829,16 @@ ignorehitpause = 1
 
 ;---------------------------------------------------------------------------
 [Statedef -2]
+
+;== STAND BROADCAST : roster-wide AI protocol (additive; touches nothing) ==
+;  any AI can read enemynear,map(standActive):
+;  0 = stand off / no stand   1 = stand deployed   2 = tandem   3 = crashed
+[State -2, Stand Broadcast]
+type = mapset
+trigger1 = 1
+map = "standActive"
+value = var(8)
+ignorehitpause = 1
 
 ;configåƒÇ—èoÇµ
 [State 3001, Super]

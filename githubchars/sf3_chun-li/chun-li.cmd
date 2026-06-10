@@ -612,7 +612,7 @@ trigger5 = enemynear,power >= 1000
 trigger5 = random < 700
 trigger6 = ctrl || stateno = 130 || stateno = 131 || stateno = 5120 || (stateno = [90,95])
 trigger6 = inguarddist
-trigger6 = enemynear,var(8) = 2
+trigger6 = (enemynear,var(8) = 2) || (enemynear,map(standActive) = 2)
 trigger6 = random < 850
 trigger2 = ctrl || stateno = 130 || stateno = 131 || stateno = 5120
 trigger2 = inguarddist
@@ -646,7 +646,7 @@ trigger5 = enemynear,power >= 1000
 trigger5 = random < 700
 trigger6 = ctrl || stateno = 130 || stateno = 131 || stateno = 5120 || (stateno = [90,95])
 trigger6 = inguarddist
-trigger6 = enemynear,var(8) = 2
+trigger6 = (enemynear,var(8) = 2) || (enemynear,map(standActive) = 2)
 trigger6 = random < 850
 
 ; --- 2. PARRY PUNISH (the one true var(38) use) ---------------------------
@@ -773,7 +773,7 @@ triggerall = !ishelper
 value = 1020
 ignorehitpause = 1
 triggerall = AILevel > 0
-triggerall = (enemynear,var(8) != 1 && enemynear,var(8) != 2) || movehit   ;<-- stand up = no chip: hit-cancels only
+triggerall = (enemynear,var(8) != 1 && enemynear,var(8) != 2 && enemynear,map(standActive) < 1) || movehit   ;<-- stand up = no chip: hit-cancels only
 triggerall = enemynear,statetype != L   ;<-- the dead cannot be comboed
 triggerall = statetype != A
 triggerall = p2statetype != A
@@ -961,7 +961,7 @@ triggerall = !ishelper
 value = 440
 triggerall = AILevel > 0
 triggerall = !(enemynear,stateno = [3000,3060] && enemynear,time > 8)   ;<-- counters eat strikes
-triggerall = enemynear,var(8) != 2   ;<-- never swing into tandem
+triggerall = enemynear,var(8) != 2 && enemynear,map(standActive) != 2   ;<-- never swing into tandem
 triggerall = enemynear,statetype != L   ;<-- the dead cannot be comboed
 triggerall = p2dist x > -4   ;<-- never swing at someone behind you
 triggerall = ctrl
@@ -996,7 +996,7 @@ triggerall = !ishelper
 value = 210
 triggerall = AILevel > 0
 triggerall = !(enemynear,stateno = [3000,3060] && enemynear,time > 8)   ;<-- counters eat strikes
-triggerall = enemynear,var(8) != 2   ;<-- never swing into tandem
+triggerall = enemynear,var(8) != 2 && enemynear,map(standActive) != 2   ;<-- never swing into tandem
 triggerall = enemynear,statetype != L   ;<-- the dead cannot be comboed
 triggerall = p2dist x > -4
 triggerall = ctrl
@@ -1051,7 +1051,7 @@ value = 100
 triggerall = AILevel > 0
 triggerall = ctrl
 triggerall = statetype != A
-trigger1 = enemynear,var(8) = 2
+trigger1 = (enemynear,var(8) = 2) || (enemynear,map(standActive) = 2)
 trigger1 = p2dist x < -4
 trigger1 = random < 500
 
@@ -1400,7 +1400,7 @@ triggerall = !ishelper
 value = 210
 triggerall = AILevel > 0
 triggerall = !(enemynear,stateno = [3000,3060] && enemynear,time > 8)   ;<-- counters eat strikes
-triggerall = (enemynear,var(8) != 1 && enemynear,var(8) != 2) || random < 520   ;<-- stand out: respect the disjoint
+triggerall = (enemynear,var(8) != 1 && enemynear,var(8) != 2 && enemynear,map(standActive) < 1) || random < 520   ;<-- stand out: respect the disjoint
 triggerall = (enemynear,power < 950) || (random < 450)   ;<-- respect their super
 triggerall = p2dist x > -4   ;<-- never swing at someone behind you
 triggerall = ctrl
@@ -1419,7 +1419,7 @@ triggerall = !ishelper
 value = 440
 triggerall = AILevel > 0
 triggerall = !(enemynear,stateno = [3000,3060] && enemynear,time > 8)   ;<-- counters eat strikes
-triggerall = (enemynear,var(8) != 1 && enemynear,var(8) != 2) || random < 520   ;<-- stand out: respect the disjoint
+triggerall = (enemynear,var(8) != 1 && enemynear,var(8) != 2 && enemynear,map(standActive) < 1) || random < 520   ;<-- stand out: respect the disjoint
 triggerall = numhelper(39000)
 triggerall = (helper(39000),var(1) < 220) || random < 500
 triggerall = (enemynear,power < 950) || (random < 450)   ;<-- respect their super
@@ -1524,7 +1524,7 @@ type = changestate
 triggerall = !ishelper
 value = 100
 triggerall = AILevel > 0
-triggerall = (enemynear,var(8) != 1 && enemynear,var(8) != 2) || random < 520   ;<-- stand out: respect the disjoint
+triggerall = (enemynear,var(8) != 1 && enemynear,var(8) != 2 && enemynear,map(standActive) < 1) || random < 520   ;<-- stand out: respect the disjoint
 triggerall = numhelper(39000)
 triggerall = (helper(39000),var(1) < 220) || random < 500   ;<-- jumpy foe: advance less
 triggerall = ctrl

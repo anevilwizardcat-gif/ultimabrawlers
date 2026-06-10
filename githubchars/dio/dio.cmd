@@ -2586,7 +2586,7 @@ trigger1 = p2statetype = A && p2movetype = H && p2bodydist x > 120 && p2bodydist
 trigger1 = enemynear,vel y >= -.5
 trigger2 = p2statetype = L && p2stateno != 5120 && p2bodydist x > 160
 trigger2 = p2bodydist x > 220 || (life < 100 && p2life < 300)
-trigger2 = !var(12) || (p2life >= 100/(enemy,Const(data.defence)/100))
+trigger2 = !var(12) || (p2life >= 100*100/enemy,Const(data.defence))
 trigger3 = enemynear,p2dist x < 0
 trigger3 = p2bodydist x >= 120 || enemynear,animtime < -120
 trigger3 = p2bodydist y >= -120 && enemynear,vel y >= 0

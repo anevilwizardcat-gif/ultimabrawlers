@@ -3217,7 +3217,7 @@ triggerall = helper(33333),var(37) <= 0
 triggerall = helper(33333),fvar(34) != [3300,3350]
 trigger1 = stateno = 0 && (prevstateno = [1301,1302]) && helper(33333),var(24)
 trigger1 = p2movetype != H
-trigger1 = p2life < 200*fvar(1)/(enemy,Const(data.defence)/100)
+trigger1 = p2life < 200*fvar(1)*100/enemy,Const(data.defence)
 trigger1 = (enemynear,animtime*-1+1)*(!enemynear,ctrl&&enemynear,anim>=200&&enemynear,stateno>=200)+26 >= 7
 ignorehitpause = 1
 
@@ -3246,7 +3246,7 @@ triggerall = helper(33333),var(37) <= 0
 triggerall = helper(33333),fvar(34) != [3300,3350]
 trigger1 = (ctrl || (stateno = 0 && (prevstateno = [1301,1302]))) && helper(33333),var(24)
 trigger1 = p2movetype != H
-trigger1 = p2life < 250*fvar(1)/(enemy,Const(data.defence)/100)
+trigger1 = p2life < 250*fvar(1)*100/enemy,Const(data.defence)
 trigger1 = (enemynear,animtime*-1+1)*(!enemynear,ctrl&&enemynear,anim>=200&&enemynear,stateno>=200)+26 >= 7
 ignorehitpause = 1
 
@@ -3274,8 +3274,8 @@ triggerall = !helper(33333),fvar(20) || helper(22222),var(0) > 0 || helper(22222
 triggerall = !helper(33333),fvar(5)
 triggerall = helper(33333),fvar(34) != 3050
 trigger1 = (ctrl || (stateno = 0 && (prevstateno = [1301,1302]))) && helper(33333),var(24)
-trigger1 = p2life < 250*fvar(1)/(enemy,Const(data.defence)/100)
-trigger1 = p2life >= 200*fvar(1)/(enemy,Const(data.defence)/100) || random < 500
+trigger1 = p2life < 250*fvar(1)*100/enemy,Const(data.defence)
+trigger1 = p2life >= 200*fvar(1)*100/enemy,Const(data.defence) || random < 500
 trigger1 = (enemynear,animtime*-1+1)*(!enemynear,ctrl&&enemynear,anim>=200&&enemynear,stateno>=200)+26 >= 15+(!var(49))
 ignorehitpause = 0
 
@@ -3302,7 +3302,7 @@ triggerall = !helper(33333),fvar(20) || helper(22222),var(0) > 0 || helper(22222
 triggerall = !helper(33333),fvar(5)
 triggerall = helper(33333),fvar(34) != 3150
 trigger1 = (ctrl || (stateno = 0 && (prevstateno = [1301,1302]))) && helper(33333),var(24)
-trigger1 = p2life < 200*fvar(1)/(enemy,Const(data.defence)/100) || p2statetype = A
+trigger1 = p2life < 200*fvar(1)*100/enemy,Const(data.defence) || p2statetype = A
 trigger1 = (enemynear,animtime*-1+1)*(!enemynear,ctrl&&enemynear,anim>=200&&enemynear,stateno>=200)+26 >= 15+(!var(49))
 ignorehitpause = 0
 
@@ -3352,7 +3352,7 @@ triggerall = p2dist x >= 0
 triggerall = stateno != [100,105]
 triggerall = (p2stateno != [120,155]) || helper(33333),fvar(9) <= 3-(life<700||life-p2life<333||var(59)=3||random<700)-(life<500||life<p2life||var(59)=3||random<800)-(life<333||p2life-life>=333||var(59)=3||random<900)
 trigger1 = (ctrl || (stateno = 0 && (prevstateno = [1301,1302]))) && helper(33333),var(24)
-trigger1 = var(28) >= 5 || p2bodydist x <= 5+(!var(49))*20 || (stateno = 10820 && p2movetype = H && time >= 0) || (power >= 1000 && p2life < 200*fvar(1)/(enemy,Const(data.defence)/100))
+trigger1 = var(28) >= 5 || p2bodydist x <= 5+(!var(49))*20 || (stateno = 10820 && p2movetype = H && time >= 0) || (power >= 1000 && p2life < 200*fvar(1)*100/enemy,Const(data.defence))
 trigger1 = (enemynear,animtime*-1+1)*(!enemynear,ctrl&&enemynear,anim>=200&&enemynear,stateno>=200)+26 >= 4+(!var(49))
 trigger1 = random < 500
 ignorehitpause = 0
@@ -3970,7 +3970,7 @@ triggerall = helper(33333),var(37) <= 0
 triggerall = helper(33333),fvar(34) != [3300,3350]
 trigger1 = ctrl || (stateno = [22,23]) || ((stateno = [100,102]) && AnimElemTime(2) >= 1) || (stateno = 105 && AnimElemTime(2) >= 1) || stateno = 120 || (stateno = [130,131])
 trigger1 = p2movetype != H
-trigger1 = p2life < 200*fvar(1)/(enemy,Const(data.defence)/100)
+trigger1 = p2life < 200*fvar(1)*100/enemy,Const(data.defence)
 trigger1 = !enemynear,ctrl
 trigger1 = random < 500
 ignorehitpause = 1
@@ -3999,7 +3999,7 @@ triggerall = helper(33333),var(37) <= 0
 triggerall = helper(33333),fvar(34) != [3300,3350]
 trigger1 = ctrl || (stateno = [22,23]) || ((stateno = [100,102]) && AnimElemTime(2) >= 1) || (stateno = 105 && AnimElemTime(2) >= 1) || stateno = 120 || (stateno = [130,131])
 trigger1 = p2movetype != H
-trigger1 = p2life < 250*fvar(1)/(enemy,Const(data.defence)/100)
+trigger1 = p2life < 250*fvar(1)*100/enemy,Const(data.defence)
 trigger1 = !enemynear,ctrl
 trigger1 = random < 500 || stateno = 10820
 ignorehitpause = 1
@@ -4033,12 +4033,12 @@ triggerall = !var(41) || var(59) != 2 || random < 100
 trigger1 = ctrl || (stateno = [22,23]) || ((stateno = [100,102]) && AnimElemTime(2) >= 1) || (stateno = 105 && AnimElemTime(2) >= 1) || stateno = 120 || (stateno = [130,131])
 trigger1 = p2movetype = A && helper(33333),var(9)&2**4
 trigger1 = enemynear,animtime < -15-(!var(49))
-trigger1 = random < 70/(1+(life>=p2life&&var(59)!=3))*(1+(power/3000)+(life<500||life<p2life)+(life<333||p2life-life>=333)+(p2stateno>=1000)+(p2stateno>=3000)+(p2life<250*fvar(1)/(enemy,Const(data.defence)/100))) || stateno = 10820
+trigger1 = random < 70/(1+(life>=p2life&&var(59)!=3))*(1+(power/3000)+(life<500||life<p2life)+(life<333||p2life-life>=333)+(p2stateno>=1000)+(p2stateno>=3000)+(p2life<250*fvar(1)*100/enemy,Const(data.defence))) || stateno = 10820
 trigger2 = StateNo = 310 || StateNo = 311 || (StateNo = 320 && (prevstateno = [100,105])) || StateNo = 340 || StateNo = 510
 trigger2 = var(41) = 1
 trigger2 = p2bodydist y >= -30
 trigger2 = helper(22222),fvar(27) >= 13+(!var(49))-1
-trigger2 = p2life < 250*fvar(1)/(enemy,Const(data.defence)/100) || p2life < 90/(enemy,Const(data.defence)/100) || (var(39) && (life < 333 || p2life-life >= 333 || fvar(37) = 11 || var(59) = 3)) || (var(39) && power >= 8500-(life>=500&&p2life>=500)*1000)
+trigger2 = p2life < 250*fvar(1)*100/enemy,Const(data.defence) || p2life < 90*100/enemy,Const(data.defence) || (var(39) && (life < 333 || p2life-life >= 333 || fvar(37) = 11 || var(59) = 3)) || (var(39) && power >= 8500-(life>=500&&p2life>=500)*1000)
 ignorehitpause = 0
 
 [State -1, プッツンオラ（本体モード）]
@@ -4071,7 +4071,7 @@ trigger1 = enemynear,p2dist x < 0
 trigger1 = p2movetype = A && helper(33333),var(9)&2**4
 trigger1 = enemynear,animtime < -20+(numhelper(7100)>0)*10-(!var(49)) || helper(33333),var(24)
 trigger1 = (helper(22222),p2bodydist x >= 250 && facing = 1) || (helper(33333),p2bodydist x >= 250 && facing = -1)
-trigger1 = random < 70/(1+(life>=p2life&&var(59)!=3))*(1+(power/3000)+(life<500||life<p2life)+(life<333||p2life-life>=333)+(p2stateno>=1000)+(p2stateno>=3000)+(p2life<150*fvar(1)/(enemy,Const(data.defence)/100))) || stateno = 830
+trigger1 = random < 70/(1+(life>=p2life&&var(59)!=3))*(1+(power/3000)+(life<500||life<p2life)+(life<333||p2life-life>=333)+(p2stateno>=1000)+(p2stateno>=3000)+(p2life<150*fvar(1)*100/enemy,Const(data.defence))) || stateno = 830
 trigger2 = ctrl || (stateno = [22,23]) || ((stateno = [100,102]) && AnimElemTime(2) >= 1) || (stateno = 105 && AnimElemTime(2) >= 1) || stateno = 120 || (stateno = [130,131])
 trigger2 = enemynear,p2dist x < 0
 trigger2 = p2movetype = I || (p2stateno = [120,155])
@@ -4110,10 +4110,10 @@ trigger1 = p2movetype = A && helper(33333),var(9)&2**4
 trigger1 = enemynear,animtime < -15-(!var(49))
 trigger1 = enemynear,vel y >= 0
 trigger1 = enemynear,hitdefattr = SCA,AA,AT,AP || p2stateno >= 3000
-trigger1 = random < 70/(1+(life>=p2life&&var(59)!=3))*(1+(power/3000)+(life<500||life<p2life)+(life<333||p2life-life>=333)+(p2stateno>=1000)+(p2stateno>=3000)+(p2life<200*fvar(1)/(enemy,Const(data.defence)/100))) || stateno = 10820
+trigger1 = random < 70/(1+(life>=p2life&&var(59)!=3))*(1+(power/3000)+(life<500||life<p2life)+(life<333||p2life-life>=333)+(p2stateno>=1000)+(p2stateno>=3000)+(p2life<200*fvar(1)*100/enemy,Const(data.defence))) || stateno = 10820
 trigger2 = StateNo = 311 || StateNo = 340
 trigger2 = var(41) = 1
-trigger2 = p2life < 200*fvar(1)/(enemy,Const(data.defence)/100) || p2life < 7/(enemy,Const(data.defence)/100) || (var(39) && fvar(37) = 11) || (var(39) && power >= 8500-(life>=500&&p2life>=500)*1000)
+trigger2 = p2life < 200*fvar(1)*100/enemy,Const(data.defence) || p2life < 7*100/enemy,Const(data.defence) || (var(39) && fvar(37) = 11) || (var(39) && power >= 8500-(life>=500&&p2life>=500)*1000)
 ignorehitpause = 0
 
 [State -1, スターブレイカー（本体モード）]
@@ -4136,7 +4136,7 @@ triggerall = p2bodydist x = [-50,130-(p2movetype=H)*30]
 triggerall = numhelper(55555)
 triggerall = var(41) || (!enemy,numproj && !(helper(55555),var(58)&2**0 || helper(55555),var(58)&2**1 || helper(55555),var(58)&2**2 || helper(55555),var(58)&2**10))
 triggerall = (life < 700 && ((life < 500 && life-p2life < 333-(power<2000)*333) || life < 333)) || life < p2life || power >= 8500-(life>=500&&p2life>=500)*1000 || var(41) || var(59) = 3
-triggerall = (facing != enemynear,facing && enemynear,p2dist x >= 0) || p2life < 150/(enemy,Const(data.defence)/100)
+triggerall = (facing != enemynear,facing && enemynear,p2dist x >= 0) || p2life < 150*100/enemy,Const(data.defence)
 triggerall = !helper(33333),fvar(20) || helper(22222),var(0) > 0 || helper(22222),fvar(0) || helper(33333),var(35)
 triggerall = !helper(33333),fvar(5)
 triggerall = !helper(33333),var(20)
@@ -4147,12 +4147,12 @@ trigger1 = p2movetype = A && helper(33333),var(9)&2**4
 trigger1 = enemynear,animtime < -10
 trigger1 = enemynear,vel y >= 0
 trigger1 = enemynear,hitdefattr = SCA,AA
-trigger1 = random < 70/(1+(life>=p2life&&var(59)!=3))*(1+(power/3000)+(life<500||life<p2life)+(life<333||p2life-life>=333)+(p2stateno>=1000)+(p2stateno>=3000)+(p2life<150*fvar(1)/(enemy,Const(data.defence)/100)))
+trigger1 = random < 70/(1+(life>=p2life&&var(59)!=3))*(1+(power/3000)+(life<500||life<p2life)+(life<333||p2life-life>=333)+(p2stateno>=1000)+(p2stateno>=3000)+(p2life<150*fvar(1)*100/enemy,Const(data.defence)))
 trigger2 = StateNo = 210 || (StateNo = 220 && animelemtime(6) >= 1) || StateNo = 221 || StateNo = 230 || StateNo = 240 || (StateNo = [410,411]) || StateNo = 430
 trigger2 = numhelper(10000)
 trigger2 = var(41) = 1 || (stateno = 411 && animelemtime(3) >= 1 && helper(10000),var(41)) || (var(41) = 2 && power >= 8500-(life>=500&&p2life>=500)*1000)
 trigger2 = p2stateno = 5000 || p2stateno = 5010 || p2statetype = A || enemynear,animtime < -10 || (var(41) && (p2movetype!= H || var(41) = 2) && power >= 8500-(life>=500&&p2life>=500)*1000 && random < 500)
-trigger2 = p2life < 150*fvar(1)/(enemy,Const(data.defence)/100) || p2life < 7/(enemy,Const(data.defence)/100) || (var(39) && (fvar(37) = [1,9]) && var(28) >= 5 && power >= 8500-(life>=500&&p2life>=500)*1000)
+trigger2 = p2life < 150*fvar(1)*100/enemy,Const(data.defence) || p2life < 7*100/enemy,Const(data.defence) || (var(39) && (fvar(37) = [1,9]) && var(28) >= 5 && power >= 8500-(life>=500&&p2life>=500)*1000)
 ignorehitpause = 0
 
 [State -1, プッツンオラ（スタンドモード）（空中）]
@@ -4185,13 +4185,13 @@ trigger1 = p2dist x < -5
 trigger1 = p2bodydist y = [-20,40]
 trigger1 = p2movetype = A && helper(33333),var(9)&2**4
 trigger1 = enemynear,animtime < -10
-trigger1 = random < 100/(1+(life>=p2life&&var(59)!=3))*(1+(power/3000)+(life<500||life<p2life)+(life<333||p2life-life>=333)+(p2stateno>=1000)+(p2stateno>=3000)+(p2life<200*fvar(1)/(enemy,Const(data.defence)/100)))
+trigger1 = random < 100/(1+(life>=p2life&&var(59)!=3))*(1+(power/3000)+(life<500||life<p2life)+(life<333||p2life-life>=333)+(p2stateno>=1000)+(p2stateno>=3000)+(p2life<200*fvar(1)*100/enemy,Const(data.defence)))
 trigger2 = StateNo = 700 || StateNo = 710 || StateNo = 720
 trigger2 = var(41) = 1
 trigger2 = helper(22222),fvar(27) >= 13-1
 trigger2 = p2bodydist y = [-40+(p2statetype=A)*20,60]
 trigger2 = p2statetype != A || enemynear,pos y < -40
-trigger2 = ((vel x <= 0 || vel y < 0) && (life < 333 || p2life-life >= 333 || var(59) = 3)) || p2life < (150+(p2statetype!=A&&power>=2000)*150)*fvar(1)/(enemy,Const(data.defence)/100) || p2life < 90/(enemy,Const(data.defence)/100) || fvar(37) = 11
+trigger2 = ((vel x <= 0 || vel y < 0) && (life < 333 || p2life-life >= 333 || var(59) = 3)) || p2life < (150+(p2statetype!=A&&power>=2000)*150)*fvar(1)*100/enemy,Const(data.defence) || p2life < 90*100/enemy,Const(data.defence) || fvar(37) = 11
 trigger3 = ctrl || (stateno = 10825 && time >= 1) || stateno = 120 || stateno = 132
 trigger3 = p2bodydist y = [-20,40]
 trigger3 = var(59) = 2
@@ -4223,7 +4223,7 @@ triggerall = enemynear,p2dist x >= 0
 triggerall = p2movetype != H
 triggerall = p2statetype != L || p2movetype = A
 triggerall = var(41) != 1 || (hitdefattr = SCA,AA) || inguarddist
-triggerall = p2life < 200*fvar(1)/(enemy,Const(data.defence)/100)
+triggerall = p2life < 200*fvar(1)*100/enemy,Const(data.defence)
 triggerall = !enemynear,ctrl
 triggerall = (life < 700 && ((life < 500 && life-p2life < 333-(power<2000)*333) || life < 333)) || life < p2life || var(59) = 3
 triggerall = p2stateno < 3000
@@ -4266,7 +4266,7 @@ triggerall = enemynear,p2dist x >= 0
 triggerall = p2movetype != H
 triggerall = p2statetype != L || p2movetype = A
 triggerall = var(41) != 1 || (hitdefattr = SCA,AA) || inguarddist
-triggerall = p2life < 250*fvar(1)/(enemy,Const(data.defence)/100)
+triggerall = p2life < 250*fvar(1)*100/enemy,Const(data.defence)
 triggerall = !enemynear,ctrl
 triggerall = (life < 700 && ((life < 500 && life-p2life < 333-(power<2000)*333) || life < 333)) || life < p2life || var(59) = 3
 triggerall = p2stateno < 3000
@@ -4307,7 +4307,7 @@ triggerall = p2bodydist x = [-50,50]
 triggerall = facing != enemynear,facing
 triggerall = enemynear,p2dist x >= 0
 triggerall = var(41) != 1 || (hitdefattr = SCA,AA) || inguarddist
-triggerall = life < 333 || p2life-life >= 333 || p2life < 250*fvar(1)/(enemy,Const(data.defence)/100) || var(59) = 3
+triggerall = life < 333 || p2life-life >= 333 || p2life < 250*fvar(1)*100/enemy,Const(data.defence) || var(59) = 3
 triggerall = p2movetype = A && helper(33333),var(9)&2**4 && inguarddist && enemynear,animtime < -10
 triggerall = p2life >= 50*fvar(1)
 triggerall = (life < 700 && ((life < 500 && life-p2life < 333-(power<2000)*333) || life < 333)) || life < p2life || var(59) = 3
@@ -4346,7 +4346,7 @@ triggerall = p2bodydist x = [-50,205]
 triggerall = facing != enemynear,facing
 triggerall = enemynear,p2dist x >= 0
 triggerall = var(41) != 1 || (hitdefattr = SCA,AA) || inguarddist
-triggerall = life < 333 || p2life-life >= 333 || p2life < 200*fvar(1)/(enemy,Const(data.defence)/100) || var(59) = 3 || p2stateno >= 3000
+triggerall = life < 333 || p2life-life >= 333 || p2life < 200*fvar(1)*100/enemy,Const(data.defence) || var(59) = 3 || p2stateno >= 3000
 triggerall = (life < 700 && ((life < 500 && life-p2life < 333-(power<2000)*333) || life < 333)) || life < p2life || var(59) = 3 || p2stateno >= 3000
 triggerall = p2movetype = A && helper(33333),var(9)&2**4 && inguarddist && enemynear,animtime < -10
 triggerall = p2bodydist x > 50 || random < 500
@@ -4384,7 +4384,7 @@ triggerall = p2bodydist x = [-50,130]
 triggerall = facing != enemynear,facing
 triggerall = enemynear,p2dist x >= 0
 triggerall = var(41) != 1 || (hitdefattr = SCA,AA) || inguarddist
-triggerall = life < 333 || p2life-life >= 333 || p2life < 200*fvar(1)/(enemy,Const(data.defence)/100) || var(59) = 3
+triggerall = life < 333 || p2life-life >= 333 || p2life < 200*fvar(1)*100/enemy,Const(data.defence) || var(59) = 3
 triggerall = p2movetype = A && helper(33333),var(9)&2**4 && inguarddist && enemynear,animtime < -10
 triggerall = numhelper(55555)
 triggerall = !enemy,numproj && !(helper(55555),var(58)&2**0 || helper(55555),var(58)&2**1 || helper(55555),var(58)&2**2 || helper(55555),var(58)&2**10)
@@ -4423,14 +4423,14 @@ triggerall = p2dist x >= 0
 triggerall = facing != enemynear,facing
 triggerall = enemynear,p2dist x >= 0
 triggerall = var(41) != 1 || (hitdefattr = SCA,AA) || inguarddist
-triggerall = life < 333 || p2life-life >= 333 || p2life < 200*fvar(1)/(enemy,Const(data.defence)/100) || var(59) = 3 || p2stateno >= 3000
+triggerall = life < 333 || p2life-life >= 333 || p2life < 200*fvar(1)*100/enemy,Const(data.defence) || var(59) = 3 || p2stateno >= 3000
 triggerall = (life < 700 && ((life < 500 && life-p2life < 333-(power<2000)*333) || life < 333)) || life < p2life || var(59) = 3 || p2stateno >= 3000
 triggerall = numhelper(55555)
 triggerall = !enemy,numproj && !(helper(55555),var(58)&2**0 || helper(55555),var(58)&2**1 || helper(55555),var(58)&2**2 || helper(55555),var(58)&2**10)
 triggerall = p2movetype = A && helper(33333),var(9)&2**4
 triggerall = enemynear,hitdefattr = SCA,AA,AT
 triggerall = p2bodydist x <= 75 || inguarddist
-triggerall = p2life >= 200*fvar(1)/(enemy,Const(data.defence)/100)
+triggerall = p2life >= 200*fvar(1)*100/enemy,Const(data.defence)
 triggerall = !(enemynear,hitdefattr = SCA,AA,AP) || !(enemynear,p2dist x < 0 || helper(22222),fvar(0) || helper(33333),var(24))
 triggerall = helper(33333),fvar(34) != 3100
 triggerall = random < 700 || var(59) = 3
@@ -5305,7 +5305,7 @@ trigger1 = (StateNo = 200 && (prevstateno != [100,105]) && animelemtime(6) > 0+1
 trigger1 = var(41) = 1
 trigger1 = p2bodydist x <= 55 || enemynear,backedgedist <= 1 || time = 1
 trigger1 = power >= 1000 || p2life < 14
-trigger1 = p2life < 150*fvar(1)/(enemy,Const(data.defence)/100)
+trigger1 = p2life < 150*fvar(1)*100/enemy,Const(data.defence)
 ignorehitpause = 0
 
 ;======================================================================
@@ -5491,7 +5491,7 @@ trigger1 = var(28) < 10
 trigger1 = (p2stateno = [120,155]) || (helper(22222),rootdist x < 140+(!var(49))*20 && facing = 1) || (helper(33333),rootdist x < 140+(!var(49))*20 && facing = -1) || (power >= 1000 && (life < 333 || p2life-life >= 333 || var(59) = 3))
 trigger1 = (p2stateno = [120,155]) || random < 150*(1+(power>=2000)+(var(39)>0)+(var(42)<10)+(life<700||var(59)=3)+(life<500||life<p2life||var(59)=3)+(life<333||p2life-life>=333||var(59)=3)) || stateno = 10820
 trigger1 = (p2stateno != [120,155]) || random < 300 || stateno = 10820
-trigger1 = fvar(37) != 11 || p2life >= 200*fvar(1)/(enemy,Const(data.defence)/100)
+trigger1 = fvar(37) != 11 || p2life >= 200*fvar(1)*100/enemy,Const(data.defence)
 trigger1 = var(42) < 10 || var(39) > 1
 trigger1 = power >= 2000 || var(28) >= 9 || var(39)
 ignorehitpause = 0
@@ -5522,7 +5522,7 @@ trigger1 = var(28) < 10
 trigger1 = (p2stateno = [120,155]) || (helper(22222),rootdist x < 140+20 && facing = 1) || (helper(33333),rootdist x < 140+20 && facing = -1) || (power >= 1000 && (life < 333 || p2life-life >= 333 || var(59) = 3))
 trigger1 = (p2stateno = [120,155]) || random < 150*(1+(power>=2000)+(var(39)>0)+(var(42)<10)+(life<700||var(59)=3)+(life<500||life<p2life||var(59)=3)+(life<333||p2life-life>=333||var(59)=3)) || stateno = 10820
 trigger1 = (p2stateno != [120,155]) || random < 300 || stateno = 10820
-trigger1 = fvar(37) != 11 || p2life >= 200*fvar(1)/(enemy,Const(data.defence)/100)
+trigger1 = fvar(37) != 11 || p2life >= 200*fvar(1)*100/enemy,Const(data.defence)
 trigger1 = var(42) < 10 || var(39) > 1
 trigger1 = power >= 2000 || var(28) >= 9 || var(39)
 
@@ -5590,8 +5590,8 @@ triggerall = var(59) != 2 || random < 100
 trigger1 = ctrl || (stateno = [22,23]) || (stateno = 10820 && p2movetype = H && time >= 0)
 trigger1 = (p2stateno != [120,155])
 trigger1 = helper(22222),fvar(27) >= 4+(!var(49))-1
-trigger1 = var(28) >= 5 || p2bodydist x <= 5+(!var(49))*20 || (stateno = 10820 && p2movetype = H && time >= 0) || (power >= 1000 && p2life < 200*fvar(1)/(enemy,Const(data.defence)/100))
-trigger1 = random < 300*(1+(life<500||life<p2life)+(life<333||p2life-life>=333)) || (stateno = 10820 && p2movetype = H && time >= 0) || (power >= 1000 && p2life < 200*fvar(1)/(enemy,Const(data.defence)/100))
+trigger1 = var(28) >= 5 || p2bodydist x <= 5+(!var(49))*20 || (stateno = 10820 && p2movetype = H && time >= 0) || (power >= 1000 && p2life < 200*fvar(1)*100/enemy,Const(data.defence))
+trigger1 = random < 300*(1+(life<500||life<p2life)+(life<333||p2life-life>=333)) || (stateno = 10820 && p2movetype = H && time >= 0) || (power >= 1000 && p2life < 200*fvar(1)*100/enemy,Const(data.defence))
 ignorehitpause = 0
 
 [State -1, Soffダッシュ立ち弱コンボ用ダッシュ（優先コンボ）]
@@ -5694,7 +5694,7 @@ triggerall = var(59) != 2 || random < 100
 trigger1 = ctrl || (stateno = [22,23]) || (stateno = 10820 && p2movetype = H && time >= 1)
 trigger1 = helper(22222),fvar(27) >= 5-1
 trigger1 = (p2stateno != [120,155]) || random < 333
-trigger1 = random < 200*(1+(life<700)+(life<500||life<p2life)+(life<333||p2life-life>=333)) || (var(39) && (life < 333 || p2life-life>= 333 || fvar(37) = 11)) || (power >= 1000 && p2life < 200*fvar(1)/(enemy,Const(data.defence)/100)) || var(59) = 3
+trigger1 = random < 200*(1+(life<700)+(life<500||life<p2life)+(life<333||p2life-life>=333)) || (var(39) && (life < 333 || p2life-life>= 333 || fvar(37) = 11)) || (power >= 1000 && p2life < 200*fvar(1)*100/enemy,Const(data.defence)) || var(59) = 3
 ignorehitpause = 0
 
 [State -1, Sonダッシュしゃがみ弱攻撃（スタンド）（優先コンボ）]
@@ -5861,7 +5861,7 @@ trigger1 = helper(22222),fvar(27) >= 1+(p2bodydist x>45+(enemynear,vel x*(1+1))*
 trigger1 = p2bodydist x = [-50,65+(enemynear,vel x*(4+1))*((!enemynear,ctrl&&enemynear,stateno>=200&&enemynear,anim>=200&&enemynear,animtime<-4-1)||p2statetype=A||p2movetype=H)]
 trigger1 = (p2bodydist x > 30 && enemynear,backedgedist > 0) || var(28) >= 4 || random < 666-(life<700||life<p2life)*333-(life<500||p2life-life>=333)*222-(life<333)*111
 trigger1 = p2statetype != C || (var(41) = 1 && p2movetype = H && (p2stateno != [120,155])) || random < 300
-trigger1 = p2statetype != C || p2life >= 150*fvar(1)/(enemy,Const(data.defence)/100)
+trigger1 = p2statetype != C || p2life >= 150*fvar(1)*100/enemy,Const(data.defence)
 trigger1 = random < 500/(1+(stateno=200))
 ignorehitpause = 0
 
@@ -8616,7 +8616,7 @@ trigger1 = (p2stateno = 5120 && enemynear,animtime >= -40) || (p2stateno = 5110 
 trigger1 = life < 333 || power >= 2000
 trigger1 = numhelper(33333) && numhelper(22222)
 trigger1 = (helper(22222),p2bodydist x >= 250 && facing = 1) || (helper(33333),p2bodydist x >= 250 && facing = -1)
-trigger1 = p2life < 150/(enemy,Const(data.defence)/100) || life < 333 || p2life-life >= 333 || (life < 500 && life < p2life && random < 500) || (life-p2life< 333 && random < 100) || power >= 8500
+trigger1 = p2life < 150*100/enemy,Const(data.defence) || life < 333 || p2life-life >= 333 || (life < 500 && life < p2life && random < 500) || (life-p2life< 333 && random < 100) || power >= 8500
 ignorehitpause = 0
 
 [State -1, 起き攻めスターフィンガー（本体モード）]
@@ -9011,7 +9011,7 @@ trigger3 = ctrl || (stateno = [22,23]) || ((stateno = [100,102]) && AnimElemTime
 trigger3 = numhelper(22222)
 trigger3 = helper(22222),var(0) = [13,23]
 trigger3 = p2bodydist y >= -60 && enemynear,vel y >= 0
-trigger3 = life < 333 || p2life-life >= 333 || p2stateno >= 1000 || p2life < 200*fvar(1)/(enemy,Const(data.defence)/100) || p2life < 7/(enemy,Const(data.defence)/100)
+trigger3 = life < 333 || p2life-life >= 333 || p2stateno >= 1000 || p2life < 200*fvar(1)*100/enemy,Const(data.defence) || p2life < 7*100/enemy,Const(data.defence)
 trigger3 = enemynear,time >= 7 || p2stateno >= 3000 || var(59) = 3
 trigger3 = !helper(33333),var(54)
 trigger3 = random < 20*(1+(life<666||life<p2life||var(59)=3)+(life<333||p2life-life>=333||var(59)=3))
@@ -10100,7 +10100,7 @@ triggerall = !helper(33333),fvar(10) || helper(22222),var(0) > 0 || helper(22222
 triggerall = !helper(33333),fvar(5)
 trigger1 = ctrl || (stateno = [22,23])
 trigger1 = p2statetype = A && p2movetype = H && p2bodydist y < 0-enemynear,vel y*4
-trigger1 = p2bodydist y >= -30 || power < 1000 || p2life >= 150*fvar(1)/(enemy,Const(data.defence)/100)
+trigger1 = p2bodydist y >= -30 || power < 1000 || p2life >= 150*fvar(1)*100/enemy,Const(data.defence)
 trigger1 = helper(22222),fvar(22) != 521
 ignorehitpause = 0
 
@@ -11117,7 +11117,7 @@ triggerall = (p2stateno != [120,155]) || helper(33333),fvar(9) <= 3-(life<700||l
 triggerall = var(59) != 2 || random < 100
 ;立弱～
 trigger1 = StateNo = 300 && (prevstateno != [100,105]) && (animelemtime(4) > 0 || var(41) = [1,2])
-trigger1 = p2life < 200*fvar(1)/(enemy,Const(data.defence)/100) || var(39) || var(28) >= 5 || p2statetype = A
+trigger1 = p2life < 200*fvar(1)*100/enemy,Const(data.defence) || var(39) || var(28) >= 5 || p2statetype = A
 
 [State -1, 優先スタンドコンボルート1-3（近強（コンボ）]
 type = ChangeState

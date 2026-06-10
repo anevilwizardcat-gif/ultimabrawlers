@@ -133,7 +133,7 @@
 [Data]
 life = 1000
 power = 10000
-attack = 105
+attack = 100
 defence = 100
 fall.defence_up = 50
 liedown.time = 60
@@ -11600,13 +11600,10 @@ value = 10850
 
 [State 0, 4]
 type = ChangeState
-ignorehitpause = 1
 trigger1 = root,movetype != H
 trigger1 = root,stateno = 1150 && root,time = 1
 trigger2 = root,movetype = H
 trigger3 = root,stateno != 840 && !root,var(24)
-trigger4 = root,stateno = [5000,5999]
-trigger5 = root,stateno = [15000,15999]
 value = 10001
 
 [State 10000, ChangeState]
@@ -27904,7 +27901,7 @@ triggerall = root,p2statetype != A
 triggerall = root,p2statetype != L
 triggerall = root,var(41)
 triggerall = !root,var(39)
-triggerall = root,p2life >= 150*fvar(1)/(enemy,Const(data.defence)/100) || root,power < 1000
+triggerall = root,p2life >= 150*fvar(1)*100/enemy,Const(data.defence) || root,power < 1000
 triggerall = (p2stateno != [120,155]) || helper(33333),fvar(9) <= 3-(root,life<700||root,life-p2life<333||root,var(59)=3)-(root,life<500||root,life<p2life||root,var(59)=3)-(root,life<333||p2life-root,life>=333||root,var(59)=3)
 triggerall = root,var(59) != 2 || random < 333
 trigger1 = root,StateNo = 200 || root,StateNo = 400 || root,StateNo = 230 || root,StateNo = 210 || root,StateNo = 410 || root,StateNo = 240 || root,StateNo = 430
@@ -27914,7 +27911,7 @@ trigger1 = root,p2bodydist x <= 25-(root,StateNo=400)*1
 trigger1 = enemynear,backedgedist <= 1 || enemynear,frontedgebodydist <= 1
 trigger1 = root,p2statetype = S
 trigger1 = root,var(24) = 5
-trigger1 = root,var(28) = 6 || (root,var(28) = 8 && root,power >= 1000 && root,p2life >= 300*fvar(1)/(enemy,Const(data.defence)/100))
+trigger1 = root,var(28) = 6 || (root,var(28) = 8 && root,power >= 1000 && root,p2life >= 300*fvar(1)*100/enemy,Const(data.defence))
 trigger1 = random < 800-(root,var(28)!=6)*300
 ignorehitpause = 1
 
@@ -27931,7 +27928,7 @@ triggerall = !root,var(9)
 triggerall = root,p2statetype != L
 triggerall = root,var(41)
 triggerall = root,var(28) <= 2
-triggerall = root,p2life >= 150*fvar(1)/(enemy,Const(data.defence)/100) || root,power < 1000
+triggerall = root,p2life >= 150*fvar(1)*100/enemy,Const(data.defence) || root,power < 1000
 triggerall = (p2stateno != [120,155]) || helper(33333),fvar(9) <= 3-(root,life<700||root,life-p2life<333||root,var(59)=3)-(root,life<500||root,life<p2life||root,var(59)=3)-(root,life<333||p2life-root,life>=333||root,var(59)=3)
 triggerall = root,var(59) != 2 || random < 333
 trigger1 = (root,StateNo = 230 && root,animelemtime(4) = 0) || (root,StateNo = 210 && root,animelemtime(4) = 0) || (root,StateNo = 410 && root,animelemtime(3) = 0)
@@ -27963,7 +27960,7 @@ triggerall = root,p2statetype != A
 triggerall = root,p2statetype != L
 triggerall = root,var(41) = 1
 triggerall = !root,var(39)
-triggerall = root,p2life >= 150*fvar(1)/(enemy,Const(data.defence)/100) || root,power < 1000
+triggerall = root,p2life >= 150*fvar(1)*100/enemy,Const(data.defence) || root,power < 1000
 triggerall = (p2stateno != [120,155]) || helper(33333),fvar(9) <= 3-(root,life<700||root,life-p2life<333||root,var(59)=3)-(root,life<500||root,life<p2life||root,var(59)=3)-(root,life<333||p2life-root,life>=333||root,var(59)=3)
 triggerall = root,var(59) != 2 || random < 333
 trigger1 = root,StateNo = 230 || root,StateNo = 210 || root,StateNo = 410 || root,StateNo = 240 || root,StateNo = 430
@@ -27988,7 +27985,7 @@ triggerall = !root,var(9)
 triggerall = root,p2statetype != A
 triggerall = root,p2statetype != L
 triggerall = root,var(41)
-triggerall = root,p2life >= 150*fvar(1)/(enemy,Const(data.defence)/100) || root,power < 1000
+triggerall = root,p2life >= 150*fvar(1)*100/enemy,Const(data.defence) || root,power < 1000
 triggerall = root,p2bodydist x > 30 || root,p2statetype != C
 triggerall = root,var(28) < 4+(root,life<333||root,p2life-root,life>=333||root,var(59)=3)+(root,power>=1000&&!root,var(39)&&enemynear,backedgedist>1&&enemynear,frontedgebodydist>1)*2
 triggerall = (p2stateno != [120,155]) || helper(33333),fvar(9) <= 3-(root,life<700||root,life-p2life<333||root,var(59)=3)-(root,life<500||root,life<p2life||root,var(59)=3)-(root,life<333||p2life-root,life>=333||root,var(59)=3)
@@ -43572,7 +43569,7 @@ trigger2 = var(47) > 37
 trigger2 = root,p2statetype != L && root,p2bodydist y >= -40-enemynear,vel y*7-enemynear,gethitvar(yaccel)*(7**2)/2
 trigger2 = (root,p2stateno != [120,155]) || time >= 520 || root,var(0) = 1
 trigger2 = p2movetype = H || !(enemynear,ctrl || enemynear,animtime >= -6 || (p2statetype = A && enemynear,pos y >= 0-enemynear,vel y*6)) || root,var(0) = 1
-trigger2 = !(p2movetype = A && enemynear,hitdefattr = SCA,AA,AT && p2stateno < 3000 && ((p2statetype != A && p2stateno < 1000) || enemynear,vel y < 0) && root,p2bodydist x <= 75 && p2life >= 200*root,fvar(1)/(enemy,Const(data.defence)/100))
+trigger2 = !(p2movetype = A && enemynear,hitdefattr = SCA,AA,AT && p2stateno < 3000 && ((p2statetype != A && p2stateno < 1000) || enemynear,vel y < 0) && root,p2bodydist x <= 75 && p2life >= 200*root,fvar(1)*100/enemy,Const(data.defence))
 trigger3 = var(47) > 546
 value = 13101
 
@@ -44200,7 +44197,7 @@ trigger3 = p2movetype != H && (enemynear,ctrl || enemynear,animtime >= -6 || (p2
 trigger3 = time > 37
 trigger4 = numhelper(33333)
 trigger4 = root,var(59) >= 1 || helper(33333),fvar(1)
-trigger4 = p2movetype = A && enemynear,hitdefattr = SCA,AA,AT && p2stateno < 3000 && ((p2statetype != A && p2stateno < 1000) || enemynear,vel y < 0) && root,p2bodydist x <= 75 && p2life >= 200*root,fvar(1)/(enemy,Const(data.defence)/100)
+trigger4 = p2movetype = A && enemynear,hitdefattr = SCA,AA,AT && p2stateno < 3000 && ((p2statetype != A && p2stateno < 1000) || enemynear,vel y < 0) && root,p2bodydist x <= 75 && p2life >= 200*root,fvar(1)*100/enemy,Const(data.defence)
 trigger4 = time > 37
 value = 13101
 
@@ -44505,7 +44502,7 @@ trigger3 = var(59) >= 1 || helper(33333),fvar(1)
 trigger3 = var(47) > 40
 trigger3 = p2statetype != L && p2bodydist y >= -40-enemynear,vel y*9-enemynear,gethitvar(yaccel)*(9**2)/2
 trigger3 = (p2stateno != [120,155]) || var(0) = 1
-trigger3 = p2life < 200*fvar(1)/(enemy,Const(data.defence)/100)
+trigger3 = p2life < 200*fvar(1)*100/enemy,Const(data.defence)
 trigger4 = numhelper(33333)
 trigger4 = var(59) >= 1 || helper(33333),fvar(1)
 trigger4 = var(47) > 40
@@ -52029,6 +52026,16 @@ value = 5110
 ;---------------------------------------------------------------------------
 [Statedef -2]
 
+;== STAND BROADCAST : roster-wide AI protocol (additive; touches nothing) ==
+;  any AI can read enemynear,map(standActive):
+;  0 = stand off / no stand   1 = stand deployed   2 = tandem   3 = crashed
+[State -2, Stand Broadcast]
+type = mapset
+trigger1 = 1
+map = "standActive"
+value = var(8)
+ignorehitpause = 1
+
 ;configåƒÇ—èoÇµ
 [State 3001, Super]
 type = Helper
@@ -54772,7 +54779,7 @@ ignorehitpause = 1
 [State -2]
 type = VarSet
 trigger1 = 1
-fvar(1) = fvar(0)*ifelse(!var(48),1,ifelse(1-(.04*ifelse(!var(42),0,var(42)-1))<.6,.6,1-(.04*ifelse(!var(42),0,var(42)-1))))
+fvar(1) = fvar(0)*ifelse(!var(48),1,ifelse(1-(.1*ifelse(!var(42),0,var(42)-1))<.2,.2,1-(.1*ifelse(!var(42),0,var(42)-1))))
 ignorehitpause = 1
 
 ;KOéûéûä‘åoâﬂ
