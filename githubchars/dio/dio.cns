@@ -3291,7 +3291,7 @@ velset = 0,0
 type = PowerSet
 trigger1 = RoundsExisted = 0
 trigger1 = time = 0
-trigger1 = power < 1000
+trigger1 = power < 0
 value = 1000
 
 [State -2, 3]
@@ -42838,6 +42838,13 @@ type = mapset
 trigger1 = 1
 map = "standActive"
 value = var(8)
+ignorehitpause = 1
+
+[State -2, Stand Gauge Broadcast]
+type = mapset
+trigger1 = 1
+map = "standGauge"
+value = var(54)
 ignorehitpause = 1
 
 ;configŒÄ‚Ño‚µ

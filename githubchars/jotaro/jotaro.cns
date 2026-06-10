@@ -4262,7 +4262,7 @@ type = PowerSet
 trigger1 = RoundsExisted = 0
 trigger1 = time = 0
 trigger1 = power < 1000
-value = 1000
+value = 0
 
 [State -2, 3]
 type = ChangeState
@@ -52034,6 +52034,13 @@ type = mapset
 trigger1 = 1
 map = "standActive"
 value = var(8)
+ignorehitpause = 1
+
+[State -2, Stand Gauge Broadcast]
+type = mapset
+trigger1 = 1
+map = "standGauge"
+value = var(54)
 ignorehitpause = 1
 
 ;configŒÄ‚Ño‚µ
