@@ -1222,6 +1222,7 @@ type = changestate
 triggerall = !ishelper
 value = 260
 triggerall = AILevel > 0
+triggerall = (enemynear,var(8) < 1 && enemynear,map(standActive) < 1) || p2dist y > -55   ;<-- stand jumpers: block first, AA deep
 triggerall = p2dist x > -12
 triggerall = ctrl || (stateno = [130,141])
 triggerall = statetype != A

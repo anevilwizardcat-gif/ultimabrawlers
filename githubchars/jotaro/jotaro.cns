@@ -7424,7 +7424,7 @@ trigger1 = parent,var(30) != gametime+1
 trigger2 = parent,var(0) = -1
 trigger3 = parent,var(0) = 2
 value = anim
-elem = AnimElemNo(0)-!AnimElemTime(AnimElemNo(0))
+elem = max(1,AnimElemNo(0)-!AnimElemTime(AnimElemNo(0)))
 persistent = 1
 
 [State 2600, posfreeze]
@@ -10228,7 +10228,7 @@ trigger1 = parent,var(36) = 1
 trigger2 = parent,var(0) = -1
 trigger3 = parent,var(0) = 2
 value = anim
-elem = AnimElemNo(0)-!AnimElemTime(AnimElemNo(0))
+elem = max(1,AnimElemNo(0)-!AnimElemTime(AnimElemNo(0)))
 persistent = 1
 
 [State 2600, posfreeze]
@@ -12252,7 +12252,7 @@ trigger1 = parent,var(36) = 1
 trigger2 = parent,var(0) = -1
 trigger3 = parent,var(0) = 2
 value = anim
-elem = AnimElemNo(0)-!AnimElemTime(AnimElemNo(0))
+elem = max(1,AnimElemNo(0)-!AnimElemTime(AnimElemNo(0)))
 persistent = 1
 
 [State 2600, posfreeze]
@@ -13141,7 +13141,7 @@ trigger1 = parent,var(36) = 1
 trigger2 = parent,var(0) = -1
 trigger3 = parent,var(0) = 2
 value = anim
-elem = AnimElemNo(0)-!AnimElemTime(AnimElemNo(0))
+elem = max(1,AnimElemNo(0)-!AnimElemTime(AnimElemNo(0)))
 persistent = 1
 
 [State 2600, posfreeze]
@@ -14023,7 +14023,7 @@ trigger1 = parent,var(36) = 1
 trigger2 = parent,var(0) = -1
 trigger3 = parent,var(0) = 2
 value = anim
-elem = AnimElemNo(0)-!AnimElemTime(AnimElemNo(0))
+elem = max(1,AnimElemNo(0)-!AnimElemTime(AnimElemNo(0)))
 persistent = 1
 
 [State 2600, posfreeze]
@@ -14744,7 +14744,7 @@ trigger1 = parent,var(36) = 1
 trigger2 = parent,var(0) = -1
 trigger3 = parent,var(0) = 2
 value = anim
-elem = AnimElemNo(0)-!AnimElemTime(AnimElemNo(0))
+elem = max(1,AnimElemNo(0)-!AnimElemTime(AnimElemNo(0)))
 persistent = 1
 
 [State 2600, posfreeze]
@@ -15471,7 +15471,7 @@ trigger1 = parent,var(36) = 1
 trigger2 = parent,var(0) = -1
 trigger3 = parent,var(0) = 2
 value = anim
-elem = AnimElemNo(0)-!AnimElemTime(AnimElemNo(0))
+elem = max(1,AnimElemNo(0)-!AnimElemTime(AnimElemNo(0)))
 persistent = 1
 
 [State 2600, posfreeze]
@@ -16308,7 +16308,7 @@ trigger1 = parent,var(36) = 1
 trigger2 = parent,var(0) = -1
 trigger3 = parent,var(0) = 2
 value = anim
-elem = AnimElemNo(0)-!AnimElemTime(AnimElemNo(0))
+elem = max(1,AnimElemNo(0)-!AnimElemTime(AnimElemNo(0)))
 persistent = 1
 
 [State 2600, posfreeze]
@@ -17173,7 +17173,7 @@ trigger1 = parent,var(36) = 1
 trigger2 = parent,var(0) = -1
 trigger3 = parent,var(0) = 2
 value = anim
-elem = AnimElemNo(0)-!AnimElemTime(AnimElemNo(0))
+elem = max(1,AnimElemNo(0)-!AnimElemTime(AnimElemNo(0)))
 persistent = 1
 
 [State 2600, posfreeze]
@@ -17991,7 +17991,7 @@ trigger1 = parent,var(36) = 1
 trigger2 = parent,var(0) = -1
 trigger3 = parent,var(0) = 2
 value = anim
-elem = AnimElemNo(0)-!AnimElemTime(AnimElemNo(0))
+elem = max(1,AnimElemNo(0)-!AnimElemTime(AnimElemNo(0)))
 persistent = 1
 
 [State 2600, posfreeze]
@@ -19334,7 +19334,7 @@ trigger1 = parent,var(36) = 1
 trigger2 = parent,var(0) = -1
 trigger3 = parent,var(0) = 2
 value = anim
-elem = AnimElemNo(0)-!AnimElemTime(AnimElemNo(0))
+elem = max(1,AnimElemNo(0)-!AnimElemTime(AnimElemNo(0)))
 persistent = 1
 
 [State 2600, posfreeze]
@@ -20100,7 +20100,7 @@ trigger1 = parent,var(36) = 1
 trigger2 = parent,var(0) = -1
 trigger3 = parent,var(0) = 2
 value = anim
-elem = AnimElemNo(0)-!AnimElemTime(AnimElemNo(0))
+elem = max(1,AnimElemNo(0)-!AnimElemTime(AnimElemNo(0)))
 persistent = 1
 
 [State 2600, posfreeze]
@@ -20889,7 +20889,7 @@ trigger1 = parent,var(36) = 1
 trigger2 = parent,var(0) = -1
 trigger3 = parent,var(0) = 2
 value = anim
-elem = AnimElemNo(0)-!AnimElemTime(AnimElemNo(0))
+elem = max(1,AnimElemNo(0)-!AnimElemTime(AnimElemNo(0)))
 persistent = 1
 
 [State 2600, posfreeze]
@@ -21591,7 +21591,7 @@ trigger1 = parent,var(36) = 1
 trigger2 = parent,var(0) = -1
 trigger3 = parent,var(0) = 2
 value = anim
-elem = AnimElemNo(0)-!AnimElemTime(AnimElemNo(0))
+elem = max(1,AnimElemNo(0)-!AnimElemTime(AnimElemNo(0)))
 persistent = 1
 
 [State 2600, posfreeze]
@@ -22285,7 +22285,7 @@ trigger1 = parent,var(36) = 1
 trigger2 = parent,var(0) = -1
 trigger3 = parent,var(0) = 2
 value = anim
-elem = AnimElemNo(0)-!AnimElemTime(AnimElemNo(0))
+elem = max(1,AnimElemNo(0)-!AnimElemTime(AnimElemNo(0)))
 persistent = 1
 
 [State 2600, posfreeze]
@@ -23030,7 +23030,7 @@ trigger1 = parent,var(36) = 1
 trigger2 = parent,var(0) = -1
 trigger3 = parent,var(0) = 2
 value = anim
-elem = AnimElemNo(0)-!AnimElemTime(AnimElemNo(0))
+elem = max(1,AnimElemNo(0)-!AnimElemTime(AnimElemNo(0)))
 persistent = 1
 
 [State 2600, posfreeze]
@@ -23708,7 +23708,7 @@ trigger1 = parent,var(36) = 1
 trigger2 = parent,var(0) = -1
 trigger3 = parent,var(0) = 2
 value = anim
-elem = AnimElemNo(0)-!AnimElemTime(AnimElemNo(0))
+elem = max(1,AnimElemNo(0)-!AnimElemTime(AnimElemNo(0)))
 persistent = 1
 
 [State 2600, posfreeze]
@@ -24430,7 +24430,7 @@ trigger1 = parent,var(36) = 1
 trigger2 = parent,var(0) = -1
 trigger3 = parent,var(0) = 2
 value = anim
-elem = AnimElemNo(0)-!AnimElemTime(AnimElemNo(0))
+elem = max(1,AnimElemNo(0)-!AnimElemTime(AnimElemNo(0)))
 persistent = 1
 
 [State 2600, posfreeze]
@@ -25214,7 +25214,7 @@ trigger1 = parent,var(36) = 1
 trigger2 = parent,var(0) = -1
 trigger3 = parent,var(0) = 2
 value = anim
-elem = AnimElemNo(0)-!AnimElemTime(AnimElemNo(0))
+elem = max(1,AnimElemNo(0)-!AnimElemTime(AnimElemNo(0)))
 persistent = 1
 
 [State 2600, posfreeze]
@@ -25998,7 +25998,7 @@ trigger1 = parent,var(36) = 1
 trigger2 = parent,var(0) = -1
 trigger3 = parent,var(0) = 2
 value = anim
-elem = AnimElemNo(0)-!AnimElemTime(AnimElemNo(0))
+elem = max(1,AnimElemNo(0)-!AnimElemTime(AnimElemNo(0)))
 persistent = 1
 
 [State 2600, posfreeze]
@@ -26730,7 +26730,7 @@ trigger1 = parent,var(36) = 1
 trigger2 = parent,var(0) = -1
 trigger3 = parent,var(0) = 2
 value = anim
-elem = AnimElemNo(0)-!AnimElemTime(AnimElemNo(0))
+elem = max(1,AnimElemNo(0)-!AnimElemTime(AnimElemNo(0)))
 persistent = 1
 
 [State 2600, posfreeze]
@@ -27462,7 +27462,7 @@ trigger1 = parent,var(36) = 1
 trigger2 = parent,var(0) = -1
 trigger3 = parent,var(0) = 2
 value = anim
-elem = AnimElemNo(0)-!AnimElemTime(AnimElemNo(0))
+elem = max(1,AnimElemNo(0)-!AnimElemTime(AnimElemNo(0)))
 persistent = 1
 
 [State 2600, posfreeze]
@@ -28280,7 +28280,7 @@ trigger1 = parent,var(36) = 1
 trigger2 = parent,var(0) = -1
 trigger3 = parent,var(0) = 2
 value = anim
-elem = AnimElemNo(0)-!AnimElemTime(AnimElemNo(0))
+elem = max(1,AnimElemNo(0)-!AnimElemTime(AnimElemNo(0)))
 persistent = 1
 
 [State 2600, posfreeze]
@@ -28388,7 +28388,7 @@ trigger1 = parent,var(36) = 1
 trigger2 = parent,var(0) = -1
 trigger3 = parent,var(0) = 2
 value = anim
-elem = AnimElemNo(0)-!AnimElemTime(AnimElemNo(0))
+elem = max(1,AnimElemNo(0)-!AnimElemTime(AnimElemNo(0)))
 persistent = 1
 
 [State 2600, posfreeze]
@@ -28944,7 +28944,7 @@ trigger1 = parent,var(36) = 1
 trigger2 = parent,var(0) = -1
 trigger3 = parent,var(0) = 2
 value = anim
-elem = AnimElemNo(0)-!AnimElemTime(AnimElemNo(0))
+elem = max(1,AnimElemNo(0)-!AnimElemTime(AnimElemNo(0)))
 persistent = 1
 
 [State 2600, posfreeze]
@@ -29025,7 +29025,7 @@ trigger1 = parent,var(36) = 1
 trigger2 = parent,var(0) = -1
 trigger3 = parent,var(0) = 2
 value = anim
-elem = AnimElemNo(0)-!AnimElemTime(AnimElemNo(0))
+elem = max(1,AnimElemNo(0)-!AnimElemTime(AnimElemNo(0)))
 persistent = 1
 
 [State 2600, posfreeze]
@@ -29151,7 +29151,7 @@ trigger1 = parent,var(36) = 1
 trigger2 = parent,var(0) = -1
 trigger3 = parent,var(0) = 2
 value = anim
-elem = AnimElemNo(0)-!AnimElemTime(AnimElemNo(0))
+elem = max(1,AnimElemNo(0)-!AnimElemTime(AnimElemNo(0)))
 persistent = 1
 
 [State 2600, posfreeze]
@@ -29706,7 +29706,7 @@ trigger1 = parent,var(36) = 1
 trigger2 = parent,var(0) = -1
 trigger3 = parent,var(0) = 2
 value = anim
-elem = AnimElemNo(0)-!AnimElemTime(AnimElemNo(0))
+elem = max(1,AnimElemNo(0)-!AnimElemTime(AnimElemNo(0)))
 persistent = 1
 
 [State 2600, posfreeze]
@@ -29787,7 +29787,7 @@ trigger1 = parent,var(36) = 1
 trigger2 = parent,var(0) = -1
 trigger3 = parent,var(0) = 2
 value = anim
-elem = AnimElemNo(0)-!AnimElemTime(AnimElemNo(0))
+elem = max(1,AnimElemNo(0)-!AnimElemTime(AnimElemNo(0)))
 persistent = 1
 
 [State 2600, posfreeze]
@@ -30374,7 +30374,7 @@ trigger1 = parent,var(36) = 1
 trigger2 = parent,var(0) = -1
 trigger3 = parent,var(0) = 2
 value = anim
-elem = AnimElemNo(0)-!AnimElemTime(AnimElemNo(0))
+elem = max(1,AnimElemNo(0)-!AnimElemTime(AnimElemNo(0)))
 persistent = 1
 
 [State 2600, posfreeze]
@@ -30455,7 +30455,7 @@ trigger1 = parent,var(36) = 1
 trigger2 = parent,var(0) = -1
 trigger3 = parent,var(0) = 2
 value = anim
-elem = AnimElemNo(0)-!AnimElemTime(AnimElemNo(0))
+elem = max(1,AnimElemNo(0)-!AnimElemTime(AnimElemNo(0)))
 persistent = 1
 
 [State 2600, posfreeze]
@@ -30832,7 +30832,7 @@ trigger1 = parent,var(36) = 1
 trigger2 = parent,var(0) = -1
 trigger3 = parent,var(0) = 2
 value = anim
-elem = AnimElemNo(0)-!AnimElemTime(AnimElemNo(0))
+elem = max(1,AnimElemNo(0)-!AnimElemTime(AnimElemNo(0)))
 persistent = 1
 
 [State 2600, posfreeze]
@@ -30925,7 +30925,7 @@ trigger1 = parent,var(36) = 1
 trigger2 = parent,var(0) = -1
 trigger3 = parent,var(0) = 2
 value = anim
-elem = AnimElemNo(0)-!AnimElemTime(AnimElemNo(0))
+elem = max(1,AnimElemNo(0)-!AnimElemTime(AnimElemNo(0)))
 persistent = 1
 
 [State 2600, posfreeze]
@@ -31024,7 +31024,7 @@ trigger1 = parent,var(36) = 1
 trigger2 = parent,var(0) = -1
 trigger3 = parent,var(0) = 2
 value = anim
-elem = AnimElemNo(0)-!AnimElemTime(AnimElemNo(0))
+elem = max(1,AnimElemNo(0)-!AnimElemTime(AnimElemNo(0)))
 persistent = 1
 
 [State 2600, posfreeze]
@@ -31082,7 +31082,7 @@ trigger1 = parent,var(36) = 1
 trigger2 = parent,var(0) = -1
 trigger3 = parent,var(0) = 2
 value = anim
-elem = AnimElemNo(0)-!AnimElemTime(AnimElemNo(0))
+elem = max(1,AnimElemNo(0)-!AnimElemTime(AnimElemNo(0)))
 persistent = 1
 
 [State 2600, posfreeze]
@@ -31148,7 +31148,7 @@ trigger1 = parent,var(36) = 1
 trigger2 = parent,var(0) = -1
 trigger3 = parent,var(0) = 2
 value = anim
-elem = AnimElemNo(0)-!AnimElemTime(AnimElemNo(0))
+elem = max(1,AnimElemNo(0)-!AnimElemTime(AnimElemNo(0)))
 persistent = 1
 
 [State 2600, posfreeze]
@@ -31222,7 +31222,7 @@ trigger1 = parent,var(36) = 1
 trigger2 = parent,var(0) = -1
 trigger3 = parent,var(0) = 2
 value = anim
-elem = AnimElemNo(0)-!AnimElemTime(AnimElemNo(0))
+elem = max(1,AnimElemNo(0)-!AnimElemTime(AnimElemNo(0)))
 persistent = 1
 
 [State 2600, posfreeze]
@@ -31288,7 +31288,7 @@ trigger1 = parent,var(36) = 1
 trigger2 = parent,var(0) = -1
 trigger3 = parent,var(0) = 2
 value = anim
-elem = AnimElemNo(0)-!AnimElemTime(AnimElemNo(0))
+elem = max(1,AnimElemNo(0)-!AnimElemTime(AnimElemNo(0)))
 persistent = 1
 
 [State 2600, posfreeze]
@@ -32285,7 +32285,7 @@ trigger1 = parent,var(36) = 1
 trigger2 = parent,var(0) = -1
 trigger3 = parent,var(0) = 2
 value = anim
-elem = AnimElemNo(0)-!AnimElemTime(AnimElemNo(0))
+elem = max(1,AnimElemNo(0)-!AnimElemTime(AnimElemNo(0)))
 persistent = 1
 
 [State 2600, posfreeze]
@@ -32505,7 +32505,7 @@ triggerall = !var(7)
 trigger1 = animelemtime(3) >= 0
 trigger1 = animelemtime(34) < 0
 value = anim
-elem = AnimElemNo(0)-!AnimElemTime(AnimElemNo(0))
+elem = max(1,AnimElemNo(0)-!AnimElemTime(AnimElemNo(0)))
 ignorehitpause = 0
 
 [State 1040,ChangeAnim]
@@ -33495,7 +33495,7 @@ trigger1 = parent,var(36) = 1
 trigger2 = parent,var(0) = -1
 trigger3 = parent,var(0) = 2
 value = anim
-elem = AnimElemNo(0)-!AnimElemTime(AnimElemNo(0))
+elem = max(1,AnimElemNo(0)-!AnimElemTime(AnimElemNo(0)))
 persistent = 1
 
 [State 2600, posfreeze]
@@ -33907,7 +33907,7 @@ triggerall = !var(7)
 trigger1 = animelemtime(3) >= 0
 trigger1 = animelemtime(34) < 0
 value = anim
-elem = AnimElemNo(0)-!AnimElemTime(AnimElemNo(0))
+elem = max(1,AnimElemNo(0)-!AnimElemTime(AnimElemNo(0)))
 ignorehitpause = 0
 
 [State 1040,ChangeAnim]
@@ -34519,7 +34519,7 @@ trigger2 = var(0)%7=[3,6]
 trigger3 = root,var(0) = -1
 trigger4 = root,var(0) = 2
 value = anim
-elem = AnimElemNo(0)-!AnimElemTime(AnimElemNo(0))
+elem = max(1,AnimElemNo(0)-!AnimElemTime(AnimElemNo(0)))
 persistent = 1
 
 [State 10000, VarAdd]
@@ -34595,7 +34595,7 @@ trigger2 = var(0)%7=[0,3]
 trigger3 = root,var(0) = -1
 trigger4 = root,var(0) = 2
 value = anim
-elem = AnimElemNo(0)-!AnimElemTime(AnimElemNo(0))
+elem = max(1,AnimElemNo(0)-!AnimElemTime(AnimElemNo(0)))
 persistent = 1
 
 [State 220, 3]
@@ -35248,7 +35248,7 @@ trigger1 = parent,var(36) = 1
 trigger2 = parent,var(0) = -1
 trigger3 = parent,var(0) = 2
 value = anim
-elem = AnimElemNo(0)-!AnimElemTime(AnimElemNo(0))
+elem = max(1,AnimElemNo(0)-!AnimElemTime(AnimElemNo(0)))
 persistent = 1
 
 [State 2600, posfreeze]
@@ -35986,7 +35986,7 @@ trigger1 = parent,var(36) = 1
 trigger2 = parent,var(0) = -1
 trigger3 = parent,var(0) = 2
 value = anim
-elem = AnimElemNo(0)-!AnimElemTime(AnimElemNo(0))
+elem = max(1,AnimElemNo(0)-!AnimElemTime(AnimElemNo(0)))
 persistent = 1
 
 [State 2600, posfreeze]
@@ -37689,7 +37689,7 @@ trigger1 = parent,var(36) = 1
 trigger2 = parent,var(0) = -1
 trigger3 = parent,var(0) = 2
 value = anim
-elem = AnimElemNo(0)-!AnimElemTime(AnimElemNo(0))
+elem = max(1,AnimElemNo(0)-!AnimElemTime(AnimElemNo(0)))
 persistent = 1
 
 [State 2600, posfreeze]
@@ -38436,7 +38436,7 @@ trigger1 = parent,var(36) = 1
 trigger2 = parent,var(0) = -1
 trigger3 = parent,var(0) = 2
 value = anim
-elem = AnimElemNo(0)-!AnimElemTime(AnimElemNo(0))
+elem = max(1,AnimElemNo(0)-!AnimElemTime(AnimElemNo(0)))
 persistent = 1
 
 [State 2600, posfreeze]
@@ -40023,7 +40023,7 @@ trigger1 = parent,var(36) = 1
 trigger2 = parent,var(0) = -1
 trigger3 = parent,var(0) = 2
 value = anim
-elem = AnimElemNo(0)-!AnimElemTime(AnimElemNo(0))
+elem = max(1,AnimElemNo(0)-!AnimElemTime(AnimElemNo(0)))
 persistent = 1
 
 [State 2600, posfreeze]
@@ -40349,7 +40349,7 @@ persisternt = 0
 type = ChangeAnim
 trigger1 = var(24)
 value = anim
-elem = AnimElemNo(0)-!AnimElemTime(AnimElemNo(0))
+elem = max(1,AnimElemNo(0)-!AnimElemTime(AnimElemNo(0)))
 ignorehitpause = 0
 
 [State 220, 3]
@@ -41160,7 +41160,7 @@ trigger1 = parent,var(36) = 1
 trigger2 = parent,var(0) = -1
 trigger3 = parent,var(0) = 2
 value = anim
-elem = AnimElemNo(0)-!AnimElemTime(AnimElemNo(0))
+elem = max(1,AnimElemNo(0)-!AnimElemTime(AnimElemNo(0)))
 persistent = 1
 
 [State 2600, posfreeze]
@@ -42514,7 +42514,7 @@ trigger1 = parent,var(36) = 1
 trigger2 = parent,var(0) = -1
 trigger3 = parent,var(0) = 2
 value = anim
-elem = AnimElemNo(0)-!AnimElemTime(AnimElemNo(0))
+elem = max(1,AnimElemNo(0)-!AnimElemTime(AnimElemNo(0)))
 persistent = 1
 
 [State 2600, posfreeze]
@@ -44141,7 +44141,7 @@ trigger1 = parent,var(36) = 1
 trigger2 = parent,var(0) = -1
 trigger3 = parent,var(0) = 2
 value = anim
-elem = AnimElemNo(0)-!AnimElemTime(AnimElemNo(0))
+elem = max(1,AnimElemNo(0)-!AnimElemTime(AnimElemNo(0)))
 persistent = 1
 
 [State 2600, posfreeze]
@@ -45258,7 +45258,7 @@ trigger1 = parent,var(36) = 1
 trigger2 = parent,var(0) = -1
 trigger3 = parent,var(0) = 2
 value = anim
-elem = AnimElemNo(0)-!AnimElemTime(AnimElemNo(0))
+elem = max(1,AnimElemNo(0)-!AnimElemTime(AnimElemNo(0)))
 persistent = 1
 
 [State 2600, posfreeze]
@@ -48978,7 +48978,7 @@ trigger1 = parent,var(35) = 1
 trigger2 = parent,var(0) = -1
 trigger3 = parent,var(0) = 2
 value = anim
-elem = AnimElemNo(0)-!AnimElemTime(AnimElemNo(0))
+elem = max(1,AnimElemNo(0)-!AnimElemTime(AnimElemNo(0)))
 persistent = 1
 
 [State 2600, posfreeze]
@@ -49047,7 +49047,7 @@ trigger1 = parent,var(35) = 1
 trigger2 = parent,var(0) = -1
 trigger3 = parent,var(0) = 2
 value = anim
-elem = AnimElemNo(0)-!AnimElemTime(AnimElemNo(0))
+elem = max(1,AnimElemNo(0)-!AnimElemTime(AnimElemNo(0)))
 persistent = 1
 
 [State 2600, posfreeze]
@@ -49096,7 +49096,7 @@ trigger1 = parent,var(35) = 1
 trigger2 = parent,var(0) = -1
 trigger3 = parent,var(0) = 2
 value = anim
-elem = AnimElemNo(0)-!AnimElemTime(AnimElemNo(0))
+elem = max(1,AnimElemNo(0)-!AnimElemTime(AnimElemNo(0)))
 persistent = 1
 
 [State 2600, posfreeze]
@@ -49150,7 +49150,7 @@ trigger1 = parent,var(35) = 1
 trigger2 = parent,var(0) = -1
 trigger3 = parent,var(0) = 2
 value = anim
-elem = AnimElemNo(0)-!AnimElemTime(AnimElemNo(0))
+elem = max(1,AnimElemNo(0)-!AnimElemTime(AnimElemNo(0)))
 persistent = 1
 
 [State 2600, posfreeze]
@@ -49212,7 +49212,7 @@ trigger1 = parent,var(35) = 1
 trigger2 = parent,var(0) = -1
 trigger3 = parent,var(0) = 2
 value = anim
-elem = AnimElemNo(0)-!AnimElemTime(AnimElemNo(0))
+elem = max(1,AnimElemNo(0)-!AnimElemTime(AnimElemNo(0)))
 persistent = 1
 
 [State 2600, posfreeze]
@@ -49412,7 +49412,7 @@ trigger1 = parent,var(35) = 1
 trigger2 = parent,var(0) = -1
 trigger3 = parent,var(0) = 2
 value = anim
-elem = AnimElemNo(0)-!AnimElemTime(AnimElemNo(0))
+elem = max(1,AnimElemNo(0)-!AnimElemTime(AnimElemNo(0)))
 persistent = 1
 
 [State 2600, posfreeze]
@@ -49627,7 +49627,7 @@ trigger1 = parent,var(35) = 1
 trigger2 = parent,var(0) = -1
 trigger3 = parent,var(0) = 2
 value = anim
-elem = AnimElemNo(0)-!AnimElemTime(AnimElemNo(0))
+elem = max(1,AnimElemNo(0)-!AnimElemTime(AnimElemNo(0)))
 persistent = 1
 
 [State 2600, posfreeze]
@@ -49842,7 +49842,7 @@ trigger1 = parent,var(35) = 1
 trigger2 = parent,var(0) = -1
 trigger3 = parent,var(0) = 2
 value = anim
-elem = AnimElemNo(0)-!AnimElemTime(AnimElemNo(0))
+elem = max(1,AnimElemNo(0)-!AnimElemTime(AnimElemNo(0)))
 persistent = 1
 
 [State 2600, posfreeze]
@@ -50058,7 +50058,7 @@ trigger1 = parent,var(35) = 1
 trigger2 = parent,var(0) = -1
 trigger3 = parent,var(0) = 2
 value = anim
-elem = AnimElemNo(0)-!AnimElemTime(AnimElemNo(0))
+elem = max(1,AnimElemNo(0)-!AnimElemTime(AnimElemNo(0)))
 persistent = 1
 
 [State 2600, posfreeze]
@@ -50279,7 +50279,7 @@ trigger1 = parent,var(35) = 1
 trigger2 = parent,var(0) = -1
 trigger3 = parent,var(0) = 2
 value = anim
-elem = AnimElemNo(0)-!AnimElemTime(AnimElemNo(0))
+elem = max(1,AnimElemNo(0)-!AnimElemTime(AnimElemNo(0)))
 persistent = 1
 
 [State 2600, posfreeze]
@@ -50478,7 +50478,7 @@ trigger1 = parent,var(35) = 1
 trigger2 = parent,var(0) = -1
 trigger3 = parent,var(0) = 2
 value = anim
-elem = AnimElemNo(0)-!AnimElemTime(AnimElemNo(0))
+elem = max(1,AnimElemNo(0)-!AnimElemTime(AnimElemNo(0)))
 persistent = 1
 
 [State 2600, posfreeze]
@@ -50672,7 +50672,7 @@ trigger1 = parent,var(35) = 1
 trigger2 = parent,var(0) = -1
 trigger3 = parent,var(0) = 2
 value = anim
-elem = AnimElemNo(0)-!AnimElemTime(AnimElemNo(0))
+elem = max(1,AnimElemNo(0)-!AnimElemTime(AnimElemNo(0)))
 persistent = 1
 
 [State 2600, posfreeze]
@@ -50746,7 +50746,7 @@ trigger1 = parent,var(35) = 1
 trigger2 = parent,var(0) = -1
 trigger3 = parent,var(0) = 2
 value = anim
-elem = AnimElemNo(0)-!AnimElemTime(AnimElemNo(0))
+elem = max(1,AnimElemNo(0)-!AnimElemTime(AnimElemNo(0)))
 persistent = 1
 
 [State 2600, posfreeze]
@@ -50849,7 +50849,7 @@ trigger1 = parent,var(35) = 1
 trigger2 = parent,var(0) = -1
 trigger3 = parent,var(0) = 2
 value = anim
-elem = AnimElemNo(0)-!AnimElemTime(AnimElemNo(0))
+elem = max(1,AnimElemNo(0)-!AnimElemTime(AnimElemNo(0)))
 persistent = 1
 
 [State 2600, posfreeze]
@@ -50896,7 +50896,7 @@ type = changeanim
 triggerall = time > 0
 trigger1 = parent,var(24)
 value = anim
-elem = AnimElemNo(0)-!AnimElemTime(AnimElemNo(0))
+elem = max(1,AnimElemNo(0)-!AnimElemTime(AnimElemNo(0)))
 persistent = 1
 
 [State 2600, ChangeState]
@@ -50994,7 +50994,7 @@ trigger1 = parent,var(35) = 1
 trigger2 = parent,var(0) = -1
 trigger3 = parent,var(0) = 2
 value = anim
-elem = AnimElemNo(0)-!AnimElemTime(AnimElemNo(0))
+elem = max(1,AnimElemNo(0)-!AnimElemTime(AnimElemNo(0)))
 persistent = 1
 
 [State 2600, posfreeze]
@@ -51088,7 +51088,7 @@ trigger1 = parent,var(35) = 1
 trigger2 = parent,var(0) = -1
 trigger3 = parent,var(0) = 2
 value = anim
-elem = AnimElemNo(0)-!AnimElemTime(AnimElemNo(0))
+elem = max(1,AnimElemNo(0)-!AnimElemTime(AnimElemNo(0)))
 persistent = 1
 
 [State 2600, posfreeze]
@@ -51194,7 +51194,7 @@ trigger1 = parent,var(35) = 1
 trigger2 = parent,var(0) = -1
 trigger3 = parent,var(0) = 2
 value = anim
-elem = AnimElemNo(0)-!AnimElemTime(AnimElemNo(0))
+elem = max(1,AnimElemNo(0)-!AnimElemTime(AnimElemNo(0)))
 persistent = 1
 
 [State 2600, posfreeze]
@@ -51293,7 +51293,7 @@ trigger1 = parent,var(35) = 1
 trigger2 = parent,var(0) = -1
 trigger3 = parent,var(0) = 2
 value = anim
-elem = AnimElemNo(0)-!AnimElemTime(AnimElemNo(0))
+elem = max(1,AnimElemNo(0)-!AnimElemTime(AnimElemNo(0)))
 persistent = 1
 
 [State 2600, posfreeze]
@@ -51331,7 +51331,7 @@ type = changeanim
 triggerall = time > 0
 trigger1 = parent,var(24)
 value = anim
-elem = AnimElemNo(0)-!AnimElemTime(AnimElemNo(0))
+elem = max(1,AnimElemNo(0)-!AnimElemTime(AnimElemNo(0)))
 persistent = 1
 
 [State 2600, ChangeState]
@@ -51409,7 +51409,7 @@ trigger1 = parent,var(35) = 1
 trigger2 = parent,var(0) = -1
 trigger3 = parent,var(0) = 2
 value = anim
-elem = AnimElemNo(0)-!AnimElemTime(AnimElemNo(0))
+elem = max(1,AnimElemNo(0)-!AnimElemTime(AnimElemNo(0)))
 persistent = 1
 
 [State 2600, posfreeze]
@@ -51445,7 +51445,7 @@ type = changeanim
 triggerall = time > 0
 trigger1 = parent,var(24)
 value = anim
-elem = AnimElemNo(0)-!AnimElemTime(AnimElemNo(0))
+elem = max(1,AnimElemNo(0)-!AnimElemTime(AnimElemNo(0)))
 persistent = 1
 
 [State 9606, EnvColor]
@@ -51540,7 +51540,7 @@ trigger1 = parent,var(35) = 1
 trigger2 = parent,var(0) = -1
 trigger3 = parent,var(0) = 2
 value = anim
-elem = AnimElemNo(0)-!AnimElemTime(AnimElemNo(0))
+elem = max(1,AnimElemNo(0)-!AnimElemTime(AnimElemNo(0)))
 persistent = 1
 
 [State 2600, posfreeze]
@@ -51595,7 +51595,7 @@ trigger1 = parent,var(35) = 1
 trigger2 = parent,var(0) = -1
 trigger3 = parent,var(0) = 2
 value = anim
-elem = AnimElemNo(0)-!AnimElemTime(AnimElemNo(0))
+elem = max(1,AnimElemNo(0)-!AnimElemTime(AnimElemNo(0)))
 persistent = 1
 
 [State 2600, posfreeze]
@@ -51651,7 +51651,7 @@ trigger1 = parent,var(35) = 1
 trigger2 = parent,var(0) = -1
 trigger3 = parent,var(0) = 2
 value = anim
-elem = AnimElemNo(0)-!AnimElemTime(AnimElemNo(0))
+elem = max(1,AnimElemNo(0)-!AnimElemTime(AnimElemNo(0)))
 persistent = 1
 
 [State 2600, posfreeze]
@@ -51701,7 +51701,7 @@ trigger1 = parent,var(35) = 1
 trigger2 = parent,var(0) = -1
 trigger3 = parent,var(0) = 2
 value = anim
-elem = AnimElemNo(0)-!AnimElemTime(AnimElemNo(0))
+elem = max(1,AnimElemNo(0)-!AnimElemTime(AnimElemNo(0)))
 persistent = 1
 
 [State 2600, posfreeze]
@@ -51758,7 +51758,7 @@ trigger1 = parent,var(35) = 1
 trigger2 = parent,var(0) = -1
 trigger3 = parent,var(0) = 2
 value = anim
-elem = AnimElemNo(0)-!AnimElemTime(AnimElemNo(0))
+elem = max(1,AnimElemNo(0)-!AnimElemTime(AnimElemNo(0)))
 persistent = 1
 
 [State 2600, posfreeze]
@@ -51893,7 +51893,7 @@ trigger1 = parent,var(35) = 1
 trigger2 = parent,var(0) = -1
 trigger3 = parent,var(0) = 2
 value = anim
-elem = AnimElemNo(0)-!AnimElemTime(AnimElemNo(0))
+elem = max(1,AnimElemNo(0)-!AnimElemTime(AnimElemNo(0)))
 persistent = 1
 
 [State 2600, posfreeze]
@@ -51953,7 +51953,7 @@ trigger1 = parent,var(35) = 1
 trigger2 = parent,var(0) = -1
 trigger3 = parent,var(0) = 2
 value = anim
-elem = AnimElemNo(0)-!AnimElemTime(AnimElemNo(0))
+elem = max(1,AnimElemNo(0)-!AnimElemTime(AnimElemNo(0)))
 persistent = 1
 
 [State 2600, posfreeze]
@@ -52640,7 +52640,7 @@ triggerall = var(30) = gametime+1
 trigger1 = var(0) = -1
 trigger2 = var(0) = 2
 value = anim
-elem = AnimElemNo(0)-!AnimElemTime(AnimElemNo(0))
+elem = max(1,AnimElemNo(0)-!AnimElemTime(AnimElemNo(0)))
 ignorehitpause = 1
 
 [State -2, posision]
