@@ -541,6 +541,26 @@ time = 1
 ;== Dash 100 is ctrl=0 the whole way -> dash-cancel guard added.          ==
 ;== Every controller: AILevel-gated + !ishelper.                          ==
 
+; --- 0z. AI BRAIN : persistent memory helper (habit reads + cooldowns) -----
+; Ibuki-style architecture: a hidden helper that thinks every frame, even
+; through pauses. Tracks the opponent's habits (jump frequency) and Chun's
+; own recent options (anti-repetition cooldowns). Body reads are always
+; guarded by numhelper so a missing brain can never error.
+[State -1, AI Brain Spawn]
+type = helper
+triggerall = !ishelper
+triggerall = AILevel > 0
+trigger1 = roundstate = 2
+trigger1 = numhelper(39000) = 0
+helpertype = normal
+name = "AI Brain"
+id = 39000
+stateno = 39000
+pos = 0, 0
+ownpal = 1
+supermovetime = 99999
+pausemovetime = 99999
+
 ; --- 0a. NO TAUNT --------------------------------------------------------
 [State -1, AI No Taunt]
 type = changestate
@@ -1139,6 +1159,7 @@ type = changestate
 triggerall = !ishelper
 value = 1220
 triggerall = AILevel > 0
+triggerall = !numhelper(39000) || helper(39000),var(11) > 150
 triggerall = ctrl || (stateno = [130,141])
 triggerall = statetype != A
 trigger1 = p2statetype = A
@@ -1314,6 +1335,7 @@ type = changestate
 triggerall = !ishelper
 value = 440
 triggerall = AILevel > 0
+triggerall = !numhelper(39000) || helper(39000),var(1) < 220 || random < 500
 triggerall = (enemynear,power < 950) || (random < 450)   ;<-- respect their super
 triggerall = p2dist x > -4   ;<-- never swing at someone behind you
 triggerall = ctrl
@@ -1347,6 +1369,7 @@ type = changestate
 triggerall = !ishelper
 value = 1310
 triggerall = AILevel > 0
+triggerall = !numhelper(39000) || helper(39000),var(10) > 180   ;<-- no repeats
 triggerall = p2dist x > -4   ;<-- never swing at someone behind you
 triggerall = ctrl
 triggerall = statetype != A
@@ -1394,6 +1417,7 @@ type = changestate
 triggerall = !ishelper
 value = 105
 triggerall = AILevel > 0
+triggerall = !numhelper(39000) || helper(39000),var(12) > 90
 triggerall = backedgebodydist > 60   ;<-- never bait toward the wall
 triggerall = ctrl
 triggerall = statetype != A
@@ -1407,6 +1431,7 @@ type = changestate
 triggerall = !ishelper
 value = 100
 triggerall = AILevel > 0
+triggerall = !numhelper(39000) || helper(39000),var(1) < 220 || random < 500   ;<-- jumpy foe: advance less
 triggerall = ctrl
 triggerall = statetype != A
 trigger1 = p2statetype != A
@@ -3101,3 +3126,104 @@ triggerall = vel x = 0
 trigger1 = statetype = A
 trigger1 = ctrl
 trigger1 = Anim != 5040 && Anim != 5210
+
+;===========================================================================
+; AI BRAIN (helper 39000) -- persistent memory for the Chun-Li AI.
+; Own vars (read by the body as helper(39000),var(N)):
+;   var(1)  = opponent jump-habit gauge (rises while they're airborne,
+;             decays in ground play; > 220 means "this one likes to jump")
+;   var(10) = ticks since Chun last used Hazanshu      (cooldown)
+;   var(11) = ticks since Chun last used SBK           (cooldown)
+;   var(12) = ticks since Chun last used the bait step (cooldown)
+;===========================================================================
+[Statedef 39000]
+type = U
+movetype = U
+physics = N
+anim = 0
+velset = 0,0
+
+[State 39000, invisible]
+type = assertspecial
+trigger1 = 1
+flag = invisible
+flag2 = noshadow
+ignorehitpause = 1
+
+[State 39000, untouchable]
+type = nothitby
+trigger1 = 1
+value = SCA
+time = -1
+ignorehitpause = 1
+
+[State 39000, follow root]
+type = bindtoroot
+trigger1 = 1
+time = -1
+facing = 1
+ignorehitpause = 1
+
+; --- jump habit gauge ---
+[State 39000, jump habit up]
+type = varadd
+trigger1 = enemynear,statetype = A
+var(1) = 3
+ignorehitpause = 1
+
+[State 39000, jump habit decay]
+type = varadd
+trigger1 = enemynear,statetype != A
+trigger1 = var(1) > 0
+var(1) = -1
+ignorehitpause = 1
+
+[State 39000, jump habit cap]
+type = varset
+trigger1 = var(1) > 600
+var(1) = 600
+ignorehitpause = 1
+
+; --- option cooldown timers (watch the root's states) ---
+[State 39000, hazanshu used]
+type = varset
+trigger1 = root,stateno = [1300,1350]
+var(10) = 0
+ignorehitpause = 1
+
+[State 39000, hazanshu cool]
+type = varadd
+trigger1 = !(root,stateno = [1300,1350])
+trigger1 = var(10) < 30000
+var(10) = 1
+ignorehitpause = 1
+
+[State 39000, sbk used]
+type = varset
+trigger1 = root,stateno = [1200,1250]
+var(11) = 0
+ignorehitpause = 1
+
+[State 39000, sbk cool]
+type = varadd
+trigger1 = !(root,stateno = [1200,1250])
+trigger1 = var(11) < 30000
+var(11) = 1
+ignorehitpause = 1
+
+[State 39000, bait used]
+type = varset
+trigger1 = root,stateno = 105
+var(12) = 0
+ignorehitpause = 1
+
+[State 39000, bait cool]
+type = varadd
+trigger1 = root,stateno != 105
+trigger1 = var(12) < 30000
+var(12) = 1
+ignorehitpause = 1
+
+[State 39000, die with round]
+type = destroyself
+trigger1 = roundstate != 2
