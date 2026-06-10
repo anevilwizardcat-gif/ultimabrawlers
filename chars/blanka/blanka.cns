@@ -1,0 +1,1792 @@
+; ------------------------------------------------------------
+; Street Fighter Alpha 3'S Blanka, The Amazonian Weirdo By MHz
+; ------------------------------------------------------------
+
+;* VARIABLES
+[Data]
+Life = 1000
+Attack = 100
+Defence = 100
+Fall.Defence_Up = 50
+Liedown.Time = 60
+Airjuggle = 15
+Sparkno = 2
+Guard.Sparkno = 40
+Ko.Echo = 0
+Volume = 50
+
+[Size]
+Xscale = 1
+Yscale = 1
+Ground.Back = 20
+Ground.Front = 29
+Air.Back = 20
+Air.Front = 30
+Z.Width = 3
+Height = 60
+Attack.Width = 4,4
+Attack.Dist = 160
+Proj.Attack.Dist = 90
+Proj.Doscale = 0
+
+[Velocity]
+Walk.Fwd  = 2.5
+Walk.Back = -2.2
+Run.Fwd  = 4, 0
+Run.Back = -5,-5
+Jump.Neu = 0,-10
+Jump.Back = -2.65
+Jump.Fwd = 2.6
+Runjump.Back = -2.55,-8.1
+Runjump.Fwd = 4,-8.1
+Airjump.Neu = 0,-8.1
+Airjump.Back = -2.55,-8.1
+Airjump.Fwd = 2.5,-8.1
+
+[Movement]
+Airjump.Num = 0
+Airjump.Height = 35
+Yaccel = .45
+Stand.Friction = .85
+Crouch.Friction = .82
+
+;---------------------------------------------------------------------------
+; Format:
+; [Statedef Stateno]
+; Type = ?      S/C/A/L  Stand/Crouch/Air/Liedown
+; Movetype = ?  I/A/H    Idle/Attack/Gethit
+; Physics = ?   S/C/A/N  Stand/Crouch/Air/None
+; Juggle = ?             Air Juggle Points Move Requires
+;
+
+;* STATIC
+;---------------------------------------------------------------------------
+[Statedef 0160] ; Taunt
+Type = S
+Ctrl = 0
+Anim = 160
+
+[State 160, Snd]
+Type = Playsnd
+Trigger1 = Time = 0
+Value = S181,0
+
+[State 160, End]
+Type = Changestate
+Trigger1 = Animtime = 0
+Value = 0
+Ctrl = 1
+
+;---------------------------------------------------------------------------
+[Statedef 0170] ; Lose (Time Over)
+Type = S
+Ctrl = 0
+Anim = 170
+Velset = 0,0,0
+
+[State 170, 1]
+Type = Nothitby
+Trigger1 = Time >= 0
+Value = Sca
+Time = 1
+
+;---------------------------------------------------------------------------
+[Statedef 0180] ; Win
+Type = S
+
+[State 180, Snd]
+Type = Playsnd
+Trigger1 = Time = 0
+Value = S181,0
+
+[State 180, End]
+Type = Changestate
+Trigger1 = Time = 0
+Value = 181
+
+;---------------------------------------------------------------------------
+[Statedef 0181] ; Win1
+Type = S
+Ctrl = 0
+Anim = 181
+Velset = 0,0,0
+
+[State 181, 2]
+Type = Playsnd
+Trigger1 = Animelem = 5
+Value = S12, 1
+
+[State 181, 1]
+Type = Nothitby
+Trigger1 = Time >= 0
+Value = Sca
+Time = 1
+
+;---------------------------------------------------------------------------
+[Statedef 0191] ; Intro
+Type = S
+Ctrl = 0
+Anim = 190
+Velset = 0,0,0
+
+[State 191, 1]
+Type = Varset
+Trigger1 = Time = 0
+V = 9
+Value = 1
+
+[State 191, 7]
+Type = Varset
+Trigger1 = Time = 20
+V = 9
+Value = 0
+
+[State 191, 3]
+Type = Assertspecial
+Trigger1 = Time = [0,40]
+Flag = Intro
+
+;* BASICS (STANDING)
+;---------------------------------------------------------------------------
+[Statedef 0200] ; Stand X
+Type    = S
+Movetype= A
+Physics = S
+Juggle  = 1
+Velset = 0,0
+Ctrl = 0
+Anim = 200
+Poweradd = 20
+
+[State 200, 1]
+Type = Playsnd
+Trigger1 = Time = 1
+Value = S12, 0
+
+[State 200, 2]
+Type = Hitdef
+Trigger1 = Animelem = 1
+Attr = S, Na
+Damage    = 25
+Animtype = Light
+Guardflag = Ma
+Hitflag = Maf
+Priority = 3, Hit
+Pausetime = 7,8
+Numhits = 1
+Sparkno = 0
+Sparkxy = -10,-70
+Hitsound = 5,0
+Guardsound = 6,0
+Ground.Type = High
+Ground.Slidetime = 5
+Ground.Hittime  = 11
+Ground.Velocity = -4
+Airguard.Velocity = -1.9    
+Air.Velocity = -1.3,-3
+
+[State 200, 7]
+Type = Changestate
+Trigger1 = Animtime = 0
+Value = 0
+Ctrl = 1
+
+;---------------------------------------------------------------------------
+[Statedef 0210] ; Stand Y
+Type    = S
+Movetype= A
+Physics = S
+Juggle  = 4
+Poweradd= 40
+Ctrl = 0
+Velset = 0,0,0
+Anim = 210
+
+[State 210, 1]
+Type = Playsnd
+Trigger1 = Time = 1
+Value = S12, 1
+
+[State 210, 2]
+Type = Hitdef
+Trigger1 = Animelem = 1
+Attr = S, Na
+Animtype  = Medium
+Damage    = 65
+Guardflag = Ma
+Pausetime = 11,11
+Sparkno = 1
+Sparkxy = -10,-70
+Hitsound   = 5,1
+Guardsound = 6,0
+Ground.Type = High
+Ground.Slidetime = 12
+Ground.Hittime  = 15
+Ground.Velocity = -5
+Air.Velocity = -2.2,-3.2
+
+[State 210, 3]
+Type = Changestate
+Trigger1 = Animtime = 0
+Value = 0
+Ctrl = 1
+
+;---------------------------------------------------------------------------
+[Statedef 0220] ; Stand Z
+Type    = S
+Movetype= A
+Physics = S
+Juggle  = 4
+Poweradd= 60
+Ctrl = 0
+Velset = 0,0,0
+Anim = 220
+
+[State 220, 1]
+Type = Playsnd
+Trigger1 = Time = 1
+Value = S12, 2
+
+[State 200, 1]
+Type = Playsnd
+Trigger1 = Time = 2
+Value = S13, 1
+Volume = 200
+
+[State 220, 8]
+Type = Hitdef
+Trigger1 = Animelem = 1
+Attr = S, Na
+Animtype  = Hard
+Damage    = 80
+Guardflag = Ma
+Pausetime = 11,11
+Sparkxy = -10,-70
+Hitsound   = 5,2
+Guardsound = 6,0
+Ground.Type = High
+Ground.Slidetime = 12
+Ground.Hittime  = 15
+Air.Hittime = 24
+Ground.Velocity = 0   
+Air.Velocity = -4,-5
+Guard.Velocity = -3   
+Airguard.Velocity = -3   
+Fall.Recover = 0
+
+[State 220, 10]
+Type = Changestate
+Trigger1 = Animtime = 0
+Value = 0
+Ctrl = 1
+
+;---------------------------------------------------------------------------
+[Statedef 0230] ; Stand A
+Type    = S
+Movetype= A
+Physics = S
+Juggle  = 1
+Velset = 0,0
+Ctrl = 0
+Anim = 230
+Poweradd = 20
+
+[State 200, 1]
+Type = Playsnd
+Trigger1 = Time = 2
+Value = S12, 0
+
+[State 230, 2]
+Type = Hitdef
+Trigger1 = Animelem = 1
+Attr = S, Na
+Damage    = 25
+Animtype = Light
+Guardflag = Ma
+Hitflag = Maf
+Priority = 3, Hit
+Pausetime = 7,8
+Numhits = 1
+Sparkno = 0
+Sparkxy = -10,-70
+Hitsound = 5,0
+Guardsound = 6,0
+Ground.Type = High
+Ground.Slidetime = 5
+Ground.Hittime  = 11
+Ground.Velocity = -4
+Airguard.Velocity = -1.9    
+Air.Velocity = -1.3,-3
+
+[State 230, 7]
+Type = Changestate
+Trigger1 = Animtime = 0
+Value = 0
+Ctrl = 1
+
+;---------------------------------------------------------------------------
+[Statedef 0240] ; Stand B
+Type    = S
+Movetype= A
+Physics = S
+Juggle  = 4
+Poweradd= 60
+Ctrl = 0
+Velset = 0,0,0
+Anim = 240
+
+[State 240, 1]
+Type = Playsnd
+Trigger1 = Time = 2
+Value = S12, 1
+
+[State 240, 2]
+Type = Hitdef
+Trigger1 = Animelem = 1
+Attr = S, Na
+Animtype  = Hard
+Damage    = 65
+Guardflag = Ma
+Pausetime = 11,11
+Sparkxy = -10,-70
+Hitsound   = 5,1
+Guardsound = 6,0
+Ground.Type = High
+Ground.Slidetime = 12
+Ground.Hittime  = 15
+Ground.Velocity = -5
+Air.Velocity = -2.2,-3.2
+
+[State 240, 3]
+Type = Changestate
+Trigger1 = Animtime = 0
+Value = 0
+Ctrl = 1
+
+;---------------------------------------------------------------------------
+[Statedef 0250] ; Stand C
+Type    = S
+Movetype= A
+Physics = S
+Juggle  = 7
+Poweradd= 80
+Ctrl = 0
+Anim = 250
+Velset = 0,0
+
+[State 250, 1]
+Type = Playsnd
+Trigger1 = Time = 2
+Value = S12, 2
+
+[State 200, 1]
+Type = Playsnd
+Trigger1 = Time = 2
+Value = S13, 1
+Volume = 200
+
+[State 250, 3]
+Type = Hitdef
+Trigger1 = Animelem = 1
+Attr = S, Na
+Animtype  = Hard
+Damage    = 80
+Guardflag = Ma
+Pausetime = 11,11
+Sparkxy = -10,-70
+Hitsound   = 5,2
+Guardsound = 6,0
+Ground.Type = High
+Ground.Slidetime = 12
+Ground.Hittime  = 15
+Ground.Velocity = -5
+Air.Velocity = -2.2,-3.2
+
+[State 250, 9]
+Type = Changestate
+Trigger1 = Animtime = 0
+Value = 0
+Ctrl = 1
+
+;---------------------------------------------------------------------------
+[Statedef 0205] ; Stand X Close
+Type    = S
+Movetype= A
+Physics = S
+Juggle  = 1
+Velset = 0,0
+Ctrl = 0
+Anim = 205
+Poweradd = 20
+
+[State 200, 1]
+Type = Playsnd
+Trigger1 = Time = 1
+Value = S12, 0
+
+[State 200, 2]
+Type = Hitdef
+Trigger1 = Animelem = 1
+Attr = S, Na
+Damage    = 25
+Animtype = Light
+Guardflag = Ma
+Hitflag = Maf
+Priority = 3, Hit
+Pausetime = 7,8
+Numhits = 1
+Sparkno = 0
+Sparkxy = -10,-70
+
+Hitsound = 5,0
+Guardsound = 6,0
+Ground.Type = High
+Ground.Slidetime = 5
+Ground.Hittime  = 11
+Ground.Velocity = -4
+Airguard.Velocity = -1.9    
+Air.Velocity = -1.3,-3
+
+[State 200, 7]
+Type = Changestate
+Trigger1 = Animtime = 0
+Value = 0
+Ctrl = 1
+
+;---------------------------------------------------------------------------
+[Statedef 0215] ; Stand Y Close
+Type    = S
+Movetype= A
+Physics = S
+Juggle  = 4
+Poweradd= 60
+Ctrl = 0
+Velset = 0,0,0
+Anim = 215
+
+[State 240, 1]
+Type = Playsnd
+Trigger1 = Time = 2
+Value = S12, 1
+
+[State 240, 2]
+Type = Hitdef
+Trigger1 = Animelem = 3
+Attr = S, Na
+Animtype  = Hard
+Damage    = 65
+Guardflag = Ma
+Pausetime = 11,11
+Sparkxy = -10,-70
+Hitsound   = 5,1
+Guardsound = 6,0
+Ground.Type = High
+Ground.Slidetime = 12
+Ground.Hittime  = 15
+Ground.Velocity = -2
+Air.Velocity = -2.2,-2.2
+
+[State 240, 2]
+Type = Hitdef
+Trigger1 = Animelem = 4
+Attr = S, Na
+Animtype  = Hard
+Damage    = 65
+Guardflag = Ma
+Pausetime = 11,11
+Sparkxy = -10,-70
+Hitsound   = 5,1
+Guardsound = 6,0
+Ground.Type = High
+Ground.Slidetime = 12
+Ground.Hittime  = 15
+Ground.Velocity = -5
+Air.Velocity = -2.2,-3.2
+
+[State 240, 3]
+Type = Changestate
+Trigger1 = Animtime = 0
+Value = 0
+Ctrl = 1
+
+;---------------------------------------------------------------------------
+[Statedef 0235] ; Stand A Close
+Type    = S
+Movetype= A
+Physics = S
+Juggle  = 1
+Velset = 0,0
+Ctrl = 0
+Anim = 235
+Poweradd = 20
+
+[State 200, 1]
+Type = Playsnd
+Trigger1 = Time = 2
+Value = S12, 0
+
+[State 230, 2]
+Type = Hitdef
+Trigger1 = Animelem = 1
+Attr = S, Na
+Damage    = 25
+Animtype = Light
+Guardflag = Ma
+Hitflag = Maf
+Priority = 3, Hit
+Pausetime = 7,8
+Numhits = 1
+Sparkno = 0
+Sparkxy = -10,-70
+Hitsound = 5,0
+Guardsound = 6,0
+Ground.Type = High
+Ground.Slidetime = 5
+Ground.Hittime  = 11
+Ground.Velocity = -4
+Airguard.Velocity = -1.9    
+Air.Velocity = -1.3,-3
+
+[State 230, 7]
+Type = Changestate
+Trigger1 = Animtime = 0
+Value = 0
+Ctrl = 1
+
+;---------------------------------------------------------------------------
+[Statedef 0245] ; Stand B
+Type    = S
+Movetype= A
+Physics = S
+Juggle  = 4
+Poweradd= 60
+Ctrl = 0
+Velset = 0,0,0
+Anim = 245
+
+[State 240, 1]
+Type = Playsnd
+Trigger1 = Time = 2
+Value = S12, 1
+
+[State 240, 2]
+Type = Hitdef
+Trigger1 = Animelem = 4
+Attr = S, Na
+Animtype  = Hard
+Damage    = 65
+Guardflag = Ma
+Pausetime = 11,11
+Sparkxy = -10,-70
+Hitsound   = 5,1
+Guardsound = 6,0
+Ground.Type = High
+Ground.Slidetime = 12
+Ground.Hittime  = 15
+Ground.Velocity = -2
+Air.Velocity = -2.2,-2.2
+
+[State 240, 2]
+Type = Hitdef
+Trigger1 = Animelem = 5
+Attr = S, Na
+Animtype  = Hard
+Damage    = 65
+Guardflag = Ma
+Pausetime = 11,11
+Sparkxy = -10,-70
+Hitsound   = 5,1
+Guardsound = 6,0
+Ground.Type = High
+Ground.Slidetime = 12
+Ground.Hittime  = 15
+Ground.Velocity = -5
+Air.Velocity = -2.2,-3.2
+
+[State 240, 3]
+Type = Changestate
+Trigger1 = Animtime = 0
+Value = 0
+Ctrl = 1
+
+;* BASICS (CROUCHING)
+;---------------------------------------------------------------------------
+[Statedef 0400] ; Crouch X
+Type    = C
+Movetype= A
+Physics = C
+Juggle  = 6
+Poweradd= 15
+Ctrl = 0
+Anim = 400
+
+[State 400, 1]
+Type = Playsnd
+Trigger1 = Time = 1
+Value = S12, 0
+
+[State 200, 1]
+Type = Playsnd
+Trigger1 = Time = 2
+Value = S13, 0
+Volume = 200
+
+[State 400, 2]
+Type = Hitdef
+Trigger1 = Animelem = 1
+Attr = C, Na
+Damage    = 25
+Animtype  = Light
+Getpower  = 10
+Givepower = 8
+Hitflag = Maf
+Guardflag = L
+Pausetime = 10,12
+Sparkno = 0
+Sparkxy = -2,-41
+Hitsound   = 5,0
+Guardsound = 6,0
+Ground.Type = Low
+Ground.Slidetime = 4
+Ground.Hittime  = 15
+Ground.Velocity = -4
+Air.Velocity = -1.3,-3
+Down.Velocity = -4,0
+Down.Hittime = 15
+
+[State 400, 3]
+Type = Ctrlset
+Trigger1 = Time = 2
+Value = 1
+
+[State 400, 4]
+Type = Changestate
+Trigger1 = Animtime = 0
+Value = 11
+
+;---------------------------------------------------------------------------
+[Statedef 0410] ; Crouch Y
+Type    = C
+Movetype= A
+Physics = C
+Juggle  = 7
+Poweradd= 70
+Ctrl = 0
+Anim = 410
+
+[State 410, 1]
+Type = Playsnd
+Trigger1 = Time = 1
+Value = S12, 1
+
+[State 200, 1]
+Type = Playsnd
+Trigger1 = Time = 2
+Value = S13, 1
+Volume = 200
+
+[State 410, 3]
+Type = Hitdef
+Trigger1 = Animelem = 1
+Attr = C, Na
+Damage    = 65
+Animtype  = Medium
+Getpower  = 40
+Givepower = 40
+Hitflag = Maf
+Guardflag = L
+Pausetime = 10,12
+Sparkno = 1
+Sparkxy = -2,-41
+Hitsound   = 5,1
+Guardsound = 6,0
+Ground.Type = Low
+Ground.Slidetime = 4
+Ground.Hittime  = 15
+Ground.Velocity = -4
+Air.Velocity = -1.3,-3
+Down.Velocity = -4,0
+Down.Hittime = 15
+
+[State 410, 4]
+Type = Changestate
+Trigger1 = Animtime = 0
+Value = 11
+Ctrl = 1
+
+;---------------------------------------------------------------------------
+[Statedef 0420] ; Crouch Z
+Type    = C
+Movetype= A
+Physics = C
+Juggle  = 7
+Poweradd= 70
+Ctrl = 0
+Anim = 420
+Velset = 0,0,0
+
+[State 420, 2]
+Type = Playsnd
+Trigger1 = Time = 2
+Value = S12, 2
+
+[State 200, 1]
+Type = Playsnd
+Trigger1 = Time = 2
+Value = S13, 1
+Volume = 200
+
+[State 420, 4]
+Type = Hitdef
+Trigger1 = Animelem = 1
+Attr = C, Na
+Damage    = 80
+Animtype = Heavy
+Guardflag = M
+Hitflag = Maf
+Priority = 4, Hit
+Pausetime = 10,8
+Sparkxy = -20,-60
+Hitsound = 5,2
+Guardsound = S20,6
+Ground.Type = Low
+Ground.Slidetime = 15
+Ground.Hittime  = 20
+Air.Hittime = 24
+Ground.Velocity = -5
+Air.Velocity = -2.2,-3.2
+
+[State 420, 5]
+Type = Changestate
+Trigger1 = Animtime = 0
+Value = 11
+Ctrl = 1
+
+;---------------------------------------------------------------------------
+[Statedef 0425] ; Crouch Z Start Slide
+Type    = C
+Movetype= A
+Physics = C
+Juggle  = 7
+Poweradd= 70
+Ctrl = 0
+Anim = 425
+Velset = 0,0
+
+[State 425, 4]
+Type = Changestate
+Trigger1 = Animtime = 0
+Value = 426
+
+;---------------------------------------------------------------------------
+[Statedef 0426] ; Crouch Z Slide
+Type    = C
+Movetype= A
+Physics = C
+Juggle  = 7
+Ctrl = 0
+Anim = 426
+Velset = 20,0
+
+[State 425, 4]
+Type = Playsnd
+Trigger1 = Time = 0
+Value = 14,0
+
+[State 425, 3]
+Type = Hitdef
+Trigger1 = Animelem = 1
+Attr = C, Na
+Damage    = 80
+Animtype  = Hard
+Getpower  = 40
+Givepower = 40
+Hitflag = Maf
+Guardflag = L
+Pausetime = 12,12
+Sparkxy = -5,-10
+Hitsound   = 5,2
+Guardsound = 6,0
+Ground.Type = Trip
+Ground.Slidetime = 12
+Ground.Hittime = 12
+Guard.Velocity = -6
+Ground.Velocity = -6
+All = 1
+
+[State 425, 4]
+Type = Changestate
+Trigger1 = Animtime = 0
+Trigger2 = Vel X <= 1
+Value = 427
+
+[Statedef 0427] ; Crouch Z Getupslide
+Type    = C
+Movetype= A
+Physics = C
+Juggle  = 7
+Ctrl = 0
+Anim = 427
+Velset = 0,0
+
+[State 425, 4]
+Type = Changestate
+Trigger1 = Animtime = 0
+Value = 11
+Ctrl=1
+
+;---------------------------------------------------------------------------
+[Statedef 0430] ; Crouch A
+Type    = C
+Movetype= A
+Physics = C
+Juggle  = 6
+Poweradd= 15
+Ctrl = 0
+Anim = 430
+
+[State 430, 1]
+Type = Playsnd
+Trigger1 = Time = 2
+Value = S12, 0
+
+[State 200, 1]
+Type = Playsnd
+Trigger1 = Time = 2
+Value = S13, 0
+Volume = 200
+
+[State 430, 2]
+Type = Hitdef
+Trigger1 = Animelem = 1
+Attr = C, Na
+Damage    = 25
+Animtype  = Light
+Getpower  = 10
+Givepower = 8
+Hitflag = Maf
+Guardflag = L
+Pausetime = 10,12
+Sparkno = 0
+Sparkxy = -5,-10
+Hitsound   = 5,0
+Guardsound = 6,0
+Ground.Type = Low
+Ground.Slidetime = 4
+Ground.Hittime  = 15
+Ground.Velocity = -4
+Air.Velocity = -1.3,-3
+Down.Velocity = -4,0
+Down.Hittime = 20
+
+[State 430, 3]
+Type = Ctrlset
+Trigger1 = Time = 2
+Value = 1
+
+[State 430, 4]
+Type = Changestate
+Trigger1 = Animtime = 0
+Value = 11
+
+;---------------------------------------------------------------------------
+[Statedef 0440] ; Crouch B
+Type    = C
+Movetype= A
+Physics = C
+Juggle  = 7
+Poweradd= 70
+Ctrl = 0
+Anim = 440
+
+[State 440, 2]
+Type = Playsnd
+Trigger1 = Time = 2
+Value = S12, 1
+
+[State 200, 1]
+Type = Playsnd
+Trigger1 = Time = 2
+Value = S13, 1
+Volume = 200
+
+[State 440, 3]
+Type = Hitdef
+Trigger1 = Animelem = 1
+Attr = C, Na
+Damage    = 65
+Animtype  = Medium
+Getpower  = 40
+Givepower = 40
+Hitflag = Maf
+Guardflag = L
+Pausetime = 10,12
+Sparkno = 1
+Sparkxy = -2,-41
+Hitsound   = 5,1
+Guardsound = 6,0
+Ground.Type = Low
+Ground.Slidetime = 4
+Ground.Hittime  = 15
+Ground.Velocity = -4
+Air.Velocity = -1.3,-3
+Down.Velocity = -4,0
+Down.Hittime = 15
+
+[State 440, 4]
+Type = Changestate
+Trigger1 = Animtime = 0
+Value = 11
+Ctrl = 1
+
+;---------------------------------------------------------------------------
+[Statedef 0450] ; Crouch C
+Type    = C
+Movetype= A
+Physics = C
+Juggle  = 7
+Poweradd= 80
+Ctrl = 0
+Anim = 450
+
+[State 450, 2]
+Type = Playsnd
+Trigger1 = Time = 2
+Value = S12, 2
+
+[State 200, 1]
+Type = Playsnd
+Trigger1 = Time = 2
+Value = S13, 1
+Volume = 200
+
+[State 450, 3]
+Type = Hitdef
+Trigger1 = Animelem = 1
+Attr = C, Na
+Damage    = 80
+Animtype  = Hard
+Getpower  = 40
+Givepower = 40
+Hitflag = Maf
+Guardflag = L
+Pausetime = 12,12
+Sparkxy = -5,-10
+Hitsound   = 5,2
+Guardsound = 6,0
+Ground.Type = Trip
+Ground.Slidetime = 12
+Ground.Hittime = 12
+Ground.Velocity = 0   
+Air.Velocity = -4,-3
+Guard.Velocity = -3   
+Airguard.Velocity = -3   
+All = 1
+
+[State 450, 5]
+Type = Changestate
+Trigger1 = Animtime = 0
+Value = 11
+Ctrl = 1
+
+;* BASICS (JUMPING)
+;---------------------------------------------------------------------------
+[Statedef 0600] ; Jump X
+Type    = A
+Movetype= A
+Physics = A
+Juggle  = 2
+Poweradd= 11
+Ctrl = 0
+Anim = 600
+
+[State 600, 2]
+Type = Playsnd
+Trigger1 = Time = 2
+Value = S12, 0
+
+[State 600, 2]
+Type = Playsnd
+Trigger1 = Time = 2
+Value = S13, 0
+Volume = 210
+
+[State 600, 2]
+Type = Hitdef
+Trigger1 = Animelem = 1
+Attr = A, Na
+Damage    = 25
+Getpower  = 10
+Givepower = 10
+Guardflag = Ha
+Priority = 3
+Pausetime = 7,8
+Sparkno = 0
+Sparkxy = -10,-51
+Hitsound   = 5,0
+Guardsound = 6,0
+Ground.Type = High
+Ground.Slidetime = 5
+Ground.Hittime  = 5
+Ground.Velocity = -4
+Air.Velocity = -1.3,-3
+
+[State 600, 3]
+Type = Ctrlset
+Trigger1 = Time = 17
+Value = 1
+
+[State 600, 4]
+Type = Changestate
+Trigger1 = Animtime = 0
+Value = 50
+
+;---------------------------------------------------------------------------
+[Statedef 0610] ; Jump Y
+Type    = A
+Movetype= A
+Physics = A
+Juggle  = 3
+Poweradd= 55
+Ctrl = 0
+Anim = 610
+
+[State 610, 2]
+Type = Playsnd
+Trigger1 = Time = 2
+Value = S12, 1
+
+[State 600, 2]
+Type = Playsnd
+Trigger1 = Time = 2
+Value = S13, 1
+Volume = 210
+
+[State 610, 3]
+Type = Hitdef
+Trigger1 = Animelem = 1
+Attr = A, Na
+Damage    = 65
+Getpower  = 50
+Givepower = 25
+Guardflag = Ha
+Priority = 3
+Pausetime = 9,10
+Sparkno = 1
+Sparkxy = -10,-51
+Hitsound   = 5,1
+Guardsound = 6,0
+Ground.Type = High
+Ground.Slidetime = 9
+Ground.Hittime  = 9
+Ground.Velocity = -4
+Air.Velocity = -1.3,-3
+
+[State 610, 4]
+Type = Changestate
+Trigger1 = Animtime = 0
+Value = 50
+Ctrl = 1
+
+;---------------------------------------------------------------------------
+[Statedef 0620] ; Jump Z
+Type    = A
+Movetype= A
+Physics = A
+Juggle  = 3
+Poweradd= 55
+Ctrl = 0
+Anim = 620
+
+[State 620, 2]
+Type = Playsnd
+Trigger1 = Time = 2
+Value = S12, 2
+
+[State 600, 2]
+Type = Playsnd
+Trigger1 = Time = 2
+Value = S13, 1
+Volume = 210
+
+[State 620, 3]
+Type = Hitdef
+Trigger1 = Animelem = 1
+Attr = A, Na
+Damage    = 80
+Getpower  = 50
+Givepower = 25
+Guardflag = Ha
+Priority = 3
+Pausetime = 9,10
+Sparkxy = -10,-51
+Hitsound   = 5,2
+Guardsound = 6,0
+Ground.Type = High
+Ground.Slidetime = 9
+Ground.Hittime  = 9
+Ground.Velocity = -4
+Air.Velocity = -1.3,-3
+
+[State 620, 4]
+Type = Changestate
+Trigger1 = Animtime = 0
+Value = 50
+Ctrl = 1
+
+;---------------------------------------------------------------------------
+[Statedef 0630] ; Jump A
+Type    = A
+Movetype= A
+Physics = A
+Juggle  = 2
+Poweradd= 11
+Ctrl = 0
+Anim = 630
+
+[State 630, 1]
+Type = Playsnd
+Trigger1 = Time = 2
+Value = S12, 0
+
+[State 600, 2]
+Type = Playsnd
+Trigger1 = Time = 2
+Value = S13, 0
+Volume = 210
+
+[State 630, 2]
+Type = Hitdef
+Trigger1 = Animelem = 1
+Attr = A, Na
+Damage    = 12
+Getpower  = 10
+Givepower = 10
+Guardflag = Ha
+Priority = 3
+Pausetime = 7,8
+Sparkno = 0
+Sparkxy = -10,-51
+Hitsound   = 5,0
+Guardsound = 6,0
+Ground.Type = High
+Ground.Slidetime = 5
+Ground.Hittime  = 5
+Ground.Velocity = -4
+Air.Velocity = -1.3,-3
+
+[State 630, 3]
+Type = Ctrlset
+Trigger1 = Time = 17
+Value = 1
+
+[State 630, 4]
+Type = Changestate
+Trigger1 = Animtime = 0
+Value = 50
+
+;---------------------------------------------------------------------------
+[Statedef 0640] ; Jump B
+Type    = A
+Movetype= A
+Physics = A
+Juggle  = 3
+Poweradd= 55
+Ctrl = 0
+Anim = 640
+
+[State 640, 1]
+Type = Playsnd
+Trigger1 = Time = 2
+Value = S12, 1
+
+[State 600, 2]
+Type = Playsnd
+Trigger1 = Time = 2
+Value = S13, 1
+Volume = 210
+
+[State 640, 3]
+Type = Hitdef
+Trigger1 = Animelem = 1
+Attr = A, Na
+Damage    = 40
+Getpower  = 50
+Givepower = 25
+Guardflag = Ha
+Priority = 3
+Pausetime = 9,10
+Sparkno = 1
+Sparkxy = -10,-51
+Hitsound   = 5,2
+Guardsound = 6,0
+Ground.Type = High
+Ground.Slidetime = 9
+Ground.Hittime  = 9
+Ground.Velocity = -4
+Air.Velocity = -1.3,-3
+
+[State 640, 4]
+Type = Changestate
+Trigger1 = Animtime = 0
+Value = 50
+Ctrl = 1
+
+;---------------------------------------------------------------------------
+[Statedef 0650] ; Jump C
+Type    = A
+Movetype= A
+Physics = A
+Juggle  = 3
+Poweradd= 55
+Ctrl = 0
+Anim = 650
+
+[State 650, 1]
+Type = Playsnd
+Trigger1 = Time = 2
+Value = S12, 2
+
+[State 600, 2]
+Type = Playsnd
+Trigger1 = Time = 2
+Value = S13, 1
+Volume = 210
+
+[State 650, 3]
+Type = Hitdef
+Trigger1 = Animelem = 1
+Attr = A, Na
+Damage    = 70
+Getpower  = 50
+Givepower = 25
+Guardflag = Ha
+Priority = 3
+Pausetime = 9,10
+Sparkxy = -10,-51
+Hitsound   = 5,2
+Guardsound = 6,0
+Ground.Type = High
+Ground.Slidetime = 9
+Ground.Hittime  = 9
+Ground.Velocity = -4
+Air.Velocity = -1.3,-3
+
+[State 650, 4]
+Type = Changestate
+Trigger1 = Animtime = 0
+Value = 50
+Ctrl = 1
+
+
+;* SPECIALS
+;---------------------------------------------------------------------------
+[Statedef 1000] ; Elec X Loop
+Type    = C
+Movetype= A
+Physics = C
+Poweradd= 15
+Ctrl = 0
+Anim = 1000
+
+[State 650, 3]
+Type = Playsnd
+Trigger1 = Timemod = 9, 0
+Value = 15,0
+
+[State 650, 3]
+Type = Hitdef
+Trigger1 = Timemod = 8, 0
+Attr = A, Na
+Damage    = 30
+Getpower  = 50
+Givepower = 25
+Guardflag = Ha
+Priority = 3
+Pausetime = 9,12
+Sparkxy = -10,-51
+Hitsound   = 5,2
+Guardsound = 6,0
+Ground.Type = High
+Ground.Slidetime = 9
+Ground.Hittime  = 12
+Ground.Velocity = -4
+Air.Velocity = -1.3,-3
+Palfx.Time = 7
+Palfx.Add = 128,64,32
+
+
+[State 650, 4]
+Type = Changestate
+Trigger1 = Time > 80
+Trigger1 = Command != "x"
+Value = 1001
+
+
+
+[Statedef 1001] ; Elec X End
+Type    = C
+Movetype= A
+Physics = C
+Ctrl = 0
+Anim = 1001
+
+[State 650, 3]
+Type = Playsnd
+Trigger1 = Timemod = 9, 0
+Value = 15,0
+
+[State 650, 3]
+Type = Hitdef
+Trigger1 = Timemod = 8, 0
+Attr = A, Na
+Damage    = 30
+Getpower  = 50
+Givepower = 25
+Guardflag = Ha
+Priority = 3
+Pausetime = 9,10
+Sparkxy = -10,-51
+Hitsound   = 5,2
+Guardsound = 6,0
+Ground.Type = High
+Ground.Slidetime = 9
+Ground.Hittime  = 9
+Ground.Velocity = -4
+Air.Velocity = -1.3,-3
+
+[State 650, 4]
+Type = Changestate
+Trigger1 = Animtime = 0
+Value = 11
+Ctrl = 1
+
+;---------------------------------------------------------------------------
+[Statedef 1010] ; Elec Y
+Type    = C
+Movetype= A
+Physics = C
+Poweradd= 20
+Ctrl = 0
+Anim = 1010
+
+[State 650, 3]
+Type = Playsnd
+Trigger1 = Timemod = 9, 0
+Value = 15,0
+
+[State 650, 3]
+Type = Hitdef
+Trigger1 = Timemod = 8, 0
+Attr = A, Na
+Damage    = 35
+Getpower  = 50
+Givepower = 25
+Guardflag = Ha
+Priority = 3
+Pausetime = 9,12
+Sparkxy = -10,-51
+Hitsound   = 5,2
+Guardsound = 6,0
+Ground.Type = High
+Ground.Slidetime = 9
+Ground.Hittime  = 12
+Ground.Velocity = -4
+Air.Velocity = -1.3,-3
+Palfx.Time = 7
+Palfx.Add = 128,64,32
+
+[State 650, 4]
+Type = Changestate
+Trigger1 = Animtime = 0
+Value = 11
+Ctrl = 1
+
+;---------------------------------------------------------------------------
+[Statedef 1020] ; Elec Z
+Type    = C
+Movetype= A
+Physics = C
+Poweradd= 25
+Ctrl = 0
+Anim = 1020
+
+[State 650, 3]
+Type = Playsnd
+Trigger1 = Timemod = 9, 0
+Value = 15,0
+
+[State 650, 3]
+Type = Hitdef
+Trigger1 = Timemod = 8, 0
+Attr = A, Na
+Damage    = 40
+Getpower  = 50
+Givepower = 25
+Guardflag = Ha
+Priority = 3
+Pausetime = 9,12
+Sparkxy = -10,-51
+Hitsound   = 5,2
+Guardsound = 6,0
+Ground.Type = High
+Ground.Slidetime = 9
+Ground.Hittime  = 12
+Ground.Velocity = -4
+Air.Velocity = -1.3,-3
+Palfx.Time = 7
+Palfx.Add = 128,64,32
+
+[State 650, 4]
+Type = Changestate
+Trigger1 = Animtime = 0
+Value = 11
+Ctrl = 1
+
+;---------------------------------------------------------------------------
+[Statedef 1100] ; Roll X Start
+Type    = C
+Movetype= A
+Physics = C
+Poweradd= 25
+Ctrl = 0
+Anim = 1100
+Velset = 0,0
+
+[State 1100, End]
+Type = Changestate
+Trigger1 = Animtime = 0
+Value = 1101
+Ctrl = 0
+
+;------------------------------
+
+[Statedef 1101] ; Roll X Roll
+Type    = C
+Movetype= A
+Physics = C
+Poweradd= 25
+Ctrl = 0
+Anim = 1101
+Velset = 25,0
+
+[State 600, 2]
+Type = Playsnd
+Trigger1 = Timemod = 10,0
+Value = S12, 2
+
+[State 1100, Endhit]
+Type = Changestate
+Trigger1 = Movecontact = 1
+Value = 1102
+Ctrl = 0
+
+[State 650, 3]
+Type = Hitdef
+Trigger1 = Animelem = 1
+Attr = A, Na
+Damage    = 80
+Getpower  = 50
+Givepower = 25
+Guardflag = Ha
+Priority = 3
+Pausetime = 9,12
+Sparkxy = -10,-51
+Hitsound   = 5,2
+Guardsound = 6,0
+Ground.Type = High
+Ground.Slidetime = 9
+Ground.Hittime  = 12
+Ground.Velocity = -4
+Air.Velocity = -1.3,-3
+
+[State 200, 1]
+Type = Playsnd
+Trigger1 = Time = 0
+Value = S16, 0
+Volume = 200
+
+[State 1100, Endnohit]
+Type = Changestate
+Trigger1 = Vel X < 1
+Trigger2 = Backedgebodydist = 0
+Value = 11
+Ctrl = 1
+
+;------------------------------
+
+[Statedef 1102] ; Roll X Rollback
+Type    = C
+Movetype= A
+Physics = A
+Poweradd= 25
+Ctrl = 0
+Anim = 1102
+Velset = -3,-8
+
+[State 1100, End]
+Type = Gravity
+Trigger1 = Animelem >= 1
+
+[State 600, 2]
+Type = Playsnd
+Trigger1 = Timemod = 10,0
+Value = S12, 2
+
+[State 52, 1]
+Type = Playsnd
+Trigger1 = Pos Y = 0
+Trigger1 = Time > 3
+Value = S5, 0
+
+[State 1100, End]
+Type = Changestate
+Trigger1 = Pos Y = 0
+Trigger1 = Time > 3
+Value = 11
+Ctrl = 1
+
+;---------------------------------------------------------------------------
+[Statedef 1110] ; Roll Y Start
+Type    = C
+Movetype= A
+Physics = C
+Poweradd= 25
+Ctrl = 0
+Anim = 1100
+Velset = 0,0
+
+[State 1100, End]
+Type = Changestate
+Trigger1 = Animtime = 0
+Value = 1111
+Ctrl = 0
+
+;------------------------------
+
+[Statedef 1111] ; Roll Y Roll
+Type    = C
+Movetype= A
+Physics = C
+Poweradd= 25
+Ctrl = 0
+Anim = 1101
+Velset = 35,0
+
+[State 600, 2]
+Type = Playsnd
+Trigger1 = Timemod = 8,0
+Value = S12, 2
+
+[State 1100, Endhit]
+Type = Changestate
+Trigger1 = Movecontact = 1
+Value = 1112
+Ctrl = 0
+
+[State 200, 1]
+Type = Playsnd
+Trigger1 = Time = 0
+Value = S16, 0
+Volume = 200
+
+[State 650, 3]
+Type = Hitdef
+Trigger1 = Animelem = 1
+Attr = A, Na
+Damage    = 90
+Getpower  = 50
+Givepower = 25
+Guardflag = Ha
+Priority = 3
+Pausetime = 9,12
+Sparkxy = -10,-51
+Hitsound   = 5,2
+Guardsound = 6,0
+Ground.Type = High
+Ground.Slidetime = 9
+Ground.Hittime  = 12
+Ground.Velocity = -4
+Air.Velocity = -1.3,-3
+
+[State 1100, Endnohit]
+Type = Changestate
+Trigger1 = Vel X < 1
+Trigger2 = Backedgebodydist = 0
+Value = 11
+Ctrl = 1
+
+;------------------------------
+
+[Statedef 1112] ; Roll Y Rollback
+Type    = C
+Movetype= A
+Physics = A
+Poweradd= 25
+Ctrl = 0
+Anim = 1102
+Velset = -3,-9
+
+[State 1100, End]
+Type = Gravity
+Trigger1 = Animelem >= 1
+
+[State 600, 2]
+Type = Playsnd
+Trigger1 = Timemod = 9,0
+Value = S12, 2
+
+[State 52, 1]
+Type = Playsnd
+Trigger1 = Pos Y = 0
+Trigger1 = Time > 3
+Value = S5, 0
+
+[State 1100, End]
+Type = Changestate
+Trigger1 = Pos Y = 0
+Trigger1 = Time > 3
+Value = 11
+Ctrl = 1
+
+[Statedef 1120] ; Roll Z Start
+Type    = C
+Movetype= A
+Physics = C
+Poweradd= 25
+Ctrl = 0
+Anim = 1100
+Velset = 0,0
+
+[State 1100, End]
+Type = Changestate
+Trigger1 = Animtime = 0
+Value = 1121
+Ctrl = 0
+
+;------------------------------
+
+[Statedef 1121] ; Roll Z Roll
+Type    = C
+Movetype= A
+Physics = C
+Poweradd= 25
+Ctrl = 0
+Anim = 1101
+Velset = 45,0
+
+[State 600, 2]
+Type = Playsnd
+Trigger1 = Timemod = 6,0
+Value = S12, 2
+
+[State 200, 1]
+Type = Playsnd
+Trigger1 = Time = 0
+Value = S16, 0
+Volume = 200
+
+[State 1100, Endhit]
+Type = Changestate
+Trigger1 = Movecontact = 1
+Value = 1122
+Ctrl = 0
+
+[State 650, 3]
+Type = Hitdef
+Trigger1 = Animelem = 1
+Attr = A, Na
+Damage    = 100
+Getpower  = 50
+Givepower = 25
+Guardflag = Ha
+Priority = 3
+Pausetime = 9,12
+Sparkxy = -10,-51
+Hitsound   = 5,2
+Guardsound = 6,0
+Ground.Type = High
+Ground.Slidetime = 9
+Ground.Hittime  = 12
+Ground.Velocity = -4
+Air.Velocity = -1.3,-3
+
+[State 1100, Endnohit]
+Type = Changestate
+Trigger1 = Vel X < 1
+Trigger2 = Backedgebodydist = 0
+Value = 11
+Ctrl = 1
+
+;------------------------------
+
+[Statedef 1122] ; Roll Z Rollback
+Type    = C
+Movetype= A
+Physics = A
+Poweradd= 25
+Ctrl = 0
+Anim = 1102
+Velset = -3,-10
+
+[State 600, 2]
+Type = Playsnd
+Trigger1 = Timemod = 8,0
+Value = S12, 2
+
+[State 1100, End]
+Type = Gravity
+Trigger1 = Animelem >= 1
+
+[State 52, 1]
+Type = Playsnd
+Trigger1 = Pos Y = 0
+Trigger1 = Time > 3
+Value = S5, 0
+
+[State 1100, End]
+Type = Changestate
+Trigger1 = Pos Y = 0
+Trigger1 = Time > 3
+Value = 11
+Ctrl = 1
+
+
+;* OVERRIDES
+;---------------------------------------------------------------------------
+[Statedef 0052] ; Jump Land
+Type    = S
+Physics = S
+Ctrl = 0
+Anim = 47
+
+[State 52, 1]
+Type = Playsnd
+Trigger1 = Time = 2
+Value = S5, 0
+
+[State 52, 2]
+Type = Velset
+Trigger1 = Time = 0
+Y = 0
+
+[State 52, 3]
+Type = Velset
+Trigger1 = Time = 0
+Y = 0
+
+[State 52, 4]
+Type = Posset
+Trigger1 = Time = 0
+Y = 0
+
+[State 52, 5]
+Type = Ctrlset
+Trigger1 = Time = 3
+Value = 1
+
+[State 52, 6]
+Type = Changestate
+Trigger1 = Animtime = 0
+Value = 0
+Ctrl = 1

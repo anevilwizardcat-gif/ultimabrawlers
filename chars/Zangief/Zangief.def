@@ -1,0 +1,37 @@
+;=====================================================================
+;  DEF File For "Zangief"                               Made By M.M.R.
+;                                       Ver. 0.91          2003.Jul.06
+;=====================================================================
+; Player Information
+[Info]
+name    = "Zangief"
+displayname = "Zangief"
+versiondate = 07,06,2003
+mugenversion = 04,14,2001
+author = "M.M.R."
+
+; Files for the Player
+[Files]
+cmd     = Zangief.cmd
+cns     = Zangief-N.cns    ;Constants
+st      = Zangief-N.cns    ;States (Normal)
+;st      = Zangief-N_alt.cns ;States (Normal)
+st1     = Zangief-S.cns    ;States (Special)
+st2     = Zangief-H.cns    ;States (Hyper)
+stcommon = common1.cns     ;Common states (in data/)
+sprite  = Zangief.sff      ;Sprite
+;sprite  = Zangief_alt.sff  ;Sprite (DownSized)
+anim    = Zangief.air      ;Animation
+sound   = Zangief.snd      ;Sound
+pal1    = Zangief04.act    ;Palettes
+pal2    = Zangief02.act
+pal3    = Zangief06.act
+pal4    = Zangief03.act
+pal5    = Zangief01.act
+pal6    = Zangief05.act
+pal7    = Zangief08.act
+pal8    = Zangief10.act
+pal9    = Zangief12.act
+pal10   = Zangief07.act
+pal11   = Zangief09.act
+pal12   = Zangief11.act

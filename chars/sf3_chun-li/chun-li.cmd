@@ -575,7 +575,7 @@ trigger1 = ctrl || stateno = 130 || stateno = 131
 trigger1 = inguarddist
 trigger1 = enemynear,movetype = A
 trigger1 = enemynear,statetype != C
-trigger1 = random < 170
+trigger1 = random < 200
 
 [State -1, AI Parry Arm Low]
 type = varset
@@ -589,7 +589,7 @@ trigger1 = ctrl || stateno = 130 || stateno = 131
 trigger1 = inguarddist
 trigger1 = enemynear,movetype = A
 trigger1 = enemynear,statetype = C
-trigger1 = random < 170
+trigger1 = random < 200
 
 ; --- 2. PARRY PUNISH (the one true var(38) use) ---------------------------
 ; With meter: buffer the Super Art. Without: c.MK only if it will reach.
@@ -628,10 +628,11 @@ triggerall = !ishelper
 value = 440
 ignorehitpause = 1
 triggerall = AILevel > 0
+triggerall = p2dist x > -4   ;<-- never swing at someone behind you
 trigger1 = stateno = 430
 trigger1 = movehit
-trigger1 = p2bodydist x < 38
-trigger1 = random < 480
+trigger1 = p2bodydist x < 42
+trigger1 = random < 520
 
 ; 3c. light chain: c.LP / far s.LP / c.LK on contact -> c.LK
 [State -1, AI Chain c.LK]
@@ -640,9 +641,10 @@ triggerall = !ishelper
 value = 430
 ignorehitpause = 1
 triggerall = AILevel > 0
+triggerall = p2dist x > -4   ;<-- never swing at someone behind you
 trigger1 = stateno = 400 || stateno = 205 || stateno = 430
 trigger1 = movecontact
-trigger1 = p2bodydist x < 36
+trigger1 = p2bodydist x < 42
 trigger1 = random < 820
 
 ; 3d. LEGS CANCEL on contact when no meter (safe chip on block too)
@@ -672,11 +674,23 @@ ignorehitpause = 1
 triggerall = AILevel > 0
 triggerall = statetype != A
 triggerall = p2statetype != A
-trigger1 = movecontact
+trigger1 = movehit
 trigger1 = var(19)
 trigger1 = stateno = 440
-trigger1 = p2bodydist x >= 45
-trigger1 = random < 450
+trigger1 = p2bodydist x >= 50
+trigger1 = random < 300
+
+; 3ee. AA CONFIRM: c.HP launcher connects vs air -> SBK juggle
+[State -1, AI AA Confirm SBK]
+type = changestate
+triggerall = !ishelper
+value = 1220
+ignorehitpause = 1
+triggerall = AILevel > 0
+trigger1 = stateno = 260
+trigger1 = movehit
+trigger1 = p2statetype = A
+trigger1 = random < 700
 
 ; 3f. AIR CHAIN: any air normal on contact -> j.HK ender
 [State -1, AI Air Chain]
@@ -711,6 +725,7 @@ type = changestate
 triggerall = !ishelper
 value = 440
 triggerall = AILevel > 0
+triggerall = p2dist x > -4   ;<-- never swing at someone behind you
 trigger1 = stateno = 52
 trigger1 = prevstateno = [600,699]
 trigger1 = p2movetype = H
@@ -724,6 +739,7 @@ type = changestate
 triggerall = !ishelper
 value = ifelse(var(58) = 2, 3000, ifelse(var(58) = 4, 3200, 3100))
 triggerall = AILevel > 0
+triggerall = p2dist x > -4   ;<-- never swing at someone behind you
 triggerall = (var(58) = 2 && power >= 880) || (var(58) = 3 && power >= 1040) || (var(58) = 4 && power >= 720)
 triggerall = statetype != A
 triggerall = ctrl || (stateno = [130,141]) || (stateno = [150,155])
@@ -731,8 +747,8 @@ trigger1 = enemynear,movetype = I
 trigger1 = enemynear,ctrl = 0
 trigger1 = p2statetype != A
 trigger1 = p2statetype != L
-trigger1 = p2bodydist x < 75
-trigger1 = random < 600
+trigger1 = p2bodydist x = [55,75]
+trigger1 = random < 250
 
 ; 4b. GUARD-EXIT THROW: foe recovering at point blank while/after she blocks
 [State -1, AI Punish Throw]
@@ -740,6 +756,7 @@ type = changestate
 triggerall = !ishelper
 value = 800
 triggerall = AILevel > 0
+triggerall = p2dist x > -4   ;<-- never swing at someone behind you
 triggerall = statetype != A
 triggerall = ctrl || (stateno = [130,141]) || (stateno = [150,155])
 trigger1 = enemynear,movetype = I
@@ -755,6 +772,7 @@ type = changestate
 triggerall = !ishelper
 value = 440
 triggerall = AILevel > 0
+triggerall = p2dist x > -4   ;<-- never swing at someone behind you
 triggerall = statetype != A
 triggerall = ctrl || (stateno = [130,141]) || (stateno = [150,155])
 trigger1 = enemynear,movetype = I
@@ -770,6 +788,7 @@ type = changestate
 triggerall = !ishelper
 value = 440
 triggerall = AILevel > 0
+triggerall = p2dist x > -4   ;<-- never swing at someone behind you
 triggerall = ctrl
 triggerall = statetype != A
 trigger1 = p2movetype = A
@@ -790,7 +809,7 @@ triggerall = ctrl
 triggerall = statetype != A
 trigger1 = inguarddist
 trigger1 = enemynear,statetype = S || enemynear,statetype = A
-trigger1 = random < 800
+trigger1 = random < 900
 trigger2 = inguarddist
 trigger2 = enemynear,statetype = C
 trigger2 = random < 120
@@ -804,7 +823,7 @@ triggerall = ctrl
 triggerall = statetype != A
 trigger1 = inguarddist
 trigger1 = enemynear,statetype = C
-trigger1 = random < 800
+trigger1 = random < 900
 trigger2 = inguarddist
 trigger2 = enemynear,statetype = S
 trigger2 = random < 120
@@ -821,19 +840,31 @@ trigger1 = inguarddist
 trigger1 = enemynear,movetype = A
 trigger1 = random < 750
 
-; --- 6. ANTI-AIR -------------------------------------------------------------
-; 6a. FAST AA: c.HP launcher vs quick jumps (cancelable -> air confirms)
-[State -1, AI Anti-Air c.HP]
+; 5c. TURN REACT: enemy crossed behind while she's in guard -> reset to idle
+; (guard states never auto-turn; idle does, then guard re-engages correctly)
+[State -1, AI Turn React]
 type = changestate
 triggerall = !ishelper
-value = 420
+value = 0
 triggerall = AILevel > 0
-triggerall = ctrl
+trigger1 = stateno = [130,141]
+trigger1 = p2dist x < -8
+trigger1 = random < 800
+
+; --- 6. ANTI-AIR -------------------------------------------------------------
+; 6a. FAST AA: c.HP launcher vs quick jumps (cancelable -> air confirms)
+[State -1, AI Anti-Air Launcher]
+type = changestate
+triggerall = !ishelper
+value = 260
+triggerall = AILevel > 0
+triggerall = p2dist x > -12
+triggerall = ctrl || (stateno = [130,141])
 triggerall = statetype != A
 trigger1 = p2statetype = A
 trigger1 = p2bodydist x < 55
-trigger1 = p2dist y < -15
-trigger1 = random < 650
+trigger1 = p2dist y < -20
+trigger1 = random < 850
 
 ; 6b. SBK only for deep, clearly descending jump-ins
 [State -1, AI Anti-Air SBK]
@@ -841,13 +872,30 @@ type = changestate
 triggerall = !ishelper
 value = 1220
 triggerall = AILevel > 0
-triggerall = ctrl
+triggerall = ctrl || (stateno = [130,141])
 triggerall = statetype != A
 trigger1 = p2statetype = A
 trigger1 = p2bodydist x < 75
 trigger1 = p2dist y < -30
-trigger1 = enemynear,vel y > 1
-trigger1 = random < 500
+trigger1 = enemynear,vel y > 0.5
+trigger1 = random < 550
+trigger2 = p2statetype = A
+trigger2 = p2dist x < 8
+trigger2 = p2dist y < -20
+trigger2 = random < 500
+
+; 6bb. AIR THROW: beats short hops when she's airborne with them
+[State -1, AI Air Throw]
+type = changestate
+triggerall = !ishelper
+value = 850
+triggerall = AILevel > 0
+triggerall = statetype = A
+triggerall = stateno = 50
+trigger1 = p2statetype = A
+trigger1 = p2bodydist x < 24
+trigger1 = p2dist y = [-30,30]
+trigger1 = random < 450
 
 [State -1, AI Air-to-Air]
 type = changestate
@@ -870,8 +918,36 @@ triggerall = AILevel > 0
 triggerall = ctrl
 triggerall = statetype != A
 trigger1 = p2statetype = L
-trigger1 = p2bodydist x > 50
-trigger1 = random < 280
+trigger1 = p2bodydist x > 60
+trigger1 = random < 220
+
+; 7aa. OKI SPACING: don't stand on the body (wake-throw bait range)
+[State -1, AI Oki Spacing]
+type = changestate
+triggerall = !ishelper
+value = 105
+triggerall = AILevel > 0
+triggerall = ctrl
+triggerall = statetype != A
+trigger1 = p2statetype = L
+trigger1 = p2bodydist x < 10
+trigger1 = random < 200
+
+; 7ab. OKI GUARD: sometimes respect the wake-up reversal instead of pressing
+[State -1, AI Oki Guard]
+type = changestate
+triggerall = !ishelper
+value = 130
+triggerall = AILevel > 0
+triggerall = ctrl
+triggerall = statetype != A
+triggerall = p2bodydist x < 45
+trigger1 = enemynear,stateno = 5120
+trigger1 = enemynear,animtime >= -10
+trigger1 = random < 300
+trigger2 = enemynear,stateno = [5099,5199]
+trigger2 = enemynear,animtime >= -10
+trigger2 = random < 300
 
 ; 7b. MEATY c.MK timed to wake-up (5120 std getup; 5100-5119 variants)
 [State -1, AI Meaty c.MK]
@@ -879,14 +955,15 @@ type = changestate
 triggerall = !ishelper
 value = 440
 triggerall = AILevel > 0
+triggerall = p2dist x > -4   ;<-- never swing at someone behind you
 triggerall = ctrl
 triggerall = statetype != A
 triggerall = p2bodydist x < 40
 trigger1 = enemynear,stateno = 5120
-trigger1 = enemynear,animtime >= -9
+trigger1 = enemynear,animtime = [-9,-5]
 trigger1 = random < 520
-trigger2 = enemynear,stateno = [5100,5119]
-trigger2 = enemynear,animtime >= -9
+trigger2 = enemynear,stateno = [5099,5199]
+trigger2 = enemynear,animtime = [-9,-5]
 trigger2 = random < 520
 
 ; 7c. wake-up THROW mixup
@@ -895,15 +972,16 @@ type = changestate
 triggerall = !ishelper
 value = 800
 triggerall = AILevel > 0
+triggerall = p2dist x > -4   ;<-- never swing at someone behind you
 triggerall = ctrl
 triggerall = statetype != A
 triggerall = p2bodydist x < 16
 trigger1 = enemynear,stateno = 5120
-trigger1 = enemynear,animtime >= -5
-trigger1 = random < 300
-trigger2 = enemynear,stateno = [5100,5119]
-trigger2 = enemynear,animtime >= -5
-trigger2 = random < 300
+trigger1 = enemynear,animtime >= -2
+trigger1 = random < 120
+trigger2 = enemynear,stateno = [5099,5199]
+trigger2 = enemynear,animtime >= -2
+trigger2 = random < 120
 
 ; --- 8. NEUTRAL OFFENSE : decisive footsies -----------------------------------
 [State -1, AI Poke c.LK]
@@ -911,38 +989,47 @@ type = changestate
 triggerall = !ishelper
 value = 430
 triggerall = AILevel > 0
+triggerall = p2dist x > -4   ;<-- never swing at someone behind you
 triggerall = ctrl
 triggerall = statetype != A
 trigger1 = p2statetype != A
 trigger1 = p2movetype != H
+trigger1 = enemynear,stateno != [40,41]
+trigger1 = enemynear,vel y = 0
 trigger1 = p2bodydist x < 28
-trigger1 = random < 300 + (28 - p2bodydist x) * 10
+trigger1 = random < 320 + (28 - p2bodydist x) * 10
 
-[State -1, AI Close s.MP]
+[State -1, AI Poke s.MP]
 type = changestate
 triggerall = !ishelper
 value = 210
 triggerall = AILevel > 0
+triggerall = p2dist x > -4   ;<-- never swing at someone behind you
 triggerall = ctrl
 triggerall = statetype != A
-trigger1 = p2statetype = S
+trigger1 = p2statetype != A
 trigger1 = p2movetype != H
+trigger1 = enemynear,stateno != [40,41]
+trigger1 = enemynear,vel y = 0
 trigger1 = p2movetype != A
-trigger1 = p2bodydist x < 34
-trigger1 = random < 150
+trigger1 = p2bodydist x < 58
+trigger1 = random < 240
 
 [State -1, AI Poke c.MK]
 type = changestate
 triggerall = !ishelper
 value = 440
 triggerall = AILevel > 0
+triggerall = p2dist x > -4   ;<-- never swing at someone behind you
 triggerall = ctrl
 triggerall = statetype != A
 triggerall = p2movetype != H || p2statetype = L
 trigger1 = p2statetype != A
+trigger1 = enemynear,stateno != [40,41]
+trigger1 = enemynear,vel y = 0
 trigger1 = p2movetype != A
-trigger1 = p2bodydist x = [28,72]
-trigger1 = random < 220
+trigger1 = p2bodydist x = [34,72]
+trigger1 = random < 230
 
 ; sweep: PUNISH-ONLY tool (recovering foes) -> free okizeme
 [State -1, AI Sweep]
@@ -950,6 +1037,7 @@ type = changestate
 triggerall = !ishelper
 value = 450
 triggerall = AILevel > 0
+triggerall = p2dist x > -4   ;<-- never swing at someone behind you
 triggerall = ctrl
 triggerall = statetype != A
 trigger1 = p2statetype != A
@@ -958,17 +1046,34 @@ trigger1 = enemynear,ctrl = 0
 trigger1 = p2bodydist x = [30,58]
 trigger1 = random < 350
 
+; --- 8b. HAZANSHU : overhead arc to crack crouch-guard turtles --------------
+[State -1, AI Hazanshu]
+type = changestate
+triggerall = !ishelper
+value = 1310
+triggerall = AILevel > 0
+triggerall = p2dist x > -4   ;<-- never swing at someone behind you
+triggerall = ctrl
+triggerall = statetype != A
+trigger1 = enemynear,statetype = C
+trigger1 = p2movetype != A
+trigger1 = p2statetype != L
+trigger1 = enemynear,vel y = 0
+trigger1 = p2bodydist x = [40,80]
+trigger1 = random < 40
+
 [State -1, AI Kikoken]
 type = changestate
 triggerall = !ishelper
 value = 1100
 triggerall = AILevel > 0
+triggerall = p2dist x > -4   ;<-- never swing at someone behind you
 triggerall = ctrl
 triggerall = statetype != A
 trigger1 = p2statetype = S || p2statetype = C
 trigger1 = p2movetype != A
 trigger1 = p2bodydist x > 160
-trigger1 = random < 50
+trigger1 = random < 35
 
 ; --- 9. THROW : the close-range answer ----------------------------------------
 [State -1, AI Throw]
@@ -976,6 +1081,7 @@ type = changestate
 triggerall = !ishelper
 value = 800
 triggerall = AILevel > 0
+triggerall = p2dist x > -4   ;<-- never swing at someone behind you
 triggerall = ctrl
 triggerall = statetype != A
 trigger1 = p2statetype != A
@@ -986,6 +1092,20 @@ trigger1 = p2bodydist x < 17
 trigger1 = random < 380
 
 ; --- 10. MOVEMENT ---------------------------------------------------------------
+; --- 10b. BAIT STEP : back off at footsie range to draw a whiff ------------
+; (the Whiff Punish layer converts what they stick out)
+[State -1, AI Bait Step]
+type = changestate
+triggerall = !ishelper
+value = 105
+triggerall = AILevel > 0
+triggerall = ctrl
+triggerall = statetype != A
+trigger1 = p2bodydist x = [40,85]
+trigger1 = p2movetype != A
+trigger1 = p2statetype != L
+trigger1 = random < 28
+
 [State -1, AI Approach Dash]
 type = changestate
 triggerall = !ishelper
@@ -995,7 +1115,7 @@ triggerall = ctrl
 triggerall = statetype != A
 trigger1 = p2bodydist x > 110
 trigger1 = p2movetype != A
-trigger1 = random < 110
+trigger1 = random < 90
 
 [State -1, AI Retreat Dash]
 type = changestate
@@ -1046,6 +1166,7 @@ keyctrl = 1
 
 [State -1]
 type = varset
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 var(38) = 3000
 triggerall = !ishelper
 triggerall = command = "SA"
@@ -1058,6 +1179,7 @@ trigger1 = AnimElemTime(4) < 3
 
 [State -1]
 type = varset
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 var(38) = 3100
 triggerall = !ishelper
 triggerall = command = "SA2"
@@ -1070,6 +1192,7 @@ trigger1 = AnimElemTime(4) < 3
 
 [State -1]
 type = varset
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 var(38) = 3200
 triggerall = !ishelper
 triggerall = command = "SA2"
@@ -1082,6 +1205,7 @@ trigger1 = AnimElemTime(4) < 3
 
 [State -1]
 type = varset
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 var(38) = 1150
 triggerall = !ishelper
 triggerall = command = "気功拳EX"
@@ -1094,6 +1218,7 @@ trigger1 = AnimElemTime(4) < 3
 
 [State -1]
 type = varset
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 var(38) = 1120
 triggerall = !ishelper
 triggerall = command = "気功拳強"
@@ -1105,6 +1230,7 @@ trigger1 = AnimElemTime(4) < 3
 
 [State -1]
 type = varset
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 var(38) = 1110
 triggerall = !ishelper
 triggerall = command = "気功拳中"
@@ -1116,6 +1242,7 @@ trigger1 = AnimElemTime(4) < 3
 
 [State -1]
 type = varset
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 var(38) = 1100
 triggerall = !ishelper
 triggerall = command = "気功拳弱"
@@ -1127,6 +1254,7 @@ trigger1 = AnimElemTime(4) < 3
 
 [State -1]
 type = varset
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 var(38) = 1250
 triggerall = !ishelper
 triggerall = command = "スピニングバードキックEX"
@@ -1138,6 +1266,7 @@ trigger1 = AnimElemTime(4) < 3
 
 [State -1]
 type = varset
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 var(38) = 1220
 triggerall = !ishelper
 triggerall = command = "スピニングバードキック強"
@@ -1148,6 +1277,7 @@ trigger1 = AnimElemTime(4) < 3
 
 [State -1]
 type = varset
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 var(38) = 1210
 triggerall = !ishelper
 triggerall = command = "スピニングバードキック中"
@@ -1158,6 +1288,7 @@ trigger1 = AnimElemTime(4) < 3
 
 [State -1]
 type = varset
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 var(38) = 1200
 triggerall = !ishelper
 triggerall = command = "スピニングバードキック弱"
@@ -1168,6 +1299,7 @@ trigger1 = AnimElemTime(4) < 3
 
 [State -1]
 type = varset
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 var(38) = 1350
 triggerall = !ishelper
 triggerall = command = "覇山蹴EX"
@@ -1179,6 +1311,7 @@ trigger1 = AnimElemTime(4) < 3
 
 [State -1]
 type = varset
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 var(38) = 1320
 triggerall = !ishelper
 triggerall = command = "覇山蹴強"
@@ -1189,6 +1322,7 @@ trigger1 = AnimElemTime(4) < 3
 
 [State -1]
 type = varset
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 var(38) = 1310
 triggerall = !ishelper
 triggerall = command = "覇山蹴中"
@@ -1199,6 +1333,7 @@ trigger1 = AnimElemTime(4) < 3
 
 [State -1]
 type = varset
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 var(38) = 1300
 triggerall = !ishelper
 triggerall = command = "覇山蹴弱"
@@ -1209,6 +1344,7 @@ trigger1 = AnimElemTime(4) < 3
 
 [State -1]
 type = varset
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 var(38) = 1050
 triggerall = !ishelper
 triggerall = numhelper(1085)
@@ -1222,6 +1358,7 @@ trigger1 = AnimElemTime(4) < 3
 
 [State -1]
 type = varset
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 var(38) = 1020
 triggerall = !ishelper
 triggerall = numhelper(1080)
@@ -1234,6 +1371,7 @@ trigger1 = AnimElemTime(4) < 3
 
 [State -1]
 type = varset
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 var(38) = 1010
 triggerall = !ishelper
 triggerall = numhelper(1080)
@@ -1246,6 +1384,7 @@ trigger1 = AnimElemTime(4) < 3
 
 [State -1]
 type = varset
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 var(38) = 1000
 triggerall = !ishelper
 triggerall = numhelper(1080)
@@ -1258,6 +1397,7 @@ trigger1 = AnimElemTime(4) < 3
 
 [State -1]
 type = varset
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 var(38) = 800
 triggerall = !ishelper
 triggerall = command = "スルー"
@@ -1271,6 +1411,7 @@ trigger1 = AnimElemTime(4) < 3
 
 [State -1]
 type = varset
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 var(38) = 805
 triggerall = !ishelper
 triggerall = command = "スルー"
@@ -1284,6 +1425,7 @@ trigger1 = AnimElemTime(4) < 3
 
 [State -1]
 type = varset
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 var(38) = 700
 triggerall = !ishelper
 triggerall = command = "リープアタック"
@@ -1298,6 +1440,7 @@ trigger1 = AnimElemTime(4) < 3
 
 [State -1]
 type = varset
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 var(38) = 195
 triggerall = !ishelper
 triggerall = command = "PA"
@@ -1315,6 +1458,7 @@ trigger1 = AnimElemTime(4) < 3
 ;---------------------------------------------------------------------------
 [State -1]
 type = varset
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 var(38) = 265
 triggerall = !ishelper
 triggerall = command = "back_z"
@@ -1327,6 +1471,7 @@ trigger1 = AnimElemTime(4) < 3
 
 [State -1]
 type = varset
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 var(38) = 260
 triggerall = !ishelper
 triggerall = command = "back_y"
@@ -1340,6 +1485,7 @@ trigger1 = AnimElemTime(4) < 3
 
 [State -1]
 type = varset
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 var(38) = 275
 triggerall = !ishelper
 triggerall = command = "3_c"
@@ -1350,6 +1496,7 @@ trigger1 = AnimElemTime(4) < 3
 
 [State -1]
 type = varset
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 var(38) = 257
 triggerall = !ishelper
 triggerall = command = "fwd_c"
@@ -1361,6 +1508,7 @@ trigger1 = AnimElemTime(4) < 3
 
 [State -1]
 type = varset
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 var(38) = 270
 triggerall = !ishelper
 triggerall = command = "fwd_b"
@@ -1373,6 +1521,7 @@ trigger1 = AnimElemTime(4) < 3
 ;---------------------------------------------------------------------------
 [State -1]
 type = varset
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 var(38) = 220
 triggerall = !ishelper
 triggerall = command = "z"
@@ -1385,6 +1534,7 @@ trigger1 = AnimElemTime(4) < 3
 ;---------------------------------------------------------------------------
 [State -1]
 type = varset
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 var(38) = 210
 triggerall = !ishelper
 triggerall = command = "y"
@@ -1397,6 +1547,7 @@ trigger1 = AnimElemTime(4) < 3
 ;---------------------------------------------------------------------------
 [State -1]
 type = varset
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 var(38) = 200
 triggerall = !ishelper
 triggerall = command = "x"
@@ -1409,6 +1560,7 @@ trigger1 = AnimElemTime(4) < 3
 
 [State -1]
 type = varset
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 var(38) = 205
 triggerall = !ishelper
 triggerall = command = "x"
@@ -1422,6 +1574,7 @@ trigger1 = AnimElemTime(4) < 3
 ;---------------------------------------------------------------------------
 [State -1]
 type = varset
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 var(38) = 250
 triggerall = !ishelper
 triggerall = command = "c"
@@ -1434,6 +1587,7 @@ trigger1 = AnimElemTime(4) < 3
 
 [State -1]
 type = varset
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 var(38) = 255
 triggerall = !ishelper
 triggerall = command = "c"
@@ -1447,6 +1601,7 @@ trigger1 = AnimElemTime(4) < 3
 ;---------------------------------------------------------------------------
 [State -1, Standing Medium Kick]
 type = varset
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 var(38) = 240
 triggerall = !ishelper
 triggerall = command = "b"
@@ -1459,6 +1614,7 @@ trigger1 = AnimElemTime(4) < 3
 
 [State -1, Standing Medium Kick]
 type = varset
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 var(38) = 245
 triggerall = !ishelper
 triggerall = command = "b"
@@ -1472,6 +1628,7 @@ trigger1 = AnimElemTime(4) < 3
 ;---------------------------------------------------------------------------
 [State -1, Stand Light Kick]
 type = varset
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 var(38) = 230
 triggerall = !ishelper
 triggerall = command = "a"
@@ -1484,6 +1641,7 @@ trigger1 = AnimElemTime(4) < 3
 ;---------------------------------------------------------------------------
 [State -1, Crouching Strong Punch]
 type = varset
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 var(38) = 420
 triggerall = !ishelper
 triggerall = command = "z"
@@ -1496,6 +1654,7 @@ trigger1 = AnimElemTime(4) < 3
 ;---------------------------------------------------------------------------
 [State -1, Crouching Medium Punch]
 type = varset
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 var(38) = 410
 triggerall = !ishelper
 triggerall = command = "y"
@@ -1508,6 +1667,7 @@ trigger1 = AnimElemTime(4) < 3
 ;---------------------------------------------------------------------------
 [State -1, Crouching Light Punch]
 type = varset
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 var(38) = 400
 triggerall = !ishelper
 triggerall = command = "x"
@@ -1520,6 +1680,7 @@ trigger1 = AnimElemTime(4) < 3
 ;---------------------------------------------------------------------------
 [State -1, Crouching Strong Kick]
 type = varset
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 var(38) = 450
 triggerall = !ishelper
 triggerall = command = "c"
@@ -1532,6 +1693,7 @@ trigger1 = AnimElemTime(4) < 3
 ;---------------------------------------------------------------------------
 [State -1, Crouching Medium Kick]
 type = varset
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 var(38) = 440
 triggerall = !ishelper
 triggerall = command = "b"
@@ -1544,6 +1706,7 @@ trigger1 = AnimElemTime(4) < 3
 ;---------------------------------------------------------------------------
 [State -1, Crouching Light Kick]
 type = varset
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 var(38) = 430
 triggerall = !ishelper
 triggerall = command = "a"
@@ -1608,6 +1771,7 @@ trigger2 = movetype = H
 
 [State -1]
 type = ChangeState
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 value = 3000
 triggerall = !ishelper
 triggerall = roundstate = 2
@@ -1631,6 +1795,7 @@ trigger6 = stateno = [1100,1150]
 
 [State -1]
 type = ChangeState
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 value = 3100
 triggerall = !ishelper
 triggerall = roundstate = 2
@@ -1654,6 +1819,7 @@ trigger6 = stateno = [1100,1150]
 
 [State -1]
 type = ChangeState
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 value = 3200
 triggerall = !ishelper
 triggerall = roundstate = 2
@@ -1678,6 +1844,7 @@ trigger6 = stateno = [1100,1150]
 ;---------------------------------------------------------------------------
 [State -1]
 type = ChangeState
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 value = 1150
 triggerall = !ishelper
 triggerall = roundstate = 2
@@ -1698,6 +1865,7 @@ trigger5 = (stateno != [250,275])||(stateno = [260,265])
 
 [State -1]
 type = ChangeState
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 value = 1120
 triggerall = !ishelper
 triggerall = roundstate = 2
@@ -1717,6 +1885,7 @@ trigger5 = (stateno != [250,275])||(stateno = [260,265])
 
 [State -1]
 type = ChangeState
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 value = 1110
 triggerall = !ishelper
 triggerall = roundstate = 2
@@ -1736,6 +1905,7 @@ trigger5 = (stateno != [250,275])||(stateno = [260,265])
 
 [State -1]
 type = ChangeState
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 value = 1100
 triggerall = !ishelper
 triggerall = roundstate = 2
@@ -1756,6 +1926,7 @@ trigger5 = (stateno != [250,275])||(stateno = [260,265])
 ;---------------------------------------------------------------------------
 [State -1]
 type = ChangeState
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 value = 1250
 triggerall = !ishelper
 triggerall = roundstate = 2
@@ -1775,6 +1946,7 @@ trigger5 = (stateno != [250,275])||(stateno = [260,265])
 
 [State -1]
 type = ChangeState
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 value = 1220
 triggerall = !ishelper
 triggerall = roundstate = 2
@@ -1793,6 +1965,7 @@ trigger5 = (stateno != [250,275])||(stateno = [260,265])
 
 [State -1]
 type = ChangeState
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 value = 1210
 triggerall = !ishelper
 triggerall = roundstate = 2
@@ -1811,6 +1984,7 @@ trigger5 = (stateno != [250,275])||(stateno = [260,265])
 
 [State -1]
 type = ChangeState
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 value = 1200
 triggerall = !ishelper
 triggerall = roundstate = 2
@@ -1830,6 +2004,7 @@ trigger5 = (stateno != [250,275])||(stateno = [260,265])
 ;---------------------------------------------------------------------------
 [State -1]
 type = ChangeState
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 value = 1350
 triggerall = !ishelper
 triggerall = roundstate = 2
@@ -1849,6 +2024,7 @@ trigger5 = (stateno != [250,275])||(stateno = [260,265])
 
 [State -1]
 type = ChangeState
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 value = 1320
 triggerall = !ishelper
 triggerall = roundstate = 2
@@ -1867,6 +2043,7 @@ trigger5 = (stateno != [250,275])||(stateno = [260,265])
 
 [State -1]
 type = ChangeState
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 value = 1310
 triggerall = !ishelper
 triggerall = roundstate = 2
@@ -1885,6 +2062,7 @@ trigger5 = (stateno != [250,275])||(stateno = [260,265])
 
 [State -1]
 type = ChangeState
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 value = 1300
 triggerall = !ishelper
 triggerall = roundstate = 2
@@ -1904,6 +2082,7 @@ trigger5 = (stateno != [250,275])||(stateno = [260,265])
 ;---------------------------------------------------------------------------
 [State -1]
 type = ChangeState
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 value = 1050
 triggerall = !ishelper
 triggerall = roundstate = 2
@@ -1925,6 +2104,7 @@ trigger5 = (stateno != [250,275])||(stateno = [260,265])
 
 [State -1]
 type = ChangeState
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 value = 1020
 triggerall = !ishelper
 triggerall = roundstate = 2
@@ -1945,6 +2125,7 @@ trigger5 = (stateno != [250,275])||(stateno = [260,265])
 
 [State -1]
 type = ChangeState
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 value = 1010
 triggerall = !ishelper
 triggerall = roundstate = 2
@@ -1965,6 +2146,7 @@ trigger5 = (stateno != [250,275])||(stateno = [260,265])
 
 [State -1]
 type = ChangeState
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 value = 1000
 triggerall = !ishelper
 triggerall = roundstate = 2
@@ -1991,6 +2173,7 @@ trigger5 = (stateno != [250,275])||(stateno = [260,265])
 ;ダッシュ
 [State -1, Run Fwd]
 type = ChangeState
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 value = 100
 triggerall = !ishelper
 trigger1 = command = "FF"
@@ -2002,6 +2185,7 @@ trigger1 = ctrl
 ;後退ダッシュ
 [State -1, Run Back]
 type = ChangeState
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 value = 105
 triggerall = !ishelper
 trigger1 = command = "BB"
@@ -2011,6 +2195,7 @@ trigger1 = ctrl
 ;---------------------------------------------------------------------------
 [State -1]
 type = ChangeState
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 value = 850
 triggerall = !ishelper
 triggerall = command = "スルー"
@@ -2021,6 +2206,7 @@ trigger1 = Anim != 5040 && Anim != 5210
 
 [State -1]
 type = ChangeState
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 value = 855
 triggerall = !ishelper
 triggerall = command = "スルー"
@@ -2032,6 +2218,7 @@ trigger1 = Anim != 5040 && Anim != 5210
 ;---------------------------------------------------------------------------
 [State -1]
 type = ChangeState
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 value = 800
 triggerall = !ishelper
 triggerall = command = "スルー"
@@ -2047,6 +2234,7 @@ trigger3 = (stateno = 52 && prevstateno != [600,699]) && time >= 0
 
 [State -1]
 type = ChangeState
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 value = 805
 triggerall = !ishelper
 triggerall = command = "スルー"
@@ -2064,6 +2252,7 @@ trigger3 = (stateno = 52 && prevstateno != [600,699]) && time >= 0
 ;リープアタック
 [State -1, Leap Attack]
 type = ChangeState
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 value = 700
 triggerall = !ishelper
 triggerall = command = "リープアタック"
@@ -2082,6 +2271,7 @@ trigger3 = (stateno = 52 && prevstateno != [600,699]) && time >= 0
 
 [State -1, PA]
 type = ChangeState
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 value = ifelse(numhelper(197),196,195)
 triggerall = !ishelper
 triggerall = command = "PA"
@@ -2127,6 +2317,7 @@ var(11) = ceil(36*const(Size.xscale))
 ;---------------------------------------------------------------------------
 [State -1, Forward Strong Punch]
 type = ChangeState
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 value = 265
 triggerall = !ishelper
 triggerall = command = "back_z"
@@ -2138,6 +2329,7 @@ trigger3 = (stateno = 52 && prevstateno != [600,699]) && time >= 0
 
 [State -1, Forward Strong Punch]
 type = ChangeState
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 value = 260
 triggerall = !ishelper
 triggerall = command = "back_y"
@@ -2150,6 +2342,7 @@ trigger3 = (stateno = 52 && prevstateno != [600,699]) && time >= 0
 ;---------------------------------------------------------------------------
 [State -1, Forward Strong Kick]
 type = ChangeState
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 value = 275
 triggerall = !ishelper
 triggerall = command = "3_c"
@@ -2160,6 +2353,7 @@ trigger3 = (stateno = 52 && prevstateno != [600,699]) && time >= 0
 
 [State -1, Forward Strong Kick]
 type = ChangeState
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 value = 257
 triggerall = !ishelper
 triggerall = command = "fwd_c"
@@ -2171,6 +2365,7 @@ trigger3 = (stateno = 52 && prevstateno != [600,699]) && time >= 0
 
 [State -1, Forward Strong Kick]
 type = ChangeState
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 value = 270
 triggerall = !ishelper
 triggerall = command = "fwd_b"
@@ -2183,6 +2378,7 @@ trigger3 = (stateno = 52 && prevstateno != [600,699]) && time >= 0
 ;---------------------------------------------------------------------------
 [State -1, Stand Strong Punch]
 type = ChangeState
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 value = 220
 triggerall = !ishelper
 triggerall = command = "z"
@@ -2195,6 +2391,7 @@ trigger3 = (stateno = 52 && prevstateno != [600,699]) && time >= 0
 ;---------------------------------------------------------------------------
 [State -1, Stand Medium Punch]
 type = ChangeState
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 value = 210
 triggerall = !ishelper
 triggerall = command = "y"
@@ -2207,6 +2404,7 @@ trigger3 = (stateno = 52 && prevstateno != [600,699]) && time >= 0
 ;---------------------------------------------------------------------------
 [State -1, Stand Light Punch]
 type = ChangeState
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 value = 200
 triggerall = !ishelper
 triggerall = command = "x"
@@ -2219,6 +2417,7 @@ trigger3 = (stateno = 52 && prevstateno != [600,699]) && time >= 0
 
 [State -1, Stand Light Punch]
 type = ChangeState
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 value = 205
 triggerall = !ishelper
 triggerall = command = "x"
@@ -2239,6 +2438,7 @@ trigger4 = stateno = 205
 ;---------------------------------------------------------------------------
 [State -1, Standing Strong Kick]
 type = ChangeState
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 value = 250
 triggerall = !ishelper
 triggerall = command = "c"
@@ -2252,6 +2452,7 @@ trigger3 = (stateno = 52 && prevstateno != [600,699]) && time >= 0
 
 [State -1, Standing Strong Kick]
 type = ChangeState
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 value = 255
 triggerall = command = "c"
 triggerall = command != "holddown"
@@ -2264,6 +2465,7 @@ trigger3 = (stateno = 52 && prevstateno != [600,699]) && time >= 0
 ;---------------------------------------------------------------------------
 [State -1, Standing Medium Kick]
 type = ChangeState
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 value = 240
 triggerall = !ishelper
 triggerall = command = "b"
@@ -2277,6 +2479,7 @@ trigger3 = (stateno = 52 && prevstateno != [600,699]) && time >= 0
 
 [State -1, Standing Medium Kick]
 type = ChangeState
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 value = 245
 triggerall = !ishelper
 triggerall = command = "b"
@@ -2290,6 +2493,7 @@ trigger3 = (stateno = 52 && prevstateno != [600,699]) && time >= 0
 ;---------------------------------------------------------------------------
 [State -1, Stand Light Kick]
 type = ChangeState
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 value = 230
 triggerall = !ishelper
 triggerall = command = "a"
@@ -2308,6 +2512,7 @@ trigger5 = stateno = 400 || stateno = 430
 ;---------------------------------------------------------------------------
 [State -1, Crouching Strong Punch]
 type = ChangeState
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 value = 420
 triggerall = !ishelper
 triggerall = command = "z"
@@ -2320,6 +2525,7 @@ trigger3 = (stateno = 52 && prevstateno != [600,699]) && time >= 0
 ;---------------------------------------------------------------------------
 [State -1, Crouching Medium Punch]
 type = ChangeState
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 value = 410
 triggerall = !ishelper
 triggerall = command = "y"
@@ -2332,6 +2538,7 @@ trigger3 = (stateno = 52 && prevstateno != [600,699]) && time >= 0
 ;---------------------------------------------------------------------------
 [State -1, Crouching Light Punch]
 type = ChangeState
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 value = 400
 triggerall = !ishelper
 triggerall = command = "x"
@@ -2352,6 +2559,7 @@ trigger5 = stateno = 400 || stateno = 430
 ;---------------------------------------------------------------------------
 [State -1, Crouching Strong Kick]
 type = ChangeState
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 value = 450
 triggerall = !ishelper
 triggerall = command = "c"
@@ -2364,6 +2572,7 @@ trigger3 = (stateno = 52 && prevstateno != [600,699]) && time >= 0
 ;---------------------------------------------------------------------------
 [State -1, Crouching Medium Kick]
 type = ChangeState
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 value = 440
 triggerall = !ishelper
 triggerall = command = "b"
@@ -2376,6 +2585,7 @@ trigger3 = (stateno = 52 && prevstateno != [600,699]) && time >= 0
 ;---------------------------------------------------------------------------
 [State -1, Crouching Light Kick]
 type = ChangeState
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 value = 430
 triggerall = !ishelper
 triggerall = command = "a"
@@ -2396,6 +2606,7 @@ trigger6 = !(movecontact||movereversed)
 ;---------------------------------------------------------------------------
 [State -1]
 type = ChangeState
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 value = 60
 triggerall = !ishelper
 triggerall = var(59) != 1
@@ -2408,6 +2619,7 @@ trigger1 = Anim != 5040 && Anim != 5210
 
 [State -1]
 type = ChangeState
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 value = 65
 triggerall = !ishelper
 triggerall = var(59) != 1
@@ -2420,6 +2632,7 @@ trigger1 = Anim != 5040 && Anim != 5210
 
 [State -1]
 type = ChangeState
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 value = 41
 triggerall = !ishelper
 triggerall = !ishelper
@@ -2433,6 +2646,7 @@ trigger2 = p2movetype = H || numtarget
 
 [State -1, Jump Strong Punch]
 type = ChangeState
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 value = 620
 triggerall = !ishelper
 triggerall = command = "z"
@@ -2444,6 +2658,7 @@ trigger1 = Anim != 5040 && Anim != 5210
 
 [State -1]
 type = ChangeState
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 value = 625
 triggerall = !ishelper
 triggerall = command = "z"
@@ -2454,6 +2669,7 @@ trigger1 = Anim != 5040 && Anim != 5210
 
 [State -1]
 type = ChangeState
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 value = 620
 triggerall = !ishelper
 triggerall = command = "z"
@@ -2465,6 +2681,7 @@ trigger1 = Anim != 5040 && Anim != 5210
 ;---------------------------------------------------------------------------
 [State -1]
 type = ChangeState
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 value = 615
 triggerall = !ishelper
 triggerall = command = "y"
@@ -2475,6 +2692,7 @@ trigger1 = Anim != 5040 && Anim != 5210
 
 [State -1]
 type = ChangeState
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 value = 610
 triggerall = !ishelper
 triggerall = command = "y"
@@ -2486,6 +2704,7 @@ trigger1 = Anim != 5040 && Anim != 5210
 ;---------------------------------------------------------------------------
 [State -1]
 type = ChangeState
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 value = 605
 triggerall = !ishelper
 triggerall = command = "x"
@@ -2496,6 +2715,7 @@ trigger1 = Anim != 5040 && Anim != 5210
 
 [State -1]
 type = ChangeState
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 value = 600
 triggerall = !ishelper
 triggerall = command = "x"
@@ -2507,6 +2727,7 @@ trigger1 = Anim != 5040 && Anim != 5210
 ;---------------------------------------------------------------------------
 [State -1]
 type = ChangeState
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 value = 655
 triggerall = !ishelper
 triggerall = command = "c"
@@ -2517,6 +2738,7 @@ trigger1 = Anim != 5040 && Anim != 5210
 
 [State -1]
 type = ChangeState
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 value = 650
 triggerall = !ishelper
 triggerall = command = "c"
@@ -2528,6 +2750,7 @@ trigger1 = Anim != 5040 && Anim != 5210
 ;---------------------------------------------------------------------------
 [State -1]
 type = ChangeState
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 value = 660
 triggerall = !ishelper
 triggerall = command = "b"
@@ -2538,6 +2761,7 @@ trigger1 = Anim != 5040 && Anim != 5210
 
 [State -1]
 type = ChangeState
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 value = 645
 triggerall = !ishelper
 triggerall = command = "b"
@@ -2548,6 +2772,7 @@ trigger1 = Anim != 5040 && Anim != 5210
 
 [State -1]
 type = ChangeState
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 value = 640
 triggerall = !ishelper
 triggerall = command = "b"
@@ -2559,6 +2784,7 @@ trigger1 = Anim != 5040 && Anim != 5210
 ;---------------------------------------------------------------------------
 [State -1]
 type = ChangeState
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 value = 635
 triggerall = !ishelper
 triggerall = command = "a"
@@ -2569,6 +2795,7 @@ trigger1 = Anim != 5040 && Anim != 5210
 
 [State -1]
 type = ChangeState
+triggerall = AILevel = 0   ;<-- AI brain has sole control; humans unaffected
 value = 630
 triggerall = !ishelper
 triggerall = command = "a"

@@ -1,0 +1,43 @@
+;***************************************************************************;
+;******************* Created in Fighter Factory Ultimate *******************;
+;*******************      http://www.virtualltek.com     *******************;
+;***************************************************************************;
+
+;General Information
+
+[Info]
+Name         ="Wolverine"
+DisplayName  ="Wolverine"
+VersionDate  = 08,23,2004
+mugenversion = 1.0
+Author       ="Sander71113"
+Editor = "REDHOT"
+pal.defaults = 1,2,3,4,5,6
+
+;Files for the player
+[Files]
+cmd      = CMND/Wolverine.cmd
+cns      = CNS/Wolverine.cns
+st       = CNS/Wolverine.cns
+st1      = CNS/config.txt
+stcommon = CNS/common1.cns
+sprite   = SPRITES/Wolverine.sff
+anim     = ANIMATIONS/Wolverine.air
+sound    = SOUNDS/Wolverine.snd
+pal1     = PALETTES/Wolverine_01.act
+pal2     = PALETTES/Wolverine_02.act
+pal3     = PALETTES/Wolverine_03.act
+pal4     = PALETTES/Wolverine_04.act
+pal5     = PALETTES/Wolverine_05.act
+pal6     = PALETTES/Wolverine_06.act
+
+[Arcade]
+intro.storyboard = 
+ending.storyboard = 
+
+;Product of Sander71113
+;http://go.to/sander71113
+;http://sander71113.mgbr.net
+;sander71113@yahoo.com
+
+;Edited by REDHOT

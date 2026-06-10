@@ -1835,6 +1835,7 @@ trigger1 = command != "holdback"
 trigger1 = AILevel = 0          ;<-- AI holds guard; human release unchanged
 trigger2 = Anim = 130
 trigger2 = !inguarddist
+trigger2 = AILevel = 0 || enemynear,movetype != A ;<-- AI holds through string gaps
 trigger3 = Anim = 90 && AnimElemTime(4) = 0
 trigger4 = Anim = 91 && AnimElemTime(4) = 3
 value = 140
@@ -1870,6 +1871,7 @@ trigger1 = command != "holdback"
 trigger1 = AILevel = 0          ;<-- AI holds guard; human release unchanged
 trigger2 = Anim = 131
 trigger2 = !inguarddist
+trigger2 = AILevel = 0 || enemynear,movetype != A ;<-- AI holds through string gaps
 trigger3 = Anim = 90 && AnimElemTime(4) = 0
 trigger4 = Anim = 91 && AnimElemTime(4) = 3
 value = 140

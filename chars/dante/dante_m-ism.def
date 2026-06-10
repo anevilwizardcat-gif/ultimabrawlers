@@ -1,0 +1,36 @@
+; Definition file for Kung Fu Man
+; Contains all the filenames needed for the character
+
+; Player information
+[Info]
+name = "dante"        ;Name of character
+displayname = "dante" ;Name of character to display
+versiondate = 04,14,2002    ;Version date of character (MM-DD-YYYY)
+mugenversion = 04,14,2002   ;Version of M.U.G.E.N character works on
+author = "bugya"            ;Character author name
+pal.defaults = 7,8,9,10,11,12,1,2,3,4,5,6      ;Default palettes in order of preference
+
+; Files for the player
+[Files]
+cmd     = m-ism/dante.cmd   ;Command set
+cns     = m-ism/dante.cns   ;Constants
+st      = m-ism/dante.cns   ;States
+st1     = m-ism/AI.cns
+st2     = m-ism/AI_Helpers.st
+stcommon = m-ism/dantecommon.cns ;Common states
+sprite  = dante_m-ism.sff   ;Sprite
+anim    = dante.air   ;Animation
+sound   = dante2.snd   ;Sound
+pal1    = dante.act  ;Palettes (can have up to 12)
+pal2    = m-ism/m_ism_blue.act
+pal3    = m-ism/m_ism_green.act
+pal4    = m-ism/m_ism_purple.act
+pal5    = m-ism/m_ism_black.act;ヒューマンライクモード
+pal6    = m-ism/m_ism.act;クライマックスモード
+;↓以下、常時AI起動
+pal7    = dante.act
+pal8    = m-ism/m_ism_blue.act
+pal9    = m-ism/m_ism_green.act
+pal10   = m-ism/m_ism_purple.act
+pal11   = m-ism/m_ism_black.act;ヒューマンライクモード
+pal12   = m-ism/m_ism.act;クライマックスモード

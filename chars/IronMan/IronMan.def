@@ -1,0 +1,28 @@
+; Definition file for WarMachine
+; Contains all the filenames needed for the character
+
+; Player information
+[Info]
+name = "Iron Man"        ;Name of character
+displayname = "Iron Man" ;Name of character to display
+mugenversion = 1.0
+author = "One Winged Angel & Unko Man"      ;Character author name
+Edited = "REDHOT"
+pal.defaults = 1,2,3,4,5,6   ;Default palettes in order of preference
+
+; Files for the player
+[Files]
+cmd     = CMND/IronMan.cmd   ;Command set
+cns      = CNS/IronMan.cns
+st       = CNS/IronMan.cns
+st1      = CNS/config.txt
+stcommon = CNS/common1.cns
+sprite   = SPRITES/IronMan.sff
+anim     = ANIMATIONS/IronMan.air
+sound    = SOUNDS/IronMan.snd
+pal1     = PALETTES/IronMan_01.act
+pal2     = PALETTES/IronMan_02.act
+pal3     = PALETTES/IronMan_03.act
+pal4     = PALETTES/IronMan_04.act
+pal5     = PALETTES/IronMan_05.act
+pal6     = PALETTES/IronMan_06.act

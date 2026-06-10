@@ -1,0 +1,32 @@
+
+
+; Player information
+[Info]
+name = "Strider Hiryu"        ;Name of character
+displayname = "Strider Hiryu" ;Name of character to display
+versiondate = 05,6,2003    ;Version date of character (MM-DD-YYYY)
+mugenversion = 04,14,2003   ;Version of M.U.G.E.N character works on
+author = "Splode"         ;Character author name
+edited = "REDHOT"
+pal.defaults = 1,2,3,4,5,6      ;Default palettes in order of preference
+
+; Files for the player
+[Files]
+cmd     = CMND/StriderHiryu.cmd   ;Command set
+cns     = CNS/StriderHiryu.cns   ;Constants
+st      = CNS/StriderHiryu.cns   ;States
+st1      = CNS/config.txt
+stcommon = CNS/common1.cns ;Common states
+sprite  = SPRITES/StriderHiryu.sff   ;Sprite
+anim    = ANIMATIONS/StriderHiryu.air   ;Animation
+sound   = SOUNDS/StriderHiryu.snd   ;Sound
+pal1    = PALETTES/StriderHiryu_01.act 
+pal2    = PALETTES/StriderHiryu_02.act
+pal3    = PALETTES/StriderHiryu_03.act
+pal4    = PALETTES/StriderHiryu_04.act
+pal5    = PALETTES/StriderHiryu_05.act
+pal6    = PALETTES/StriderHiryu_06.act
+
+; Arcade mode
+[Arcade]
+

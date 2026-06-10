@@ -1,0 +1,28 @@
+; Definition file for Kung Fu Man
+; Contains all the filenames needed for the character
+
+; Player information
+[Info]
+name = "dante"        ;Name of character
+displayname = "dante" ;Name of character to display
+versiondate = 04,14,2002    ;Version date of character (MM-DD-YYYY)
+mugenversion = 04,14,2002   ;Version of M.U.G.E.N character works on
+author = "Elecbyte"         ;Character author name
+pal.defaults = 6,3,4,2      ;Default palettes in order of preference
+
+; Files for the player
+[Files]
+cmd     = dante.cmd   ;Command set
+cns     = dante.cns   ;Constants
+st      = dante.cns   ;States
+stcommon = dantecommon.cns ;Common states
+sprite  = dante.sff   ;Sprite
+anim    = dante.air   ;Animation
+sound   = dante2.snd   ;Sound
+pal1    = dante.act  ;Palettes (can have up to 12)
+pal2    = dante.act
+pal3    = dante.act
+pal4    = dante.act
+pal5    = dante.act
+pal6    = dante.act
+

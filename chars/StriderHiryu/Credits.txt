@@ -1,0 +1,4 @@
+- Splode (Original author and various original codes of this character)
+- Mouser (Some codes of this character)
+- DarkWolf13, walruslui and ExShadow (Hyper Ports code and Common1 codes)
+- FerchoGTX (Some MvC2 FX and sounds)

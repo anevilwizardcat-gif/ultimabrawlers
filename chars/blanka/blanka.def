@@ -1,0 +1,24 @@
+; ------------------------------------------------------------
+; Street Fighter Alpha 3's Blanka, the amazonian weirdo by MHz
+; ------------------------------------------------------------
+
+;* Character information
+[Info]
+name    = "Blanka by MHz"
+displayname = "Blanka"
+
+;* Files for the character
+[Files]
+cmd     = Blanka.cmd     ;Command set
+cns     = Blanka.cns     ;Constants
+st      = Blanka.cns     ;States
+stcommon = common1.cns   ;Common states
+sprite  = Blanka.sff     ;Sprite
+anim    = Blanka.air     ;Animation
+sound   = Blanka.snd     ;Sound
+pal1    = Blanka1.act
+pal2    = Blanka2.act
+pal3    = Blanka3.act
+pal4    = Blanka4.act
+pal5    = Blanka5.act
+pal6    = Blanka6.act
