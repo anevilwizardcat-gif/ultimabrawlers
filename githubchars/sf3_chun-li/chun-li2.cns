@@ -388,7 +388,7 @@ ignorehitpause = 1
 type = varset
 trigger1 = !enemy,numpartner
 trigger1 = enemy,gethitvar(hitcount) = [0,1]
-trigger2 = enemy,numpartner
+trigger2 = enemy,numpartner && numenemy >= 2
 trigger2 = enemy(0),gethitvar(hitcount) + enemy(1),gethitvar(hitcount) = [0,21]
 trigger3 = p2movetype != H
 trigger3 = p2stateno != [5000,5999]
@@ -402,7 +402,7 @@ type = varset
 triggerall = p2movetype = H
 trigger1 = !enemy,numpartner
 trigger1 = enemy,gethitvar(hitcount) = 2
-trigger2 = enemy,numpartner
+trigger2 = enemy,numpartner && numenemy >= 2
 trigger2 = enemy(0),gethitvar(hitcount) + enemy(1),gethitvar(hitcount) = 2
 fvar(5) = 0.96
 ignorehitpause = 1
@@ -412,7 +412,7 @@ type = varset
 triggerall = p2movetype = H
 trigger1 = !enemy,numpartner
 trigger1 = enemy,gethitvar(hitcount) = 3
-trigger2 = enemy,numpartner
+trigger2 = enemy,numpartner && numenemy >= 2
 trigger2 = enemy(0),gethitvar(hitcount) + enemy(1),gethitvar(hitcount) = 3
 fvar(5) = 0.92
 ignorehitpause = 1
@@ -422,7 +422,7 @@ type = varset
 triggerall = p2movetype = H
 trigger1 = !enemy,numpartner
 trigger1 = enemy,gethitvar(hitcount) = 4
-trigger2 = enemy,numpartner
+trigger2 = enemy,numpartner && numenemy >= 2
 trigger2 = enemy(0),gethitvar(hitcount) + enemy(1),gethitvar(hitcount) = 4
 fvar(5) = 0.88
 ignorehitpause = 1
@@ -432,7 +432,7 @@ type = varset
 triggerall = p2movetype = H
 trigger1 = !enemy,numpartner
 trigger1 = enemy,gethitvar(hitcount) = 5
-trigger2 = enemy,numpartner
+trigger2 = enemy,numpartner && numenemy >= 2
 trigger2 = enemy(0),gethitvar(hitcount) + enemy(1),gethitvar(hitcount) = 5
 fvar(5) = 0.84
 ignorehitpause = 1
@@ -442,7 +442,7 @@ type = varset
 triggerall = p2movetype = H
 trigger1 = !enemy,numpartner
 trigger1 = enemy,gethitvar(hitcount) = 6
-trigger2 = enemy,numpartner
+trigger2 = enemy,numpartner && numenemy >= 2
 trigger2 = enemy(0),gethitvar(hitcount) + enemy(1),gethitvar(hitcount) = 6
 fvar(5) = 0.8
 ignorehitpause = 1
@@ -452,7 +452,7 @@ type = varset
 triggerall = p2movetype = H
 trigger1 = !enemy,numpartner
 trigger1 = enemy,gethitvar(hitcount) = 7
-trigger2 = enemy,numpartner
+trigger2 = enemy,numpartner && numenemy >= 2
 trigger2 = enemy(0),gethitvar(hitcount) + enemy(1),gethitvar(hitcount) = 7
 fvar(5) = 0.76
 ignorehitpause = 1
@@ -462,7 +462,7 @@ type = varset
 triggerall = p2movetype = H
 trigger1 = !enemy,numpartner
 trigger1 = enemy,gethitvar(hitcount) = 8
-trigger2 = enemy,numpartner
+trigger2 = enemy,numpartner && numenemy >= 2
 trigger2 = enemy(0),gethitvar(hitcount) + enemy(1),gethitvar(hitcount) = 8
 fvar(5) = 0.72
 ignorehitpause = 1
@@ -472,7 +472,7 @@ type = varset
 triggerall = p2movetype = H
 trigger1 = !enemy,numpartner
 trigger1 = enemy,gethitvar(hitcount) = 9
-trigger2 = enemy,numpartner
+trigger2 = enemy,numpartner && numenemy >= 2
 trigger2 = enemy(0),gethitvar(hitcount) + enemy(1),gethitvar(hitcount) = 9
 fvar(5) = 0.68
 ignorehitpause = 1
@@ -482,7 +482,7 @@ type = varset
 triggerall = p2movetype = H
 trigger1 = !enemy,numpartner
 trigger1 = enemy,gethitvar(hitcount) = 10
-trigger2 = enemy,numpartner
+trigger2 = enemy,numpartner && numenemy >= 2
 trigger2 = enemy(0),gethitvar(hitcount) + enemy(1),gethitvar(hitcount) = 10
 fvar(5) = 0.64
 ignorehitpause = 1
@@ -492,7 +492,7 @@ type = varset
 triggerall = p2movetype = H
 trigger1 = !enemy,numpartner
 trigger1 = enemy,gethitvar(hitcount) = 11
-trigger2 = enemy,numpartner
+trigger2 = enemy,numpartner && numenemy >= 2
 trigger2 = enemy(0),gethitvar(hitcount) + enemy(1),gethitvar(hitcount) = 11
 fvar(5) = 0.60
 ignorehitpause = 1
@@ -502,7 +502,7 @@ type = varset
 triggerall = p2movetype = H
 trigger1 = !enemy,numpartner
 trigger1 = enemy,gethitvar(hitcount) = 12
-trigger2 = enemy,numpartner
+trigger2 = enemy,numpartner && numenemy >= 2
 trigger2 = enemy(0),gethitvar(hitcount) + enemy(1),gethitvar(hitcount) = 12
 fvar(5) = 0.56
 ignorehitpause = 1
@@ -512,7 +512,7 @@ type = varset
 triggerall = p2movetype = H
 trigger1 = !enemy,numpartner
 trigger1 = enemy,gethitvar(hitcount) = 13
-trigger2 = enemy,numpartner
+trigger2 = enemy,numpartner && numenemy >= 2
 trigger2 = enemy(0),gethitvar(hitcount) + enemy(1),gethitvar(hitcount) = 13
 fvar(5) = 0.52
 ignorehitpause = 1
@@ -522,7 +522,7 @@ type = varset
 triggerall = p2movetype = H
 trigger1 = !enemy,numpartner
 trigger1 = enemy,gethitvar(hitcount) = 14
-trigger2 = enemy,numpartner
+trigger2 = enemy,numpartner && numenemy >= 2
 trigger2 = enemy(0),gethitvar(hitcount) + enemy(1),gethitvar(hitcount) = 14
 fvar(5) = 0.48
 ignorehitpause = 1
@@ -532,7 +532,7 @@ type = varset
 triggerall = p2movetype = H
 trigger1 = !enemy,numpartner
 trigger1 = enemy,gethitvar(hitcount) = 15
-trigger2 = enemy,numpartner
+trigger2 = enemy,numpartner && numenemy >= 2
 trigger2 = enemy(0),gethitvar(hitcount) + enemy(1),gethitvar(hitcount) = 15
 fvar(5) = 0.44
 ignorehitpause = 1
@@ -542,7 +542,7 @@ type = varset
 triggerall = p2movetype = H
 trigger1 = !enemy,numpartner
 trigger1 = enemy,gethitvar(hitcount) = 16
-trigger2 = enemy,numpartner
+trigger2 = enemy,numpartner && numenemy >= 2
 trigger2 = enemy(0),gethitvar(hitcount) + enemy(1),gethitvar(hitcount) = 16
 fvar(5) = 0.4
 ignorehitpause = 1
@@ -552,7 +552,7 @@ type = varset
 triggerall = p2movetype = H
 trigger1 = !enemy,numpartner
 trigger1 = enemy,gethitvar(hitcount) = 17
-trigger2 = enemy,numpartner
+trigger2 = enemy,numpartner && numenemy >= 2
 trigger2 = enemy(0),gethitvar(hitcount) + enemy(1),gethitvar(hitcount) = 17
 fvar(5) = 0.36
 ignorehitpause = 1
@@ -562,7 +562,7 @@ type = varset
 triggerall = p2movetype = H
 trigger1 = !enemy,numpartner
 trigger1 = enemy,gethitvar(hitcount) = 18
-trigger2 = enemy,numpartner
+trigger2 = enemy,numpartner && numenemy >= 2
 trigger2 = enemy(0),gethitvar(hitcount) + enemy(1),gethitvar(hitcount) = 18
 fvar(5) = 0.32
 ignorehitpause = 1
@@ -572,7 +572,7 @@ type = varset
 triggerall = p2movetype = H
 trigger1 = !enemy,numpartner
 trigger1 = enemy,gethitvar(hitcount) = 19
-trigger2 = enemy,numpartner
+trigger2 = enemy,numpartner && numenemy >= 2
 trigger2 = enemy(0),gethitvar(hitcount) + enemy(1),gethitvar(hitcount) = 19
 fvar(5) = 0.28
 ignorehitpause = 1
@@ -582,7 +582,7 @@ type = varset
 triggerall = p2movetype = H
 trigger1 = !enemy,numpartner
 trigger1 = enemy,gethitvar(hitcount) >= 20
-trigger2 = enemy,numpartner
+trigger2 = enemy,numpartner && numenemy >= 2
 trigger2 = enemy(0),gethitvar(hitcount) + enemy(1),gethitvar(hitcount) >= 20
 fvar(5) = 0.24
 ignorehitpause = 1
@@ -591,10 +591,10 @@ ignorehitpause = 1
 type = VarSet
 trigger1 = !enemy,numpartner
 trigger1 = (100*enemy,life/enemy,const(data.life)) > 30
-trigger2 = enemy,numpartner
+trigger2 = enemy,numpartner && numenemy >= 2
 trigger2 = enemy(0),alive && enemy(1),alive
 trigger2 = ceil(100*(enemy(0),life+enemy(1),life)/(enemy(0),const(data.life)+enemy(1),const(data.life))) > 30
-trigger3 = enemy,numpartner
+trigger3 = enemy,numpartner && numenemy >= 2
 trigger3 = !enemy(0),alive || !enemy(1),alive
 trigger3 = (100*enemy(ifelse(enemy(0),alive,0,1)),life/enemy(ifelse(enemy(0),alive,0,1)),const(data.life)) > 30
 fvar(6) = 1.0
@@ -603,10 +603,10 @@ fvar(6) = 1.0
 type = VarSet
 trigger1 = !enemy,numpartner
 trigger1 = (100*enemy,life/enemy,const(data.life)) = [21,30]
-trigger2 = enemy,numpartner
+trigger2 = enemy,numpartner && numenemy >= 2
 trigger2 = enemy(0),alive && enemy(1),alive
 trigger2 = ceil(100*(enemy(0),life+enemy(1),life)/(enemy(0),const(data.life)+enemy(1),const(data.life))) = [21,30]
-trigger3 = enemy,numpartner
+trigger3 = enemy,numpartner && numenemy >= 2
 trigger3 = !enemy(0),alive || !enemy(1),alive
 trigger3 = (100*enemy(ifelse(enemy(0),alive,0,1)),life/enemy(ifelse(enemy(0),alive,0,1)),const(data.life)) = [21,30]
 fvar(6) = 0.91
@@ -615,10 +615,10 @@ fvar(6) = 0.91
 type = VarSet
 trigger1 = !enemy,numpartner
 trigger1 = (100*enemy,life/enemy,const(data.life)) = [11,20]
-trigger2 = enemy,numpartner
+trigger2 = enemy,numpartner && numenemy >= 2
 trigger2 = enemy(0),alive && enemy(1),alive
 trigger2 = ceil(100*(enemy(0),life+enemy(1),life)/(enemy(0),const(data.life)+enemy(1),const(data.life))) = [11,20]
-trigger3 = enemy,numpartner
+trigger3 = enemy,numpartner && numenemy >= 2
 trigger3 = !enemy(0),alive || !enemy(1),alive
 trigger3 = (100*enemy(ifelse(enemy(0),alive,0,1)),life/enemy(ifelse(enemy(0),alive,0,1)),const(data.life)) = [11,20]
 fvar(6) = 0.82
@@ -627,10 +627,10 @@ fvar(6) = 0.82
 type = VarSet
 trigger1 = !enemy,numpartner
 trigger1 = (100*enemy,life/enemy,const(data.life)) = [6,10]
-trigger2 = enemy,numpartner
+trigger2 = enemy,numpartner && numenemy >= 2
 trigger2 = enemy(0),alive && enemy(1),alive
 trigger2 = ceil(100*(enemy(0),life+enemy(1),life)/(enemy(0),const(data.life)+enemy(1),const(data.life))) = [6,10]
-trigger3 = enemy,numpartner
+trigger3 = enemy,numpartner && numenemy >= 2
 trigger3 = !enemy(0),alive || !enemy(1),alive
 trigger3 = (100*enemy(ifelse(enemy(0),alive,0,1)),life/enemy(ifelse(enemy(0),alive,0,1)),const(data.life)) = [6,10]
 fvar(6) = 0.73
@@ -639,10 +639,10 @@ fvar(6) = 0.73
 type = VarSet
 trigger1 = !enemy,numpartner
 trigger1 = (100*enemy,life/enemy,const(data.life)) <= 5
-trigger2 = enemy,numpartner
+trigger2 = enemy,numpartner && numenemy >= 2
 trigger2 = enemy(0),alive && enemy(1),alive
 trigger2 = ceil(100*(enemy(0),life+enemy(1),life)/(enemy(0),const(data.life)+enemy(1),const(data.life))) <= 5
-trigger3 = enemy,numpartner
+trigger3 = enemy,numpartner && numenemy >= 2
 trigger3 = !enemy(0),alive || !enemy(1),alive
 trigger3 = (100*enemy(ifelse(enemy(0),alive,0,1)),life/enemy(ifelse(enemy(0),alive,0,1)),const(data.life)) <= 5
 fvar(6) = 0.64

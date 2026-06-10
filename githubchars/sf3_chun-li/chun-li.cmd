@@ -623,6 +623,10 @@ trigger8 = enemynear,vel x > 4
 trigger8 = p2bodydist x < 95
 trigger8 = p2statetype != L
 trigger8 = random < 650
+trigger9 = ctrl || stateno = 100 || stateno = 130 || stateno = 131 || stateno = 5120 || (stateno = [90,95])
+trigger9 = inguarddist
+trigger9 = (life < 320 && enemynear,life < 320 && power >= 720 && power > enemynear,power + 250)
+trigger9 = random < 880
 trigger2 = ctrl || stateno = 130 || stateno = 131 || stateno = 5120
 trigger2 = inguarddist
 trigger2 = random < 550
@@ -666,6 +670,10 @@ trigger8 = enemynear,vel x > 4
 trigger8 = p2bodydist x < 95
 trigger8 = p2statetype != L
 trigger8 = random < 650
+trigger9 = ctrl || stateno = 100 || stateno = 130 || stateno = 131 || stateno = 5120 || (stateno = [90,95])
+trigger9 = inguarddist
+trigger9 = (life < 320 && enemynear,life < 320 && power >= 720 && power > enemynear,power + 250)
+trigger9 = random < 880
 
 ; --- 2. PARRY PUNISH (the one true var(38) use) ---------------------------
 ; With meter: buffer the Super Art. Without: c.MK only if it will reach.
@@ -1510,6 +1518,7 @@ type = changestate
 triggerall = !ishelper
 value = 430
 triggerall = AILevel > 0
+triggerall = !(life < 320 && enemynear,life < 320 && power >= 720 && power > enemynear,power + 250) || random < 280   ;<-- endgame meter lead: starve neutral, feast on the punish
 triggerall = !(enemynear,stateno = [3000,3060] && enemynear,time > 8)   ;<-- counters eat strikes
 triggerall = p2dist x > -4   ;<-- never swing at someone behind you
 triggerall = ctrl
@@ -1526,6 +1535,7 @@ type = changestate
 triggerall = !ishelper
 value = 210
 triggerall = AILevel > 0
+triggerall = !(life < 320 && enemynear,life < 320 && power >= 720 && power > enemynear,power + 250) || random < 280   ;<-- endgame meter lead: starve neutral, feast on the punish
 triggerall = numhelper(39000)
 triggerall = (helper(39000),var(3) < 120) || p2bodydist x < 42   ;<-- whiffing? poke closer
 triggerall = !(enemynear,stateno = [3000,3060] && enemynear,time > 8)   ;<-- counters eat strikes
@@ -1554,6 +1564,7 @@ type = changestate
 triggerall = !ishelper
 value = 440
 triggerall = AILevel > 0
+triggerall = !(life < 320 && enemynear,life < 320 && power >= 720 && power > enemynear,power + 250) || random < 280   ;<-- endgame meter lead: starve neutral, feast on the punish
 triggerall = !(enemynear,stateno = [3000,3060] && enemynear,time > 8)   ;<-- counters eat strikes
 triggerall = (enemynear,map(standActive) < 1) || random < 520 || (enemynear,map(standGauge) <= 24)   ;<-- low gauge: hunt the crash
 triggerall = numhelper(39000)
@@ -1598,6 +1609,7 @@ type = changestate
 triggerall = !ishelper
 value = 1310
 triggerall = AILevel > 0
+triggerall = !(life < 320 && enemynear,life < 320 && power >= 720 && power > enemynear,power + 250) || random < 280   ;<-- endgame meter lead: starve neutral, feast on the punish
 triggerall = numhelper(39000)
 triggerall = helper(39000),var(10) > 180   ;<-- no repeats
 triggerall = p2dist x > -4   ;<-- never swing at someone behind you
@@ -1672,6 +1684,7 @@ type = changestate
 triggerall = !ishelper
 value = 100
 triggerall = AILevel > 0
+triggerall = !(life < 320 && enemynear,life < 320 && power >= 720 && power > enemynear,power + 250) || random < 280   ;<-- endgame meter lead: starve neutral, feast on the punish
 triggerall = (enemynear,map(standActive) < 1) || random < 520 || (enemynear,map(standGauge) <= 24)   ;<-- low gauge: hunt the crash
 triggerall = numhelper(39000)
 triggerall = (helper(39000),var(1) < 220) || random < 500   ;<-- jumpy foe: advance less
