@@ -592,28 +592,37 @@ triggerall = AILevel > 0
 triggerall = var(21) = 0
 triggerall = roundstate = 2
 triggerall = statetype != A
-trigger1 = ctrl || stateno = 130 || stateno = 131 || stateno = 5120 || (stateno = [90,95])
+trigger1 = ctrl || stateno = 100 || stateno = 130 || stateno = 131 || stateno = 5120 || (stateno = [90,95])
 trigger1 = inguarddist
 trigger1 = enemynear,movetype = A
 trigger1 = enemynear,statetype != C
-trigger1 = random < 650
+trigger1 = random < 720
 trigger3 = life < 220
-trigger3 = ctrl || stateno = 130 || stateno = 131 || stateno = 5120 || (stateno = [90,95])
+trigger3 = ctrl || stateno = 100 || stateno = 130 || stateno = 131 || stateno = 5120 || (stateno = [90,95])
 trigger3 = inguarddist
 trigger3 = enemynear,statetype != C
-trigger3 = random < 850
-trigger4 = ctrl || stateno = 130 || stateno = 131 || stateno = 5120 || (stateno = [90,95])
+trigger3 = random < 900
+trigger4 = ctrl || stateno = 100 || stateno = 130 || stateno = 131 || stateno = 5120 || (stateno = [90,95])
 trigger4 = inguarddist
-trigger4 = enemynear,stateno = [3000,4699]
-trigger4 = random < 800
-trigger5 = ctrl || stateno = 130 || stateno = 131 || stateno = 5120 || (stateno = [90,95])
+trigger4 = enemynear,stateno = [3000,4999]
+trigger4 = random < 880
+trigger5 = ctrl || stateno = 100 || stateno = 130 || stateno = 131 || stateno = 5120 || (stateno = [90,95])
 trigger5 = inguarddist
 trigger5 = enemynear,power >= 1000
 trigger5 = random < 700
-trigger6 = ctrl || stateno = 130 || stateno = 131 || stateno = 5120 || (stateno = [90,95])
+trigger6 = ctrl || stateno = 100 || stateno = 130 || stateno = 131 || stateno = 5120 || (stateno = [90,95])
 trigger6 = inguarddist
-trigger6 = (enemynear,var(8) = 2) || (enemynear,map(standActive) = 2)
+trigger6 = (enemynear,map(standActive) = 2)
 trigger6 = random < 850
+trigger7 = ctrl || stateno = 100 || stateno = 130 || stateno = 131 || stateno = 5120 || (stateno = [90,95])
+trigger7 = inguarddist
+trigger7 = enemynear,stateno = [1000,1399]
+trigger7 = random < 830
+trigger8 = ctrl || stateno = 100 || stateno = 130 || stateno = 131 || stateno = 5120 || (stateno = [90,95])
+trigger8 = enemynear,vel x > 4
+trigger8 = p2bodydist x < 95
+trigger8 = p2statetype != L
+trigger8 = random < 650
 trigger2 = ctrl || stateno = 130 || stateno = 131 || stateno = 5120
 trigger2 = inguarddist
 trigger2 = random < 550
@@ -626,28 +635,37 @@ triggerall = AILevel > 0
 triggerall = var(23) = 0
 triggerall = roundstate = 2
 triggerall = statetype != A
-trigger1 = ctrl || stateno = 130 || stateno = 131 || stateno = 5120 || (stateno = [90,95])
+trigger1 = ctrl || stateno = 100 || stateno = 130 || stateno = 131 || stateno = 5120 || (stateno = [90,95])
 trigger1 = inguarddist
 trigger1 = enemynear,movetype = A
 trigger1 = enemynear,statetype = C
-trigger1 = random < 650
+trigger1 = random < 720
 trigger3 = life < 220
-trigger3 = ctrl || stateno = 130 || stateno = 131 || stateno = 5120 || (stateno = [90,95])
+trigger3 = ctrl || stateno = 100 || stateno = 130 || stateno = 131 || stateno = 5120 || (stateno = [90,95])
 trigger3 = inguarddist
 trigger3 = enemynear,statetype = C
-trigger3 = random < 850
-trigger4 = ctrl || stateno = 130 || stateno = 131 || stateno = 5120 || (stateno = [90,95])
+trigger3 = random < 900
+trigger4 = ctrl || stateno = 100 || stateno = 130 || stateno = 131 || stateno = 5120 || (stateno = [90,95])
 trigger4 = inguarddist
-trigger4 = enemynear,stateno = [3000,4699]
-trigger4 = random < 800
-trigger5 = ctrl || stateno = 130 || stateno = 131 || stateno = 5120 || (stateno = [90,95])
+trigger4 = enemynear,stateno = [3000,4999]
+trigger4 = random < 880
+trigger5 = ctrl || stateno = 100 || stateno = 130 || stateno = 131 || stateno = 5120 || (stateno = [90,95])
 trigger5 = inguarddist
 trigger5 = enemynear,power >= 1000
 trigger5 = random < 700
-trigger6 = ctrl || stateno = 130 || stateno = 131 || stateno = 5120 || (stateno = [90,95])
+trigger6 = ctrl || stateno = 100 || stateno = 130 || stateno = 131 || stateno = 5120 || (stateno = [90,95])
 trigger6 = inguarddist
-trigger6 = (enemynear,var(8) = 2) || (enemynear,map(standActive) = 2)
+trigger6 = (enemynear,map(standActive) = 2)
 trigger6 = random < 850
+trigger7 = ctrl || stateno = 100 || stateno = 130 || stateno = 131 || stateno = 5120 || (stateno = [90,95])
+trigger7 = inguarddist
+trigger7 = enemynear,stateno = [1000,1399]
+trigger7 = random < 830
+trigger8 = ctrl || stateno = 100 || stateno = 130 || stateno = 131 || stateno = 5120 || (stateno = [90,95])
+trigger8 = enemynear,vel x > 4
+trigger8 = p2bodydist x < 95
+trigger8 = p2statetype != L
+trigger8 = random < 650
 
 ; --- 2. PARRY PUNISH (the one true var(38) use) ---------------------------
 ; With meter: buffer the Super Art. Without: c.MK only if it will reach.
@@ -697,7 +715,7 @@ trigger1 = stateno = [200,440]
 trigger1 = stateno != 220 && stateno != 410
 trigger1 = stateno != 230 && (stateno != [240,242]) && stateno != 245
 trigger1 = (stateno != [250,275]) || (stateno = [260,265])
-trigger1 = random < 980
+trigger1 = random < 990
 
 ; combo-rep bookkeeping (var(59) is unused by her own systems)
 [State -1, AI Rep Count]
@@ -727,8 +745,24 @@ triggerall = enemynear,statetype != L   ;<-- the dead cannot be comboed
 triggerall = p2dist x > -4   ;<-- never swing at someone behind you
 trigger1 = stateno = 430
 trigger1 = movehit
-trigger1 = p2bodydist x < 42
-trigger1 = random < 820
+trigger1 = p2bodydist x < 52
+trigger1 = random < 900
+
+; 3bb. LINK s.MP BRIDGE: jab pushback past c.MK link range -> s.MP carries
+; the string (reach 77, cancelable -> the enders still arrive)
+[State -1, AI Link s.MP]
+type = changestate
+triggerall = !ishelper
+value = 210
+ignorehitpause = 1
+triggerall = AILevel > 0
+triggerall = enemynear,statetype != L   ;<-- the dead cannot be comboed
+triggerall = p2dist x > -4
+triggerall = statetype != A
+trigger1 = stateno = 430
+trigger1 = movehit
+trigger1 = p2bodydist x = [40,58]
+trigger1 = random < 750
 
 ; 3c. light chain: c.LP / far s.LP / c.LK on contact -> c.LK
 [State -1, AI Chain c.LK]
@@ -743,7 +777,7 @@ triggerall = p2dist x > -4   ;<-- never swing at someone behind you
 trigger1 = stateno = 400 || stateno = 205 || stateno = 430
 trigger1 = movecontact
 trigger1 = p2bodydist x < 42
-trigger1 = random < 880
+trigger1 = random < 920
 
 ; 3cc. EX LEGS CANCEL: mid-tier ender (400 power) when super isn't banked
 [State -1, AI Cancel EX Legs]
@@ -753,7 +787,7 @@ value = 1050
 ignorehitpause = 1
 triggerall = AILevel > 0
 triggerall = enemynear,statetype != L   ;<-- the dead cannot be comboed
-triggerall = power >= 400 && power < 520
+triggerall = (power >= 400 && power < 520) || power >= 2700
 triggerall = !((var(58) = 2 && power >= 880) || (var(58) = 3 && power >= 1040) || (var(58) = 4 && power >= 720))
 triggerall = statetype != A
 triggerall = p2statetype != A
@@ -764,7 +798,7 @@ trigger1 = stateno != 220 && stateno != 410
 trigger1 = stateno != 230 && (stateno != [240,242]) && stateno != 245
 trigger1 = (stateno != [250,275]) || (stateno = [260,265])
 trigger1 = p2bodydist x < 45
-trigger1 = random < 750
+trigger1 = random < 850
 
 ; 3d. LEGS CANCEL on contact when no meter (safe chip on block too)
 [State -1, AI Cancel Legs]
@@ -773,7 +807,7 @@ triggerall = !ishelper
 value = 1020
 ignorehitpause = 1
 triggerall = AILevel > 0
-triggerall = (enemynear,var(8) != 1 && enemynear,var(8) != 2 && enemynear,map(standActive) < 1) || movehit   ;<-- stand up = no chip: hit-cancels only
+triggerall = (enemynear,map(standActive) < 1) || movehit   ;<-- stand up = no chip: hit-cancels only
 triggerall = enemynear,statetype != L   ;<-- the dead cannot be comboed
 triggerall = statetype != A
 triggerall = p2statetype != A
@@ -784,7 +818,7 @@ trigger1 = stateno != 220 && stateno != 410
 trigger1 = stateno != 230 && (stateno != [240,242]) && stateno != 245
 trigger1 = (stateno != [250,275]) || (stateno = [260,265])
 trigger1 = p2bodydist x < 45
-trigger1 = random < 800
+trigger1 = random < 880
 
 ; 3ec. EX SBK JUGGLE: launcher confirms into EX SBK at EX-tier meter
 [State -1, AI AA Confirm EX SBK]
@@ -793,7 +827,7 @@ triggerall = !ishelper
 value = 1250
 ignorehitpause = 1
 triggerall = AILevel > 0
-triggerall = power >= 400 && power < 620
+triggerall = (power >= 400 && power < 620) || power >= 2700
 triggerall = !((var(58) = 2 && power >= 880) || (var(58) = 3 && power >= 1040) || (var(58) = 4 && power >= 720))
 triggerall = statetype != A
 trigger1 = stateno = 260
@@ -801,7 +835,7 @@ trigger1 = movehit
 trigger1 = p2statetype = A
 trigger1 = p2dist y = [-60,-5]
 trigger1 = enemynear,vel y > 0
-trigger1 = random < 550
+trigger1 = random < 700
 
 ; 3ed. JUGGLE RELAUNCH: b.MP again while they're still up there
 [State -1, AI Juggle Relaunch]
@@ -817,7 +851,7 @@ trigger1 = p2statetype = A
 trigger1 = p2dist x > -4
 trigger1 = p2bodydist x < 40
 trigger1 = p2dist y = [-80,-10]
-trigger1 = random < 650
+trigger1 = random < 750
 
 ; 3ee. AA CONFIRM: c.HP launcher connects vs air -> SBK juggle
 [State -1, AI AA Confirm SBK]
@@ -831,7 +865,7 @@ trigger1 = movehit
 trigger1 = p2statetype = A
 trigger1 = p2dist y = [-60,-5]
 trigger1 = enemynear,vel y > 0
-trigger1 = random < 780
+trigger1 = random < 880
 
 ; 3eg. TECH CHASE: air-recovery near her = free relaunch
 [State -1, AI Tech Chase]
@@ -907,6 +941,14 @@ trigger1 = p2statetype != A
 trigger1 = p2statetype != L
 trigger1 = p2bodydist x = [55,75]
 trigger1 = random < 250
+trigger2 = power >= 2080   ;<-- meter lead: near-guaranteed is good enough
+trigger2 = enemynear,movetype = I
+trigger2 = enemynear,ctrl = 0
+trigger2 = enemynear,animtime <= -10
+trigger2 = p2statetype != A
+trigger2 = p2statetype != L
+trigger2 = p2bodydist x = [40,80]
+trigger2 = random < 450
 
 ; 4b. GUARD-EXIT THROW: foe recovering at point blank while/after she blocks
 [State -1, AI Punish Throw]
@@ -922,7 +964,7 @@ trigger1 = enemynear,ctrl = 0
 trigger1 = p2statetype != A
 trigger1 = p2statetype != L
 trigger1 = p2bodydist x < 17
-trigger1 = random < 750
+trigger1 = random < 850
 
 ; 4c. RECOVERY PUNISH: foe in recovery in range -> c.MK (confirms cancel)
 [State -1, AI Punish c.MK]
@@ -938,7 +980,15 @@ trigger1 = enemynear,ctrl = 0
 trigger1 = p2statetype != A
 trigger1 = p2statetype != L
 trigger1 = p2bodydist x < 70
-trigger1 = random < 800
+trigger1 = random < 950
+trigger2 = enemynear,stateno = [1000,1399]   ;<-- special in recovery = guaranteed conversion
+trigger2 = enemynear,movetype != H
+trigger2 = enemynear,ctrl = 0
+trigger2 = enemynear,animtime <= -8
+trigger2 = p2statetype != A
+trigger2 = p2statetype != L
+trigger2 = p2bodydist x < 70
+trigger2 = random < 900
 
 ; 4cc. LANDING PUNISH: whiffed jump-in lands next to her -> c.MK confirm
 [State -1, AI Landing Punish]
@@ -952,7 +1002,7 @@ triggerall = ctrl
 triggerall = statetype != A
 trigger1 = enemynear,stateno = 52
 trigger1 = p2bodydist x = [10,62]
-trigger1 = random < 750
+trigger1 = random < 850
 
 ; 4d. WHIFF PUNISH: foe attacking but OUT of reach -> step on their limb
 [State -1, AI Whiff Punish c.MK]
@@ -961,7 +1011,7 @@ triggerall = !ishelper
 value = 440
 triggerall = AILevel > 0
 triggerall = !(enemynear,stateno = [3000,3060] && enemynear,time > 8)   ;<-- counters eat strikes
-triggerall = enemynear,var(8) != 2 && enemynear,map(standActive) != 2   ;<-- never swing into tandem
+triggerall = (enemynear,map(standActive) != 2) || enemynear,time < 22   ;<-- tandem REPS are off-limits; tandem STARTUP is food
 triggerall = enemynear,statetype != L   ;<-- the dead cannot be comboed
 triggerall = p2dist x > -4   ;<-- never swing at someone behind you
 triggerall = ctrl
@@ -970,7 +1020,7 @@ trigger1 = p2movetype = A
 trigger1 = !inguarddist
 trigger1 = p2statetype != A
 trigger1 = p2bodydist x = [44,75]
-trigger1 = random < 700
+trigger1 = random < 780
 
 ; 4dd. CROUCH-SPAM COUNTER: stubby crouch attacks whiffing at range -> c.MK
 ; (short pokes barely trip inguarddist, so guard gets no warning; the answer
@@ -996,7 +1046,7 @@ triggerall = !ishelper
 value = 210
 triggerall = AILevel > 0
 triggerall = !(enemynear,stateno = [3000,3060] && enemynear,time > 8)   ;<-- counters eat strikes
-triggerall = enemynear,var(8) != 2 && enemynear,map(standActive) != 2   ;<-- never swing into tandem
+triggerall = (enemynear,map(standActive) != 2) || enemynear,time < 22   ;<-- tandem REPS are off-limits; tandem STARTUP is food
 triggerall = enemynear,statetype != L   ;<-- the dead cannot be comboed
 triggerall = p2dist x > -4
 triggerall = ctrl
@@ -1005,7 +1055,7 @@ trigger1 = p2movetype = A
 trigger1 = !inguarddist
 trigger1 = p2statetype != A
 trigger1 = p2bodydist x = [18,44]
-trigger1 = random < 700
+trigger1 = random < 780
 
 ; --- 4y. COUNTER-STANCE WARFARE ---------------------------------------------
 ; Counter stances (DIO's Checkmate: 3000/3050/3060) trigger on strikes and
@@ -1041,6 +1091,36 @@ trigger1 = p2statetype != A
 trigger1 = p2bodydist x = [17,70]
 trigger1 = random < 450
 
+; 4y4. TANDEM STARTUP PUNISH: raw tandem activation is long -- if she is
+; free when the reps haven't started, rush it down (confirm goes to super)
+[State -1, AI Tandem Startup Punish]
+type = changestate
+triggerall = !ishelper
+value = 440
+triggerall = AILevel > 0
+triggerall = p2dist x > -4
+triggerall = ctrl
+triggerall = statetype != A
+trigger1 = enemynear,map(standActive) = 2
+trigger1 = enemynear,time < 20
+trigger1 = p2bodydist x = [10,70]
+trigger1 = random < 800
+
+; 4y5. tandem startup at grab range: throw beats everything
+[State -1, AI Tandem Startup Throw]
+type = changestate
+triggerall = !ishelper
+value = 800
+triggerall = AILevel > 0
+triggerall = p2dist x > -4
+triggerall = ctrl
+triggerall = statetype != A
+trigger1 = enemynear,map(standActive) = 2
+trigger1 = enemynear,time < 20
+trigger1 = p2statetype != A
+trigger1 = p2bodydist x < 17
+trigger1 = random < 700
+
 ; 4y3. TANDEM SANDWICH ESCAPE: during tandem the root jumps BEHIND her
 ; while the stand holds the front -- dash forward THROUGH the stand
 ; (helpers have no pushbox) and out of the pincer entirely.
@@ -1051,7 +1131,7 @@ value = 100
 triggerall = AILevel > 0
 triggerall = ctrl
 triggerall = statetype != A
-trigger1 = (enemynear,var(8) = 2) || (enemynear,map(standActive) = 2)
+trigger1 = (enemynear,map(standActive) = 2)
 trigger1 = p2dist x < -4
 trigger1 = random < 500
 
@@ -1141,12 +1221,13 @@ type = changestate
 triggerall = !ishelper
 value = 130
 triggerall = AILevel > 0
+triggerall = stateno != 130   ;<-- no re-entry spam (it resets guard time)
 triggerall = life > 200 || random < 560   ;<-- chip kills: gamble on parry
 triggerall = ctrl
 triggerall = statetype != A
 trigger1 = inguarddist
 trigger1 = enemynear,statetype = S || enemynear,statetype = A
-trigger1 = random < 960
+trigger1 = random < 975
 trigger2 = inguarddist
 trigger2 = enemynear,statetype = C
 trigger2 = random < 120
@@ -1156,12 +1237,13 @@ type = changestate
 triggerall = !ishelper
 value = 131
 triggerall = AILevel > 0
+triggerall = stateno != 131   ;<-- no re-entry spam (it resets guard time)
 triggerall = life > 200 || random < 560   ;<-- chip kills: gamble on parry
 triggerall = ctrl
 triggerall = statetype != A
 trigger1 = inguarddist
 trigger1 = enemynear,statetype = C
-trigger1 = random < 960
+trigger1 = random < 975
 trigger2 = inguarddist
 trigger2 = enemynear,statetype = S
 trigger2 = random < 120
@@ -1175,7 +1257,7 @@ value = ifelse(enemynear,statetype = C, 131, 130)
 triggerall = AILevel > 0
 trigger1 = stateno = 100
 trigger1 = inguarddist
-trigger1 = random < 850
+trigger1 = random < 920
 
 ; 5c. TURN REACT: enemy crossed behind while she's in guard -> reset to idle
 ; (guard states never auto-turn; idle does, then guard re-engages correctly)
@@ -1202,6 +1284,25 @@ trigger1 = enemynear,vel y < 0
 trigger1 = p2bodydist x = [30,90]
 trigger1 = random < 450
 
+; 6d. HOP SWAT: short-hop pressure (hop j.C starters/relinks) gets swatted
+; by s.MP, whose attack box reaches -86 -- exactly hop altitude. This is
+; the anti-HFTF-skeleton button: no hop link, no BnB.
+[State -1, AI Hop Swat]
+type = changestate
+triggerall = !ishelper
+value = 210
+triggerall = AILevel > 0
+triggerall = p2dist x > -4
+triggerall = ctrl
+triggerall = statetype != A
+trigger1 = p2statetype = A
+trigger1 = enemynear,movetype != A   ;<-- swat jumps; air ATTACKS get blocked/parried
+trigger1 = p2dist y = [-60,-12]
+trigger1 = enemynear,vel y < 1.5
+trigger1 = p2bodydist x < 46
+trigger1 = (enemynear,map(standActive) < 1) || p2dist y > -40
+trigger1 = random < 520
+
 ; 6c. JUMP-UNDER EVADE: step out from under the arc; landing punish feeds
 [State -1, AI Jump Under Evade]
 type = changestate
@@ -1215,6 +1316,22 @@ trigger1 = p2dist y < -60
 trigger1 = p2bodydist x < 35
 trigger1 = random < 250
 
+; 5z. RANGE RESET: own the spacing -- after exchanges, step back to the
+; band where her reach wins and the faster character's normals whiff.
+[State -1, AI Range Reset]
+type = changestate
+triggerall = !ishelper
+value = 105
+triggerall = AILevel > 0
+triggerall = backedgebodydist > 60
+triggerall = ctrl
+triggerall = statetype != A
+trigger1 = p2bodydist x < 26
+trigger1 = enemynear,movetype != A
+trigger1 = p2statetype != L
+trigger1 = p2statetype != A
+trigger1 = random < 170
+
 ; --- 6. ANTI-AIR -------------------------------------------------------------
 ; 6a. FAST AA: c.HP launcher vs quick jumps (cancelable -> air confirms)
 [State -1, AI Anti-Air Launcher]
@@ -1222,7 +1339,7 @@ type = changestate
 triggerall = !ishelper
 value = 260
 triggerall = AILevel > 0
-triggerall = (enemynear,var(8) < 1 && enemynear,map(standActive) < 1) || p2dist y > -55   ;<-- stand jumpers: block first, AA deep
+triggerall = (enemynear,map(standActive) < 1) || p2dist y > -55   ;<-- stand jumpers: block first, AA deep
 triggerall = p2dist x > -12
 triggerall = ctrl || (stateno = [130,141])
 triggerall = statetype != A
@@ -1337,6 +1454,9 @@ trigger2 = random < 520
 trigger3 = enemynear,prevstateno = [5099,5199]
 trigger3 = enemynear,time < 5
 trigger3 = random < 900
+trigger4 = numhelper(39000)
+trigger4 = helper(39000),var(5) > 0
+trigger4 = random < 880
 
 ; 7bb. FAST MEATY c.LK: 4-tick startup, window measured to overlap wake frame
 [State -1, AI Meaty c.LK]
@@ -1357,6 +1477,9 @@ trigger2 = random < 420
 trigger3 = enemynear,prevstateno = [5099,5199]
 trigger3 = enemynear,time < 4
 trigger3 = random < 800
+trigger4 = numhelper(39000)
+trigger4 = helper(39000),var(5) > 0
+trigger4 = random < 800
 
 ; 7c. wake-up THROW mixup
 [State -1, AI Meaty Throw]
@@ -1377,6 +1500,9 @@ trigger2 = random < 160
 trigger3 = enemynear,prevstateno = [5099,5199]
 trigger3 = enemynear,time < 4
 trigger3 = random < 380
+trigger4 = numhelper(39000)
+trigger4 = helper(39000),var(5) > 0
+trigger4 = random < 380
 
 ; --- 8. NEUTRAL OFFENSE : decisive footsies -----------------------------------
 [State -1, AI Poke c.LK]
@@ -1400,8 +1526,10 @@ type = changestate
 triggerall = !ishelper
 value = 210
 triggerall = AILevel > 0
+triggerall = numhelper(39000)
+triggerall = (helper(39000),var(3) < 120) || p2bodydist x < 42   ;<-- whiffing? poke closer
 triggerall = !(enemynear,stateno = [3000,3060] && enemynear,time > 8)   ;<-- counters eat strikes
-triggerall = (enemynear,var(8) != 1 && enemynear,var(8) != 2 && enemynear,map(standActive) < 1) || random < 520   ;<-- stand out: respect the disjoint
+triggerall = (enemynear,map(standActive) < 1) || random < 520 || (enemynear,map(standGauge) <= 24)   ;<-- low gauge: hunt the crash
 triggerall = (enemynear,power < 950) || (random < 450)   ;<-- respect their super
 triggerall = p2dist x > -4   ;<-- never swing at someone behind you
 triggerall = ctrl
@@ -1413,6 +1541,13 @@ trigger1 = enemynear,vel y = 0
 trigger1 = p2movetype != A
 trigger1 = p2bodydist x < 52
 trigger1 = random < 240
+trigger2 = power >= 2080   ;<-- meter lead: hunt the confirm
+trigger2 = p2statetype != A
+trigger2 = enemynear,vel y = 0
+trigger2 = p2movetype != H
+trigger2 = p2movetype != A
+trigger2 = p2bodydist x < 58
+trigger2 = random < 400
 
 [State -1, AI Poke c.MK]
 type = changestate
@@ -1420,9 +1555,10 @@ triggerall = !ishelper
 value = 440
 triggerall = AILevel > 0
 triggerall = !(enemynear,stateno = [3000,3060] && enemynear,time > 8)   ;<-- counters eat strikes
-triggerall = (enemynear,var(8) != 1 && enemynear,var(8) != 2 && enemynear,map(standActive) < 1) || random < 520   ;<-- stand out: respect the disjoint
+triggerall = (enemynear,map(standActive) < 1) || random < 520 || (enemynear,map(standGauge) <= 24)   ;<-- low gauge: hunt the crash
 triggerall = numhelper(39000)
 triggerall = (helper(39000),var(1) < 220) || random < 500
+triggerall = (helper(39000),var(3) < 120) || p2bodydist x < 58   ;<-- whiffing? poke closer
 triggerall = (enemynear,power < 950) || (random < 450)   ;<-- respect their super
 triggerall = p2dist x > -4   ;<-- never swing at someone behind you
 triggerall = ctrl
@@ -1434,6 +1570,12 @@ trigger1 = enemynear,vel y = 0
 trigger1 = p2movetype != A
 trigger1 = p2bodydist x = [32,68]
 trigger1 = random < 200
+trigger2 = power >= 2080   ;<-- meter lead: hunt the confirm
+trigger2 = p2statetype != A
+trigger2 = enemynear,vel y = 0
+trigger2 = p2movetype != A
+trigger2 = p2bodydist x = [32,68]
+trigger2 = random < 380
 
 ; sweep: PUNISH-ONLY tool (recovering foes) -> free okizeme
 [State -1, AI Sweep]
@@ -1519,13 +1661,18 @@ trigger2 = p2bodydist x = [30,95]
 trigger2 = p2movetype != A
 trigger2 = p2statetype != L
 trigger2 = random < 100
+trigger3 = enemynear,map(standActive) = 1
+trigger3 = p2bodydist x = [36,95]
+trigger3 = p2movetype != A
+trigger3 = p2statetype != L
+trigger3 = random < 90
 
 [State -1, AI Approach Dash]
 type = changestate
 triggerall = !ishelper
 value = 100
 triggerall = AILevel > 0
-triggerall = (enemynear,var(8) != 1 && enemynear,var(8) != 2 && enemynear,map(standActive) < 1) || random < 520   ;<-- stand out: respect the disjoint
+triggerall = (enemynear,map(standActive) < 1) || random < 520 || (enemynear,map(standGauge) <= 24)   ;<-- low gauge: hunt the crash
 triggerall = numhelper(39000)
 triggerall = (helper(39000),var(1) < 220) || random < 500   ;<-- jumpy foe: advance less
 triggerall = ctrl
@@ -3318,6 +3465,64 @@ type = varadd
 trigger1 = root,stateno != 105
 trigger1 = var(12) < 30000
 var(12) = 1
+ignorehitpause = 1
+
+; --- whiff gauge: pokes sailing through thin bodies -> tighten ranges ---
+[State 39000, whiff detect cmk]
+type = varadd
+trigger1 = root,stateno = 440
+trigger1 = root,time = 20
+trigger1 = !root,movecontact
+var(3) = 30
+ignorehitpause = 1
+
+[State 39000, whiff detect smp]
+type = varadd
+trigger1 = root,stateno = 210
+trigger1 = root,time = 23
+trigger1 = !root,movecontact
+var(3) = 30
+ignorehitpause = 1
+
+[State 39000, whiff decay]
+type = varadd
+trigger1 = var(3) > 0
+var(3) = -1
+ignorehitpause = 1
+
+[State 39000, whiff cap]
+type = varset
+trigger1 = var(3) > 300
+var(3) = 300
+ignorehitpause = 1
+
+; --- universal wake detection: "was lying down -> isn't anymore" ---
+; (state-number agnostic: HFTF customs, common states, anything)
+[State 39000, wake edge fire]
+type = varset
+trigger1 = var(4) = 1
+trigger1 = enemynear,statetype != L
+trigger1 = enemynear,statetype != A
+var(5) = 10
+ignorehitpause = 1
+
+[State 39000, downed latch]
+type = varset
+trigger1 = enemynear,statetype = L
+var(4) = 1
+ignorehitpause = 1
+
+[State 39000, latch clear]
+type = varset
+trigger1 = var(4) = 1
+trigger1 = enemynear,statetype != L
+var(4) = 0
+ignorehitpause = 1
+
+[State 39000, wake window decay]
+type = varadd
+trigger1 = var(5) > 0
+var(5) = -1
 ignorehitpause = 1
 
 [State 39000, die with round]

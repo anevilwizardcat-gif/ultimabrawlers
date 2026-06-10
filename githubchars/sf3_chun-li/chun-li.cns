@@ -1825,6 +1825,7 @@ value = 130
 
 [State 130, Hi to Lo]
 type = ChangeState
+trigger1 = AILevel = 0
 trigger1 = command = "holddown"
 value = 131
 
@@ -1835,9 +1836,9 @@ trigger1 = command != "holdback"
 trigger1 = AILevel = 0          ;<-- AI holds guard; human release unchanged
 trigger2 = Anim = 130
 trigger2 = !inguarddist
-trigger2 = AILevel = 0 || (enemynear,movetype != A && enemynear,var(8) < 1 && enemynear,map(standActive) < 1) ;<-- stand barrages pulse: hold through them
+trigger2 = AILevel = 0 || (enemynear,movetype != A && (enemynear,map(standActive) < 1 || p2bodydist x > 60)) ;<-- stand barrages pulse: hold through them
 trigger5 = Anim = 130
-trigger5 = AILevel > 0 && !inguarddist && time > 30 ;<-- calm release: no turtle-lock
+trigger5 = AILevel > 0 && !inguarddist && (time > 30 || p2bodydist x > 70) ;<-- calm release: no turtle-lock
 trigger3 = Anim = 90 && AnimElemTime(4) = 0
 trigger4 = Anim = 91 && AnimElemTime(4) = 3
 value = 140
@@ -1862,6 +1863,7 @@ value = 131
 
 [State 131, Lo to Hi]
 type = ChangeState
+trigger1 = AILevel = 0
 trigger1 = command != "holddown"
 trigger1 = AILevel = 0          ;<-- AI holds guard; human release unchanged
 value = 130
@@ -1873,9 +1875,9 @@ trigger1 = command != "holdback"
 trigger1 = AILevel = 0          ;<-- AI holds guard; human release unchanged
 trigger2 = Anim = 131
 trigger2 = !inguarddist
-trigger2 = AILevel = 0 || (enemynear,movetype != A && enemynear,var(8) < 1 && enemynear,map(standActive) < 1) ;<-- stand barrages pulse: hold through them
+trigger2 = AILevel = 0 || (enemynear,movetype != A && (enemynear,map(standActive) < 1 || p2bodydist x > 60)) ;<-- stand barrages pulse: hold through them
 trigger5 = Anim = 131
-trigger5 = AILevel > 0 && !inguarddist && time > 30 ;<-- calm release: no turtle-lock
+trigger5 = AILevel > 0 && !inguarddist && (time > 30 || p2bodydist x > 70) ;<-- calm release: no turtle-lock
 trigger3 = Anim = 90 && AnimElemTime(4) = 0
 trigger4 = Anim = 91 && AnimElemTime(4) = 3
 value = 140
