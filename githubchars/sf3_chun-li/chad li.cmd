@@ -610,10 +610,6 @@ trigger5 = ctrl || stateno = 130 || stateno = 131 || stateno = 5120 || (stateno 
 trigger5 = inguarddist
 trigger5 = enemynear,power >= 1000
 trigger5 = random < 700
-trigger6 = ctrl || stateno = 130 || stateno = 131 || stateno = 5120 || (stateno = [90,95])
-trigger6 = inguarddist
-trigger6 = enemynear,var(8) = 2
-trigger6 = random < 850
 trigger2 = ctrl || stateno = 130 || stateno = 131 || stateno = 5120
 trigger2 = inguarddist
 trigger2 = random < 550
@@ -644,10 +640,6 @@ trigger5 = ctrl || stateno = 130 || stateno = 131 || stateno = 5120 || (stateno 
 trigger5 = inguarddist
 trigger5 = enemynear,power >= 1000
 trigger5 = random < 700
-trigger6 = ctrl || stateno = 130 || stateno = 131 || stateno = 5120 || (stateno = [90,95])
-trigger6 = inguarddist
-trigger6 = enemynear,var(8) = 2
-trigger6 = random < 850
 
 ; --- 2. PARRY PUNISH (the one true var(38) use) ---------------------------
 ; With meter: buffer the Super Art. Without: c.MK only if it will reach.
@@ -773,7 +765,6 @@ triggerall = !ishelper
 value = 1020
 ignorehitpause = 1
 triggerall = AILevel > 0
-triggerall = (enemynear,var(8) != 1 && enemynear,var(8) != 2) || movehit   ;<-- stand up = no chip: hit-cancels only
 triggerall = enemynear,statetype != L   ;<-- the dead cannot be comboed
 triggerall = statetype != A
 triggerall = p2statetype != A
@@ -960,8 +951,6 @@ type = changestate
 triggerall = !ishelper
 value = 440
 triggerall = AILevel > 0
-triggerall = !(enemynear,stateno = [3000,3060] && enemynear,time > 8)   ;<-- counters eat strikes
-triggerall = enemynear,var(8) != 2   ;<-- never swing into tandem
 triggerall = enemynear,statetype != L   ;<-- the dead cannot be comboed
 triggerall = p2dist x > -4   ;<-- never swing at someone behind you
 triggerall = ctrl
@@ -995,8 +984,6 @@ type = changestate
 triggerall = !ishelper
 value = 210
 triggerall = AILevel > 0
-triggerall = !(enemynear,stateno = [3000,3060] && enemynear,time > 8)   ;<-- counters eat strikes
-triggerall = enemynear,var(8) != 2   ;<-- never swing into tandem
 triggerall = enemynear,statetype != L   ;<-- the dead cannot be comboed
 triggerall = p2dist x > -4
 triggerall = ctrl
@@ -1006,54 +993,6 @@ trigger1 = !inguarddist
 trigger1 = p2statetype != A
 trigger1 = p2bodydist x = [18,44]
 trigger1 = random < 700
-
-; --- 4y. COUNTER-STANCE WARFARE ---------------------------------------------
-; Counter stances (DIO's Checkmate: 3000/3050/3060) trigger on strikes and
-; lose to throws. Discriminator vs supers sharing those numbers: counters
-; LINGER in-state waiting; super startups don't.
-
-; 4y1. throw the counter stance
-[State -1, AI Counter Stance Throw]
-type = changestate
-triggerall = !ishelper
-value = 800
-triggerall = AILevel > 0
-triggerall = p2dist x > -4
-trigger1 = enemynear,stateno = [3000,3060]
-trigger1 = enemynear,time > 14
-trigger1 = p2statetype != A
-trigger1 = p2statetype != L
-trigger1 = p2bodydist x < 17
-trigger1 = ctrl || stateno = 100
-trigger1 = random < 800
-
-; 4y2. close distance to throw it (dash arrives inside grab range)
-[State -1, AI Counter Stance Close]
-type = changestate
-triggerall = !ishelper
-value = 100
-triggerall = AILevel > 0
-triggerall = ctrl
-triggerall = statetype != A
-trigger1 = enemynear,stateno = [3000,3060]
-trigger1 = enemynear,time > 14
-trigger1 = p2statetype != A
-trigger1 = p2bodydist x = [17,70]
-trigger1 = random < 450
-
-; 4y3. TANDEM SANDWICH ESCAPE: during tandem the root jumps BEHIND her
-; while the stand holds the front -- dash forward THROUGH the stand
-; (helpers have no pushbox) and out of the pincer entirely.
-[State -1, AI Tandem Escape]
-type = changestate
-triggerall = !ishelper
-value = 100
-triggerall = AILevel > 0
-triggerall = ctrl
-triggerall = statetype != A
-trigger1 = enemynear,var(8) = 2
-trigger1 = p2dist x < -4
-trigger1 = random < 500
 
 ; --- 4z. TURN THEFT : pressure is not a sentence ---------------------------
 ; Ibuki-class AIs chain endlessly and cancel their own blockstun into
@@ -1383,7 +1322,6 @@ type = changestate
 triggerall = !ishelper
 value = 430
 triggerall = AILevel > 0
-triggerall = !(enemynear,stateno = [3000,3060] && enemynear,time > 8)   ;<-- counters eat strikes
 triggerall = p2dist x > -4   ;<-- never swing at someone behind you
 triggerall = ctrl
 triggerall = statetype != A
@@ -1399,8 +1337,6 @@ type = changestate
 triggerall = !ishelper
 value = 210
 triggerall = AILevel > 0
-triggerall = !(enemynear,stateno = [3000,3060] && enemynear,time > 8)   ;<-- counters eat strikes
-triggerall = (enemynear,var(8) != 1 && enemynear,var(8) != 2) || random < 520   ;<-- stand out: respect the disjoint
 triggerall = (enemynear,power < 950) || (random < 450)   ;<-- respect their super
 triggerall = p2dist x > -4   ;<-- never swing at someone behind you
 triggerall = ctrl
@@ -1418,8 +1354,6 @@ type = changestate
 triggerall = !ishelper
 value = 440
 triggerall = AILevel > 0
-triggerall = !(enemynear,stateno = [3000,3060] && enemynear,time > 8)   ;<-- counters eat strikes
-triggerall = (enemynear,var(8) != 1 && enemynear,var(8) != 2) || random < 520   ;<-- stand out: respect the disjoint
 triggerall = numhelper(39000)
 triggerall = (helper(39000),var(1) < 220) || random < 500
 triggerall = (enemynear,power < 950) || (random < 450)   ;<-- respect their super
@@ -1524,7 +1458,6 @@ type = changestate
 triggerall = !ishelper
 value = 100
 triggerall = AILevel > 0
-triggerall = (enemynear,var(8) != 1 && enemynear,var(8) != 2) || random < 520   ;<-- stand out: respect the disjoint
 triggerall = numhelper(39000)
 triggerall = (helper(39000),var(1) < 220) || random < 500   ;<-- jumpy foe: advance less
 triggerall = ctrl
