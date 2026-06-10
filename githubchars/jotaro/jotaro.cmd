@@ -762,6 +762,19 @@ time = 1
 
 ; 下の記述↓は絶対に消さないでください。
 [Statedef -1]
+
+;== TAG STANDBY AI SUPPRESSION (Ikemen native tag) ===========================
+; The engine's noailevel can't reach Misobin AI (it runs on persistent
+; var(59), not live AILevel), so standby characters kept fighting from
+; offscreen and yanked themselves out of the holding state = the linger.
+; Zero the flag during tag standby states; the AI's own re-detection loop
+; re-arms it automatically on tag-in.
+[State -1, Tag Standby AI Off]
+type = VarSet
+triggerall = !ishelper
+trigger1 = stateno = [6565610, 6565620]
+trigger1 = var(59) != 0
+var(59) = 0
 ;===========================================================================
 ;AI
 [State -1, AI起動用ヘルパー]
