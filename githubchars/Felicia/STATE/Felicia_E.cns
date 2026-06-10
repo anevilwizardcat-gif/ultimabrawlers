@@ -1,0 +1,675 @@
+;===========================================================================
+; ダークフォース
+;===========================================================================
+;ダークフォース発動
+[Statedef 900]
+type     = U
+movetype = I
+physics  = U
+velset   = 0,0
+anim     = 900
+ctrl     = 0
+
+[State 900, ドォォォン]
+type = PlaySnd
+trigger1 = AnimElem = 2
+value = 18000
+
+[State 900, 音声]
+type = PlaySnd
+trigger1 = AnimElem = 1
+value = 3000
+
+[State 900]
+type = PowerAdd
+trigger1 = AnimElem = 1
+value = -1000
+
+[State 900, ムテキング]
+type = NotHitBy 
+trigger1 = 1 
+value = SCA 
+
+[State 900,エフェクト]
+type = Explod
+trigger1 = AnimElem = 1
+anim = 18000
+ID = 18000
+pos = 0, -50
+postype = p1
+ontop = 1
+ownpal = 1
+
+[State 900,エフェクト2前]
+type = Explod
+trigger1 = AnimElem = 3
+anim = 18001
+ID = 18001
+pos = 0, -30
+postype = p1
+ontop = 1
+ownpal = 1
+
+[State 900,エフェクト2後]
+type = Explod
+trigger1 = AnimElem = 3
+anim = 18002
+ID = 18002
+pos = 0, -30
+postype = p1
+sprpriority = -1
+ownpal = 1
+
+[State 900,アルト]
+type = Helper
+trigger1 = AnimElem = 3
+name = "Alut"
+ID = 980
+pos = 0, 0
+postype = back
+stateno = 980
+helpertype = normal
+keyctrl = 1
+ownpal = 1
+
+[State 900,TIME]
+type = Helper
+trigger1 = AnimElem = 1
+name = "TIME"
+ID = 952
+pos = 0, 0
+postype = p1
+stateno = 952
+ownpal = 1
+
+[State 900,蝙蝠]
+type = Helper
+trigger1 = AnimElem = 1
+name = "bat"
+ID = 953
+pos = 0, 50
+postype = left
+stateno = 953
+ownpal = 1
+
+[State 900,フラッシュ]
+type = Explod
+trigger1 = AnimElem = 8
+anim = 18006
+pos = 0, 0
+postype = left
+ontop = 1
+ownpal = 1
+
+[State 900,背景]
+type = Helper
+trigger1 = AnimElem = 8
+name = "haikei"
+ID = 951
+pos = 9999, 9999
+postype = left
+facing = 1
+stateno = 951
+ownpal = 1
+
+[State 900]
+type = VarSet
+trigger1 = AnimElem = 1
+var(6) = 1
+
+[State 900]
+type = VarSet
+trigger1 = AnimElem = 1
+fvar(10) = 1
+
+[State 900]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+;==========================================================================
+;ダークフォース終了
+[Statedef 901]
+type     = U
+movetype = I
+physics  = U
+velset   = 0,0
+anim     = 900
+ctrl     = 0
+
+[State 901]
+type = Explod
+triggerall = prevstateno != 1604
+trigger1 = AnimElem = 1
+anim = 18007
+pos = 0, 0
+postype = left
+ontop = 1
+ownpal = 1
+
+[State 901, 発光]
+type = PalFX
+trigger1 = AnimElem = 1
+time = 1
+add = 0,0,0
+
+[State 901]
+type = VarSet
+trigger1 = AnimElem = 1
+var(6) = 0
+
+[State 901]
+type = VarSet
+trigger1 = AnimElem = 1
+fvar(10) = 0
+
+[State 901]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+;==========================================================================
+;背景
+[Statedef 951]
+type     = U
+movetype = I
+physics  = U
+velset   = 0,0
+anim     = 10105
+ctrl     = 0
+sprpriority = -3
+
+[State 951]
+type = AssertSpecial
+triggerall = NumExplod(18005) = 1
+trigger1 = Root,var(6) = 1
+flag = NoBG
+flag = NoFG
+ignorehitpause = 1
+
+[State 951, 背景]
+type = Explod
+trigger1 = time = 1
+anim = 18005
+ID = 18005
+pos = 0, 0
+postype = Left
+bindtime = -1
+removetime = -1
+supermovetime = 9999
+pausemovetime = 9999
+scale = 1, 1
+sprpriority = -3
+ownpal = 1
+IgnoreHitPause = 1
+Persistent = 1
+
+[State 951, 背景消去]
+type = RemoveExplod
+trigger1 = Root,var(6) = 0 
+trigger2 = RoundState != 2
+trigger3 = Root,Life = 0
+ID = 18005
+
+[State 951, ヘルパー消滅]
+type = DestroySelf
+triggerall = NumExplod(18005) = 0
+trigger1 = Root,var(6) = 0 
+trigger2 = RoundState != 2
+trigger3 = Root,Life = 0
+
+;==========================================================================
+;TIME
+[Statedef 952]
+physics = N
+velset = 0,0
+anim = 10105
+ctrl = 0
+sprpriority = 0
+
+[State 952, 無敵]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+
+[State 952, 特殊効果]
+type = AssertSpecial
+trigger1 = 1
+flag = NoShadow
+flag2= Invisible
+
+[State 952, 変数リセット]
+type = ParentVarSet
+trigger1 = Root,fvar(10) <= 0
+fv = 10
+value = 0
+IgnoreHitPause = 1
+Persistent = 1
+
+[State 952, ゲージ処理]
+type = ParentVarAdd
+triggerall = RoundState = 2
+triggerall = Root,fvar(10) > 0
+trigger1 = Time >= 30
+fv = 10
+value = -0.00305
+IgnoreHitPause = 1
+Persistent = 1
+
+[State 952, TIME]
+type = Explod
+triggerall = RoundState = 2
+triggerall = NumExplod(18003) = 0
+trigger1 = Root,fvar(10) > 0
+anim = 18003
+ID = 18003
+pos = IfElse((Root,TeamSide=2),190,30),30
+postype = Left
+bindtime = -1
+removetime = -1
+supermovetime = 9999
+pausemovetime = 9999
+scale = 0.9, 1
+sprpriority = 3
+ontop = 1
+ownpal = 1
+IgnoreHitPause = 1
+Persistent = 1
+
+[State 952, バー]
+type = Explod
+triggerall = RoundState = 2
+triggerall = NumExplod(18004) = 0
+trigger1 = Root,fvar(10) > 0
+anim = 18004
+ID = 18004
+pos = IfElse((Root,TeamSide=2),190,30),38
+postype = Left
+bindtime = -1
+removetime = -1
+supermovetime = 9999
+pausemovetime = 9999
+scale = 0.9, 1
+sprpriority = 3
+ontop = 1
+ownpal = 1
+IgnoreHitPause = 1
+Persistent = 1
+
+[State 952, バー伸縮]
+type = ModifyExplod
+trigger1 = Root,fvar(10) > 0
+scale = (0+(Root,fvar(10)))*0.9,1
+supermovetime = 9999
+pausemovetime = 9999
+sprpriority = 3
+ID = 18004
+
+[State 952, TIME消去]
+type = RemoveExplod
+trigger1 = Root,var(6) = 0 
+trigger2 = RoundState != 2
+trigger3 = Root,Life = 0
+trigger4 = Root,fvar(10) = 0
+ID = 18003
+IgnoreHitPause = 1
+Persistent = 1
+
+[State 952, バー消去]
+type = RemoveExplod
+trigger1 = Root,var(6) = 0 
+trigger2 = RoundState != 2
+trigger3 = Root,Life = 0
+trigger4 = Root,fvar(10) = 0
+ID = 18004
+IgnoreHitPause = 1
+Persistent = 1
+
+[State 952, ヘルパー消滅]
+type = DestroySelf
+trigger1 = Root,var(6) = 0 
+trigger2 = RoundState != 2
+trigger3 = Root,Life = 0
+
+;==========================================================================
+;蝙蝠
+[Statedef 953]
+physics = N
+velset = 0,-5.5
+anim = 18008
+ctrl = 0
+sprpriority = -1
+
+[State 953, 無敵]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+
+[State 953, ヘルパー消滅]
+type = DestroySelf
+trigger1 = Pos Y <= -300
+
+;==========================================================================
+;アルト登場
+[Statedef 980]
+type     = S
+movetype = I
+physics  = N
+velset   = 3.7,0
+anim     = 980
+ctrl     = 0
+sprpriority = 4
+
+[State 980,振り向き]
+type = Turn
+triggerall = RoundState = 2
+triggerall = Root,Alive
+triggerall = Root,var(6) = 1
+triggerall = Root,fvar(10) != 0
+trigger1 = ParentDist X < -49
+
+[State 980]
+type = VelSet
+triggerall = Root,var(6) = 1
+triggerall = Root,fvar(10) != 0
+trigger1 = ParentDist X = [-49, 49]
+x = 3.5
+
+[State 980]
+type = VelSet
+trigger1 = ParentDist X > 49
+trigger2 = Root,fvar(10) = 0
+x = 3.7
+
+;-DF終了-------------------------------------------------------------------
+
+[State 980]
+type = DestroySelf
+triggerall = (Root,var(6) = 0) || (Root,fvar(10) = 0) || RoundState != 2
+trigger1 = BackEdgeDist <= -50
+trigger2 = frontEdgeDist <= -50
+
+[State 980,振り向き]
+type = Turn
+triggerall = RoundState = 2
+triggerall = Root,fvar(10) = 0
+trigger1 = Facing = 1
+trigger1 = ScreenPos X < 160
+trigger2 = Facing = -1
+trigger2 = ScreenPos X >= 160
+persistent = 0
+
+;-アルト攻撃受付-----------------------------------------------------------
+
+[State 980, 攻撃位置記憶]
+type = VarSet
+triggerall = var(1) = 0
+trigger1 = Root,Anim = [800, 802]
+trigger2 = Root,Anim = 850
+var(1) = 15
+
+[State 980, 攻撃位置記憶]
+type = VarSet
+triggerall = var(1) = 0
+trigger1 = Root,Anim = 201
+trigger2 = Root,Anim = 650
+var(1) = 45
+
+[State 980, 攻撃位置記憶]
+type = VarSet
+triggerall = var(1) = 0
+trigger1 = Root,Anim = 605
+trigger2 = Root,Anim = 680
+trigger3 = Root,Anim = [805, 808]
+trigger4 = Root,Anim = [812, 813]
+var(1) = 50
+
+[State 980, 攻撃位置記憶]
+type = VarSet
+triggerall = var(1) = 0
+trigger1 = Root,Anim = 410
+trigger2 = Root,Anim = 600
+trigger3 = Root,Anim = 241
+var(1) = 55
+
+[State 980, 攻撃位置記憶]
+type = VarSet
+triggerall = var(1) = 0
+trigger1 = Root,Anim = 206
+trigger2 = Root,Anim = 236
+trigger3 = Root,Anim = 400
+var(1) = 60
+
+[State 980, 攻撃位置記憶]
+type = VarSet
+triggerall = var(1) = 0
+trigger1 = Root,Anim = 211
+trigger2 = Root,Anim = 231
+trigger3 = Root,Anim = 430
+var(1) = 65
+
+[State 980, 攻撃位置記憶]
+type = VarSet
+triggerall = var(1) = 0
+trigger1 = Root,Anim = 630
+trigger2 = Root,Anim = 655
+trigger3 = Root,Anim = 810
+trigger4 = Root,Anim = 818
+var(1) = 70
+
+[State 980, 攻撃位置記憶]
+type = VarSet
+triggerall = var(1) = 0
+trigger1 = Root,Anim = 685
+var(1) = 80
+
+[State 980, 攻撃位置記憶]
+type = VarSet
+triggerall = var(1) = 0
+trigger1 = Root,Anim = 405
+var(1) = 85
+
+[State 980, 攻撃位置記憶]
+type = VarSet
+triggerall = var(1) = 0
+trigger1 = Root,Anim = 230
+trigger2 = Root,Anim = 240
+trigger3 = Root,Anim = 435
+trigger4 = Root,Anim = 610
+trigger5 = Root,Anim = 635
+trigger6 = Root,Anim = 660
+var(1) = 90
+
+[State 980, 攻撃位置記憶]
+type = VarSet
+triggerall = var(1) = 0
+trigger1 = Root,Anim = 200
+trigger2 = Root,Anim = 210
+var(1) = 95
+
+[State 980, 攻撃位置記憶]
+type = VarSet
+triggerall = var(1) = 0
+trigger1 = Root,Anim = 640
+trigger2 = Root,Anim = 690
+var(1) = 100
+
+[State 980, 攻撃位置記憶]
+type = VarSet
+triggerall = var(1) = 0
+trigger1 = Root,Anim = 205
+trigger2 = Root,Anim = 235
+var(1) = 105
+
+[State 980, 攻撃位置記憶]
+type = VarSet
+triggerall = var(1) = 0
+trigger1 = Root,Anim = 440
+var(1) = 115
+
+[State 980, 攻撃位置記憶]
+type = VarSet
+triggerall = var(1) = 0
+trigger1 = Root,Anim = [815, 816]
+var(1) = 120
+
+[State 980, 攻撃位置記憶]
+type = VarSet
+triggerall = var(1) = 0
+trigger1 = Root,Anim = 817
+var(1) = 220
+
+[State 980]
+type = ChangeState
+value = 981
+triggerall = Root,var(6) = 1
+triggerall = Root,AnimElemTime(1) = [3, 15]
+trigger1 = Root,StateNo = [200, 640]
+trigger2 = Root,StateNo = 800
+trigger3 = Root,StateNo = 805
+trigger4 = Root,StateNo = [810, 813]
+trigger5 = Root,StateNo = [815, 817]
+trigger6 = Root,StateNo = [850, 852]
+
+[State 980, ESキャットスパイク用]
+type = ChangeState
+value = 981
+triggerall = Root,var(6) = 1
+triggerall = Root,AnimElemTime(14) = [3, 15]
+trigger1 = Root,StateNo = 818
+
+[State 980, ダッシュ攻撃用]
+type = ChangeState
+value = 981
+triggerall = Root,var(6) = 1
+triggerall = Root,StateNo = [110, 115]
+triggerall = Root,AnimElemTime(1) = [3, 15]
+trigger1 = Root,Anim = [650, 690]
+
+;=アルト攻撃==============================================================
+[Statedef 981]
+type     = A
+movetype = I
+physics  = N
+velset   = 0, 0
+anim     = 981
+ctrl     = 0
+sprpriority = 4
+facep2 = 1
+
+[State 981, ヒット定義]
+type = HitDef
+trigger1 = AnimElem >= 6
+attr = A, NA
+damage = Ceil((8*6.67)+((2*6.67)*Root,fvar(1))), 0 ;(8,2)
+animtype = Mediumt
+ground.type = High
+air.type = Low
+guardflag = MA
+hitflag = MA
+priority = 1, Hit
+pausetime = 9, 9
+sparkno = s15003
+guard.sparkno = s15006
+sparkxy = -15, -25
+hitsound = s4, 0
+guardsound = s6, 0
+ground.slidetime = 11
+guard.slidetime = 10
+ground.hittime  = 11
+guard.hittime  = 10
+air.hittime = 11
+ground.velocity = -4.1, 0
+air.velocity = -2.5,-4
+ID = Ifelse(Root,var(14)=0,0,Ifelse(Root,var(20)=0,45000,0))
+
+[State 981, ヒット数]
+type = ParentVarAdd
+trigger1 = MoveHit = 1
+var(18) = 1
+
+[State 981]
+type = TargetDrop
+trigger1 = NumTarget(45000) >= 2
+excludeID = 45000
+keepone = 1
+
+[State 981, ヴァイタルソース]
+type = TargetState
+triggerall = NumTarget(45000)
+trigger1 = MoveHit = 1
+value = 45000
+ctrl = 0
+ID = 45000
+ignorehitpause = 1
+persistent = 0
+
+[State 981, ヴァイタルソース回復量]
+type = ParentVarAdd
+trigger1 = MoveHit = 1
+var(37) = Ceil((2*6.67)*(Root,const(data.attack)*0.01))
+
+[State 981]
+type = StatetypeSet
+triggerall = MoveType != A
+triggerall = Root,var(6) = 1
+trigger1 = Vel Y > 0
+MoveType = A
+
+[State 981]
+type = StatetypeSet
+trigger1 = Root,var(6) = 0
+MoveType = I
+
+[State 981]
+type = VelSet
+trigger1 = AnimElem = 3
+y = -15
+
+[State 981]
+type = VelAdd
+trigger1 = Time >= 7 
+y = 1
+
+[State 981]
+type = Turn
+triggerall = AnimElem = 3
+trigger1 = facing != Root,facing
+
+[State 981]
+type = VelSet
+trigger1 = AnimElem = 3
+x = ((ParentDist X)+var(1))*0.033
+
+[State 981]
+type = ChangeState
+triggerall = Vel Y > 0
+trigger1 = Pos Y >= 0
+value = 982
+
+;=(アルト着地)==============================================================
+[Statedef 982]
+type     = U
+movetype = A
+physics  = N
+velset   = 0, 0
+anim     = 982
+ctrl     = 0
+sprpriority = 4
+
+[State 982, 記憶リセット]
+type = VarSet
+trigger1 = var(1) != 0
+var(1) = 0
+
+[State 982]
+type = PosSet
+trigger1 = 1
+y = 0
+
+[State 982]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 980

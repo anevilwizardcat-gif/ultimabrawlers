@@ -1,0 +1,3295 @@
+;■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+;                         EX必殺技
+;■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+;=========================================================================
+;                     フィニッシングシャワー
+;=========================================================================
+[Statedef 900]
+type    = A
+movetype= A
+physics = N
+juggle  = 1
+velset = 0,0
+poweradd = 0
+ctrl = 0
+anim = 900
+sprpriority = 2
+facep2 = 1
+hitcountpersist = 1
+
+[State 900]
+type = PowerAdd
+trigger1 = AnimElem = 1
+value = -1000
+
+[State 900]
+type = VarSet
+trigger1 = AnimElem = 1
+var(5) = 0
+
+[State 900,根性で色を変更]
+type = VarSet
+triggerall = Time <= 10
+trigger1 = var(7) >= 6
+var(7) = 0
+
+[State 900,根性で色を変更]
+type = VarAdd
+triggerall = Time <= 10
+trigger1 = TimeMod = 3, 0
+var(7) = 1
+
+[State 900,根性で色を変更]
+type = VarSet
+triggerall = Time > 10
+trigger1 = var(7) < 10
+var(7) = 10
+
+[State 900,根性で色を変更]
+Type = PalFX
+triggerall = var(7) = 0
+Trigger1 = 1
+Time = 2
+add = 0,128,256
+
+[State 900,根性で色を変更]
+Type = PalFX
+triggerall = var(7) = 1
+Trigger1 = 1
+Time = 2
+add = 256,256,0
+
+[State 900,根性で色を変更]
+Type = PalFX
+triggerall = var(7) = 2
+Trigger1 = 1
+Time = 2
+add = 256,0,0
+
+[State 900,根性で色を変更]
+Type = PalFX
+triggerall = var(7) = 3
+Trigger1 = 1
+Time = 2
+add = 0,256,0
+
+[State 900,根性で色を変更]
+Type = PalFX
+triggerall = var(7) = 4
+Trigger1 = 1
+Time = 2
+add = 256,0,256
+
+[State 900,根性で色を変更]
+Type = PalFX
+triggerall = var(7) = 5
+Trigger1 = 1
+Time = 2
+add = 256,64,0
+
+;--------------------------
+
+[State 900, 音声]
+type = PlaySnd
+trigger1 = AnimElem = 1
+value = 100, 19
+volume = 255
+
+[State 900, 音声]
+type = PlaySnd
+trigger1 = AnimElem = 1
+value = 200, 6
+
+[State 900, 音声]
+type = PlaySnd
+trigger1 = time = 34
+trigger2 = time = 40
+trigger3 = time = 46
+trigger4 = time = 52
+trigger5 = time = 58
+trigger6 = time = 64
+trigger7 = time = 70
+trigger8 = time = 76
+trigger9 = time = 82
+trigger10= time = 88
+trigger11= time = 94
+trigger12= time = 100
+trigger13= time = 106
+trigger14= time = 112
+trigger15= time = 118
+trigger16= time = 124
+value = 200, 7
+
+[State 900, 上下ランダム]
+type = VarRandom
+triggerall = Time%6 = 0
+trigger1 = Command != "holdup"
+trigger1 = Command != "holddown"
+trigger2 = Command = "holdup"
+trigger2 = Command = "holddown"
+v = 9
+range = 0, 2
+
+[State 900, 上]
+type = VarSet
+triggerall = Command = "holdup"
+triggerall = Command != "holddown"
+triggerall = Var(9) != 0
+trigger1 = Time%6 = 0
+var(9) = 0
+
+[State 900, 下]
+type = VarSet
+triggerall = Command != "holdup"
+triggerall = Command = "holddown"
+triggerall = Var(9) != 2
+trigger1 = Time%6 = 0
+var(9) = 2
+
+[State 900, X]
+type = VarRandom
+trigger1 = Time%6 = 0
+v = 10
+range = -30, -10
+
+[State 900, Y]
+type = VarRandom
+trigger1 = Time%6 = 0
+v = 11
+range = -100, -20
+
+[State 900]
+type = VelSet
+trigger1 = AnimElem = 1
+x = -0.5
+y = -0.25
+
+[State 900]
+type = VelAdd
+trigger1 = StateType = A
+y = 0.004
+
+[State 900, 土煙]
+type = Helper
+trigger1 = AnimElem = 1
+name = "smoke"
+ID = 900
+pos = 0, 0
+postype = p1
+stateno = 909
+ownpal = 1
+
+[State 900, ヒット定義]
+type = Projectile
+trigger1 = time = 34
+trigger2 = time = 40
+trigger3 = time = 46
+trigger4 = time = 52
+trigger5 = time = 58
+trigger6 = time = 64
+trigger7 = time = 70
+trigger8 = time = 76
+trigger9 = time = 82
+trigger10= time = 88
+trigger11= time = 94
+trigger12= time = 100
+trigger13= time = 106
+trigger14= time = 112
+trigger15= time = 118
+trigger16= time = 124
+attr = A, HP
+damage = Ceil((3*6.67)+(2*6.67)*fvar(1)),5 ;(3,2)
+animtype = Hard
+ground.type = Low
+air.type = Low
+guardflag = MA
+hitflag = MA
+priority = 1, Hit
+pausetime = 10, 10
+sparkno = s15003
+guard.sparkno = s15006
+sparkxy = 20, 0
+hitsound = s4, 0
+guardsound = s6, 0
+ground.slidetime = 17
+guard.slidetime = 16
+ground.hittime  = 17
+guard.hittime  = 16
+air.hittime = 17
+ground.velocity = -6
+air.velocity = -2.5,-4
+getpower = 0,0
+givepower= 8*7,0 
+;飛び道具専用
+ProjID = 900
+projanim = 901
+projhitanim = 10900
+projremanim = -1
+projcancelanim = 10900
+projremove = 1
+projremovetime = 60
+velocity = 1, (var(9)-1)*0.65
+accel = 0.75, 0
+remvelocity = 0, 0
+projhits = 1
+projmisstime = 0
+projpriority = 1
+projsprpriority = ifelse(var(10)%2=0,3,1)
+offset = var(10), var(11)
+postype = p1
+projshadow = 0, 0, 0
+
+[State 900, 煙]
+type = Explod
+trigger1 = time = 34
+trigger2 = time = 40
+trigger3 = time = 46
+trigger4 = time = 52
+trigger5 = time = 58
+trigger6 = time = 64
+trigger7 = time = 70
+trigger8 = time = 76
+trigger9 = time = 82
+trigger10= time = 88
+trigger11= time = 94
+trigger12= time = 100
+trigger13= time = 106
+trigger14= time = 112
+trigger15= time = 118
+trigger16= time = 124
+anim = 902 + ifelse(var(9)=0,2,ifelse(var(9)=2,1,0))
+pos = var(10), var(11)
+postype = p1
+scale = 0.9, 1.1
+shadow = 16, 16, 16
+removeongethit = 1
+ownpal = 0
+sprpriority = ifelse(var(10)%2=0,3,1)
+removetime = -2
+ID = 900
+
+[State 900]
+type = PosSet
+trigger1 = AnimTime = 0
+y = 0
+
+[State 900]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+:--------------------------------------------------------------------------
+;土煙
+[Statedef 909]
+type = S
+anim = 905
+sprpriority = 3
+
+[State 909]
+type = Explod
+trigger1 = time = 0
+anim = 906
+ID = 909
+pos = 0, 0
+postype = p1
+scale = 0.9, 1.1
+shadow = 16, 16, 16
+removeongethit = 1
+ownpal = 0
+sprpriority = 1
+removetime = 137
+bindtime = -1
+ID = 900
+
+[State 909]
+type = PosSet
+trigger1 = 1
+x = Parent,Pos X
+
+[State 909]
+type = RemoveExplod
+trigger1 = Root,Anim != 900
+ID = 909
+
+[State 909]
+type = DestroySelf
+trigger1 = Root,Anim != 900
+
+;=========================================================================
+;                    ダークネスイリュージョン(地上)
+;=========================================================================
+[Statedef 910]
+type    = A
+movetype= A
+physics = N
+juggle  = 1
+velset = 0,0
+poweradd = 0
+ctrl = 0
+anim = 910
+sprpriority = 2
+facep2 = 1
+hitcountpersist = 1
+
+[State 910]
+type = PowerAdd
+trigger1 = AnimElem = 1
+value = -1000
+
+[State 910,根性で色を変更]
+type = VarSet
+trigger1 = var(7) >= 6
+var(7) = 0
+
+[State 910,根性で色を変更]
+type = VarAdd
+trigger1 = TimeMod = 3, 0
+var(7) = 1
+
+[State 910,根性で色を変更]
+Type = PalFX
+triggerall = var(7) = 0
+Trigger1 = 1
+Time = 2
+add = 0,128,256
+
+[State 910,根性で色を変更]
+Type = PalFX
+triggerall = var(7) = 1
+Trigger1 = 1
+Time = 2
+add = 256,256,0
+
+[State 910,根性で色を変更]
+Type = PalFX
+triggerall = var(7) = 2
+Trigger1 = 1
+Time = 2
+add = 256,0,0
+
+[State 910,根性で色を変更]
+Type = PalFX
+triggerall = var(7) = 3
+Trigger1 = 1
+Time = 2
+add = 0,256,0
+
+[State 910,根性で色を変更]
+Type = PalFX
+triggerall = var(7) = 4
+Trigger1 = 1
+Time = 2
+add = 256,0,256
+
+[State 910,根性で色を変更]
+Type = PalFX
+triggerall = var(7) = 5
+Trigger1 = 1
+Time = 2
+add = 256,64,0
+
+;--------------------------
+
+[State 910]
+type = NotHitBy
+trigger1 = time <= 1
+value = SCA
+
+[State 910]
+type = VelSet
+trigger1 = AnimElem = 4
+x = 6.5
+
+[State 910]
+type = VelSet
+trigger1 = AnimElem = 11
+x = 0
+
+[State 910]
+type = StateTypeSet
+trigger1 = AnimElem = 11
+movetype= I
+
+[State 910]
+type = StateTypeSet
+trigger1 = AnimElem = 12
+type    = S
+physics = S
+
+[State 910 ヒット定義]
+type = Hitdef
+triggerall = (PrevStateNo = 440) + (Enemy,StateNo = [5070,5071]) < 2
+trigger1 = AnimElem = 3
+attr = A, HP
+damage = Ceil((2*6.67)+((1*6.67)*fvar(1))),0 ;(2,1)
+animtype = Up
+ground.type = High
+air.type = High
+guardflag = MA
+hitflag = MA
+priority = 4, Miss
+pausetime = 10, 10
+sparkno = s15004
+guard.sparkno = s15006
+sparkxy = 0, -40
+hitsound = s4, 0
+guardsound = s6, 0
+ground.slidetime = 15
+guard.slidetime = 14
+ground.hittime  = 15
+guard.hittime  = 14
+air.hittime = 15
+ground.velocity = -1.5, -6
+air.velocity = -1.5,-6
+getpower = 0,0 
+givepower= 8*7,0 
+fall = 1
+air.fall = 1
+fall.recover = 0
+p1stateno = 912
+p2stateno = 914
+kill = 0
+down.bounce = 1
+fall.xvelocity = -1.5
+fall.yvelocity = -3
+
+[State 910]
+type = ChangeState
+trigger1 = MoveGuarded
+value = 911
+ctrl = 0
+
+[State 910]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+[State 10805, 光]
+type = Explod
+triggerall = Time = [5, 17]
+trigger1 = Random <= 200
+anim = 10805+(random%9)
+ID = 10805
+pos = -15, -60
+removetime = -2
+postype = p1
+sprpriority = 4
+ownpal = 1
+vel = 0.3, 0
+random = 0, 30
+
+[State 910, 音声]
+type = PlaySnd
+trigger1 = AnimElem = 1
+value = 100, 9
+volume = 255
+
+[State 910, 音声]
+type = PlaySnd
+trigger1 = AnimElem = 1
+value = 200, 2
+channel = 5
+
+;---------------------------------------------------------------------------
+;ガード
+[Statedef 911]
+type    = A
+movetype= I
+physics = N
+juggle  = 1
+velset = -2,-8
+poweradd = 0
+ctrl = 0
+anim = 43
+sprpriority = 0
+facep2 = 1
+hitcountpersist = 1
+
+[State 911]
+type = Gravity
+trigger1 = 1
+
+[State 911]
+type = ChangeState
+triggerall = Vel Y > 0
+trigger1 = Pos Y >= 0
+value = 795
+ctrl = 0
+
+;---------------------------------------------------------------------------
+;Hit後
+[Statedef 912]
+type    = S
+movetype= A
+physics = N
+juggle  = 1
+velset = 0,0
+poweradd = 0
+ctrl = 0
+anim = 912
+sprpriority = 2
+facep2 = 1
+hitcountpersist = 1
+
+[State 912, 音声]
+type = PlaySnd
+trigger1 = AnimElem = 46
+value = 100, 15
+volume = 255
+
+[State 912, 音声]
+type = PlaySnd
+trigger1 = AnimElem = 4
+trigger2 = AnimElem = 7
+trigger3 = AnimElem = 10
+trigger4 = AnimElem = 13
+trigger5 = AnimElem = 16
+trigger6 = AnimElem = 20
+trigger7 = AnimElem = 26
+trigger8 = AnimElem = 33
+trigger9 = AnimElem = 37
+trigger10= AnimElem = 38
+trigger11= AnimElem = 39
+trigger12= AnimElem = 40
+value = 4, 1
+
+[State 912, 音声]
+type = PlaySnd
+trigger1 = AnimElem = 47
+value = 5, 2
+
+[State 912, 物理的なキャラの幅]
+type = Width
+trigger1 = AnimElem = 1
+edge = 55,0
+
+[State 912, 掴んだ相手の位置]
+type = TargetBind
+trigger1 = AnimElem = 2
+pos = 55, 0
+
+[State 912]
+type = Helper
+trigger1 = time = 0
+name = "doll"
+ID = 910
+pos = -65, 0
+postype = p2
+stateno = 913
+keyctrl = 0
+facing = -1
+
+[State 912]
+type = VelAdd
+trigger1 = StateType = A
+y = 0.6
+
+[State 912]
+type = StateTypeSet
+trigger1 = AnimElem = 45
+StateType = A
+
+[State 912]
+type = VelSet
+trigger1 = AnimElem = 45
+x = -2.5
+y = -10
+
+[State 912]
+type = VelSet
+trigger1 = Time = [163, 173]
+x = 0
+y = 0
+
+[State 912]
+type = VelSet
+trigger1 = AnimElem = 48
+x = -4.5
+y = -8
+
+[State 912]
+type = StateTypeSet
+trigger1 = AnimElem = 60
+StateType = S
+
+[State 912]
+type = VelSet
+trigger1 = AnimElem = 60
+x = 0
+y = 0
+
+[State 912]
+type = PosSet
+trigger1 = AnimElem = 60
+y = 0
+
+[State 912]
+type = Explod
+trigger1 = AnimElem = 4
+trigger2 = AnimElem = 13
+anim = 15004
+pos = 50, -75
+postype = p1
+bindtime = -1
+scale = 0.9, 1
+removeongethit = 1
+ownpal = 1
+sprpriority = 4
+
+[State 912]
+type = Explod
+trigger1 = AnimElem = 7
+trigger2 = AnimElem = 16
+anim = 15004
+pos = 60, -20
+postype = p1
+bindtime = -1
+scale = 0.9, 1
+removeongethit = 1
+ownpal = 1
+sprpriority = 4
+
+[State 912]
+type = Explod
+trigger1 = AnimElem = 10
+anim = 15004
+pos = 55, -80
+postype = p1
+bindtime = -1
+scale = 0.9, 1
+removeongethit = 1
+ownpal = 1
+sprpriority = 4
+
+[State 912]
+type = Explod
+trigger1 = AnimElem = 20
+anim = 15002
+pos = 70, -55
+postype = p1
+bindtime = -1
+scale = 0.9, 1
+removeongethit = 1
+ownpal = 1
+sprpriority = 4
+
+[State 912]
+type = Explod
+trigger1 = AnimElem = 26
+anim = 15004
+pos = 65, -60
+postype = p1
+bindtime = -1
+scale = 0.9, 1
+removeongethit = 1
+ownpal = 1
+sprpriority = 4
+
+[State 912]
+type = Explod
+trigger1 = AnimElem = 33
+anim = 15004
+pos = 45, -80
+postype = p1
+bindtime = -1
+scale = 0.9, 1
+removeongethit = 1
+ownpal = 1
+sprpriority = 4
+
+[State 912]
+type = Explod
+trigger1 = AnimElem = 37
+anim = 15004
+pos = 70, -100
+postype = p1
+bindtime = -1
+scale = 0.9, 1
+removeongethit = 1
+ownpal = 1
+sprpriority = 4
+
+[State 912]
+type = Explod
+trigger1 = AnimElem = 38
+anim = 15004
+pos = 75, -60
+postype = p1
+bindtime = -1
+scale = 0.9, 1
+removeongethit = 1
+ownpal = 1
+sprpriority = 4
+
+[State 912]
+type = Explod
+trigger1 = AnimElem = 39
+anim = 15004
+pos = 40, -95
+postype = p1
+bindtime = -1
+scale = 0.9, 1
+removeongethit = 1
+ownpal = 1
+sprpriority = 4
+
+[State 912]
+type = Explod
+trigger1 = AnimElem = 40
+anim = 15004
+pos = 70, -70
+postype = p1
+bindtime = -1
+scale = 0.9, 1
+removeongethit = 1
+ownpal = 1
+sprpriority = 4
+
+[State 912]
+type = Explod
+trigger1 = AnimElem = 47
+anim = 15008
+pos = 0, 0
+postype = p1
+bindtime = -1
+scale = 0.9, 1
+removeongethit = 1
+ownpal = 1
+sprpriority = 3
+bindtime = -1
+
+[State 912]
+type = Explod
+trigger1 = AnimElem = 47
+anim = 15004
+pos = 45, -60
+postype = p1
+bindtime = -1
+scale = 0.9, 1
+removeongethit = 1
+ownpal = 1
+sprpriority = 4
+
+[State 912]
+type = HitAdd
+trigger1 = AnimElem = 4
+trigger2 = AnimElem = 7
+trigger3 = AnimElem = 10
+trigger4 = AnimElem = 13
+trigger5 = AnimElem = 16
+trigger6 = AnimElem = 20
+trigger7 = AnimElem = 26
+trigger8 = AnimElem = 33
+trigger9 = AnimElem = 37
+trigger10= AnimElem = 38
+trigger11= AnimElem = 39
+trigger12= AnimElem = 40
+trigger13= AnimElem = 47
+value = 2
+
+[State 912, 掴んだ相手のライフ増減]
+type = TargetLifeAdd
+trigger1 = AnimElem = 4
+trigger2 = AnimElem = 7
+trigger3 = AnimElem = 10
+trigger4 = AnimElem = 13
+trigger5 = AnimElem = 16
+trigger6 = AnimElem = 20
+trigger7 = AnimElem = 26
+trigger8 = AnimElem = 33
+trigger9 = AnimElem = 37
+trigger10= AnimElem = 38
+trigger11= AnimElem = 39
+trigger12= AnimElem = 40
+value =-ceil((((1*6.67)+((0*6.67)*fvar(1)))*const(data.attack)*0.01)*2) ;(1,0)
+kill = 0
+
+[State 912, 掴んだ相手のライフ増減]
+type = TargetLifeAdd
+trigger1 = AnimElem = 47
+value =-ceil((((4*6.67)+((6*6.67)*fvar(1)))*const(data.attack)*0.01)*1.5) ;(4,6)
+
+[State 912]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+;--------------------------------------------------------------------------
+;ドール
+[Statedef 913]
+type    = S
+movetype= A
+physics = N
+juggle  = 1
+velset = 0,0
+poweradd = 0
+ctrl = 0
+anim = 913
+sprpriority = 2
+;facep2 = 1
+hitcountpersist = 1
+
+[State 913]
+type = turn
+trigger1 = (Root,Facing = 1) + (Facing = 1) = 2
+trigger2 = (Root,Facing = -1) + (Facing = -1) = 2
+
+[State 913]
+type = PosSet
+trigger1 = 1
+x = Root,Pos X + (2 * Root,P2Dist X * Root,facing)
+y = Root,Pos Y 
+
+[State 913]
+type = Explod
+trigger1 = AnimElem = 21
+trigger2 = AnimElem = 30
+anim = 15004
+pos = 50, -75
+postype = p1
+bindtime = -1
+scale = 0.9, 1
+removeongethit = 1
+ownpal = 1
+sprpriority = 4
+
+[State 913]
+type = Explod
+trigger1 = AnimElem = 24
+trigger2 = AnimElem = 33
+anim = 15004
+pos = 60, -20
+postype = p1
+bindtime = -1
+scale = 0.9, 1
+removeongethit = 1
+ownpal = 1
+sprpriority = 4
+
+[State 913]
+type = Explod
+trigger1 = AnimElem = 27
+anim = 15004
+pos = 55, -80
+postype = p1
+bindtime = -1
+scale = 0.9, 1
+removeongethit = 1
+ownpal = 1
+sprpriority = 4
+
+[State 913]
+type = Explod
+trigger1 = AnimElem = 37
+anim = 15002
+pos = 70, -55
+postype = p1
+bindtime = -1
+scale = 0.9, 1
+removeongethit = 1
+ownpal = 1
+sprpriority = 4
+
+[State 913]
+type = Explod
+trigger1 = AnimElem = 43
+anim = 15004
+pos = 65, -60
+postype = p1
+bindtime = -1
+scale = 0.9, 1
+removeongethit = 1
+ownpal = 1
+sprpriority = 4
+
+[State 913]
+type = Explod
+trigger1 = AnimElem = 50
+anim = 15004
+pos = 45, -80
+postype = p1
+bindtime = -1
+scale = 0.9, 1
+removeongethit = 1
+ownpal = 1
+sprpriority = 4
+
+[State 913]
+type = Explod
+trigger1 = AnimElem = 54
+anim = 15004
+pos = 70, -100
+postype = p1
+bindtime = -1
+scale = 0.9, 1
+removeongethit = 1
+ownpal = 1
+sprpriority = 4
+
+[State 913]
+type = Explod
+trigger1 = AnimElem = 55
+anim = 15004
+pos = 75, -60
+postype = p1
+bindtime = -1
+scale = 0.9, 1
+removeongethit = 1
+ownpal = 1
+sprpriority = 4
+
+[State 913]
+type = Explod
+trigger1 = AnimElem = 56
+anim = 15004
+pos = 40, -95
+postype = p1
+bindtime = -1
+scale = 0.9, 1
+removeongethit = 1
+ownpal = 1
+sprpriority = 4
+
+[State 913]
+type = Explod
+trigger1 = AnimElem = 57
+anim = 15004
+pos = 70, -70
+postype = p1
+bindtime = -1
+scale = 0.9, 1
+removeongethit = 1
+ownpal = 1
+sprpriority = 4
+
+[State 913]
+type = Explod
+trigger1 = AnimElem = 64
+anim = 15008
+pos = 0, 0
+postype = p1
+bindtime = -1
+scale = 0.9, 1
+removeongethit = 1
+ownpal = 1
+sprpriority = 3
+bindtime = -1
+
+[State 912]
+type = Explod
+trigger1 = AnimElem = 64
+anim = 15004
+pos = 45, -60
+postype = p1
+bindtime = -1
+scale = 0.9, 1
+removeongethit = 1
+ownpal = 1
+sprpriority = 4
+
+[State 913]
+type = AssertSpecial
+trigger1 = time > 180
+trigger1 = Time%2 = 0
+flag = invisible
+
+[State 913]
+type = DestroySelf
+trigger1 = AnimTime = 0
+
+;--------------------------------------------------------------------------
+;相手
+[Statedef 914]
+type    = S
+movetype= H
+physics = N
+juggle  = 1
+velset = 0,0
+poweradd = 0
+ctrl = 0
+anim = 5010
+sprpriority = -1
+facep2 = 1
+hitcountpersist = 1
+
+[State 914]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+
+[State 914]
+type = PlayerPush
+trigger1 = 1
+value = 0
+
+[State 914]
+type = ChangeAnim
+trigger1 = time = 39+8
+trigger2 = time = 55+8
+trigger3 = time = 70+8
+trigger4 = time = 104+8
+trigger5 = time = 128+8
+trigger6 = time = 138+8
+value = 5002
+
+[State 914]
+type = ChangeAnim
+trigger1 = time = 47+8
+trigger2 = time = 63+8
+trigger3 = time = 85+8
+trigger4 = time = 116+8
+trigger5 = time = 133+8
+trigger6 = time = 143+8
+value = 5010
+
+[State 914]
+type = SelfState
+trigger1 = time = 180
+value = 5030
+
+;=========================================================================
+;                    ルミナスイリュージョン(空中)
+;=========================================================================
+[Statedef 920]
+type    = A
+movetype= A
+physics = N
+juggle  = 1
+velset = 0,0
+poweradd = 0
+ctrl = 0
+anim = 920
+sprpriority = 2
+facep2 = 1
+hitcountpersist = 1
+
+[State 920]
+type = PowerAdd
+trigger1 = AnimElem = 1
+value = -1000
+
+[State 920,根性で色を変更]
+type = VarSet
+trigger1 = var(7) >= 6
+var(7) = 0
+
+[State 920,根性で色を変更]
+type = VarAdd
+trigger1 = TimeMod = 3, 0
+var(7) = 1
+
+[State 920,根性で色を変更]
+Type = PalFX
+triggerall = var(7) = 0
+Trigger1 = 1
+Time = 2
+add = 0,128,256
+
+[State 920,根性で色を変更]
+Type = PalFX
+triggerall = var(7) = 1
+Trigger1 = 1
+Time = 2
+add = 256,256,0
+
+[State 920,根性で色を変更]
+Type = PalFX
+triggerall = var(7) = 2
+Trigger1 = 1
+Time = 2
+add = 256,0,0
+
+[State 920,根性で色を変更]
+Type = PalFX
+triggerall = var(7) = 3
+Trigger1 = 1
+Time = 2
+add = 0,256,0
+
+[State 920,根性で色を変更]
+Type = PalFX
+triggerall = var(7) = 4
+Trigger1 = 1
+Time = 2
+add = 256,0,256
+
+[State 920,根性で色を変更]
+Type = PalFX
+triggerall = var(7) = 5
+Trigger1 = 1
+Time = 2
+add = 256,64,0
+
+;--------------------------
+
+[State 920]
+type = NotHitBy
+trigger1 = time <= 1
+value = SCA
+
+[State 920]
+type = VelSet
+trigger1 = AnimElem = 3
+x = 6.5
+
+[State 920]
+type = VelSet
+trigger1 = AnimElem = 11
+x = 0
+
+[State 920]
+type = StateTypeSet
+trigger1 = AnimElem = 11
+MoveType = I
+
+[State 920]
+type = VelAdd
+trigger1 = time >= 25
+y = 0.7
+
+[State 920 ヒット定義]
+type = Hitdef
+triggerall = (PrevStateNo = 440) + (Enemy,StateNo = [5070,5071]) < 2
+trigger1 = AnimElem = 3
+attr = A, HP
+damage = Ceil((2*6.67)+((1*6.67)*fvar(1))),0 ;(2,1)
+animtype = Up
+ground.type = High
+air.type = High
+guardflag = MA
+hitflag = MA
+priority = 4, Miss
+pausetime = 10, 10
+sparkno = s15004
+guard.sparkno = s15006
+sparkxy = -30, -40
+hitsound = s4, 0
+guardsound = s6, 0
+ground.slidetime = 15
+guard.slidetime = 14
+ground.hittime  = 15
+guard.hittime  = 14
+air.hittime = 15
+ground.velocity = 0,6
+air.velocity = 0,6
+getpower = 0,0 
+givepower= 8*7,0 
+fall = 1
+air.fall = 1
+fall.recover = 0
+p1stateno = 921
+p2stateno = 923
+kill = 0
+
+[State 920]
+type = ChangeState
+trigger1 = MoveGuarded
+value = 911
+ctrl = 0
+
+[State 920]
+type = ChangeState
+triggerall = Vel Y > 0
+trigger1 = Pos Y >= 0
+value = 795
+ctrl = 0
+
+[State 920, 光]
+type = Explod
+triggerall = Time = [3, 18]
+trigger1 = Random <= 200
+anim = 10805+(random%9)
+ID = 10805
+pos = -15, -60
+removetime = -2
+postype = p1
+sprpriority = 4
+ownpal = 1
+vel = 0.3, 0
+random = 0, 30
+
+[State 920, 音声]
+type = PlaySnd
+trigger1 = AnimElem = 1
+value = 100, 9
+volume = 255
+
+[State 920, 音声]
+type = PlaySnd
+trigger1 = AnimElem = 1
+value = 200, 2
+channel = 5
+
+;---------------------------------------------------------------------------
+;Hit後
+[Statedef 921]
+type    = A
+movetype= A
+physics = N
+juggle  = 1
+velset = 0,0
+poweradd = 0
+ctrl = 0
+anim = 922
+sprpriority = 2
+facep2 = 1
+hitcountpersist = 1
+
+[State 921, 音声]
+type = PlaySnd
+trigger1 = AnimElem = 25
+value = 100, 15
+volume = 255
+
+[State 921, 音声]
+type = PlaySnd
+trigger1 = AnimElem = 4
+trigger2 = AnimElem = 7
+trigger3 = AnimElem = 10
+trigger4 = AnimElem = 12
+trigger5 = AnimElem = 14
+trigger6 = AnimElem = 17
+trigger7 = AnimElem = 18
+trigger8 = AnimElem = 19
+trigger9 = AnimElem = 20
+value = 4, 1
+
+[State 921, 音声]
+type = PlaySnd
+trigger1 = AnimElem = 25
+value = 5, 2
+
+[State 921, 物理的なキャラの幅]
+type = Width
+trigger1 = AnimElem = 1
+edge = 55,0
+
+[State 921, 掴んだ相手の位置]
+type = BindToTarget;TargetBind
+trigger1 = AnimElem = 1
+pos = 55, 0, Foot
+
+[State 921]
+type = Helper
+trigger1 = time = 0
+name = "doll"
+ID = 860
+pos = -65, 0
+postype = p2
+stateno = 922
+keyctrl = 0
+facing = -1
+
+[State 921]
+type = Turn
+trigger1 = AnimElem = 24
+
+[State 921]
+type = VelSet
+trigger1 = AnimElem = 26
+x = 2.75
+y = -12
+
+[State 921]
+type = VelAdd
+trigger1 = time >= 134
+y = 0.6
+
+[State 921]
+type = Explod
+trigger1 = AnimElem = 4
+anim = 15004
+pos = 50, -50
+postype = p1
+bindtime = -1
+scale = 0.9, 1
+removeongethit = 1
+ownpal = 1
+sprpriority = 4
+
+[State 921]
+type = Explod
+trigger1 = AnimElem = 7
+anim = 15004
+pos = 50, -45
+postype = p1
+bindtime = -1
+scale = 0.9, 1
+removeongethit = 1
+ownpal = 1
+sprpriority = 4
+
+[State 921]
+type = Explod
+trigger1 = AnimElem = 10
+anim = 15004
+pos = 55, -35
+postype = p1
+bindtime = -1
+scale = 0.9, 1
+removeongethit = 1
+ownpal = 1
+sprpriority = 4
+
+[State 921]
+type = Explod
+trigger1 = AnimElem = 12
+anim = 15004
+pos = 55, -65
+postype = p1
+bindtime = -1
+scale = 0.9, 1
+removeongethit = 1
+ownpal = 1
+sprpriority = 4
+
+[State 921]
+type = Explod
+trigger1 = AnimElem = 14
+anim = 15004
+pos = 50, -60
+postype = p1
+bindtime = -1
+scale = 0.9, 1
+removeongethit = 1
+ownpal = 1
+sprpriority = 4
+
+[State 921]
+type = Explod
+trigger1 = AnimElem = 17
+anim = 15004
+pos = 70, -100
+postype = p1
+bindtime = -1
+scale = 0.9, 1
+removeongethit = 1
+ownpal = 1
+sprpriority = 4
+
+[State 921]
+type = Explod
+trigger1 = AnimElem = 18
+anim = 15004
+pos = 75, -60
+postype = p1
+bindtime = -1
+scale = 0.9, 1
+removeongethit = 1
+ownpal = 1
+sprpriority = 4
+
+[State 921]
+type = Explod
+trigger1 = AnimElem = 19
+anim = 15004
+pos = 40, -95
+postype = p1
+bindtime = -1
+scale = 0.9, 1
+removeongethit = 1
+ownpal = 1
+sprpriority = 4
+
+[State 921]
+type = Explod
+trigger1 = AnimElem = 20
+anim = 15004
+pos = 70, -70
+postype = p1
+bindtime = -1
+scale = 0.9, 1
+removeongethit = 1
+ownpal = 1
+sprpriority = 4
+
+[State 921]
+type = Explod
+trigger1 = AnimElem = 25
+anim = 15009
+pos = 0, 0
+postype = p1
+bindtime = -1
+scale = 0.9, 1
+removeongethit = 1
+ownpal = 1
+sprpriority = 3
+bindtime = -1
+facing = -1
+
+[State 921]
+type = Explod
+trigger1 = AnimElem = 25
+anim = 15004
+pos = -40, -60
+postype = p1
+bindtime = -1
+scale = 0.9, 1
+removeongethit = 1
+ownpal = 1
+sprpriority = 4
+
+[State 921]
+type = HitAdd
+trigger1 = AnimElem = 4
+trigger2 = AnimElem = 7
+trigger3 = AnimElem = 10
+trigger4 = AnimElem = 12
+trigger5 = AnimElem = 14
+trigger6 = AnimElem = 17
+trigger7 = AnimElem = 18
+trigger8 = AnimElem = 19
+trigger9 = AnimElem = 20
+trigger10= AnimElem = 25
+value = 2
+
+[State 921, 掴んだ相手のライフ増減,通常]
+type = TargetLifeAdd
+trigger1 = AnimElem = 4
+value =-ceil((((2*6.67)+((1*6.67)*fvar(1)))*const(data.attack)*0.01)*2) ;(2,1)
+kill = 0
+
+[State 921, 掴んだ相手のライフ増減,通常]
+type = TargetLifeAdd
+trigger1 = AnimElem = 7
+trigger2 = AnimElem = 10
+trigger3 = AnimElem = 12
+trigger4 = AnimElem = 14
+trigger5 = AnimElem = 17
+trigger6 = AnimElem = 18
+trigger7 = AnimElem = 19
+trigger8 = AnimElem = 20
+value =-ceil((((1*6.67)+((0*6.67)*fvar(1)))*const(data.attack)*0.01)*2) ;(1,0)
+kill = 0
+
+[State 921, 掴んだ相手のライフ増減,通常]
+type = TargetLifeAdd
+trigger1 = AnimElem = 25
+value =-ceil((((4*6.67)+((6*6.67)*fvar(1)))*const(data.attack)*0.01)*1.5) ;(4,6)
+
+[State 921]
+type = ChangeState
+triggerall = Vel Y > 0
+trigger1 = Pos Y >= 0
+value = 795
+ctrl = 0
+
+;--------------------------------------------------------------------------
+;ドール
+[Statedef 922]
+type    = A
+movetype= A
+physics = N
+juggle  = 1
+velset = 0,0
+poweradd = 0
+ctrl = 0
+anim = 923
+sprpriority = 2
+;facep2 = 1
+hitcountpersist = 1
+
+[State 922]
+type = turn
+trigger1 = (Root,Facing = 1) + (Facing = 1) = 2
+trigger2 = (Root,Facing = -1) + (Facing = -1) = 2
+
+[State 922]
+type = PosSet
+trigger1 = 1
+x = Root,Pos X + (2 * Root,P2Dist X * Root,facing)
+y = Root,Pos Y 
+
+[State 922]
+type = Explod
+trigger1 = AnimElem = 22
+anim = 15004
+pos = 50, -50
+postype = p1
+bindtime = -1
+scale = 0.9, 1
+removeongethit = 1
+ownpal = 1
+sprpriority = 4
+
+[State 922]
+type = Explod
+trigger1 = AnimElem = 25
+anim = 15004
+pos = 50, -45
+postype = p1
+bindtime = -1
+scale = 0.9, 1
+removeongethit = 1
+ownpal = 1
+sprpriority = 4
+
+[State 922]
+type = Explod
+trigger1 = AnimElem = 28
+anim = 15004
+pos = 55, -35
+postype = p1
+bindtime = -1
+scale = 0.9, 1
+removeongethit = 1
+ownpal = 1
+sprpriority = 4
+
+[State 922]
+type = Explod
+trigger1 = AnimElem = 30
+anim = 15004
+pos = 55, -65
+postype = p1
+bindtime = -1
+scale = 0.9, 1
+removeongethit = 1
+ownpal = 1
+sprpriority = 4
+
+[State 922]
+type = Explod
+trigger1 = AnimElem = 32
+anim = 15004
+pos = 50, -60
+postype = p1
+bindtime = -1
+scale = 0.9, 1
+removeongethit = 1
+ownpal = 1
+sprpriority = 4
+
+[State 922]
+type = Explod
+trigger1 = AnimElem = 35
+anim = 15004
+pos = 70, -100
+postype = p1
+bindtime = -1
+scale = 0.9, 1
+removeongethit = 1
+ownpal = 1
+sprpriority = 4
+
+[State 922]
+type = Explod
+trigger1 = AnimElem = 36
+anim = 15004
+pos = 75, -60
+postype = p1
+bindtime = -1
+scale = 0.9, 1
+removeongethit = 1
+ownpal = 1
+sprpriority = 4
+
+[State 922]
+type = Explod
+trigger1 = AnimElem = 37
+anim = 15004
+pos = 40, -95
+postype = p1
+bindtime = -1
+scale = 0.9, 1
+removeongethit = 1
+ownpal = 1
+sprpriority = 4
+
+[State 922]
+type = Explod
+trigger1 = AnimElem = 38
+anim = 15004
+pos = 70, -70
+postype = p1
+bindtime = -1
+scale = 0.9, 1
+removeongethit = 1
+ownpal = 1
+sprpriority = 4
+
+[State 922]
+type = Explod
+trigger1 = AnimElem = 43
+anim = 15009
+pos = 0, 0
+postype = p1
+bindtime = -1
+scale = 0.9, 1
+removeongethit = 1
+ownpal = 1
+sprpriority = 3
+bindtime = -1
+facing = -1
+
+[State 922]
+type = Explod
+trigger1 = AnimElem = 43
+anim = 15004
+pos = -40, -60
+postype = p1
+bindtime = -1
+scale = 0.9, 1
+removeongethit = 1
+ownpal = 1
+sprpriority = 4
+
+[State 922]
+type = AssertSpecial
+trigger1 = time > 177
+trigger1 = Time%2 = 0
+flag = invisible
+
+[State 922]
+type = ChangeAnim
+trigger1 = Root,StateNo = 795
+value = 47
+
+[State 922]
+type = DestroySelf
+trigger1 = Root,StateNo != 795
+trigger1 = Root,StateNo != 921
+trigger2 = Anim = 47
+trigger2 = AnimTime = 0
+
+;--------------------------------------------------------------------------
+;相手
+[Statedef 923]
+type    = S
+movetype= H
+physics = N
+juggle  = 1
+velset = 0,0
+poweradd = 0
+ctrl = 0
+anim = 5010
+sprpriority = -1
+facep2 = 1
+hitcountpersist = 1
+
+[State 923]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+
+[State 923]
+type = PlayerPush
+trigger1 = 1
+value = 0
+
+[State 923]
+type = ChangeAnim
+trigger1 = time = 49
+trigger2 = time = 72
+trigger3 = time = 95
+value = 5002
+
+[State 923]
+type = ChangeAnim
+trigger1 = time = 63
+trigger2 = time = 79
+trigger3 = time = 110
+trigger4 = time = 118
+trigger5 = time = 130
+value = 5010
+
+[State 923]
+type = SelfState
+trigger1 = time = 135
+value = 5030
+
+;=========================================================================
+;                       クリプティックニードル
+;=========================================================================
+[Statedef 930]
+type    = S
+movetype= A
+physics = S
+juggle  = 1
+velset = 0,0
+poweradd = 0
+ctrl = 0
+anim = 930
+sprpriority = 2
+facep2 = 1
+hitcountpersist = 1
+
+[State 930]
+type = PowerAdd
+trigger1 = AnimElem = 1
+value = -1000
+
+[State 930,根性で色を変更]
+type = VarSet
+trigger1 = var(7) >= 6
+var(7) = 0
+
+[State 930,根性で色を変更]
+type = VarAdd
+trigger1 = TimeMod = 3, 0
+var(7) = 1
+
+[State 930,根性で色を変更]
+Type = PalFX
+triggerall = var(7) = 0
+Trigger1 = 1
+Time = 2
+add = 0,128,256
+
+[State 930,根性で色を変更]
+Type = PalFX
+triggerall = var(7) = 1
+Trigger1 = 1
+Time = 2
+add = 256,256,0
+
+[State 930,根性で色を変更]
+Type = PalFX
+triggerall = var(7) = 2
+Trigger1 = 1
+Time = 2
+add = 256,0,0
+
+[State 930,根性で色を変更]
+Type = PalFX
+triggerall = var(7) = 3
+Trigger1 = 1
+Time = 2
+add = 0,256,0
+
+[State 930,根性で色を変更]
+Type = PalFX
+triggerall = var(7) = 4
+Trigger1 = 1
+Time = 2
+add = 256,0,256
+
+[State 930,根性で色を変更]
+Type = PalFX
+triggerall = var(7) = 5
+Trigger1 = 1
+Time = 2
+add = 256,64,0
+
+;--------------------------
+[State 930, 音声]
+type = PlaySnd
+trigger1 = AnimElem = 6
+value = 100, 17
+volume = 255
+
+[State 930, 音声]
+type = PlaySnd
+trigger1 = AnimElem = 5
+value = 200, 4
+
+[State 930, ヘルパー]
+type = Helper
+trigger1 = AnimElem = 6
+name = "hand"
+ID = 940
+pos = -1, 0
+postype = p1
+stateno = 940
+keyctrl = 0
+facing = 1
+
+[State 930, HIT有り]
+type = ChangeState
+triggerall = Time >= 25
+triggerall = NumHelper(940)
+trigger1 = Helper(940),MoveHit
+value = 931
+ctrl = 0
+
+[State 930, HIT無し]
+type = ChangeState
+triggerall = Time >= 25
+trigger1 = !NumHelper(940)
+value = 932
+ctrl = 0
+
+;--------------------------------------------------------------------------
+;HIT有り
+[Statedef 931]
+type    = S
+movetype= I
+physics = S
+juggle  = 1
+velset = 0,0
+poweradd = 0
+ctrl = 0
+anim = 931
+sprpriority = 2
+facep2 = 1
+hitcountpersist = 1
+
+[State 931]
+type = ChangeState
+;triggerall = Anim = 931
+trigger1 = AnimTime = 0
+value = 932
+ctrl = 0
+
+;--------------------------------------------------------------------------
+;HIT無し
+[Statedef 932]
+type    = S
+movetype= I
+physics = S
+juggle  = 1
+velset = 0,0
+poweradd = 0
+ctrl = 0
+anim = 932
+sprpriority = 2
+facep2 = 1
+hitcountpersist = 1
+
+[State 932]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+;--------------------------------------------------------------------------
+;手
+[Statedef 940]
+type    = A
+movetype= A
+physics = N
+juggle  = 1
+velset = 0,0
+poweradd = 0
+ctrl = 0
+anim = 940
+sprpriority = 2
+
+[State 940, DF手]
+type = Helper
+triggerall = Root,var(6) = 1
+trigger1 = Time = 0
+pos = Ceil(2*P2Dist X), 0
+postype = p1
+stateno = 10940
+keyctrl = 0
+facing = -1
+
+[State 940]
+type = PosSet
+trigger1 = 1
+x = Root,Pos X
+
+[State 940]
+type = VarSet
+trigger1 = 1
+var(1) = AnimElemNo(0)
+
+[State 940 ヒット定義]
+type = Hitdef
+trigger1 = AnimElem = 1
+attr = A, HP
+damage = Ceil(((14*6.67)+((1*6.67)*Root,fvar(1)))*0.5),0 ;(14,1)
+animtype = Up
+ground.type = High
+air.type = High
+guardflag = MA
+hitflag = -MA
+priority = 4, Miss
+pausetime = 10, 10
+sparkno = s15004
+guard.sparkno = s15006
+sparkxy = 10, -65
+hitsound = s4, 0
+guardsound = s6, 0
+ground.slidetime = 15
+guard.slidetime = 14
+ground.hittime  = 15
+guard.hittime  = 14
+air.hittime = 15
+ground.velocity = -2,-5
+air.velocity = -2,-5
+getpower = 0,0 
+givepower= 8*7,0 
+fall = 1
+air.fall = 1
+fall.recover = 0
+p1stateno = 942
+p2stateno = 945
+kill = 0
+guard.dist  = 320
+ID = 940
+
+[State 940]
+type = ChangeState
+trigger1 = AnimTime = 0
+trigger2 = MoveGuarded
+value = 941
+ignorehitpause = 1
+
+;--------------------------------------------------------------------------
+;手戻り
+[Statedef 941]
+type    = A
+movetype= A
+physics = N
+juggle  = 1
+velset = 0,0
+poweradd = 0
+ctrl = 0
+anim = 941
+sprpriority = 2
+
+[State 941]
+type = PosSet
+trigger1 = 1
+x = Root,Pos X
+
+[State 941]
+type = ChangeAnim
+trigger1 = time = 0
+value = 941
+elem = 26-var(1)
+
+[State 941]
+type = Helper
+trigger1 = AnimElem = 25, = 3
+name = "smoke&bat"
+ID = 945
+pos = 40, -65
+postype = p1
+stateno = 943
+keyctrl = 0
+facing = 1
+
+[State 941]
+type = Helper
+trigger1 = AnimElem = 25, = 3
+name = "smoke&bat"
+ID = 945
+pos = 70, -65
+postype = p1
+stateno = 943
+keyctrl = 0
+facing = 1
+
+[State 941]
+type = Helper
+trigger1 = AnimElem = 25, = 3
+name = "smoke&bat"
+ID = 945
+pos = 100, -65
+postype = p1
+stateno = 943
+keyctrl = 0
+facing = 1
+
+[State 941]
+type = DestroySelf
+trigger1 = AnimTime = 0
+
+;--------------------------------------------------------------------------
+;手Hit
+[Statedef 942]
+type    = A
+movetype= A
+physics = N
+juggle  = 1
+velset = 0,0
+poweradd = 0
+ctrl = 0
+anim = 945
+sprpriority = 2
+
+[State 942, 音声]
+type = PlaySnd
+trigger1 = Time = 0
+value = 200, 5
+
+[State 942]
+type = PosSet
+trigger1 = 1
+x = Root,Pos X
+
+[State 942, 掴んだ相手のライフ増減,通常]
+type = TargetLifeAdd
+trigger1 = Time = 94
+value = -ceil(((24*6.67)+((1*6.67)*Root,fvar(1)))*Root,const(data.attack)*0.01) ;(24,1)
+
+[State 942]
+type = ChangeAnim
+trigger1 = time <= 95
+value = 945
+elem = 26-var(1)
+
+[State 942, 掴んだ相手の位置]
+type = TargetBind
+trigger1 = Time = 0
+pos = 315-((26-var(1))*8), -65
+
+[State 942]
+type = ChangeAnim
+trigger1 = time > 95
+trigger1 = AnimElemNo(0) >= 20
+trigger2 = time > 108
+value = 945
+elem = 19
+
+[State 942]
+type = sprpriority
+trigger1 = Time = 100
+value = -2
+
+[State 942]
+type = Explod
+trigger1 = Time = 2
+anim = 947
+pos = 0, 0
+postype = p2
+bindtime = -1
+scale = 1, 1
+removeongethit = 1
+ownpal = 1
+sprpriority = 1
+bindtime = -1
+facing = -1
+
+[State 942]
+type = Helper
+trigger1 = time = 100
+name = "smoke&bat"
+ID = 945
+pos = 40, -65
+postype = p1
+stateno = 943
+keyctrl = 0
+facing = 1
+
+[State 942]
+type = Helper
+trigger1 = time = 101
+name = "smoke&bat"
+ID = 945
+pos = 70, -65
+postype = p1
+stateno = 943
+keyctrl = 0
+facing = 1
+
+[State 942]
+type = Helper
+trigger1 = time = 101
+name = "smoke&bat"
+ID = 945
+pos = 100, -65
+postype = p1
+stateno = 943
+keyctrl = 0
+facing = 1
+
+[State 942]
+type = Helper
+trigger1 = time = 102
+name = "smoke&bat"
+ID = 945
+pos = 130, -65
+postype = p1
+stateno = 943
+keyctrl = 0
+facing = 1
+
+[State 942]
+type = Helper
+trigger1 = time = 100
+name = "smoke&bat"
+ID = 945
+pos = 160, -65
+postype = p1
+stateno = 943
+keyctrl = 0
+facing = 1
+
+[State 942]
+type = DestroySelf
+trigger1 = time >= 108
+
+;==========================================================================
+;蝙蝠
+[Statedef 943]
+type    = A
+movetype= I
+physics = N
+juggle  = 1
+anim = 16000
+sprpriority = 3
+velset = 0, 0
+
+[State 943, DF蝙蝠]
+type = Helper
+triggerall = Root,var(6) = 1
+trigger1 = Time = 0
+pos = Ceil(2*P2Dist X), 0
+postype = p1
+stateno = 10943
+keyctrl = 0
+facing = -1
+
+[State 943]
+type = PosSet
+trigger1 = Anim = 16000
+y = -65
+
+[State 943]
+type = AngleDraw
+trigger1 = Anim = 16000
+scale = 0.3, 0.333
+
+[State 943]
+type = ChangeAnim
+triggerall = Anim = 16000
+trigger1 = AnimTime = 0
+value = 180
+
+[State 943]
+type = sprpriority
+trigger1 = Anim = 180
+value = -1
+
+[State 943]
+type = Turn
+triggerall = time >= 12
+trigger1 = Root,Facing = Facing
+trigger1 = RootDist X < 0
+trigger2 = Root,Facing != Facing
+trigger2 = RootDist X < 0
+
+[State 943]
+type = VelSet
+trigger1 = time >= 12
+x = Ifelse((RootDist X=[-20,20]),5,RootDist X*0.05)
+y = (RootDist Y-50)*0.03
+
+[State 943]
+type = ChangeState
+trigger1 = RootDist X= [-10, 10]
+trigger1 = RootDist X= [-50, 20]
+trigger2 = Root,MoveType = H
+value = 944
+
+;==========================================================================
+;消滅
+[Statedef 944]
+type    = A
+movetype= I
+physics = N
+juggle  = 1
+anim = 16000
+sprpriority = -1
+velset = 0,0
+
+[State 944]
+type = AngleDraw
+trigger1 = 1
+scale = 0.3, 0.333
+
+[State 944]
+type = DestroySelf
+trigger1 = AnimTime = 0
+
+;==========================================================================
+;相手やられ
+[Statedef 945]
+type    = A
+movetype= H
+physics = N
+juggle  = 1
+velset = 0,0
+poweradd = 0
+ctrl = 0
+anim = 5010
+sprpriority = -1
+facep2 = 1
+hitcountpersist = 1
+
+[State 945]
+type = PalFX
+triggerall = Time >= 10
+trigger1 = GameTime % 10 = [0, 4]
+time = 1
+;add = 256,128,128
+mul = 256,64,64
+color = 0
+ignorehitpause = 1
+
+[State 945]
+type = PalFX
+triggerall = Time >= 10
+trigger1 = GameTime % 10 = [5, 9]
+time = 1
+;add = 256,128,256
+mul = 256,64,256
+color = 0
+ignorehitpause = 1
+
+[State 945]
+type = ChangeAnim2
+trigger1 = time = 9
+value = 948
+
+[State 945]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+
+[State 945]
+type = PosSet
+trigger1 = time = 110
+y = 0
+
+[State 945]
+type = SelfState
+trigger1 = time = 110
+value = 5030
+
+;==========================================================================
+;                       バルキリーターン(低)
+;==========================================================================
+[Statedef 950]
+type    = A
+movetype= I
+physics = N
+juggle  = 1
+velset = 0,0
+poweradd = 0
+ctrl = 0
+anim = 950
+sprpriority = 4
+facep2 = 1
+hitcountpersist = 1
+
+[State 950]
+type = AssertSpecial
+trigger1 = 1
+flag = noshadow
+flag2 = invisible
+
+[State 950]
+type = Explod
+trigger1 = time = 0
+anim = 950
+ID = 950
+pos = 0, 0
+postype = p1
+facing = 1
+bindtime = 35
+vel = 18, 0
+removetime = 51
+supermovetime = 0
+pausemovetime = 0
+scale = 0.9, 1
+sprpriority = 4
+ownpal = 0
+
+[State 950, 画面固定用ヘルパー]
+type = Helper
+trigger1 = time = 0
+name = "Helper"
+ID = 995
+pos = 0, 0
+postype = left
+facing = 1
+stateno = 995
+keyctrl = 0
+ownpal = 1
+supermovetime = 9999
+pausemovetime = 9999
+
+[State 950, 画面固定用ヘルパー]
+type = Helper
+trigger1 = time = 0
+name = "Helper"
+ID = 996
+pos = 0, 0
+postype = right
+facing = -1
+stateno = 995
+keyctrl = 0
+ownpal = 1
+supermovetime = 9999
+pausemovetime = 9999
+
+[State 950]
+type = PowerAdd
+trigger1 = AnimElem = 1
+value = -1000
+
+[State 950,根性で色を変更]
+type = VarSet
+trigger1 = var(7) >= 6
+var(7) = 0
+
+[State 950,根性で色を変更]
+type = VarAdd
+trigger1 = TimeMod = 3, 0
+var(7) = 1
+
+[State 950,根性で色を変更]
+Type = PalFX
+triggerall = var(7) = 0
+Trigger1 = 1
+Time = 2
+add = 0,128,256
+
+[State 950,根性で色を変更]
+Type = PalFX
+triggerall = var(7) = 1
+Trigger1 = 1
+Time = 2
+add = 256,256,0
+
+[State 950,根性で色を変更]
+Type = PalFX
+triggerall = var(7) = 2
+Trigger1 = 1
+Time = 2
+add = 256,0,0
+
+[State 950,根性で色を変更]
+Type = PalFX
+triggerall = var(7) = 3
+Trigger1 = 1
+Time = 2
+add = 0,256,0
+
+[State 950,根性で色を変更]
+Type = PalFX
+triggerall = var(7) = 4
+Trigger1 = 1
+Time = 2
+add = 256,0,256
+
+[State 950,根性で色を変更]
+Type = PalFX
+triggerall = var(7) = 5
+Trigger1 = 1
+Time = 2
+add = 256,64,0
+
+;--------------------------
+[State 950]
+type = Explod
+trigger1 = AnimElem = 7
+anim = 10950
+ID = 10950
+pos = 0, 0
+postype = p1
+facing = 1
+bindtime = 10
+vel = 18, 0
+removetime = -2
+supermovetime = 0
+pausemovetime = 0
+scale = 2, 1
+sprpriority = 3
+ownpal = 1
+
+[State 950]
+type = VelSet
+trigger1 = AnimElem = 3
+x = (-BackEdgeDist + 50) * 0.142857143
+y = (-Pos Y - 5) * 0.142857143
+
+[State 950]
+type = VelSet
+trigger1 = AnimElem = 7
+x = 0
+y = 0
+
+[State 950]
+type = VelSet
+trigger1 = AnimElem = 11
+x = 18
+
+[State 950]
+type = VelSet
+trigger1 = AnimTime = 0
+x = 0
+
+[State 950]
+type = ChangeState
+trigger1 = NumExplod(950) = 0
+value = 960
+
+[State 950, 光]
+type = Explod
+trigger1 = Random <= 200
+anim = 10805+(random%9)
+ID = 10805
+pos = -15, -60
+removetime = -2
+postype = p1
+sprpriority = 4
+ownpal = 1
+vel = 0.3, 0
+random = 0, 30
+
+[State 950, 音声]
+type = PlaySnd
+trigger1 = AnimElem = 1
+value = 100, 13
+volume = 255
+
+[State 950, 音声]
+type = PlaySnd
+trigger1 = AnimElem = 11
+value = 200, 3
+
+;==========================================================================
+;                       バルキリーターン(中)
+;==========================================================================
+[Statedef 951]
+type    = A
+movetype= I
+physics = N
+juggle  = 1
+velset = 0,0
+poweradd = 0
+ctrl = 0
+anim = 950
+sprpriority = 4
+facep2 = 1
+hitcountpersist = 1
+
+[State 951]
+type = AssertSpecial
+trigger1 = 1
+flag = noshadow
+flag2 = invisible
+
+[State 951]
+type = Explod
+trigger1 = time = 0
+anim = 950
+ID = 950
+pos = 0, 0
+postype = p1
+facing = 1
+bindtime = 35
+vel = 18, 0
+removetime = 51
+supermovetime = 0
+pausemovetime = 0
+scale = 0.9, 1
+sprpriority = 4
+ownpal = 0
+
+[State 951, 画面固定用ヘルパー]
+type = Helper
+trigger1 = time = 0
+name = "Helper"
+ID = 995
+pos = 0, 0
+postype = left
+facing = 1
+stateno = 995
+keyctrl = 0
+ownpal = 1
+supermovetime = 9999
+pausemovetime = 9999
+
+[State 951, 画面固定用ヘルパー]
+type = Helper
+trigger1 = time = 0
+name = "Helper"
+ID = 996
+pos = 0, 0
+postype = right
+facing = -1
+stateno = 995
+keyctrl = 0
+ownpal = 1
+supermovetime = 9999
+pausemovetime = 9999
+
+[State 951]
+type = PowerAdd
+trigger1 = AnimElem = 1
+value = -1000
+
+[State 951,根性で色を変更]
+type = VarSet
+trigger1 = var(7) >= 6
+var(7) = 0
+
+[State 951,根性で色を変更]
+type = VarAdd
+trigger1 = TimeMod = 3, 0
+var(7) = 1
+
+[State 951,根性で色を変更]
+Type = PalFX
+triggerall = var(7) = 0
+Trigger1 = 1
+Time = 2
+add = 0,128,256
+
+[State 951,根性で色を変更]
+Type = PalFX
+triggerall = var(7) = 1
+Trigger1 = 1
+Time = 2
+add = 256,256,0
+
+[State 951,根性で色を変更]
+Type = PalFX
+triggerall = var(7) = 2
+Trigger1 = 1
+Time = 2
+add = 256,0,0
+
+[State 951,根性で色を変更]
+Type = PalFX
+triggerall = var(7) = 3
+Trigger1 = 1
+Time = 2
+add = 0,256,0
+
+[State 951,根性で色を変更]
+Type = PalFX
+triggerall = var(7) = 4
+Trigger1 = 1
+Time = 2
+add = 256,0,256
+
+[State 951,根性で色を変更]
+Type = PalFX
+triggerall = var(7) = 5
+Trigger1 = 1
+Time = 2
+add = 256,64,0
+
+;--------------------------
+[State 951]
+type = Explod
+trigger1 = AnimElem = 7
+anim = 10950
+ID = 10950
+pos = 0, 0
+postype = p1
+facing = 1
+bindtime = 10
+vel = 18, 0
+removetime = -2
+supermovetime = 0
+pausemovetime = 0
+scale = 2, 1
+sprpriority = 3
+ownpal = 1
+
+[State 951]
+type = VelSet
+trigger1 = AnimElem = 3
+x = (-BackEdgeDist + 50) * 0.142857143
+y = (-Pos Y - 5) * 0.142857143
+
+[State 951]
+type = VelSet
+trigger1 = AnimElem = 7
+x = 0
+y = 0
+
+[State 951]
+type = VelSet
+trigger1 = AnimElem = 11
+x = 18
+
+[State 951]
+type = VelSet
+trigger1 = AnimTime = 0
+x = 0
+
+[State 951]
+type = ChangeState
+trigger1 = NumExplod(950) = 0
+value = 961
+
+[State 951, 光]
+type = Explod
+trigger1 = Random <= 200
+anim = 10805+(random%9)
+ID = 10805
+pos = -15, -60
+removetime = -2
+postype = p1
+sprpriority = 4
+ownpal = 1
+vel = 0.3, 0
+random = 0, 30
+
+[State 951, 音声]
+type = PlaySnd
+trigger1 = AnimElem = 1
+value = 100, 13
+volume = 255
+
+[State 951, 音声]
+type = PlaySnd
+trigger1 = AnimElem = 11
+value = 200, 3
+
+;==========================================================================
+;                       バルキリーターン(高)
+;==========================================================================
+[Statedef 952]
+type    = A
+movetype= I
+physics = N
+juggle  = 1
+velset = 0,0
+poweradd = 0
+ctrl = 0
+anim = 950
+sprpriority = 4
+facep2 = 1
+hitcountpersist = 1
+
+[State 952]
+type = AssertSpecial
+trigger1 = 1
+flag = noshadow
+flag2 = invisible
+
+[State 952]
+type = Explod
+trigger1 = time = 0
+anim = 950
+ID = 950
+pos = 0, 0
+postype = p1
+facing = 1
+bindtime = 35
+vel = 18, 0
+removetime = 51
+supermovetime = 0
+pausemovetime = 0
+scale = 0.9, 1
+sprpriority = 4
+ownpal = 0
+
+[State 952, 画面固定用ヘルパー]
+type = Helper
+trigger1 = time = 0
+name = "Helper"
+ID = 995
+pos = 0, 0
+postype = left
+facing = 1
+stateno = 995
+keyctrl = 0
+ownpal = 1
+supermovetime = 9999
+pausemovetime = 9999
+
+[State 952, 画面固定用ヘルパー]
+type = Helper
+trigger1 = time = 0
+name = "Helper"
+ID = 996
+pos = 0, 0
+postype = right
+facing = -1
+stateno = 995
+keyctrl = 0
+ownpal = 1
+supermovetime = 9999
+pausemovetime = 9999
+
+[State 952]
+type = PowerAdd
+trigger1 = AnimElem = 1
+value = -1000
+
+[State 952,根性で色を変更]
+type = VarSet
+trigger1 = var(7) >= 6
+var(7) = 0
+
+[State 952,根性で色を変更]
+type = VarAdd
+trigger1 = TimeMod = 3, 0
+var(7) = 1
+
+[State 952,根性で色を変更]
+Type = PalFX
+triggerall = var(7) = 0
+Trigger1 = 1
+Time = 2
+add = 0,128,256
+
+[State 952,根性で色を変更]
+Type = PalFX
+triggerall = var(7) = 1
+Trigger1 = 1
+Time = 2
+add = 256,256,0
+
+[State 952,根性で色を変更]
+Type = PalFX
+triggerall = var(7) = 2
+Trigger1 = 1
+Time = 2
+add = 256,0,0
+
+[State 952,根性で色を変更]
+Type = PalFX
+triggerall = var(7) = 3
+Trigger1 = 1
+Time = 2
+add = 0,256,0
+
+[State 952,根性で色を変更]
+Type = PalFX
+triggerall = var(7) = 4
+Trigger1 = 1
+Time = 2
+add = 256,0,256
+
+[State 952,根性で色を変更]
+Type = PalFX
+triggerall = var(7) = 5
+Trigger1 = 1
+Time = 2
+add = 256,64,0
+
+;--------------------------
+[State 952]
+type = Explod
+trigger1 = AnimElem = 7
+anim = 10950
+ID = 10950
+pos = 0, 0
+postype = p1
+facing = 1
+bindtime = 10
+vel = 18, 0
+removetime = -2
+supermovetime = 0
+pausemovetime = 0
+scale = 2, 1
+sprpriority = 3
+ownpal = 1
+
+[State 952]
+type = VelSet
+trigger1 = AnimElem = 3
+x = (-BackEdgeDist + 50) * 0.142857143
+y = (-Pos Y - 5) * 0.142857143
+
+[State 952]
+type = VelSet
+trigger1 = AnimElem = 7
+x = 0
+y = 0
+
+[State 952]
+type = VelSet
+trigger1 = AnimElem = 11
+x = 18
+
+[State 952]
+type = VelSet
+trigger1 = AnimTime = 0
+x = 0
+
+[State 952]
+type = ChangeState
+trigger1 = NumExplod(950) = 0
+value = 962
+
+[State 952, 光]
+type = Explod
+trigger1 = Random <= 200
+anim = 10805+(random%9)
+ID = 10805
+pos = -15, -60
+removetime = -2
+postype = p1
+sprpriority = 4
+ownpal = 1
+vel = 0.3, 0
+random = 0, 30
+
+[State 952, 音声]
+type = PlaySnd
+trigger1 = AnimElem = 1
+value = 100, 13
+volume = 255
+
+[State 952, 音声]
+type = PlaySnd
+trigger1 = AnimElem = 11
+value = 200, 3
+
+;==============================================================================
+;低帰還
+[Statedef 960]
+type    = A
+movetype= I
+physics = N
+velset = -8, 0
+ctrl = 0
+anim = 951
+sprpriority = 4
+hitcountpersist = 1
+
+[State 960]
+Type = PalFX
+Trigger1 = time = 0
+Time = 1
+add = 0,0,0
+
+[State 960]
+type = Turn
+triggerall = Anim = 951
+trigger1 = time = 0
+
+[State 960]
+type = PosSet
+trigger1 = Time = 0
+y = -10
+
+[State 960]
+type = VelAdd
+trigger1 = StateType = A
+x = -0.125
+
+[State 960]
+type = VelAdd
+triggerall = StateType = A
+trigger1 = 1
+y = 0.075
+
+[State 960]
+type = StateTypeSet
+triggerall = Anim = 951
+trigger1 = AnimElem = 14
+StateType = S
+physics = S
+
+[State 960]
+type = VelSet
+trigger1 = StateType = S
+x = 0
+y = 0
+
+[State 960]
+type = PosSet
+triggerall = Anim = 951
+trigger1 = AnimElem = 14
+trigger2 = AnimTime = 0
+y = 0
+
+[State 960]
+type = ChangeState
+triggerall = Anim = 951
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+;-------
+[State 960]
+type = ChangeAnim
+triggerall = StateType = A
+triggerall = Anim = 951
+trigger1 = command = "a"
+trigger2 = command = "b"
+trigger3 = command = "c"
+value = 960
+
+[State 960]
+type = StateTypeSet
+triggerall = Anim = 960
+trigger1 = MoveType = I
+MoveType = A
+
+[State 960]
+type = ChangeState
+triggerall = Anim = 960
+trigger1 = Pos Y >= 15
+value = 965
+
+[State 960 ヒット定義]
+type = Hitdef
+triggerall = Anim = 960
+trigger1 = AnimElem = 4
+trigger2 = AnimElem = 5
+trigger3 = AnimElem = 6
+trigger4 = AnimElem = 7
+attr = A, HP
+damage = Ceil(((3*6.67)+((1*6.67)*fvar(1)))*fvar(3)), 0 ;(3,1)
+animtype = Hard
+ground.type = Low
+air.type = Low
+guardflag = MA
+hitflag = MA
+priority = 4, Miss
+pausetime = 10, 10
+sparkno = s15004
+guard.sparkno = s15006
+sparkxy = -30, -55
+hitsound = s4, 2
+guardsound = s6, 0
+ground.slidetime = 11
+guard.slidetime = 10
+ground.hittime  = 11
+guard.hittime  = 10
+air.hittime = 11
+ground.velocity = ifelse(var(6)=1,0,-3)
+air.velocity = -2.5,-4
+getpower = 0,0 
+givepower= 8*7,0 
+air.fall = 1
+fall.recover = 0
+
+[State 960, 光]
+type = Explod
+triggerall = MoveContact = 0
+trigger1 = Random <= 200
+anim = 10805+(random%9)
+ID = 10805
+pos = -15, -60
+removetime = -2
+postype = p1
+sprpriority = 4
+ownpal = 1
+vel = 0.3, 0
+random = 0, 30
+
+;==============================================================================
+;中帰還
+[Statedef 961]
+type    = A
+movetype= I
+physics = N
+velset = -7.25, 1
+ctrl = 0
+anim = 953
+sprpriority = 4
+hitcountpersist = 1
+
+[State 961]
+Type = PalFX
+Trigger1 = time = 0
+Time = 1
+add = 0,0,0
+
+[State 961]
+type = Turn
+triggerall = Anim = 953
+trigger1 = time = 0
+
+[State 961]
+type = PosSet
+trigger1 = Time = 0
+y = -50
+
+[State 961]
+type = VelAdd
+trigger1 = StateType = A
+x = -0.075
+
+[State 961]
+type = VelAdd
+triggerall = Anim = 953
+triggerall = StateType = A
+trigger1 = 1
+y = 0.02
+
+[State 961]
+type = StateTypeSet
+triggerall = Anim = 953
+trigger1 = AnimElem = 24
+StateType = S
+physics = S
+
+[State 961]
+type = VelSet
+trigger1 = StateType = S
+x = 0
+y = 0
+
+[State 961]
+type = PosSet
+triggerall = Anim = 953
+trigger1 = AnimElem = 24
+trigger2 = AnimTime = 0
+y = 0
+
+[State 961]
+type = ChangeState
+triggerall = Anim = 953
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+;-------
+[State 961]
+type = ChangeAnim
+triggerall = Anim = 953
+trigger1 = command = "a"
+trigger2 = command = "b"
+trigger3 = command = "c"
+value = 960
+
+[State 961]
+type = StateTypeSet
+triggerall = Anim = 960
+trigger1 = MoveType = I
+MoveType = A
+
+[State 961]
+type = VelAdd
+triggerall = Anim = 960
+triggerall = StateType = A
+trigger1 = 1
+y = 0.0125
+
+[State 961]
+type = ChangeState
+triggerall = Anim = 960
+trigger1 = Pos Y >= 15
+value = 965
+
+[State 961 ヒット定義]
+type = Hitdef
+triggerall = Anim = 960
+trigger1 = Time%3 = 0
+attr = A, HP
+damage = Ceil(((3*6.67)+((1*6.67)*fvar(1)))*fvar(3)), 0 ;(3,1)
+animtype = Hard
+ground.type = Low
+air.type = Low
+guardflag = MA
+hitflag = MA
+priority = 4, Miss
+pausetime = 10, 10
+sparkno = s15004
+guard.sparkno = s15006
+sparkxy = -30, -55
+hitsound = s4, 2
+guardsound = s6, 0
+ground.slidetime = 11
+guard.slidetime = 10
+ground.hittime  = 11
+guard.hittime  = 10
+air.hittime = 11
+ground.velocity = ifelse(var(6)=1,0,-3)
+air.velocity = -2.5,-4
+getpower = 0,0 
+givepower= 8*7,0 
+air.fall = 1
+fall.recover = 0
+
+[State 961, 光]
+type = Explod
+triggerall = MoveContact = 0
+trigger1 = Random <= 200
+anim = 10805+(random%9)
+ID = 10805
+pos = -15, -60
+removetime = -2
+postype = p1
+sprpriority = 4
+ownpal = 1
+vel = 0.3, 0
+random = 0, 30
+
+;==============================================================================
+;高帰還
+[Statedef 962]
+type    = A
+movetype= I
+physics = N
+velset = -7.25, 2
+ctrl = 0
+anim = 953
+sprpriority = 4
+hitcountpersist = 1
+
+[State 962]
+Type = PalFX
+Trigger1 = time = 0
+Time = 1
+add = 0,0,0
+
+[State 962]
+type = Turn
+triggerall = Anim = 953
+trigger1 = time = 0
+
+[State 962]
+type = PosSet
+trigger1 = Time = 0
+y = -100
+
+[State 962]
+type = VelAdd
+trigger1 = StateType = A
+x = -0.075
+
+[State 962]
+type = VelAdd
+triggerall = StateType = A
+trigger1 = 1
+y = 0.0175
+
+[State 962]
+type = StateTypeSet
+triggerall = Anim = 953
+trigger1 = AnimElem = 24
+StateType = S
+physics = S
+
+[State 962]
+type = VelSet
+trigger1 = StateType = S
+x = 0
+y = 0
+
+[State 962]
+type = PosSet
+triggerall = Anim = 953
+trigger1 = AnimElem = 24
+trigger2 = AnimTime = 0
+y = 0
+
+[State 962]
+type = ChangeState
+triggerall = Anim = 953
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+;-------
+[State 962]
+type = ChangeAnim
+triggerall = StateType = A
+triggerall = Anim = 953
+trigger1 = command = "a"
+trigger2 = command = "b"
+trigger3 = command = "c"
+value = 960
+
+[State 962]
+type = StateTypeSet
+triggerall = Anim = 960
+trigger1 = MoveType = I
+MoveType = A
+
+[State 962]
+type = ChangeState
+triggerall = Anim = 960
+trigger1 = Pos Y >= 15
+value = 965
+
+[State 962 ヒット定義]
+type = Hitdef
+triggerall = Anim = 960
+trigger1 = Time%3 = 0
+attr = A, HP
+damage = Ceil(((3*6.67)+((1*6.67)*fvar(1)))*fvar(3)), 0 ;(3,1)
+animtype = Hard
+ground.type = Low
+air.type = Low
+guardflag = MA
+hitflag = MA
+priority = 4, Miss
+pausetime = 10, 10
+sparkno = s15004
+guard.sparkno = s15006
+sparkxy = -30, -55
+hitsound = s4, 2
+guardsound = s6, 0
+ground.slidetime = 11
+guard.slidetime = 10
+ground.hittime  = 11
+guard.hittime  = 10
+air.hittime = 11
+ground.velocity = ifelse(var(6)=1,0,-3)
+air.velocity = -2.5,-4
+getpower = 0,0 
+givepower= 8*7,0 
+air.fall = 1
+fall.recover = 0
+
+[State 962, 光]
+type = Explod
+triggerall = MoveContact = 0
+trigger1 = Random <= 200
+anim = 10805+(random%9)
+ID = 10805
+pos = -15, -60
+removetime = -2
+postype = p1
+sprpriority = 4
+ownpal = 1
+vel = 0.3, 0
+random = 0, 30
+
+;------------------------------------------------------------------------------
+;着地
+[Statedef 965]
+type    = S
+movetype= I
+physics = S
+velset = 0, 0
+ctrl = 0
+anim = 965
+sprpriority = 1
+
+[State 965]
+type = PosSet
+trigger1 = 1
+y = 0
+
+[State 965]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+
+;==============================================================================
+;画面固定用ヘルパー
+[Statedef 995]
+type = A
+anim = 0
+
+[State 995]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+
+[State 995]
+type = PosSet
+trigger1 = 1
+x = Ifelse(facing=1,Ifelse(Root,facing=1,-180,180),Ifelse(Root,facing=1,180,-180))
+
+[State 995, 画面固定]
+type = ScreenBound
+trigger1 = 1
+value = 1
+movecamera = 1,1
+
+[State 995]
+type = AssertSpecial
+trigger1 = 1
+flag = noshadow
+flag2 = invisible
+
+[State 995]
+type = DestroySelf
+trigger1 = Root,StateNo != [950, 959]

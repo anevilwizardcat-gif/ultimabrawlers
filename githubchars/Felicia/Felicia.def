@@ -1,0 +1,41 @@
+;-----------------------------------------------------------------------------
+[Info]
+Name         = "Felicia"
+DisplayName  = "Felicia"
+VersionDate  = 01,25,2012
+MugenVersion = 04,14,2002
+Author       = "misao"
+Pal.Defaults = 1,8
+;-----------------------------------------------------------------------------
+[Files]
+Cmd      = STATE\Felicia.cmd
+Cns      = STATE\Felicia_A.cns
+St       = STATE\Felicia_A.cns
+St0      = STATE\Felicia_B.cns
+St1      = STATE\Felicia_C.cns
+St2      = STATE\Felicia_D.cns
+St3      = STATE\Felicia_E.cns
+St4      = STATE\Felicia_F.cns
+St5      = STATE\common_Felicia.cns
+St6      = Config.txt
+Sprite   = MEDIA\Felicia.sff
+Anim     = MEDIA\Felicia.air
+Sound    = MEDIA\Felicia.snd
+;-----------------------------------------------------------------------------
+Pal1 = ACT\A.act    ;弱Ｋカラー
+Pal2 = ACT\B.act    ;中Ｋカラー
+Pal3 = ACT\C.act    ;強Ｋカラー
+Pal4 = ACT\X.act    ;弱Ｐカラー
+Pal5 = ACT\Y.act    ;中Ｐカラー
+Pal6 = ACT\Z.act    ;強Ｐカラー
+Pal7 = ACT\KK.act   ;ＫＫカラー
+Pal8 = ACT\AGK.act  ;ＡＧＫカラー
+Pal9 = ACT\HA.act
+Pal10= ACT\PP.act   ;ＰＰカラー
+Pal11= ACT\AGP.act  ;ＡＧＰカラー
+Pal12= ACT\HZ.act
+;-----------------------------------------------------------------------------
+[Arcade]
+Intro.Storyboard = ;intro.def   ;オープニングのファイルを登録します
+Ending.Storyboard = ;ending.def ;エンディングのファイルを登録します
+;-----------------------------------------------------------------------------
