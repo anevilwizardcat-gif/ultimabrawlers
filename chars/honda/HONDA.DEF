@@ -1,0 +1,32 @@
+;혼다 정의 파일
+;이것은 가고일에 의해 작성되었음
+
+;플레이어 정보
+[Info]
+name = "Honda"        
+displayname = "E.Honda"
+versiondate = 04,14,2001    
+mugenversion = 04,14,2001   
+author = "Gargoyle"       
+pal.defaults = 1  
+
+;플레이어 파일
+[Files]
+cmd     = honda.cmd   
+cns     = honda.cns   
+st      = honda.cns   
+stcommon = common1.cns 
+sprite  = honda.sff   
+anim    = honda.air   
+sound   = honda.snd   
+pal1    = 1.act  
+pal2    = 2.act
+pal3    = 3.act
+pal4    = 4.act
+pal5    = 5.act
+pal6    = 6.act
+
+;아케이드 모드
+;[Arcade]
+;intro.storyboard = intro.def
+;ending.storyboard = ending.def

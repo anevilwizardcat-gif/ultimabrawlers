@@ -555,7 +555,6 @@ type = changestate
 triggerall = !ishelper
 value = ifelse(p2movetype = A, 0, 100)
 triggerall = AILevel > 0
-trigger1 = backedgebodydist > 35   ;<-- cornered jump-outs are allowed
 trigger1 = stateno = 40
 trigger1 = p2statetype != A
 trigger1 = p2statetype != L
@@ -572,19 +571,11 @@ triggerall = AILevel > 0
 triggerall = var(21) = 0
 triggerall = roundstate = 2
 triggerall = statetype != A
-trigger1 = ctrl || stateno = 130 || stateno = 131 || stateno = 5120
+trigger1 = ctrl || stateno = 130 || stateno = 131
 trigger1 = inguarddist
 trigger1 = enemynear,movetype = A
 trigger1 = enemynear,statetype != C
-trigger1 = random < 650
-trigger3 = life < 220
-trigger3 = ctrl || stateno = 130 || stateno = 131 || stateno = 5120
-trigger3 = inguarddist
-trigger3 = enemynear,statetype != C
-trigger3 = random < 850
-trigger2 = ctrl || stateno = 130 || stateno = 131 || stateno = 5120
-trigger2 = inguarddist
-trigger2 = random < 550
+trigger1 = random < 200
 
 [State -1, AI Parry Arm Low]
 type = varset
@@ -594,44 +585,23 @@ triggerall = AILevel > 0
 triggerall = var(23) = 0
 triggerall = roundstate = 2
 triggerall = statetype != A
-trigger1 = ctrl || stateno = 130 || stateno = 131 || stateno = 5120
+trigger1 = ctrl || stateno = 130 || stateno = 131
 trigger1 = inguarddist
 trigger1 = enemynear,movetype = A
 trigger1 = enemynear,statetype = C
-trigger1 = random < 650
-trigger3 = life < 220
-trigger3 = ctrl || stateno = 130 || stateno = 131 || stateno = 5120
-trigger3 = inguarddist
-trigger3 = enemynear,statetype = C
-trigger3 = random < 850
+trigger1 = random < 200
 
 ; --- 2. PARRY PUNISH (the one true var(38) use) ---------------------------
 ; With meter: buffer the Super Art. Without: c.MK only if it will reach.
 [State -1, AI Parry Punish]
 type = varset
 triggerall = !ishelper
-var(38) = ifelse(p2bodydist x >= 70, ifelse(p2bodydist x < 55, 440, 0), ifelse(var(58) = 2 && power >= 880, 3000, ifelse(var(58) = 3 && power >= 1040, 3100, ifelse(var(58) = 4 && power >= 720, 3200, ifelse(p2bodydist x < 55, 440, 0)))))
+var(38) = ifelse(var(58) = 2 && power >= 880, 3000, ifelse(var(58) = 3 && power >= 1040, 3100, ifelse(var(58) = 4 && power >= 720, 3200, ifelse(p2bodydist x < 55, 440, 0))))
 triggerall = AILevel > 0
 triggerall = var(38) = 0
 trigger1 = stateno = [90,93]
 trigger1 = AnimElemTime(4) < 3
 trigger1 = p2bodydist x < 95
-
-; --- 2b. PARRY THROW : point-blank parries convert to instant grab ---------
-; The var(38) buffer fires late enough for throws to beat it; at grab
-; range, grab THEM the moment control returns instead.
-[State -1, AI Parry Throw]
-type = changestate
-triggerall = !ishelper
-value = 800
-triggerall = AILevel > 0
-triggerall = p2dist x > -4
-trigger1 = stateno = [90,93]
-trigger1 = AnimElemTime(4) >= 0
-trigger1 = p2statetype != A
-trigger1 = p2statetype != L
-trigger1 = p2bodydist x < 17
-trigger1 = random < 800
 
 ; --- 3. COMBO ENGINE : ignorehitpause cancels = confirms never drop --------
 ; 3a. SUPER CANCEL on confirmed hit from any cancelable normal
@@ -641,9 +611,6 @@ triggerall = !ishelper
 value = ifelse(var(58) = 2, 3000, ifelse(var(58) = 4, 3200, 3100))
 ignorehitpause = 1
 triggerall = AILevel > 0
-triggerall = (p2statetype != A) || (p2dist y > -50 && enemynear,vel y > 0)   ;<-- kick-height only
-triggerall = stateno != 440 || p2bodydist x < 62   ;<-- no tip-range super whiffs
-triggerall = enemynear,statetype != L   ;<-- the dead cannot be comboed
 triggerall = (var(58) = 2 && power >= 880) || (var(58) = 3 && power >= 1040) || (var(58) = 4 && power >= 720)
 triggerall = statetype != A
 trigger1 = movehit
@@ -652,24 +619,7 @@ trigger1 = stateno = [200,440]
 trigger1 = stateno != 220 && stateno != 410
 trigger1 = stateno != 230 && (stateno != [240,242]) && stateno != 245
 trigger1 = (stateno != [250,275]) || (stateno = [260,265])
-trigger1 = random < 980
-
-; combo-rep bookkeeping (var(59) is unused by her own systems)
-[State -1, AI Rep Count]
-type = varadd
-triggerall = !ishelper
-var(59) = 1
-ignorehitpause = 1
-triggerall = AILevel > 0
-trigger1 = stateno = 430 && time = 1
-
-[State -1, AI Rep Reset]
-type = varset
-triggerall = !ishelper
-var(59) = 0
-triggerall = AILevel > 0
-trigger1 = ctrl && movetype = I
-trigger1 = var(59) != 0
+trigger1 = random < 920
 
 ; 3b. LINK c.MK : confirmed c.LK -> c.MK (the classic deep confirm)
 [State -1, AI Link c.MK]
@@ -678,12 +628,11 @@ triggerall = !ishelper
 value = 440
 ignorehitpause = 1
 triggerall = AILevel > 0
-triggerall = enemynear,statetype != L   ;<-- the dead cannot be comboed
 triggerall = p2dist x > -4   ;<-- never swing at someone behind you
 trigger1 = stateno = 430
 trigger1 = movehit
 trigger1 = p2bodydist x < 42
-trigger1 = random < 820
+trigger1 = random < 520
 
 ; 3c. light chain: c.LP / far s.LP / c.LK on contact -> c.LK
 [State -1, AI Chain c.LK]
@@ -692,43 +641,19 @@ triggerall = !ishelper
 value = 430
 ignorehitpause = 1
 triggerall = AILevel > 0
-triggerall = var(59) < 2
-triggerall = enemynear,statetype != L   ;<-- the dead cannot be comboed
 triggerall = p2dist x > -4   ;<-- never swing at someone behind you
 trigger1 = stateno = 400 || stateno = 205 || stateno = 430
 trigger1 = movecontact
 trigger1 = p2bodydist x < 42
-trigger1 = random < 880
-
-; 3cc. EX LEGS CANCEL: mid-tier ender (400 power) when super isn't banked
-[State -1, AI Cancel EX Legs]
-type = changestate
-triggerall = !ishelper
-value = 1050
-ignorehitpause = 1
-triggerall = AILevel > 0
-triggerall = enemynear,statetype != L   ;<-- the dead cannot be comboed
-triggerall = power >= 400 && power < 520
-triggerall = !((var(58) = 2 && power >= 880) || (var(58) = 3 && power >= 1040) || (var(58) = 4 && power >= 720))
-triggerall = statetype != A
-triggerall = p2statetype != A
-trigger1 = movehit
-trigger1 = var(19)
-trigger1 = stateno = [200,440]
-trigger1 = stateno != 220 && stateno != 410
-trigger1 = stateno != 230 && (stateno != [240,242]) && stateno != 245
-trigger1 = (stateno != [250,275]) || (stateno = [260,265])
-trigger1 = p2bodydist x < 45
-trigger1 = random < 750
+trigger1 = random < 820
 
 ; 3d. LEGS CANCEL on contact when no meter (safe chip on block too)
 [State -1, AI Cancel Legs]
 type = changestate
 triggerall = !ishelper
-value = 1020
+value = 1010
 ignorehitpause = 1
 triggerall = AILevel > 0
-triggerall = enemynear,statetype != L   ;<-- the dead cannot be comboed
 triggerall = statetype != A
 triggerall = p2statetype != A
 trigger1 = movecontact
@@ -738,40 +663,22 @@ trigger1 = stateno != 220 && stateno != 410
 trigger1 = stateno != 230 && (stateno != [240,242]) && stateno != 245
 trigger1 = (stateno != [250,275]) || (stateno = [260,265])
 trigger1 = p2bodydist x < 45
-trigger1 = random < 800
+trigger1 = random < 700
 
-; 3ec. EX SBK JUGGLE: launcher confirms into EX SBK at EX-tier meter
-[State -1, AI AA Confirm EX SBK]
+; 3e. KIKOKEN CANCEL ender at range (safe fireball finish off c.MK tip)
+[State -1, AI Cancel Kikoken]
 type = changestate
 triggerall = !ishelper
-value = 1250
+value = 1110
 ignorehitpause = 1
 triggerall = AILevel > 0
-triggerall = power >= 400 && power < 620
-triggerall = !((var(58) = 2 && power >= 880) || (var(58) = 3 && power >= 1040) || (var(58) = 4 && power >= 720))
 triggerall = statetype != A
-trigger1 = stateno = 260
+triggerall = p2statetype != A
 trigger1 = movehit
-trigger1 = p2statetype = A
-trigger1 = p2dist y = [-60,-5]
-trigger1 = enemynear,vel y > 0
-trigger1 = random < 550
-
-; 3ed. JUGGLE RELAUNCH: b.MP again while they're still up there
-[State -1, AI Juggle Relaunch]
-type = changestate
-triggerall = !ishelper
-value = 260
-triggerall = AILevel > 0
-triggerall = statetype != A
-trigger1 = stateno = 260
-trigger1 = movehit
-trigger1 = time >= 10
-trigger1 = p2statetype = A
-trigger1 = p2dist x > -4
-trigger1 = p2bodydist x < 40
-trigger1 = p2dist y = [-80,-10]
-trigger1 = random < 650
+trigger1 = var(19)
+trigger1 = stateno = 440
+trigger1 = p2bodydist x >= 50
+trigger1 = random < 300
 
 ; 3ee. AA CONFIRM: c.HP launcher connects vs air -> SBK juggle
 [State -1, AI AA Confirm SBK]
@@ -783,23 +690,7 @@ triggerall = AILevel > 0
 trigger1 = stateno = 260
 trigger1 = movehit
 trigger1 = p2statetype = A
-trigger1 = p2dist y = [-60,-5]
-trigger1 = enemynear,vel y > 0
-trigger1 = random < 780
-
-; 3eg. TECH CHASE: air-recovery near her = free relaunch
-[State -1, AI Tech Chase]
-type = changestate
-triggerall = !ishelper
-value = 260
-triggerall = AILevel > 0
-triggerall = p2dist x > -4
-triggerall = ctrl
-triggerall = statetype != A
-trigger1 = enemynear,stateno = [5200,5219]
-trigger1 = p2dist y = [-85,-10]
-trigger1 = p2bodydist x < 45
-trigger1 = random < 650
+trigger1 = random < 700
 
 ; 3f. AIR CHAIN: any air normal on contact -> j.HK ender
 [State -1, AI Air Chain]
@@ -834,7 +725,6 @@ type = changestate
 triggerall = !ishelper
 value = 440
 triggerall = AILevel > 0
-triggerall = enemynear,statetype != L   ;<-- the dead cannot be comboed
 triggerall = p2dist x > -4   ;<-- never swing at someone behind you
 trigger1 = stateno = 52
 trigger1 = prevstateno = [600,699]
@@ -855,7 +745,6 @@ triggerall = statetype != A
 triggerall = ctrl || (stateno = [130,141]) || (stateno = [150,155])
 trigger1 = enemynear,movetype = I
 trigger1 = enemynear,ctrl = 0
-trigger1 = enemynear,animtime <= -16   ;<-- recovery long enough to guarantee it
 trigger1 = p2statetype != A
 trigger1 = p2statetype != L
 trigger1 = p2bodydist x = [55,75]
@@ -875,7 +764,7 @@ trigger1 = enemynear,ctrl = 0
 trigger1 = p2statetype != A
 trigger1 = p2statetype != L
 trigger1 = p2bodydist x < 17
-trigger1 = random < 750
+trigger1 = random < 550
 
 ; 4c. RECOVERY PUNISH: foe in recovery in range -> c.MK (confirms cancel)
 [State -1, AI Punish c.MK]
@@ -891,21 +780,7 @@ trigger1 = enemynear,ctrl = 0
 trigger1 = p2statetype != A
 trigger1 = p2statetype != L
 trigger1 = p2bodydist x < 70
-trigger1 = random < 800
-
-; 4cc. LANDING PUNISH: whiffed jump-in lands next to her -> c.MK confirm
-[State -1, AI Landing Punish]
-type = changestate
-triggerall = !ishelper
-value = 440
-triggerall = AILevel > 0
-triggerall = enemynear,statetype != L   ;<-- the dead cannot be comboed
-triggerall = p2dist x > -4
-triggerall = ctrl
-triggerall = statetype != A
-trigger1 = enemynear,stateno = 52
-trigger1 = p2bodydist x = [10,62]
-trigger1 = random < 750
+trigger1 = random < 650
 
 ; 4d. WHIFF PUNISH: foe attacking but OUT of reach -> step on their limb
 [State -1, AI Whiff Punish c.MK]
@@ -913,126 +788,14 @@ type = changestate
 triggerall = !ishelper
 value = 440
 triggerall = AILevel > 0
-triggerall = enemynear,statetype != L   ;<-- the dead cannot be comboed
 triggerall = p2dist x > -4   ;<-- never swing at someone behind you
 triggerall = ctrl
 triggerall = statetype != A
 trigger1 = p2movetype = A
 trigger1 = !inguarddist
 trigger1 = p2statetype != A
-trigger1 = p2bodydist x = [44,75]
-trigger1 = random < 700
-
-; 4dd. CROUCH-SPAM COUNTER: stubby crouch attacks whiffing at range -> c.MK
-; (short pokes barely trip inguarddist, so guard gets no warning; the answer
-;  is outranging them: c.MK reaches 103, their stub doesn't)
-[State -1, AI Counter Crouch Poke]
-type = changestate
-triggerall = !ishelper
-value = 440
-triggerall = AILevel > 0
-triggerall = p2dist x > -4
-triggerall = ctrl
-triggerall = statetype != A
-trigger1 = enemynear,statetype = C
-trigger1 = enemynear,movetype = A
-trigger1 = !inguarddist
-trigger1 = p2bodydist x = [25,60]
-trigger1 = random < 520
-
-; 4de. WHIFF PUNISH s.MP: faster button for close-range whiffs
-[State -1, AI Whiff Punish s.MP]
-type = changestate
-triggerall = !ishelper
-value = 210
-triggerall = AILevel > 0
-triggerall = enemynear,statetype != L   ;<-- the dead cannot be comboed
-triggerall = p2dist x > -4
-triggerall = ctrl
-triggerall = statetype != A
-trigger1 = p2movetype = A
-trigger1 = !inguarddist
-trigger1 = p2statetype != A
-trigger1 = p2bodydist x = [18,44]
-trigger1 = random < 700
-
-; --- 4z. TURN THEFT : pressure is not a sentence ---------------------------
-; Ibuki-class AIs chain endlessly and cancel their own blockstun into
-; attacks. The ONLY counterplay is stealing turns by force, using the same
-; legal tech her file proves works (attacking out of guard-hit states).
-
-; 4z1. ABARE: jab out of blockstun gaps. Her chains have 1-3 tick seams;
-; c.LK is active in 4. Connects -> the chain engine converts the steal.
-[State -1, AI Abare c.LK]
-type = changestate
-triggerall = !ishelper
-value = 430
-triggerall = AILevel > 0
-triggerall = p2dist x > -4
-trigger1 = stateno = [150,153]
-trigger1 = p2bodydist x < 30
-trigger1 = enemynear,statetype != A
-trigger1 = random < 240
-
-; 4z2. GUARD THROW: walk-up tick throws get thrown FIRST
-; (Punish Throw needs their recovery; this covers the pre-throw walk-up)
-[State -1, AI Guard Throw]
-type = changestate
-triggerall = !ishelper
-value = 800
-triggerall = AILevel > 0
-triggerall = p2dist x > -4
-trigger1 = stateno = [130,141]
-trigger1 = enemynear,ctrl
-trigger1 = enemynear,movetype != A
-trigger1 = p2statetype != A
-trigger1 = p2statetype != L
-trigger1 = p2bodydist x < 17
-trigger1 = random < 380
-
-; 4z3. CORNERED REVERSAL: EX SBK out of guard when trapped on the wall
-; (flies up-forward: damage + corner escape in one). Costed, so rare.
-[State -1, AI Corner Reversal EX SBK]
-type = changestate
-triggerall = !ishelper
-value = 1250
-triggerall = AILevel > 0
-triggerall = power >= 400
-triggerall = backedgebodydist < 30
-trigger1 = stateno = [130,141]
-trigger1 = enemynear,movetype = A
-trigger1 = p2bodydist x < 40
-trigger1 = random < 130
-
-; 4z4. PARRY ESCAPE: cornered parry -> dash THROUGH them (side steal)
-; instead of punishing in place. Uses the parry's frame advantage to flip
-; the stage position entirely.
-[State -1, AI Parry Escape Dash]
-type = changestate
-triggerall = !ishelper
-value = 100
-triggerall = AILevel > 0
-triggerall = backedgebodydist < 35
-trigger1 = stateno = [90,93]
-trigger1 = AnimElemTime(4) >= 0
-trigger1 = p2statetype != A
-trigger1 = random < 600
-
-; 4z5. FRAME TRAP: her AI mashes out of OUR blockstrings (25%/frame) --
-; so a blocked light deliberately re-presses into the mash = counter-hit
-; into the full chain engine. Her habit becomes our combo starter.
-[State -1, AI Frame Trap c.LK]
-type = changestate
-triggerall = !ishelper
-value = 430
-triggerall = AILevel > 0
-triggerall = p2dist x > -4
-triggerall = enemynear,statetype != L
-trigger1 = stateno = 430 || stateno = 400 || stateno = 210
-trigger1 = moveguarded
-trigger1 = time >= 9
-trigger1 = p2bodydist x < 30
-trigger1 = random < 480
+trigger1 = p2bodydist x = [30,75]
+trigger1 = random < 420
 
 ; --- 5. GUARD : mirror the attacker's stance --------------------------------
 ; Standing foes mostly hit mid (stand-block them); crouching foes hit low
@@ -1042,12 +805,11 @@ type = changestate
 triggerall = !ishelper
 value = 130
 triggerall = AILevel > 0
-triggerall = life > 200 || random < 560   ;<-- chip kills: gamble on parry
 triggerall = ctrl
 triggerall = statetype != A
 trigger1 = inguarddist
 trigger1 = enemynear,statetype = S || enemynear,statetype = A
-trigger1 = random < 960
+trigger1 = random < 900
 trigger2 = inguarddist
 trigger2 = enemynear,statetype = C
 trigger2 = random < 120
@@ -1057,12 +819,11 @@ type = changestate
 triggerall = !ishelper
 value = 131
 triggerall = AILevel > 0
-triggerall = life > 200 || random < 560   ;<-- chip kills: gamble on parry
 triggerall = ctrl
 triggerall = statetype != A
 trigger1 = inguarddist
 trigger1 = enemynear,statetype = C
-trigger1 = random < 960
+trigger1 = random < 900
 trigger2 = inguarddist
 trigger2 = enemynear,statetype = S
 trigger2 = random < 120
@@ -1076,7 +837,8 @@ value = ifelse(enemynear,statetype = C, 131, 130)
 triggerall = AILevel > 0
 trigger1 = stateno = 100
 trigger1 = inguarddist
-trigger1 = random < 850
+trigger1 = enemynear,movetype = A
+trigger1 = random < 750
 
 ; 5c. TURN REACT: enemy crossed behind while she's in guard -> reset to idle
 ; (guard states never auto-turn; idle does, then guard re-engages correctly)
@@ -1087,34 +849,7 @@ value = 0
 triggerall = AILevel > 0
 trigger1 = stateno = [130,141]
 trigger1 = p2dist x < -8
-trigger1 = random < 900
-
-; 6cc. JUMP-AWAY SPACING: step outside the jump arc; the whiff feeds
-[State -1, AI Jump Away Space]
-type = changestate
-triggerall = !ishelper
-value = 105
-triggerall = AILevel > 0
-triggerall = ctrl
-triggerall = statetype != A
-triggerall = backedgebodydist > 60
-trigger1 = p2statetype = A
-trigger1 = enemynear,vel y < 0
-trigger1 = p2bodydist x = [30,90]
-trigger1 = random < 450
-
-; 6c. JUMP-UNDER EVADE: step out from under the arc; landing punish feeds
-[State -1, AI Jump Under Evade]
-type = changestate
-triggerall = !ishelper
-value = ifelse(backedgebodydist < 40, 100, 105)
-triggerall = AILevel > 0
-triggerall = ctrl
-triggerall = statetype != A
-trigger1 = p2statetype = A
-trigger1 = p2dist y < -60
-trigger1 = p2bodydist x < 35
-trigger1 = random < 250
+trigger1 = random < 800
 
 ; --- 6. ANTI-AIR -------------------------------------------------------------
 ; 6a. FAST AA: c.HP launcher vs quick jumps (cancelable -> air confirms)
@@ -1126,12 +861,10 @@ triggerall = AILevel > 0
 triggerall = p2dist x > -12
 triggerall = ctrl || (stateno = [130,141])
 triggerall = statetype != A
-trigger1 = (enemynear,movetype != A) || (p2dist y > -45)
 trigger1 = p2statetype = A
 trigger1 = p2bodydist x < 55
-trigger1 = p2dist y = [-95,-25]
-trigger1 = enemynear,vel y > -1
-trigger1 = random < 930
+trigger1 = p2dist y < -20
+trigger1 = random < 850
 
 ; 6b. SBK only for deep, clearly descending jump-ins
 [State -1, AI Anti-Air SBK]
@@ -1142,14 +875,14 @@ triggerall = AILevel > 0
 triggerall = ctrl || (stateno = [130,141])
 triggerall = statetype != A
 trigger1 = p2statetype = A
-trigger1 = p2bodydist x < 60
-trigger1 = p2dist y = [-80,-25]
+trigger1 = p2bodydist x < 75
+trigger1 = p2dist y < -30
 trigger1 = enemynear,vel y > 0.5
-trigger1 = random < 300
+trigger1 = random < 550
 trigger2 = p2statetype = A
 trigger2 = p2dist x < 8
-trigger2 = p2dist y = [-55,-15]
-trigger2 = random < 300
+trigger2 = p2dist y < -20
+trigger2 = random < 500
 
 ; 6bb. AIR THROW: beats short hops when she's airborne with them
 [State -1, AI Air Throw]
@@ -1162,7 +895,7 @@ triggerall = stateno = 50
 trigger1 = p2statetype = A
 trigger1 = p2bodydist x < 24
 trigger1 = p2dist y = [-30,30]
-trigger1 = random < 600
+trigger1 = random < 450
 
 [State -1, AI Air-to-Air]
 type = changestate
@@ -1173,7 +906,7 @@ triggerall = statetype = A
 triggerall = stateno = 50
 trigger1 = p2statetype = A
 trigger1 = p2bodydist x < 55
-trigger1 = random < 650
+trigger1 = random < 500
 
 ; --- 7. OKIZEME : own the knockdown -------------------------------------------
 ; 7a. close the gap while they're down
@@ -1185,8 +918,8 @@ triggerall = AILevel > 0
 triggerall = ctrl
 triggerall = statetype != A
 trigger1 = p2statetype = L
-trigger1 = p2bodydist x > 36
-trigger1 = random < 260
+trigger1 = p2bodydist x > 60
+trigger1 = random < 220
 
 ; 7aa. OKI SPACING: don't stand on the body (wake-throw bait range)
 [State -1, AI Oki Spacing]
@@ -1206,7 +939,7 @@ type = changestate
 triggerall = !ishelper
 value = 130
 triggerall = AILevel > 0
-triggerall = ctrl || stateno = 100
+triggerall = ctrl
 triggerall = statetype != A
 triggerall = p2bodydist x < 45
 trigger1 = enemynear,stateno = 5120
@@ -1223,38 +956,15 @@ triggerall = !ishelper
 value = 440
 triggerall = AILevel > 0
 triggerall = p2dist x > -4   ;<-- never swing at someone behind you
-triggerall = ctrl || stateno = 100
+triggerall = ctrl
 triggerall = statetype != A
-triggerall = p2bodydist x < 56
+triggerall = p2bodydist x < 40
 trigger1 = enemynear,stateno = 5120
-trigger1 = enemynear,animtime = [-8,-5]
+trigger1 = enemynear,animtime = [-9,-5]
 trigger1 = random < 520
 trigger2 = enemynear,stateno = [5099,5199]
-trigger2 = enemynear,animtime = [-8,-5]
+trigger2 = enemynear,animtime = [-9,-5]
 trigger2 = random < 520
-trigger3 = enemynear,prevstateno = [5099,5199]
-trigger3 = enemynear,time < 5
-trigger3 = random < 900
-
-; 7bb. FAST MEATY c.LK: 4-tick startup, window measured to overlap wake frame
-[State -1, AI Meaty c.LK]
-type = changestate
-triggerall = !ishelper
-value = 430
-triggerall = AILevel > 0
-triggerall = p2dist x > -4
-triggerall = ctrl || stateno = 100
-triggerall = statetype != A
-triggerall = p2bodydist x < 30
-trigger1 = enemynear,stateno = 5120
-trigger1 = enemynear,animtime = [-6,-3]
-trigger1 = random < 420
-trigger2 = enemynear,stateno = [5099,5199]
-trigger2 = enemynear,animtime = [-6,-3]
-trigger2 = random < 420
-trigger3 = enemynear,prevstateno = [5099,5199]
-trigger3 = enemynear,time < 4
-trigger3 = random < 800
 
 ; 7c. wake-up THROW mixup
 [State -1, AI Meaty Throw]
@@ -1263,18 +973,15 @@ triggerall = !ishelper
 value = 800
 triggerall = AILevel > 0
 triggerall = p2dist x > -4   ;<-- never swing at someone behind you
-triggerall = ctrl || stateno = 100
+triggerall = ctrl
 triggerall = statetype != A
 triggerall = p2bodydist x < 16
 trigger1 = enemynear,stateno = 5120
 trigger1 = enemynear,animtime >= -2
-trigger1 = random < 160
+trigger1 = random < 120
 trigger2 = enemynear,stateno = [5099,5199]
 trigger2 = enemynear,animtime >= -2
-trigger2 = random < 160
-trigger3 = enemynear,prevstateno = [5099,5199]
-trigger3 = enemynear,time < 4
-trigger3 = random < 380
+trigger2 = random < 120
 
 ; --- 8. NEUTRAL OFFENSE : decisive footsies -----------------------------------
 [State -1, AI Poke c.LK]
@@ -1289,15 +996,14 @@ trigger1 = p2statetype != A
 trigger1 = p2movetype != H
 trigger1 = enemynear,stateno != [40,41]
 trigger1 = enemynear,vel y = 0
-trigger1 = p2bodydist x < 32
-trigger1 = random < 240 + (32 - p2bodydist x) * 10
+trigger1 = p2bodydist x < 28
+trigger1 = random < 320 + (28 - p2bodydist x) * 10
 
 [State -1, AI Poke s.MP]
 type = changestate
 triggerall = !ishelper
 value = 210
 triggerall = AILevel > 0
-triggerall = (enemynear,power < 950) || (random < 450)   ;<-- respect their super
 triggerall = p2dist x > -4   ;<-- never swing at someone behind you
 triggerall = ctrl
 triggerall = statetype != A
@@ -1306,7 +1012,7 @@ trigger1 = p2movetype != H
 trigger1 = enemynear,stateno != [40,41]
 trigger1 = enemynear,vel y = 0
 trigger1 = p2movetype != A
-trigger1 = p2bodydist x < 52
+trigger1 = p2bodydist x < 58
 trigger1 = random < 240
 
 [State -1, AI Poke c.MK]
@@ -1314,7 +1020,6 @@ type = changestate
 triggerall = !ishelper
 value = 440
 triggerall = AILevel > 0
-triggerall = (enemynear,power < 950) || (random < 450)   ;<-- respect their super
 triggerall = p2dist x > -4   ;<-- never swing at someone behind you
 triggerall = ctrl
 triggerall = statetype != A
@@ -1323,8 +1028,8 @@ trigger1 = p2statetype != A
 trigger1 = enemynear,stateno != [40,41]
 trigger1 = enemynear,vel y = 0
 trigger1 = p2movetype != A
-trigger1 = p2bodydist x = [32,68]
-trigger1 = random < 200
+trigger1 = p2bodydist x = [34,72]
+trigger1 = random < 230
 
 ; sweep: PUNISH-ONLY tool (recovering foes) -> free okizeme
 [State -1, AI Sweep]
@@ -1355,7 +1060,7 @@ trigger1 = p2movetype != A
 trigger1 = p2statetype != L
 trigger1 = enemynear,vel y = 0
 trigger1 = p2bodydist x = [40,80]
-trigger1 = random < 45
+trigger1 = random < 40
 
 [State -1, AI Kikoken]
 type = changestate
@@ -1384,7 +1089,7 @@ trigger1 = p2statetype != L
 trigger1 = p2movetype != H
 trigger1 = p2movetype != A
 trigger1 = p2bodydist x < 17
-trigger1 = random < 420
+trigger1 = random < 380
 
 ; --- 10. MOVEMENT ---------------------------------------------------------------
 ; --- 10b. BAIT STEP : back off at footsie range to draw a whiff ------------
@@ -1394,13 +1099,12 @@ type = changestate
 triggerall = !ishelper
 value = 105
 triggerall = AILevel > 0
-triggerall = backedgebodydist > 60   ;<-- never bait toward the wall
 triggerall = ctrl
 triggerall = statetype != A
-trigger1 = p2bodydist x = [36,95]
+trigger1 = p2bodydist x = [40,85]
 trigger1 = p2movetype != A
 trigger1 = p2statetype != L
-trigger1 = random < 50
+trigger1 = random < 28
 
 [State -1, AI Approach Dash]
 type = changestate
@@ -1409,17 +1113,15 @@ value = 100
 triggerall = AILevel > 0
 triggerall = ctrl
 triggerall = statetype != A
-trigger1 = p2statetype != A
 trigger1 = p2bodydist x > 110
 trigger1 = p2movetype != A
-trigger1 = random < 60
+trigger1 = random < 90
 
 [State -1, AI Retreat Dash]
 type = changestate
 triggerall = !ishelper
 value = 105
 triggerall = AILevel > 0
-triggerall = backedgebodydist > 60
 triggerall = ctrl
 triggerall = statetype != A
 trigger1 = p2bodydist x < 20
