@@ -592,16 +592,24 @@ triggerall = AILevel > 0
 triggerall = var(21) = 0
 triggerall = roundstate = 2
 triggerall = statetype != A
-trigger1 = ctrl || stateno = 130 || stateno = 131 || stateno = 5120
+trigger1 = ctrl || stateno = 130 || stateno = 131 || stateno = 5120 || (stateno = [90,95])
 trigger1 = inguarddist
 trigger1 = enemynear,movetype = A
 trigger1 = enemynear,statetype != C
 trigger1 = random < 650
 trigger3 = life < 220
-trigger3 = ctrl || stateno = 130 || stateno = 131 || stateno = 5120
+trigger3 = ctrl || stateno = 130 || stateno = 131 || stateno = 5120 || (stateno = [90,95])
 trigger3 = inguarddist
 trigger3 = enemynear,statetype != C
 trigger3 = random < 850
+trigger4 = ctrl || stateno = 130 || stateno = 131 || stateno = 5120 || (stateno = [90,95])
+trigger4 = inguarddist
+trigger4 = enemynear,stateno = [3000,4699]
+trigger4 = random < 800
+trigger5 = ctrl || stateno = 130 || stateno = 131 || stateno = 5120 || (stateno = [90,95])
+trigger5 = inguarddist
+trigger5 = enemynear,power >= 1000
+trigger5 = random < 700
 trigger2 = ctrl || stateno = 130 || stateno = 131 || stateno = 5120
 trigger2 = inguarddist
 trigger2 = random < 550
@@ -614,23 +622,31 @@ triggerall = AILevel > 0
 triggerall = var(23) = 0
 triggerall = roundstate = 2
 triggerall = statetype != A
-trigger1 = ctrl || stateno = 130 || stateno = 131 || stateno = 5120
+trigger1 = ctrl || stateno = 130 || stateno = 131 || stateno = 5120 || (stateno = [90,95])
 trigger1 = inguarddist
 trigger1 = enemynear,movetype = A
 trigger1 = enemynear,statetype = C
 trigger1 = random < 650
 trigger3 = life < 220
-trigger3 = ctrl || stateno = 130 || stateno = 131 || stateno = 5120
+trigger3 = ctrl || stateno = 130 || stateno = 131 || stateno = 5120 || (stateno = [90,95])
 trigger3 = inguarddist
 trigger3 = enemynear,statetype = C
 trigger3 = random < 850
+trigger4 = ctrl || stateno = 130 || stateno = 131 || stateno = 5120 || (stateno = [90,95])
+trigger4 = inguarddist
+trigger4 = enemynear,stateno = [3000,4699]
+trigger4 = random < 800
+trigger5 = ctrl || stateno = 130 || stateno = 131 || stateno = 5120 || (stateno = [90,95])
+trigger5 = inguarddist
+trigger5 = enemynear,power >= 1000
+trigger5 = random < 700
 
 ; --- 2. PARRY PUNISH (the one true var(38) use) ---------------------------
 ; With meter: buffer the Super Art. Without: c.MK only if it will reach.
 [State -1, AI Parry Punish]
 type = varset
 triggerall = !ishelper
-var(38) = ifelse(p2bodydist x >= 70, ifelse(p2bodydist x < 55, 440, 0), ifelse(var(58) = 2 && power >= 880, 3000, ifelse(var(58) = 3 && power >= 1040, 3100, ifelse(var(58) = 4 && power >= 720, 3200, ifelse(p2bodydist x < 55, 440, 0)))))
+var(38) = ifelse(p2bodydist x >= 70, ifelse(p2bodydist x < 55, 440, 0), ifelse(var(58) = 2 && power >= 880, 3000, ifelse(var(58) = 3 && power >= 1040, 3100, ifelse(var(58) = 4 && power >= 720 && p2statetype = A, 3200, ifelse(p2bodydist x < 55, 440, 0)))))
 triggerall = AILevel > 0
 triggerall = var(38) = 0
 trigger1 = stateno = [90,93]
@@ -661,6 +677,7 @@ triggerall = !ishelper
 value = ifelse(var(58) = 2, 3000, ifelse(var(58) = 4, 3200, 3100))
 ignorehitpause = 1
 triggerall = AILevel > 0
+triggerall = var(58) != 4 || p2statetype = A   ;<-- SA3 is an anti-air super
 triggerall = (p2statetype != A) || (p2dist y > -50 && enemynear,vel y > 0)   ;<-- kick-height only
 triggerall = stateno != 440 || p2bodydist x < 62   ;<-- no tip-range super whiffs
 triggerall = enemynear,statetype != L   ;<-- the dead cannot be comboed
@@ -869,6 +886,7 @@ type = changestate
 triggerall = !ishelper
 value = ifelse(var(58) = 2, 3000, ifelse(var(58) = 4, 3200, 3100))
 triggerall = AILevel > 0
+triggerall = var(58) != 4   ;<-- never raw SA3 at grounded targets
 triggerall = p2dist x > -4   ;<-- never swing at someone behind you
 triggerall = (var(58) = 2 && power >= 880) || (var(58) = 3 && power >= 1040) || (var(58) = 4 && power >= 720)
 triggerall = statetype != A
@@ -1159,7 +1177,8 @@ type = changestate
 triggerall = !ishelper
 value = 1220
 triggerall = AILevel > 0
-triggerall = !numhelper(39000) || helper(39000),var(11) > 150
+triggerall = numhelper(39000)
+triggerall = helper(39000),var(11) > 150
 triggerall = ctrl || (stateno = [130,141])
 triggerall = statetype != A
 trigger1 = p2statetype = A
@@ -1335,7 +1354,8 @@ type = changestate
 triggerall = !ishelper
 value = 440
 triggerall = AILevel > 0
-triggerall = !numhelper(39000) || helper(39000),var(1) < 220 || random < 500
+triggerall = numhelper(39000)
+triggerall = (helper(39000),var(1) < 220) || random < 500
 triggerall = (enemynear,power < 950) || (random < 450)   ;<-- respect their super
 triggerall = p2dist x > -4   ;<-- never swing at someone behind you
 triggerall = ctrl
@@ -1369,7 +1389,8 @@ type = changestate
 triggerall = !ishelper
 value = 1310
 triggerall = AILevel > 0
-triggerall = !numhelper(39000) || helper(39000),var(10) > 180   ;<-- no repeats
+triggerall = numhelper(39000)
+triggerall = helper(39000),var(10) > 180   ;<-- no repeats
 triggerall = p2dist x > -4   ;<-- never swing at someone behind you
 triggerall = ctrl
 triggerall = statetype != A
@@ -1417,7 +1438,8 @@ type = changestate
 triggerall = !ishelper
 value = 105
 triggerall = AILevel > 0
-triggerall = !numhelper(39000) || helper(39000),var(12) > 90
+triggerall = numhelper(39000)
+triggerall = helper(39000),var(12) > 90
 triggerall = backedgebodydist > 60   ;<-- never bait toward the wall
 triggerall = ctrl
 triggerall = statetype != A
@@ -1425,13 +1447,19 @@ trigger1 = p2bodydist x = [36,95]
 trigger1 = p2movetype != A
 trigger1 = p2statetype != L
 trigger1 = random < 50
+trigger2 = enemynear,power >= 1000
+trigger2 = p2bodydist x = [30,95]
+trigger2 = p2movetype != A
+trigger2 = p2statetype != L
+trigger2 = random < 100
 
 [State -1, AI Approach Dash]
 type = changestate
 triggerall = !ishelper
 value = 100
 triggerall = AILevel > 0
-triggerall = !numhelper(39000) || helper(39000),var(1) < 220 || random < 500   ;<-- jumpy foe: advance less
+triggerall = numhelper(39000)
+triggerall = (helper(39000),var(1) < 220) || random < 500   ;<-- jumpy foe: advance less
 triggerall = ctrl
 triggerall = statetype != A
 trigger1 = p2statetype != A
