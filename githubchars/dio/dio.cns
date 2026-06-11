@@ -38452,6 +38452,11 @@ anim = 6900
 velset = 0,0
 ctrl = 0
 
+[State 3610, Tag Bench Cleanup]
+type = DestroySelf
+trigger1 = root,stateno = [6565610, 6565611]
+ignorehitpause = 1
+
 [State 181, EnvColor]
 type = Bgpalfx
 trigger1 = 1
@@ -42858,6 +42863,43 @@ trigger1 = !ishelper
 trigger1 = stateno = [6565610, 6565611]
 trigger1 = !(prevstateno = [6565610, 6565611])
 channel = 0
+ignorehitpause = 1
+
+; TIMESTOP vs TAG-OUT: the sustained stop is one long engine Pause that
+; only the owner's own code can cancel -- code his tag-out replaces. The
+; engine helper dies the same frame he benches (helpers process after the
+; root), so it can't be the witness. Instead the root RECORDS ownership
+; in a persistent map while the stop runs, cancels off the map when
+; benched, and clears it immediately after (single-shot: a benched
+; character can never suppress a later enemy timestop).
+[State -2, Timestop Owner Flag]
+type = mapset
+trigger1 = !ishelper
+trigger1 = numhelper(3610)
+map = "ownStop"
+value = 1
+ignorehitpause = 1
+
+[State -2, Tag Timestop Cancel]
+type = pause
+trigger1 = !ishelper
+trigger1 = stateno = [6565610, 6565611]
+trigger1 = map(ownStop) = 1
+time = 0
+movetime = 0
+ignorehitpause = 1
+
+[State -2, Timestop Owner Clear]
+type = mapset
+trigger1 = !ishelper
+trigger1 = stateno = [6565610, 6565611]
+trigger1 = map(ownStop) = 1
+trigger2 = !ishelper
+trigger2 = !numhelper(3610)
+trigger2 = !(stateno = [6565610, 6565611])
+trigger2 = map(ownStop) = 1
+map = "ownStop"
+value = 0
 ignorehitpause = 1
 
 

@@ -233,6 +233,20 @@ ignoreHitPause if roundState = 2 && !isHelper {
 	}
 }
 
+
+# Hide bound helpers while their root is leaving the screen or benched.
+# Helpers never execute their owner's negative states, so character-side
+# fixes cannot reach them; this global state runs for helpers too.
+# Exemption: a stand in tandem mode (the HFTF template keeps the owner's
+# var(8) at 2 through the barrage) stays visible and keeps attacking
+# through the switch. Redirected var reads are used because redirected
+# map reads return 0 in this build.
+ignoreHitPause if isHelper && teamSide != 0 && roundState = 2 {
+	if root, teamMode = Tag && root, stateNo >= const(StateTagLeavingScreen) && root, stateNo <= const(StateTagWaitingOutside) && root, var(8) != 2 {
+		assertSpecial{flag: invisible; flag2: noShadow}
+	}
+}
+
 #===============================================================================
 # Global states
 #===============================================================================
@@ -298,7 +312,8 @@ ignoreHitPause if !const(Default.Enable.Tag) || isHelper || teamSide = 0 {
 						let partnerId = $previousPartnerId;
 					}
 					# having control, command buffered, partner standby
-					if ctrl && $partnerId > 0 && playerId($partnerId),stateNo = playerId($partnerId),const(StateTagWaitingOutside) {
+					# ownStop: set by sustained-timestop owners (e.g. HFTF characters) while their stop runs; the switch is deferred until it ends.
+					if ctrl && map(ownStop) = 0 && $partnerId > 0 && playerId($partnerId),stateNo = playerId($partnerId),const(StateTagWaitingOutside) {
 						mapSet{map: "_iksys_tagSwitchCooldown"; value: playerId($partnerId),const(TagSwitchCooldown); redirectid: $partnerId}
 						map(_iksys_tagPartnerId) := 0;
 						lifebarAction{spr: const(MsgPartnerChange), 0; top: 1}

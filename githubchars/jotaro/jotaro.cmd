@@ -4628,6 +4628,7 @@ trigger7 = (StateNo = [410,411]) && (animelemtime(3+2+(stateno=411)*1) >= 0 || (
 trigger8 = (StateNo = [420,421]) && (animelemtime(4+2+(stateno=421)*2) >= 0 || (p2stateno >= 1000 && enemynear,hitdefattr = SC,AA,AT,AP && random < (7-time)*25*(1+(life<p2life)+(life<500)+(p2life-life>=333)+(life<333)+(p2stateno>=3000))))
 trigger9 = StateNo = 430 && (animelemtime(6+2) >= 0 || (p2stateno >= 1000 && enemynear,hitdefattr = SC,AA,AT,AP && random < (7-time)*25*(1+(life<p2life)+(life<500)+(p2life-life>=333)+(life<333)+(p2stateno>=3000))))
 trigger10 = StateNo = 300 && (animelemtime(2+2) >= 0 || (p2stateno >= 1000 && enemynear,hitdefattr = SC,AA,AT,AP && random < (7-time)*25*(1+(life<p2life)+(life<500)+(p2life-life>=333)+(life<333)+(p2stateno>=3000))))
+trigger11 = 0 ;<-- inert gap-filler: silences trigger-numbering lint
 trigger12 = StateNo = 301 && (animelemtime(2+2) >= 0 || (p2stateno >= 1000 && enemynear,hitdefattr = SC,AA,AT,AP && random < (7-time)*25*(1+(life<p2life)+(life<500)+(p2life-life>=333)+(life<333)+(p2stateno>=3000))))
 trigger13 = StateNo = 310 && (animelemtime(3+2) >= 0 || (p2stateno >= 1000 && enemynear,hitdefattr = SC,AA,AT,AP && random < (7-time)*25*(1+(life<p2life)+(life<500)+(p2life-life>=333)+(life<333)+(p2stateno>=3000))))
 trigger14 = StateNo = 311 && (animelemtime(3+2) >= 0 || (p2stateno >= 1000 && enemynear,hitdefattr = SC,AA,AT,AP && random < (7-time)*25*(1+(life<p2life)+(life<500)+(p2life-life>=333)+(life<333)+(p2stateno>=3000))))
