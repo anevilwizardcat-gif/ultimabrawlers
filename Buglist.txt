@@ -1,0 +1,4 @@
+- when a cvs character is knocked out in 2v2 tag, their meter appears as if they are tagged in.
+- jotaro using star finger before tagging out results in "star platinum" being stuck at the edge of the stage until jotaro tags back in.
+- stands in tandem turn invisible when the user tags out, the stand in tandem mode specifically should remain visible until the tandem is over- however it might rely on the users presence, so you'll need a workaround or reworking of it that doesn't break anything.
+- cvs character "gp" counters need to also toggle just like their meters do.
