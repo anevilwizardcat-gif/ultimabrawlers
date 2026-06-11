@@ -2850,6 +2850,7 @@ trigger4 = var(51) = [80,85)
 trigger4 = stateno = 245 && animelemtime(7) <= 0 && var(38) = 245
 trigger4 = numtarget(245)
 trigger4 = target(245),stateno = [5000,5011]
+trigger5 = 0 ;<-- inert gap-filler: silences trigger-numbering lint
 trigger6 = var(51) = [80,85)
 trigger6 = stateno = 910
 trigger6 = AnimelemTime(13) = 1

@@ -355,7 +355,7 @@ type = helper
 trigger1 = numhelper(40000) = 0
 trigger1 = stateno = 191
 trigger1 = time = 1
-trigger1 = numpartner = 0
+trigger1 = 1 ;<-- tag fix: SA initializer must also spawn in team modes (was: numpartner = 0)
 trigger1 = RoundsExisted = 0
 ID = 40000
 pos = 0,0
@@ -1457,34 +1457,34 @@ fvar(26) = 0.56
 
 [State -2, VarSet]
 type = VarSet
-triggerall = (enemy,teammode = single) || (enemy,teammode = turns)
+triggerall = (enemy,teammode = single) || (enemy,teammode = turns) || (enemy,teammode = tag)
 trigger1 = (100*enemy,life/enemy,const(data.life))>30
 fvar(26) = 1.0
 
 [State -2, VarSet]
 type = VarSet
-triggerall = (enemy,teammode = single) || (enemy,teammode = turns)
+triggerall = (enemy,teammode = single) || (enemy,teammode = turns) || (enemy,teammode = tag)
 trigger1 = (100*enemy,life/enemy,const(data.life))<=30
 trigger1 = (100*enemy,life/enemy,const(data.life))>20
 fvar(26) = 0.89
 
 [State -2, VarSet]
 type = VarSet
-triggerall = (enemy,teammode = single) || (enemy,teammode = turns)
+triggerall = (enemy,teammode = single) || (enemy,teammode = turns) || (enemy,teammode = tag)
 trigger1 = (100*enemy,life/enemy,const(data.life))<=20
 trigger1 = (100*enemy,life/enemy,const(data.life))>10
 fvar(26) = 0.78
 
 [State -2, VarSet]
 type = VarSet
-triggerall = (enemy,teammode = single) || (enemy,teammode = turns)
+triggerall = (enemy,teammode = single) || (enemy,teammode = turns) || (enemy,teammode = tag)
 trigger1 = (100*enemy,life/enemy,const(data.life))<=10
 trigger1 = (100*enemy,life/enemy,const(data.life))>5
 fvar(26) = 0.67
 
 [State -2, VarSet]
 type = VarSet
-triggerall = (enemy,teammode = single) || (enemy,teammode = turns)
+triggerall = (enemy,teammode = single) || (enemy,teammode = turns) || (enemy,teammode = tag)
 trigger1 = (100*enemy,life/enemy,const(data.life))<=5
 fvar(26) = 0.56
 
