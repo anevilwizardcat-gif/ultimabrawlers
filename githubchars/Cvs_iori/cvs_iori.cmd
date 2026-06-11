@@ -1802,10 +1802,10 @@ x = Const(velocity.run.fwd.x)
 [State 100,ChangeState]
 type = ChangeState
 triggerall = Time >= 10
-trigger2 = !var(59)
-trigger2 = Command != "holdfwd"
 trigger1 = var(59)
 Trigger1 = RoundState != 2||inguarddist||P2BodyDist X<=10||P2BodyDist X<=90&&P2BodyDist Y>=-120&&EnemyNear,MoveType!=H
+trigger2 = !var(59)
+trigger2 = Command != "holdfwd"
 value = 101
 ctrl = 1
 

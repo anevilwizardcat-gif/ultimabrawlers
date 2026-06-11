@@ -580,6 +580,7 @@ type = PowerAdd
 triggerall = movehit
 trigger1 = numtarget(210) || numtarget(220)
 trigger2 = numtarget(410) || numtarget(440)
+trigger3 = 0 ;<-- inert gap-filler
 trigger4 = numtarget(910) || numtarget(911)
 value = 30
 ignorehitpause = 1

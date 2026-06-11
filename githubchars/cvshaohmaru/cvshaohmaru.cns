@@ -13328,6 +13328,7 @@ trigger1 = !partner,authorname = "Jesuszilla"
 trigger2 = numpartner
 trigger2 = ID<partner,ID
 trigger3 = !numpartner
+trigger4 = numpartner && teamMode = Tag ;<-- tag: every character hosts their OWN gauge; bench-gates then handle visibility per owner
 id = 6100
 name = "gauge"
 pos = 0,300
@@ -15667,7 +15668,7 @@ trigger1 = var(10) = [1,4]
 trigger1 = command != "holdfwd" && Command != "holdback" && command != "holdup" && Command != "holddown"
 var(0) = 2**6
 
-[State -2, Blocking-12
+[State -2, Blocking-12]
 type = VarAdd
 triggerall = var(0)&2**7
 trigger1 = var(11) >= 20

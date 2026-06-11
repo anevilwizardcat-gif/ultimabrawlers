@@ -5610,6 +5610,21 @@ velset = 0,0
 ctrl = 0
 ownpal = 1
 
+[State 21000, Bench UI Sweep]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611]
+trigger2 = roundstate > 2
+ignorehitpause = 1
+
+[State 21000, Bench UI Restore]
+type = ChangeState
+trigger1 = roundstate <= 2
+trigger1 = !(root,stateno = [6565610, 6565611])
+trigger1 = numexplod(21010) = 0
+trigger1 = time > 0
+value = stateno
+ignorehitpause = 1
+
 [State 5900, 1]
 type = ParentVarSet
 trigger1 = 1
@@ -5617,6 +5632,7 @@ var(30) = 1
 
 [State -2, Explod(P1)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 1
 anim = 21010
 id = 21010
@@ -5634,6 +5650,7 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 2
 anim = 21015
 id = 21010
@@ -5664,6 +5681,7 @@ scale = 0,0
 ;------------------------ Lv.1
 [State -2, Explod(P1-Lv.1)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 1
 anim = 21020
 id = 21020
@@ -5682,6 +5700,7 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 2
 anim = 21025
 id = 21020
@@ -5715,6 +5734,7 @@ ignorehitpause = 1
 
 [State -2, Explod(P1-Lv.1)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 1
 anim = 21030
 id = 21030
@@ -5733,6 +5753,7 @@ Supermovetime = -1
 
 [State -2, Explod(P1-Lv.1)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 2
 anim = 21035
 id = 21030
@@ -5766,6 +5787,7 @@ scale = 0,5
 ;------------------------ Lv.2
 [State -2, Explod(P1-Lv.2)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 1
 anim = 21020
 id = 21021
@@ -5784,6 +5806,7 @@ Supermovetime = -1
 
 [State -2, Explod(P2-Lv.2)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 2
 anim = 21025
 id = 21021
@@ -5819,6 +5842,7 @@ ignorehitpause = 1
 
 [State -2, Explod(P1-Lv.1)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 1
 anim = 21030
 id = 21031
@@ -5837,6 +5861,7 @@ Supermovetime = -1
 
 [State -2, Explod(P1-Lv.1)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 2
 anim = 21035
 id = 21031
@@ -5871,6 +5896,7 @@ ignorehitpause = 1
 ;------------------------ Lv.3
 [State -2, Explod(P1-Lv.3)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 1
 anim = 21020
 id = 21022
@@ -5889,6 +5915,7 @@ Supermovetime = -1
 
 [State -2, Explod(P2-Lv.3)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 2
 anim = 21025
 id = 21022
@@ -5924,6 +5951,7 @@ ignorehitpause = 1
 
 [State -2, Explod(P1-Lv.3)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 1
 anim = 21030
 id = 21032
@@ -5941,6 +5969,7 @@ Supermovetime = -1
 
 [State -2, Explod(P1-Lv.3)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 2
 anim = 21035
 id = 21032
@@ -5974,6 +6003,7 @@ ignorehitpause = 1
 ;------------------------ 枠
 [State -2, Explod(P1)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 1
 anim = 21000
 id = 21000
@@ -5991,6 +6021,7 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 2
 anim = 21005
 id = 21000
@@ -6021,6 +6052,7 @@ scale = 0,0
 ;------------------------ レベル表記
 [State -2, Explod(P1-Lv.1)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 1
 anim = 21041
 id = 21041
@@ -6037,6 +6069,7 @@ Supermovetime = -1
 
 [State -2, Explod(P1-Lv.1)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 2
 anim = 21051
 id = 21041
@@ -6068,6 +6101,7 @@ ignorehitpause = 1
 
 [State -2, Explod(P1-Lv.1)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 1
 anim = 21042
 id = 21042
@@ -6084,6 +6118,7 @@ Supermovetime = -1
 
 [State -2, Explod(P1-Lv.1)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 2
 anim = 21052
 id = 21042
@@ -6115,6 +6150,7 @@ ignorehitpause = 1
 
 [State -2, Explod(P1-Lv.1)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 1
 anim = 21043
 id = 21043
@@ -6131,6 +6167,7 @@ Supermovetime = -1
 
 [State -2, Explod(P1-Lv.1)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 2
 anim = 21053
 id = 21043
@@ -6163,6 +6200,7 @@ ignorehitpause = 1
 ;------------------------ グルーヴ表記
 [State -2, Explod(C-GROOVE)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 1
 anim = Ifelse((Root,var(43)),27001,21001)
 id = 21001
@@ -6180,6 +6218,7 @@ Supermovetime = -1
 ;------------------------ グルーヴ表記
 [State -2, Explod(C-GROOVE)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 2
 anim = Ifelse((Root,var(43)),27001,21001)
 id = 21001
@@ -6254,6 +6293,21 @@ velset = 0,0
 ctrl = 0
 ownpal = 1
 
+[State 22000, Bench UI Sweep]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611]
+trigger2 = roundstate > 2
+ignorehitpause = 1
+
+[State 22000, Bench UI Restore]
+type = ChangeState
+trigger1 = roundstate <= 2
+trigger1 = !(root,stateno = [6565610, 6565611])
+trigger1 = numexplod(22010) = 0
+trigger1 = time > 0
+value = stateno
+ignorehitpause = 1
+
 [State 5900, 1]
 type = ParentVarSet
 trigger1 = 1
@@ -6268,6 +6322,7 @@ ignorehitpause = 1
 
 [State -2, Explod(P1)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 1
 anim = 22010
 id = 22010
@@ -6285,6 +6340,7 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 2
 anim = 22015
 id = 22010
@@ -6314,6 +6370,7 @@ scale = 0,0
 
 [State -2, Explod(P1)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 1
 anim = 22020
 id = 22020
@@ -6332,6 +6389,7 @@ Supermovetime = -1
 
 [State -2, Explod(P1)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 1
 anim = 22021
 id = 22021
@@ -6350,6 +6408,7 @@ Supermovetime = -1
 
 [State -2, Explod(P1)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 1
 anim = 22022
 id = 22022
@@ -6367,6 +6426,7 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 2
 anim = 22025
 id = 22020
@@ -6385,6 +6445,7 @@ Supermovetime = -1
 
 [State -2, Explod(P1)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 2
 anim = 22026
 id = 22021
@@ -6403,6 +6464,7 @@ Supermovetime = -1
 
 [State -2, Explod(P1)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 2
 anim = 22027
 id = 22022
@@ -6420,6 +6482,7 @@ Supermovetime = -1
 
 [State -2, Explod(P1)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 1
 anim = 22000
 id = 22000
@@ -6438,6 +6501,7 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 2
 anim = 22005
 id = 22000
@@ -6468,6 +6532,7 @@ scale = 0,0
 
 [State -2, Explod(P1)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 1
 anim = 22030
 id = 22030
@@ -6486,6 +6551,7 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 2
 anim = 22030
 id = 22030
@@ -6586,6 +6652,7 @@ ignorehitpause = 1
 ;------------------------ グルーヴ表記
 [State -2, Explod(A-GROOVE)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 1
 anim = Ifelse((Root,var(43)),27001,22001)
 id = 22001
@@ -6603,6 +6670,7 @@ Supermovetime = -1
 ;------------------------ グルーヴ表記
 [State -2, Explod(A-GROOVE)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 2
 anim = Ifelse((Root,var(43)),27001,22001)
 id = 22001
@@ -6713,6 +6781,21 @@ velset = 0,0
 ctrl = 0
 ownpal = 1
 
+[State 23000, Bench UI Sweep]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611]
+trigger2 = roundstate > 2
+ignorehitpause = 1
+
+[State 23000, Bench UI Restore]
+type = ChangeState
+trigger1 = roundstate <= 2
+trigger1 = !(root,stateno = [6565610, 6565611])
+trigger1 = numexplod(23010) = 0
+trigger1 = time > 0
+value = stateno
+ignorehitpause = 1
+
 [State 5900, 1]
 type = ParentVarSet
 trigger1 = 1
@@ -6720,6 +6803,7 @@ var(30) = 3
 
 [State -2, Explod(P1)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 1
 anim = 23010
 id = 23010
@@ -6736,6 +6820,7 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 2
 anim = 23015
 id = 23010
@@ -6766,6 +6851,7 @@ ignorehitpause = 1
 
 [State -2, Explod(P1)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 1
 anim = 23020
 id = 23020
@@ -6782,6 +6868,7 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 2
 anim = 23025
 id = 23020
@@ -6812,6 +6899,7 @@ ignorehitpause = 1
 
 [State -2, Explod(P1)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 1
 anim = 23021
 id = 23021
@@ -6828,6 +6916,7 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 2
 anim = 23026
 id = 23021
@@ -6859,6 +6948,7 @@ ignorehitpause = 1
 
 [State -2, Explod(P1)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 1
 anim = 23022
 id = 23022
@@ -6875,6 +6965,7 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 2
 anim = 23027
 id = 23022
@@ -6906,6 +6997,7 @@ ignorehitpause = 1
 
 [State -2, Explod(P1)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 1
 anim = 23030
 id = 23030
@@ -6922,6 +7014,7 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 2
 anim = 23035
 id = 23030
@@ -6953,6 +7046,7 @@ ignorehitpause = 1
 
 [State -2, Explod(P1)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 1
 anim = 23000
 id = 23000
@@ -6969,6 +7063,7 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 2
 anim = 23005
 id = 23000
@@ -6999,6 +7094,7 @@ ignorehitpause = 1
 
 [State -2, Explod(P1)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 1
 anim = 23040
 id = 23040
@@ -7015,6 +7111,7 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 2
 anim = 23040
 id = 23040
@@ -7067,6 +7164,7 @@ var(2) = floor(power/3000)
 ;------------------------ グルーヴ表記
 [State -2, Explod(A-GROOVE)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 1
 anim = Ifelse((Root,var(43)),27001,23001)
 id = 23001
@@ -7084,6 +7182,7 @@ Supermovetime = -1
 ;------------------------ グルーヴ表記
 [State -2, Explod(A-GROOVE)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 2
 anim = Ifelse((Root,var(43)),27001,23001)
 id = 23001
@@ -7135,6 +7234,21 @@ velset = 0,0
 ctrl = 0
 ownpal = 1
 
+[State 24000, Bench UI Sweep]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611]
+trigger2 = roundstate > 2
+ignorehitpause = 1
+
+[State 24000, Bench UI Restore]
+type = ChangeState
+trigger1 = roundstate <= 2
+trigger1 = !(root,stateno = [6565610, 6565611])
+trigger1 = numexplod(24010) = 0
+trigger1 = time > 0
+value = stateno
+ignorehitpause = 1
+
 [State 4000,ChangeState]
 type = ChangeState
 trigger1 = time = 0 && floor(Root,var(52)/10%10)=1
@@ -7162,6 +7276,7 @@ ignorehitpause = 1
 
 [State -2, Explod(P1)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 1
 anim = 24010
 id = 24010
@@ -7179,6 +7294,7 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 2
 anim = 24015
 id = 24010
@@ -7210,6 +7326,7 @@ ignorehitpause = 1
 
 [State -2, Explod(P1)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 1
 anim = 24020
 id = 24020
@@ -7227,6 +7344,7 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 2
 anim = 24025
 id = 24020
@@ -7258,6 +7376,7 @@ ignorehitpause = 1
 
 [State -2, Explod(P1)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 1
 anim = 24000
 id = 24000
@@ -7275,6 +7394,7 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 2
 anim = 24005
 id = 24000
@@ -7306,6 +7426,7 @@ ignorehitpause = 1
 
 [State -2, Explod(P1)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 1
 anim = 24030
 id = 24030
@@ -7323,6 +7444,7 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 2
 anim = 24030
 id = 24030
@@ -7355,6 +7477,7 @@ ignorehitpause = 1
 
 [State -2, Explod(P1)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 1
 anim = 24031
 id = 24031
@@ -7372,6 +7495,7 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 2
 anim = 24031
 id = 24031
@@ -7405,6 +7529,7 @@ ignorehitpause = 1
 ;------------------------ グルーヴ表記
 [State -2, Explod(A-GROOVE)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 1
 anim = Ifelse((Root,var(43)),27001,24001)
 id = 24001
@@ -7422,6 +7547,7 @@ Supermovetime = -1
 ;------------------------ グルーヴ表記
 [State -2, Explod(A-GROOVE)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 2
 anim = Ifelse((Root,var(43)),27001,24001)
 id = 24001
@@ -7504,6 +7630,21 @@ velset = 0,0
 ctrl = 0
 ownpal = 1
 
+[State 24100, Bench UI Sweep]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611]
+trigger2 = roundstate > 2
+ignorehitpause = 1
+
+[State 24100, Bench UI Restore]
+type = ChangeState
+trigger1 = roundstate <= 2
+trigger1 = !(root,stateno = [6565610, 6565611])
+trigger1 = numexplod(24010) = 0
+trigger1 = time > 0
+value = stateno
+ignorehitpause = 1
+
 [State 5900, 1]
 type = ParentVarSet
 trigger1 = 1
@@ -7526,6 +7667,7 @@ ignorehitpause = 1
 
 [State -2, Explod(P1)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 1
 anim = 24010
 id = 24010
@@ -7543,6 +7685,7 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 2
 anim = 24015
 id = 24010
@@ -7574,6 +7717,7 @@ ignorehitpause = 1
 
 [State -2, Explod(P1)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 1
 anim = 24020
 id = 24020
@@ -7591,6 +7735,7 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 2
 anim = 24025
 id = 24020
@@ -7622,6 +7767,7 @@ ignorehitpause = 1
 
 [State -2, Explod(P1)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 1
 anim = 24100
 id = 24000
@@ -7639,6 +7785,7 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 2
 anim = 24105
 id = 24000
@@ -7670,6 +7817,7 @@ ignorehitpause = 1
 
 [State -2, Explod(P1)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 1
 anim = 24030
 id = 24030
@@ -7687,6 +7835,7 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 2
 anim = 24030
 id = 24030
@@ -7719,6 +7868,7 @@ ignorehitpause = 1
 
 [State -2, Explod(P1)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 1
 anim = 24031
 id = 24031
@@ -7736,6 +7886,7 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 2
 anim = 24031
 id = 24031
@@ -7769,6 +7920,7 @@ ignorehitpause = 1
 ;------------------------ グルーヴ表記
 [State -2, Explod(A-GROOVE)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 1
 anim = Ifelse((Root,var(43)),27001,24001)
 id = 24001
@@ -7786,6 +7938,7 @@ Supermovetime = -1
 ;------------------------ グルーヴ表記
 [State -2, Explod(A-GROOVE)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 2
 anim = Ifelse((Root,var(43)),27001,24001)
 id = 24001
@@ -7816,6 +7969,7 @@ ignorehitpause = 1
 
 [State -2, Explod(P2)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 1
 anim = 25030
 id = 25030
@@ -7833,6 +7987,7 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 2
 anim = 25030
 id = 25030
@@ -7850,6 +8005,7 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 1
 anim = 25035
 id = 25030
@@ -7867,6 +8023,7 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 2
 anim = 25035
 id = 25030
@@ -7971,6 +8128,21 @@ velset = 0,0
 ctrl = 0
 ownpal = 1
 
+[State 25000, Bench UI Sweep]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611]
+trigger2 = roundstate > 2
+ignorehitpause = 1
+
+[State 25000, Bench UI Restore]
+type = ChangeState
+trigger1 = roundstate <= 2
+trigger1 = !(root,stateno = [6565610, 6565611])
+trigger1 = numexplod(25010) = 0
+trigger1 = time > 0
+value = stateno
+ignorehitpause = 1
+
 [State 5900, 1]
 type = ParentVarSet
 trigger1 = 1
@@ -7978,6 +8150,7 @@ var(30) = 5
 
 [State -2, Explod(P1)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 1
 anim = 25010
 id = 25010
@@ -7995,6 +8168,7 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 2
 anim = 25015
 id = 25010
@@ -8026,6 +8200,7 @@ ignorehitpause = 1
 
 [State -2, Explod(P1)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 1
 anim = 25020
 id = 25020
@@ -8043,6 +8218,7 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 2
 anim = 25025
 id = 25020
@@ -8074,6 +8250,7 @@ ignorehitpause = 1
 
 [State -2, Explod(P1)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 1
 anim = 25000
 id = 25000
@@ -8091,6 +8268,7 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 2
 anim = 25005
 id = 25000
@@ -8123,6 +8301,7 @@ ignorehitpause = 1
 ;------------------------ グルーヴ表記
 [State -2, Explod(A-GROOVE)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 1
 anim = Ifelse((Root,var(43)),27001,25001)
 id = 25001
@@ -8140,6 +8319,7 @@ Supermovetime = -1
 ;------------------------ グルーヴ表記
 [State -2, Explod(A-GROOVE)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 2
 anim = Ifelse((Root,var(43)),27001,25001)
 id = 25001
@@ -8170,6 +8350,7 @@ ignorehitpause = 1
 
 [State -2, Explod(P1)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 1
 anim = 25040
 id = 25040
@@ -8187,6 +8368,7 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 2
 anim = 25040
 id = 25040
@@ -8219,6 +8401,7 @@ ignorehitpause = 1
 
 [State -2, Explod(P1)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 1
 anim = 25041
 id = 25041
@@ -8236,6 +8419,7 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 2
 anim = 25041
 id = 25041
@@ -8268,6 +8452,7 @@ ignorehitpause = 1
 
 [State -2, Explod(P2)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 1
 anim = 25030
 id = 25030
@@ -8285,6 +8470,7 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 2
 anim = 25030
 id = 25030
@@ -8302,6 +8488,7 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 1
 anim = 25035
 id = 25030
@@ -8319,6 +8506,7 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 2
 anim = 25035
 id = 25030
@@ -8351,6 +8539,7 @@ ignorehitpause = 1
 
 [State -2, Explod(P2)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 1
 anim = 25030
 id = 25031
@@ -8368,6 +8557,7 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 2
 anim = 25030
 id = 25031
@@ -8385,6 +8575,7 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 1
 anim = 25035
 id = 25031
@@ -8402,6 +8593,7 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 2
 anim = 25035
 id = 25031
@@ -8434,6 +8626,7 @@ ignorehitpause = 1
 
 [State -2, Explod(P2)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 1
 anim = 25030
 id = 25032
@@ -8451,6 +8644,7 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 2
 anim = 25030
 id = 25032
@@ -8468,6 +8662,7 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 1
 anim = 25035
 id = 25032
@@ -8485,6 +8680,7 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 2
 anim = 25035
 id = 25032
@@ -8812,6 +9008,21 @@ velset = 0,0
 ctrl = 0
 ownpal = 1
 
+[State 26000, Bench UI Sweep]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611]
+trigger2 = roundstate > 2
+ignorehitpause = 1
+
+[State 26000, Bench UI Restore]
+type = ChangeState
+trigger1 = roundstate <= 2
+trigger1 = !(root,stateno = [6565610, 6565611])
+trigger1 = numexplod(26010) = 0
+trigger1 = time > 0
+value = stateno
+ignorehitpause = 1
+
 [State 5900, 1]
 type = ParentVarSet
 trigger1 = 1
@@ -8824,6 +9035,7 @@ pos = 0,-60
 
 [State -2, Explod(P1)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 1
 anim = 26010
 id = 26010
@@ -8841,6 +9053,7 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 2
 anim = 26015
 id = 26010
@@ -8872,6 +9085,7 @@ ignorehitpause = 1
 
 [State -2, Explod(P1)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 1
 anim = 26020
 id = 26020
@@ -8889,6 +9103,7 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 2
 anim = 26025
 id = 26020
@@ -8920,6 +9135,7 @@ ignorehitpause = 1
 
 [State -2, Explod(P1)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 1
 anim = 26000
 id = 26000
@@ -8937,6 +9153,7 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 2
 anim = 26005
 id = 26000
@@ -8969,6 +9186,7 @@ ignorehitpause = 1
 ;------------------------ グルーヴ表記
 [State -2, Explod(K-GROOVE)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 1
 anim = Ifelse((Root,var(43)),27001,26001)
 id = 26001
@@ -8986,6 +9204,7 @@ Supermovetime = -1
 ;------------------------ グルーヴ表記
 [State -2, Explod(K-GROOVE)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 2
 anim = Ifelse((Root,var(43)),27001,26001)
 id = 26001
@@ -9016,6 +9235,7 @@ ignorehitpause = 1
 
 [State -2, Explod(P1)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 1
 anim = 26030
 id = 26030
@@ -9033,6 +9253,7 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 2
 anim = 26030
 id = 26030
@@ -9065,6 +9286,7 @@ ignorehitpause = 1
 
 [State -2, Explod(P1)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 1
 anim = 26031
 id = 26031
@@ -9082,6 +9304,7 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 2
 anim = 26031
 id = 26031
@@ -9141,6 +9364,7 @@ var(1) = 0
 
 [State -2, Explod(P1)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 1
 anim = 26035
 id = 26035
@@ -9158,6 +9382,7 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Time = 0 && teamside = 2
 anim = 26035
 id = 26035
@@ -9206,6 +9431,7 @@ value = 20,10
 
 [State -2, Explod(P2)]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && roundstate <= 2 ;<-- hidden when benched or round over
 trigger1 = Root,fvar(37) = 72
 trigger1 = Root,fvar(8) = 1
 anim = 8420
@@ -10267,6 +10493,7 @@ triggerall = !NumHelper(21000)
 trigger1 = numpartner
 trigger1 = ID<partner,ID
 trigger2 = !numpartner
+trigger3 = numpartner && teamMode = Tag ;<-- tag: every character hosts their OWN gauge
 id = 21000
 name = "Gauge"
 pos = 1000,0
