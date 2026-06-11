@@ -1,0 +1,33 @@
+;***************************************************************************;
+;******************* Created in Fighter Factory Ultimate *******************;
+;*******************      http://www.virtualltek.com     *******************;
+;***************************************************************************;
+
+[Info]
+Name         = "Doctor Doom"  
+DisplayName  = "Doctor Doom"
+versiondate  = 8/13/10
+mugenversion = 1.0
+Author       ="DCL"
+editor       = "REDHOT"
+pal.defaults = 1,2,3,4,5,6
+
+[Files]
+cmd      = CMND/DoctorDoom.cmd
+cns      = CNS/DoctorDoom.cns
+st       = CNS/DoctorDoom.cns
+st1      = CNS/config.txt
+stcommon = CNS/common1.cns
+sprite   = SPRITES/DoctorDoom.sff
+anim     = ANIMATIONS/DoctorDoom.air
+sound    = SOUNDS/DoctorDoom.snd
+pal1     = PALETTES/DoctorDoom_01.act
+pal2     = PALETTES/DoctorDoom_02.act
+pal3     = PALETTES/DoctorDoom_03.act
+pal4     = PALETTES/DoctorDoom_04.act
+pal5     = PALETTES/DoctorDoom_05.act
+pal6     = PALETTES/DoctorDoom_06.act
+
+[Arcade]
+intro.storyboard = 
+ending.storyboard = 
