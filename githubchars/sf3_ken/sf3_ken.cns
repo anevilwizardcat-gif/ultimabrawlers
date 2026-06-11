@@ -2950,8 +2950,14 @@ ctrl = 0
 velset = 0,0
 
 ;ÉXÉ^ÉìÉQÅ[ÉW(ÇPÇoë§)
+[State 25000, Bench UI Sweep]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611]
+ignorehitpause = 1
+
 [State -2, Explod]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] ;<-- benched: UI hidden, auto-restores via numexplod guards
 trigger1 = roundstate = 2
 trigger1 = numexplod(25000) = 0
 trigger1 = root,Var(1) = 1
@@ -2970,6 +2976,7 @@ scale = 0.5,0.5
 
 [State -2, Explod]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] ;<-- benched: UI hidden, auto-restores via numexplod guards
 trigger1 = roundstate = 2
 trigger1 = numexplod(25002) = 0
 trigger1 = root,Var(1) = 1
@@ -3006,6 +3013,7 @@ ignorehitpause = 1
 
 [State -2, Explod]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] ;<-- benched: UI hidden, auto-restores via numexplod guards
 trigger1 = roundstate = 2
 trigger1 = numexplod(25003) = 0
 trigger1 = root,fvar(2) = 64
@@ -3033,6 +3041,7 @@ ignorehitpause = 1
 ;ÉXÉ^ÉìÉQÅ[ÉW(ÇQÇoë§)
 [State -2, Explod]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] ;<-- benched: UI hidden, auto-restores via numexplod guards
 trigger1 = roundstate = 2
 trigger1 = numexplod(25001) = 0
 trigger1 = root,Var(1) = 2
@@ -3051,6 +3060,7 @@ scale = 0.5,0.5
 
 [State -2, Explod]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] ;<-- benched: UI hidden, auto-restores via numexplod guards
 trigger1 = roundstate = 2
 trigger1 = numexplod(25004) = 0
 trigger1 = root,Var(1) = 2
@@ -3087,6 +3097,7 @@ ignorehitpause = 1
 
 [State -2, Explod]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] ;<-- benched: UI hidden, auto-restores via numexplod guards
 trigger1 = roundstate = 2
 trigger1 = numexplod(25005) = 0
 trigger1 = root,fvar(2) = 64

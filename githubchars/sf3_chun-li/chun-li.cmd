@@ -597,6 +597,7 @@ trigger1 = inguarddist
 trigger1 = enemynear,movetype = A
 trigger1 = enemynear,statetype != C
 trigger1 = random < 720
+trigger2 = 0 ;<-- inert gap-filler
 trigger3 = life < 220
 trigger3 = ctrl || stateno = 100 || stateno = 130 || stateno = 131 || stateno = 5120 || (stateno = [90,95])
 trigger3 = inguarddist
@@ -644,6 +645,7 @@ trigger1 = inguarddist
 trigger1 = enemynear,movetype = A
 trigger1 = enemynear,statetype = C
 trigger1 = random < 720
+trigger2 = 0 ;<-- inert gap-filler
 trigger3 = life < 220
 trigger3 = ctrl || stateno = 100 || stateno = 130 || stateno = 131 || stateno = 5120 || (stateno = [90,95])
 trigger3 = inguarddist
@@ -3038,6 +3040,7 @@ triggerall = command != "holddown"
 triggerall = p2bodydist x > var(11) || p2bodydist x < -var(11)
 trigger1 = statetype = S || statetype = C
 trigger1 = ctrl
+trigger2 = 0 ;<-- inert gap-filler
 trigger3 = (stateno = 52 && prevstateno = [600,699]) && time >= 0;time >= 3
 trigger3 = (stateno = 52 && prevstateno != [600,699]) && time >= 0
 

@@ -360,6 +360,7 @@ ignorehitpause = 1
 
 [State -2, First Attack] 
 type = PlaySnd 
+triggerall = 0 ;<-- disabled: MVC2 screenpack announcer (assets absent from this game)
 triggerall = var(13)=-1 
 triggerall = NumExplod(8701) = 0 
 trigger1 = var(13)=-1 && (movehit || p2stateno = 6300 || p2stateno = [5000,5899]) 
@@ -370,6 +371,7 @@ ignorehitpause = 1
 
 [State -2, Combo Sound] 
 type = PlaySnd 
+triggerall = 0 ;<-- disabled: MVC2 screenpack announcer (assets absent from this game)
 trigger1 = NumExplod(8701) = 0 
 trigger1 = var(13)=0 && var(14)!=0 
 persistent = 0 
@@ -379,6 +381,7 @@ ignorehitpause = 1
 
 [State -2, Left] 
 type = explod 
+triggerall = 0 ;<-- disabled: MVC2 screenpack announcer (assets absent from this game)
 trigger1 = var(13)=0 && var(14)!=0 
 trigger2 = var(13)=-1 && (movehit || p2stateno = 6300 || p2stateno = [5000,5899]) 
 triggerall = TeamSide = 1 && NumExplod(8701) = 0 
@@ -397,6 +400,7 @@ ignorehitpause = 1
 
 [State -2, Right] 
 type = explod 
+triggerall = 0 ;<-- disabled: MVC2 screenpack announcer (assets absent from this game)
 trigger1 = var(13)=0 && var(14)!=0 
 trigger2 = var(13)=-1 && (movehit || p2stateno = 6300 || p2stateno = [5000,5899]) 
 triggerall = TeamSide = 2 && NumExplod(8701) = 0 

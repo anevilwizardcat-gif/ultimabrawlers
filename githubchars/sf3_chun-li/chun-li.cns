@@ -1837,10 +1837,10 @@ trigger1 = AILevel = 0          ;<-- AI holds guard; human release unchanged
 trigger2 = Anim = 130
 trigger2 = !inguarddist
 trigger2 = AILevel = 0 || (enemynear,movetype != A && (enemynear,map(standActive) < 1 || p2bodydist x > 60)) ;<-- stand barrages pulse: hold through them
-trigger5 = Anim = 130
-trigger5 = AILevel > 0 && !inguarddist && (time > 30 || p2bodydist x > 70) ;<-- calm release: no turtle-lock
 trigger3 = Anim = 90 && AnimElemTime(4) = 0
 trigger4 = Anim = 91 && AnimElemTime(4) = 3
+trigger5 = Anim = 130
+trigger5 = AILevel > 0 && !inguarddist && (time > 30 || p2bodydist x > 70) ;<-- calm release: no turtle-lock
 value = 140
 
 ;---------------------------------------------------------------------------
@@ -1876,10 +1876,10 @@ trigger1 = AILevel = 0          ;<-- AI holds guard; human release unchanged
 trigger2 = Anim = 131
 trigger2 = !inguarddist
 trigger2 = AILevel = 0 || (enemynear,movetype != A && (enemynear,map(standActive) < 1 || p2bodydist x > 60)) ;<-- stand barrages pulse: hold through them
-trigger5 = Anim = 131
-trigger5 = AILevel > 0 && !inguarddist && (time > 30 || p2bodydist x > 70) ;<-- calm release: no turtle-lock
 trigger3 = Anim = 90 && AnimElemTime(4) = 0
 trigger4 = Anim = 91 && AnimElemTime(4) = 3
+trigger5 = Anim = 131
+trigger5 = AILevel > 0 && !inguarddist && (time > 30 || p2bodydist x > 70) ;<-- calm release: no turtle-lock
 value = 140
 
 ;---------------------------------------------------------------------------

@@ -1906,6 +1906,7 @@ value = 220,0
 
 [State 220]
 type = PlaySnd
+triggerall = 0 ;<-- disabled: sound 220,1 absent from snd
 trigger1 = AnimElem = 3
 value = 220,1
 
@@ -19755,6 +19756,7 @@ sprpriority = 0
 
 [State 21561]
 type = BindToParent
+triggerall = ishelper ;<-- targets/roots have no parent; bind is helper-only
 trigger1 = 1
 
 [State 21561]
@@ -19947,6 +19949,7 @@ sprpriority = 0
 
 [State 21562]
 type = BindToParent
+triggerall = ishelper ;<-- targets/roots have no parent; bind is helper-only
 trigger1 = 1
 
 
@@ -21300,6 +21303,7 @@ sprpriority = 0
 
 [State 23051]
 type = BindToParent
+triggerall = ishelper ;<-- targets/roots have no parent; bind is helper-only
 trigger1 = 1
 
 [State 23051]
@@ -21572,6 +21576,7 @@ sprpriority = 0
 
 [State 23052]
 type = BindToParent
+triggerall = ishelper ;<-- targets/roots have no parent; bind is helper-only
 trigger1 = 1
 
 
