@@ -42847,19 +42847,8 @@ map = "standGauge"
 value = var(54)
 ignorehitpause = 1
 
-;== TAG-OUT HELPER DISCIPLINE (Ikemen native tag) ============================
-; Helpers run this -2 too. During the root's tag-out/standby, bound idle
-; helpers (the "doppelganger" body/stand doubles) turn invisible instead of
-; chasing the root to the screen edge. The TANDEM stand is exempt -- it
-; stays visible and barraging, as intended.
-[State -2, Tag Helper Hide]
-type = assertspecial
-trigger1 = ishelper
-trigger1 = root,stateno = [6565610, 6565611]
-trigger1 = root,var(8) != 2
-flag = invisible
-flag2 = noshadow
-ignorehitpause = 1
+;== TAG-OUT DISCIPLINE: helper hiding lives in data/tag.zss [StateDef -4]
+;   (helpers never execute a character's own negative states).
 
 ; stuck voice loops (ORA...) die with the tag-out; helper-owned attack
 ; sounds are unaffected (channel scope is this player only)
@@ -42871,36 +42860,6 @@ trigger1 = !(prevstateno = [6565610, 6565611])
 channel = 0
 ignorehitpause = 1
 
-; PIN, self-flagging design: a character is "benched" only because he
-; HIMSELF passed through the tag-out states, and un-benched only via the
-; legitimate tag-in state. No leadership bookkeeping, no way to ever
-; misidentify the active character.
-[State -2, Tag Bench Flag Set]
-type = mapset
-trigger1 = !ishelper
-trigger1 = stateno = [6565610, 6565611]
-map = "benched"
-value = 1
-ignorehitpause = 1
-
-[State -2, Tag Bench Flag Clear]
-type = mapset
-trigger1 = !ishelper
-trigger1 = (stateno = 6565620) || (roundstate != 2)
-map = "benched"
-value = 0
-ignorehitpause = 1
-
-[State -2, Tag Standby Pin]
-type = changestate
-trigger1 = !ishelper
-trigger1 = teamMode = Tag
-trigger1 = roundstate = 2
-trigger1 = alive
-trigger1 = map(benched) = 1
-trigger1 = !(stateno = [6565610, 6565620])
-value = 6565611
-ignorehitpause = 1
 
 ;configåƒÇ—èoÇµ
 [State 3001, Super]

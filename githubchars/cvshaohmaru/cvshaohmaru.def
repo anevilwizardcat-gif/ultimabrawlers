@@ -1,0 +1,38 @@
+[Info]
+name = "cvshaohmaru"		;覇王丸(cvs)
+displayname = "Haohmaru"	;覇王丸
+versiondate=09,08,2011	;Version date of character
+mugenversion=06,14,2003	;Version of M.U.G.E.N character works on
+author="Warusaki3"		;悪咲3号
+Pal.Defaults=4,5,10,11
+
+[Files]
+cmd=cvshaohmaru.cmd
+cns=cvshaohmaru.cns
+st=cvshaohmaru.cns
+st1=cvs_common.cns
+st2=groove.cns
+st3=config.txt
+stcommon=common1.cns
+sprite=cvshaohmaru.sff
+anim=cvshaohmaru.air
+sound=cvshaohmaru.snd
+pal1=act004.act;カプエス2弱Kカラー
+pal2=act005.act;カプエス2中Kカラー
+pal3=act006.act;カプエス2強Kカラー
+pal4=act001.act;カプエス2弱Pカラー
+pal5=act002.act;カプエス2中Pカラー
+pal6=act003.act;カプエス2強Pカラー
+pal7=act105.act;羅刹丸3P（零SP）カラー
+pal8=act106.act;羅刹丸4P（零SP）カラー
+pal9=act108.act;羅刹丸オリジナルカラー2
+pal10=act101.act;羅刹丸1Pカラー
+pal11=act103.act;羅刹丸3Pカラー
+pal12=act107.act;羅刹丸オリジナルカラー1
+
+;pal**=act007.act;カプエス2P同時押しカラー
+;pal**=act008.act;カプエス2K同時押しカラー
+;pal**=act009.act;オリジナルカラー2
+
+;pal**=act102.act;羅刹丸2Pカラー
+;pal**=act104.act;羅刹丸4Pカラー
