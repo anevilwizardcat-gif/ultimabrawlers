@@ -1,0 +1,36 @@
+[Info]
+Name="ErmacMO"
+DisplayName="Ermac"
+Author="Mike Obrecht"
+VersionDate=0.0
+mugenversion = 04,14,2001
+Pal.Defaults= 1,2,3,4
+
+[Files]
+cmd=ermac/ermac.cmd
+cns=mkninja.cns
+st=ermac/ermac.cns
+st2=mkninja.cns
+st3=blood.cns
+st4=ermac/ai.cns
+stcommon=common1.cns
+sprite=ermac/ermac.sff
+anim=ermac/ermac.air
+sound=ermac/ermac.snd
+pal1=ermac/ermac1.act
+pal2=ermac/ermac2.act
+pal3=ermac/ermac3.act
+pal4=ermac/ermac4.act
+pal5=ermac/ermac5.act
+pal6=ermac/ermac6.act
+pal7=ermac/ermac1.act
+pal8=ermac/ermac2.act
+pal9=ermac/ermac3.act
+pal10=ermac/ermac4.act
+pal11=ermac/ermac5.act
+pal12=ermac/ermac6.act
+
+; Arcade mode
+[Arcade]
+;intro.storyboard = scorpion/scorpionintro.def
+;ending.storyboard = scorpion/scorpionend.def

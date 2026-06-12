@@ -1,0 +1,33 @@
+[Info]
+name = "Sub-Zero by Gary Fisher"       
+displayname = "Sub-Zero MKA" 
+versiondate = 11,18,2007   
+mugenversion = 12,21,2006
+author = "Gary Fisher"; "ermac on mugenguild.com and mugen-infantry.net"
+pal.defaults = 1 
+
+
+[Files]
+cmd     = sub.cmd                ;Command set
+cns     = data.cns             ;Constants
+stcommon = general.cns         ;Common states
+st      = basics.cns           ;States
+st1     = linkuei.cns           ;basic moves
+st2     = specials.cns         ;special moves
+st3     = supers.cns           ;supers
+st4     = intros.cns           ;intro
+st5     = winpose_taunt.cns    ;win pose / taunt
+st6     = wakeup.cns           ;wakeup
+st7     = combos.cns           ;combos
+st8     = finish.cns           ;finishers
+st9     = neg_sub_states.cns       ;-states
+sprite  = sub.sff       ;Sprite
+anim    = sub.air       ;Animation
+sound   = sub.snd                ;Sound
+
+pal1 = blue.act
+
+;Arcade mode
+[Arcade]
+intro.storyboard = 0gf_subintro.def
+;ending.storyboard = intro_ending/0gf_scorpionending.def

@@ -1,0 +1,413 @@
+;---------------------------------------------------------------------------
+; Override common states (use same number to override) :
+;---------------------------------------------------------------------------
+
+;---------------------------------------------------------------------------
+; States that are always executed (use statedef -2)
+;---------------------------------------------------------------------------
+
+[Statedef -2]
+
+[State 183, 1]
+type = AssertSpecial
+trigger1 = 1
+trigger1 = var(26) = 1
+flag = Nomusic
+ignorehitpause = 1
+[State 5610, 8]
+type = AssertSpecial
+trigger1 = 1
+trigger1 = var(26) = 1
+flag = NoBarDisplay
+ignorehitpause = 1
+[State 183, 1]
+type = AssertSpecial
+triggerall = p2life<=2
+triggerall = var(26) = 1
+trigger1 = 1
+flag = timerfreeze
+ignorehitpause = 1
+
+[state a]
+type = stopsnd
+trigger1 = Movetype = H
+channel = 7
+ignorehitpause = 1
+[State 1773]
+type = Stopsnd
+triggerall = Time = 1
+trigger1 = var(8) >0
+trigger2 = movetype = H
+Channel = 8
+ignorehitpause = 1
+
+[State -2, Guarding]
+type = AssertSpecial
+trigger1 = 1
+flag = nostandguard
+flag2 = nocrouchguard
+flag3 = noairguard
+Ignorehitpause = 1
+
+[State -2, NO SLOW]
+type = AssertSpecial
+trigger1 = 1
+ignorehitpause = 1
+flag = nokoslow
+Ignorehitpause = 1
+
+[State -2]
+type = NotHitBy
+trigger1 = 1
+value = , NT,ST,HT,NP,SP,HP,HA,AP
+time = -1
+Ignorehitpause = 1
+
+[State 6, 2]
+type = PlayerPush
+trigger1 = 1
+value = 1
+Ignorehitpause = 1
+
+
+
+
+
+
+
+
+
+
+[State -3, laughlong]
+type = VarRandom
+trigger1 = 1
+ignorehitpause = 1
+v = 3
+range = 6,14
+
+[State -3, GORE]
+type = VarRandom
+trigger1 = 1
+ignorehitpause = 1
+v = 6
+range = 2050,2067
+
+[State -3, BACKGROUND]
+type = VarRandom
+trigger1 = 1
+v = 7
+range = 99901,99911
+ignorehitpause = 1
+
+[State -3, ANNOUNCER-NEW]
+type = VarRandom
+trigger1 = 1
+ignorehitpause = 1
+v = 8
+range = 1,6
+
+[State -3, Finishhim-her-Theme-New]
+type = VarRandom
+trigger1 = 1
+ignorehitpause = 1
+v = 9
+range = 0,3
+
+
+
+
+[State -3, FALL-GORE]
+type = VarRandom
+trigger1 = 1
+ignorehitpause = 1
+v = 12
+range = -30,30
+
+[State -2, VAR]
+type = Varset
+trigger1 = Win
+trigger1 = life >= lifemax
+trigger1 = roundstate = 3 || roundstate = 4
+v = 17
+value = 1
+[State -2, VAR]
+type = Varset
+trigger1 = var(17) = 1
+trigger1 = roundstate = 0 || roundstate = 1 || roundstate = 2
+v = 18
+value = 1
+[State -2, VAR]
+type = Varset
+trigger1 = var(18) = 1
+trigger1 = Win
+trigger1 = life >= lifemax
+trigger1 = roundstate = 3 || roundstate = 4
+v = 19
+value = 1
+
+[State -2, FATALITY_SWITCH]
+type = Varset
+triggerall = 1
+trigger1 = Roundstate = 0
+trigger2 = Roundstate = 1
+v = 34
+value = 0
+
+[State -3, Movelist_THEME]
+type = VarRandom
+trigger1 = 1
+ignorehitpause = 1
+v = 39
+range = 1,4
+
+
+;***************************HITDEF ANIMS
+;FORCE TO SELFSTATE
+[State 0, 1]
+type = SelfState
+triggerall = stateno = [123455,123462]
+triggerall = stateno != [5070,5071]
+triggerall = stateno != 123459
+trigger1 = 1
+value = 5070
+;***************************
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+;************FATALITY*************
+
+[State -2, 1] 
+type = varset
+triggerall = NumEnemy = 1
+triggerall = NumPartner = 0
+trigger1 = Win >= 1
+trigger1 = NumHelper(7000) = 0
+v = 58
+value = 1
+
+[State -2, 2] 
+type = varset
+trigger1 = Win >= 1
+trigger1 = NumHelper(7000) = 1
+trigger1 = p2life != 0
+trigger2 = var(55) = 1
+v = 58
+value = 0
+
+[State -2, 3] 
+type = AttackMulSet
+triggerall = NumEnemy = 1
+triggerall = NumPartner = 0
+triggerall = !Var(58) 
+triggerall = p2Life <= 1
+trigger1 = Win = 0 
+trigger1 = RoundNo != 1 
+trigger2 = P2StateNo = 49999
+value = 9999
+
+[State -2, FATALITY TIME ONE TIME]
+type = Varset
+trigger1 = NumHelper(7000) >= 1
+v = 55
+value = 1
+[State -2, FATALITY TIME ONE TIME]
+type = Varset
+trigger1 = NumHelper(7000) >= 1
+v = 19
+value = 1
+
+[State -2, 1] 
+type = varset
+triggerall = NumEnemy = 1
+triggerall = NumPartner = 0
+trigger1 = 1
+trigger1 = var(19)= 1
+trigger1 = roundstate = 0 || roundstate = 1
+v = 58
+value = 1
+
+[State -2, FATALITY TIME ONE TIME]
+type = Varset
+triggerall = 1
+trigger1 = var(55)= 1
+trigger1 = roundstate = 0 || roundstate = 1
+trigger2 = enemy,life >=2
+v = 55
+value = 0
+
+[State -2, FATALITY TIME ONE TIME]
+type = Varset
+trigger1 = 1
+trigger1 = Roundno = 1
+trigger1 = Win = 0
+trigger1 = roundstate = 0 || roundstate = 1
+v = 58
+value = 0
+
+;ANTI-CHEAT OFF
+[State 300, 0]
+type = Varset
+Triggerall = var(56) = 1
+trigger1 = (GameTime%90)=0
+v = 56
+value = 0
+
+[State -2, FATALITY win]
+Type = VarRangeSet
+trigger1 = 1
+trigger1 = roundstate = 0 || roundstate = 1
+Value = 0
+First = 26
+Last = 34
+
+
+
+[State -2, 1]
+type = Explod
+trigger1 = var(50) = 0
+trigger1 = facing = 1
+trigger1 = NumExplod(21052) = 0
+trigger1 = 1
+anim = 10000
+ID = 21052
+pos = 5,234
+sprpriority = 50
+postype = Left
+bindtime = -1
+ignorehitpause = 1
+scale = 0.5,0.5
+ownpal = 1
+
+[State -2, 1]
+type = Explod
+trigger1 = var(50) = 0
+trigger1 = facing = -1
+trigger1 = NumExplod(21052) = 0
+trigger1 = 1
+anim = 10000
+ID = 21052
+pos = -55,234
+sprpriority = 50
+postype = right
+bindtime = -1
+ignorehitpause = 1
+scale = 0.5,0.5
+ownpal = 1
+
+[State 981]
+type = RemoveExplod
+trigger1 = roundstate = 0
+trigger2 = roundstate = 1
+trigger3 = roundstate = 3
+trigger4 = roundstate = 4
+trigger5 = var(50) = 1
+ID = 21052
+
+
+[State -1, MOVE LIST]
+type = Helper
+triggerall = var(50) = 0
+triggerall = AIlevel = 0
+triggerall = Numhelper(49000) = 0
+triggerall = roundstate = 2
+triggerall = stateno != [5000,5410]
+triggerall = P2stateno != 29001
+triggerall = movetype != H
+triggerall = stateno != [600,1100]
+triggerall = command = "start"
+triggerall = !GetHitVar(isbound)
+triggerall = ctrl = 1
+trigger1 = 1
+helpertype = normal
+name = "MOVE_LIST"
+id = 11000
+pos = 0,0
+sprpriority = 90
+postype = Left
+stateno = ifelse(var(25) = 0,11000,10999)
+KeyCtrl = 1
+ownpal = 1
+removetime = -1
+ignorehitpause = 0
+size.xscale = 1
+size.yscale = 1
+
+
+
+
+
+
+
+
+
+
+
+
+; PROJECTILE REFLECTOR
+[State 2200,Proj-reflector]
+type = Helper
+triggerall = numhelper(1771) = 0
+trigger1 = numprojID(601) <5
+trigger1 = 1
+name = "REFLECTOR"
+id = 1771
+stateno = 1771
+pos = 0,0
+postype = p1
+sprpriority = 2
+helpertype = normal
+keyctrl = 0
+ownpal = 1
+
+[State -1, DANGER]
+type = Helper
+triggerall = Numhelper(22200) = 0
+triggerall = roundstate = 2
+trigger1 = 1
+helpertype = normal
+name = "DANGER"
+id = 22200
+pos = 0,0
+sprpriority = 90
+postype = Left
+stateno = 22200
+KeyCtrl = 1
+ownpal = 1
+removetime = -1
+ignorehitpause = 0
+size.xscale = 1
+size.yscale = 1
+
+
+
+
+
+;---------------------------------------------------------------------------
+; States that are executed when in self's state file (use statedef -3)
+;---------------------------------------------------------------------------
+
+[Statedef -3]
+
+[State -3,Display]
+type = DisplayToClipboard
+trigger1 = var(10) >= 1
+text = "Var(10)=%d, var 10 activada,Pox y = %f%%"
+params = var(10),p2dist y
+[State -3,Display.de.Tela]
+type = DisplayToClipboard
+trigger1 = var(10) <= 0
+text = "Var(10)=%d, var 10 desactivada,Pox y = %f%%"
+params = var(10),p2dist y
+

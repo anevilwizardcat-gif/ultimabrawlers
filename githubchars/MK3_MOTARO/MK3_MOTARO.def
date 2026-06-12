@@ -1,0 +1,37 @@
+;MOTARO from MORTAL KOMBAT 3 by OMEGAPSYCHO
+;Copyright NETHERREALM STUDIOS, WARNER BROTHERS 2015
+; E-mail: OMEGAPSYCHO@hotmail.com
+;versión 3.0 (100%) 
+
+; Player information
+[Info]
+name = "MOTARO"    
+displayname = "MOTARO"	
+versiondate = 06,01,2015
+mugenversion = 1.1
+author = "OMEGAPSYCHO-MKBoss"
+pal.defaults = 1
+
+; Files for the player
+[Files]
+cmd = CODE/Cmd_Motaro.cmd 
+cns   = CODE/Constants-Others_Motaro.cns
+st      = CODE/Constants-Others_Motaro.cns
+st1    = CODE/-2_Motaro.cns
+st2    = CODE/Fatalities_Motaro.cns  
+st3    = CODE/OBJECTS_Motaro.cns  
+st4    = CODE/Engines_Motaro.cns
+st5    = CODE/Moves_Motaro.cns
+st6    = CODE/P2States_Motaro.cns
+st7    = CONFIG.def
+stcommon = CODE/common_Motaro.cns
+anim   = CODE/Air_Motaro.air
+sprite  = CODE/MOTARO.SFF
+sound = CODE/MOTARO.snd
+
+pal1   = act\MOTARO_1.ACT
+pal2   = act\MOTARO_2.ACT
+pal3   = act\MOTARO_3.ACT
+pal4   = act\MOTARO_4.ACT
+pal5   = act\MOTARO_5.ACT
+pal6   = act\MOTARO_6.ACT

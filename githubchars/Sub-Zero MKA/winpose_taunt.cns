@@ -1,0 +1,82 @@
+;Sub-Zero
+;Created by: Gary Fisher ("ermac" on mugenguild.com, mugen-fantry.net)
+
+
+;------------------------------------------------------------------------------
+;time over shit
+;------------------------------------------------------------------------------
+;time over 
+
+[Statedef 170]
+type = S
+ctrl = 0
+anim = 181
+
+[State 171, 3]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+time = 510
+
+
+
+
+
+;------------------------------------------------------------------------------
+;winning poses
+;------------------------------------------------------------------------------
+;win pose
+
+[Statedef 180]
+type = S
+ctrl = 0
+anim = 181
+velset = 0,0
+
+
+
+
+[State 181, szwins]
+type = PlaySnd
+trigger1 = AnimElem = 1
+value = s4, 0
+
+[State 181, flawsound]
+type = PlaySnd
+trigger1 = time = 200 && winperfect
+value = s2, 15
+
+[State 181, fsound]
+type = PlaySnd
+trigger1 = time = 320 && NumExplod(1780) = 1
+value = s25, 4
+
+
+[State 181, flaw]
+type = Explod
+trigger1 = time = 200 && winperfect
+;trigger1 = life = 1000
+anim = 4630
+name = "Flawless"
+id = 4630
+pos = 90, 77
+postype = left
+facing = 1
+sprpriority = 9999999999
+
+
+
+
+[State 181, 0]
+type = AssertSpecial
+trigger1 = Time < 480
+flag = roundnotover
+
+
+[State 181, 1]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+time = 10
+
+

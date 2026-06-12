@@ -1,0 +1,1310 @@
+;Sub-Zero
+;Created by: Gary Fisher ("ermac" on mugenguild.com, mugen-fantry.net)
+
+
+;--------------------------------------------------------------------------
+;super moves
+;--------------------------------------------------------------------------
+
+;ice mode
+
+[Statedef 1943]
+type    = S
+movetype= A
+physics = S
+poweradd= -10000
+ctrl = 0
+velset = 0,0,0
+anim = 9956
+
+[state ]
+type = Explod
+trigger1 = time >= 6 && !(time%3)
+anim = 9957
+id = 9957
+Postype = p1
+pos = -20,-40
+random = 40,20
+sprpriority = 2
+velocity = 0,-5
+ownpal = 0
+
+[State ]
+type = Explod
+trigger1 = time >= 6 && !(time%3)
+anim = 7555
+id = 7555
+Postype = p1
+pos = -30,-90
+random = 40,20
+sprpriority = 2
+velocity = 0,3
+ownpal = 1
+
+[State ]
+type = Explod
+trigger1 = time >= 6 && !(time%3)
+anim = 7555
+id = 7555
+Postype = p1
+pos = 0,-90
+random = 40,20
+sprpriority = 2
+velocity = 0,3
+ownpal = 1
+
+[State ]
+type = Explod
+trigger1 = time >= 6 && !(time%3)
+anim = 7555
+id = 7555
+Postype = p1
+pos = 30,-90
+random = 40,20
+sprpriority = 2
+velocity = 0,3
+ownpal = 1
+
+[state ]
+type = playsnd
+trigger1 = animtime = 0
+value = s3,3
+
+[State ]
+type = Helper
+trigger1 = time = 120
+helpertype = Normal
+ID = 10129
+name = "damage"
+postype = p1
+pos = 0,0
+stateno = 10129
+ownpal = 1
+ontop = 1
+bindtime = 9999
+
+[State 1943, snd]
+type = Playsnd
+trigger1 = Time = 0
+value = s3,2
+
+[State ]
+type = AfterImage
+trigger1 = Time = 0
+length = 15
+PalBright   =  0, 0,  0
+PalContrast =  70, 70, 250
+PalAdd      = 0,0,0
+PalMul      = .85,.85,.50
+TimeGap  = 1
+FrameGap = 5
+Trans = Add
+time = 1000
+persistent = 1
+ignorehitpause = 1
+
+[State ]
+type = Explod
+trigger1 = animtime = 0
+anim = 780
+name = "ice time"
+id = 780
+pos = 0,0
+postype = left
+facing = 1
+sprpriority = -1
+ownpal = 0
+removetime = 1000
+
+[State ]
+type = palfx
+trigger1 = !(time%1)
+time = 1
+ignorehitpause = 1
+add = 70,70, 250
+trans = add
+
+[State 1944, Immune]
+type = NotHitBy
+trigger1 = time = 0
+time = 130
+value = SCA
+
+[State 6173, dragon]
+type = explod
+trigger1 = time = 0
+anim = 4408
+removetime =130
+pos = 0,0
+postype = left
+bindtime = 999
+ontop = 0
+
+[State ]
+type = bgpalfx
+trigger1 = !time
+time = 3
+add = 0,0, 0
+sinadd = -250,-250, -250, 75
+
+[State ]
+type = bgpalfx
+trigger1 = time = 3
+time = 130
+add = -150,-150, -150
+
+[State ]
+type = Helper
+trigger1 = time = 0
+helpertype = Normal
+ID = 10138
+name = "let it snow"
+postype = left
+pos = 0,0
+stateno = 9943
+ownpal = 1
+
+
+
+
+[State ]
+type = envcolor
+trigger1 = animtime = 0
+time = 2
+value = 255,255,255
+
+[State 1944, 7]
+type = ChangeState
+trigger1 = Animtime = 0
+value = 0
+ctrl = 1
+
+
+
+;-------------------------------------------------------------------------
+;blank helper
+[Statedef 10129]
+type    = S
+movetype= A
+physics = N
+poweradd= 0
+anim = 9965
+velset = 0,0
+ctrl = 0
+sprpriority = 999
+
+
+[state ]
+type = changeanim
+trigger1 = parent, statetype = A
+value = 9966
+
+[state ]
+type = changeanim
+trigger1 = parent, statetype = S
+value = 9965
+
+
+[State ]
+type = BindToParent
+trigger1 = time = 0
+time = 1000
+facing = 1
+pos = 0,0
+ignorehitpause =1
+persistent =  1
+
+
+[State ]
+type = Helper
+trigger1 = movehit = 1
+trigger1 = p2stateno != 6169
+helpertype = Normal
+ID = 10133
+name = "you cant see me"
+postype = p1
+pos = 0,0
+stateno = 10133
+ownpal = 1
+
+[State ]
+type = Helper
+trigger1 = movehit = 1
+trigger1 = p2stateno = 6169
+helpertype = Normal
+ID = 10138
+name = "floored"
+postype = p1
+pos = 0,0
+stateno = 10138
+ownpal = 1
+
+[State ]
+type = Hitdef
+;trigger1 = time = [0,1001]
+;trigger1 = !time
+trigger1 = p2stateno !=4003
+trigger1 = p2stateno != 6169
+triggerall = p2movetype = A
+trigger2 = statetype !=S
+damage = 0,0
+getpower = 0,0
+givepower = 0,0
+pausetime = 0,10
+attr = A,SP
+guardflag = M
+hitflag = HAML
+animtype = heavy
+air.animtype = back
+priority = 5, hit
+sparkno = S10014      ;ice hits
+guard.sparkno = -1
+sparkxy = 70, -120
+hitsound = S3,4
+guardsound = S7,77
+ground.type = high
+air.type = high
+ground.slidetime = 0
+ground.hittime = 15
+ground.velocity = 0, 0
+air.velocity = 0, 0
+guard.velocity = -7
+air.cornerpush.veloff = 0
+ground.cornerpush.veloff = 0
+yaccel = .5
+p2stateno = 4003
+air.fall = 1
+fall = 0
+fall.recover = 0
+fall.xvelocity = 0
+fall.yvelocity = 0
+numhits = 0
+
+[State ]
+type = Hitdef
+;trigger1 = time = [0,1001]
+;trigger1 = !time
+trigger1 = p2stateno !=4003
+trigger1 = p2stateno = 6169
+triggerall = p2movetype = A
+trigger2 = statetype !=S
+damage = 0,0
+getpower = 0,0
+givepower = 0,0
+pausetime = 0,10
+attr = A,SP
+guardflag = M
+hitflag = HAML
+animtype = heavy
+air.animtype = back
+priority = 5, hit
+sparkno = S10014      ;ice hits
+guard.sparkno = -1
+sparkxy = 70, -120
+hitsound = S3,4
+guardsound = S7,77
+ground.type = high
+air.type = high
+ground.slidetime = 0
+ground.hittime = 15
+ground.velocity = 0, 0
+air.velocity = 0, 0
+guard.velocity = -7
+air.cornerpush.veloff = 0
+ground.cornerpush.veloff = 0
+yaccel = .5
+p2stateno = 4004
+air.fall = 1
+fall = 0
+fall.recover = 0
+fall.xvelocity = 0
+fall.yvelocity = 0
+numhits = 0
+
+[State 6173, snow]
+type = explod
+;trigger1 = time >= 6 && !(time%3)
+trigger1 = time = 0
+trigger2 = time = 200
+trigger3 = time = 400
+trigger4 = time = 600
+trigger5 = time = 800
+anim = 4407
+id = 6000
+;removetime =215
+;random = 40,20
+pos = -1,75
+postype = left
+;bindtime = 999
+;random = 40,20
+ontop = 1
+vel = 0.3,0.3
+removetime = 500
+;accel = 1,1
+
+[State 6173, snow]
+type = explod
+trigger1 = time = 5
+trigger2 = time = 205
+trigger3 = time = 405
+trigger4 = time = 605
+trigger5 = time = 805
+anim = 4407
+id = 6000
+;removetime =215
+;random = 40,20
+pos = 98,7
+postype = left
+;bindtime = 999
+;random = 40,20
+ontop = 0
+vel = 0.4,0.4
+;accel = 1,1
+removetime = 500
+
+[State 6173, snow]
+type = explod
+trigger1 = time = 20
+trigger2 = time = 220
+trigger3 = time = 420
+trigger4 = time = 620
+trigger5 = time = 820
+anim = 4407
+id = 6000
+;removetime =215
+;random = 40,20
+pos = 0,0
+postype = left
+;bindtime = 999
+;random = 40,20
+ontop = 0
+vel = 0.2,0.2
+;accel = 1,1
+removetime = 500
+
+[State 6173, snow]
+type = explod
+trigger1 = time = 30
+trigger2 = time = 230
+trigger3 = time = 430
+trigger4 = time = 630
+trigger5 = time = 830
+anim = 4407
+id = 6000
+;removetime =215
+;random = 40,20
+pos = -52,0
+postype = left
+;bindtime = 999
+;random = 40,20
+ontop = 0
+vel = 0.4,0.4
+;accel = 1,1
+removetime = 500
+
+
+
+[State 6173, snow]
+type = explod
+trigger1 = time = 5
+trigger2 = time = 205
+trigger3 = time = 405
+trigger4 = time = 605
+trigger5 = time = 805
+anim = 4407
+id = 6000
+;removetime =215
+;random = 40,20
+pos = 0,150
+postype = left
+;bindtime = 999
+;random = 40,20
+ontop = 0
+vel = -0.2,0.2
+;accel = 1,1
+removetime = 500
+
+[State 6173, snow]
+type = explod
+trigger1 = time = 10
+trigger2 = time = 210
+trigger3 = time = 410
+trigger4 = time = 610
+trigger5 = time = 810
+anim = 4407
+id = 6000
+;removetime =215
+;random = 40,20
+pos = 10,-10
+postype = left
+;bindtime = 999
+;random = 40,20
+ontop = 1
+vel = -0.3,0.3
+;accel = 1,1
+removetime = 500
+
+[State 6173, snow]
+type = explod
+trigger1 = time = 0
+trigger2 = time = 200
+trigger3 = time = 400
+trigger4 = time = 600
+trigger5 = time = 800
+anim = 4407
+id = 6000
+;removetime =215
+;random = 40,20
+pos = 44,-67
+postype = left
+;bindtime = 999
+;random = 40,20
+ontop = 1
+vel = 0,0.3
+;accel = 1,1
+removetime = 500
+
+[State 6173, snow]
+type = explod
+trigger1 = time = 5
+trigger2 = time = 255
+trigger3 = time = 455
+trigger4 = time = 655
+trigger5 = time = 855
+anim = 4407
+id = 6000
+;removetime =215
+;random = 40,20
+pos = -100,-67
+postype = left
+;bindtime = 999
+;random = 40,20
+ontop = 1
+vel = 0,0.3
+;accel = 1,1
+removetime = 500
+
+[State ]
+type = envcolor
+trigger1 = time = 1000
+time = 2
+value = 255,255,255
+
+[State 0, RemoveExplod]
+type = RemoveExplod
+trigger1 =  time = 1000
+id = 6000
+;ignorehitpause =
+;persistent =
+
+
+[State ]
+type = destroyself
+trigger1 = time = 1000
+
+
+
+
+
+;--------------------------------------------------------------------------
+
+;polar blast
+
+[Statedef 1944]
+type    = S
+movetype= A
+physics = S
+poweradd= -10000
+ctrl = 0
+velset = 0,0,0
+anim =222; 10030
+
+[state ]
+type = Explod
+trigger1 = time = 0
+anim = 647;10031
+id = 10031
+Postype = p1
+pos = -47,-80
+;random = 40,20
+sprpriority = 2
+;velocity = 0,-5
+ownpal = 0
+
+[State ]
+type = Explod
+trigger1 = time = 40
+anim = 10032
+id = 10032
+Postype = p1
+pos = -34,-63
+;random = 40,20
+sprpriority = 2
+;velocity = 0,3
+ownpal = 1
+
+[State ]
+type = Hitdef
+trigger1 = !movecontact;time = 40
+trigger1 = p2stateno !=4003
+trigger1 = p2stateno != 6169
+damage = 300,0
+getpower = 0,0
+givepower = 0,0
+pausetime = 0,10
+affectteam = B
+attr = SCA,HA,HP
+guardflag =
+hitflag = HMLAFD
+animtype = heavy
+air.animtype = back
+;priority = 5, hit
+sparkno = S10014      ;ice hits
+guard.sparkno = -1
+sparkxy = 70, -120
+hitsound = S7,77
+guardsound = S7,77
+ground.type = high
+air.type = high
+ground.slidetime = 0
+ground.hittime = 15
+ground.velocity = 0, 0
+air.velocity = 0, 0
+guard.velocity = -7
+air.cornerpush.veloff = 0
+ground.cornerpush.veloff = 0
+yaccel = .5
+p2stateno = 4003
+air.fall = 0
+fall = 0
+fall.recover = 0
+fall.xvelocity = 0
+fall.yvelocity = 0
+numhits = 0
+kill = 0
+
+[State ]
+type = Hitdef
+trigger1 = !movecontact;time = 40
+trigger1 = p2stateno !=4003
+trigger1 = p2stateno = 6169
+damage = 300,0
+getpower = 0,0
+givepower = 0,0
+pausetime = 0,10
+affectteam = B
+attr = SCA,HA,HP
+guardflag =
+hitflag = HMLAFD
+animtype = heavy
+air.animtype = back
+;priority = 5, hit
+sparkno = S10014      ;ice hits
+guard.sparkno = -1
+sparkxy = 70, -120
+hitsound = S7,77
+guardsound = S7,77
+ground.type = high
+air.type = high
+ground.slidetime = 0
+ground.hittime = 15
+ground.velocity = 0, 0
+air.velocity = 0, 0
+guard.velocity = -7
+air.cornerpush.veloff = 0
+ground.cornerpush.veloff = 0
+yaccel = .5
+p2stateno = 4004
+air.fall = 0
+fall = 0
+fall.recover = 0
+fall.xvelocity = 0
+fall.yvelocity = 0
+numhits = 0
+kill = 0
+
+[State ] 
+type = Explod
+trigger1 = movehit = 1
+triggerall = p2statetype !=A
+anim = 10016
+id = 10016
+Postype = p2
+pos = -138,-165
+random = 0,0
+sprpriority = 2
+velocity = 0,0
+ownpal = 1
+
+[State ]
+type = Helper
+trigger1 = movehit = 1
+trigger1 = p2stateno != 6169
+helpertype = Normal
+ID = 10133
+name = "you cant see me"
+postype = p1
+pos = 0,0
+stateno = 10133
+ownpal = 1
+
+[State ]
+type = Helper
+trigger1 = movehit = 1
+trigger1 = p2stateno = 6169
+helpertype = Normal
+ID = 10138
+name = "floored"
+postype = p1
+pos = 0,0
+stateno = 10138
+ownpal = 1
+
+[State 1943, snd]
+type = Playsnd
+trigger1 = Time = 0
+value = s3,1
+channel=4
+
+[state ]
+type = playsnd
+trigger1 = time = 0
+value = s11,8
+
+[state ]
+type=stopsnd
+trigger1=time=60
+channel=4
+
+[state ]
+type = playsnd
+trigger1 = time = 40
+value = s3,3
+
+[state ]
+type = playsnd
+trigger1 = time = 45
+value = s3,12
+
+[State 1944, Immune]
+type = NotHitBy
+trigger1 = time = 1
+time = 10
+value = SCA,NP,SP,HP,NT,ST,HT
+
+[State ]
+type = envcolor
+trigger1 = time = 40
+time = 2
+value = 255,255,255
+
+[State 6173, ]
+type = explod
+trigger1 = time = 0
+anim = 4408
+removetime =40
+pos = 0,0
+postype = left
+bindtime = 999
+ontop = 0
+
+[State ]
+type = bgpalfx
+trigger1 = !time
+time = 3
+add = 0,0, 0
+sinadd = -250,-250, -250, 75
+
+[State ]
+type = bgpalfx
+trigger1 = time = 3
+time = 40
+add = -150,-150, -150
+
+[State ]
+type = Helper
+trigger1 = time = 0
+helpertype = Normal
+ID = 10138
+name = "let it snow"
+postype = left
+pos = 0,0
+stateno = 2943
+ownpal = 1
+
+[State ]
+type = ChangeState
+trigger1 = Animtime = 0
+value = 0
+ctrl = 1
+
+
+
+
+[Statedef 2943]
+type    = S
+movetype= I
+physics = S
+anim = 1344
+
+[State 0, BindToParent]
+type = BindToParent
+trigger1 =1
+time = -1
+;facing = 0
+pos = 0,0
+;ignorehitpause =
+;persistent =
+
+[State 6173, ]
+type = explod
+trigger1 = time = 0
+anim = 4407
+;removetime =215
+;random = 40,20
+pos = -1,75
+postype = left
+;bindtime = 999
+;random = 40,20
+ontop = 1
+vel = 0.3,0.3
+removetime = 40;177
+;accel = 1,1
+
+[State 6173, ]
+type = explod
+trigger1 = time = 5
+anim = 4407
+;removetime =215
+;random = 40,20
+pos = 98,7
+postype = left
+;bindtime = 999
+;random = 40,20
+ontop = 0
+vel = 0.4,0.4
+;accel = 1,1
+removetime = 40;172
+
+[State 6173, ]
+type = explod
+trigger1 = time = 20
+anim = 4407
+;removetime =215
+;random = 40,20
+pos = 0,0
+postype = left
+;bindtime = 999
+;random = 40,20
+ontop = 0
+vel = 0.2,0.2
+;accel = 1,1
+removetime = 40;157
+
+[State 6173, ]
+type = explod
+trigger1 = time = 30
+anim = 4407
+;removetime =215
+;random = 40,20
+pos = -52,0
+postype = left
+;bindtime = 999
+;random = 40,20
+ontop = 0
+vel = 0.4,0.4
+;accel = 1,1
+removetime = 40;147
+
+[State 6173, ]
+type = explod
+trigger1 = time = 5
+anim = 4407
+;removetime =215
+;random = 40,20
+pos = 0,150
+postype = left
+;bindtime = 999
+;random = 40,20
+ontop = 0
+vel = -0.2,0.2
+;accel = 1,1
+removetime = 40;172
+
+[State 6173, ]
+type = explod
+trigger1 = time = 10
+anim = 4407
+;removetime =215
+;random = 40,20
+pos = 10,-10
+postype = left
+;bindtime = 999
+;random = 40,20
+ontop = 1
+vel = -0.3,0.3
+;accel = 1,1
+removetime = 40;167
+
+[State 6173, ]
+type = explod
+trigger1 = time = 0
+anim = 4407
+;removetime =215
+;random = 40,20
+pos = 44,-67
+postype = left
+;bindtime = 999
+;random = 40,20
+ontop = 1
+vel = 0,0.3
+;accel = 1,1
+removetime = 40;177
+
+[state ]
+type = destroyself
+trigger1 = time = 40
+
+
+
+;-----------------------------------------------------------------
+
+
+
+[Statedef 1543]
+type    = S
+movetype= A
+physics = S
+juggle  = 4
+poweradd= -10000
+ctrl = 0
+velset = 0,0
+anim = 1543
+sprpriority = 10
+
+
+[state 1543]
+type = HitDef
+trigger1 = time = 0
+attr = S, NA
+animtype  = light
+damage    = 0, 0
+getpower = 25,5  
+guardflag = 
+hitflag = HAMFD
+pausetime = 0, 0
+sparkno = -1                   
+guard.sparkno = -1                   
+;hitsound   = s5,0
+;guardsound = s0,0
+ground.type = High
+ground.slidetime = 0
+ground.hittime  = 0
+ground.velocity = 0,0    
+ground.cornerpush.veloff = 0        
+air.velocity = 0,0
+air.hittime = 0  
+fall = 1
+fall.recover = 0
+p2facing = 1 
+p2stateno = 661
+p1stateno = 1945
+
+[state ]
+type = changestate
+trigger1 = time = 5
+value = 0
+ctrl = 1
+
+
+
+
+
+
+
+;--------------------------------------------------------------------------
+;ice block
+
+[Statedef 1945]
+type    = S
+movetype= A
+physics = S
+poweradd= -10000
+ctrl = 0
+velset = 0,0,0
+anim = 10030
+
+
+[state ]
+type = Explod
+trigger1 = time = 0
+anim = 10031
+id = 10031
+Postype = p1
+pos = -47,-80
+;random = 40,20
+sprpriority = 2
+;velocity = 0,-5
+ownpal = 0
+
+[State ]
+type = Explod
+trigger1 = time = 144
+anim = 10032
+id = 10032
+Postype = p1
+pos = -34,-63
+;random = 40,20
+sprpriority = 2
+;velocity = 0,3
+ownpal = 1
+
+[State ] ;ice hits
+type = Explod
+trigger1 = movehit = 1
+triggerall = p2statetype !=A
+anim = 10016
+id = 10016
+Postype = p2
+pos = -138,-165
+random = 0,0
+sprpriority = 2
+velocity = 0,0
+ownpal = 1
+
+
+
+
+[State 1943, snd]
+type = Playsnd
+trigger1 = Time = 0
+value = s3,1
+
+[state ]
+type = playsnd
+trigger1 = time = 0
+value = s11,8
+
+[state ]
+type = playsnd
+trigger1 = time = 100
+value = s11,4
+
+[state ]
+type = playsnd
+trigger1 = time = 125
+value = s3,12
+
+[state ]
+type = playsnd
+trigger1 = time = 177
+value = s3,8
+
+
+
+[State 1944, Immune]
+type = NotHitBy
+trigger1 = time = 1
+time = 200
+value = SCA,NP,SP,HP,NT,ST,HT
+
+[State ]
+type = envcolor
+trigger1 = time = 177
+time = 2
+value = 255,255,255
+
+[State ]
+type = Helper
+trigger1 = time = 177
+helpertype = Normal
+ID = 1946
+name = "ice block"
+postype = p1
+pos = -40,-115
+stateno = 1946
+ownpal = 1
+ontop = 1
+bindtime = 9999
+shadow = 0
+size.xscale = .90
+size.yscale =  .50
+size.shadowoffset = -1
+
+[State 1943, snd]
+type = Playsnd
+trigger1 = Time = 0
+value = s3,2
+
+
+[state 182, shake]
+type = envshake
+trigger1 = time = 177
+time = 5
+freq = 60
+ampl = -2
+
+[State 6173, dragon]
+type = explod
+trigger1 = time = 0
+anim = 4408
+removetime =177
+pos = 0,0
+postype = left
+bindtime = 999
+ontop = 0
+
+[State ]
+type = bgpalfx
+trigger1 = !time
+time = 3
+add = 0,0, 0
+sinadd = -250,-250, -250, 75
+
+[State ]
+type = bgpalfx
+trigger1 = time = 3
+time = 177
+add = -150,-150, -150
+
+[State ]
+type = Helper
+trigger1 = time = 0
+helpertype = Normal
+ID = 10138
+name = "let it snow"
+postype = left
+pos = 0,0
+stateno = 9943
+ownpal = 1
+
+[State 1944, 7]
+type = ChangeState
+trigger1 = time = 177
+value = 1947
+ctrl = 0
+
+
+
+;----------------------------------------
+;ice block iteself
+[Statedef 1946]
+type = S
+movetype = A
+physics = U
+anim = 10057
+velset = 0,0
+ctrl = 0
+juggle = 0
+facep2 = 1
+sprpriority = 99
+
+
+[State ]
+type = Hitdef
+trigger1 = !time
+trigger1 = p2stateno !=4003
+triggerall = p2movetype = I
+trigger3 = p2statetype = S
+trigger4 = p2statetype = C
+trigger5 = p2statetype = A
+trigger2 = statetype !=S
+damage = 700,700
+trigger1 = p2stateno !=6169
+attr = A,NA,SA,HA,NP,SP,HP
+guardflag =
+hitflag = HAMLFD
+animtype = heavy
+air.animtype = back
+priority = 5, hit
+sparkno = S10014
+guard.sparkno = -1
+sparkxy = 70, 0
+hitsound = S3,4
+guardsound = S7,77
+ground.type = high
+air.type = high
+ground.slidetime = 0
+ground.hittime = 15
+ground.velocity = 0, 0
+air.velocity = 0, 0
+guard.velocity = -7
+air.cornerpush.veloff = 0
+ground.cornerpush.veloff = 0
+yaccel = .5
+p2stateno = 4003
+air.fall = 1
+guard.dist = 0
+fall = 0
+fall.recover = 0
+fall.xvelocity = 0
+fall.yvelocity = 0
+numhits = 0
+kill = 0
+
+
+[state ]
+type = assertspecial
+trigger1 = 1
+flag = noshadow
+
+
+
+[State ] ;ice hits
+type = Explod
+trigger1 = movehit = 1
+triggerall = p2statetype !=A
+anim = 10016
+id = 10016
+Postype = p2
+pos = -138,-165
+random = 0,0
+sprpriority = 2
+velocity = 0,0
+ownpal = 1
+
+[State ]
+type = Helper
+trigger1 = movehit = 1
+helpertype = Normal
+ID = 10133
+name = "you cant see me"
+postype = p1
+pos = 0,0
+stateno = 10133
+ownpal = 1
+
+
+[state ]
+type = Explod
+trigger1 = time = 1000
+trigger2 = movehit = 1
+anim = 10058
+id = 10058
+Postype = p1
+pos = -25,0
+sprpriority = 2
+ownpal = 0
+ontop = 1
+scale = .90,.50
+
+[state 182, shake]
+type = envshake
+trigger1 = time = 1000
+trigger2 = movehit = 1
+time = 5
+freq = 60
+ampl = -2
+
+
+[State 0, BindToRoot]
+type = BindToparent
+trigger1 = !time
+time =-1
+;facing = -1
+pos = -40,-115
+;ignorehitpause =
+;persistent =
+
+
+
+
+[state ]
+type = destroyself
+trigger1 = time = 1000
+trigger2 = movehit = 1
+
+;----------------------------------------
+;p1 cant move
+[Statedef 1947]
+type = S
+movetype = I
+physics = U
+anim = 10059
+ctrl = 0
+sprpriority = 0
+
+[State ]
+type = palfx
+trigger1 = !(time%1)
+time = 1
+ignorehitpause = 1
+add = 70,70,250
+mul = 256,256,256
+sinadd = 0,0,0,1
+invertall = 0
+color = 0
+ignorehitpause = 0
+persistent = 1
+
+
+
+[state ]
+type = poweradd
+trigger1 = 1
+value = 5
+
+
+[state ]
+type = assertspecial
+trigger1 = 1
+flag = noshadow
+
+[state ]
+type = playsnd
+trigger1 = time = 1000
+trigger2 = p2stateno = 4003
+value = s3, 18
+
+[state ]
+type = changestate
+trigger1 = time = 1000
+trigger2 = p2stateno = 4003
+value = 0
+ctrl = 1
+
+
+
+;------------------------------------------------------------------
+;player 2 pause for ice block
+[Statedef 661]
+type = S
+physics = S
+sprpriority = 0
+ctrl = 0
+velset = 0,0,0
+anim = 0
+
+[state ]
+type = posset
+trigger1 = 1
+y = 0
+
+
+[State 661, 7]
+type = selfstate
+trigger1 = time = 178
+value = 0
+ctrl = 1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

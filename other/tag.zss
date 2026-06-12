@@ -247,11 +247,12 @@ ignoreHitPause if isHelper && teamSide != 0 && roundState = 2 {
 	# between a replay's recorded attacks (Jotaro/DIO flicker); ~12 ticks after the rush truly
 	# ends the hide applies.
 	if moveType = A {
-		mapSet{map: "rushCool"; value: 20}
-	} else if map(rushCool) > 0 && stateNo >= 100 && stateNo <= 159 {
-		# tandem stands DASH into position between recorded attacks (standard movement
-		# states, moveType I, often 15+ ticks) -- movement sustains an active rush
-		mapSet{map: "rushCool"; value: 20}
+		mapSet{map: "rushCool"; value: 30}
+	} else if map(rushCool) > 0 && ((stateNo >= 100 && stateNo <= 159) || (stateNo >= 12000 && stateNo <= 12999)) {
+		# tandem stands DASH into position between recorded attacks (standard movement states)
+		# and idle in 12xxx dispatcher states while picking the next recorded move --
+		# both sustain an active rush
+		mapSet{map: "rushCool"; value: 30}
 	} else if map(rushCool) > 0 {
 		mapSet{map: "rushCool"; value: map(rushCool) - 1}
 	}

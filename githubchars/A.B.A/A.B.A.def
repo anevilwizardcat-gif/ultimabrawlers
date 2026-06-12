@@ -1,0 +1,31 @@
+[Info]
+name = "A.B.A"
+displayname = "A.B.A"
+versiondate = 04,15,2006
+mugenversion = 04,14,2002
+author = "muteki" 
+pal.defaults = 1
+
+[Files]
+cmd     = aba.cmd
+cns     = aba_const.txt
+st      = aba.cns
+st1     = -2&-3.cns
+stcommon = common1.cns
+sprite  = aba.sff
+anim    = aba.air
+sound   = aba.snd
+pal1    = aba01.act
+pal2    = aba02.act
+pal3    = aba03.act
+pal4    = aba04.act
+pal5    = aba05.act
+pal6    = aba06.act
+pal7    = aba07.act
+pal8    = aba08.act
+pal9    = aba09.act
+pal10   = aba10.act
+pal11   = aba11.act
+pal12   = aba12.act
+
+[Arcade]

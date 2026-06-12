@@ -1,0 +1,176 @@
+
+***************Introducing the Obreck fatality frames******************
+
+   **Note: Sorry about the rush job. I was trying to get Sub-Zero out
+           as quickly as possible. I'll write a better version later.
+
+-Skip down to "The half-assed way to add the Obreck Fatality Frames if-
+-you want to quickly make a charater compatible to the spine ripper.  -
+  
+	As you may know if you've created any charaters in Mugen there 
+  are no frames designated frames for a charater losing their head or
+  being severed in half. While this causes no problems for most charaters
+  ported to the game charaters from Mortal Kombat lose some of their more
+  appealing fatalites because this (Or the person porting them has to
+  come up with some creative way to fake it that looks terrible on many
+  of Mugen massive charater line-up). I've decided to designate my own
+  set of frames for the sequences in hopes that others will take advantage
+  of it by making charaters with those frames and charaters with fatalities
+  that also make use of them. If your just reading this because you 
+  want favorite/most hated charater get their spine ripped out as 
+  quickly as possible skip the next paragraph. It'll only confuse and
+  discourage you. Scroll down to "The half-assed way to add the Obreck 
+  Fatality frames to your charater" instead.
+
+  	Anyways this trick designates you add 11 animation sequences in 
+  your charater's .air file. I picked these numbers because I figured
+  NO ONE in their right would need to use them for the charater's 
+  standard animation. Anyways the animations you need to add are:
+
+
+	- 29990  ;Charater's inanimate severed head. Used for things like
+		  Subby's spine-ripper when he hold your head up like a
+                  trophy. 1 frame. Number it 29990,0
+
+	- 29991  ;Charater's severed head spinning. Used for when the
+                  head is airborne charater's decaped head is airborne,
+                  like in Johnny Cage's decap uppercut. Can have as many
+                  animation frames as you want and the squence should be
+                  allowed to loop. Number the most upright frame 29991,0
+
+	- 29992  ;Charater's inanimate head lying on the ground. Used for
+                  things like when the charater's head is just lying
+                  there on the ground after Cage knocked their head off.
+                  1 frame. Number it 29992,0
+
+	- 29993  ;Charater's headless body keeling over. The body should
+                  start standing and end up lying on the ground. Can 
+                  have as many frames as you want as want but should 
+                  be under 70 ticks and the last frame should 
+                  have -1 on its animation time. Number 1st frame 29993,0
+                  and the last 29994,0
+
+	- 29994  ;Inanimate headless body lying on the ground. Should
+                  look indenticle to the last frame in animation 29993.
+
+	- 29995  ;Severed lower half of charater's body. Treat animating
+                  it like animation 29993. Number 1st frame 29995,0 and
+                  the last 29996,0. Make a duplicate frame for 29996,0
+                  if you only used 1 frame for this squence.
+
+ 	- 29996  ;Inanimate severed lower half of body. Should look 
+                  indenticle to the last frame in animation 29995.
+
+	- 29997  ;Charater's severed upper body. Used in fatalites like
+                  Cage's rip-in-half. Should start upright and end up 
+                  lying on its back or stomach. Treat animating it like
+                  in animation 29993. Number 1st frame 29997,0 and the
+                  last 29998,0
+  
+ 	- 29998  ;Inanimate severed upper half of body. Should look 
+                  indenticle to the last frame in animation 29997.
+
+	- 29999  ;Exacty like 29997 expect the sever upper body should
+                  also be missing its head. for really gorey fatalities
+                  where the opponent removes your head then chops you
+                  in half. Number 1st frame 29999,0 and last 29989,0
+
+ 	- 29989  ;Inanimate severed and headless upper half of body.
+                  Should look indenticle to the last frame in 
+                  animation 29999.
+
+	Well that's it for now. Look at Sub-Zero .air .sff and .cns file
+  for more info or if you want to see how the speciallized fatalities work.
+  Or if you have no fucking clue about anything I just said scroll down
+  to........
+
+
+
+
+****The Half-Assed approach to adding in the Obreck fatality frames********
+
+Here is the quickest way to add the Obreck frames to your guy. Keep in
+mind they will look a crappy "MK3 Paper doll" when a fataly that uses
+the frames are done on them.
+
+STEP 1: Get Mcm if you don't have in already. http://ses.mgbr.net
+
+STEP 2: Open the charater's .sff file and find a frame of the charater where they're
+        standing and look like they're in pain. Go to export image and save the image.
+
+STEP 3: Open the image with an art editor. Make 5 copies of the image naming them:
+        Head,Body,Lower,Upper,and UpperDecap.
+
+STEP 4: Edit each image:
+          Make Head just the charater's head. This is their decaped head.
+
+          Remove the head from Body, leaving the rest. This is your decaped body.
+
+          Remove everthing below the waist on Upper. This is your severed upper body.
+
+          Remove everthing above the waist on Lower. This is your severed lower body.
+
+          Make UpperDecap the same as upper, but with the head removed. This is your
+            decapped/severed upper body
+
+STEP 5: Get the frames axis's. Make them centered X-wise and where they would touch the 
+        ground Y-wise. Make sure the images are saved as .pcx format. If the charater 
+        has some CONSISTENT red in their palette feel free to dabble some blood on.
+
+STEP 6: Open your guy's .sff file again in Mcm. Add Head.pcx in 3 times as 29990,0 29991,0 and
+        29992,0. Add Body.pcx in 2 times as 29993,0 and 29994,0. Add Lower.pcx in twice as
+        29995,0 and 29996,0. Add Upper.pcx in twice as 29997,0 and 29998,0. Finally add 
+        UpperDecap.pcx in twice as 29999,0 and 29989,0. Save your .sff file and exit.
+
+STEP 7: Copy and paste the lines of code below this step to the bottom of your charater's
+        .air file and you're done! Load up a match with Sub-Zero and your guy and try Subby's
+        spine ripper on them. Enjoy. Here's the lines of code:
+
+
+; Trophy Head
+[Begin Action 29990]
+29990, 0,0,0,-1
+
+; Airborne Head
+[Begin Action 29991]
+29991, 0,0,0,-1
+
+; Head on ground
+[Begin Action 29992]
+29992, 0,0,0,-1
+
+; Decaped Body Dying
+[Begin Action 29993]
+29993, 0,0,0,-1
+
+; Decaped Body Lying on Ground
+[Begin Action 29994]
+29994, 0,0,0,-1
+
+; Lower Body Dying
+[Begin Action 29995]
+29995, 0,0,0,-1
+
+; Lower Body Lying on Ground
+[Begin Action 29996]
+29996, 0,0,0,-1
+
+; Upper Body Dying
+[Begin Action 29997]
+29997, 0,0,0,-1
+
+; Upper Body Lying on Ground
+[Begin Action 29998]
+29998, 0,0,0,-1
+
+; Decaped Upper Body Dying
+[Begin Action 29999]
+29999, 0,0,0,-1
+
+; Decaped Upper Body Lying on Ground
+[Begin Action 29989]
+29989, 0,0,0,-1
+
+          
+
+  

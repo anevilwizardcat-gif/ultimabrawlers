@@ -1,0 +1,32 @@
+;=====================================================================
+;  DEF File For "alessi"					     Made By H"
+;=====================================================================
+; Player Information
+[Info]
+name    = "alessi"
+displayname = "alessi"
+versiondate = 08,08,2004
+mugenversion = 06,14,2003
+author = "HÅh"
+pal.defaults = 4,5
+
+; Files for the Player
+[Files]
+cmd     = alessi.cmd
+cns     = alessi-N.cns		;Constants
+st      = alessi-N.cns		;States (Normal)
+st1     = alessi-S.cns		;States (Special)
+st2     = alessi-H.cns		;States (Hyper)
+st3     = alessi-stand.cns		;States (stand)
+st4     = alessi-child.cns		;States (child)
+st5     = alessi-common.cns		;Common states
+stcommon = common1.cns	;Common states
+sprite  = alessi.sff			;Sprite
+anim    = alessi.air			;Animation
+sound   = alessi.snd			;Sound
+pal1    = act/alessi04.act		;Palettes
+pal2    = act/alessi05.act
+pal3    = act/alessi06.act
+pal4    = act/alessi01.act
+pal5    = act/alessi02.act
+pal6    = act/alessi03.act

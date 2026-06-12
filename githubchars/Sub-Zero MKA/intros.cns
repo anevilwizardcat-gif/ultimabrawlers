@@ -1,0 +1,107 @@
+;Sub-Zero
+;Created by: Gary Fisher ("ermac" on mugenguild.com, mugen-fantry.net)
+
+
+;------------------------------------------------------------------------------
+;intro shit
+;------------------------------------------------------------------------------
+;intro
+[Statedef 191]
+type = S
+ctrl = 0
+anim = 0
+velset = 0,0
+
+[state ]
+type = changeanim
+trigger1 = var(54)= 1
+triggerall = time = 0
+value = 19909
+
+
+[State ]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+time = 1
+
+;--------------------
+;fat intro
+[Statedef 5550]
+type = S
+ctrl = 0
+anim = 0
+velset = 0,0
+
+[state ]
+type = changeanim
+trigger1 = var(54)= 1
+triggerall = time = 0
+value = 19909
+
+
+[State ]
+type = Playsnd
+trigger1 = Time = 0
+value = s25,0
+
+
+[State ]
+type = AssertSpecial
+trigger1 = Time < 300
+flag = Intro
+
+[State ]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+time = 1
+
+
+
+
+
+
+
+
+
+;--------------------
+;SPECIAL sub-zero ending  vs noobsmoke
+[Statedef 5540]
+type = S
+ctrl = 0
+anim = 0
+velset = 0,0
+
+[state ]
+type = posset
+trigger1 = time = 0
+y = 0
+
+[State 194, 0]
+type = AssertSpecial
+trigger1 = Time < 500
+flag = roundnotover
+flag2 = nofg
+flag3 = nobardisplay
+
+[State 194, 0]
+type = AssertSpecial
+trigger1 = Time < 500
+flag = nomusic
+
+
+
+[state ]
+type = changestate
+trigger1 = time = 500
+value = 0
+ctrl = 1
+
+
+
+
+
+
+
+
