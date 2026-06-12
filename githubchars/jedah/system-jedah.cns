@@ -1880,6 +1880,12 @@ trigger1 = roundstate>1||(time>2&&command="s")
 ;~~~~~~~~~
 
 [statedef -2]
+[State -2, Hide Engine Power Bar]
+type = AssertSpecial
+trigger1 = 1
+flag = noPowerBarDisplay
+ignorehitpause = 1
+
 [state -2]
 type = DisplaytoClipboard
 trigger1 = 1

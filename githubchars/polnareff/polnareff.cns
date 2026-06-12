@@ -11391,7 +11391,7 @@ trigger1 = teamside = 1
 anim = 16001
 id = 16001
 postype = L
-pos = 140+var(4),48+var(5)
+pos = 140+var(4),48+var(5)+16*(numpartner && root,ID > partner,ID && (partner,authorname="warusaki3" || partner,authorname="Nimame"))
 ownpal = 0
 bindtime = -1
 ignorehitpause = 1
@@ -11408,7 +11408,7 @@ trigger1 = teamside = 2
 anim = 16051
 id = 16001
 postype = R
-pos = -140+var(4),48+var(5)
+pos = -140+var(4),48+var(5)+16*(numpartner && root,ID > partner,ID && (partner,authorname="warusaki3" || partner,authorname="Nimame"))
 ownpal = 0
 bindtime = -1
 ignorehitpause = 1
@@ -11424,7 +11424,7 @@ trigger1 = time >= 2
 anim = ifelse(teamside=1,16000,16050)
 id = 16000
 postype = Back
-pos = 140+var(4),48+var(5)
+pos = 140+var(4),48+var(5)+16*(numpartner && root,ID > partner,ID && (partner,authorname="warusaki3" || partner,authorname="Nimame"))
 ownpal = 1
 bindtime = -1
 ignorehitpause = 1
@@ -11441,7 +11441,7 @@ trigger1 = time >= 2
 anim = 7510
 id = 16004
 postype = Back
-pos = ifelse(teamside=1,102,137)+var(4),51+var(5)
+pos = ifelse(teamside=1,102,137)+var(4),51+var(5)+16*(numpartner && root,ID > partner,ID && (partner,authorname="warusaki3" || partner,authorname="Nimame"))
 ownpal = 1
 bindtime = -1
 ignorehitpause = 1
@@ -11509,7 +11509,7 @@ trigger1 = !numexplod(7522)
 trigger1 = time > 0
 anim = 7522
 id = 7522
-pos = ifelse(teamside=1,94,210)+var(4),43+var(5)
+pos = ifelse(teamside=1,94,210)+var(4),43+var(5)+16*(numpartner && root,ID > partner,ID && (partner,authorname="warusaki3" || partner,authorname="Nimame"))
 postype = left
 bindtime = -1
 scale = .5,.5

@@ -1666,6 +1666,12 @@ ctrl = 1
 ; 常時監視ステート（－２）
 ;===========================================================================
 [Statedef -2]
+[State -2, Hide Engine Power Bar]
+type = AssertSpecial
+trigger1 = NumHelper(17000) ;<-- only while the custom DS meter exists; engine bar returns otherwise
+flag = noPowerBarDisplay
+ignorehitpause = 1
+
 ;===========================================================================
 
 [State -2, アナウンス設定]
@@ -1676,6 +1682,7 @@ var(15) = 1    ;ここを0にするとOFFにできます。
 [State -2, ゲージ表示設定]
 type = VarSet
 trigger1 = NumPartner = 0
+trigger2 = teamMode = Tag ;<-- author disabled the DS meter in teams; tag re-enables it so the Bench UI Protocol can manage it
 var(24) = 1    ;ここを0にするとOFFにできます。
 
 [State -2, 白ダメージ倍率設定]
@@ -2304,8 +2311,8 @@ ownpal = 1
 type = VarAdd
 triggerall = var(15) = 1
 trigger1 = MoveHit = 1
-trigger2 = ProjHit(800) = 1
-trigger3 = ProjHit(900) = 1
+trigger2 = ProjHit800 = 1
+trigger3 = ProjHit900 = 1
 var(18) = 1+Ifelse(PrevStateNo=910,26,(Ifelse(PrevStateNo=920,26,0)))
 
 [State -2, コンボ数カウント(ヘルパー用)]

@@ -3,6 +3,13 @@
 ;===========================================================================
 
 [Statedef -2]
+[State -2, StandBar Broadcast]
+type = MapSet
+trigger1 = 1
+map = "standBar"
+value = 1
+ignorehitpause = 1
+
 
 ;AIテスト用
 [State -2,KO]

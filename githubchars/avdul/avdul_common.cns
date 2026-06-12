@@ -2529,6 +2529,7 @@ persistent = 0
 type = changestate
 triggerall = !alive
 trigger1 = !animtime
+trigger2 = 0 ;<-- inert gap-filler
 trigger3 = anim = [5110,5119]
 value = 5150
 

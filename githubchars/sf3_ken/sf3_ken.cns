@@ -2953,11 +2953,13 @@ velset = 0,0
 [State 25000, Bench UI Sweep]
 type = RemoveExplod
 trigger1 = root,stateno = [6565610, 6565611]
+trigger2 = roundstate > 2
+trigger3 = !root,alive
 ignorehitpause = 1
 
 [State -2, Explod]
 type = Explod
-triggerall = root,stateno != [6565610, 6565611] ;<-- benched: UI hidden, auto-restores via numexplod guards
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = roundstate = 2
 trigger1 = numexplod(25000) = 0
 trigger1 = root,Var(1) = 1
@@ -2976,7 +2978,7 @@ scale = 0.5,0.5
 
 [State -2, Explod]
 type = Explod
-triggerall = root,stateno != [6565610, 6565611] ;<-- benched: UI hidden, auto-restores via numexplod guards
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = roundstate = 2
 trigger1 = numexplod(25002) = 0
 trigger1 = root,Var(1) = 1
@@ -3013,7 +3015,7 @@ ignorehitpause = 1
 
 [State -2, Explod]
 type = Explod
-triggerall = root,stateno != [6565610, 6565611] ;<-- benched: UI hidden, auto-restores via numexplod guards
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = roundstate = 2
 trigger1 = numexplod(25003) = 0
 trigger1 = root,fvar(2) = 64
@@ -3041,7 +3043,7 @@ ignorehitpause = 1
 ;ƒXƒ^ƒ“ƒQ[ƒW(‚Q‚o‘¤)
 [State -2, Explod]
 type = Explod
-triggerall = root,stateno != [6565610, 6565611] ;<-- benched: UI hidden, auto-restores via numexplod guards
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = roundstate = 2
 trigger1 = numexplod(25001) = 0
 trigger1 = root,Var(1) = 2
@@ -3060,7 +3062,7 @@ scale = 0.5,0.5
 
 [State -2, Explod]
 type = Explod
-triggerall = root,stateno != [6565610, 6565611] ;<-- benched: UI hidden, auto-restores via numexplod guards
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = roundstate = 2
 trigger1 = numexplod(25004) = 0
 trigger1 = root,Var(1) = 2
@@ -3097,7 +3099,7 @@ ignorehitpause = 1
 
 [State -2, Explod]
 type = Explod
-triggerall = root,stateno != [6565610, 6565611] ;<-- benched: UI hidden, auto-restores via numexplod guards
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = roundstate = 2
 trigger1 = numexplod(25005) = 0
 trigger1 = root,fvar(2) = 64
@@ -4157,6 +4159,13 @@ trigger3 = root,command = "a" || root,command = "b" || root,command = "c"
 type = S
 anim = 9999
 
+[State 50000, Bench UI Sweep]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611]
+trigger2 = roundstate > 2
+trigger3 = !root,alive
+ignorehitpause = 1
+
 [State -3, ‰¹‚ð–Â‚ç‚·]
 type = PlaySnd
 triggerall = roundstate >= 2
@@ -4203,6 +4212,7 @@ channel = 15
 
 [State -2, Explod]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = numhelper(40000) = 0
 trigger1 = numexplod(35000) = 0
 trigger1 = root,var(1) = 1
@@ -4221,6 +4231,7 @@ scale = 0.5,0.5
 
 [State -2, Explod]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = numhelper(40000) = 0
 trigger1 = numexplod(35000) = 0
 trigger1 = root,var(1) = 2
@@ -4239,6 +4250,7 @@ scale = 0.5,0.5
 
 [State -2, Explod]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 triggerall = numexplod(35000)
 triggerall = numexplod(35100) = 0
 triggerall = root,var(1) = 1
@@ -4265,6 +4277,7 @@ scale = 0.5,0.5
 
 [State -2, Explod]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 triggerall = numexplod(35000)
 triggerall = numexplod(35100) = 0
 triggerall = root,var(1) = 2
@@ -4291,6 +4304,7 @@ scale = 0.5,0.5
 
 [State -2, Explod]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 triggerall = numexplod(35000)
 triggerall = numexplod(35101) = 0
 triggerall = root,var(1) = 1
@@ -4317,6 +4331,7 @@ scale = 0.5,0.5
 
 [State -2, Explod]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 triggerall = numexplod(35000)
 triggerall = numexplod(35101) = 0
 triggerall = root,var(1) = 2
@@ -4343,6 +4358,7 @@ scale = 0.5,0.5
 
 [State -2, Explod]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 triggerall = numexplod(35000)
 triggerall = numexplod(35102) = 0
 triggerall = root,var(1) = 1
@@ -4367,6 +4383,7 @@ scale = 0.5,0.5
 
 [State -2, Explod]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 triggerall = numexplod(35000)
 triggerall = numexplod(35102) = 0
 triggerall = root,var(1) = 2
@@ -4391,6 +4408,7 @@ scale = 0.5,0.5
 
 [State -2, Explod]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 triggerall = numexplod(35000)
 triggerall = numexplod(35103) = 0
 triggerall = root,var(1) = 1
@@ -4411,6 +4429,7 @@ scale = 0.5,0.5
 
 [State -2, Explod]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 triggerall = numexplod(35000)
 triggerall = numexplod(35103) = 0
 triggerall = root,var(1) = 2
@@ -4431,6 +4450,7 @@ scale = 0.5,0.5
 
 [State -2, Explod]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = numexplod(35000)
 trigger1 = numexplod(35200) = 0
 trigger1 = root,var(1) = 1
@@ -4450,6 +4470,7 @@ scale = 0.5,0.5
 
 [State -2, Explod]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = numexplod(35000)
 trigger1 = numexplod(35200) = 0
 trigger1 = root,var(1) = 2
@@ -4469,6 +4490,7 @@ scale = 0.5,0.5
 
 [State -2, Explod]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = numexplod(35000)
 trigger1 = numexplod(35201) = 0
 trigger1 = root,var(1) = 1
@@ -4488,6 +4510,7 @@ scale = 0.5,0.5
 
 [State -2, Explod]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = numexplod(35000)
 trigger1 = numexplod(35201) = 0
 trigger1 = root,var(1) = 2
@@ -4507,6 +4530,7 @@ scale = 0.5,0.5
 
 [State -2, Explod]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 triggerall = numexplod(35000)
 triggerall = numexplod(35202) = 0
 triggerall = root,var(1) = 1
@@ -4529,6 +4553,7 @@ scale = 0.5,0.5
 
 [State -2, Explod]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 triggerall = numexplod(35000)
 triggerall = numexplod(35202) = 0
 triggerall = root,var(1) = 2
@@ -4551,6 +4576,7 @@ scale = 0.5,0.5
 
 [State -2, Explod]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 triggerall = numexplod(35000)
 triggerall = numexplod(35203) = 0
 triggerall = root,var(1) = 1
@@ -4571,6 +4597,7 @@ scale = 0.5,0.5
 
 [State -2, Explod]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 triggerall = numexplod(35000)
 triggerall = numexplod(35203) = 0
 triggerall = root,var(1) = 2
@@ -4591,6 +4618,7 @@ scale = 0.5,0.5
 
 [State -2, Explod]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = numexplod(35000)
 trigger1 = numexplod(35300) = 0
 trigger1 = root,var(1) = 1
@@ -4609,6 +4637,7 @@ scale = 0.5,0.5
 
 [State -2, Explod]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = numexplod(35000)
 trigger1 = numexplod(35300) = 0
 trigger1 = root,var(1) = 2

@@ -14075,6 +14075,12 @@ value = 5150
 
 ;---------------------------------------------------------------------------
 [Statedef -2]
+[State -2, Hide Engine Power Bar]
+type = AssertSpecial
+trigger1 = 1
+flag = noPowerBarDisplay
+ignorehitpause = 1
+
 
 ;configŒÄ‚Ño‚µ
 [State 3001, Super]
@@ -14130,6 +14136,7 @@ trigger1 = !partner,authorname = "Jesuszilla"
 trigger2 = numpartner
 trigger2 = ID<partner,ID
 trigger3 = !numpartner
+trigger4 = numpartner && teamMode = Tag ;<-- tag: every character hosts their OWN GP counter
 id = 6500
 name = "groove point"
 pos = 0,300

@@ -764,6 +764,13 @@ anim = 17001
 ctrl = 0
 sprpriority = -5
 
+[State 17000, Bench UI Sweep]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611]
+trigger2 = roundstate > 2
+trigger3 = !root,alive
+ignorehitpause = 1
+
 [State 17000]
 type = RemoveExplod
 triggerall = var(1) != Floor(Root,Power * 0.001)
@@ -801,6 +808,7 @@ flag2= Invisible
 
 [State 17000, è¸ÇË]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = NumExplod(17002) = 0
 anim = 17002
 ID = 17002
@@ -819,6 +827,7 @@ Persistent = 1
 
 [State 17000, òg]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = NumExplod(17000) = 0
 anim = 17000
 ID = 17000
@@ -837,6 +846,7 @@ Persistent = 1
 
 [State 17000, ÉoÅ[]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = NumExplod(17003) = 0
 anim = 17003
 ID = 17003
@@ -855,6 +865,7 @@ Persistent = 1
 
 [State 17000, òg]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = NumExplod(17001) = 0
 anim = 17001
 ID = 17001
@@ -1049,6 +1060,7 @@ IgnoreHitPause = 1
 
 [State 17000,0]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 triggerall = var(1)%10 = 0
 trigger1 = NumExplod(17004) = 0
 anim = 17004
@@ -1068,6 +1080,7 @@ Persistent = 1
 
 [State 17000,1]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 triggerall = var(1)%10 = 1
 trigger1 = NumExplod(17005) = 0
 anim = 17005
@@ -1087,6 +1100,7 @@ Persistent = 1
 
 [State 17000,2]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 triggerall = var(1)%10 = 2
 trigger1 = NumExplod(17006) = 0
 anim = 17006
@@ -1106,6 +1120,7 @@ Persistent = 1
 
 [State 17000,3]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 triggerall = var(1)%10 = 3
 trigger1 = NumExplod(17007) = 0
 anim = 17007
@@ -1125,6 +1140,7 @@ Persistent = 1
 
 [State 17000,4]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 triggerall = var(1)%10 = 4
 trigger1 = NumExplod(17008) = 0
 anim = 17008
@@ -1144,6 +1160,7 @@ Persistent = 1
 
 [State 17000,5]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 triggerall = var(1)%10 = 5
 trigger1 = NumExplod(17009) = 0
 anim = 17009
@@ -1163,6 +1180,7 @@ Persistent = 1
 
 [State 17000,6]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 triggerall = var(1)%10 = 6
 trigger1 = NumExplod(17010) = 0
 anim = 17010
@@ -1182,6 +1200,7 @@ Persistent = 1
 
 [State 17000,7]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 triggerall = var(1)%10 = 7
 trigger1 = NumExplod(17011) = 0
 anim = 17011
@@ -1201,6 +1220,7 @@ Persistent = 1
 
 [State 17000,8]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 triggerall = var(1)%10 = 8
 trigger1 = NumExplod(17012) = 0
 anim = 17012
@@ -1220,6 +1240,7 @@ Persistent = 1
 
 [State 17000,9]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 triggerall = var(1)%10 = 9
 trigger1 = NumExplod(17013) = 0
 anim = 17013
@@ -1241,6 +1262,7 @@ Persistent = 1
 
 [State 17000,1]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 triggerall = var(1) = [10, 19]
 trigger1 = NumExplod(17015) = 0
 anim = 17005
@@ -1260,6 +1282,7 @@ Persistent = 1
 
 [State 17000,2]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 triggerall = var(1) = [20, 29]
 trigger1 = NumExplod(17016) = 0
 anim = 17006
@@ -1279,6 +1302,7 @@ Persistent = 1
 
 [State 17000,3]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 triggerall = var(1) = [30, 39]
 trigger1 = NumExplod(17017) = 0
 anim = 17007
@@ -1298,6 +1322,7 @@ Persistent = 1
 
 [State 17000,4]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 triggerall = var(1) = [40, 49]
 trigger1 = NumExplod(17018) = 0
 anim = 17008
@@ -1317,6 +1342,7 @@ Persistent = 1
 
 [State 17000,5]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 triggerall = var(1) = [50, 59]
 trigger1 = NumExplod(17019) = 0
 anim = 17009
@@ -1336,6 +1362,7 @@ Persistent = 1
 
 [State 17000,6]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 triggerall = var(1) = [60, 69]
 trigger1 = NumExplod(17020) = 0
 anim = 17010
@@ -1355,6 +1382,7 @@ Persistent = 1
 
 [State 17000,7]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 triggerall = var(1) = [70, 79]
 trigger1 = NumExplod(17021) = 0
 anim = 17011
@@ -1374,6 +1402,7 @@ Persistent = 1
 
 [State 17000,8]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 triggerall = var(1) = [80, 89]
 trigger1 = NumExplod(17022) = 0
 anim = 17012
@@ -1393,6 +1422,7 @@ Persistent = 1
 
 [State 17000,9]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 triggerall = var(1) >= 90
 trigger1 = NumExplod(17023) = 0
 anim = 17013
@@ -1433,6 +1463,13 @@ anim = 19000
 ctrl = 0
 sprpriority = -5
 
+[State 19000, Bench UI Sweep]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611]
+trigger2 = roundstate > 2
+trigger3 = !root,alive
+ignorehitpause = 1
+
 [State 19000, ñ≥ìG]
 type = NotHitBy
 trigger1 = 1
@@ -1446,6 +1483,7 @@ flag2= Invisible
 
 [State 19000, FINISH]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 triggerall = !NumExplod(19000)
 trigger1 = Root,Var(16) = 1
 anim = IfElse((Root,TeamSide=1),19000,19001)
@@ -1465,6 +1503,7 @@ facing = 1
 
 [State 19000, SPECIALFINISH]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 triggerall = !NumExplod(19000)
 trigger1 = Root,Var(16) = 2
 anim = IfElse((Root,TeamSide=1),19002,19003)
@@ -1484,6 +1523,7 @@ facing = 1
 
 [State 19000, ESFINISH]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 triggerall = !NumExplod(19000)
 trigger1 = Root,Var(16) = 3
 anim = IfElse((Root,TeamSide=1),19004,18999)
@@ -1503,6 +1543,7 @@ facing = 1
 
 [State 19000, EXFINISH]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 triggerall = !NumExplod(19000)
 trigger1 = Root,Var(16) = 4
 anim = IfElse((Root,TeamSide=1),19006,19007)
@@ -1522,6 +1563,7 @@ facing = 1
 
 [State 19000, CHEAPFINISH]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 triggerall = !NumExplod(19000)
 trigger1 = Root,Var(16) = 5
 anim = IfElse((Root,TeamSide=1),19008,19009)
@@ -1541,6 +1583,7 @@ facing = 1
 
 [State 19000, DARKFORCE]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 triggerall = !NumExplod(19000)
 trigger1 = Root,Var(16) = 6
 anim = IfElse((Root,TeamSide=1),19010,19011)

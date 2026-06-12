@@ -3,6 +3,12 @@
 ;☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆
 
 [Statedef -2]
+[State -2, Hide Engine Power Bar]
+type = AssertSpecial
+trigger1 = 1
+flag = noPowerBarDisplay
+ignorehitpause = 1
+
 
 ;デバック
 [State -2]
@@ -1451,6 +1457,7 @@ triggerall = numhelper(50000) = 0
 trigger1 = numpartner = 0
 trigger2 = numpartner && !fvar(37)
 trigger3 = fvar(37) && id < partner,id
+trigger4 = numpartner && teamMode = Tag ;<-- tag: every character hosts their OWN gauges
 name = "ゲージ"
 id = 50000
 pos =  0,0
@@ -1470,6 +1477,7 @@ triggerall = numhelper(25000) = 0
 trigger1 = numpartner = 0
 trigger2 = numpartner && !fvar(37)
 trigger3 = fvar(37) && id < partner,id
+trigger4 = numpartner && teamMode = Tag ;<-- tag: every character hosts their OWN gauges
 name = "ゲージ"
 id = 25000
 pos =  0,0

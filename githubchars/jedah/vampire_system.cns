@@ -2583,6 +2583,13 @@ ctrl = 0
 anim = 90000
 
 ;Gauge(SND)
+[State 8000, Bench UI Sweep]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611]
+trigger2 = roundstate > 2
+trigger3 = !root,alive
+ignorehitpause = 1
+
 [State 0, Helper]
 type = PlaySND
 trigger1 = floor(Power/1000)>var(1)&&time>0&&root,var(59)<=1 && roundstate=2
@@ -2626,6 +2633,7 @@ ignorehitpause=1
 ;Board ストック表示板
 [State 0, Helper]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = !numexplod(8010)&&root,var(59)<2
 ID = 8010
 anim = 8010+(root,var(59)=1)*2
@@ -2641,6 +2649,7 @@ scale = 320.0/384.0,240.0/224.0
 ;Figure ストック数一桁目
 [State 0, Helper]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = !numexplod(8050)&&root,var(59)<2
 ID = 8050
 anim = 8050+(teamside=2)*10+ifelse(floor(Power/10000)>=1,floor(floor(Power/1000)-floor(Power/10000)*10),floor(Power/1000))
@@ -2657,6 +2666,7 @@ ignorehitpause=1
 ;Figure10~ ストック数二桁目
 [State 0, Helper]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = !numexplod(8055) && floor(Power/10000)>=1&&root,var(59)<2
 ID = 8055
 anim = 8050+(teamside=2)*10+floor(Power/10000)
@@ -2673,6 +2683,7 @@ ignorehitpause=1
 ;Back 背景
 [State 0, Helper]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = !numexplod(8020)&&root,var(59)<2
 ID = 8020
 anim = 8020
@@ -2688,6 +2699,7 @@ scale = 320.0/384.0,240.0/224.0
 ;Bar ゲージ(144ドット)
 [State 0, Helper]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = !numexplod(8030)&&root,var(59)<2
 ID = 8030
 anim = 8030+(teamside=2)*9
@@ -2709,6 +2721,7 @@ scale = (Power-floor(Power/1000)*1000)*.000833333333333,1.07142857142857
 ;Frame 枠
 [State 0, Helper]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = !numexplod(8000)&&root,var(59)<2
 ID = 8000
 anim = 8000+(root,var(59)=1)*2
@@ -2793,6 +2806,7 @@ postype = back
 ;===CFJ===
 [State 0, Back]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = !numexplod(8021)&&root,var(59)=2
 ID = 8021
 anim = 8021
@@ -2807,6 +2821,7 @@ scale = .5,.5
 
 [State 0, Back]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = !numexplod(8022)&&root,var(59)=2
 ID = 8022
 anim = 8022
@@ -2821,6 +2836,7 @@ scale = .5,.5
 
 [State 0, Frame]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = !numexplod(8001)&&root,var(59)=2
 ID = 8001
 anim = 8001
@@ -2835,6 +2851,7 @@ scale = .5,.5
 
 [State 0, Figure]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = !numexplod(8070)&&root,var(59)=2
 ID = 8070
 anim = 8070+(teamside=2&&!root,var(49))*5+ifelse((Power/1000)>=3,3,floor(Power/1000))
@@ -2850,6 +2867,7 @@ ignorehitpause=1
 
 [State 0, Bar]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = !numexplod(8031)&&root,var(59)=2
 ID = 8031
 anim = 8031+(teamside=2&&!root,var(49))*5+(Power>=2000)*1+(Power>=3000)*1
@@ -2881,6 +2899,7 @@ scale = .5,.5
 ;Back 背景
 [State 0, Helper]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = !numexplod(8024)&&root,var(59)=3
 ID = 8024
 anim = 8024+(power>=10000)*2
@@ -2896,6 +2915,7 @@ scale = 320.0/384.0,240.0/224.0
 ;Board 本数表示板
 [State 0, Helper]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = !numexplod(8013)&&root,var(59)=3
 ID = 8013
 anim = 8013
@@ -2911,6 +2931,7 @@ scale = 320.0/384.0,240.0/224.0
 ;Gauge 本数
 [State 0, Helper]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = !numexplod(8090)&&root,var(59)=3
 ID = 8090
 anim = 8090+ifelse((Power/1000)>=10,-5,floor(Power/1000)-40)+(teamside=2)*10
@@ -2927,6 +2948,7 @@ ignorehitpause=1
 ;Board Frame 本数表示板-枠
 [State 0, Helper]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = !numexplod(8014)&&root,var(59)=3
 ID = 8014
 anim = 8014
@@ -2942,6 +2964,7 @@ scale = 320.0/384.0,240.0/224.0
 ;Bar ゲージ(116dot)
 [State 0, Helper]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = !numexplod(8082)&&root,var(59)=3
 ID = 8082
 anim = 8030
@@ -2963,6 +2986,7 @@ scale = (Power-floor(Power/1000)*1000)*(116/144.0)*.000833333333333,1.0714285714
 ;Gauge ゲージ枠
 [State 0, Helper]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = !numexplod(8080)&&root,var(59)=3
 ID = 8080
 anim = 8080
@@ -2979,6 +3003,7 @@ scale = 320.0/384.0,240.0/224.0
 ;背景
 [State 0, Helper]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = !numexplod(8025) && root,var(59)=4
 ID = 8025
 anim = 8025
@@ -2994,6 +3019,7 @@ scale = 320.0/384.0,240.0/224.0
 ;枠
 [State 0, Helper]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = !numexplod(8005) && root,var(59)=4 && !root,var(37)
 ID = 8005
 anim = 8005
@@ -3009,6 +3035,7 @@ scale = 320.0/384.0,240.0/224.0
 ;枠(スペシャルゲージ点灯時)
 [State 0, Helper]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = !numexplod(8007) && root,var(59)=4 && root,var(37)
 ID = 8007
 anim = 8007
@@ -3024,6 +3051,7 @@ scale = 320.0/384.0,240.0/224.0
 ;ゲージ
 [State 0, Helper]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = !numexplod(8040) && !numexplod(8041) && root,var(59)=4 && !root,var(37)
 ID = 8040
 anim = 8040+(teamside=2&&!root,var(49))*5
@@ -3039,6 +3067,7 @@ scale = 320.0/384.0,240.0/224.0
 ;ゲージ(スペシャルゲージ点灯時)
 [State 0, Helper]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = !numexplod(8041) && root,var(59)=4 && root,var(37)
 ID = 8041
 anim = 8041+(teamside=2&&!root,var(49))*5
@@ -3068,6 +3097,7 @@ scale = (Power-floor(Power/1000)*1000)*80*.83333333/1000,1.07142857142857
 ;Special
 [State 0, sp]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = !numexplod(8015) && root,var(59)=4
 ID = 8015
 anim = 8015+(teamside=2)
@@ -3083,6 +3113,7 @@ scale = 320.0/384.0,240.0/224.0
 ;Special(点灯)
 [State 0, sp_max]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = !numexplod(8017) && root,var(59)=4 && root,var(37)
 ID = 8017
 anim = 8017+(teamside=2)
@@ -3135,6 +3166,13 @@ trigger3 = numhelper(8750)
 ctrl = 0
 anim = 90000
 
+[State 8005, Bench UI Sweep]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611]
+trigger2 = roundstate > 2
+trigger3 = !root,alive
+ignorehitpause = 1
+
 [state 8000]
 type = varset
 trigger1 = !time
@@ -3163,6 +3201,7 @@ ignorehitpause=1
 
 [State 0, Board]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = !numexplod(8010)
 ID = 8010
 anim = 8010+(root,var(59)=1)*2
@@ -3177,6 +3216,7 @@ scale = 320.0/384.0,240.0/224.0
 
 [State 0, digit]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = !numexplod(8050)
 ID = 8050
 anim = 8050+(teamside=1)*10+ifelse(floor(playerid(var(2)),Power/10000)>=1,floor(floor(playerid(var(2)),Power/1000)-floor(playerid(var(2)),Power/10000)*10),floor(playerid(var(2)),Power/1000))
@@ -3192,6 +3232,7 @@ ignorehitpause=1
 
 [State 0, double-digit]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = !numexplod(8055) && floor(playerid(var(2)),Power/10000)>=1
 ID = 8055
 anim = 8050+(teamside=1)*10+floor(playerid(var(2)),Power/10000)
@@ -3207,6 +3248,7 @@ ignorehitpause=1
 
 [State 0, BG]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = !numexplod(8020)
 ID = 8020
 anim = 8020
@@ -3221,6 +3263,7 @@ scale = 320.0/384.0,240.0/224.0
 
 [State 0, Bar]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = !numexplod(8030)
 ID = 8030
 anim = 8030+(teamside=1)*9
@@ -3241,6 +3284,7 @@ scale = (playerid(var(2)),Power-floor(playerid(var(2)),Power/1000)*1000)*.000833
 
 [State 0, Frame]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = !numexplod(8000)
 ID = 8000
 anim = 8000+(root,var(59)=1)*2
@@ -3354,6 +3398,13 @@ physics = N
 ctrl = 0
 anim = 90000
 
+[State 8100, Bench UI Sweep]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611]
+trigger2 = roundstate > 2
+trigger3 = !root,alive
+ignorehitpause = 1
+
 [state 8100]
 type = AssertSpecial
 trigger1 = 1
@@ -3362,6 +3413,7 @@ flag2 = timerfreeze
 
 [State 0, Name]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = !numexplod(8400)&&var(0)>=30
 ID = 8400
 anim = 8400+(teamside=2&&!root,var(49))*5
@@ -3389,6 +3441,7 @@ id = 8205
 ;Gauge バットマーク
 [State 0, Helper]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = !numexplod(8200)&&root,var(54)>0
 ID = 8200
 anim = 8200
@@ -3405,6 +3458,7 @@ scale = 320.0/384.0,240.0/224.0
 ;Gauge バットマーク
 [State 0, Helper]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = !numexplod(8205)&&root,var(54)>1
 ID = 8205
 anim = 8200
@@ -3421,6 +3475,7 @@ scale = 320.0/384.0,240.0/224.0
 ;Gauge バットマーク2
 [State 0, Helper]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = !numexplod(8250)&&!numexplod(8200)&&!root,var(54)&&!var(2)&&time>0 && roundstate>=2
 ID = 8250
 anim = 8250
@@ -3436,6 +3491,7 @@ scale = 320.0/384.0,240.0/224.0
 ;Gauge バットマーク2
 [State 0, Helper]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = !numexplod(8255)&&!numexplod(8205)&&root,var(54)<=1&&!var(3)&&time>0 && roundstate>=2
 ID = 8255
 anim = 8250
@@ -3509,6 +3565,7 @@ var(1) = -1
 ;Gauge ゲージ炎
 [State 0, Helper]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = !numexplod(8140) && teamside=1 && var(0)=59
 ID = 8140
 anim = 8140
@@ -3526,6 +3583,7 @@ persistent = 0
 ;Gauge ゲージタイマー
 [State 0, Helper]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = !numexplod(8130) && teamside=1 && var(0)>70 && ((Root,MoveType=H||Root,StateType=L)||(P2MoveType=H||P2StateType=L))
 ID = 8130
 anim = 8130
@@ -3543,6 +3601,7 @@ ignorehitpause=1
 ;Gauge ゲージ燃焼
 [State 0, Helper]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = !numexplod(8150) && teamside=1 && var(0)>70 && ((Root,MoveType=H||Root,StateType=L)||(P2MoveType=H||P2StateType=L))
 ID = 8150
 anim = 8150
@@ -3561,6 +3620,7 @@ ignorehitpause=1
 ;Gauge ゲージ炎
 [State 0, Helper]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = !numexplod(8120) && teamside=1 && var(0)>70 && !numexplod(8150)
 ID = 8120
 anim = 8120
@@ -3578,6 +3638,7 @@ ignorehitpause=1
 ;Gauge ゲージ本体1
 [State 0, Helper]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = !numexplod(8100)
 ID = 8100
 anim = 8100+(teamside=2&&!root,var(49))*5
@@ -3594,6 +3655,7 @@ scale = 320.0/384.0,240.0/224.0
 ;Gauge ゲージ背景
 [State 0, Helper]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = !numexplod(8110)
 ID = 8110
 anim = 8110+(teamside=2&&!root,var(49))*5
@@ -3610,6 +3672,7 @@ scale = .83333333333333333333333333,1.07142857142857
 ;Gauge ゲージ(確定部分)
 [State 0, Helper]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = !numexplod(8111)
 ID = 8111
 anim = 8111+(teamside=2&&!root,var(49))*5
@@ -3667,6 +3730,7 @@ ignorehitpause=1
 ;Gauge ゲージ(回復可能部分)
 [State 0, Helper]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = !numexplod(8112)
 ID = 8112
 anim = 8112+(teamside=2&&!root,var(49))*5
@@ -3713,6 +3777,7 @@ ignorehitpause=1
 ;Character Portraite
 [State 0, Helper]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = !numexplod(8410)
 ID = 8410
 anim = 8410+(teamside=2&&!root,var(49))*5
@@ -3729,6 +3794,7 @@ scale = 320.0/384.0,240.0/224.0
 ;Gauge ゲージ本体2
 [State 0, Helper]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = !numexplod(8101)
 ID = 8101
 anim = 8101+(teamside=2&&!root,var(49))*5
@@ -3847,6 +3913,13 @@ trigger3 = numhelper(8750)
 ctrl = 0
 anim = 90000
 
+[State 8105, Bench UI Sweep]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611]
+trigger2 = roundstate > 2
+trigger3 = !root,alive
+ignorehitpause = 1
+
 [state 0]
 type = RemoveExplod
 trigger1 = !Root,var(34)
@@ -3860,6 +3933,7 @@ id = 8205
 ;Gauge バットマーク
 [State 0, Helper]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = !numexplod(8200)&&root,var(34)>0
 ID = 8200
 anim = 8200
@@ -3876,6 +3950,7 @@ scale = 320.0/384.0,240.0/224.0
 ;Gauge バットマーク
 [State 0, Helper]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = !numexplod(8205)&&root,var(34)>1
 ID = 8205
 anim = 8200
@@ -3892,6 +3967,7 @@ scale = 320.0/384.0,240.0/224.0
 ;Gauge バットマーク2
 [State 0, Helper]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = !numexplod(8250)&&!numexplod(8200)&&!root,var(34)&&!var(2)&&time>0 && roundstate>=2
 ID = 8250
 anim = 8250
@@ -3907,6 +3983,7 @@ scale = 320.0/384.0,240.0/224.0
 ;Gauge バットマーク2
 [State 0, Helper]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = !numexplod(8255)&&!numexplod(8205)&&root,var(34)<=1&&!var(3)&&time>0 && roundstate>=2
 ID = 8255
 anim = 8250
@@ -3964,6 +4041,7 @@ var(1) = -1
 ;Gauge ゲージ炎
 [State 0, Helper]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = !numexplod(8140) && teamside=2 && var(0)=45
 ID = 8140
 anim = 8140
@@ -3981,6 +4059,7 @@ persistent = 0
 ;Gauge ゲージタイマー
 [State 0, Helper]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = !numexplod(8130) && teamside=2 && var(0)>56 && ((Root,MoveType=H||Root,StateType=L)||(P2MoveType=H||P2StateType=L))
 ID = 8130
 anim = 8130
@@ -3998,6 +4077,7 @@ ignorehitpause=1
 ;Gauge ゲージ燃焼
 [State 0, Helper]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = !numexplod(8150) && teamside=2 && var(0)>56 && ((Root,MoveType=H||Root,StateType=L)||(P2MoveType=H||P2StateType=L))
 ID = 8150
 anim = 8150
@@ -4016,6 +4096,7 @@ ignorehitpause=1
 ;Gauge ゲージ炎
 [State 0, Helper]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = !numexplod(8120) && teamside=2 && var(0)>56 && !numexplod(8150)
 ID = 8120
 anim = 8120
@@ -4033,6 +4114,7 @@ ignorehitpause=1
 ;Gauge ゲージ本体1
 [State 0, Helper]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = !numexplod(8100)
 ID = 8100
 anim = 8100+(teamside=1&&!root,var(49))*5
@@ -4049,6 +4131,7 @@ scale = 320.0/384.0,240.0/224.0
 ;Gauge ゲージ
 [State 0, Helper]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = !numexplod(8110)
 ID = 8110
 anim = 8110+(teamside=1&&!root,var(49))*5
@@ -4065,6 +4148,7 @@ scale = 320.0/384.0,240.0/224.0
 ;Gauge ゲージ(確定部分)
 [State 0, Helper]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = !numexplod(8111)
 ID = 8111
 anim = 8111+(teamside=1&&!root,var(49))*5
@@ -4100,6 +4184,7 @@ ignorehitpause = 1
 ;Gauge ゲージ(回復可能部分)
 [State 0, Helper]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = !numexplod(8112)
 ID = 8112
 anim = 8112+(teamside=1&&!root,var(49))*5
@@ -4134,6 +4219,7 @@ ignorehitpause = 1
 ;Gauge ゲージ本体2
 [State 0, Helper]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = !numexplod(8101)
 ID = 8101
 anim = 8101+(teamside=1&&!root,var(49))*5
@@ -5337,6 +5423,23 @@ ignorehitpause=1
 ;GAME OVER
 [statedef 8751]
 
+[State 8751, Bench UI Sweep]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611]
+trigger2 = roundstate > 2
+trigger3 = !root,alive
+ignorehitpause = 1
+
+[State 8751, Bench UI Restore]
+type = ChangeState
+trigger1 = roundstate <= 2
+trigger1 = !(root,stateno = [6565610, 6565611])
+trigger1 = root,alive
+trigger1 = numexplod(8757) = 0
+trigger1 = time > 1
+value = stateno
+ignorehitpause = 1
+
 [state 8750,carpet_remove]
 type = RemoveExplod
 trigger1 = !time
@@ -5356,6 +5459,7 @@ ignorehitpause =1
 
 [state 8750,BG]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = time=1
 id = 8750
 anim = 8750
@@ -5385,6 +5489,7 @@ ignorehitpause=1
 
 [state 8750,GAMEOVER]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = time=2
 id = 8751
 anim = 8751
@@ -5402,6 +5507,7 @@ ignorehitpause=1
 
 [state 8750,Cards1]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = time=2
 id = 8752
 anim = 8752
@@ -5418,6 +5524,7 @@ ignorehitpause=1
 
 [state 8750,Cards2]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = time=2
 id = 8752
 anim = 8753
@@ -5434,6 +5541,7 @@ ignorehitpause=1
 
 [state 8750,Cards3]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = time=4
 id = 8752
 anim = 8753
@@ -5450,6 +5558,7 @@ ignorehitpause=1
 
 [state 8750,Cards4]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = time=4
 id = 8752
 anim = 8754
@@ -5466,6 +5575,7 @@ ignorehitpause=1
 
 [state 8750,Cards5]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = time=4
 id = 8752
 anim = 8753
@@ -5482,6 +5592,7 @@ ignorehitpause=1
 
 [state 8750,Cards6]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = time=2
 id = 8752
 anim = 8753
@@ -5498,6 +5609,7 @@ ignorehitpause=1
 
 [state 8750,Cards7]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = time=2
 id = 8752
 anim = 8752
@@ -5641,6 +5753,23 @@ ignorehitpause=1
 ;Winning Demo(Savior)
 [statedef 8761]
 
+[State 8761, Bench UI Sweep]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611]
+trigger2 = roundstate > 2
+trigger3 = !root,alive
+ignorehitpause = 1
+
+[State 8761, Bench UI Restore]
+type = ChangeState
+trigger1 = roundstate <= 2
+trigger1 = !(root,stateno = [6565610, 6565611])
+trigger1 = root,alive
+trigger1 = numexplod(8757) = 0
+trigger1 = time > 1
+value = stateno
+ignorehitpause = 1
+
 [state 8700]
 type = varrandom
 trigger1 = !time
@@ -5683,6 +5812,7 @@ ignorehitpause = 1
 
 [state 8750,BG]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = time=1||time=(var(50)+17)
 id = 8750
 anim = 8750
@@ -5700,6 +5830,7 @@ ignorehitpause=1
 
 [state 8750,Portrait]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = time=1
 id = 8776
 anim = 8776
@@ -5718,6 +5849,7 @@ persistent=0
 
 [state 8750,Frame]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = time=1
 id = 8759
 anim = 8759
@@ -5736,6 +5868,7 @@ persistent=0
 
 [state 8750,Message]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = time=1
 id = 8760
 anim = 8760+var(1)
@@ -5754,6 +5887,7 @@ persistent=0
 
 [state 8750,into-demo]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = time=1||time=(var(50)+17)
 id = 8756
 anim = 8755
@@ -5771,6 +5905,7 @@ ignorehitpause=1
 
 [state 8750,into-demo]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = time=1||time=(var(50)+17)
 id = 8756
 anim = 8755
@@ -5816,6 +5951,7 @@ ignorehitpause=1
 
 [state 8750,match_end]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = time=var(50)
 id = 8755
 anim = 8756
@@ -5833,6 +5969,7 @@ ignorehitpause=1
 
 [state 8750,match-end]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = time=var(50)
 id = 8755
 anim = 8756
@@ -5877,6 +6014,7 @@ id = 8750
 
 [state 8750,carpet]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = time=(var(50)+16)
 id = 8757
 anim = 8757
@@ -5895,6 +6033,7 @@ ignorehitpause=1
 
 [state 8750,carpet]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = time=(var(50)+16)
 id = 8757
 anim = 8757

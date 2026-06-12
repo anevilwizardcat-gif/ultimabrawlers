@@ -24384,6 +24384,14 @@ movetype = I
 ctrl = 0
 anim = 6900
 
+[State 11010, ORA Loop Failsafe]
+type = StopSnd
+trigger1 = root,movetype = H
+trigger2 = parent,movetype = H
+trigger3 = parent,stateno = 12200 || parent,stateno = 12300
+channel = 0
+ignorehitpause = 1
+
 [State 220, 3]
 type = DestroySelf
 trigger1 = root,movetype = H
@@ -39223,6 +39231,14 @@ ctrl = 0
 anim = 3653
 velset = 0,0
 
+[State 3653, ORA Loop Failsafe]
+type = StopSnd
+trigger1 = root,movetype = H
+trigger2 = parent,movetype = H
+trigger3 = parent,stateno = 12200 || parent,stateno = 12300
+channel = 0
+ignorehitpause = 1
+
 [State 220, Position]
 type = PosSet
 trigger1 = Time = 0
@@ -42839,6 +42855,20 @@ ignorehitpause = 1
 
 ;---------------------------------------------------------------------------
 [Statedef -2]
+[State -2, Voice Loop Failsafe]
+type = StopSnd
+triggerall = movetype = H
+trigger1 = time = 0
+channel = 0
+ignorehitpause = 1
+
+[State -2, StandBar Broadcast]
+type = MapSet
+trigger1 = 1
+map = "standBar"
+value = 1
+ignorehitpause = 1
+
 
 ;== STAND BROADCAST : roster-wide AI protocol (additive; touches nothing) ==
 ;  any AI can read enemynear,map(standActive):

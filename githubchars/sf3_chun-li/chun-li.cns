@@ -22537,14 +22537,22 @@ anim = 9999
 sprpriority = 4
 
 ;黒い部分
+[State 4000, Bench UI Sweep]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611]
+trigger2 = roundstate > 2
+trigger3 = !root,alive
+ignorehitpause = 1
+
 [State 1500]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = numexplod(4055) = 0
 trigger1 = root,power < 880
 anim = 4055
 ID = 4055
 postype = left
-pos = ifelse(root,teamside = 1,35,197),231
+pos = ifelse(root,teamside = 1,35,197),225
 sprpriority = 99990
 bindtime = -1
 removetime = -1
@@ -22565,11 +22573,12 @@ id = 4055
 ;ゲージ本体=============================
 [State 1500]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = numexplod(4000) = 0
 anim = 4000 + ifelse(root,teamside = 1,0,1)
 ID = 4000
 postype = left
-pos = ifelse(root,teamside = 1,35,197),231
+pos = ifelse(root,teamside = 1,35,197),225
 sprpriority = 99991
 bindtime = -1
 removetime = -1
@@ -22584,13 +22593,14 @@ ignorehitpause = 1
 
 [State 1000, 6]
 type = explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = roundstate > 1
 trigger1 = numexplod(4050) = 0
 trigger1 = root,power = [0,399]
 anim = 4050
 id = 4050
 postype = left
-pos = ifelse(root,teamside = 1,123,197),231
+pos = ifelse(root,teamside = 1,123,197),225
 facing = ifelse(root,teamside = 1,1,1)
 sprpriority = 99992
 supermove = 1
@@ -22604,13 +22614,14 @@ ignorehitpause = 1
 
 [State 1000, 6]
 type = explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = roundstate > 1
 trigger1 = numexplod(4051) = 0
 trigger1 = root,power = [400,879]
 anim = 4051
 id = 4051
 postype = left
-pos = ifelse(root,teamside = 1,123,197),231
+pos = ifelse(root,teamside = 1,123,197),225
 facing = ifelse(root,teamside = 1,1,1)
 sprpriority = 99992
 supermove = 1
@@ -22684,13 +22695,14 @@ id = 4051
 
 [State 1000, 6]
 type = explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = roundstate > 1
 trigger1 = numexplod(4052) = 0
 trigger1 = root,power >= 880
 anim = 4051
 id = 4052
 postype = left
-pos = ifelse(root,teamside = 1,35,197),231
+pos = ifelse(root,teamside = 1,35,197),225
 facing = ifelse(root,teamside = 1,1,1)
 sprpriority = 99992
 supermove = 1
@@ -22721,13 +22733,14 @@ id = 4052
 
 [State 1000, 6]
 type = explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = roundstate > 1
 trigger1 = numexplod(4060) = 0
 trigger1 = root,power >= 880
 anim = 4060
 id = 4060
 postype = left
-pos = ifelse(root,teamside = 1,78,242),231
+pos = ifelse(root,teamside = 1,78,236),225
 facing = ifelse(root,teamside = 1,1,1)
 sprpriority = 99993
 supermove = 1
@@ -22747,6 +22760,7 @@ id = 4060
 
 [State 1000, 6]
 type = explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 triggerall = numexplod(4005) = 0
 trigger1 = root,power = [0,879]
 trigger2 = roundstate < 2
@@ -22754,7 +22768,7 @@ trigger2 = roundno > 1
 anim = ifelse(root,teamside = 1,4005,4006)
 id = 4005
 postype = left
-pos = ifelse(root,teamside = 1,35,197),231
+pos = ifelse(root,teamside = 1,35,197),225
 facing = ifelse(root,teamside = 1,1,1)
 sprpriority = 99993
 supermove = 1
@@ -22775,13 +22789,14 @@ id = 4005
 
 [State 1000, 6]
 type = explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = roundstate > 1
 trigger1 = numexplod(4010) = 0
 trigger1 = root,power >= 880
 anim = ifelse(root,teamside = 1,4010,4011)
 id = 4010
 postype = left
-pos = ifelse(root,teamside = 1,35,197),231
+pos = ifelse(root,teamside = 1,35,197),225
 facing = ifelse(root,teamside = 1,1,1)
 sprpriority = 99993
 supermove = 1
@@ -22838,14 +22853,22 @@ anim = 9999
 sprpriority = 4
 
 ;黒い部分
+[State 4001, Bench UI Sweep]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611]
+trigger2 = roundstate > 2
+trigger3 = !root,alive
+ignorehitpause = 1
+
 [State 1500]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = numexplod(4155) = 0
 trigger1 = root,power < 2080
 anim = 4155
 ID = 4155
 postype = left
-pos = ifelse(root,teamside = 1,35,181),231
+pos = ifelse(root,teamside = 1,35,181),225
 sprpriority = 99990
 bindtime = -1
 removetime = -1
@@ -22866,11 +22889,12 @@ id = 4155
 ;ゲージ本体=============================
 [State 1500]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = numexplod(4100) = 0
 anim = 4100 + ifelse(root,teamside = 1,0,1)
 ID = 4100
 postype = left
-pos = ifelse(root,teamside = 1,35,181),231
+pos = ifelse(root,teamside = 1,35,181),225
 sprpriority = 99991
 bindtime = -1
 removetime = -1
@@ -22885,13 +22909,14 @@ ignorehitpause = 1
 
 [State 1000, 6]
 type = explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = roundstate > 1
 trigger1 = numexplod(4150) = 0
 trigger1 = root,power = [0,399]
 anim = 4150
 id = 4150
 postype = left
-pos = ifelse(root,teamside = 1,139,181),231
+pos = ifelse(root,teamside = 1,139,181),225
 facing = ifelse(root,teamside = 1,1,1)
 sprpriority = 99992
 supermove = 1
@@ -22905,13 +22930,14 @@ ignorehitpause = 1
 
 [State 1000, 6]
 type = explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = roundstate > 1
 trigger1 = numexplod(4151) = 0
 trigger1 = root,power = [400,1039]
 anim = 4151
 id = 4151
 postype = left
-pos = ifelse(root,teamside = 1,139,181),231
+pos = ifelse(root,teamside = 1,139,181),225
 facing = ifelse(root,teamside = 1,1,1)
 sprpriority = 99992
 supermove = 1
@@ -22985,13 +23011,14 @@ id = 4151
 
 [State 1000, 6]
 type = explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = roundstate > 1
 trigger1 = numexplod(4152) = 0
 trigger1 = root,power = [1040,2079]
 anim = 4151
 id = 4152
 postype = left
-pos = ifelse(root,teamside = 1,139,181),231
+pos = ifelse(root,teamside = 1,139,181),225
 facing = ifelse(root,teamside = 1,1,1)
 sprpriority = 99992
 supermove = 1
@@ -23035,13 +23062,14 @@ id = 4152
 
 [State 1000, 6]
 type = explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = roundstate > 1
 trigger1 = numexplod(4153) = 0
 trigger1 = root,power >= 2080
 anim = 4151
 id = 4153
 postype = left
-pos = ifelse(root,teamside = 1,35,181),231
+pos = ifelse(root,teamside = 1,35,181),225
 facing = ifelse(root,teamside = 1,1,1)
 sprpriority = 99992
 supermove = 1
@@ -23072,13 +23100,14 @@ id = 4153
 
 [State 1000, 6]
 type = explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = roundstate > 1
 trigger1 = numexplod(4060) = 0
 trigger1 = root,power >= 2080
 anim = 4060
 id = 4060
 postype = left
-pos = ifelse(root,teamside = 1,87,233),231
+pos = ifelse(root,teamside = 1,87,227),225
 facing = ifelse(root,teamside = 1,1,1)
 sprpriority = 99993
 supermove = 1
@@ -23098,6 +23127,7 @@ id = 4060
 
 [State 1000, 6]
 type = explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 triggerall = numexplod(4105) = 0
 trigger1 = root,power = [0,1039]
 trigger2 = roundstate < 2
@@ -23105,7 +23135,7 @@ trigger2 = roundno > 1
 anim = ifelse(root,teamside = 1,4105,4106)
 id = 4105
 postype = left
-pos = ifelse(root,teamside = 1,35,181),231
+pos = ifelse(root,teamside = 1,35,181),225
 facing = ifelse(root,teamside = 1,1,1)
 sprpriority = 99993
 supermove = 1
@@ -23126,13 +23156,14 @@ id = 4105
 
 [State 1000, 6]
 type = explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = roundstate > 1
 trigger1 = numexplod(4110) = 0
 trigger1 = root,power = [1040,2079]
 anim = ifelse(root,teamside = 1,4110,4111)
 id = 4110
 postype = left
-pos = ifelse(root,teamside = 1,35,181),231
+pos = ifelse(root,teamside = 1,35,181),225
 facing = ifelse(root,teamside = 1,1,1)
 sprpriority = 99993
 supermove = 1
@@ -23152,13 +23183,14 @@ id = 4110
 
 [State 1000, 6]
 type = explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = roundstate > 1
 trigger1 = numexplod(4120) = 0
 trigger1 = root,power >= 2080
 anim = ifelse(root,teamside = 1,4120,4121)
 id = 4120
 postype = left
-pos = ifelse(root,teamside = 1,35,181),231
+pos = ifelse(root,teamside = 1,35,181),225
 facing = ifelse(root,teamside = 1,1,1)
 sprpriority = 99993
 supermove = 1
@@ -23228,14 +23260,22 @@ anim = 9999
 sprpriority = 4
 
 ;黒い部分
+[State 4002, Bench UI Sweep]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611]
+trigger2 = roundstate > 2
+trigger3 = !root,alive
+ignorehitpause = 1
+
 [State 1500]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = numexplod(4255) = 0
 trigger1 = root,power < 2160
 anim = 4255
 ID = 4255
 postype = left
-pos = ifelse(root,teamside = 1,35,213),231
+pos = ifelse(root,teamside = 1,35,207),225
 sprpriority = 99990
 bindtime = -1
 removetime = -1
@@ -23256,11 +23296,12 @@ id = 4255
 ;ゲージ本体=============================
 [State 1500]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = numexplod(4200) = 0
 anim = 4200 + ifelse(root,teamside = 1,0,1)
 ID = 4200
 postype = left
-pos = ifelse(root,teamside = 1,35,213),231
+pos = ifelse(root,teamside = 1,35,207),225
 sprpriority = 99991
 bindtime = -1
 removetime = -1
@@ -23275,13 +23316,14 @@ ignorehitpause = 1
 
 [State 1000, 6]
 type = explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = roundstate > 1
 trigger1 = numexplod(4250) = 0
 trigger1 = root,power = [0,399]
 anim = 4250
 id = 4250
 postype = left
-pos = ifelse(root,teamside = 1,107,213),231
+pos = ifelse(root,teamside = 1,107,207),225
 facing = ifelse(root,teamside = 1,1,1)
 sprpriority = 99992
 supermove = 1
@@ -23295,13 +23337,14 @@ ignorehitpause = 1
 
 [State 1000, 6]
 type = explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = roundstate > 1
 trigger1 = numexplod(4251) = 0
 trigger1 = root,power = [400,719]
 anim = 4251
 id = 4251
 postype = left
-pos = ifelse(root,teamside = 1,107,213),231
+pos = ifelse(root,teamside = 1,107,207),225
 facing = ifelse(root,teamside = 1,1,1)
 sprpriority = 99992
 supermove = 1
@@ -23375,13 +23418,14 @@ id = 4251
 
 [State 1000, 6]
 type = explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = roundstate > 1
 trigger1 = numexplod(4252) = 0
 trigger1 = root,power = [720,1439]
 anim = 4251
 id = 4252
 postype = left
-pos = ifelse(root,teamside = 1,107,213),231
+pos = ifelse(root,teamside = 1,107,207),225
 facing = ifelse(root,teamside = 1,1,1)
 sprpriority = 99992
 supermove = 1
@@ -23425,13 +23469,14 @@ id = 4252
 
 [State 1000, 6]
 type = explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = roundstate > 1
 trigger1 = numexplod(4253) = 0
 trigger1 = root,power = [1440,2159]
 anim = 4251
 id = 4253
 postype = left
-pos = ifelse(root,teamside = 1,107,213),231
+pos = ifelse(root,teamside = 1,107,207),225
 facing = ifelse(root,teamside = 1,1,1)
 sprpriority = 99992
 supermove = 1
@@ -23475,13 +23520,14 @@ id = 4253
 
 [State 1000, 6]
 type = explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = roundstate > 1
 trigger1 = numexplod(4254) = 0
 trigger1 = root,power >= 2160
 anim = 4251
 id = 4254
 postype = left
-pos = ifelse(root,teamside = 1,35,213),231
+pos = ifelse(root,teamside = 1,35,207),225
 facing = ifelse(root,teamside = 1,1,1)
 sprpriority = 99992
 supermove = 1
@@ -23512,13 +23558,14 @@ id = 4254
 
 [State 1000, 6]
 type = explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = roundstate > 1
 trigger1 = numexplod(4060) = 0
 trigger1 = root,power >= 2160
 anim = 4060
 id = 4060
 postype = left
-pos = ifelse(root,teamside = 1,71,249),231
+pos = ifelse(root,teamside = 1,71,243),225
 facing = ifelse(root,teamside = 1,1,1)
 sprpriority = 99993
 supermove = 1
@@ -23538,6 +23585,7 @@ id = 4060
 
 [State 1000, 6]
 type = explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 triggerall = numexplod(4205) = 0
 trigger1 = root,power = [0,719]
 trigger2 = roundstate < 2
@@ -23545,7 +23593,7 @@ trigger2 = roundno > 1
 anim = ifelse(root,teamside = 1,4205,4206)
 id = 4205
 postype = left
-pos = ifelse(root,teamside = 1,35,213),231
+pos = ifelse(root,teamside = 1,35,207),225
 facing = ifelse(root,teamside = 1,1,1)
 sprpriority = 99993
 supermove = 1
@@ -23567,13 +23615,14 @@ id = 4205
 
 [State 1000, 6]
 type = explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = roundstate > 1
 trigger1 = numexplod(4210) = 0
 trigger1 = root,power = [720,1439]
 anim = ifelse(root,teamside = 1,4210,4211)
 id = 4210
 postype = left
-pos = ifelse(root,teamside = 1,35,213),231
+pos = ifelse(root,teamside = 1,35,207),225
 facing = ifelse(root,teamside = 1,1,1)
 sprpriority = 99993
 supermove = 1
@@ -23593,13 +23642,14 @@ id = 4210
 
 [State 1000, 6]
 type = explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = roundstate > 1
 trigger1 = numexplod(4220) = 0
 trigger1 = root,power = [1440,2159]
 anim = ifelse(root,teamside = 1,4220,4221)
 id = 4220
 postype = left
-pos = ifelse(root,teamside = 1,35,213),231
+pos = ifelse(root,teamside = 1,35,207),225
 facing = ifelse(root,teamside = 1,1,1)
 sprpriority = 99993
 supermove = 1
@@ -23619,13 +23669,14 @@ id = 4220
 
 [State 1000, 6]
 type = explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = roundstate > 1
 trigger1 = numexplod(4230) = 0
 trigger1 = root,power >= 2160
 anim = ifelse(root,teamside = 1,4230,4231)
 id = 4230
 postype = left
-pos = ifelse(root,teamside = 1,35,213),231
+pos = ifelse(root,teamside = 1,35,207),225
 facing = ifelse(root,teamside = 1,1,1)
 sprpriority = 99993
 supermove = 1
@@ -23695,14 +23746,22 @@ anim = 9999
 sprpriority = 4
 
 ;黒い部分
+[State 3999, Bench UI Sweep]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611]
+trigger2 = roundstate > 2
+trigger3 = !root,alive
+ignorehitpause = 1
+
 [State 1500]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = numexplod(4000) = 0
 trigger1 = root,var(58) = 2
 anim = 4255
 ID = 4000
 postype = left
-pos = ifelse(root,teamside = 1,35,197),231
+pos = ifelse(root,teamside = 1,35,197),225
 sprpriority = 99990
 bindtime = -1
 removetime = -1
@@ -23716,12 +23775,13 @@ ignorehitpause = 1
 ;ゲージ本体=============================
 [State 1500]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = numexplod(4010) = 0
 trigger1 = root,var(58) = 2
 anim = 4000 + ifelse(root,teamside = 1,0,1)
 ID = 4010
 postype = left
-pos = ifelse(root,teamside = 1,35,197),231
+pos = ifelse(root,teamside = 1,35,197),225
 sprpriority = 99991
 bindtime = -1
 removetime = -1
@@ -23735,12 +23795,13 @@ ignorehitpause = 1
 
 [State 1000, 6]
 type = explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = numexplod(4020) = 0
 trigger1 = root,var(58) = 2
 anim = ifelse(root,teamside = 1,4005,4006)
 id = 4020
 postype = left
-pos = ifelse(root,teamside = 1,35,197),231
+pos = ifelse(root,teamside = 1,35,197),225
 facing = ifelse(root,teamside = 1,1,1)
 sprpriority = 99993
 supermove = 1
@@ -23755,12 +23816,13 @@ ignorehitpause = 1
 ;黒い部分
 [State 1500]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = numexplod(4001) = 0
 trigger1 = root,var(58) = 3
 anim = 4155
 ID = 4001
 postype = left
-pos = ifelse(root,teamside = 1,35,181),231
+pos = ifelse(root,teamside = 1,35,181),225
 sprpriority = 99990
 bindtime = -1
 removetime = -1
@@ -23774,12 +23836,13 @@ ignorehitpause = 1
 ;ゲージ本体=============================
 [State 1500]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = numexplod(4011) = 0
 trigger1 = root,var(58) = 3
 anim = 4100 + ifelse(root,teamside = 1,0,1)
 ID = 4011
 postype = left
-pos = ifelse(root,teamside = 1,35,181),231
+pos = ifelse(root,teamside = 1,35,181),225
 sprpriority = 99991
 bindtime = -1
 removetime = -1
@@ -23793,12 +23856,13 @@ ignorehitpause = 1
 
 [State 1000, 6]
 type = explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = numexplod(4021) = 0
 trigger1 = root,var(58) = 3
 anim = ifelse(root,teamside = 1,4105,4106)
 id = 4021
 postype = left
-pos = ifelse(root,teamside = 1,35,181),231
+pos = ifelse(root,teamside = 1,35,181),225
 facing = ifelse(root,teamside = 1,1,1)
 sprpriority = 99993
 supermove = 1
@@ -23813,12 +23877,13 @@ ignorehitpause = 1
 ;黒い部分
 [State 1500]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = numexplod(4002) = 0
 trigger1 = root,var(58) = 4
 anim = 4055
 ID = 4002
 postype = left
-pos = ifelse(root,teamside = 1,35,213),231
+pos = ifelse(root,teamside = 1,35,207),225
 sprpriority = 99990
 bindtime = -1
 removetime = -1
@@ -23832,12 +23897,13 @@ ignorehitpause = 1
 ;ゲージ本体=============================
 [State 1500]
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = numexplod(4012) = 0
 trigger1 = root,var(58) = 4
 anim = 4200 + ifelse(root,teamside = 1,0,1)
 ID = 4012
 postype = left
-pos = ifelse(root,teamside = 1,35,213),231
+pos = ifelse(root,teamside = 1,35,207),225
 sprpriority = 99991
 bindtime = -1
 removetime = -1
@@ -23851,12 +23917,13 @@ ignorehitpause = 1
 
 [State 1000, 6]
 type = explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = numexplod(4022) = 0
 trigger1 = root,var(58) = 4
 anim = ifelse(root,teamside = 1,4205,4206)
 id = 4022
 postype = left
-pos = ifelse(root,teamside = 1,35,213),231
+pos = ifelse(root,teamside = 1,35,207),225
 facing = ifelse(root,teamside = 1,1,1)
 sprpriority = 99993
 supermove = 1
