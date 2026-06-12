@@ -242,10 +242,33 @@ ignoreHitPause if roundState = 2 && !isHelper {
 # through the switch. Redirected var reads are used because redirected
 # map reads return 0 in this build.
 ignoreHitPause if isHelper && teamSide != 0 && roundState = 2 {
-	if root, teamMode = Tag && root, stateNo >= const(StateTagLeavingScreen) && root, stateNo <= const(StateTagWaitingOutside) && root, var(8) != 2 {
+	# Rule of cool: a helper mid-ATTACK (tandem stand replaying its rush, in-flight projectile)
+	# stays visible while its user is benched. rushCool hysteresis bridges the 1-2 idle ticks
+	# between a replay's recorded attacks (Jotaro/DIO flicker); ~12 ticks after the rush truly
+	# ends the hide applies.
+	if moveType = A {
+		mapSet{map: "rushCool"; value: 20}
+	} else if map(rushCool) > 0 && stateNo >= 100 && stateNo <= 159 {
+		# tandem stands DASH into position between recorded attacks (standard movement
+		# states, moveType I, often 15+ ticks) -- movement sustains an active rush
+		mapSet{map: "rushCool"; value: 20}
+	} else if map(rushCool) > 0 {
+		mapSet{map: "rushCool"; value: map(rushCool) - 1}
+	}
+	if root, teamMode = Tag && root, stateNo >= const(StateTagLeavingScreen) && root, stateNo <= const(StateTagWaitingOutside) && map(rushCool) <= 0 {
 		assertSpecial{flag: invisible; flag2: noShadow}
 	}
 }
+
+# Benched roots must not act on the shared controller: without this, the benched partner's
+# command processing still sees the active character's button presses (e.g. the Stand button
+# cancelling the benched owner's tandem). noInput while leaving/waiting outside.
+ignoreHitPause if !isHelper && teamSide != 0 && roundState = 2 {
+	if teamMode = Tag && stateNo >= const(StateTagLeavingScreen) && stateNo <= const(StateTagWaitingOutside) {
+		assertSpecial{flag: noInput}
+	}
+}
+
 
 #===============================================================================
 # Global states

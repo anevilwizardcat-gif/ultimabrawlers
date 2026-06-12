@@ -62,7 +62,6 @@ triggerall = root,ID > partner,ID
 trigger1 = partner,authorname="warusaki3" && partner,fvar(39) = 4
 trigger2 = partner,authorname="warusaki3" && partner,fvar(39) = 5
 trigger2 = partner,name!="shadow DIO"
-trigger3 = partner,authorname = "Nimame" ;<-- polnareff/avdul lineage (redirected map reads are dead in this build)
 var(1) = -16
 
 [State 30001, DestroySelf]

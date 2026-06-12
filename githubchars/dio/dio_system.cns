@@ -29,7 +29,7 @@ trigger1 = time >= 2
 anim = 6002
 id = 6002
 postype = Back
-pos = 140+var(0),48-var(1)
+pos = 140+var(0),43-var(1)+16*(numpartner && root,ID > partner,ID && partner,authorname = "Nimame")
 ownpal = 1
 bindtime = -1
 ignorehitpause = 1
@@ -46,7 +46,7 @@ trigger1 = time >= 2
 anim = 6052
 id = 6002
 postype = Back
-pos = 140+var(0),48-var(1)
+pos = 140+var(0),43-var(1)+16*(numpartner && root,ID > partner,ID && partner,authorname = "Nimame")
 facing = -1
 ownpal = 1
 bindtime = -1
@@ -64,7 +64,7 @@ trigger1 = time >= 2
 anim = 6001
 id = 6001
 postype = Back
-pos = 140+var(0),48-var(1)
+pos = 140+var(0),43-var(1)+16*(numpartner && root,ID > partner,ID && partner,authorname = "Nimame")
 ownpal = 0
 bindtime = -1
 ignorehitpause = 1
@@ -81,7 +81,7 @@ trigger1 = time >= 2
 anim = 6051
 id = 6001
 postype = Back
-pos = 140+var(0),48-var(1)
+pos = 140+var(0),43-var(1)+16*(numpartner && root,ID > partner,ID && partner,authorname = "Nimame")
 facing = -1
 ownpal = 0
 bindtime = -1
@@ -98,7 +98,7 @@ trigger1 = time >= 2
 anim = ifelse(teamside=1,6000,6050)
 id = 6000
 postype = Back
-pos = 140+var(0),48-var(1)
+pos = 140+var(0),43-var(1)+16*(numpartner && root,ID > partner,ID && partner,authorname = "Nimame")
 ownpal = 1
 bindtime = -1
 ignorehitpause = 1
@@ -115,7 +115,7 @@ trigger1 = time >= 2
 anim = 6003
 id = 6003
 postype = Back
-pos = ifelse(teamside=1,102,137)+var(0),51-var(1)
+pos = ifelse(teamside=1,102,137)+var(0),46-var(1)+16*(numpartner && root,ID > partner,ID && partner,authorname = "Nimame")
 ownpal = 1
 bindtime = -1
 ignorehitpause = 1
@@ -133,7 +133,7 @@ trigger1 = time >= 2
 anim = 6004
 id = 6004
 postype = Back
-pos = 140+var(0),48-var(1)
+pos = 140+var(0),43-var(1)+16*(numpartner && root,ID > partner,ID && partner,authorname = "Nimame")
 ownpal = 1
 bindtime = -1
 ignorehitpause = 1

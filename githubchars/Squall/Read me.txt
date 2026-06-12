@@ -1,0 +1,524 @@
+;==================================================
+;Help
+;==================================================
+
+Current DEF File named "Squall" is for Japanese version.
+Rename "SquallEng" DEF File to "Squall" for English version.
+
+;==================================================
+;Biography
+;==================================================
+
+Game: Final Fantasy VIII
+Name: Squall Leonhart
+Hometown: ?
+Age: 17
+Birthday: August 23rd
+Weight: ? lbs / ? kg
+Height: 5'8" / 173 cm
+Race: Human
+Occupation: SeeD Mercenary
+Weapon: Gunblade
+
+Story: Squall is a fairly quiet person who likes to
+keep his feelings and emotions to himself for the
+most part and lacks in terms of spirit and teamwork.
+He doesn’t quite act like most people his age.
+Although he is very mature and well-behaved yet he
+seems to take things too seriously at times.
+Over time, his emotions and attitude towards things
+change dramatically.
+
+;==================================================
+;Movelist
+;==================================================
+
+
+;-| Basic |-;
+
+X Punch Sta
+Damage - 20
+Defense Damage - 10
+Power - +50
+Enemy Power - +50
+Knockback - No
+Fall - No
+Ground Type - High
+Aerial Type - High
+Blockable - Yes
+
+Y Punch Sta
+Damage - 24
+Defense Damage - 12
+Power - +50
+Enemy Power - +50
+Knockback - No
+Fall - No
+Ground Type - High
+Aerial Type - High
+Blockable - Yes
+
+Z Punch Sta
+Damage - 28
+Defense Damage - 14
+Power - +50
+Enemy Power - +50
+Knockback - No
+Fall - No
+Ground Type - High
+Aerial Type - High
+Blockable - Yes
+
+A Kick Sta
+Damage - 22
+Defense Damage - 11
+Power - +50
+Enemy Power - +50
+Knockback - No
+Fall - No
+Ground Type - Low
+Aerial Type - Low
+Blockable - Yes
+
+B Kick Sta
+Damage - 28
+Defense Damage - 14
+Power - +50
+Enemy Power - +50
+Knockback - No
+Fall - No
+Ground Type - High
+Aerial Type - High
+Blockable - Yes
+
+C Kick Sta
+Damage - 37
+Defense Damage - 17
+Power - +50
+Enemy Power - +50
+Knockback - No
+Fall - No
+Ground Type - Low
+Aerial Type - Low
+Blockable - Yes
+
+X Punch Cro
+Damage - 20
+Defense Damage - 10
+Power - +50
+Enemy Power - +50
+Knockback - No
+Fall - No
+Ground Type - Low
+Aerial Type - Low
+Blockable - Yes
+
+Y Punch Cro
+Damage - 23
+Defense Damage - 11
+Power - +50
+Enemy Power - +50
+Knockback - No
+Fall - No
+Ground Type - Low
+Aerial Type - Low
+Blockable - Yes
+
+Z Punch Cro
+Damage - 30
+Defense Damage - 15
+Power - +50
+Enemy Power - +50
+Knockback - No
+Fall - No
+Ground Type - High
+Aerial Type - High
+Blockable - Yes
+
+A Kick Cro
+Damage - 22
+Defense Damage - 11
+Power - +50
+Enemy Power - +50
+Knockback - No
+Fall - No
+Ground Type - Low
+Aerial Type - Low
+Blockable - Low Block Only
+
+B Kick Cro
+Damage - 27
+Defense Damage - 13
+Power - +50
+Enemy Power - +50
+Knockback - No
+Fall - No
+Ground Type - High
+Aerial Type - High
+Blockable - Low Block Only
+
+C Kick Cro
+Damage - 33
+Defense Damage - 16
+Power - +50
+Enemy Power - +50
+Knockback - No
+Fall - No
+Ground Type - Low
+Aerial Type - Trip
+Blockable - Yes
+
+X Punch Air
+Damage - 22
+Defense Damage - 11
+Power - +50
+Enemy Power - +50
+Knockback - No
+Fall - No
+Ground Type - High
+Aerial Type - High
+Blockable - Yes
+
+Y Punch Air
+Damage - 24
+Defense Damage - 12
+Power - +50
+Enemy Power - +50
+Knockback - No
+Fall - No
+Ground Type - High
+Aerial Type - High
+Blockable - Yes
+
+Z Punch Air
+Damage - 28
+Defense Damage - 14
+Power - +50
+Enemy Power - +50
+Knockback - No
+Fall - No
+Ground Type - High
+Aerial Type - High
+Blockable - Yes
+
+A Kick Air
+Damage - 24
+Defense Damage - 12
+Power - +50
+Enemy Power - +50
+Knockback - No
+Fall - No
+Ground Type - Low
+Aerial Type - Low
+Blockable - Yes
+
+B Kick Air
+Damage - 28
+Defense Damage - 14
+Power - +50
+Enemy Power - +50
+Knockback - No
+Fall - No
+Ground Type - Low
+Aerial Type - Low
+Blockable - Yes
+
+C Kick Air
+Damage - 34
+Defense Damage - 17
+Power - +50
+Enemy Power - +50
+Knockback - No
+Fall - No
+Ground Type - High
+Aerial Type - High
+Blockable - Yes
+
+;-| Specials |-;
+
+
+Rough Divide (REGULAR Style)
+Damage - 75
+Defense Damage - 10
+Power Cost - 0
+Aerial Enabled - Yes
+Knockback - No
+Fall - Yes
+Ground Type (Standing) - Low
+Aerial Type (Standing) - Low
+Ground Type (Aerial) - High
+Aerial Type (Aerial) - High
+Blockable - Yes
+
+Rough Divide (DISSIDIA Style)
+Damage - 60
+Defense Damage - 10
+Power Cost - 0
+Aerial Enabled - Yes
+Knockback - No
+Fall - Yes
+Ground Type - Low
+Aerial Type - Low
+Blockable - Yes
+
+Fated Circle (REGULAR Style)
+Damage - 30*8
+Defense Damage - 10*8
+Power Cost - 1000
+Aerial Enabled - Yes
+Knockback - Yes
+Fall - Maybe
+Ground Type - Low
+Aerial Type - Low
+Blockable - Low Block Only
+
+Fated Circle (DISSIDIA Style)
+Damage - 75
+Defense Damage - 10
+Power Cost - 1000
+Aerial Enabled - Yes
+Knockback - Yes
+Fall - No
+Ground Type - Low
+Aerial Type - Low
+Blockable - Yes
+
+Blasting Zone (REGULAR Style)
+Damage - 30*10
+Defense Damage - 10*10
+Power Cost - 2000
+Aerial Enabled - Yes
+Knockback - Yes
+Fall - Yes
+Ground Type - Low
+Aerial Type - High
+Blockable - Low Block Only
+
+
+;-| Supers |-;
+
+
+Renzokuken 4-Hits (REGULAR Style)
+Damage - 10*4
+Trigger Damage - 25*4
+Defense Damage - 0
+Power Cost - 2500
+Aerial Enabled - No
+Knockback - No
+Fall - Yes
+Ground Type - None
+Aerial Type - None
+Blockable - Yes
+
+Renzokuken 5-Hits (REGULAR Style)
+Damage - 10*5
+Trigger Damage - 25*5
+Defense Damage - 0
+Power Cost - 2500
+Aerial Enabled - No
+Knockback - No
+Fall - Yes
+Ground Type - None
+Aerial Type - None
+Blockable - Yes
+
+Lionheart (REGULAR Style)
+Damage - 575
+Power Cost - Successful Renzokuken Triggers
+Defense Damage - 0
+Aerial Enabled - No
+Knockback - No
+Fall - Yes
+Ground Type - None
+Aerial Type - None
+Blockable - No
+
+
+;-| Magic |-;
+
+
+Blizzard (REGULAR Style)
+Damage (First Hit) - 40
+Defense Damage (First Hit) - 10
+Damage (Second Hit) - 35
+Defense Damage (Second Hit) - 10
+Power Cost - 500
+Aerial Enabled - No
+Knockback - No
+Fall (First Hit) - No
+Fall (Second Hit) - Yes
+Ground Type (First Hit) - High
+Aerial Type (First Hit) - High
+Ground Type (Second Hit) - Low
+Aerial Type (Second Hit) - Low
+Status Effect (First Hit) - None
+Status Effect (Second Hit) - Frozen
+Special Trait (Frozen) - Immovable
+Blockable (First Hit) - Yes
+Blockable (Second Hit) - Low Block Only
+
+Fire (DISSIDIA Style)
+Damage - 30*3
+Defense Damage - 10*3
+Power Cost - 500
+Aerial Enabled - No
+Knockback - Yes
+Fall - No
+Ground Type - Low
+Aerial Type - Low
+Status Effect - None
+Special Trait - Slowly Tracks Closest Enemy
+Special Trait 2 - Makes Funny Noises When Using Palette 10 (Enter + X)
+Blockable - Yes
+
+Thunder (DISSIDIA Style)
+Damage - 10*5
+Defense Damage - 2*5
+Power Cost - 500
+Aerial Enabled - No
+Knockback - No
+Fall - No
+Ground Type - Low
+Aerial Type - High
+Status Effect - None
+Special Trait - Pulls In The Enemy
+Special Trait 2 - Can Chain Into Basic Sta And Basic Cro Attacks
+Blockable - Yes
+
+Water (CUSTOM Style)
+Damage - 111
+Defense Damage - 55
+Power Cost - 1500
+Aerial Enabled - No
+Knockback - Yes
+Fall - Yes
+Ground Type - High
+Aerial Type - High
+Status Effect - Immovable
+Special Trait - Pushes Away All Enemies
+Blockable - Yes
+
+Meteor (REGULAR Style)
+Damage - 15*N
+Defense Damage - 10*N
+Power Cost - 1500
+Aerial Enabled - No
+Knockback - Yes
+Fall - No
+Ground Type - High
+Aerial Type - High
+Status Effect - None
+Special Trait - Meteors Always Spawn Above Enemies
+Blockable - Yes
+
+Tornado (REGULAR Style)
+Damage - 170
+Defense Damage - 85
+Power Cost - 1500
+Aerial Enabled - No
+Knockback - Yes
+Fall - No
+Ground Type - Low
+Aerial Type - High
+Status Effect - Immovable
+Special Trait - Pulls In Surrounding Enemies
+Blockable - Yes
+
+
+;-| Abilities |-;
+
+
+Mad Rush (REGULAR Style)
+Power Cost - 3000
+Status Effect - Protect, Haste, Berserk
+Special Trait - Tougher, Faster, Stronger And Immune To Staggering
+Special Trait 2 - Immune To Throws And Status Effects
+Special Trait 3 - Guarding, Specials, Supers, Magic And Abilities Disabled
+
+Draw (CUSTOM Style)
+Status Effect - None
+Special Trait - Charges Power
+
+;==================================================
+;How To Use
+;==================================================
+
+;-| Specials |-;
+
+Rough Divide (REGULAR Style) - QCF x
+
+Rough Divide (DISSIDIA Style) - QCB x
+
+Fated Circle (REGULAR Style) - QCF y
+
+Fated Circle (DISSIDIA Style) - QCB y
+
+Blasting Zone (REGULAR Style) - QCF z
+
+;-| Supers |-;
+
+Renzokuken (REGULAR Style) - DQCF x
+
+Renzokuken (REGULAR Style) - DQCF y
+
+Renzokuken (REGULAR Style) - DQCF z
+
+Lionheart (REGULAR Style) - Successful Renzokuken Triggers
+
+;-| Magic |-;
+
+Blizzard (REGULAR Style) - QCF a
+
+Fire (REGULAR Style) - QCF b
+
+Thunder (REGULAR Style) - QCF c
+
+Water (REGULAR Style) - QCB a
+
+Meteor (REGULAR Style) - QCB b
+
+Tornado (REGULAR Style) - QCB c
+
+;-| Abilities |-;
+
+Mad Rush (REGULAR Style) - x+y+a
+
+Draw (CUSTOM Style) - x+a
+
+;==================================================
+;How To Combo
+;==================================================
+
+Basic (Punch, Kick, Sword, etc.) - Lv.1
+Special - Lv.2
+Super - Lv.3
+
+Basic > Basic
+Basic > Special
+Basic > Super
+Special > Special
+Special > Super
+
+Lv.1 > Lv.1
+Lv.1 > Lv.2
+Lv.1 > Lv.3
+Lv.2 > Lv.2
+Lv.2 > Lv.3
+
+You can't chain everything. Try experimenting.
+
+;==================================================
+;Credits
+;==================================================
+
+Elecbyte for Mugen.
+VirtuallTek at MugenGuild for Fighter Factory.
+SeanAltly at MugenGuild for the sprites.
+Cyanide and 2OS at MugenGuild for all their help.
+Me for ripping all the sounds.
+
+http://mugenguild.com/
+http://mugenfreeforall.com/
+http://soldier.ucoz.net/
+http://www.elecbyte.com/
+http://www.virtualltek.com/

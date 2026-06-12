@@ -42862,6 +42862,13 @@ trigger1 = time = 0
 channel = 0
 ignorehitpause = 1
 
+[State -2, OwnTandem Broadcast]
+type = MapSet
+trigger1 = 1
+map = "ownTandem"
+value = (var(8) = 2)
+ignorehitpause = 1
+
 [State -2, StandBar Broadcast]
 type = MapSet
 trigger1 = 1

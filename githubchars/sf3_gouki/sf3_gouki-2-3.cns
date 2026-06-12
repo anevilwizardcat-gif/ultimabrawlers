@@ -1178,6 +1178,7 @@ keyctrl = 0
 ;スタンゲージ
 [State -3]
 type = helper
+triggerall = 0 ;<-- stun gauge disabled for this game
 triggerall = numhelper(30000) && helper(30000),var(20)
 triggerall = helper(30000),var(21)
 triggerall = numhelper(25000) = 0
