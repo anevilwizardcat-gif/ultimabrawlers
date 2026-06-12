@@ -1,0 +1,159 @@
+;Mount Nibel Reactor, background from Final Fantasy VII, by Phantom.of.the.Server
+;High resolution version
+;This version of the stage only works in Mugen 1.1 and Ikemen GO
+
+[Info]
+name = "Mount Nibel Reactor"
+author = "Phantom.of.the.Server"
+versiondate = 2023
+mugenversion = 1.1
+
+[Music]
+bgmusic = NibelReactor.mp3
+bgmvolume = 100
+
+[Camera]
+startx = 0
+starty = 0
+boundleft = -84
+boundright = 84
+boundhigh = -380
+boundlow = 0
+tension = 120
+tensionhigh = 240
+tensionlow = 0
+overdrawhigh = 0
+overdrawlow = 0
+cuthigh = 120
+cutlow = 0
+startzoom = 1
+zoomout = 0.75
+zoomin = 1
+
+[PlayerInfo]
+p1startx = -140
+p1starty = 0
+p1facing = 1
+
+p2startx = 140
+p2starty = 0
+p2facing = -1
+
+leftbound = -2000
+rightbound = 2000
+
+[Bound]
+screenleft = 30
+screenright = 30
+
+[StageInfo]
+zoffset = 448
+autoturn = 1
+resetBG = 0
+localcoord = 640, 480
+xscale = 1
+yscale = 1
+
+[Shadow]
+intensity = 128
+color = 0, 0, 0
+yscale = 0.2
+fade.range = -480, 0
+
+
+;=====<MAIN BG DEFINITION>=====
+
+[BGdef]
+spr = NibelReactorHR.sff
+debugbg = 0
+
+[BG Main]
+type = normal
+spriteno = 0, 0
+layerno = 0
+start = 0, 16
+delta = 1, 1
+zoomdelta = 1
+mask = 0
+
+[BG Glow]
+type = anim
+actionno = 1
+start = 0, 16
+layerno = 0
+delta = 1, 1
+zoomdelta = 1
+
+[BG Red Lights]
+type = anim
+actionno = 3
+start = 0, 16
+layerno = 0
+delta = 1, 1
+zoomdelta = 1
+
+[BG Green Lights]
+type = anim
+actionno = 4
+start = 0, 16
+layerno = 0
+delta = 1, 1
+zoomdelta = 1
+
+[BG Mist]
+type = anim
+actionno = 2
+start = 0, 16
+layerno = 0
+delta = 1, 1
+tile = 1, 0
+tilespacing = 1600, 1600
+velocity = 1, 0
+
+[BG Mist]
+type = anim
+actionno = 2
+start = 0, 16
+layerno = 0
+delta = 1, 1
+tile = 1, 0
+tilespacing = 1600, 1600
+velocity = -1.5, 0
+
+
+;=====<ANIMATION>=====
+
+[Begin Action 1]
+1,0, 0,0, 47, , AS0D256
+Interpolate Blend
+1,0, 0,0, 1, , AS128D256
+1,0, 0,0, 95, , AS128D256
+Interpolate Blend
+1,0, 0,0, 1, , AS0D256
+
+[Begin Action 2]
+2,0, 0,0, 63, , AS144D256
+Interpolate Blend
+2,0, 0,0, 1, , AS240D256
+2,0, 0,0, 63, , AS240D256
+Interpolate Blend
+2,0, 0,0, 1, , AS144D256
+
+[Begin Action 3]
+3,0, 0,0, 7, , AS0D256
+Interpolate Blend
+3,0, 0,0, 1, , AS128D256
+3,0, 0,0, 7, , AS128D256
+Interpolate Blend
+3,0, 0,0, 1, , AS0D256
+
+[Begin Action 4]
+4,0, 0,0, 7, , AS0D256
+Interpolate Blend
+4,0, 0,0, 1, , AS128D256
+4,0, 0,0, 7, , AS128D256
+Interpolate Blend
+4,0, 0,0, 1, , AS0D256
+
+[Begin Action 9000]
+9000,1, 0,0, 1

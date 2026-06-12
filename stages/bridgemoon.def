@@ -1,0 +1,230 @@
+;--------------------------------------------------------
+[Info]
+;Name of the stage.
+name = "Cairo Bridge"
+; Author : Kitsune Sniper
+; Co-Author: Orochi Herman
+; Webpage: http://rotb.mgbr.net
+; Original Game : Jojo's Bizarre Adventure
+; Original Copyright : Capcom
+; Posted on January 1, 2003
+; Updated: February 6, 2005
+
+;
+; UPDATES:
+;
+; * Changed name to match blue color counterpart.
+; * Fixed Sprite error in the 4'oclock part of the stage.
+; * Matched cityscape height with the original
+; * Completely abandoned accuracy from JoJo's Bizarre
+;   adventure due to an impossible stage implementation.
+; * Added fancy parralax, deltas, and updated graphics.
+; * WInMUGEN compliance.
+; * Added realism to the stage.
+; * Expanded stage.
+; * Added height.
+; * And others.
+
+;--------------------------------------------------------
+[Camera]
+startx = 0
+starty = 0
+boundleft = -450
+boundright = 450
+boundhigh = -80
+boundlow = 0
+verticalfollow = .3
+floortension = 0
+tension = 50
+zoomin = 1.0
+zoomout = 0.85
+
+;--------------------------------------------------------
+[PlayerInfo]
+;--- Player 1 ---
+p1startx = -70
+p1starty = 0
+p1startz = 0
+p1facing = 1
+
+;--- Player 2 ---
+p2startx = 70
+p2starty = 0
+p2startz = 0
+p2facing = -1
+
+;--- Common ---
+leftbound  = -1000
+rightbound =  1000
+topbound  =  0
+botbound  =  0
+
+;--------------------------------------------------------
+[Scaling]
+topz     = 0
+botz     = 50
+topscale = 1
+botscale = 1.2
+
+;--------------------------------------------------------
+[Bound]
+screenleft = 15
+screenright = 15
+
+;--------------------------------------------------------
+[StageInfo]
+zoffset = 225
+autoturn = 1
+resetBG = 1
+
+;--------------------------------------------------------
+[Shadow]
+color = 128,128,128
+reflect = 0
+yscale = .1
+;--------------------------------------------------------
+[Music]
+bgmusic = jotarotheme.mp3
+bgvolume = 300
+
+;-------------------------------------
+[BGdef]
+spr = stages/bridgemoon.sff
+debugbg = 1
+
+[BG RedCity]
+type  = normal;parallax
+spriteno = 0, 1
+layerno = 0
+;start = -192,0;-384,0
+start = -260,-83
+delta = .1501,1 ;.1501,.48 ; .145,1;.14,1
+trans = none
+mask  = 0
+tile  = 0, 0
+tilespacing = 0,0
+;window = 0,0, 319, 239
+;windowdelta = 1,1
+xscale = .5,1.5;.5, .5
+yscale = 1.5,1.5 ;.5, .5
+xscalestart = 5
+yscalestart = 250
+
+[BG RedTown]
+type  = normal
+spriteno = 0, 2
+layerno = 0
+;start = -192,0;-384,0
+start = -260,-83
+delta = 0.2001,.98 ; .145,1;.14,1
+trans = none
+mask  = 1
+tile  = 0, 0
+tilespacing = 0,0
+window = 0,0, 319, 239
+windowdelta = 0,0
+
+[BG Lamp Post]
+type  = normal
+spriteno = 0,8
+layerno = 0
+start = 34,18
+delta = .54,1
+trans = none
+mask  = 1
+tile  = 64, 0
+tilespacing = 39,0
+window = 0,0, 319, 239
+windowdelta = 0,0
+
+[BG Lamp Light]
+type  = normal
+spriteno = 0,9
+layerno = 0
+start = 34,18
+delta = .54,1
+trans = add
+mask  = 1
+tile  = 64, 0
+tilespacing = 11,0
+window = 0,0, 319, 239
+windowdelta = 0,0
+
+[BG Sidewalk]
+type  = normal
+spriteno = 0,7
+layerno = 0
+start = -864,12
+delta = .61,1
+trans = none
+mask  = 1
+tile  = 64, 0
+tilespacing = 0,0
+window = 0,0, 319, 239
+windowdelta = 0,0
+
+[BG Bridge Shadow Rails]
+type  = normal
+spriteno = 0,5
+layerno = 0
+start = 0,163
+delta = .59,1
+trans = none
+mask  = 1
+tile  = 64, 0
+tilespacing = 16,0
+window = 0,0, 319, 239
+windowdelta = 0,0
+
+[BG Bridge Rail Tops]
+type  = normal
+spriteno = 0,6
+layerno = 0
+start = 0,158
+delta = .5919,1
+trans = none
+mask  = 1
+tile  = 64, 0
+tilespacing = 19,0
+window = 0,0, 319, 239
+windowdelta = 0,0
+
+[BG Bridge Rails]
+type  = normal
+spriteno = 0, 0
+layerno = 0
+start = 0,163
+delta = .60,1
+trans = none
+mask  = 1
+tile  = 64, 0
+tilespacing = 0,0
+window = 0,0, 319, 239
+windowdelta = 0,0
+
+[BG Floor]
+type = parallax
+spriteno = 0,3
+start = 0,200
+delta = .83,.99
+mask = 0
+xscale = .58, 1.58
+
+[BG Floor WIth Spotlight]
+type = normal
+spriteno = 0,4
+start = 0,230
+delta = 1.6,1
+mask = 0
+
+; Do not distribute this background in your website - pictures of it are OK, just
+; do not post it at your site.
+; You may distribute this background amongst your friends, however; I do not have
+; any intention of restricting its distribution in that form; I just do not want
+; to see my hard work be plagiarized in any way.
+; Please do not remove these lines. Also, do not redistribute the sprite file
+; without this DEF file or its corresponding documentation.
+;
+; Thanks,
+;        Kitsune Sniper & Orochi Herman
+;        http://rotb.mgbr.net

@@ -1,0 +1,472 @@
+; Autor : Juan Carlos http://eternalmugen.cjb.net
+; Se puede hacer mejor, quizas si, pero lo que si puedo decir es que he trabajado muchisimo
+;en el.
+
+
+[Info]
+name = "Avenger Headquarters"
+edited by = "Manuz"
+
+[Camera]
+startx = 0
+starty = 0
+boundleft = -155
+boundright = 185
+boundhigh = -166
+boundlow = -7
+verticalfollow = .7
+floortension = 0
+tension = 50
+zoomin = 1
+zoomout = .75 
+
+[PlayerInfo]
+p1startx = -80
+p1starty = 0
+p1startz = 0
+p1facing = 1
+
+p2startx = 80
+p2starty = 0
+p2startz = 0
+p2facing = -1
+
+leftbound  = -1000
+rightbound =  1000
+topbound  =  0
+botbound  =  0
+
+[Scaling]
+topz     = 0
+botz     = 50
+topscale = 1
+botscale = 1.4
+
+[Bound]
+screenleft = 15
+screenright = 15
+
+[StageInfo]
+zoffset = 220
+autoturn = 1
+resetBG = 1
+
+[Shadow]
+color = 92,92,92
+yscale = .1
+reflect = 0
+
+[Music]
+bgmusic = centralsuperh.mp3
+bgvolume = 255
+
+[BGdef]
+spr = centralsuperheroes 1.1.sff
+debug = 0
+
+[BG 3]
+type = normal
+spriteno = 13,0
+layerno = 0
+start = 0, 0
+delta = 1, 1
+mask = 1
+
+[BG 1]
+type = normal
+spriteno = 0,0
+layerno = 0
+start = 0, 0
+delta = 1, 1
+mask = 1
+
+[BG 1]
+type = normal
+spriteno = 8,0
+layerno = 0
+start = 0, 0
+delta = 1, 1
+mask = 1
+
+[BG 1]
+type = normal
+spriteno = 12,0
+layerno = 0
+start = 0, 0
+delta = 1, 1
+mask = 1
+
+[BG 1]
+type = normal
+spriteno = 12,1
+layerno = 0
+start = 0, 0
+delta = 1, 1
+mask = 1
+
+[BG 1]
+type = normal
+spriteno = 12,2
+layerno = 0
+start = 0, 0
+delta = 1, 1
+mask = 1
+
+[BG 1]
+type = anim
+actionno = 4
+layerno = 0
+start = 0, 0
+delta = 1, 1
+mask = 1
+
+
+[BG 1]
+type = normal
+spriteno = 20,0
+layerno = 0
+start = 0, 0
+delta = 1, 1
+mask = 1
+
+
+[BG 2]
+type = ani
+actionno= 1
+layerno = 0
+start = 0, 0
+delta = 1, 1
+mask = 1
+
+[BG 1]
+type = normal
+spriteno = 23,0
+layerno = 0
+start = 0, 0
+delta = 1, 1
+mask = 1
+
+[BG 2]
+type = ani
+actionno = 7
+layerno = 0
+start = 0, 0
+delta = 1, 1
+mask = 1
+
+[BG 2]
+type = normal
+spriteno= 21,0
+layerno = 0
+start = 0, 0
+delta = 1, 1
+mask = 1
+
+[BG 2]
+type = ani
+actionno= 5
+layerno = 0
+start = 0, 0
+delta = 1, 1
+mask = 1
+
+[BG 2]
+type = ani
+actionno = 2
+layerno = 0
+start = 0, 0
+delta = 1, 1
+mask = 1
+
+[BG 1]
+type = normal
+spriteno = 22,0
+layerno = 0
+start = 0, 0
+delta = 1, 1
+mask = 1
+
+[BG 2]
+type = ani
+actionno= 8
+layerno = 0
+start = 0, 0
+delta = 1, 1
+mask = 1
+
+[BG 2]
+type = normal
+spriteno= 7,0
+layerno = 0
+start = 0, 0
+delta = 1, 1
+mask = 1
+
+
+[BG 2]
+type = normal
+spriteno= 9,0
+layerno = 0
+start = 0, 0
+delta = 1, 1
+mask = 1
+
+
+[BG 2]
+type = normal
+spriteno = 3,0
+layerno = 0
+start = 0, 0
+delta = 1, 1
+mask = 1
+
+[BG 3]
+type = ani
+actionno = 3
+layerno = 0
+start = 0, 0
+delta = 1, 1
+mask = 1
+
+[BG 3]
+type = ani
+actionno = 9
+layerno = 0
+start = 0, 0
+delta = 1, 1
+mask = 1
+
+[BG 3]
+type = ani
+actionno = 6
+layerno = 0
+start = 0, 0
+delta = 1, 1
+mask = 1
+
+
+
+
+[Begin action 1]
+
+1,7,0,0,19
+1,8,0,0,39
+1,9,0,0,19
+1,10, 0,0, 40
+1,11, 0,0, 19
+1,12, 0,0, 31
+;1,13, 0,0, 8
+1,14, 0,0, 9
+1,15, 0,0, 9
+1,16, 0,0, 9
+1,17, 0,0, 9
+1,18,0,0,9
+1,19,0,0,9
+1,20, 0,0, 9
+1,21, 0,0, 29
+1,23, 0,0, 9
+1,24, 0,0, 8
+1,25, 0,0, 9
+1,26, 0,0, 9
+1,25, 0,0, 9
+1,26,0,0,9
+1,25,0,0,9
+1,26, 0,0, 9
+1,25, 0,0, 9
+1,26, 0,0, 9
+1,33, 0,0, 9
+1,34, 0,0, 19
+1,35, 0,0, 19
+1,36, 0,0, 19
+1,37, 0,0, 19
+1,38,0,0,11
+1,39,0,0,8
+1,40, 0,0, 9
+1,41, 0,0, 9
+1,42, 0,0, 9
+1,43, 0,0, 9
+1,44, 0,0, 9
+1,45, 0,0, 9
+1,46, 0,0, 9
+1,47, 0,0, 9
+1,48,0,0,9
+1,49,0,0,9
+1,50, 0,0,9 
+1,51, 0,0, 9
+1,52, 0,0, 9
+1,53, 0,0, 9
+17,1,0,0,9
+17,2,0,0,9
+17,3,0,0,9
+17,4,0,0,9
+17,5,0,0,9
+16,0,0,0,9
+16,1,0,0,9
+16,2,0,0,9
+16,3,0,0,9
+16,4,0,0,9
+16,5,0,0,9
+16,7,0,0,9
+16,8,0,0,9
+1,2, 0,0, 9
+1,3, 0,0, 9
+1,4, 0,0, 9
+1,5, 0,0, 9
+1,6, 0,0, 9
+
+
+[Begin action 2]
+2,0,0,0,4
+2,1,0,0,4
+2,0,0,0,4
+2,1,0,0,4
+2,5,0,0,4
+2,6,0,0,4
+2,8,0,0,500
+2,6,0,0,4
+2,5,0,0,4
+2,1,0,0,4
+2,0,0,0,4
+2,1,0,0,4
+2,0,0,0,4
+2,7,0,0,500
+2,6,0,0,4
+2,5,0,0,4
+2,0,0,0,4
+2,1,0,0,4
+2,0,0,0,4
+2,9,0,0,500
+
+[Begin action 3]
+4,0,0,0,6
+4,1,0,0,6
+4,2,0,0,6
+
+
+[Begin action 4]
+5,1,0,0,10
+5,2,0,0,10
+
+[Begin action 5]
+6,0, 0,0, 16
+6,1, 0,0, 16
+6,2, 0,0, 16
+6,3, 0,0, 16
+6,4, 0,0, 16
+6,5, 0,0, 16
+6,6, 0,0, 16
+6,7, 0,0, 16
+6,8,0,0,16
+6,9,0,0,16
+6,10, 0,0,16
+6,11, 0,0,32 
+6,12, 0,0,16 
+6,13, 0,0, 16
+6,14, 0,0, 16
+6,15, 0,0, 16
+6,16, 0,0, 16
+6,17, 0,0,16
+6,18,0,0,16
+6,19,0,0,16
+6,20, 0,0,16
+6,21, 0,0,16 
+6,22, 0,0, 16
+6,23, 0,0, 16
+6,24, 0,0, 16
+6,25, 0,0, 16
+6,26, 0,0, 50
+
+
+[Begin action 6]
+10,0,0,0,56
+10,1,0,0,6
+10,2,0,0,26
+10,3,0,0,6
+10,4,0,0,26
+
+[Begin action 7]
+11,10,0,0,16
+11,9,0,0,16
+11,10,0,0,16
+11,9,0,0,8
+11,12,0,0,16
+11,11,0,0,16
+11,12,0,0,16
+11,11,0,0,8
+11,14,0,0,16
+11,13,0,0,16
+11,14,0,0,16
+11,13,0,0,8
+11,19,0,0,16
+11,20,0,0,16
+11,19,0,0,16
+11,20,0,0,8
+11,22,0,0,14
+11,23,0,0,14
+11,24,0,0,14
+11,26,0,0,14
+11,27,0,0,14
+11,28,0,0,14
+;19,0,0,0,
+11,29,0,0,20
+11,23,0,0,20
+11,29,0,0,20
+11,23,0,0,20
+11,29,0,0,20
+11,23,0,0,20
+11,30,0,0,8
+11,31,0,0,9
+11,32,0,0,15
+11,33,0,0,19
+11,32,0,0,15
+11,34,0,0,10
+11,35,0,0,9
+11,36,0,0,10
+11,35,0,0,9
+11,36,0,0,10
+11,35,0,0,18
+11,36,0,0,19
+11,37,0,0,8
+11,38,0,0,8
+11,37,0,0,8
+11,38,0,0,8
+11,39,0,0,8
+11,40,0,0,8
+11,39,0,0,8
+11,40,0,0,8
+11,41,0,0,8
+
+[Begin action 8]
+14,3,0,0,4
+14,4,0,0,4
+14,5,0,0,4
+14,1,0,0,175
+14,5,0,0,4
+14,4,0,0,4
+14,3,0,0,4
+14,2,0,0,175
+14,3,0,0,4
+14,4,0,0,4
+14,5,0,0,4
+14,0,0,0,175
+
+[Begin action 9]
+15,0,0,0,10
+15,1,0,0,10
+15,2,0,0,10
+15,3,0,0,10
+15,4,0,0,10
+15,5,0,0,10
+15,6,0,0,10
+15,7,0,0,10
+15,9,0,0,10
+15,10,0,0,10
+15,11,0,0,10
+15,12,0,0,10
+15,13,0,0,10
+15,14,0,0,10
+15,15,0,0,10
+15,16,0,0,10
+15,17,0,0,10
+15,18,0,0,10
+15,19,0,0,10

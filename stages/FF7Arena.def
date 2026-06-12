@@ -1,0 +1,136 @@
+;Battle Square Arena, stage from Final Fantasy VII, by Phantom.of.the.Server
+;Huge thanks to Kashkabald, for the rip
+
+[Info]
+name = "Battle Square Arena"
+author = "Phantom.of.the.Server"
+versiondate = 2023
+mugenversion = 1.0
+
+[Music]
+bgmusic = FF7Arena.mp3
+bgmvolume = 255
+
+[Camera]
+startx = 0
+starty = 0
+boundleft = -160
+boundright = 160
+boundhigh = -240
+boundlow = 0
+verticalfollow = 1
+floortension = 72
+tension = 60
+overdrawhigh = 0
+overdrawlow = 0
+cuthigh = 36
+cutlow = 24
+startzoom = 1
+zoomout = 1
+zoomin = 1
+
+[PlayerInfo]
+p1startx = -70
+p1starty = 0
+p1facing = 1
+
+p2startx = 70
+p2starty = 0
+p2facing = -1
+
+leftbound = -1000
+rightbound = 1000
+
+[Bound]
+screenleft = 15
+screenright = 15
+
+[StageInfo]
+zoffset = 200
+autoturn = 1
+resetBG = 0
+localcoord = 320, 240
+xscale = 1
+yscale = 1
+
+[Shadow]
+intensity = 128
+color = 0, 0, 0
+yscale = 0.5
+fade.range = -240, 0
+
+
+;=====<MAIN BG DEFINITION>=====
+[BGdef]
+spr = FF7Arena.sff
+debugbg = 0
+
+[BG wall]
+type = normal
+spriteno = 0, 2
+layerno = 0
+start = 0, 0
+delta = 0.33, 1
+mask = 0
+tile = 1, 1
+tilespacing = 0, 0
+
+[BG wall]
+type = normal
+spriteno = 0, 1
+layerno = 0
+start = 0, 0
+delta = 0.33, 1
+mask = 0
+tile = 1, 0
+tilespacing = 0, 0
+
+[BG water]
+type = parallax
+spriteno = 1, 0
+layerno = 0
+start = 0, 0
+delta = 0.33, 1
+width = 806, 2418;xscale = 1, 3
+tile = 1, 0
+tilespacing = 0, 0
+mask = 0
+ID = 1
+
+[BG floor]
+type = parallax
+spriteno = 0, 0
+layerno = 0
+start = 0, 0
+delta = 0.5, 1
+xscale = 1, 2.67
+mask = 1
+
+[BG Darken]
+type = normal
+spriteno = 2, 0
+layerno = 0
+start = 0, 0
+delta = 0, 1
+zoomdelta = 0
+mask = 1
+trans = sub
+
+
+;=====<BGCTRLDEFs>=====
+[BGctrldef 1]
+ctrlid = 1
+
+[BGCtrl 1, enable]
+type = enable
+time = 0
+value = 1
+
+[BGCtrl 1, vel]
+type = velset
+time = 0
+x = 0.25
+y = 0
+
+[Begin Action 9000]
+9000,1, 0,0, 1

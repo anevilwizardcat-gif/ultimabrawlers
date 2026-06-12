@@ -1,0 +1,138 @@
+;Barricaded Station from Resident Evil 3
+;Converted for Mugen/Ikemen GO by Phantom.of.the.Server
+;Special thanks to Mortician for the background rips
+
+[Info]
+name = "Barricaded Station"
+author = "Phantom.of.the.Server"
+versiondate = 21.12.2023
+mugenversion = 1.1
+
+[Music]
+bgmusic = BarricadedStation.mp3
+bgmvolume = 255
+
+[Camera]
+startx = 0
+starty = 0
+boundleft = -52
+boundright = 52
+boundhigh = 0; Change to -76 for Ikemen GO 0.99 workaround
+boundlow = 0
+tension = 120
+tensionhigh = 240
+tensionlow = 0
+overdrawhigh = 0
+overdrawlow = 0
+cuthigh = 104
+cutlow = 16
+startzoom = 1
+zoomout = 0.75
+zoomin = 1
+
+[PlayerInfo]
+p1startx = -140
+p1starty = 0
+p1facing = 1
+
+p2startx = 140
+p2starty = 0
+p2facing = -1
+
+leftbound = -2000
+rightbound = 2000
+
+[Bound]
+screenleft = 30
+screenright = 30
+
+[StageInfo]
+zoffset = 432
+autoturn = 1
+resetBG = 0
+localcoord = 640, 480
+
+[Shadow]
+intensity = 128
+color = 0, 0, 0
+yscale = -0.25
+fade.range = -240, 0
+
+[Reflection]
+reflect = 0
+intensity = 0
+
+
+;=====<MAIN BG DEFINITION>=====
+[BGdef]
+spr = BarricadedStation.sff
+debugbg = 0
+
+[BG Main]
+type = normal
+spriteno = 0, 0
+layerno = 0
+start = 0, 0
+delta = 1, 1
+mask = 0
+
+[BG Front]
+type = normal
+spriteno = 0, 1
+layerno = 1
+start = 0, 0
+delta = 1, 1
+mask = 1
+
+[BG Fire Left]
+type = anim
+actionno = 1
+layerno = 1
+start = -560, 485
+delta = 1, 1
+zoomdelta = 0
+
+[BG Fire Right]
+type = anim
+actionno = 1
+layerno = 1
+start = 336, 485
+delta = 1, 1
+zoomdelta = 0
+
+
+;=====<ANIMATION>=====
+[Begin Action 1]
+1,0, 0,0, 1, , AS256D256
+1,1, 0,0, 1, , AS256D256
+1,2, 0,0, 1, , AS256D256
+1,3, 0,0, 1, , AS256D256
+1,4, 0,0, 1, , AS256D256
+1,5, 0,0, 1, , AS256D256
+1,6, 0,0, 1, , AS256D256
+1,7, 0,0, 1, , AS256D256
+1,8, 0,0, 1, , AS256D256
+1,9, 0,0, 1, , AS256D256
+1,10, 0,0, 1, , AS256D256
+1,11, 0,0, 1, , AS256D256
+1,12, 0,0, 1, , AS256D256
+1,13, 0,0, 1, , AS256D256
+1,14, 0,0, 1, , AS256D256
+1,15, 0,0, 1, , AS256D256
+1,16, 0,0, 1, , AS256D256
+1,17, 0,0, 1, , AS256D256
+1,18, 0,0, 1, , AS256D256
+1,19, 0,0, 1, , AS256D256
+1,20, 0,0, 1, , AS256D256
+1,21, 0,0, 1, , AS256D256
+1,22, 0,0, 1, , AS256D256
+1,23, 0,0, 1, , AS256D256
+1,24, 0,0, 1, , AS256D256
+1,25, 0,0, 1, , AS256D256
+1,26, 0,0, 1, , AS256D256
+1,27, 0,0, 1, , AS256D256
+1,28, 0,0, 1, , AS256D256
+1,29, 0,0, 1, , AS256D256
+
+[Begin Action 9000]
+9000,1, 0,0, 1

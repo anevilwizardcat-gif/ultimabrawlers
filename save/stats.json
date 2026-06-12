@@ -1,0 +1,92 @@
+{
+  "playtime": 25962.41,
+  "modes": {
+    "training": {
+      "playtime": 0,
+      "clear": 0
+    },
+    "arcade": {
+      "playtime": 485.89,
+      "clear": 0,
+      "ranking": [
+        {
+          "score": 116400,
+          "time": 304.6,
+          "win": 2,
+          "lose": 1,
+          "consecutive": 0,
+          "name": "RMB",
+          "chars": [
+            "mvc2_spiderman"
+          ],
+          "tmode": 0,
+          "ailevel": 8
+        },
+        {
+          "score": 47500,
+          "time": 126.42,
+          "win": 1,
+          "lose": 1,
+          "consecutive": 0,
+          "name": "",
+          "chars": [
+            "jotaro"
+          ],
+          "tmode": 0,
+          "ailevel": 5
+        },
+        {
+          "score": 6000,
+          "time": 54.87,
+          "win": 0,
+          "lose": 1,
+          "consecutive": 0,
+          "name": "DFO",
+          "chars": [
+            "jotaro"
+          ],
+          "tmode": 0,
+          "ailevel": 5
+        }
+      ]
+    },
+    "watch": {
+      "playtime": 25476.52,
+      "clear": 110,
+      "clearcount": {
+        "jotaro": 31,
+        "dio": 12,
+        "mvc2_spiderman": 4,
+        "ryu_pots": 1,
+        "sf3_ryu": 4,
+        "sephiroth_ak": 1,
+        "sf3_ibuki": 1,
+        "sf3_gouki": 1,
+        "lightning": 2,
+        "josuke": 2,
+        "shadowdio": 4,
+        "tifalockhart": 2,
+        "sf3_chun-li": 16,
+        "nero_dmc4": 1,
+        "striderhiryu": 1,
+        "blanka": 1,
+        "sf3_blanka_frs": 1,
+        "jedah": 1,
+        "dhalsim_a": 2,
+        "polnareff": 1,
+        "avdul": 2,
+        "doctordoom": 1,
+        "kakyoin": 1,
+        "cvs_iori": 3,
+        "albertwesker": 2,
+        "guile": 1,
+        "mk1_scorpion": 3,
+        "sol_b": 1,
+        "pot": 4,
+        "ironman": 1,
+        "wolverine": 1,
+        "sonya": 1
+      }
+    }
+  }
+}

@@ -3896,6 +3896,7 @@ var(15) = 675
 [State 3001, Super]
 type = Helper
 trigger1 = time = 6
+triggerall = !NumHelper(6170) ;<-- dedup (author omission): supers were stacking gauge instances
 id = 6170
 name = "n_gauge"
 pos = 0,0
@@ -14695,6 +14696,7 @@ trigger2 = numpartner
 trigger2 = ID<partner,ID
 trigger3 = !numpartner
 trigger4 = numpartner && teamMode = Tag ;<-- tag: every character hosts their OWN gauge; bench-gates then handle visibility per owner
+triggerall = roundstate = 2 ;<-- groove bar appears at round start, not during intros
 id = 6100
 name = "gauge"
 pos = 0,300

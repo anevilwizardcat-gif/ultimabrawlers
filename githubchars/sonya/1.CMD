@@ -394,7 +394,7 @@ triggerall = Var(50) != 1
 ;correr
 [State -1, RunMk]
 type = ChangeState
-value = 107
+value = 100 ;<-- was 107, defined in sp.st which is absent from this build; 100 = standard run
 trigger1 = command = "run"
 trigger1 = command = "holdfwd"
 trigger1 = command != "holddown"

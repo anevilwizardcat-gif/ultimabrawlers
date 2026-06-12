@@ -1169,6 +1169,7 @@ anim = 2242                       ;Change animation (Def: no change)
 
 [State 200, Play]
 type = PlaySnd
+triggerall = 0 ;<-- sound F5,15 absent from this build's fight.snd; silenced
 trigger1 = time = 1
 trigger1 = 1
 value = F5, 15
@@ -1265,6 +1266,7 @@ ampl = 5
 
 [State 200, Play]
 type = PlaySnd
+triggerall = 0 ;<-- sound F5,15 absent from this build's fight.snd; silenced
 trigger1 = time = 1
 trigger1 = 1
 value = F5, 15
@@ -1330,6 +1332,7 @@ Y = 0
 
 [State 200, Play]
 type = PlaySnd
+triggerall = 0 ;<-- sound F5,15 absent from this build's fight.snd; silenced
 trigger1 = time = 1
 trigger1 = 1
 value = F5, 15
@@ -1411,6 +1414,7 @@ anim = 224          ;Change animation (Def: no change)
 
 [State 200, Play]
 type = PlaySnd
+triggerall = 0 ;<-- sound F5,15 absent from this build's fight.snd; silenced
 trigger1 = time = 1
 trigger1 = 1
 value = F5, 15
@@ -1509,6 +1513,7 @@ ampl = 5
 
 [State 200, Play]
 type = PlaySnd
+triggerall = 0 ;<-- sound F5,15 absent from this build's fight.snd; silenced
 trigger1 = time = 5
 trigger1 = 1
 value = F5, 15
@@ -1568,6 +1573,7 @@ anim = 223                       ;Change animation (Def: no change)
 
 [State 200, Play]
 type = PlaySnd
+triggerall = 0 ;<-- sound F5,15 absent from this build's fight.snd; silenced
 trigger1 = time = 5
 trigger1 = 1
 value = F5, 15
@@ -1651,6 +1657,7 @@ ampl = 5
 
 [State 200, Play]
 type = PlaySnd
+triggerall = 0 ;<-- sound F5,15 absent from this build's fight.snd; silenced
 trigger1 = time = 1
 trigger1 = 1
 value = F5, 15
@@ -1720,6 +1727,7 @@ ampl = 5
 
 [State 200, Play]
 type = PlaySnd
+triggerall = 0 ;<-- sound F5,15 absent from this build's fight.snd; silenced
 trigger1 = time = 1
 trigger1 = 1
 value = F5, 15
@@ -1779,6 +1787,7 @@ anim = 2242                       ;Change animation (Def: no change)
 
 [State 200, Play]
 type = PlaySnd
+triggerall = 0 ;<-- sound F5,15 absent from this build's fight.snd; silenced
 trigger1 = time = 1
 trigger1 = 1
 value = F5, 15
@@ -1877,6 +1886,7 @@ ampl = 5
 
 [State 200, Play]
 type = PlaySnd
+triggerall = 0 ;<-- sound F5,15 absent from this build's fight.snd; silenced
 trigger1 = time = 1
 trigger1 = 1
 value = F5, 15
@@ -2449,6 +2459,7 @@ channel = 3
 
 [State -2, jumpup]
 type = PlaySnd
+triggerall = 0 ;<-- sound F5,15 absent from this build's fight.snd; silenced
 triggerall = anim = 40
 trigger1 = time = 4
 value = F5,15

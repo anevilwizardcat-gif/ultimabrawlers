@@ -1,0 +1,112 @@
+;Derelict Church by Phantom.of.the.Server
+;Adapted from The King Of Fighters XIV concept art
+;Special thanks to The Fighters Generation for sharing the image
+
+; Version History:
+; 27/03/2025 - Fixed light effect layering
+; 23/03/2025 - First release
+
+[Info]
+name = "Derelict Church"
+author = "Phantom.of.the.Server"
+versiondate = 27.03.2025
+ikemenversion = 1.0
+mugenversion = 1.1
+
+[Music]
+bgmusic = DerelictChurch.mp3
+bgmvolume = 255
+
+[Camera]
+startx = 0
+starty = 0
+boundleft = -1012
+boundright = 1012
+boundhigh = -270
+boundlow = 0
+tension = 120
+tensionhigh = 240
+tensionlow = 0
+verticalfollow = 1; Ikemen
+overdrawhigh = 0
+overdrawlow = 0
+cuthigh = 104
+cutlow = 16
+startzoom = 1
+zoomout = 0.75
+zoomin = 1
+
+[PlayerInfo]
+p1startx = -140
+p1starty = 0
+p1facing = 1
+
+p2startx = 140
+p2starty = 0
+p2facing = -1
+
+leftbound = -2000
+rightbound = 2000
+
+[Bound]
+screenleft = 30
+screenright = 30
+
+[StageInfo]
+zoffset = 432
+autoturn = 1
+resetBG = 0
+localcoord = 640, 480
+
+[Shadow]
+intensity = 128
+color = 0, 0, 0
+yscale = 0.25
+fade.range = -480, 0
+
+[Reflection]
+reflect = 0
+intensity = 0
+
+
+;=====<MAIN BG DEFINITION>=====
+[BGdef]
+spr = DerelictChurch.sff
+debugbg = 0
+
+[BG Main]
+type = normal
+spriteno = 0, 0
+layerno = 0
+start = 0, 0
+delta = 1, 1
+mask = 1
+
+[BG Light]
+type = anim
+actionno = 1
+layerno = 0
+start = 0, 0
+delta = 1, 1
+zoomdelta = 1
+sin.y = 4, 90, 0
+
+
+;=====<ANIMATION>=====
+[Begin Action 1]
+1,0, 0,0, 120, , AS16D256
+Interpolate Blend
+1,0, 0,0, 1, , AS64D256
+1,0, 0,0, 120, , AS64D256
+Interpolate Blend
+1,0, 0,0, 1, , AS40D256
+1,0, 0,0, 120, , AS40D256
+Interpolate Blend
+1,0, 0,0, 1, , AS64D256
+1,0, 0,0, 120, , AS64D256
+Interpolate Blend
+1,0, 0,0, 1, , AS16D256
+1,0, 0,0, 120, , AS16D256
+
+[Begin Action 9000]
+9000,1, 0,0, 1

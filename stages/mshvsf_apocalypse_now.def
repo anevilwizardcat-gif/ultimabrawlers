@@ -1,0 +1,268 @@
+;--------------------------------------------------------
+[Info]
+name = "Apocalypse Now! (MSHvSF)"
+author = "XsLaught"
+; E-mail: xslaught@hotmail.com
+
+;--------------------------------------------------------
+[Camera]
+startx = 0
+starty = 0
+boundleft = -224
+boundright = 224
+boundhigh = -224
+boundlow = 0
+verticalfollow = 1
+floortension = 60		; Artmoney checked
+tension = 64			; (384 - 256) / 2 = 64
+; 256 = distance between p1 and p2
+
+;--------------------------------------------------------
+[PlayerInfo]
+;--- Player 1 ---
+ ;Player 1 starting coordinates.
+ ;p1startx is typically -70 and p2startx is 70.
+ ;p1starty and p1startz should be 0.
+p1startx = -70         ; Starting x coordinates
+						; (320/384) * (256/2) = 106.66666666666666666666666666667
+p1starty = 0            ; Starting y coordinates
+p1startz = 28           ; Stage identifier
+p1facing = 1            ; Direction player faces: 1=right, -1=left
+
+;--- Player 2 ---
+p2startx = 70
+p2starty = 0
+p2startz = -28			; Stage identifier
+p2facing = -1
+
+;--- Common ---
+leftbound  = -1000		; Left bound (x-movement)
+rightbound =  1000		; Right bound
+topbound  =  0    		; Top bound (z-movement)
+botbound  =  0    		; Bottom bound
+
+;--------------------------------------------------------
+[Scaling]
+topz     = 0			; Top z-coordinate for scaling
+botz     = 50			; Bottom z-coordinate for scaling
+topscale = 1			; Scale to use at top
+botscale = 1.2			; Scale to use at bottom
+
+;--------------------------------------------------------
+[Bound]
+screenleft = 21    		; Artmoneyed
+screenright = 21   		; Artmoneyed
+
+;--------------------------------------------------------
+[StageInfo]
+zoffset = 217			; 240 - 23
+zoffsetlink = 1
+autoturn = 1
+resetBG = 1
+hires = 0
+
+;--------------------------------------------------------
+[Shadow]
+intensity = 128
+color = 32, 32, 32
+yscale = 0.4
+fade.range = -400,-100
+
+;--------------------------------------------------------
+[Reflection]
+intensity = 0
+
+;--------------------------------------------------------
+[Music]
+bgmusic = magneto.mp3
+bgvolume = 255
+
+;========================================================
+;-------------------------------------
+; Background definition
+[BGdef]
+spr = mshvsf_apocalypse_now.sff
+
+[BG Space]
+type = Anim
+actionno = 10
+start = 0, 240
+delta = 0.89285714285714285714285714285714, .85
+; 118/(200 - 60) = 0.85
+
+[BG Space Bottom]
+type = Anim
+start = 0, 240
+actionno = 15
+delta = 0.89285714285714285714285714285714, 0.85
+
+[BG Background]
+type = Anim
+start = 0, 240
+actionno = 20
+delta = 0.89285714285714285714285714285714, 0.85
+
+[BG Upper Left]
+type = Anim
+start = 0, 240
+actionno = 30
+delta = 0.89285714285714285714285714285714, 0.85
+
+[BG Upper Right]
+type = Anim
+start = 0, 240
+actionno = 40
+delta = 0.89285714285714285714285714285714, 0.85
+
+[Bg Bottom Left - Light 1]
+type = Anim
+id = 50
+actionno = 50
+start = 0, 240
+delta = 0.89285714285714285714285714285714, 0.85
+
+[Bg Bottom Left - Light 2]
+type = Anim
+id = 51
+actionno = 51
+start = 0, 240
+delta = 0.89285714285714285714285714285714, 0.85
+
+[Bg Bottom Left - Light 3]
+type = Anim
+id = 52
+actionno = 52
+start = 0, 240
+delta = 0.89285714285714285714285714285714, 0.85
+
+[BG Floor]
+type = Anim
+actionno = 0
+start = 0, 240
+delta = 1, 1
+
+;--------------------------------------------------------
+; Animations
+
+; Floor
+[Begin Action 0]
+0,0, 0,0, 13		; Counted
+0,1, 0,0, 13
+0,2, 0,0, 13
+0,1, 0,0, 13
+
+; Space
+[Begin Action 10]
+10,0, 0,0, 300		; Counted
+10,3, 0,0, 24		; Counted
+10,1, 0,0, 300		; Counted
+10,3, 0,0, 24		; Counted
+10,2, 0,0, 300
+10,3, 0,0, 24
+
+; Space Bottom
+[Begin Action 15]
+15,0, 0,0, 300
+15,1, 0,0, 24
+
+; Background
+[Begin Action 20]
+20,0, 0,0, 13		; Counted
+20,1, 0,0, 13
+20,2, 0,0, 13
+20,1, 0,0, 13
+
+; Upper left
+[Begin Action 30]
+30,0, 0,0, 13
+30,1, 0,0, 13
+30,2, 0,0, 13
+30,1, 0,0, 13
+
+; Upper right
+[Begin Action 40]
+40,0, 0,0, 13
+40,1, 0,0, 13
+40,2, 0,0, 13
+40,1, 0,0, 13
+
+; Bottom Left - Light 1
+[Begin Action 50]
+50,0, 0,0, 42
+51,0, 0,0, 6
+52,0, 0,0, 6
+53,0, 0,0, 6
+54,0, 0,0, 6
+55,0, 0,0, 6
+56,0, 0,0, 6
+
+; Bottom Left - Light 2
+[Begin Action 51]
+50,1, 0,0, 42
+51,1, 0,0, 6
+52,1, 0,0, 6
+53,1, 0,0, 6
+54,1, 0,0, 6
+55,1, 0,0, 6
+56,1, 0,0, 6
+
+; Bottom Left - Light 3
+[Begin Action 52]
+50,2, 0,0, 42
+51,2, 0,0, 6
+52,2, 0,0, 6
+53,2, 0,0, 6
+54,2, 0,0, 6
+55,2, 0,0, 6
+56,2, 0,0, 6
+
+[BGCtrlDef - Bottom Left - Light Adjustment]
+looptime = 52
+
+[BGCtrl - Light 1 - Turn On Light 1]
+type = Visible
+time = 0, 13
+value = 1
+ctrlID = 50
+
+[BGCtrl - Light 1 - Turn Off Light 2 and 3]
+type = Visible
+time = 0, 13
+value = 0
+ctrlID = 51, 52
+
+[BGCtrl - Light 2 - Turn On Light 2]
+type = Visible
+time = 13, 26
+value = 1
+ctrlID = 51
+
+[BGCtrl - Light 2 - Turn Off Light 1 and 3]
+type = Visible
+time = 13, 26
+value = 0
+ctrlID = 50, 52
+
+[BGCtrl - Light 3 - Turn On Light 3]
+type = Visible
+time = 26, 39
+value = 1
+ctrlID = 52
+
+[BGCtrl - Light 3 - Turn Off Light 1 and 2]
+type = Visible
+time = 26, 39
+value = 0
+ctrlID = 50, 51
+
+[BGCtrl - Light 4 - Turn On Light 2]
+type = Visible
+time = 39, 52
+value = 1
+ctrlID = 51
+
+[BGCtrl - Light 4 - Turn Off Light 1 and 3]
+type = Visible
+time = 39, 52
+value = 0
+ctrlID = 50, 52

@@ -1,0 +1,93 @@
+;Training Grid by Phantom.of.the.Server
+;Capcom vs SNK 2 version
+
+[Info]
+name = "Training Grid"
+author = "Phantom.of.the.Server"
+versiondate = 2023
+mugenversion = 1.0
+
+[Music]
+bgmusic =
+bgmvolume = 100
+
+[Camera]
+startx = 0
+starty = 0
+boundleft = -205
+boundright = 205
+boundhigh = -240
+boundlow = 0
+verticalfollow = 1
+floortension = 88
+tension = 60
+overdrawhigh = 0
+overdrawlow = 0
+cuthigh = 54
+cutlow = 6
+startzoom = 1
+zoomout = 1
+zoomin = 1
+
+[PlayerInfo]
+p1startx = -70
+p1starty = 0
+p1facing = 1
+
+p2startx = 70
+p2starty = 0
+p2facing = -1
+
+leftbound = -1000
+rightbound = 1000
+
+[Bound]
+screenleft = 15
+screenright = 15
+
+[StageInfo]
+zoffset = 216
+autoturn = 1
+resetBG = 0
+localcoord = 320, 240
+xscale = 0.25
+yscale = 0.25
+
+[Shadow]
+intensity = 0
+color = 0, 0, 0
+yscale = 0
+
+[Reflection]
+reflect = 1
+intensity = 64
+
+
+;=====<MAIN BG DEFINITION>=====
+[BGdef]
+spr = TrainingGridCvS2.sff
+debugbg = 0
+
+[BG Wall]
+type = normal
+spriteno = 0, 1
+layerno = 0
+start = 0, 764
+tile = 1, 1
+tilespacing = 0, 0
+delta = 0.5, 1.0
+mask = 0
+
+[BG Floor]
+type = parallax
+spriteno = 0, 0
+layerno = 0
+start = 0, 764
+width = 400, 1844
+tile = 1, 0
+tilespacing = 0, 0
+delta = 0.5, 1.0
+mask = 0
+
+[Begin Action 9000]
+9000,1, 0,0, 1

@@ -16,6 +16,7 @@ range = 11, 12
 
 [State 600, 1.5]
 type = Playsnd
+triggerall = 0 ;<-- sound F5,15 absent from this build's fight.snd; silenced
 trigger1 = animelem = 2
 value = F5,15
 
@@ -84,6 +85,7 @@ range = 11, 12
 
 [State 610, Play]
 type = PlaySnd
+triggerall = 0 ;<-- sound F5,15 absent from this build's fight.snd; silenced
 trigger1 = Time = 1
 value = F5, 15
 
@@ -164,6 +166,7 @@ range = 11, 12
 
 [State 620, 1.5]
 type = Playsnd
+triggerall = 0 ;<-- sound F5,15 absent from this build's fight.snd; silenced
 trigger1 = Animelem = 2
 value = F5,15
 
@@ -286,6 +289,7 @@ range = 0, 50
 
 [State 200, Play]
 type = PlaySnd
+triggerall = 0 ;<-- sound F5,15 absent from this build's fight.snd; silenced
 trigger1 = time = 1
 triggerall = Var(1) = [25, 50]
 trigger1 = 1
@@ -441,6 +445,7 @@ range = 0, 50
 
 [State 200, Play]
 type = PlaySnd
+triggerall = 0 ;<-- sound F5,15 absent from this build's fight.snd; silenced
 trigger1 = time = 1
 triggerall = Var(1) = [25, 50]
 trigger1 = 1
@@ -624,6 +629,7 @@ range = 0, 50
 
 [State 200, Play]
 type = PlaySnd
+triggerall = 0 ;<-- sound F5,15 absent from this build's fight.snd; silenced
 trigger1 = time = 1
 triggerall = Var(1) = [25, 50]
 trigger1 = 1
@@ -785,6 +791,7 @@ range = 0, 50
 
 [State 200, Play]
 type = PlaySnd
+triggerall = 0 ;<-- sound F5,15 absent from this build's fight.snd; silenced
 trigger1 = time = 1
 triggerall = Var(1) = [25, 50]
 trigger1 = 1
@@ -930,6 +937,7 @@ ignorehitpause = 1
 
 [State 210, 1.4]
 type = Playsnd
+triggerall = 0 ;<-- sound F5,15 absent from this build's fight.snd; silenced
 trigger1 = Animelem = 4
 value = F5,15
 
@@ -991,6 +999,7 @@ value = 4,10
 
 [State 225, 1.5]
 type = Playsnd
+triggerall = 0 ;<-- sound F5,15 absent from this build's fight.snd; silenced
 trigger1 = animelem = 4
 value = F5,15
 
@@ -1055,6 +1064,7 @@ ignorehitpause = 1
 
 [State 240, 1.5]
 type = Playsnd
+triggerall = 0 ;<-- sound F5,15 absent from this build's fight.snd; silenced
 trigger1 = animelem = 3
 value = F5,15
 
@@ -1128,6 +1138,7 @@ value = 13,0
 
 [State 240, 1.5]
 type = Playsnd
+triggerall = 0 ;<-- sound F5,15 absent from this build's fight.snd; silenced
 trigger1 = animelem = 3
 value = F5,15
 
@@ -1197,6 +1208,7 @@ anim = 245
 
 [State 240, 1.5]
 type = Playsnd
+triggerall = 0 ;<-- sound F5,15 absent from this build's fight.snd; silenced
 trigger1 = animelem = 3
 value = F5,15
 [State 245, 2]
@@ -1295,6 +1307,7 @@ range = 0, 50
 
 [State 200, Play]
 type = PlaySnd
+triggerall = 0 ;<-- sound F5,15 absent from this build's fight.snd; silenced
 trigger1 = time = 1
 triggerall = Var(1) = [25, 50]
 trigger1 = 1
@@ -1380,6 +1393,7 @@ range = 0, 50
 
 [State 200, Play]
 type = PlaySnd
+triggerall = 0 ;<-- sound F5,15 absent from this build's fight.snd; silenced
 trigger1 = time = 1
 triggerall = Var(1) = [25, 50]
 trigger1 = 1
@@ -1465,6 +1479,7 @@ range = 0, 50
 
 [State 200, Play]
 type = PlaySnd
+triggerall = 0 ;<-- sound F5,15 absent from this build's fight.snd; silenced
 trigger1 = time = 1
 triggerall = Var(1) = [25, 50]
 trigger1 = 1
@@ -1550,6 +1565,7 @@ sprpriority = 2
 
 [State 430, 1]
 type = PlaySnd
+triggerall = 0 ;<-- sound F5,15 absent from this build's fight.snd; silenced
 trigger1 = Time = 1
 value = F5, 15
 
@@ -1714,6 +1730,7 @@ sprpriority = 2
 
 [State 430, 1]
 type = PlaySnd
+triggerall = 0 ;<-- sound F5,15 absent from this build's fight.snd; silenced
 trigger1 = Time = 1
 value = F5, 15
 
@@ -1784,6 +1801,7 @@ sprpriority = 2
 
 [State 430, 1]
 type = PlaySnd
+triggerall = 0 ;<-- sound F5,15 absent from this build's fight.snd; silenced
 trigger1 = Time = 1
 value = F5, 15
 

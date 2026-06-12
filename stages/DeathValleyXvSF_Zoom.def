@@ -1,0 +1,145 @@
+;Death Valley, stage from X-Men vs Street Fighter
+;by Phantom.of.the.Server
+
+[Info]
+name = "Death Valley (Night)"
+author = "Phantom.of.the.Server"
+versiondate = 2023
+mugenversion = 1.1
+
+[Music]
+bgmusic =
+bgmvolume = 100
+
+[Camera]
+startx = 0
+starty = 0
+boundleft = -170
+boundright = 170
+boundhigh = -170
+boundlow = 0
+tension = 60
+tensionhigh = 120
+tensionlow = 0
+verticalfollow = 1; Ikemen
+overdrawhigh = 0
+overdrawlow = 0
+cuthigh = 60
+cutlow = 0
+startzoom = 1
+zoomout = 0.75
+zoomin = 1
+
+[PlayerInfo]
+p1startx = -70
+p1starty = 0
+p1facing = 1
+
+p2startx = 70
+p2starty = 0
+p2facing = -1
+
+leftbound = -1000
+rightbound = 1000
+
+[Bound]
+screenleft = 15
+screenright = 15
+
+[StageInfo]
+zoffset = 224
+autoturn = 1
+resetBG = 0
+localcoord = 320, 240
+xscale = 1
+yscale = 1
+
+[Shadow]
+intensity = 112
+color = 0, 0, 0
+yscale = 0.25
+fade.range = -240, 0
+
+
+;=====<MAIN BG DEFINITION>=====
+[BGdef]
+spr = DeathValleyXvSF.sff
+debugbg = 0
+
+[BG Sky]
+type = normal
+spriteno = 0, 2
+layerno = 0
+start = 0, 0
+delta = 0.1578, 0.1578
+zoomdelta = 0
+mask = 1
+
+[BG Valley]
+type = normal
+spriteno = 0, 1
+layerno = 0
+start = 0, 0
+delta = 0.4385, 0.4385
+zoomdelta = 0.5
+mask = 1
+
+[BG Main]
+type = normal
+spriteno = 0, 0
+layerno = 0
+start = 0, 8
+delta = 1, 1
+zoomdelta = 1
+mask = 1
+
+[BG Glow]
+type = anim
+actionno = 1
+layerno = 0
+start = 0, 8
+delta = 1, 1
+zoomdelta = 1
+
+[BG Blanka]
+type = anim
+actionno = 3
+layerno = 0
+start = 0, 8
+delta = 1, 1
+zoomdelta = 1
+
+[BG Smoke]
+type = anim
+actionno = 2
+layerno = 0
+start = 0, 8
+delta = 1, 1
+zoomdelta = 1
+
+
+;=====<ANIMATION>=====
+[Begin Action 1]
+-1, -1, 0, 0, 2
+1, 0, 0, 0, 2
+1, 1, 0, 0, 2
+
+[Begin Action 2]
+2, 0, 0, 0, 4
+2, 1, 0, 0, 4
+2, 2, 0, 0, 4
+2, 3, 0, 0, 4
+2, 4, 0, 0, 4
+2, 5, 0, 0, 4
+
+[Begin Action 3]
+3, 0, 0, 0, 132
+3, 1, 0, 0, 4
+3, 2, 0, 0, 88
+3, 3, 0, 0, 4
+3, 4, 0, 0, 5
+3, 5, 0, 0, 44
+3, 6, 0, 0, 5
+
+[Begin Action 9000]
+9000,1, 0,0, 1

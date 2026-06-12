@@ -1,0 +1,1315 @@
+
+;========================================================
+;////***DAILY BUGLE ROOFTOPS STAGE BY  MASTER YODA***////
+;--------------------------------------------------------
+[Info]
+name = "Daily Bugle Rooftops MVC"; 
+author= "Master Yoda"
+;DATE = 15/03/2015
+;My site: http://senseiyoda.mugen-infantry.net/
+
+;Thanks to:
+;CAPCOM for making this amazing game!
+;Just No Point for his Spiderman rips (Intro)
+;Juan Carlos for his great contribution to the community with his tutorials!
+;and you for downloading this stage!
+
+[BGdef]
+spr = stages/DailyBugleRooftopsMVC.sff
+debugbg = 0
+;--------------------------------------------------------
+[Music]
+bgmusic = spiderman.mp3
+bgvolume = 255
+
+;--------------------------------------------------------
+[Camera]
+startx = 0
+starty = 0
+boundleft = -65
+boundright = 10
+boundhigh = -224
+boundlow = -20
+verticalfollow = .5
+floortension = 60
+tension = 50
+
+overdrawhigh = 0
+overdrawlow = 0
+zoomin = 1
+zoomout = .8;.7
+
+;--------------------------------------------------------
+[PlayerInfo]
+
+;--- Player 1 ---
+p1startx = -70          
+p1starty = 0            
+p1startz = 0            
+p1facing = 1            
+
+;--- Player 2 ---
+p2startx = 70
+p2starty = 0
+p2startz = 0
+p2facing = -1
+
+;--- Common ---
+ ;Don't change these values.
+leftbound  = -1000 ;Left bound (x-movement)
+rightbound =  1000 ;Right bound
+topbound  =  0     ;Top bound (z-movement)
+botbound  =  0     ;Bottom bound
+
+;--------------------------------------------------------
+[Scaling]
+topz     = 0       ;Top z-coordinate for scaling
+botz     = 50      ;Bottom z-coordinate for scaling
+topscale = 1       ;Scale to use at top
+botscale = 1.2     ;Scale to use at bottom
+
+;--------------------------------------------------------
+[Bound]
+screenleft = 15    ;Dist from left of screen that player can move to
+screenright = 15   ;Right edge
+
+;--------------------------------------------------------
+[StageInfo]
+zoffset = 215
+zoffsetlink = 1
+autoturn = 1
+resetBG = 0
+
+;--------------------------------------------------------
+[Shadow]
+intensity = 118
+color = 0,0,0
+yscale = .25
+fade.range = -400,-100
+
+;--------------------------------------------------------
+[Reflection]
+;intensity = 128
+
+;========================================================
+;--------------------------------------------------------
+; Background definition
+; ***
+;-------------------------------------
+
+;-------------------------------------
+; [BG x]
+; type = ?       "Normal"/"Parallax"  (def: "normal")
+; spriteno = ?, ? Sprite group and number: groupno, imgno  (req'd)
+; start = ?, ?   Starting location (integer)  (def: 0, 0)
+; delta = ?, ?   Change in location per camera unit moved (float)  (def: 1,1)
+; trans = ?      Transparency settings: "none"/"add"/"add1"/"sub"" (def: "none")
+; mask = ?       Masking (int): 0 - off, 1 - on  (def: 0)
+; velocity = ?, ? Velocity: x, y (float): speed background moves (def: 0, 0)
+; tile = ?, ?    Tiling: xtile, ytile (int): 0 - off, 1 - infinite,
+;                        >1 - tile that number of times  (def: 0, 0) - only for Normal BG
+; tilespacing = ?, ? Tiling: x, y (int) : space between tiles (def: 0, 0)
+;  Parallax-only:
+; xscale = ?, ?    Top xscale, bottom xscale (float)
+; width = ?, ?     Top width, bottom width (int)  (use either this or above, but not both)
+; yscalestart = ?  Starting y-scale (float, in percent)  (def: 100)
+; yscaledelta = ?  Change in y-scale per unit (float, in percent)  (def: 0)
+;-------------------------------------
+[BG SKY]
+type  = normal
+spriteno = 1,0
+delta = 0,.32
+mask = 1
+
+[BG BUILDINGS_00]
+type  = normal
+spriteno = 1,1
+delta = .2,.37
+start = 0,9
+mask = 1
+
+[BG CAR.00]
+type  = normal
+spriteno = 1,8
+delta = .2,.37
+start = 0,9
+tile = 1, 0
+tilespacing = 100, 0
+velocity = -1.5,0
+mask = 1
+
+[BG SKYSCRAPER_TRICK]
+type  = normal
+spriteno = 1,4
+delta = .24,.39
+start = 0,9
+mask = 1
+[BG SKYSCRAPER_REFLECTION]
+type  = normal
+spriteno = 1,5
+delta = .26,.4075
+trans = addalpha
+alpha = 100, 100
+start = 0,9
+mask = 1
+[BG SKYSCRAPER_PART]
+type  = normal
+spriteno = 1,3
+delta = .24,.39
+start = 0,9
+mask = 1
+
+[BG BAXTER_BUILDING]
+type  = normal
+spriteno = 1,2
+delta = .26,.4075
+start = 0,9
+mask = 1
+
+[BG CAR.00]
+type  = normal
+spriteno = 1,7
+delta = .26,.4075
+start = 0,9
+tile = 1, 0
+tilespacing = 120, 0
+velocity = 2.2,0
+mask = 1
+[BG CAR.00]
+type  = normal
+spriteno = 1,9
+delta = .26,.4075
+start = 0,9
+tile = 1, 0
+tilespacing = 100, 0
+velocity = -2.5,0
+mask = 1
+
+[BG BUILDINGS_01]
+type  = normal
+spriteno = 1,6
+delta = .28,.4075
+start = 0,9
+mask = 1
+
+[BG AVENUE.00]
+type  = normal
+spriteno = 2,0
+delta = .355,.465
+start = 0,9
+mask = 1
+[BG AVENUE.01]
+type  = normal
+spriteno = 2, 1
+delta = .359807692307692,.465
+start = 0,9
+mask = 1
+[BG AVENUE.02]
+type  = normal
+spriteno = 2, 2
+delta = .364615384615385,.465
+start = 0,9
+mask = 1
+[BG AVENUE.03]
+type  = normal
+spriteno = 2, 3
+delta = .369423076923077,.465
+start = 0,9
+mask = 1
+[BG AVENUE.04]
+type  = normal
+spriteno = 2,4
+delta = .374230769230769,.465
+start = 0,9
+mask = 1
+[BG AVENUE.05]
+type  = normal
+spriteno = 2,5
+delta = .379038461538461,.465
+start = 0,9
+mask = 1
+[BG FLAG]
+type  = anim
+actionno = 9
+delta = .379038461538461,.465
+start = 0,9
+[BG AVENUE.06]
+type  = normal
+spriteno = 2,6
+delta = .383846153846154,.465
+start = 0,9
+mask = 1
+[BG AVENUE.07]
+type  = normal
+spriteno = 2,7
+delta = .388653846153846,.465
+start = 0,9
+mask = 1
+[BG AVENUE.08]
+type  = normal
+spriteno = 2,8
+delta = .393461538461538,.465
+start = 0,9
+mask = 1
+[BG AVENUE.09]
+type  = normal
+spriteno = 2,9
+delta = .398269230769231,.465
+start = 0,9
+mask = 1
+[BG AVENUE.10]
+type  = normal
+spriteno = 2,10
+delta = .403076923076923,.465
+start = 0,9
+mask = 1
+[BG AVENUE.11]
+type  = normal
+spriteno = 2, 11
+delta = .407884615384615,.465
+start = 0,9
+mask = 1
+[BG AVENUE.12]
+type  = normal
+spriteno = 2, 12
+delta = .412692307692307,.465
+start = 0,9
+mask = 1
+[BG AVENUE.13]
+type  = normal
+spriteno = 2, 13
+delta = .4175,.465
+start = 0,9
+mask = 1
+[BG AVENUE.14]
+type  = normal
+spriteno = 2,14
+delta = .422307692307692,.465
+start = 0,9
+mask = 1
+[BG AVENUE.15]
+type  = normal
+spriteno = 2,15
+delta = .427115384615384,.465
+start = 0,9
+mask = 1
+[BG AVENUE.16]
+type  = normal
+spriteno = 2,16
+delta = .431923076923077,.465
+start = 0,9
+mask = 1
+[BG AVENUE.17]
+type  = normal
+spriteno = 2,17
+delta = .436730769230769,.465
+start = 0,9
+mask = 1
+[BG AVENUE.18]
+type  = normal
+spriteno = 2,18
+delta = .441538461538461,.465
+start = 0,9
+mask = 1
+[BG AVENUE.19]
+type  = normal
+spriteno = 2,19
+delta = .446346153846154,.465
+start = 0,9
+mask = 1
+[BG AVENUE.20]
+type  = normal
+spriteno = 2,20
+delta = .451153846153846,.465
+start = 0,9
+mask = 1
+[BG AVENUE.21]
+type  = normal
+spriteno = 2,21
+delta = .455961538461538,.465
+start = 0,9
+mask = 1
+[BG AVENUE.22]
+type  = normal
+spriteno = 2,22
+delta = .46076923076923,.465
+start = 0,9
+mask = 1
+[BG AVENUE.23]
+type  = normal
+spriteno = 2,23
+delta = .465576923076923,.465
+start = 0,9
+mask = 1
+[BG AVENUE.24]
+type  = normal
+spriteno = 2,24
+delta = .470384615384615,.465
+start = 0,9
+mask = 1
+[BG AVENUE.25]
+type  = normal
+spriteno = 2,25
+delta = .475192307692307,.465
+start = 0,9
+mask = 1
+[BG AVENUE.26]
+type  = normal
+spriteno = 2,26
+delta = .48,.465
+start = 0,9
+mask = 1
+[BG AVENUE.27]
+type  = normal
+spriteno = 2,27
+delta = .484807692307692,.465
+start = 0,9
+mask = 1
+[BG AVENUE.28]
+type  = normal
+spriteno = 2,28
+delta = .489615384615384,.465
+start = 0,9
+mask = 1
+[BG AVENUE.29]
+type  = normal
+spriteno = 2,29
+delta = .494423076923076,.465
+start = 0,9
+mask = 1
+[BG AVENUE.30]
+type  = normal
+spriteno = 2,30
+delta = .499230769230769,.465
+start = 0,9
+mask = 1
+[BG AVENUE.31]
+type  = normal
+spriteno = 2,31
+delta = .504038461538461,.465
+start = 0,9
+mask = 1
+[BG AVENUE.32]
+type  = normal
+spriteno = 2,32
+delta = .508846153846153,.465
+start = 0,9
+mask = 1
+[BG AVENUE.33]
+type  = normal
+spriteno = 2,33
+delta = .513653846153846,.465
+start = 0,9
+mask = 1
+[BG AVENUE.34]
+type  = normal
+spriteno = 2,34
+delta = .518461538461538,.465
+start = 0,9
+mask = 1
+[BG AVENUE.35]
+type  = normal
+spriteno = 2,35
+delta = .52326923076923,.465
+start = 0,9
+mask = 1
+[BG AVENUE.36]
+type  = normal
+spriteno = 2,36
+delta = .528076923076922,.465
+start = 0,9
+mask = 1
+[BG AVENUE.37]
+type  = normal
+spriteno = 2,37
+delta = .532884615384615,.465
+start = 0,9
+mask = 1
+[BG AVENUE.38]
+type  = normal
+spriteno = 2,38
+delta = .537692307692307,.465
+start = 0,9
+mask = 1
+[BG AVENUE.39]
+type  = normal
+spriteno = 2,39
+delta = .542499999999999,.465
+start = 0,9
+mask = 1
+[BG AVENUE.40]
+type  = normal
+spriteno = 2,40
+delta = .547307692307692,.465
+start = 0,9
+mask = 1
+[BG AVENUE.41]
+type  = normal
+spriteno = 2,41
+delta = .552115384615384,.465
+start = 0,9
+mask = 1
+[BG AVENUE.42]
+type  = normal
+spriteno = 2,42
+delta = .556923076923076,.465
+start = 0,9
+mask = 1
+[BG AVENUE.43]
+type  = normal
+spriteno = 2,43
+delta = .561730769230768,.465
+start = 0,9
+mask = 1
+[BG AVENUE.44]
+type  = normal
+spriteno = 2,44
+delta = .566538461538461,.465
+start = 0,9
+mask = 1
+[BG AVENUE.45]
+type  = normal
+spriteno = 2,45
+delta = .571346153846153,.465
+start = 0,9
+mask = 1
+
+[BG NINE_BUILDING.00]
+type  = normal
+spriteno = 3,0
+delta = .422307692307692,.465
+start = -10,9
+mask = 1
+[BG NINE_BUILDING.01]
+type  = normal
+spriteno = 3,1
+delta = .427115384615384,.465
+start = -10,9
+mask = 1
+[BG NINE_BUILDING.02]
+type  = normal
+spriteno = 3,2
+delta = .431923076923077,.465
+start = -10,9
+mask = 1
+[BG NINE_BUILDING.03]
+type  = normal
+spriteno = 3,3
+delta = .436730769230769,.465
+start = -10,9
+mask = 1
+[BG NINE_BUILDING.04]
+type  = normal
+spriteno = 3,4
+delta = .441538461538461,.465
+start = -10,9
+mask = 1
+[BG NINE_BUILDING.05]
+type  = normal
+spriteno = 3,5
+delta = .446346153846154,.465
+start = -10,9
+mask = 1
+[BG NINE_BUILDING.06]
+type  = normal
+spriteno = 3,6
+delta = .451153846153846,.465
+start = -10,9
+mask = 1
+[BG NINE_BUILDING.07]
+type  = normal
+spriteno = 3,7
+delta = .455961538461538,.465
+start = -10,9
+mask = 1
+[BG NINE_BUILDING.08]
+type  = normal
+spriteno = 3,8
+delta = .46076923076923,.465
+start = -10,9
+mask = 1
+[BG NINE_BUILDING.09]
+type  = normal
+spriteno = 3,9
+delta = .465576923076923,.465
+start = -10,9
+mask = 1
+[BG NINE_BUILDING.10]
+type  = normal
+spriteno = 3,10
+delta = .470384615384615,.465
+start = -10,9
+mask = 1
+[BG NINE_BUILDING.11]
+type  = normal
+spriteno = 3,11
+delta = .475192307692307,.465
+start = -10,9
+mask = 1
+[BG NINE_BUILDING.12]
+type  = normal
+spriteno = 3,12
+delta = .48,.465
+start = -10,9
+mask = 1
+
+[BG GOLD_STREET_BUILDING.00]
+type  = normal
+spriteno = 4,0
+delta = .489615384615384,.495
+start = 5,9
+mask = 1
+[BG GOLD_STREET_BUILDING.01]
+type  = normal
+spriteno = 4,1
+delta = .494423076923076,.495
+start = 5,9
+mask = 1
+[BG GOLD_STREET_BUILDING.02]
+type  = normal
+spriteno = 4,2
+delta = .499230769230769,.495
+start = 5,9
+mask = 1
+[BG GOLD_STREET_BUILDING.03]
+type  = normal
+spriteno = 4,3
+delta = .504038461538461,.495
+start = 5,9
+mask = 1
+[BG GOLD_STREET_BUILDING.04]
+type  = normal
+spriteno = 4,4
+delta = .508846153846153,.495
+start = 5,9
+mask = 1
+[BG GOLD_STREET_BUILDING.05]
+type  = normal
+spriteno = 4,5
+delta = .513653846153846,.495
+start = 5,9
+mask = 1
+[BG GOLD_STREET_BUILDING.06]
+type  = normal
+spriteno = 4,6
+delta = .518461538461538,.495
+start = 5,9
+mask = 1
+[BG GOLD_STREET_BUILDING.07]
+type  = normal
+spriteno = 4,7
+delta = .52326923076923,.495
+start = 5,9
+mask = 1
+[BG GOLD_STREET_BUILDING.08]
+type  = normal
+spriteno = 4,8
+delta = .528076923076922,.495
+start = 5,9
+mask = 1
+[BG GOLD_STREET_BUILDING.09]
+type  = normal
+spriteno = 4,9
+delta = .532884615384615,.495
+start = 5,9
+mask = 1
+[BG GOLD_STREET_BUILDING.10]
+type  = normal
+spriteno = 4,10
+delta = .537692307692307,.495
+start = 5,9
+mask = 1
+[BG GOLD_STREET_BUILDING.11]
+type  = normal
+spriteno = 4,11
+delta = .542499999999999,.495
+start = 5,9
+mask = 1
+[BG GOLD_STREET_BUILDING.12]
+type  = normal
+spriteno = 4,12
+delta = .547307692307692,.495
+start = 5,9
+mask = 1
+[BG GOLD_STREET_BUILDING.13]
+type  = normal
+spriteno = 4,13
+delta = .552115384615384,.495
+start = 5,9
+mask = 1
+[BG GOLD_STREET_BUILDING.14]
+type  = normal
+spriteno = 4,14
+delta = .556923076923076,.495
+start = 5,9
+mask = 1
+[BG GOLD_STREET_BUILDING.15]
+type  = normal
+spriteno = 4,15
+delta = .561730769230768,.495
+start = 5,9
+mask = 1
+[BG GOLD_STREET_BUILDING.16]
+type  = normal
+spriteno = 4,16
+delta = .566538461538461,.495
+start = 5,9
+mask = 1
+[BG GOLD_STREET_BUILDING.17]
+type  = normal
+spriteno = 4,17
+delta = .571346153846153,.495
+start = 5,9
+mask = 1
+[BG GOLD_STREET_BUILDING.18]
+type  = normal
+spriteno = 4,18
+delta = .576153846153845,.495
+start = 5,9
+mask = 1
+[BG GOLD_STREET_BUILDING.19]
+type  = normal
+spriteno = 4,19
+delta = .580961538461538,.495
+start = 5,9
+mask = 1
+[BG GOLD_STREET_BUILDING.20]
+type  = normal
+spriteno = 4,20
+delta = .58576923076923,.495
+start = 5,9
+mask = 1
+[BG GOLD_STREET_BUILDING.21]
+type  = normal
+spriteno = 4,21
+delta = .590576923076922,.495
+start = 5,9
+mask = 1
+
+[BG FLOOR.00]
+type  = normal
+spriteno = 5,1
+delta = .8967, 1
+mask = 1
+[BG FLOOR.01]
+type  = normal
+spriteno = 5,2
+delta = .9484, 1
+mask = 1
+[BG FLOOR.02]
+type  = parallax
+spriteno = 5,3
+delta= 0.85, 1
+xscale = 1, 1.24879459980714
+mask= 1
+[BG FLOOR.03]
+type  = normal
+spriteno = 5,4
+delta = .9484, 1
+mask = 1
+
+[BG CARTEL.00]
+type  = normal
+spriteno = 6,0
+delta = .9367, 1
+mask = 1
+[BG CARTEL.01]
+type  = normal
+spriteno = 6,1
+delta = .9364, 1
+mask = 1
+[BG CARTEL.02]
+type  = normal
+spriteno = 6,2
+delta = .9361, 1
+mask = 1
+[BG CARTEL.03]
+type  = normal
+spriteno = 6,3
+delta = .9358, 1
+mask = 1
+[BG CARTEL.04]
+type  = normal
+spriteno = 6,4
+delta = .9355, 1
+mask = 1
+[BG CARTEL.05]
+type  = normal
+spriteno = 6,5
+delta = .9351, 1
+mask = 1
+[BG CARTEL.06]
+type  = normal
+spriteno = 6,6
+delta = .9348, 1
+mask = 1
+[BG CARTEL.07]
+type  = normal
+spriteno = 6,7
+delta = .9345, 1
+mask = 1
+[BG CARTEL.08]
+type  = normal
+spriteno = 6,8
+delta = .9342, 1
+mask = 1
+[BG CARTEL.09]
+type  = normal
+spriteno = 6,9
+delta = .9339, 1
+mask = 1
+[BG CARTEL.10]
+type  = normal
+spriteno = 6,10
+delta = .933, 1
+mask = 1
+[BG CARTEL.11]
+type  = normal
+spriteno = 6,11
+delta = .9333, 1
+mask = 1
+[BG CARTEL.12]
+type  = normal
+spriteno = 6,12
+delta = .933, 1
+mask = 1
+[BG CARTEL.13]
+type  = normal
+spriteno = 6,13
+delta = .9327, 1
+mask = 1
+[BG CARTEL.14]
+type  = normal
+spriteno = 6,14
+delta = .9324, 1
+mask = 1
+[BG CARTEL.15]
+type  = normal
+spriteno = 6,15
+delta = .9321, 1
+mask = 1
+[BG CARTEL.16]
+type  = normal
+spriteno = 6,16
+delta = .9318, 1
+mask = 1
+[BG CARTEL.17]
+type  = normal
+spriteno = 6,17
+delta = .9315, 1
+mask = 1
+[BG CARTEL.18]
+type  = normal
+spriteno = 6,18
+delta = .9311, 1
+mask = 1
+[BG CARTEL.19]
+type  = normal
+spriteno = 6,19
+delta = .9308, 1
+mask = 1
+[BG CARTEL.20]
+type  = normal
+spriteno = 6,20
+delta = .9305, 1
+mask = 1
+[BG CARTEL.21]
+type  = normal
+spriteno = 6,21
+delta = .9302, 1
+mask = 1
+[BG CARTEL.22]
+type  = normal
+spriteno = 6,22
+delta = .9299, 1
+mask = 1
+[BG CARTEL.23]
+type  = normal
+spriteno = 6,23
+delta = .9296, 1
+mask = 1
+[BG CARTEL.24]
+type  = normal
+spriteno = 6,24
+delta = .9293, 1
+mask = 1
+[BG CARTEL.25]
+type  = normal
+spriteno = 6,25
+delta = .929, 1
+mask = 1
+[BG CARTEL.26]
+type  = normal
+spriteno = 6,26
+delta = .9287, 1
+mask = 1
+[BG CARTEL.27]
+type  = normal
+spriteno = 6,27
+delta = .9284, 1
+mask = 1
+[BG CARTEL.28]
+type  = normal
+spriteno = 6,28
+delta = .9281, 1
+mask = 1
+[BG CARTEL.29]
+type  = normal
+spriteno = 6,29
+delta = .9278, 1
+mask = 1
+[BG CARTEL.30]
+type  = normal
+spriteno = 6,30
+delta = .9275, 1
+mask = 1
+[BG CARTEL.31]
+type  = normal
+spriteno = 6,31
+delta = .9272, 1
+mask = 1
+[BG CARTEL.32]
+type  = normal
+spriteno = 6,32
+delta = .9268, 1
+mask = 1
+[BG CARTEL.33]
+type  = normal
+spriteno = 6,33
+delta = .9265, 1
+mask = 1
+[BG CARTEL.34]
+type  = normal
+spriteno = 6,34
+delta = .9262, 1
+mask = 1
+[BG CARTEL.35]
+type  = normal
+spriteno = 6,35
+delta = .9259, 1
+mask = 1
+[BG CARTEL.36]
+type  = normal
+spriteno = 6,36
+delta = .9256, 1
+mask = 1
+[BG CARTEL.37]
+type  = normal
+spriteno = 6,37
+delta = .9253, 1
+mask = 1
+[BG CARTEL.38]
+type  = normal
+spriteno = 6,38
+delta = .925, 1
+mask = 1
+[BG CARTEL.39]
+type  = normal
+spriteno = 6,39
+delta = .9247, 1
+mask = 1
+[BG CARTEL.40]
+type  = normal
+spriteno = 6,40
+delta = .9244, 1
+mask = 1
+[BG CARTEL.41]
+type  = normal
+spriteno = 6,41
+delta = .9241, 1
+mask = 1
+[BG CARTEL.42]
+type  = normal
+spriteno = 6,42
+delta = .9238, 1
+mask = 1
+[BG CARTEL.43]
+type  = normal
+spriteno = 6,43
+delta = .9235, 1
+mask = 1
+[BG CARTEL.44]
+type  = normal
+spriteno = 6,44
+delta = .9232, 1
+mask = 1
+[BG CARTEL.45]
+type  = normal
+spriteno = 6,45
+delta = .9228, 1
+mask = 1
+[BG CARTEL.46]
+type  = normal
+spriteno = 6,46
+delta = .9225, 1
+mask = 1
+[BG CARTEL.47]
+type  = normal
+spriteno = 6,47
+delta = .9222, 1
+mask = 1
+[BG CARTEL.48]
+type  = normal
+spriteno = 6,48
+delta = .9219, 1
+mask = 1
+[BG CARTEL.49]
+type  = normal
+spriteno = 6,49
+delta = .9216, 1
+mask = 1
+[BG CARTEL.50]
+type  = normal
+spriteno = 6,50
+delta = .9213, 1
+mask = 1
+[BG CARTEL.51]
+type  = normal
+spriteno = 6,51
+delta = .921, 1
+mask = 1
+[BG CARTEL.52]
+type  = normal
+spriteno = 6,52
+delta = .9207, 1
+mask = 1
+[BG CARTEL.53]
+type  = normal
+spriteno = 6,53
+delta = .9204, 1
+mask = 1
+
+[BG STRUCTURE.00]
+type  = normal
+spriteno = 7,0
+delta = .9351, 1
+mask = 1
+[BG STRUCTURE.01]
+type  = normal
+spriteno = 7,1
+delta = .9351, 1
+mask = 1
+[BG STRUCTURE.02]
+type  = normal
+spriteno = 7,2
+delta = .9351, 1
+mask = 1
+[BG STRUCTURE.03]
+type  = normal
+spriteno = 7,3
+delta = .9415, 1
+mask = 1
+[BG STRUCTURE.04]
+type  = normal
+spriteno = 7,4
+delta = .9479, 1
+mask = 1
+[BG STRUCTURE.05]
+type  = normal
+spriteno = 7,5
+delta = .9543, 1
+mask = 1
+[BG STRUCTURE.06]
+type  = normal
+spriteno = 7,6
+delta = .9607, 1
+mask = 1
+[BG STRUCTURE.07]
+type  = normal
+spriteno = 7,7
+delta = .9268, 1
+mask = 1
+[BG STRUCTURE.08]
+type  = normal
+spriteno = 7,8
+delta = .9292, 1
+mask = 1
+[BG STRUCTURE.9]
+type  = normal
+spriteno = 7,9
+delta = .9316, 1
+mask = 1
+[BG STRUCTURE.10]
+type  = normal
+spriteno = 7,10
+delta = .9340, 1
+mask = 1
+[BG STRUCTURE.11]
+type  = normal
+spriteno = 7,11
+delta = .9364, 1
+mask = 1
+[BG STRUCTURE.12]
+type  = normal
+spriteno = 7,12
+delta = .9388, 1
+mask = 1
+[BG STRUCTURE.13]
+type  = normal
+spriteno = 7,13
+delta = .9412, 1
+mask = 1
+[BG STRUCTURE.14]
+type  = normal
+spriteno = 7,14
+delta = .9436, 1
+mask = 1
+[BG STRUCTURE.15]
+type  = normal
+spriteno = 7,15
+delta = .9460, 1
+mask = 1
+[BG STRUCTURE.16]
+type  = normal
+spriteno = 7,16
+delta = .9484, 1
+mask = 1
+[BG STRUCTURE.17]
+type  = normal
+spriteno = 7,17
+delta = .9508, 1
+mask = 1
+[BG STRUCTURE.18]
+type  = normal
+spriteno = 7,18
+delta = .9532, 1
+mask = 1
+
+[BG BIRDS]
+type  = anim
+actionno = 8
+delta = .9484, 1
+
+[BG INTRO.PINK]
+type  = normal
+spriteno = 10,0
+delta = 0, 0
+id = 1
+[BG INTRO.BACKGROUND]
+type  = normal
+spriteno = 10,1
+delta = 0, 1
+id = 2
+[BG WEB_SPIDER.00]
+type  = anim
+actionno = 10
+delta = 0, 1
+start = 90,0
+id = 2
+[BG WEB_SPIDER.01]
+type  = anim
+actionno = 11
+delta = 0, 1
+start = -90,0
+id = 2
+mask = 0
+
+;========================================================
+;                  ANIMATIONS
+;--------------------------------------------------------
+;BIRDS
+[Begin Action 8]
+-1, 0,0,0,270
+Loopstart
+8, 0,0,0,12
+8, 1,0,0,3
+8, 2,0,0,3
+8, 3,0,0,3
+8, 4,0,0,3
+8, 5,0,0,3
+8, 6,0,0,3
+8, 7,0,0,3
+8, 8,0,0,3
+8, 9,0,0,3
+8, 10,0,0,3
+8, 11,0,0,3
+8, 12,0,0,3
+8, 13,0,0,3
+8, 14,0,0,3
+8, 15,0,0,3
+8, 16,0,0,3
+8, 17,0,0,3
+8, 18,0,0,3
+8, 19,0,0,3
+8, 20,0,0,3
+8, 21,0,0,3
+8, 22,0,0,3
+8, 23,0,0,12
+8, 24,0,0,3
+8, 25,0,0,12
+8, 26,0,0,3
+8, 27,0,0,3
+8, 28,0,0,3
+8, 29,0,0,3
+8, 30,0,0,3
+8, 31,0,0,3
+8, 32,0,0,3
+8, 33,0,0,3
+8, 34,0,0,12
+8, 35,0,0,3
+8, 36,0,0,3
+8, 37,0,0,3
+8, 38,0,0,3
+8, 39,0,0,3
+8, 40,0,0,3
+8, 41,0,0,3
+8, 42,0,0,3
+8, 43,0,0,3
+8, 44,0,0,12
+;FLAG
+[Begin Action 9]
+-1, 0,0,0,270
+Loopstart
+9, 0,0,0,6
+9, 1,0,0,6
+9, 2,0,0,6
+;WEB_SPIDER.00
+[Begin Action 10]
+11, 0,0,0,200
+11, 1,0,0,3
+11, 0,0,0,3
+11, 1,0,0,3
+11, 0,0,0,3
+11, 1,0,0,3
+11, 0,0,0,3
+11, 1,0,0,3
+11, 2,0,0,4
+11, 3,0,0,4
+11, 4,0,0,4
+11, 5,0,0,3
+11, 6,0,0,4
+;WEB_SPIDER.01
+[Begin Action 11]
+11, 0,0,0,200
+11, 1,0,0,3
+11, 0,0,0,3
+11, 1,0,0,3
+11, 0,0,0,3
+11, 1,0,0,3
+11, 0,0,0,3
+11, 1,0,0,3
+11, 2,0,0,4
+11, 3,0,0,4
+11, 4,0,0,4
+11, 5,0,0,3
+11, 6,0,0,4
+;========================================================
+;                BG CONTROLS
+;--------------------------------------------------------
+[BGCtrlDef INTRO_ZOFFSET]
+looptime = -1
+CtrlID = 1
+[BGCtrl INTRO_ZOFFSET:UBICATION]
+type = PosSet
+time= 0
+x = 0
+y = 250
+[BGCtrl INTRO_ZOFFSET:DESC.00]
+type = VelAdd
+time= 100;400+640+100
+x = 0
+y = -1
+[BGCtrl INTRO_ZOFFSET:STOP.00]
+type = VelSet
+time= 240
+x = 0
+y = 0
+[BGCtrl INTRO_ZOFFSET:DESC.01]
+type = VelAdd
+time= 240
+x = 0
+y = -11
+[BGCtrl INTRO_ZOFFSET:STOP.01]
+type = VelSet
+time= 250
+x = 0
+y = 0
+[BGCtrl INTRO_ZOFFSET:SHAKE_IT_Y]
+type = SinY
+time= 250
+value = 6,5
+[BGCtrl INTRO_ZOFFSET:SHAKE_IT_X]
+type = SinX
+time= 250
+value = 4,5
+[BGCtrl INTRO_ZOFFSET:SHAKE_IT_Y_STOP]
+type = SinY
+time= 270
+value = 0,0
+[BGCtrl INTRO_ZOFFSET:SHAKE_IT_X_STOP]
+type = SinX
+time= 270
+value = 0,0
+[BGCtrl INTRO_ZOFFSET:_DESACTIVATE]
+type = Enable
+time= 270
+value = 0
+
+[BGCtrlDef INTRO]
+looptime = -1
+CtrlID = 2
+[BGCtrl INTRO:UBICATION]
+type = PosSet
+time= 0
+x = 0
+y = 250
+[BGCtrl INTRO:DESC.00];70
+type = VelAdd
+time= 100
+x = 0
+y = -.5
+[BGCtrl INTRO:STOP.00]
+type = VelSet
+time= 140;20
+x = 0
+y = 0
+[BGCtrl INTRO:DESC.01]
+type = VelAdd
+time= 160
+x = 0
+y = -1.5
+[BGCtrl INTRO:STOP.01]
+type = VelSet;60
+time= 180;30
+x = 0
+y = 0
+[BGCtrl INTRO:DESC.02]
+type = VelAdd
+time= 200;20
+x = 0
+y = -.5
+[BGCtrl INTRO:STOP.02]
+type = VelSet
+time= 240;140*.5 = 70
+x = 0
+y = 0
+[BGCtrl INTRO:DESC.03]
+type = VelAdd
+time= 240;240
+x = 0
+y = -18
+[BGCtrl INTRO:STOP.03]
+type = VelSet
+time= 250
+x = 0
+y = 0
+[BGCtrl INTRO:SHAKE_IT_Y]
+type = SinY
+time= 250
+value = 6,5
+[BGCtrl INTRO:SHAKE_IT_X]
+type = SinX
+time= 250
+value = 4,5
+[BGCtrl INTRO:_SHAKE_IT_Y_STOP]
+type = SinY
+time= 270
+value = 0,0
+[BGCtrl INTRO:SHAKE_IT_X_STOP]
+type = SinX
+time= 270
+value = 0,0
+[BGCtrl INTRO:DESACTIVATE]
+type = Enable
+time= 270
+value = 0

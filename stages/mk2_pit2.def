@@ -1,0 +1,185 @@
+;--------------------------------------------------------
+;PROVIENE DE MORTAL KOMBAT PROJECT 4.1
+;--------------------------------------------------------
+
+[Info]
+name     = "The Pit 2"
+
+;--------------------------------------------------------
+
+[Camera]
+startx = 0
+starty = 0
+boundleft = -434
+boundright = 434
+boundhigh = 0
+boundlow =  1500
+verticalfollow = 1
+;floortension = 50
+tension = 80
+
+;--------------------------------------------------------
+
+[PlayerInfo]
+p1startx = -80
+p1starty = 0
+p1startz = -2
+p1facing = 1
+
+p2startx = 80
+p2starty = 0
+p2startz = -2
+p2facing = -1
+
+leftbound  = -1000 
+rightbound =  1000 
+topbound  =  0
+botbound  =  1600
+
+;--------------------------------------------------------
+
+[Scaling]
+topz     = 0       
+botz     = 50     
+topscale = 1       
+botscale = 1.2     
+
+;--------------------------------------------------------
+
+[Bound]
+screenleft = 20
+screenright = 20
+
+;--------------------------------------------------------
+
+[StageInfo]
+zoffset        = 0
+zoffsetlink    = 1
+autoturn       = 1
+resetBG        = 1
+
+;--------------------------------------------------------
+
+[Shadow]
+color = 0,0,0
+yscale = .2
+reflect = 0
+fade.range = -30,0
+
+;--------------------------------------------------------
+
+[Music]
+bgmusic = mk2_pit2.mp3
+bgvolume = 255
+
+;--------------------------------------------------------
+
+[BGdef]
+spr = MK2_Pit2.sff
+debugbg = 0
+
+;--------------------------------------------------------
+
+[BG up]
+type  = dummy
+start = 0,0
+id    = 1
+
+[BGCtrl stageID 2]
+type   = PosSet
+time   = 0
+y      = 5010
+ctrlID = 1
+
+[BGCtrl stageID 2]
+type   = PosSet
+time   = 5
+y      = 206
+ctrlID = 1
+
+;-----------------------
+
+[BG Cielo azul]
+type  = normal
+spriteno = 5,1
+delta = .1,.1
+mask  = 0
+tile = 1,1
+
+[BG Cielo]
+type  = normal
+spriteno = 4,0
+delta = .08,0
+mask  = 0
+
+[BG luna]
+type  = normal
+spriteno = 0,3
+delta = .08,0
+mask  = 1
+
+[BG puenteatras]
+type  = normal
+spriteno = 0,1
+delta = .20,0
+mask  = 1
+
+[BG torch]
+type  = anim
+actionno = Torch
+delta = .20,0
+
+[BG puente]
+type  = normal
+spriteno = 5,2
+delta = 1,1
+mask  = 1
+
+[BG columna]
+type  = normal
+spriteno = 5,0
+delta = 1,1
+mask  = 1
+tile = 1
+tilespacing = 338
+
+[BG frentepuente]
+type  = normal
+spriteno = 0,4
+delta = 1,1
+mask  = 1
+
+[BG columnafrente]
+type  = normal
+spriteno = 5,0
+delta = 1,1
+mask  = 1
+tile = 1
+tilespacing = 338
+
+[BG frentepuente]
+type  = normal
+spriteno = 0,4
+delta = 1,1
+mask  = 1
+layerno = 1
+
+[BG columnafrente]
+type  = normal
+spriteno = 5,0
+delta = 1,1
+mask  = 1
+tile = 1
+tilespacing = 338
+layerno = 1
+
+[Begin action Torch]
+3,0, 1,0, 8
+3,1, 1,0, 8
+3,2, 1,0, 8
+3,3, 1,0, 8
+3,4, 1,0, 8
+3,5, 1,0, 8
+3,6, 1,0, 8
+
+;--------------------------------------------------------

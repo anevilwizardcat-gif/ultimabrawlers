@@ -9948,6 +9948,7 @@ id = 6000+var(45)
 name = "SUPER COMBO FINISH"
 pos = 0,0
 postype = P1
+triggerall = roundstate = 2 ;<-- gauge appears at round start, not during intros
 stateno = ifelse(var(47),6102,ifelse((var(30)<4),6103,6104))+var(45)*10
 helpertype = normal
 keyctrl = 0
@@ -10543,6 +10544,7 @@ id = 21000
 name = "Gauge"
 pos = 1000,0
 postype = P1
+triggerall = roundstate = 2 ;<-- gauge appears at round start, not during intros
 stateno = 20000+Var(30)*1000
 helpertype = normal
 keyctrl = 0
