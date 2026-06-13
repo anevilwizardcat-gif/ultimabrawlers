@@ -1,0 +1,33 @@
+[Info]
+name = "chipp"
+displayname = "Chipp"
+versiondate = 06,20,2006
+mugenversion = 04,14,2002
+author = "muteki"
+pal.defaults = 1
+
+[Files]
+cmd     = chipp.cmd   ;Command set
+cns     = chipp_const.txt   ;Constants
+st      = chipp.cns   ;States
+st2      = -2.cns   ;States
+st3      = AI.txt
+stcommon = common1.cns ;Common states
+sprite  = chipp.sff   ;Sprite
+anim    = chipp.air   ;Animation
+sound   = chipp.snd   ;Sound
+pal1    = chipp01.act
+pal2    = chipp02.act
+pal3    = chipp03.act
+pal4    = chipp04.act
+pal5    = chipp05.act
+pal6    = chipp06.act
+pal7    = chipp07.act
+pal8    = chipp08.act
+pal9    = chipp09.act
+pal10    = chipp10.act
+pal11    = chipp11.act
+pal12    = chipp12.act
+
+[Arcade]
+

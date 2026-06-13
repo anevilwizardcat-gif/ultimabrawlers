@@ -1,0 +1,36 @@
+Version: nightly
+Build Time: 2026.06.07
+Platform: windows (amd64)
+OpenGL 3.3
+RAM in Use: 72 MB / OS Reserved: 124 MB
+Active Goroutines: 2
+Timestamp: 2026-06-13 07:58:33
+
+Engine error
+
+Error: .\external\mods\inputdisplay.lua:14: module menu not found:
+	no field package.preload['menu']
+	CreateFile .\menu.lua: The system cannot find the file specified.
+	CreateFile E:\Desktop\ULTIMA BRAWLERS\IKEMEN - LATEST\lua\menu.lua: The system cannot find the path specified.
+	CreateFile E:\Desktop\ULTIMA BRAWLERS\IKEMEN - LATEST\lua\menu\init.lua: The system cannot find the path specified., 
+stack traceback:
+	[G]: in function 'require'
+	.\external\mods\inputdisplay.lua:14: in function <.\external\mods\inputdisplay.lua:0>
+	[G]: in function 'require'
+	external/script/main.lua:3717: in main chunk
+	[G]: ?
+
+Go stack traceback:
+goroutine 1 [running, locked to thread]:
+runtime/debug.Stack()
+	runtime/debug/stack.go:24 +0x65
+main.handlePanic({0x7ff68d68e4a0?, 0xc00479a5c0})
+	github.com/ikemen-engine/Ikemen-GO/src/main.go:362 +0x3e5
+main.realMain.func1()
+	github.com/ikemen-engine/Ikemen-GO/src/main.go:66 +0x2a
+panic({0x7ff68d68e4a0, 0xc00479a5c0})
+	runtime/panic.go:884 +0x213
+main.realMain()
+	github.com/ikemen-engine/Ikemen-GO/src/main.go:206 +0x573
+main.main()
+	github.com/ikemen-engine/Ikemen-GO/src/main.go:59 +0x17

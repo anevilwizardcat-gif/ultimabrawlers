@@ -226,18 +226,16 @@ cvssakura, DerelictChurch.def
 cvshaohmaru, DerelictChurch.def
 Cvs_iori, DerelictChurch.def
 Cvskyo, DerelictChurch.def
-A.B.A, XX'KY'XX.def
+dizzy2, XX'KY'XX.def
 may_xx, XX'KY'XX.def
+justice, XX'KY'XX.def
+chipp, XX'KY'XX.def
 sol_b, XX'KY'XX.def
 pot, XX'KY'XX.def
+baiken_SLASH, XX'KY'XX.def
+ky_slash, XX'KY'XX.def
 MK1_SCORPION, mk2_pit2.def
 MK1_SUB-ZERO, mk2_pit2.def
-MK1_GORO, mk2_pit2.def
-Scorpion MKA, mk2_pit2.def
-Sub-Zero MKA, mk2_pit2.def
-ErmacMO, mk2_pit2.def
-sonya, mk2_pit2.def
-MK3_MOTARO, mk2_pit2.def
 Cloud_S, NibelReactorHR.def
 sephiroth_ak, NibelReactorHR.def
 TifaLockhart, NibelReactorHR.def
@@ -246,7 +244,6 @@ AlbertWesker, BarricadedStation.def
 dante, MemoriaTimeInterval.def
 vergil, MemoriaTimeInterval.def
 nero_DMC4, MemoriaTimeInterval.def
-luffy-kofa, desert.def
 randomselect
 
 ;-------------------------------------------------------------------------------

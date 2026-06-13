@@ -298,8 +298,7 @@ ignorehitpause = 1
 
 [State 810, 1]
 type = varset
-triggerall = numenemy >= 2
-triggerall = !enemy(0),alive || !enemy(1),alive
+triggerall = numenemy >= 2 && (!enemy(0),alive || !enemy(1),alive) ;<-- merged: && short-circuits enemy(1) when <2 enemies (kills benched 'no enemy index 1' spam)
 triggerall = root,fvar(29) >= fvar(20)
 triggerall = fvar(27) = 0; || root,var(58) = 1
 triggerall = fvar(29) = 0
@@ -340,8 +339,7 @@ ignorehitpause = 1
 
 [State 810, 1]
 type = varset
-triggerall = numenemy >= 2
-triggerall = !enemy(0),alive || !enemy(1),alive
+triggerall = numenemy >= 2 && (!enemy(0),alive || !enemy(1),alive) ;<-- merged: && short-circuits enemy(1) when <2 enemies (kills benched 'no enemy index 1' spam)
 triggerall = root,fvar(29) >= fvar(20)
 triggerall = fvar(27) = 0 || root,var(58) = 1
 triggerall = fvar(29) = 0

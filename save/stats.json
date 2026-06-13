@@ -1,12 +1,12 @@
 {
-  "playtime": 25962.41,
+  "playtime": 27166.97,
   "modes": {
     "training": {
       "playtime": 0,
       "clear": 0
     },
     "arcade": {
-      "playtime": 485.89,
+      "playtime": 508.91,
       "clear": 0,
       "ranking": [
         {
@@ -51,14 +51,14 @@
       ]
     },
     "watch": {
-      "playtime": 25476.52,
-      "clear": 110,
+      "playtime": 26585.81,
+      "clear": 116,
       "clearcount": {
-        "jotaro": 31,
+        "jotaro": 32,
         "dio": 12,
-        "mvc2_spiderman": 4,
+        "mvc2_spiderman": 5,
         "ryu_pots": 1,
-        "sf3_ryu": 4,
+        "sf3_ryu": 5,
         "sephiroth_ak": 1,
         "sf3_ibuki": 1,
         "sf3_gouki": 1,
@@ -81,12 +81,33 @@
         "albertwesker": 2,
         "guile": 1,
         "mk1_scorpion": 3,
-        "sol_b": 1,
+        "sol_b": 2,
         "pot": 4,
         "ironman": 1,
         "wolverine": 1,
-        "sonya": 1
+        "sonya": 1,
+        "justice": 1,
+        "cvshaohmaru": 1
       }
+    },
+    "survival": {
+      "playtime": 72.25,
+      "clear": 0,
+      "ranking": [
+        {
+          "score": 80300,
+          "time": 72.25,
+          "win": 2,
+          "lose": 1,
+          "consecutive": 0,
+          "name": "DED",
+          "chars": [
+            "sephiroth_ak"
+          ],
+          "tmode": 0,
+          "ailevel": 8
+        }
+      ]
     }
   }
 }
