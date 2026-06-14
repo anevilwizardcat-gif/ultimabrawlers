@@ -1,40 +1,47 @@
-;-----------------------------------------------------------------------------
+;Sprites by Li Kun, Swap by Memo
+; ___________________________________
+;| Morrigan by Phantom.of.the.Server |
+; ｯｯｯｯｯｯｯｯｯｯｯｯｯｯｯｯｯｯｯｯｯｯｯｯｯｯｯｯｯｯｯｯｯｯｯ
+;====================<DEFINITION>====================
 [Info]
-Name         = "Morrigan"
-DisplayName  = "Morrigan"
-VersionDate  = 08,01,2012
-MugenVersion = 04,14,2002
-Author       = "misao"
-Pal.Defaults = 1
-;-----------------------------------------------------------------------------
+name        = "Morrigan Aensland"
+displayname = "Morrigan"
+versiondate = 01,14,2010
+mugenversion= 1.0
+author      = "Phantom.of.the.Server"
+pal.defaults= 1,2,3,4,5,6
+;localcoord  = 320,240
+
 [Files]
-Cmd      = STATE\Morrigan.cmd
-Cns      = STATE\Morrigan_A.cns
-St       = STATE\Morrigan_A.cns
-St0      = STATE\Morrigan_B.cns
-St1      = STATE\Morrigan_C.cns
-St2      = STATE\Morrigan_D.cns
-St3      = STATE\Morrigan_E.cns
-St4      = STATE\Morrigan_F.cns
-StCommon = STATE\common_Morrigan.cns
-Sprite   = MEDIA\Morrigan.sff
-Anim     = MEDIA\Morrigan.air
-Sound    = MEDIA\Morrigan.snd
-;-----------------------------------------------------------------------------
-Pal1 = ACT\A.act    ;弱Ｋカラー
-Pal2 = ACT\B.act    ;中Ｋカラー
-Pal3 = ACT\C.act    ;強Ｋカラー
-Pal4 = ACT\X.act    ;弱Ｐカラー
-Pal5 = ACT\Y.act    ;中Ｐカラー
-Pal6 = ACT\Z.act    ;強Ｐカラー
-Pal7 = ACT\KK.act   ;ＫＫカラー
-Pal8 = ACT\AGK.act  ;ＡＧＫカラー
-Pal9 = ACT\A.act
-Pal10= ACT\PP.act   ;ＰＰカラー
-Pal11= ACT\AGP.act  ;ＡＧＰカラー
-Pal12= ACT\X.act
-;-----------------------------------------------------------------------------
-[Arcade]
-Intro.Storyboard = ;intro.def   ;オープニングのファイルを登録します
-Ending.Storyboard = ;ending.def ;エンディングのファイルを登録します
-;-----------------------------------------------------------------------------
+cmd     = Command.cmd
+cns     = Constants.cns
+st      = States/System.st
+st1     = States/Normal.st
+st2     = States/Specials.st
+st3     = States/EX-Specials.st
+st4     = States/Supers.st
+st5     = States/Helpers.st
+st6     = States/DarkForce.st
+stcommon= common1.cns
+sprite  = NEW.sff
+anim    = Anim.air
+sound   = Sound.snd
+;ai      = ai.ai
+pal1    = Palettes/Memo1.act
+pal2    = Palettes/Memo2.act
+pal3    = Palettes/SF43.act
+pal4    = Palettes/SF44.act
+pal5    = Palettes/SF45.act
+pal6    = Palettes/SF46.act
+
+[Palette Keymap]
+a = 1
+b = 2
+c = 3
+x = 4
+y = 5
+z = 6
+
+;[Arcade]
+;intro.storyboard = intro.def
+;ending.storyboard = ending.def

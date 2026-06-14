@@ -1,0 +1,44 @@
+; Definition file for Juri Han
+; Contains all the filenames needed for the character
+
+; Player information
+[Info]
+name ="Juri Han"
+displayname ="Juri"
+versiondate =06,06,2014
+mugenversion =1.0
+author ="chucho & Prime"
+pal.defaults =4,5,6,1,2,3
+
+; Files for the player
+[Files]
+cmd     =Juri.cmd
+cns     =Coding/System.cns
+st      =Coding/System.cns
+stcommon =common1.cns
+sprite  =JuriHan.sff
+anim    =Juri.air
+sound   =JuriENG.snd
+pal1=Pals/Juri04.act
+pal2=Pals/Juri05.act
+pal3=Pals/Juri06.act
+pal4=Pals/JuriHan01CVS.act
+pal5=Pals/Juri02.act
+pal6=Pals/Juri03.act
+pal7=Pals/Juri07.act
+pal8=Pals/Juri08.act
+pal9=Pals/Juri09.act
+pal10=Pals/Juri09.act
+pal11=Pals/JuriHanRYU.act
+pal12=Pals/JuriHanKEN.act
+st1=Coding/Normal.cns
+st2=Coding/Specials.cns
+st3=Coding/Helpers.cns
+st4=Coding/Supers.cns
+st5=custom.cns
+
+
+; Arcade mode
+[Arcade]
+intro.storyboard =
+ending.storyboard =

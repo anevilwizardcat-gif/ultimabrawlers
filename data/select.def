@@ -194,11 +194,12 @@
 
 jotaro, bridgemoon.def
 kakyoin, ctower.def
+joseph2, ctower.def
 avdul, desert.def
+iggy, desert.def
 polnareff, coffin.def
 dio, jjba-ctower2-alt.def
 shadowdio, jjba-ctower2-alt.def
-alessi, coffin.def
 MVC2_Spiderman, DailyBugleRooftopsMVC.def
 Venom, DailyBugleRooftopsMVC.def
 IronMan, centralsuperheroes 1.1
@@ -206,20 +207,23 @@ CaptainAmerica, centralsuperheroes 1.1
 Wolverine, Onslaught.def
 Cyclops, Onslaught.def
 Magneto, mshvsf_apocalypse_now.def
+DivinePsy, mshvsf_apocalypse_now.def
 DoctorDoom, mshvsf_apocalypse_now.def
 sf3_ryu, SuzakuCastleWW.def
 sf3_ken, SuzakuCastleWW.def
 sf3_chun-li, SF3 Battle Arena Rd 02.def
 honda, TowerOfShogun.def
 zangief, TowerOfShogun.def
-SF3_Blanka_FRS, SF3 Battle Arena Rd 02.def
-guile, SF3 Battle Arena Rd 02.def
-Dhalsim_A, SF3 Battle Arena Rd 02.def
+Blanka, TowerOfShogun.def
+Guile, SF3 Battle Arena Rd 02.def
+Cammy-Delta_Red, SF3 Battle Arena Rd 02.def
+Dhalsim, SF3 Battle Arena Rd 02.def
 sf3_ibuki, SF3 Battle Arena Rd 02.def
 sf3_gouki, MemoriaTimeInterval.def
+Juri, SF3 Battle Arena Rd 02.def
 jedah, LiveHousePurple.def
 Morrigan, LiveHousePurple.def
-Felicia, LiveHousePurple.def
+Felicia_Y, LiveHousePurple.def
 StriderHiryu, SF3 Battle Arena Rd 02.def
 cvsterry, DerelictChurch.def
 cvssakura, DerelictChurch.def
@@ -231,19 +235,25 @@ may_xx, XX'KY'XX.def
 justice, XX'KY'XX.def
 chipp, XX'KY'XX.def
 sol_b, XX'KY'XX.def
+ky_slash, XX'KY'XX.def
 pot, XX'KY'XX.def
 baiken_SLASH, XX'KY'XX.def
-ky_slash, XX'KY'XX.def
 MK1_SCORPION, mk2_pit2.def
 MK1_SUB-ZERO, mk2_pit2.def
-Cloud_S, NibelReactorHR.def
+CvWScorpion, mk2_pit2.def
+SubZero, mk2_pit2.def
+Yu, mk2_pit2.def
+Ragna_S, mk2_pit2.def
+Cloud, NibelReactorHR.def
 sephiroth_ak, NibelReactorHR.def
 TifaLockhart, NibelReactorHR.def
+Squall, IceCavernIcicleFields.def
 Leon, BarricadedStation.def
-AlbertWesker, BarricadedStation.def
-dante, MemoriaTimeInterval.def
+Wesker, BarricadedStation.def
+Dante, MemoriaTimeInterval.def
 vergil, MemoriaTimeInterval.def
 nero_DMC4, MemoriaTimeInterval.def
+KENSHIROU, MemoriaTimeInterval.def
 randomselect
 
 ;-------------------------------------------------------------------------------

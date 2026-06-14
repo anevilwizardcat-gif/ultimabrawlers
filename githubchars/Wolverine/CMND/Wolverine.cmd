@@ -1605,7 +1605,7 @@ trigger1 = p2bodydist x > 100 &&  p2movetype != A && random < 100
 type = ChangeState
 value = 200
 triggerall = var(9) = 1
-trigger1 = random <= 500
+trigger1 = random <= 250 + AILevel*60
 trigger1 = p2statetype != A && p2statetype != L
 trigger1 = p2bodydist x <= 50 && p2movetype != A
 trigger1 = statetype = S && ctrl && var(24) <= 15
@@ -1642,7 +1642,7 @@ trigger2 = stateno = 410 && animelemtime(3) > 0 && movehit && var(10) > 0
 type = ChangeState
 value = 430
 triggerall = var(9) = 1
-trigger1 = random <= 700
+trigger1 = random <= 350 + AILevel*55
 trigger1 = stateno = 410 && animelemtime(3) > 0 && movecontact
 
 ;MP
@@ -1699,7 +1699,7 @@ trigger1 = stateno = 420 && animelemtime(4) > 0 && movecontact
 type = ChangeState
 value = 250
 triggerall = var(9) = 1
-triggerall = random <= 500
+triggerall = random <= 250 + AILevel*60
 trigger1 = stateno = 420 && animelemtime(4) > 0 && movecontact 
 trigger2 = stateno = 230 && animelemtime(3) > 0 && movecontact 
 
@@ -1707,7 +1707,7 @@ trigger2 = stateno = 230 && animelemtime(3) > 0 && movecontact
 type = ChangeState
 value = 6000
 triggerall = var(9) = 1
-trigger1 = power >= 1000 && random <= 500
+trigger1 = power >= 1000 && random <= 100 + AILevel*110
 trigger1 = stateno = 440 && animelemtime(7) > 1 && movehit
 
 [State -1, Speedy GonzaleX]
@@ -1731,7 +1731,7 @@ trigger1 = p2bodydist x > 120 && p2movetype != H
 type = ChangeState
 value = 6300
 triggerall = var(9) = 1
-triggerall = power >= 1000 && random <= 600
+triggerall = power >= 1000 && random <= 100 + AILevel*105
 trigger1 = stateno = 460 && animelemtime(2) > 0 && movehit
 trigger2 = stateno = 440 && animelemtime(7) > 2 && movehit
 trigger3 = stateno = 450 && animelemtime(5) > 0 && movehit

@@ -1,137 +1,126 @@
-**********************************************************************
+                            __________________________________________
+===========================| Zangief by varo_hades	              |===========================
+                            ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯        [05.02.12]
 
- Zangief            For M.U.G.E.N. (From Street Fighter Zero/Alpha 3)
+ - Contact:	varo_hades@hotmail.com
+ - Website:	Comming soon
+ - Customized version of Capcom's Zangief character, for MUGEN 1.0
 
-                           Ver. 0.91   (90% Complete !!)  2003/Jul./06
-                                                  by M.M.R.
-**********************************************************************
+=====<Features>=====
 
- Sorry, I'm not good at English so, it is poor at English.(^_^;)
+ - All the essential stuff
+ - Details and moves taken from his various video game appearances
+ - Gameplay mixed from several games, including SF2, SF4, SFA3, MVC
 
-++++++++++++++++++++
- Ver. 0.91
- 2003/07/06
-++++++++++++++++++++
- H" has added new Intro for VS "Raiden" !!
- Great Thanks !
+=====<Movelist>=====
 
-+++++++++++
- First
-+++++++++++
- This character is "Zangief" for M.U.G.E.N.
- His original game is "Street Fighter Zero/Alpha 3" by Capcom.
+ U - up          x - light punch        a - light kick
+ D - down        y - medium punch       b - medium kick
+ F - forward     z - heavy punch        c - heavy kick
+ B - back        p - any punch          k - any kick
+ s - start       2p- two punches        2k- two kicks
+ 		 3p- three punches      3k- three kicks
 
-+++++++++++++++
- Installation
-+++++++++++++++
- DownLoad 1 file named "Zangief.zip".
- The "Zangief.zip"  contains 12 files or folder shown below.
-  Zangief.air		Zangief03.act
-  Zangief.cmd		Zangief04.act
-  Zangief-N.cns		Zangief05.act
-  Zangief-S.cns		Zangief06.act
-  Zangief-H.cns		
-  Zangief.def		
-  Zangief.sff		
-  Zangief01.act		ReadMe_J.txt (In Japanese)
-  Zangief02.act		ReadMe.txt (In English, this file)
-  Skill (Folder)
+ (Air) - Move must be performed in the air.
+ (EX)  - Move has an EX version, performed by pressing two punch/kick buttons.
+ (MAX) - Use two punch/kick buttons when performing a Super move to power it up.
+ (N)   - Only for the Normal mode.
+ (Mech)- Only for Mech Mode.
+ (M)   - Only for the Master mode.	
 
- Unzip a file then, put these files into 1 folder named "Zangief".
- Then Put "Zangief" folder into your Mugen "charas" folder.
+<NORMAL>
 
- Ex.)
-   muk10414-----charas
-              :    |____Zangief
-              :    :       |____Zangief.air
-              :    :       :
-              :    :       :
-              :    :       :
-
- Add this line in your "select.def" in "data" folder.
-
- Zangief, stages/******.def
-
- Replace ****** with your favorite background name.
-
- Ok, run your Mugen then the Zangief's face is added your character
- select screen. Let's enjoy !!!
-
-++++++++++++++++
- Commands
-++++++++++++++++
- Please show "Skill_E.htm" in the "Skill" folder.
- Button layout is below...
-
-  X Y Z
- (l ; :) : Deffault Keys
-  A B C
- (, . /) : Deffault Keys
-
- X...Light Punch  ,  Y...Mid  Punch  ,  Z...Hard Punch
- A...Light Kick   ,  B...Mid  Kick   ,  C...Hard Kick
-
-++++++++++++++++++
- Featuers
-++++++++++++++++++
- / Air recover or fall recover
-   - Air recover -
-   Press 2 or 3 Punch Buttons , when he can recover.
-   - fall recover -
-   Press 2 or 3 Kick Buttons , when he can recover.
-
- / Zero/Alpha Counter
-   During he is guarding, "Forward + same strong punch
-   & kick button".
-   ex.)
-        Forward + (Light Punch + Light Kick)
-
- / High Jump
-   Same as KOF series.
-
-++++++++++++++
- Version ?
-++++++++++++++
- This version is Ver.0.9.
-
-+++++++++++++++
- What's lack
-+++++++++++++++
- / AI
- / ISM system. (Is it possible ??)
-
-++++++++++++++
- Caution !
-++++++++++++++
- Please do not link directly to the files on our site &
- Please do not upload the files on our site, Thank you.
-
-++++++++++++++++++
- Special Thanx
-++++++++++++++++++
- o Many creators' character helped me in my work. Thanx.
- o Thanks "Adamskie" for sprites of effect & his sounds !
- o Thanks Elecbyte for making the great 2D Game Engine "M.U.G.E.N.".
- o Thanks Capcom for making the great 2D Game "Vampire Savior".
- o Thanks many people who report me bugs or test playing.
- o Thanks for testing.
-	/ Adamskie
-	/ Mouser
-	/ Tin
-	/ Ryokucha
-	/ Camrat
-	/ bad darkness
-	/ H"
-	/ PIKA
-	/ K-Z
-	/ Third
-	/ NR
-
-++++++++++++++++++
- WebSite & E-Mail
-++++++++++++++++++
- WebSite:  http://projectm.mgbr.net/  (Thanks MugenBR !!)
-           * This site is Link Free. The place for link is above address.
- E-Mail ;  m.m.r@anet.ne.jp
+.Body Press (Mech) (M)			F + y
+.Air Body Press	(Mech) (M)		D + y			(Air)
+.Double Knee Drop			D + a/b			(Air)
+.Headbutt				U + y/z			(Air)
+.Kuuchuu Punch			      B/F + z			(Air)
+.Body Attack 				D + z			(Air)
+.Back Drop:	         		B + 2p			(near opponent)
+.Piledriver:				F + 2p			(near opponent)
+.Kamitsuki:				F + 2k			(near opponent)
+.Stomach Claw:				B + 2k			(near opponent)
 
 
+<SPECIAL>
+
+.Double Lariat  			3p			
+.Quick Double Lariat 	 		3k
+.Double Lariat (Mech) (M)		3p			(Air)	
+.Quick Double Lariat (Mech) (M)		3k			(Air)
+.Screw Piledriver (EX) 			F, D, DB, p/B, D, DF, p 			
+.Screw Piledriver (EX) (Mech) (M) 	F, D, DB, p/B, D, DF, p	(Air)
+.Flying Powerbomb (EX) 			F, D, DB, k
+.Atomic Suplex (EX) 			B, D, DF, k
+.Banishing Flat (EX) (N) (M)		F, D, DF, p
+.Aerial Russian Slam (EX) (N) (M)	F, D, DF, k
+.Vodka Fire (EX)			D, DF, p
+.Toss Up (EX) (Mech) (M)		B, D, DB, p
+
+<SUPER>
+
+.Final Atomic Buster (MAX):		B, D, DF, B, D, DF, p / F, D, DB, F, D, DB, p
+.Ultra Final Atomic Buster (MAX):	B, D, DF, B, D, DF, k / F, D, DB, F, D, DB, k
+.Super Aerial Russian Slam (MAX) (N) (M)D, DF, F, D, DF, F, k
+.Siberian Blizzard (MAX) (Mech) (M)	D, DB, B, D, DB, B, k
+
+<Lv3 SUPER>
+
+.Ultimate Atomic Buster (N) (M):        B, D, DF, B, D, DF, 3p / F, D, DB, F, D, DB, 3p
+.Power Atomic Destruction (Mech) (M)    B, D, DF, B, D, DF, 3k / F, D, DB, F, D, DB, 3k
+
+<SYSTEM>
+
+.Forward Dash:                  	F, F
+   .Run:                        	hold
+.Backward Dash:                 	B, B
+.Low Jump:                      	tap U
+.High Jump:                     	tap D, U
+.Long Low Jump:                 	tap D, tap U            
+.Sidestep:                      	a + x
+   .Sidestep Attack:            	p / k
+.Forward Roll:                  	F + a + x
+.Backward Roll:                 	B + a + x
+.Parry High:                    	tap F
+.Parry Low:                     	tap D
+.Air Parry:                     	tap F           	(Air)
+.Power Charge:                  	hold b + y
+.Zero Counter:                  	B, DB, D, p / k 	(during standing or crouching guard)
+.Custom Combo:                  	c + z           	(Air also)
+.Fall Recovery:                 	2p / a + x      	(while falling and allowed)
+
+=====<Gameplay Notes>=====
+
+COMBO SYSTEM:
+ - Some Normal attacks can be canceled into Special and Super moves
+ - Some Special moves can be canceled into Super moves
+ - Some Lv1 Super moves can be canceled into MAX Super moves
+ - Cancelling a Special, Super move or Custom Combo into a Super move resets the juggle points
+   but also reduces its damage
+
+CUSTOM COMBO:
+ - Removes cancellable attack restrictions and gives you a lot of freedom to combo them
+ - Juggle limit is lifted
+ - You can only use EX Special or Super moves from the point the character starts flashing faster
+   and brighter, and doing so ends Custom Combo
+ - Gives you a short invulnerability window at the start
+
+=====<Miscellaneous>=====
+
+- To change his size to TV aspect ratio (a.k.a. CvS scale), open the .def file and replace
+  "ConstantsSFZ.cns" with "ConstantsCvS.cns".
+
+=====<Special Thanks>=====
+ - warusaki3 for sprites and some code.
+ - P.o.t.S. for code, effects, hitsparks, formatting style
+ - Froz for part of the color separation.
+ - Infinite for some sprites, sounds, code and hyper portraits.
+ - Hades for Hyper fonts.
+ - People for palettes.
+ - Everybody at the MUGEN Fighters Guild for feedback
+
+=====<Disclaimer>=====
+
+ - The Zangief character is property of Capcom
+ - Capcom vs SNK is property of Capcom
+ - This MUGEN character is a non-profit fan work, it cannot be used for any commercial purposes

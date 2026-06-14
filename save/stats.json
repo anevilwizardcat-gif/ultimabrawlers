@@ -1,5 +1,5 @@
 {
-  "playtime": 27166.97,
+  "playtime": 29792.72,
   "modes": {
     "training": {
       "playtime": 0,
@@ -51,17 +51,17 @@
       ]
     },
     "watch": {
-      "playtime": 26585.81,
-      "clear": 116,
+      "playtime": 29211.56,
+      "clear": 123,
       "clearcount": {
         "jotaro": 32,
-        "dio": 12,
+        "dio": 15,
         "mvc2_spiderman": 5,
         "ryu_pots": 1,
-        "sf3_ryu": 5,
+        "sf3_ryu": 6,
         "sephiroth_ak": 1,
         "sf3_ibuki": 1,
-        "sf3_gouki": 1,
+        "sf3_gouki": 2,
         "lightning": 2,
         "josuke": 2,
         "shadowdio": 4,
@@ -87,7 +87,9 @@
         "wolverine": 1,
         "sonya": 1,
         "justice": 1,
-        "cvshaohmaru": 1
+        "cvshaohmaru": 1,
+        "dizzy2": 1,
+        "juri": 1
       }
     },
     "survival": {

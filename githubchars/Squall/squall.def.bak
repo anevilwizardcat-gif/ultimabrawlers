@@ -1,0 +1,31 @@
+[Info]
+name="Squall"
+displayname="Squall"
+versiondate =04,25,2011
+mugenversion =1.0
+author="SeanAltly"
+pal.defaults=1,2,3,4
+[Files]
+sprite=squall.sff
+sound=squall.snd
+anim=squall.air
+cmd=squall.cmd
+cns=squall.cns
+st=squall.cns
+stcommon=common1.cns
+pal1=squall2.act
+pal2=squall1.act
+pal3=squall3.act
+pal4=squall4.act
+pal5=squall5.act
+pal6=squall6.act
+pal7=squall7.act
+pal8=squall8.act
+pal9=squall9.act
+pal10=squall10.act
+pal11=squall11.act
+pal12=squall-kiri.act
+st1=utbar.st
+[Arcade]
+intro.storyboard=
+ending.storyboard=

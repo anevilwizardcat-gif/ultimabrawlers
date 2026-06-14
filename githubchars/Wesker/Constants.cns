@@ -1,0 +1,143 @@
+
+;---------------------- Integer variable list ----------------------
+;var(0):= Hyper Finish Text Selector
+;var(3):= Jump
+;var(4):= Normal Cancel
+;var(5):= Special Cancel
+;var(6):= Super Cancel
+;var(7):= Max Cancel
+;var(8):= Helper Contact Target
+;var(9):= Counter Flag
+;var(10):= Move Var
+;var(11):= Helper Var
+;var(12):= Enemy Hit Var
+;var(13):= Hit count
+;var(15):= Juggle Points
+;var(16):= Juggle Flag
+;var(17):= Unguardable0
+;var(18):= Helper Projcontact
+;var(19):= Throw Escape
+;var(20):= Custom Combo Time
+;var(21):= Super Cancel Flag
+;var(22):= Hyper Cancel Flag
+;var(23):= Super Finish Type
+;var(25):= Ticks to Apply EX FX
+;var(26):= Palette Select
+;var(27):= Palette Selector (on/off)
+;var(29):= Palette Selector Timer
+;var(30):= Hit Detection
+;var(33):= Hit SparkNo
+;var(34):= Guard SparkNo
+;var(35):= Spark X Axis
+;var(36):= Spark Y Axis
+;var(38):= Throws (0 = Allowed/1 = Not Allowed)
+;var(43):= Hit Sparks Selector
+;var(44):= Hit Sounds Selector
+;var(55):= Combo Style Selector
+
+;---------------------- Float variable list ----------------------
+;fvar(5):= Corner Push
+;fvar(8):= Down Juggle Points
+;fvar(9):= Ctrl Flag
+;fvar(10):= Damage Scale (Dampener)
+;fvar(11):= Damage Scale Backup
+;fvar(12):= Enemy In Hit State
+;fvar(13):= Attack Level
+;fvar(17):= Hitspark Helper Var
+;fvar(18):= Hitspark Helper Var
+;---------------------- Sound Channel list ----------------------
+;Channel=0 := Voice
+;Channel=1 := Dust Sound FX's
+;Channel=5 := Movement Sound FX's
+;Channel=22 := Wall Hit Sound FX
+
+;======================================================================================
+;Constants
+;======================================================================================
+[Data]
+life = 1072
+power = 3000			
+attack = 100		
+defence = 100		
+fall.defence_up = 50	
+liedown.time = 50		
+airjuggle = 0		
+sparkno = s8010			
+guard.sparkno = s8000	
+KO.echo = 0			
+volumescale = 90			
+IntPersistIndex = 0	
+FloatPersistIndex = 0 
+
+[Size]
+xscale = 1
+yscale = 0.95
+ground.back = 28
+ground.front = 14
+air.back = 18
+air.front = 18
+height = 60
+attack.dist = 160
+proj.attack.dist = 90
+proj.doscale = 0
+head.pos = 2, -100
+mid.pos = 2, -70
+shadowoffset = 0
+draw.offset = 0,-3
+
+[Velocity]
+walk.fwd  = 2.6575
+walk.back = -2.5575
+run.fwd  = 6.8125, 0   
+run.back = -6.8125,-3.75 
+jump.neu = 0,-9.7375 
+jump.back = -3.85925   
+jump.fwd = 3.75925       
+runjump.back = -4.0390625,-10.7275
+runjump.fwd = 5.8390625,-10.7235
+
+[Movement]
+airJump.num = 0
+airJump.height = 0
+yaccel = 0.49275
+stand.friction = 0.85
+crouch.friction = 0.82
+stand.friction.threshold = 1.0
+crouch.friction.threshold = 1.0
+air.gethit.groundLevel = 25
+air.gethit.groundRecover.ground.threshold = -20
+air.gethit.groundRecover.groundLevel = 10
+air.gethit.airRecover.threshold = -1
+air.gethit.airRecover.yAccel = 0.35
+air.gethit.trip.groundLevel = 15
+down.bounce.offset = 0, 20
+down.bounce.yAccel = 0.4
+down.bounce.groundLevel = 12
+down.friction.threshold = 0.5
+
+[Quotes]
+victory0 = "Everything is going to plan. I will be a god."
+victory1 = "A new age with begin, and it wil require a god."
+victory2 = "I don't have time for interferences." 
+victory3 = "This world will soon be mine."
+victory4 = "Learn your place."
+victory5 = "This world shall be mine."
+victory6 = "You'll make a nice test subject."
+victory7 = "I told you I was the only worthy one."
+victory8 = "A new world order is at hand."
+victory9 = "This is the end of humanity and the start of a new world order!"
+victory10 = "How does it feel to be inferior, to know you are destined for a life of mediocrity? Hmph. You probably can't even conceive how much better I am than you."
+victory11 = "Oh my, new test subjects? Thank you for volunteering."
+victory12 = "My sunglasses are custom made. Your new god deserves nothing but the best in quality." 
+victory13 = "Now if you'll excuse me, I have a world to saturate...."
+;Vs.Dr.Doom
+victory14 = "There's only room on this planet for one true mastermind!"
+;Vs.M.O.D.O.K.
+victory15 = "I do so look forward to dissecting that ridiculously large brain of yours."
+;Vs.Nemesis
+victory16 = "You are a pale imitation of what the Tyrants can do. I shall have you disintegrated."
+;Vs.Chris
+victory18 =  "Don't worry, Chris. You can die in peace knowing the world has a new god to watch over it." 
+victory19 =  "I will not be held back by such insects." 
+;Vs.Jill
+victory20 =  "You are quite a remarkable subject. You will serve me well for a long, long time. Ha ha ha!" 
