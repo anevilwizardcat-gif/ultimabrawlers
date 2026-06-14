@@ -1,0 +1,287 @@
+==========================================================================================
+Yuuki Terumi
+From Blazblue
+Version 1.151
+For M.U.G.E.N 1.0 and above
+==========================================================================================
+
+==========================================================================================
+Note
+==========================================================================================
+This character was made with only single and turns mode in mind, so using this in simul mode is probably not a good idea.
+==========================================================================================
+
+==========================================================================================
+Change log
+==========================================================================================
+01/16/2022 - 1.151
+- Fixed an error where the Astral Heat can Chip Kill
+- Fixed minor visual errors
+
+10/17/2021 - 1.15
+-4A can now only be chained into once during a chain
+-Added landing sound to Venomous Bite's animation
+
+10/17/2021 - 1.14
+-Fixed Venomous Bite's buggy interaction with helper based physical attacks
+-Fixed an error where Dungeon fo Serpents could be rapid canceled just before the final hit
+-Fixed minor visual errors
+
+09/12/2021 - 1.13
+-New Mechanic: Not Over Yet
+  -Upon reaching 35% health or below and not being in a hurt state, you will receive the following benefits for the rest of the round:
+   +All Distortion Drives deal 20% more damage (Stacks with Ultra Burst's damage buff)
+   +Immediately Gain 500 Meter
+   +Slowly gain meter overtime
+   +Gain a defense buff that scales up to 35% according to how much health you currently have (Less health means more defense)
+  -Only triggers once per round
+-New Mechanic: Ultra Dead Angle (Burst while Guarding)
+  -Using this will cancel your guard stun and make you invulnerable for ten frames after the super pause. This also puts you into the Ultra Burst state, but it will only last a third of the time it would if you were to Ultra Burst normally.
+-Ground throw now has 5 frames of startup, Dash Grab now has 3 frames of startup
+-Stationary, Forward, and air dodges now have less invul time against physical attacks
+-Invul time upon air recovery lasts a little longer and control is regained a little sooner
+-Directional inputs now have more influence over air recovery
+-Distortion Drives can now be triggered with any combination of A, B, and C rather than just A+B (Example: QCF B+C, QCB A+C)
+-Changed default Liedown time to 15 frames
+-A red X now appears over the Burst Icon when in a situation where it is not usable
+-Added an Invalid Combo Indicator
+-General Aesthetic Changes
+-5C is now special cancelable on hit
+-Serpent's laceration is now special cancelable after the last hit
+-jC no longer halt's Terumi's horizontal velocity when moving forward
+
+00/00/2021 - 1.121
+- Fixed "sound does not exist" debug errors in IKEMEN GO
+- Fixed visual bugs that occur during Ultra Burst in IKEMEN GO
+
+01/27/2021 - 1.12
+- Changed the attribute flags on certain moves
+
+12/20/2020 - 1.11
+- Fixed an error where the Astral Heat could be used in the match again after successfully hitting with it
+
+12/16/2020 - 1.1
+- Holding up since the first jump will no longer trigger an air jump
+- Swapped the Hit sounds that play for jB and jC
+- Realigned jC's hitspark
+
+11/07/2020 - 1.09
+- Fixed all Hitdefs so they may properly interact with reversal defs
+- Fixed turn to face behavior during normal burst
+
+09/27/2020 - 1.08
+- Reduced active frames and adjusted hitbox on air throw attempt
+- Fixed an error where air dodge's remaining invul frames would linger upon landing
+
+08/17/2020 - 1.077
+- Upon Successfully hitting with Serpent's Cursed Sting, Only the second hit can be rapid canceled
+- If Snakebite hits and transitions into the grab, It can only be rapid canceled after the last hit
+- Fixed an error where the wrong ground shockwave sound effect plays when the opponent touches the ground during one of the custom states
+
+08/16/2020 - 1.075
+- Reduced the amount of time the opponent stays in the hit state after Terumi Rapid Cancels the first hit of Serpent's Cursed Sting
+- Once Terumi Starts summoning the Serpent during Dungeon of Serpents, he will not be able to Rapid Cancel until after the last hit
+
+07/26/2020 - 1.07
+- Frame data adjustments
+- Damage Scaling Adjustments
+- Additional Effects
+- Retaliating Fang is now immune to throws up until the last active frame
+- Adjusted the hiboxes on 5A, 5AAA, 2A, and 4A so they can hit smaller characters more consistently
+- Changed animation for Dead Angle Attack
+- It is now possible to chain into 4A from 5B or 5BB
+- Adjusted launch trajectory for aerial Gleaming Fang, 2A, and 2B
+- Increased jump height during the first attack of Dungeon of Serpents
+- Added special intro against Iori Yagami
+- Japanese SND has also been updated. Get it here:
+https://drive.google.com/file/d/1smzE0nkGfVkrWoHNdIShsMZ3KqXsgjt1/view?usp=sharing
+
+04/05/2020 - 1.061
+- Fixed an error when the opponent could appear under the floor for a split second during snake bite
+- Fixed a couple of overlooked cosmetic errors
+
+04/03/2020 - 1.06
+- Fixed an error in the incremental cornerpush system
+- Ultra Burst's aura effect will be temporarily disabled whenever Terumi is in a custom state
+- Added dash dust effect to running grab
+- Added special intro against Susanoo
+
+08/31/2019 - 1.051
+- Fixed an error where jump attacks caused debug flood
+- Fixed an error where 5C didn't drain the opponent's power
+
+08/31/2019 - 1.05
+- New system mechanic: Ultra Burst. Burst can now be used in a neutral state, and doing so will put Terumi in a powered up state that gives the following benefits:
+ +Health and Meter will gradually recover overtime (Unless you're taking damage)
+ +Damage output will be increased by 20%
+ +Timer will be frozen
+ +Hitting the opponent with the Ultra Burst will launch them upward and will be unable to recover from it
+ +Hitting the opponent with the ultra burst will also grant 500 meter instantly
+The time that the Ultra Burst state will last is proportionate to the amount of health lost prior to activating, Attempting an astral heat will immediately end the Ultra Burst state
+- Implemented throw escape system, the opponent can now escape Terumi's normal throws by inputting A+B, B+C, X+Y, or Z within 14 frames after being grabbed. However, throws are inescapable on counterhit
+- New Burst icon
+- New cut in portrait for astral heat
+- New astral heat BG
+- Revised Burst System
+- After a successful Burst, none of Terumi's attacks will connect until the opponent has recovered
+- Fixed an error where Terumi could rapid cancel his burst
+- AI no longer dash dances
+- Terumi now makes use of custom fall states, bypassing fall.defence_up
+- Implemented Incremental cornerpush and hitsun decay
+- Changed Scale from .315,.315 to .33,.33
+- Added special intro against Kokonoe
+- New alternate Japanese .snd file available here:
+https://drive.google.com/file/d/1smzE0nkGfVkrWoHNdIShsMZ3KqXsgjt1/view?usp=sharing
+
+02/21/2019 - 1.03
+- All attacks now deal extra damage on counter hit
+- Running A will have increased hitstun on counter hit
+- 5C now causes the opponent to stagger on counter hit
+- Fixed an error where the forward throw registers one extra hit
+- New slash sounds
+
+01/12/2019 - 1.02
+- Made some adjustments to the burst animation
+- Increased the cornerpush on burst
+- When bursting in the air, Terumi will no longer have control until he touches the ground
+- Made some slight adjustments to the launch trajectory for the final hit of Retaliating Fang and the first hit of Dungeon of Serpents
+- Made some adjustments to the AI
+
+01/09/2019 - 1.01
+- Fixed a bug that caused Terumi to suddenly scoot back a few pixels after using Retaliating Fang
+- Added the sheath sound effect to the run stop animation
+
+01/09/2019 - 1.00
+- First Release
+==========================================================================================
+
+==========================================================================================
+To do list
+==========================================================================================
+- Fix bugs and errors that I might have missed
+==========================================================================================
+
+==========================================================================================
+Introduction
+==========================================================================================
+This Terumi uses a custom gameplay style. He is based on a hypothetical moveset for what Terumi would be like if he were a playable character in Blazblue Cross Tag Battle. This read me will explain how this gameplay style works. His move list can be found in the .png included in this folder. 
+==========================================================================================
+
+==========================================================================================
+Default Button Layout
+==========================================================================================
+A, B, and C: Attack Buttons
+
+X: Rapid Cancel
+
+Y: Dodge
+
+Z: Grab
+==========================================================================================
+
+==========================================================================================
+Gameplay Mechanics
+==========================================================================================
+------------------------------------------------------------------------------------------
+Double Jump (Tap Up in the air)
+------------------------------------------------------------------------------------------
+Pretty self explanatory, allows you to jump a second time in the air. Can be canceled into after connecting any of your air normals. Can only be used once in the air, can't be used if you have already air dashed.
+
+------------------------------------------------------------------------------------------
+Air Dash (Double Tap Forward/Back while in the air)
+------------------------------------------------------------------------------------------
+Sends you flying forward or back for a set distance. Can be canceled into after connecting any of your air normals. Can only be used once in the air, can't be used if you have already double jumped.
+
+------------------------------------------------------------------------------------------
+Dodge (Y)
+------------------------------------------------------------------------------------------
+For a very short amount of time, you'll become invulnerable and can pass through the opponent and their projectiles. Just pressing Y will keep you stationary, pressing Y and forward at the same time will have you move forward a short distance, and pressing Y and back will have you back dash. The stationary dodge can also be done in the air. You will become vulnerable again near the end of the dodge animation, so be carful about how you time it.
+
+------------------------------------------------------------------------------------------
+Grab (Z)
+------------------------------------------------------------------------------------------
+Once again, pretty self explanatory. Overrides the opponent's guard, but only works if they're not in the air and not in a hit state
+
+------------------------------------------------------------------------------------------
+Air Grab (Z in the air)
+------------------------------------------------------------------------------------------
+Inversely, only works on airborne opponents and can work even when they're in a hit state. Can be used as a combo ender.
+
+------------------------------------------------------------------------------------------
+Running Grab (Z While Running)
+------------------------------------------------------------------------------------------
+Works on airborne opponents and standing opponents even when they're in a hit state. However, it won't work on crouching opponents.
+
+------------------------------------------------------------------------------------------
+Rapid Cancel (X When your attack has made contact with the opponent) (Costs 1000 meter) (Costs 500 meter if used during a Distortion Drive)
+------------------------------------------------------------------------------------------
+Using this will immediately put you in a neutral state, this can be used to extend combos, make otherwise unsafe moves safe, or make you more unpredictable to your opponent. Holding Forward or back while inputing the command will immediately have you run or back dash respectively (Air Dash Forward/Back when in the air), Holding up will immediately make you jump, and holding down while in the air will quickly bring you back to the ground.
+
+------------------------------------------------------------------------------------------
+Dead Angle Attack (Press Forward and X or Forward and B+C While guarding) (Costs 1000 meter)
+------------------------------------------------------------------------------------------
+Cancels your guard animation into an invulnerable attack animation that sends the opponent flying backward. Deals damage, but doesn't kill.
+
+------------------------------------------------------------------------------------------
+Burst (y+z while getting hit) (Can only be used once per round) (Doesn't work while being grabbed or being hit by a super move)
+------------------------------------------------------------------------------------------
+Deploys a non damaging blast around your character that sends you opponent flying away from you. A poorly timed burst can leave open for even more damage, so be careful.
+
+------------------------------------------------------------------------------------------
+Wake up Action
+------------------------------------------------------------------------------------------
+The wake up animation can be canceled into a forward dodge or a back dash. In Terumi's case, he can aslo cancel into Rising Fang or Divine Twin Blades.
+
+==========================================================================================
+
+==========================================================================================
+Character Specific Mechanics
+==========================================================================================
+------------------------------------------------------------------------------------------
+Force Eater
+------------------------------------------------------------------------------------------
+Terumi is a very meter reliant character. Fortunately, certain moves will give Terumi a large amount of meter upon contact while also draining a little bit of the opponent's meter.
+The following attacks have these properties:
+
+5AAAA
+5B
+5C
+jB
+jC
+Running Grab
+Snake Bite
+Retaliating Fang
+Rising Fang
+
+------------------------------------------------------------------------------------------
+Projectile Break
+------------------------------------------------------------------------------------------
+5B and jB are capable of nullifying projectiles
+
+------------------------------------------------------------------------------------------
+Snake Bite's minimum height check
+------------------------------------------------------------------------------------------
+If terumi hits with the A version of Snake Bite while the opponent is too far from the ground, Snake Bite will juggle the opponent instead of grabbing them. If snake bite is used again after juggling in the same combo, then it will grab the opponent regardless of how far from the ground the opponent is. The B version of Snake Bite ignores the minimum height check and will always grab the opponent. 
+
+------------------------------------------------------------------------------------------
+Serpent's Cursed Sting
+------------------------------------------------------------------------------------------
+Serpent's Cursed Sting works differently from other Distortion Drives. After hitting successfully with it, both the opponent and Terumi will have their meter drained, and the distortion drive will keep going until Terumi's meter is empty. Serpent's Cursed Sting will also have a different finisher depending on how much meter Terumi had on initiation.
+
+==========================================================================================
+
+==========================================================================================
+Thanks to:
+- CozySquirtle, for teaching me how to make small ports like he does
+- Seraphs Ares for providing Terumi's voice clips from Chrono Phantasma
+- Zolidsone, Takehaya Susanoo, Mister Fael Chan, and Nep Heart for testing
+- Takehaya Susanoo for the assets from his own version of Terumi
+- Nep Heart for the code that allows bursting during custom states
+- Y2K from the Spriters Resource for ripping Terumi's sprites
+- Dustloop Wiki for the data on Terumi's moves
+- Boxdox.bb for the references on Terumi's animations and hitboxes
+- Elecbyte and Mugen Guild, for their very helpful references and documentation on how the Mugen code works
+- Mugen Guild again for providing feedback for my characters
+- You, for checking this character out, Have fun
+==========================================================================================
+
