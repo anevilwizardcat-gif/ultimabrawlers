@@ -1,0 +1,11 @@
+Darkstalkers3,4(Vampire Savior,2)
+
+Throw			4,6+MPorHP(near opponent)
+Air Throw		4,6+MPorHP(near opponent,in the air)
+Dash, Back Dash	66,44
+Chain Combo		Cancelation of normal moves(Light --- Medium --- High or Punch --- Kick)
+Guard Push		Tap PorK(in guarding)
+Guard Cancel	one Special Moves(in guarding)
+Dark Force		LP+LK, MP+MK, HP+HK
+Movement Recover	4,6(in down)
+Down Attack		8+P,K(in enemy hitfall or liedown)

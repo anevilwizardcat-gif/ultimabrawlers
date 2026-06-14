@@ -1,9 +1,0 @@
-DivineWolf's Psylocke A.I. Patch + Few Edits by ShinSmoke
-
-If AI's very hard for you.....you can lower the difficulty setting from the options menu.
-
-What's new:
-
-1. Modified parry system
-
-2. New A.I.

@@ -1,0 +1,38 @@
+;=====================================================================
+;  DEF File For "iori"               	                   Made By H"  
+;                                       Ver. 1.32    
+;=====================================================================
+; Player Information
+[Info]
+name    = "cvsiori"
+displayname = "Iori"
+versiondate = 10,27,2008
+MugenVersion = 04,14,2002
+author = "HÅh"
+Pal.Defaults=4,10
+
+; Files for the Player
+[Files]
+cmd     = cvs_iori.cmd
+cns     = cvs_iori.cns
+st      = cvs_iori.cns
+st1     = iori-common.cns
+st2     = cvs2_system.cns
+st3     = config.txt
+stcommon= common1.cns
+sprite  = cvs_iori.sff
+anim    = cvs_iori.air
+sound   = cvs_iori.snd
+pal1    = act/cvs_iori-N04.act
+pal2    = act/cvs_iori-N05.act
+pal3    = act/cvs_iori-N06.act
+pal4    = act/cvs_iori-N01.act
+pal5    = act/cvs_iori-N02.act
+pal6    = act/cvs_iori-N03.act
+pal7    = act/cvs_iori-EX04.act
+pal8    = act/cvs_iori-EX05.act
+pal9    = act/cvs_iori-EX06.act
+pal10   = act/cvs_iori-EX01.act
+pal11   = act/cvs_iori-EX02.act
+pal12   = act/cvs_iori-EX03.act
+

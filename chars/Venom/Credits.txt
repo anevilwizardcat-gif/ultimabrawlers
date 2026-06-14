@@ -1,0 +1,6 @@
+- Big Eli King (Original author and various original codes of this character)
+- DarkWolf13, walruslui and ExShadow (First edit, various original codes of this character, Hyper Ports, and Common1 codes)
+- Mouser (Some original MvC2 system codes of this character)
+- FerchogtX (Some MvC2 FX and sounds)
+- Violin Ken (Negative edge command)
+- Preppy (Hyper Combo Finish BG, sounds and Portaits images)

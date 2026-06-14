@@ -1,0 +1,34 @@
+;***************************************************************************;
+;******************* Created in Fighter Factory Ultimate *******************;
+;*******************      http://www.virtualltek.com     *******************;
+;***************************************************************************;
+
+[Info]
+Name         = "Captain America"  
+DisplayName  = "Captain America"  
+mugenversion = 1.0
+Author       = "Unkoman"
+editor = "REDHOT"
+pal.defaults = 1,2,3,4,5,6
+
+
+[Files]
+cmd      = CMND/CaptainAmerica.cmd
+cns      = CNS/CaptainAmerica.cns
+st       = CNS/CaptainAmerica.cns
+st1      = CNS/config.txt
+stcommon = CNS/common1.cns
+sprite   = SPRITES/CaptainAmerica.sff
+anim     = ANIMATIONS/CaptainAmerica.air
+sound    = SOUNDS/CaptainAmerica.snd
+pal1     = PALETTES/CaptainAmerica_01.act
+pal2     = PALETTES/CaptainAmerica_02.act
+pal3     = PALETTES/CaptainAmerica_03.act
+pal4     = PALETTES/CaptainAmerica_04.act
+pal5     = PALETTES/CaptainAmerica_05.act
+pal6     = PALETTES/CaptainAmerica_06.act
+
+[Arcade]
+intro.storyboard = 
+ending.storyboard = 
+

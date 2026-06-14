@@ -1,0 +1,40 @@
+;SCORPION from MORTAL KOMBAT by OMEGAPSYCHO
+;Copyright NETHERREALM STUDIOS, WARNER BROTHERS 2015
+; E-mail: OMEGAPSYCHO@hotmail.com
+;versión 2.0 (100%) 
+
+; Player information
+[Info]
+name = "SCORPION MK1" 
+displayname = "SCORPION" 
+versiondate = 06,01,2015
+mugenversion = 1.1
+author = "OMEGAPSYCHO-MK"
+Pal.Defaults = 1
+
+; Files for the player
+[Files]
+cmd   =  CODE\Cmd_Scorpion.cmd
+cns     =  CODE\Constants_Scorpion.cns
+st        =  CODE\Common_Scorpion.cns
+st0    =  CODE\-2_Scorpion.cns
+st1    =  CODE\Moves_Scorpion.cns
+st2    =  CODE\Specials_Scorpion.cns
+st3    =  CODE\Throws_Scorpion.cns
+st4    =  CODE\Fatalities_Scorpion.cns
+st5    =  CODE\OBJECTS_Scorpion.cns
+st6    =  CODE\Engines_Scorpion.cns
+st7    =  CODE\Others_Scorpion.cns
+st8    =  CODE\P2States_Scorpion.cns
+st9    = CONFIG.def
+stcommon =  CODE\Common_Scorpion.cns
+sprite  =  CODE\SCORPION.sff
+anim    =  CODE\Air_Scorpion.air
+sound   =  CODE\SCORPION.snd    
+
+pal1 = act/SCORPION_Original.act
+pal2 = act/SCORPION_02.act
+pal3 = act/SCORPION_03.act
+pal4 = act/SCORPION_04.act
+pal5 = act/SCORPION_05.act
+pal6 = act/SCORPION_06.act

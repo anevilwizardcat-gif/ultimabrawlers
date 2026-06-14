@@ -1,0 +1,37 @@
+[Info]
+name = "dio"			;DIO
+displayname = "DIO"		;DIO
+versiondate=09,08,2011	;Version date of character
+mugenversion=06,14,2003	;Version of M.U.G.E.N character works on
+author="Warusaki3"		;悪咲3号
+Pal.Defaults=5,11,1,7,6,12
+
+[Files]
+cmd=m-ism/dio.cmd
+cns=m-ism/dio.cns
+st=m-ism/dio.cns
+st1=dio_system.cns
+st2=dio_damage.cns
+st3=config.txt
+st4=m-ism/AI.cns
+st5=m-ism/AI_Helpers.st
+stcommon=common1.cns
+sprite=dio.sff
+anim=dio.air
+sound=dio.snd
+pal1=act001.act;弱攻撃カラー
+pal2=act002.act;中攻撃カラー
+pal3=act003.act;強攻撃カラー
+pal4=act004.act;スタンドボタンカラー
+pal5=m-ism/m-ism_h.act;<<< ヒューマンライク
+pal6=m-ism/m-ism.act;<<< クライマックス
+pal7=act007.act;オリジナルカラー2
+pal8=act008.act;オリジナルカラー3
+pal9=act009.act;オリジナルカラー4
+pal10=act010.act;オリジナルカラー5
+pal11=m-ism/m-ism_ura_h.act;<<< ヒューマンライク
+pal12=m-ism/m-ism_ura.act;<<< クライマックス
+
+;[Arcade]
+;intro.storyboard = opening.def
+;ending.storyboard = ending.def

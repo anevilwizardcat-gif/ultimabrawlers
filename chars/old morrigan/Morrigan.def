@@ -1,0 +1,40 @@
+;-----------------------------------------------------------------------------
+[Info]
+Name         = "Morrigan"
+DisplayName  = "Morrigan"
+VersionDate  = 08,01,2012
+MugenVersion = 04,14,2002
+Author       = "misao"
+Pal.Defaults = 1
+;-----------------------------------------------------------------------------
+[Files]
+Cmd      = STATE\Morrigan.cmd
+Cns      = STATE\Morrigan_A.cns
+St       = STATE\Morrigan_A.cns
+St0      = STATE\Morrigan_B.cns
+St1      = STATE\Morrigan_C.cns
+St2      = STATE\Morrigan_D.cns
+St3      = STATE\Morrigan_E.cns
+St4      = STATE\Morrigan_F.cns
+StCommon = STATE\common_Morrigan.cns
+Sprite   = MEDIA\Morrigan.sff
+Anim     = MEDIA\Morrigan.air
+Sound    = MEDIA\Morrigan.snd
+;-----------------------------------------------------------------------------
+Pal1 = ACT\A.act    ;弱Ｋカラー
+Pal2 = ACT\B.act    ;中Ｋカラー
+Pal3 = ACT\C.act    ;強Ｋカラー
+Pal4 = ACT\X.act    ;弱Ｐカラー
+Pal5 = ACT\Y.act    ;中Ｐカラー
+Pal6 = ACT\Z.act    ;強Ｐカラー
+Pal7 = ACT\KK.act   ;ＫＫカラー
+Pal8 = ACT\AGK.act  ;ＡＧＫカラー
+Pal9 = ACT\A.act
+Pal10= ACT\PP.act   ;ＰＰカラー
+Pal11= ACT\AGP.act  ;ＡＧＰカラー
+Pal12= ACT\X.act
+;-----------------------------------------------------------------------------
+[Arcade]
+Intro.Storyboard = ;intro.def   ;オープニングのファイルを登録します
+Ending.Storyboard = ;ending.def ;エンディングのファイルを登録します
+;-----------------------------------------------------------------------------

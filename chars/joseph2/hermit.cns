@@ -1,0 +1,4137 @@
+
+[Statedef 2500]
+type = S
+movetype = I
+physics = S
+ctrl = 1
+anim = 2500
+velset = 0,0
+sprpriority = 2
+
+[State 191, 3]
+type = PlaySnd
+trigger1 = Time = 0
+value = 3,15
+channel = 0
+
+[state 3003]
+type = helper
+trigger1 = time = 0
+name = "hermit purple"
+helpertype = normal
+stateno = 10000
+id = 10000
+pos = 0,0
+postype = p1
+ownpal = 1
+keyctrl = 0
+
+[State 191, Wood 1]
+type = Explod
+trigger1 = time = 0
+anim = 875
+id = 875
+postype = p1
+pos = 0,0
+sprpriority = 3
+bindtime = 1
+ownpal = 1
+removeongethit = 1
+
+[State 1000, 7]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+
+;---------------------------------------------------------------------------
+; スタンドモード（イントロ時）
+[Statedef 2507]
+type    = S
+movetype= I
+physics = S
+velset = 0,0
+anim = 2500
+sprpriority = 2
+
+[State 191, 3]
+type = PlaySnd
+trigger1 = Time = 0
+value = 3,15
+channel = 0
+
+[state 3003]
+type = helper
+trigger1 = time = 0
+name = "hermit purple"
+helpertype = normal
+stateno = 10000
+id = 10000
+pos = 0,0
+postype = p1
+ownpal = 1
+keyctrl = 0
+
+[State 191, Wood 1]
+type = Explod
+trigger1 = time = 0
+anim = 875
+id = 875
+postype = p1
+pos = 0,0
+sprpriority = 3
+bindtime = 1
+ownpal = 1
+removeongethit = 1
+
+[State 230, 3]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+
+;---------------------------------------------------------------------------
+
+[Statedef 2501]
+type = S
+movetype = I
+physics = S
+ctrl = 0
+anim = 2501
+velset = 0,0
+sprpriority = 2
+
+[State 1000, 7]
+type = null
+trigger1 = AnimTime = 0
+value = 0
+
+[State 1000, 7]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+;---------------------------------------------------------------------------
+; スタンドモード解除（イントロ時）
+[Statedef 2508]
+type    = S
+movetype= I
+physics = S
+velset = 0,0
+anim = 2501
+sprpriority = 2
+
+[State 230, 3]
+type = ChangeState
+trigger1 = animTime = 0
+value = 0
+
+;---------------------------------------------------------------------------
+
+[Statedef 2503]
+type = C
+movetype = I
+physics = C
+ctrl = 1
+anim = 11
+velset = 0,0
+sprpriority = 2
+
+[State 191, 3]
+type = PlaySnd
+trigger1 = Time = 0
+value = 3,15
+channel = 0
+
+[state 3003]
+type = helper
+trigger1 = time = 0
+name = "hermit purple"
+helpertype = normal
+stateno = 10000
+id = 10000
+pos = 0,0
+postype = p1
+ownpal = 1
+keyctrl = 0
+
+[State 191, Wood 1]
+type = Explod
+trigger1 = time = 0
+anim = 875
+id = 875
+postype = p1
+pos = 0,0
+sprpriority = 3
+bindtime = 1
+ownpal = 1
+removeongethit = 1
+
+[State 1000, 7]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 11
+
+;---------------------------------------------------------------------------
+
+[Statedef 2504]
+type = S
+movetype = I
+physics = S
+ctrl = 0
+anim = 11
+velset = 0,0
+sprpriority = 2
+
+[State 1000, 7]
+type = null
+trigger1 = AnimTime = 0
+value = 0
+
+[State 1000, 7]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 11
+ctrl = 1
+
+;---------------------------------------------------------------------------
+
+[Statedef 2505]
+type = A
+movetype = I
+physics = A
+ctrl = 1
+anim = 2505
+;velset = 0,0
+sprpriority = 2
+
+[State 191, 3]
+type = PlaySnd
+trigger1 = Time = 0
+value = 3,15
+channel = 0
+
+[State -3]
+type = AssertSpecial
+trigger1 = 1
+flag = noairguard
+
+[State 191, 2] 
+type = varset
+trigger1 = Time = 0
+v = 3
+value = 1
+
+[state 3003]
+type = helper
+trigger1 = time = 0
+name = "hermit purple"
+helpertype = normal
+stateno = 10000
+id = 10000
+pos = 0,0
+postype = p1
+ownpal = 1
+keyctrl = 0
+
+[State 191, Wood 1]
+type = Explod
+trigger1 = time = 0
+anim = 874
+id = 874
+postype = p1
+pos = 0,0
+removeongethit = 1
+sprpriority = 3
+
+;---------------------------------------------------------------------------
+
+[Statedef 2506]
+type = A
+movetype = I
+physics = A
+ctrl = 1
+anim = 41
+;velset = 0,0
+sprpriority = 2
+
+[State 191, 2] 
+type = changeanim
+trigger1 = vel x = 0
+trigger1 = Time = 0
+value = 41
+elem = var(23)
+
+[State 191, 2] 
+type = changeanim
+trigger1 = vel x > 0
+trigger1 = Time = 0
+value = 42
+elem = var(23)
+
+[State 191, 2] 
+type = changeanim
+trigger1 = vel x < 0
+trigger1 = Time = 0
+value = 43
+elem = var(23)
+
+[State 191, 2] 
+type = varset
+trigger1 = Time = 0
+v = 3
+value = 1
+
+[state 3003]
+type = null
+trigger1 = time = 0
+
+;------------------
+;stand
+
+[Statedef 10000]
+type    = A
+movetype= I
+physics = N
+velset = 0,0
+
+[State 191, 3]
+type = PlaySnd
+triggerall = parent,stateno != 2100 && parent,stateno != 3501
+triggerall = (parent,stateno != [700,999]) && (parent,stateno != [1500,1599])
+trigger1 = Time = 0
+value = 3,16
+
+[State 191, 2] 
+type = parentvarset
+trigger1 = 1
+v = 2
+value = 1
+
+[State 191, 2] 
+type = AssertSpecial
+trigger1 = 1
+flag = noshadow
+
+[State 191, 2] 
+type = turn
+trigger1 = facing = ifelse(parent,facing=1,-1,1)
+;------------------
+;paentstate 2500
+
+[State 1065, 3]
+type = sprpriority
+trigger1 = parent,stateno = 2500 || parent,stateno = 2505 || parent,stateno = 2507
+value = 3
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,stateno = 2500 || parent,stateno = 2507
+trigger1 = parent,time <= 3
+value = 10001
+persistent = 0
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,stateno = 2500 || parent,stateno = 2507
+trigger1 = parent,animelem = 5
+value = 10500
+persistent = 0
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,stateno = 2500 || parent,stateno = 2507
+trigger1 = parent,animelem = 5
+pos = 43*const(size.xscale),-116*const(size.yscale)
+time = 7
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,stateno = 2500 || parent,stateno = 2507
+trigger1 = parent,animelem = 6
+pos = 44*const(size.xscale),-92*const(size.yscale)
+time = 5
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,stateno = 2500 || parent,stateno = 2507
+trigger1 = parent,animelem = 7
+value = 10501
+persistent = 0
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,stateno = 2500 || parent,stateno = 2507
+trigger1 = parent,animelem = 7
+pos = 37*const(size.xscale),-83*const(size.yscale)
+time = 5
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,stateno = 2500 || parent,stateno = 2507
+trigger1 = parent,animelem = 8
+pos = 27*const(size.xscale),-78*const(size.yscale)
+time = 5
+
+;------------------
+;paentstate 2505
+
+;[State 1065, 3]
+;type = sprpriority
+;trigger1 = parent,stateno = 2505
+;value = 3
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,stateno = 2505
+trigger1 = parent,animelem =  1
+value = 10500
+persistent = 0
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,stateno = 2505
+trigger1 = anim = 10500
+trigger1 = animtime = 0
+value = 10501
+persistent = 0
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,stateno = 2505
+trigger1 = anim = 10501
+trigger1 = animtime = 0
+value = 1012
+persistent = 0
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,stateno = 2505
+trigger1 = parent,animelem =  1
+pos = 29*const(size.xscale),-89*const(size.yscale)
+time = -1
+
+;------------------
+;paentstate 2000
+
+
+[State 1065, 3]
+type = sprpriority
+trigger1 = parent,anim = 2000
+value = 3
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 2000
+trigger1 = anim != 10000
+value = 10000
+;persistent = 0
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 2000
+trigger1 = parent,animelem = 1
+pos = 30*const(size.xscale),-76*const(size.yscale)
+time = 12
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 2000
+trigger1 = parent,animelem = 3
+pos = 30*const(size.xscale),-75*const(size.yscale)
+time = 66
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 2000
+trigger1 = parent,animelem = 10
+pos = 30*const(size.xscale),-76*const(size.yscale)
+time = -1;37
+
+;------------------
+;paentstate 2005
+
+[State 1065, 3]
+type = sprpriority
+trigger1 = parent,anim = 2005
+value = 3
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 2005
+trigger1 = parent,animelem = 1
+trigger1 = anim != 1012
+value = 1012
+;persistent = 0
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 2005
+trigger1 = parent,animelem = 1
+pos = -31*const(size.xscale),-71*const(size.yscale)
+time = 4
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 2005
+trigger1 = parent,animelem = 2
+pos = 30*const(size.xscale),-76*const(size.yscale)
+time = 4
+
+;------------------
+;paentstate 6
+
+[State 1065, 3]
+type = sprpriority
+trigger1 = parent,anim = 6
+value = 0
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 6
+trigger1 = parent,animelem = 1
+trigger1 = anim != 1012
+value = 1012
+;persistent = 0
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 6
+trigger1 = parent,animelem = 1
+pos = -22*const(size.xscale),-34*const(size.yscale)
+time = 4
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 6
+trigger1 = parent,animelem = 2
+pos = 22*const(size.xscale),-34*const(size.yscale)
+time = 4
+
+;------------------
+;paentstate 181
+
+[State 1065, 3]
+type = sprpriority
+trigger1 = parent,stateno = 181
+value = 3
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,stateno = 181 || parent,stateno = 182 || parent,stateno = 183|| parent,stateno = 184|| parent,stateno = 186
+trigger1 = parent,animelem = 1
+value = 10001
+persistent = 0
+
+;------------------
+;paentstate 10
+
+[State 1065, 3]
+type = sprpriority
+trigger1 = parent,anim = 10
+value = 0
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 10
+trigger1 = parent,animelem = 1
+trigger1 = anim != 1012
+value = 1012
+;persistent = 0
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 10
+trigger1 = parent,animelem = 1
+pos = 22*const(size.xscale),-59*const(size.yscale)
+time = 2
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 10
+trigger1 = parent,animelem = 2
+pos = 19*const(size.xscale),-51*const(size.yscale)
+time = 2
+
+;------------------
+;paentstate 11
+
+[State 1065, 3]
+type = sprpriority
+trigger1 = parent,anim = 11
+value = 0
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 11
+trigger1 = anim != 1012
+value = 1012
+;persistent = 0
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 11
+pos = 22*const(size.xscale),-32*const(size.yscale)
+time = -1
+
+;------------------
+;paentstate 12
+
+[State 1065, 3]
+type = sprpriority
+trigger1 = parent,anim = 12
+value = 0
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 12
+trigger1 = parent,animelem = 1
+trigger1 = anim != 1012
+value = 1012
+;persistent = 0
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 12
+trigger1 = parent,animelem = 1
+pos = 19*const(size.xscale),-51*const(size.yscale)
+time = 2
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 12
+trigger1 = parent,animelem = 2
+pos = 22*const(size.xscale),-59*const(size.yscale)
+time = 2
+
+;------------------
+;paentstate 2020
+
+[State 1065, 3]
+type = sprpriority
+trigger1 = parent,anim = 2020
+value = 0
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 2020
+trigger1 = parent,animelem = 1
+trigger1 = anim != 1012
+value = 1012
+;persistent = 0
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 2020
+trigger1 = parent,animelem = 1
+pos = -5*const(size.xscale),-70*const(size.yscale)
+time = 4
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 2020
+trigger1 = parent,animelem = 2
+pos = -2*const(size.xscale),-72*const(size.yscale)
+time = 4
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 2020
+trigger1 = parent,animelem = 3
+pos = 0,-74*const(size.yscale)
+time = 4
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 2020
+trigger1 = parent,animelem = 4
+pos = 3*const(size.xscale),-75*const(size.yscale)
+time = 4
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 2020
+trigger1 = parent,animelem = 5
+pos = 5*const(size.xscale),-75*const(size.yscale)
+time = 4
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 2020
+trigger1 = parent,animelem = 6
+pos = 7*const(size.xscale),-73*const(size.yscale)
+time = 4
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 2020
+trigger1 = parent,animelem = 7
+pos = 9*const(size.xscale),-72*const(size.yscale)
+time = 4
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 2020
+trigger1 = parent,animelem = 8
+pos = 7*const(size.xscale),-73*const(size.yscale)
+time = 4
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 2020
+trigger1 = parent,animelem = 9
+pos = 5*const(size.xscale),-75*const(size.yscale)
+time = 4
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 2020
+trigger1 = parent,animelem = 10
+pos = 3*const(size.xscale),-75*const(size.yscale)
+time = 4
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 2020
+trigger1 = parent,animelem = 11
+pos = 0,-74*const(size.yscale)
+time = 4
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 2020
+trigger1 = parent,animelem = 12
+pos = -2*const(size.xscale),-72*const(size.yscale)
+time = 4
+
+;------------------
+;paentstate 2021
+
+[State 1065, 3]
+type = sprpriority
+trigger1 = parent,anim = 2021
+value = 0
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 2021
+trigger1 = parent,animelem = 1
+trigger1 = anim != 1012
+value = 1012
+;persistent = 0
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 2021
+trigger1 = parent,animelem = 1
+pos = -2*const(size.xscale),-72*const(size.yscale)
+time = 4
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 2021
+trigger1 = parent,animelem = 2
+pos = 0,-74*const(size.yscale)
+time = 4
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 2021
+trigger1 = parent,animelem = 3
+pos = 3*const(size.xscale),-75*const(size.yscale)
+time = 4
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 2021
+trigger1 = parent,animelem = 4
+pos = 5*const(size.xscale),-75*const(size.yscale)
+time = 4
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 2021
+trigger1 = parent,animelem = 5
+pos = 7*const(size.xscale),-73*const(size.yscale)
+time = 4
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 2021
+trigger1 = parent,animelem = 6
+pos = 9*const(size.xscale),-72*const(size.yscale)
+time = 4
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 2021
+trigger1 = parent,animelem = 7
+pos = 7*const(size.xscale),-73*const(size.yscale)
+time = 4
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 2021
+trigger1 = parent,animelem = 8
+pos = 5*const(size.xscale),-75*const(size.yscale)
+time = 4
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 2021
+trigger1 = parent,animelem = 9
+pos = 3*const(size.xscale),-75*const(size.yscale)
+time = 4
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 2021
+trigger1 = parent,animelem = 10
+pos = 0,-74*const(size.yscale)
+time = 4
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 2021
+trigger1 = parent,animelem = 11
+pos = -2*const(size.xscale),-72*const(size.yscale)
+time = 4
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 2021
+trigger1 = parent,animelem = 12
+pos = -5*const(size.xscale),-70*const(size.yscale)
+time = 4
+
+;------------------
+;paentstate 2040
+
+[State 1065, 3]
+type = sprpriority
+trigger1 = parent,anim = 2040
+value = 3
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 2040
+trigger1 = parent,animelem = 1
+trigger1 = anim != 1012
+value = 1012
+;persistent = 0
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 2040
+trigger1 = parent,animelem = 1
+pos = 27*const(size.xscale),-64*const(size.yscale)
+time = 3
+
+;------------------
+;paentstate 2041
+
+[State 1065, 3]
+type = sprpriority
+trigger1 = parent,anim = 2041
+value = 3
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 2041
+trigger1 = parent,animelem = 1
+trigger1 = anim != 1012
+value = 1012
+;persistent = 0
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 2041
+trigger1 = parent,animelem = 1
+pos = 42*const(size.xscale),-90*const(size.yscale)
+time = 15
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 2041
+trigger1 = parent,animelem = 2
+pos = 40*const(size.xscale),-89*const(size.yscale)
+time = 5
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 2041
+trigger1 = parent,animelem = 3
+pos = 39*const(size.xscale),-87*const(size.yscale)
+time = 5
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 2041
+trigger1 = parent,animelem = 4
+pos = 38*const(size.xscale),-86*const(size.yscale)
+time = 5
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 2041
+trigger1 = parent,animelem = 5
+pos = 37*const(size.xscale),-85*const(size.yscale)
+time = 5
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 2041
+trigger1 = parent,animelem = 6
+pos = 36*const(size.xscale),-84*const(size.yscale)
+time = -1
+
+;------------------
+;paentstate 2042
+
+[State 1065, 3]
+type = sprpriority
+trigger1 = parent,anim = 2042
+value = 3
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 2042
+trigger1 = parent,animelem = 1
+trigger1 = anim != 1012
+value = 1012
+;persistent = 0
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 2042
+trigger1 = parent,animelem = 1
+pos = 35*const(size.xscale),-85*const(size.yscale)
+time = 15
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 2042
+trigger1 = parent,animelem = 2
+pos = 34*const(size.xscale),-84*const(size.yscale)
+time = 6
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 2042
+trigger1 = parent,animelem = 3
+pos = 33*const(size.xscale),-85*const(size.yscale)
+time = 6
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 2042
+trigger1 = parent,animelem = 4
+pos = 30*const(size.xscale),-88*const(size.yscale)
+time = 6
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 2042
+trigger1 = parent,animelem = 5
+pos = 29,-92
+time = -1
+
+;------------------
+;paentstate 2043
+
+[State 1065, 3]
+type = sprpriority
+trigger1 = parent,anim = 2043
+value = 3
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 2043
+trigger1 = parent,animelem = 1
+trigger1 = anim != 1012
+value = 1012
+;persistent = 0
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 2043
+trigger1 = parent,animelem = 1
+pos = 29*const(size.xscale),-92*const(size.yscale)
+time = 15
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 2043
+trigger1 = parent,animelem = 2
+pos = 41*const(size.xscale),-88*const(size.yscale)
+time = 4
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 2043
+trigger1 = parent,animelem = 3
+pos = 40*const(size.xscale),-87*const(size.yscale)
+time = 4
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 2043
+trigger1 = parent,animelem = 4
+pos = 39*const(size.xscale),-86*const(size.yscale)
+time = 4
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 2043
+trigger1 = parent,animelem = 5
+pos = 38*const(size.xscale),-85*const(size.yscale)
+time = 5
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 2043
+trigger1 = parent,animelem = 6
+pos = 37*const(size.xscale),-84*const(size.yscale)
+time = -1
+
+;------------------
+;paentstate 2047
+
+[State 1065, 3]
+type = sprpriority
+trigger1 = parent,anim = 2047
+value = 3
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 2047
+trigger1 = parent,animelem = 1
+trigger1 = anim != 1012
+value = 1012
+;persistent = 0
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 2047
+trigger1 = parent,animelem = 1
+pos = 27*const(size.xscale),-64*const(size.yscale)
+time = 3
+
+;------------------
+;paentstate 100
+
+[State 1065, 3]
+type = sprpriority
+trigger1 = parent,anim = 100
+value = 0
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 100
+trigger1 = parent,animelem = 1
+trigger1 = anim != 1012
+value = 1012
+;persistent = 0
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 100
+trigger1 = parent,animelem = 1
+pos = -26,-88
+time = 3
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 100
+trigger1 = parent,animelem = 2
+pos = -20*const(size.xscale),-81*const(size.yscale)
+time = 3
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 100
+trigger1 = parent,animelem = 3
+pos = -2*const(size.xscale),-75*const(size.yscale)
+time = 3
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 100
+trigger1 = parent,animelem = 4
+pos = 5*const(size.xscale),-72*const(size.yscale)
+time = 3
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 100
+trigger1 = parent,animelem = 5
+pos = 13*const(size.xscale),-74*const(size.yscale)
+time = 3
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 100
+trigger1 = parent,animelem = 6
+pos = 33*const(size.xscale),-88*const(size.yscale)
+time = 3
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 100
+trigger1 = parent,animelem = 7
+pos = 25*const(size.xscale),-105*const(size.yscale)
+time = 3
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 100
+trigger1 = parent,animelem = 8
+pos = 34*const(size.xscale),-88*const(size.yscale)
+time = 3
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 100
+trigger1 = parent,animelem = 9
+pos = 14*const(size.xscale),-74*const(size.yscale)
+time = 3
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 100
+trigger1 = parent,animelem = 10
+pos = 5*const(size.xscale),-74*const(size.yscale)
+time = 3
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 100
+trigger1 = parent,animelem = 11
+pos = -2*const(size.xscale),-75*const(size.yscale)
+time = 3
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 100
+trigger1 = parent,animelem = 12
+pos = -20*const(size.xscale),-81*const(size.yscale)
+time = 3
+
+;------------------
+;paentstate 101
+
+[State 1065, 3]
+type = sprpriority
+trigger1 = parent,anim = 101
+value = 0
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 101
+trigger1 = parent,animelem = 1
+trigger1 = anim != 1012
+value = 1012
+;persistent = 0
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 101
+trigger1 = parent,animelem = 1
+pos = 41*const(size.xscale),-46*const(size.yscale)
+time = 4
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 101
+trigger1 = parent,animelem = 2
+pos = 19*const(size.xscale),-51*const(size.yscale)
+time = 4
+
+;------------------
+;paentstate 105
+
+[State 1065, 3]
+type = sprpriority
+trigger1 = parent,anim = 105
+value = 0
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 105
+trigger1 = parent,animelem = 1
+trigger1 = anim != 1012
+value = 1012
+;persistent = 0
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 105
+trigger1 = parent,animelem = 1
+pos = 26*const(size.xscale),-88*const(size.yscale)
+time = 3
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 105
+trigger1 = parent,animelem = 2
+pos = 20*const(size.xscale),-81*const(size.yscale)
+time = 3
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 105
+trigger1 = parent,animelem = 3
+pos = 2*const(size.xscale),-75*const(size.yscale)
+time = 3
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 105
+trigger1 = parent,animelem = 4
+pos = -5*const(size.xscale),-72*const(size.yscale)
+time = 3
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 105
+trigger1 = parent,animelem = 5
+pos = -13*const(size.xscale),-74*const(size.yscale)
+time = 3
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 105
+trigger1 = parent,animelem = 6
+pos = -33*const(size.xscale),-88*const(size.yscale)
+time = 3
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 105
+trigger1 = parent,animelem = 7
+pos = -25*const(size.xscale),-105*const(size.yscale)
+time = 3
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 105
+trigger1 = parent,animelem = 8
+pos = -34*const(size.xscale),-88*const(size.yscale)
+time = 3
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 105
+trigger1 = parent,animelem = 9
+pos = -14*const(size.xscale),-74*const(size.yscale)
+time = 3
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 105
+trigger1 = parent,animelem = 10
+pos = -5*const(size.xscale),-74*const(size.yscale)
+time = 3
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 105
+trigger1 = parent,animelem = 11
+pos = 2*const(size.xscale),-75*const(size.yscale)
+time = 3
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 105
+trigger1 = parent,animelem = 12
+pos = 20*const(size.xscale),-81*const(size.yscale)
+time = 3
+
+;------------------
+;paentstate 106
+
+[State 1065, 3]
+type = sprpriority
+trigger1 = parent,anim = 106
+value = 0
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 106
+trigger1 = parent,animelem = 1
+trigger1 = anim != 1012
+value = 1012
+;persistent = 0
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 106
+trigger1 = parent,animelem = 1
+pos = -41*const(size.xscale),-46*const(size.yscale)
+time = 4
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 106
+trigger1 = parent,animelem = 2
+pos = -19*const(size.xscale),-51*const(size.yscale)
+time = 4
+
+;------------------
+;paentstate 120
+
+[State 1065, 3]
+type = sprpriority
+trigger1 = parent,anim = 120 ||parent,anim = 130 ||parent,anim = 140
+value = 3
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 120 ||parent,anim = 130 ||parent,anim = 140
+trigger1 = parent,animelem = 1
+trigger1 = anim != 1012
+value = 1012
+;persistent = 0
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 120 ||parent,anim = 130 ||parent,anim = 140
+trigger1 = parent,animelem = 1
+pos = 23*const(size.xscale),-86*const(size.yscale)
+time = -1
+
+;------------------
+;paentstate 150
+
+[State 1065, 3]
+type = sprpriority
+trigger1 = parent,anim = 150
+value = 3
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 150
+trigger1 = parent,animelem = 1
+value = 10120
+;persistent = 0
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 150
+trigger1 = parent,animelem = 1
+pos = 23*const(size.xscale),-86*const(size.yscale)
+time = -1
+
+;------------------
+;paentstate 121
+
+[State 1065, 3]
+type = sprpriority
+trigger1 = parent,anim = 121 ||parent,anim = 131 ||parent,anim = 141
+value = 3
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 121 ||parent,anim = 131 ||parent,anim = 141
+trigger1 = parent,animelem = 1
+trigger1 = anim != 1012
+value = 1012
+;persistent = 0
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 121 ||parent,anim = 131 ||parent,anim = 141
+trigger1 = parent,animelem = 1
+pos = 25*const(size.xscale),-57*const(size.yscale)
+time = -1
+
+;------------------
+;paentstate 151
+
+[State 1065, 3]
+type = sprpriority
+trigger1 = parent,anim = 151
+value = 3
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 151
+trigger1 = parent,animelem = 1
+value = 10120
+;persistent = 0
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 151
+trigger1 = parent,animelem = 1
+pos = 25*const(size.xscale),-57*const(size.yscale)
+time = -1
+
+;------------------
+;paentstate 122
+
+[State 1065, 3]
+type = sprpriority
+trigger1 = parent,anim = 122 ||parent,anim = 132 ||parent,anim = 142
+value = 3
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 122 ||parent,anim = 132 ||parent,anim = 142
+trigger1 = parent,animelem = 1
+trigger1 = anim != 1012
+value = 1012
+;persistent = 0
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 122 ||parent,anim = 132 ||parent,anim = 142
+trigger1 = parent,animelem = 1
+pos = 25*const(size.xscale),-97*const(size.yscale)
+time = -1
+
+;------------------
+;paentstate 152
+
+[State 1065, 3]
+type = sprpriority
+trigger1 = parent,anim = 152
+value = 3
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 152
+trigger1 = parent,animelem = 1
+value = 10120
+;persistent = 0
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 152
+trigger1 = parent,animelem = 1
+pos = 25*const(size.xscale),-97*const(size.yscale)
+time = -1
+
+;------------------
+;paentstate 2195
+
+[State 1065, 3]
+type = sprpriority
+trigger1 = parent,anim = 2195
+value = 3
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 2195
+trigger1 = parent,animelem = 1
+value = 10501
+;persistent = 0
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 2195
+trigger1 = parent,animelem = 2
+value = 10500
+;persistent = 0
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 2195
+trigger1 = parent,animelem = 1
+pos = 44*const(size.xscale),-119*const(size.yscale)
+time = 3
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 2195
+trigger1 = parent,animelem = 2
+pos = 44*const(size.xscale),-93*const(size.yscale)
+time = 3
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 2195
+trigger1 = parent,animelem = 3
+pos = 38*const(size.xscale),-83*const(size.yscale)
+time = 3
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 2195
+trigger1 = parent,animelem = 4
+pos = 30*const(size.xscale),-76*const(size.yscale)
+time = 3
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 2195
+trigger1 = parent,animelem = 5
+pos = 18*const(size.xscale),-63*const(size.yscale)
+time = 90
+
+;------------------
+;paentstate 5000
+
+[State 1065, 3]
+type = sprpriority
+trigger1 = parent,anim = 5000
+value = 3
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 5000 || parent,anim = 5005
+trigger1 = parent,animelem = 1
+trigger1 = anim != 15000
+value = 15000
+;persistent = 0
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 5005
+trigger1 = parent,animelem = 2
+value = 1012
+;persistent = 0
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 5000 || parent,anim = 5005
+trigger1 = parent,animelem = 1
+pos = 17*const(size.xscale),-83*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 5005
+trigger1 = parent,animelem = 2
+pos = 23*const(size.xscale),-76*const(size.yscale)
+time = -1
+
+;------------------
+;paentstate 5001
+
+[State 1065, 3]
+type = sprpriority
+trigger1 = parent,anim = 5001
+value = 3
+
+[State 1065, 3]
+type = changeanim
+triggerall = anim != 15000
+trigger1 = parent,anim = 5001
+trigger1 = parent,animelem = 1
+trigger2 = parent,anim = 5006
+trigger2 = parent,animelem = 1 || parent,animelem = 2
+value = 15000
+;persistent = 0
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 5006
+trigger1 = parent,animelem = 3
+value = 1012
+;persistent = 0
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 5001 || parent,anim = 5006
+trigger1 = parent,animelem = 1
+pos = 5*const(size.xscale),-83*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 5006
+trigger1 = parent,animelem = 2
+pos = 17*const(size.xscale),-83*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 5006
+trigger1 = parent,animelem = 3
+pos = 23*const(size.xscale),-76*const(size.yscale)
+time = -1
+
+;------------------
+;paentstate 5002
+
+[State 1065, 3]
+type = sprpriority
+trigger1 = parent,anim = 5002
+value = 3
+
+[State 1065, 3]
+type = changeanim
+triggerall = anim != 15000
+trigger1 = parent,anim = 5002
+trigger1 = parent,animelem = 1
+trigger2 = parent,anim = 5007
+trigger2 = parent,animelem = 1 || parent,animelem = 2 || parent,animelem = 3
+value = 15000
+;persistent = 0
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 5007
+trigger1 = parent,animelem = 4
+value = 1012
+;persistent = 0
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 5002
+trigger1 = parent,animelem = 1
+pos = -21*const(size.xscale),-89*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 5007
+trigger1 = parent,animelem = 1
+pos = -1*const(size.xscale),-85*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 5007
+trigger1 = parent,animelem = 2
+pos = 5*const(size.xscale),-83*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 5007
+trigger1 = parent,animelem = 3
+pos = 17*const(size.xscale),-83*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 5007
+trigger1 = parent,animelem = 4
+pos = 23*const(size.xscale),-76*const(size.yscale)
+time = -1
+
+;------------------
+;paentstate 5010
+
+[State 1065, 3]
+type = sprpriority
+trigger1 = parent,anim = 5010
+value = 3
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 5010 || parent,anim = 5015
+trigger1 = parent,animelem = 1
+trigger1 = anim != 15000
+value = 15000
+;persistent = 0
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 5015
+trigger1 = parent,animelem = 2
+value = 1012
+;persistent = 0
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 5010 || parent,anim = 5015
+trigger1 = parent,animelem = 1
+pos = -11*const(size.xscale),-88*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 5015
+trigger1 = parent,animelem = 2
+pos = -2*const(size.xscale),-82*const(size.yscale)
+time = -1
+
+;------------------
+;paentstate 5011
+
+[State 1065, 3]
+type = sprpriority
+trigger1 = parent,anim = 5011
+value = 3
+
+[State 1065, 3]
+type = changeanim
+triggerall = anim != 15000
+trigger1 = parent,anim = 5011
+trigger1 = parent,animelem = 1
+trigger2 = parent,anim = 5016
+trigger2 = parent,animelem = 1 || parent,animelem = 2
+trigger1 = anim != 15000
+value = 15000
+;persistent = 0
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 5016
+trigger1 = parent,animelem = 3
+value = 1012
+;persistent = 0
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 5011 || parent,anim = 5016
+trigger1 = parent,animelem = 1
+pos = -21*const(size.xscale),-91*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 5016
+trigger1 = parent,animelem = 2
+pos = -11*const(size.xscale),-88*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 5016
+trigger1 = parent,animelem = 3
+pos = -2*const(size.xscale),-82*const(size.yscale)
+time = -1
+
+;------------------
+;paentstate 5012
+
+[State 1065, 3]
+type = sprpriority
+trigger1 = parent,anim = 5012
+value = 3
+
+[State 1065, 3]
+type = changeanim
+triggerall = anim != 15000
+trigger1 = parent,anim = 5012
+trigger1 = parent,animelem = 1
+trigger2 = parent,anim = 5017
+trigger2 = parent,animelem = 1 || parent,animelem = 2
+value = 15000
+;persistent = 0
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 5017
+trigger1 = parent,animelem = 3
+value = 1012
+;persistent = 0
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 5012
+trigger1 = parent,animelem = 1
+pos = -38*const(size.xscale),-94*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 5017
+trigger1 = parent,animelem = 1
+pos = -21*const(size.xscale),-91*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 5017
+trigger1 = parent,animelem = 2
+pos = -11*const(size.xscale),-88*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 5017
+trigger1 = parent,animelem = 3
+pos = -2*const(size.xscale),-82*const(size.yscale)
+time = -1
+
+;------------------
+;paentstate 5220
+
+[State 1065, 3]
+type = sprpriority
+trigger1 = parent,anim = 5220
+value = 0
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 5220
+trigger1 = parent,animelem = 1
+trigger1 = anim != 1012
+value = 1012
+;persistent = 0
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 5220
+trigger1 = parent,animelem = 1
+pos = 41*const(size.xscale),-46*const(size.yscale)
+time = 4
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 5220
+trigger1 = parent,animelem = 2
+pos = 19*const(size.xscale),-51*const(size.yscale)
+time = 4
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 5220
+trigger1 = parent,animelem = 3
+pos = 22*const(size.xscale),-59*const(size.yscale)
+time = 4
+
+;------------------
+;paentstate 5030
+
+[State 1065, 3]
+type = sprpriority
+trigger1 = parent,anim = 5030 || parent,anim = 5035
+value = 0
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 5030
+trigger1 = parent,animelem = 1
+value = 10001
+;persistent = 0
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 5035
+trigger1 = parent,animelem = 1
+trigger1 = anim != 1012
+value = 1012
+;persistent = 0
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 5030
+trigger1 = parent,animelem = 1
+pos = -3*const(size.xscale),-70*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 5035
+trigger1 = parent,animelem = 1
+pos = -3*const(size.xscale),-70*const(size.yscale)
+time = 5
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 5035
+trigger1 = parent,animelem = 2
+pos = 1*const(size.xscale),-64*const(size.yscale)
+time = 10
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 5050
+trigger1 = parent,animelem = 1
+pos = 12*const(size.xscale),-71*const(size.yscale)
+time = -1
+
+;------------------
+;paentstate 5060
+
+[State 1065, 3]
+type = sprpriority
+trigger1 = parent,anim = 5051
+trigger2 = parent,anim = 5270
+value = 0
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 5051
+trigger1 = parent,animelem = 1
+value = 10001
+;persistent = 0
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 5061
+trigger1 = parent,animelem = 1
+trigger1 = anim != 1012
+trigger2 = parent,anim = 5270
+trigger2 = anim != 1012
+value = 1012
+;persistent = 0
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 5051
+trigger1 = parent,animelem = 1
+pos = -3*const(size.xscale),-70*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 5061
+trigger1 = parent,animelem = 1
+trigger2 = parent,anim = 5270
+trigger2 = parent,animelem = 1
+pos = -3*const(size.xscale),-70*const(size.yscale)
+time = 5
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 5061
+trigger1 = parent,animelem = 2
+trigger2 = parent,anim = 5270
+trigger2 = parent,animelem = 2
+pos = 1*const(size.xscale),-64*const(size.yscale)
+time = 5
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 5061
+trigger1 = parent,animelem = 3
+pos = 12*const(size.xscale),-71*const(size.yscale)
+time = 5
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 5061
+trigger1 = parent,animelem = 4
+pos = 0,-71*const(size.yscale)
+time = -1
+
+;------------------
+;paentstate 5070
+
+[State 1065, 3]
+type = sprpriority
+trigger1 = parent,anim = 5070
+value = 3
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 5070
+trigger1 = parent,animelem = 1
+trigger1 = anim != 1012
+value = 1012
+;persistent = 0
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 5070
+trigger1 = parent,animelem = 1
+pos = 53*const(size.xscale),-67*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 5070
+trigger1 = parent,animelem = 2
+pos = 50*const(size.xscale),-71*const(size.yscale)
+time = 4
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 5070
+trigger1 = parent,animelem = 3
+pos = 18*const(size.xscale),-68*const(size.yscale)
+time = 5
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 5070
+trigger1 = parent,animelem = 4
+pos = 44*const(size.xscale),-65*const(size.yscale)
+time = -1
+
+;------------------
+;paentstate 5040
+
+[State 1065, 3]
+type = sprpriority
+trigger1 = parent,anim = 5040 || parent,anim = 5210
+trigger1 = parent,animelem = 1
+value = 0
+
+[State 1065, 3]
+type = sprpriority
+trigger1 = parent,anim = 5040 || parent,anim = 5210
+trigger1 = parent,animelem = 3
+value = 3
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 5040 || parent,anim = 5210
+trigger1 = parent,animelem = 1
+trigger1 = anim != 1012
+value = 1012
+;persistent = 0
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 5040 || parent,anim = 5210
+trigger1 = parent,animelem = 1
+pos = 0,-95*const(size.yscale)
+time = 5
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 5040 || parent,anim = 5210
+trigger1 = parent,animelem = 2
+pos = 19*const(size.xscale),-72*const(size.yscale)
+time = 5
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 5040 || parent,anim = 5210
+trigger1 = parent,animelem = 3
+pos = 45*const(size.xscale),-82*const(size.yscale)
+time = -1
+
+;------------------
+;paentstate 5200
+
+[State 1065, 3]
+type = sprpriority
+trigger1 = parent,anim = 5200
+trigger1 = parent,animelem = 1
+value = 0
+
+[State 1065, 3]
+type = sprpriority
+trigger1 = parent,anim = 5200
+trigger1 = parent,animelem = 3
+value = 3
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 5200
+trigger1 = parent,animelem = 1
+trigger1 = anim != 1012
+value = 1012
+;persistent = 0
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 5200
+trigger1 = parent,animelem = 1
+trigger2 = parent,anim = 5270
+trigger2 = parent,animelem = 3
+pos = 0,-95*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 5200
+trigger1 = parent,animelem = 2
+trigger2 = parent,anim = 5270
+trigger2 = parent,animelem = 4
+pos = 19*const(size.xscale),-72*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 5200
+trigger1 = parent,animelem = 3
+trigger2 = parent,anim = 5270
+trigger2 = parent,animelem = 5
+pos = 45*const(size.xscale),-82*const(size.yscale)
+time = -1
+
+;------------------
+;paentstate 205
+
+[State 1065, 3]
+type = sprpriority
+trigger1 = parent,anim = 205 || parent,anim = 265 || parent,anim = 700
+trigger1 = parent,animelem = 1
+value = 3
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 205 || parent,anim = 265 || parent,anim = 700
+trigger1 = parent,animelem = 2
+trigger1 = anim != 10200
+value = 10200
+;persistent = 0
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 205 || parent,anim = 265 || parent,anim = 700
+trigger1 = parent,animelem = 1 || parent,animelem = 4
+trigger1 = anim != 1012
+value = 1012
+;persistent = 0
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 205 || parent,anim = 265 || parent,anim = 700
+trigger1 = parent,animelem = 1
+pos = 29*const(size.xscale),-77*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 205 || parent,anim = 265 || parent,anim = 700
+trigger1 = parent,animelem = 2
+pos = 0,0
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 205 || parent,anim = 265 || parent,anim = 700
+trigger1 = parent,animelem = 4
+pos = 29*const(size.xscale),-77*const(size.yscale)
+time = -1
+
+;------------------
+;paentstate 215
+
+[State 1065, 3]
+type = sprpriority
+trigger1 = parent,anim = 215 || parent,anim = 275 || parent,anim = 291 || parent,anim = 715
+trigger1 = parent,animelem = 1
+value = 3
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 215 || parent,anim = 275 || parent,anim = 291 || parent,anim = 715
+trigger1 = parent,animelem = 1
+trigger1 = anim != 1012
+value = 1012
+;persistent = 0
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 215 || parent,anim = 275 || parent,anim = 291 || parent,anim = 715
+trigger1 = parent,animelem = 1
+pos = 7*const(size.xscale),-82*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 215 || parent,anim = 275 || parent,anim = 291 || parent,anim = 715
+trigger1 = parent,animelem = 2
+pos = -6*const(size.xscale),-86*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 215 || parent,anim = 275 || parent,anim = 291 || parent,anim = 715
+trigger1 = parent,animelem = 3
+pos = -7*const(size.xscale),-85*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 215 || parent,anim = 275 || parent,anim = 291 || parent,anim = 715
+trigger1 = parent,animelem = 4
+pos = 13*const(size.xscale),-87*const(size.yscale)
+time = -1
+
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 215 || parent,anim = 275 || parent,anim = 291 || parent,anim = 715
+trigger1 = parent,animelem = 6
+pos = 25*const(size.xscale),-77*const(size.yscale)
+time = -1
+
+;------------------
+;paentstate 210
+
+[State 1065, 3]
+type = sprpriority
+trigger1 = parent,anim = 210 || parent,anim = 3002 || parent,anim = 710
+trigger1 = parent,animelem = 1
+value = 1
+
+[State 1065, 3]
+type = sprpriority
+trigger1 = parent,anim = 210 || parent,anim = 3002 || parent,anim = 710
+trigger1 = parent,animelem = 3
+value = 3
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 210 || parent,anim = 3002 || parent,anim = 710
+trigger1 = parent,animelem = 1 || parent,animelem = 5
+trigger1 = anim != 1012
+value = 1012
+;persistent = 0
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 210 || parent,anim = 3002 || parent,anim = 710
+trigger1 = parent,animelem = 3
+value = 10210
+;persistent = 0
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 210 || parent,anim = 3002 || parent,anim = 710
+trigger1 = parent,animelem = 1
+pos = 0,-70*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 210 || parent,anim = 3002 || parent,anim = 710
+trigger1 = parent,animelem = 2
+pos = 35*const(size.xscale),-73*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 210 || parent,anim = 3002 || parent,anim = 710
+trigger1 = parent,animelem = 3
+pos = 0,0
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 210 || parent,anim = 3002 || parent,anim = 710
+trigger1 = parent,animelem = 5
+pos = 43*const(size.xscale),-94*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 210 || parent,anim = 3002 || parent,anim = 710
+trigger1 = parent,animelem = 6
+pos = 39*const(size.xscale),-83*const(size.yscale)
+time = -1
+
+;------------------
+;paentstate 245
+
+[State 1065, 3]
+type = sprpriority
+trigger1 = parent,anim = 245
+trigger1 = parent,animelem = 1 || parent,animelem = 9
+value = 3
+
+[State 1065, 3]
+type = sprpriority
+trigger1 = parent,anim = 245
+trigger1 = parent,animelem = 7
+value = 1
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 245
+trigger1 = parent,animelem = 1 || parent,animelem = 8
+trigger1 = anim != 1012
+value = 1012
+;persistent = 0
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 245
+trigger1 = parent,animelem = 7
+value = 10245
+;persistent = 0
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 245
+trigger1 = parent,animelem = 1
+pos = 5*const(size.xscale),-65*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 245
+trigger1 = parent,animelem = 2
+pos = -29*const(size.xscale),-69*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 245
+trigger1 = parent,animelem = 3
+pos = -29*const(size.xscale),-68*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 245
+trigger1 = parent,animelem = 4
+pos = 8*const(size.xscale),-55*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 245
+trigger1 = parent,animelem = 5
+pos = 72*const(size.xscale),-73*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 245
+trigger1 = parent,animelem = 7
+pos = 0,0
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 245
+trigger1 = parent,animelem = 8
+pos = 15*const(size.xscale),-64*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 245
+trigger1 = parent,animelem = 9
+pos = 27*const(size.xscale),-66*const(size.yscale)
+time = -1
+
+;------------------
+;paentstate 235
+
+[State 1065, 3]
+type = sprpriority
+trigger1 = parent,anim = 236 || parent,anim = 736
+trigger1 = parent,animelem = 5
+value = 3
+
+[State 1065, 3]
+type = sprpriority
+trigger1 = parent,anim = 235 || parent,anim = 735
+trigger1 = parent,animelem = 1
+value = 1
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 235 || parent,anim = 735
+trigger1 = parent,animelem = 1
+trigger1 = anim != 1012
+value = 1012
+;persistent = 0
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 235 || parent,anim = 735
+trigger1 = parent,animelem = 1
+pos = -29*const(size.xscale),-83*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 236 || parent,anim = 736
+trigger1 = parent,animelem = 2
+pos = -33*const(size.xscale),-91*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 236 || parent,anim = 736
+trigger1 = parent,animelem = 3
+pos = -21*const(size.xscale),-93*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 236 || parent,anim = 736
+trigger1 = parent,animelem = 5
+pos = 33*const(size.xscale),-88*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 237 || parent,anim = 737
+trigger1 = parent,animelem = 1
+pos = 19*const(size.xscale),-51*const(size.yscale)
+time = -1
+
+;------------------
+;paentstate 405
+
+[State 1065, 3]
+type = sprpriority
+trigger1 = parent,anim = 405 || parent,anim = 445 || parent,anim = 900
+trigger1 = parent,animelem = 1
+value = 3
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 405 || parent,anim = 445 || parent,anim = 900
+trigger1 = parent,animelem = 1 || parent,animelem = 4
+trigger1 = anim != 1012
+value = 1012
+;persistent = 0
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 405 || parent,anim = 445 || parent,anim = 900
+trigger1 = parent,animelem = 2
+value = 10405
+;persistent = 0
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 405 || parent,anim = 445 || parent,anim = 900
+trigger1 = parent,animelem = 1
+pos = 27*const(size.xscale),-44*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 405 || parent,anim = 445 || parent,anim = 900
+trigger1 = parent,animelem = 2
+pos = 0,0
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 405 || parent,anim = 445 || parent,anim = 900
+trigger1 = parent,animelem = 4
+pos = 27*const(size.xscale),-44*const(size.yscale)
+time = -1
+
+;------------------
+;paentstate 415
+
+[State 1065, 3]
+type = sprpriority
+trigger1 = parent,anim = 415 || parent,anim = 915
+trigger1 = parent,animelem = 1
+value = 1
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 415 || parent,anim = 915
+trigger1 = parent,animelem = 1
+trigger1 = anim != 1012
+value = 1012
+;persistent = 0
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 415 || parent,anim = 915
+trigger1 = parent,animelem = 1 || parent,animelem = 6
+pos = 22*const(size.xscale),-35*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 415 || parent,anim = 915
+trigger1 = parent,animelem = 2 || parent,animelem = 5
+pos = 26*const(size.xscale),-38*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 415 || parent,anim = 915
+trigger1 = parent,animelem = 3
+pos = 22*const(size.xscale),-44*const(size.yscale)
+time = -1
+
+;------------------
+;paentstate 425
+
+[State 1065, 3]
+type = sprpriority
+trigger1 = parent,anim = 425 || parent,anim = 925 || parent,anim = 426
+trigger1 = parent,animelem = 1
+value = 3
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 425 || parent,anim = 925 || parent,anim = 426
+trigger1 = parent,animelem = 1
+value = 10120
+;persistent = 0
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 425 || parent,anim = 925 || parent,anim = 426
+trigger1 = parent,animelem = 2 || parent,animelem = 5
+trigger1 = anim != 1012
+value = 1012
+;persistent = 0
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 425 || parent,anim = 925 || parent,anim = 426
+trigger1 = parent,animelem = 3
+value = 10426
+;persistent = 0
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 425 || parent,anim = 925 || parent,anim = 426
+trigger1 = parent,animelem = 1
+pos = 14*const(size.xscale),-84*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 425 || parent,anim = 925 || parent,anim = 426
+trigger1 = parent,animelem = 2
+pos = 55*const(size.xscale),-81*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 425 || parent,anim = 925 || parent,anim = 426
+trigger1 = parent,animelem = 3
+pos = 46*const(size.xscale),20*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 425 || parent,anim = 925 || parent,anim = 426
+trigger1 = parent,animelem = 5
+pos = 87*const(size.xscale),-9*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 425 || parent,anim = 925 || parent,anim = 426
+trigger1 = parent,animelem = 6
+pos = 62*const(size.xscale),-21*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 425 || parent,anim = 925 || parent,anim = 426
+trigger1 = parent,animelem = 7
+pos = 14*const(size.xscale),-29*const(size.yscale)
+time = -1
+
+;------------------
+;paentstate 432
+
+[State 1065, 3]
+type = sprpriority
+trigger1 = parent,anim = 432 || parent,anim = 932
+trigger1 = parent,animelem = 1
+value = 1
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 432 || parent,anim = 932
+trigger1 = parent,animelem = 1
+trigger1 = anim != 1012
+value = 1012
+;persistent = 0
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 432 || parent,anim = 932
+trigger1 = parent,animelem = 1 || parent,animelem = 6
+pos = 22*const(size.xscale),-35*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 432 || parent,anim = 932
+trigger1 = parent,animelem = 2 || parent,animelem = 5
+pos = 26*const(size.xscale),-38*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 432 || parent,anim = 932
+trigger1 = parent,animelem = 3
+pos = 22*const(size.xscale),-44*const(size.yscale)
+time = -1
+
+;------------------
+;paentstate 455
+
+[State 1065, 3]
+type = sprpriority
+trigger1 = parent,anim = 250 || parent,anim = 457 || parent,anim = 750
+trigger1 = parent,animelem = 1
+value = 3
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 250 || parent,anim = 457 || parent,anim = 750
+trigger1 = parent,animelem = 1 || parent,animelem = 7
+trigger1 = anim != 1012
+value = 1012
+;persistent = 0
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 250 || parent,anim = 457 || parent,anim = 750
+trigger1 = parent,animelem = 4
+value = 10250
+;persistent = 0
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 250 || parent,anim = 457 || parent,anim = 750
+trigger1 = parent,animelem = 6
+value = 10251
+;persistent = 0
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 250 || parent,anim = 457 || parent,anim = 750
+trigger1 = parent,animelem = 1
+pos = -1*const(size.xscale),-90*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 250 || parent,anim = 457 || parent,anim = 750
+trigger1 = parent,animelem = 2
+pos = -1*const(size.xscale),-89*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 250 || parent,anim = 457 || parent,anim = 750
+trigger1 = parent,animelem = 3
+pos = 15*const(size.xscale),-69*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 250 || parent,anim = 457 || parent,anim = 750
+trigger1 = parent,animelem = 4
+pos = 0,0
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 250 || parent,anim = 457 || parent,anim = 750
+trigger1 = parent,animelem = 7
+pos = 78*const(size.xscale),-20*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 250 || parent,anim = 457 || parent,anim = 750
+trigger1 = parent,animelem = 8
+pos = 27*const(size.xscale),-44*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 250 || parent,anim = 457 || parent,anim = 750
+trigger1 = parent,animelem = 9
+pos = 19*const(size.xscale),-51*const(size.yscale)
+time = -1
+
+;------------------
+;paentstate 605
+
+[State 1065, 3]
+type = sprpriority
+trigger1 = parent,anim = 605
+trigger1 = parent,animelem = 1
+value = 3
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 605
+trigger1 = parent,animelem = 1 || parent,animelem = 5
+trigger1 = anim != 1012
+value = 1012
+;persistent = 0
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 605
+trigger1 = parent,animelem = 3
+value = 10600
+;persistent = 0
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 605
+trigger1 = parent,animelem = 1
+pos = -9*const(size.xscale),-88*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 605
+trigger1 = parent,animelem = 2
+pos = -2*const(size.xscale),-109*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 605
+trigger1 = parent,animelem = 3
+pos = 0,0
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 605
+trigger1 = parent,animelem = 5
+pos = -2*const(size.xscale),-109*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 640
+trigger1 = parent,animelem = 1
+pos = 40*const(size.xscale),-89*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 640
+trigger1 = parent,animelem = 1
+pos = 40*const(size.xscale),-89*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 640
+trigger1 = parent,animelem = 2
+pos = 39*const(size.xscale),-87*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 640
+trigger1 = parent,animelem = 3
+pos = 38*const(size.xscale),-86*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 640
+trigger1 = parent,animelem = 4
+pos = 37*const(size.xscale),-85*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 640
+trigger1 = parent,animelem = 5
+pos = 36*const(size.xscale),-84*const(size.yscale)
+time = -1
+
+;------------------
+;paentstate 615
+
+[State 1065, 3]
+type = sprpriority
+trigger1 = parent,anim = 615
+trigger1 = parent,animelem = 1
+value = 3
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 615
+trigger1 = parent,animelem = 1 || parent,animelem = 5
+trigger1 = anim != 1012
+value = 1012
+;persistent = 0
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 615
+trigger1 = parent,animelem = 3
+value = 10425
+;persistent = 0
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 615
+trigger1 = parent,animelem = 1
+pos = -19*const(size.xscale),-125*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 615
+trigger1 = parent,animelem = 2
+pos = 15*const(size.xscale),-127*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 615
+trigger1 = parent,animelem = 3
+pos = -1*const(size.xscale),-21*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 615
+trigger1 = parent,animelem = 5
+pos = 34*const(size.xscale),-77*const(size.yscale)
+time = -1
+
+;------------------
+;paentstate 290
+
+[State 1065, 3]
+type = sprpriority
+trigger1 = parent,anim = 290
+trigger1 = parent,animelem = 1 || parent,animelem = 7
+value = 3
+
+[State 1065, 3]
+type = sprpriority
+trigger1 = parent,anim = 290
+trigger1 = parent,animelem = 5
+value = 1
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 290
+trigger1 = parent,animelem = 1 || parent,animelem = 6
+trigger1 = anim != 1012
+value = 1012
+;persistent = 0
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 290
+trigger1 = parent,animelem = 5
+value = 10245
+;persistent = 0
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 290
+trigger1 = parent,animelem = 1
+pos = -29*const(size.xscale),-68*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 290
+trigger1 = parent,animelem = 2
+pos = 8*const(size.xscale),-55*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 290
+trigger1 = parent,animelem = 3
+pos = 72*const(size.xscale),-73*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 290
+trigger1 = parent,animelem = 5
+pos = 0,0
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 290
+trigger1 = parent,animelem = 6
+pos = 15*const(size.xscale),-64*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 290
+trigger1 = parent,animelem = 7
+pos = 27*const(size.xscale),-66*const(size.yscale)
+time = -1
+
+;------------------
+;paentstate 490
+
+[State 1065, 3]
+type = sprpriority
+trigger1 = parent,anim = 490
+trigger1 = parent,animelem = 1
+value = 3
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 490
+trigger1 = parent,animelem = 1
+value = 10490
+;persistent = 0
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 490
+trigger1 = parent,animelem = 7 || parent,animelem = 10
+trigger1 = anim != 1012
+value = 1012
+;persistent = 0
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 490
+trigger1 = parent,animelem = 8
+value = 10405
+;persistent = 0
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 490
+trigger1 = parent,animelem = 1
+pos = 35*const(size.xscale),-11*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 490
+trigger1 = parent,animelem = 7
+pos = 15*const(size.xscale),-68*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 490
+trigger1 = parent,animelem = 8
+pos = 0,0
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 490
+trigger1 = parent,animelem = 10
+pos = 26*const(size.xscale),-44*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 490
+trigger1 = parent,animelem = 11
+pos = 19*const(size.xscale),-51*const(size.yscale)
+time = -1
+
+;------------------
+;paentstate 491
+
+[State 1065, 3]
+type = sprpriority
+trigger1 = parent,anim = 491 || parent,anim = 791
+trigger1 = parent,animelem = 1
+value = 3
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 491 || parent,anim = 791
+trigger1 = parent,animelem = 1 || parent,animelem = 7
+trigger1 = anim != 1012
+value = 1012
+;persistent = 0
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 491 || parent,anim = 791
+trigger1 = parent,animelem = 5
+value = 10425
+;persistent = 0
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 491 || parent,anim = 791
+trigger1 = parent,animelem = 1
+pos = -28*const(size.xscale),-92*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 491 || parent,anim = 791
+trigger1 = parent,animelem = 2
+pos = -26*const(size.xscale),-93*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 491 || parent,anim = 791
+trigger1 = parent,animelem = 3
+pos = 6*const(size.xscale),-110*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 491 || parent,anim = 791
+trigger1 = parent,animelem = 4
+pos = 48*const(size.xscale),-106*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 491 || parent,anim = 791
+trigger1 = parent,animelem = 5
+pos = -5*const(size.xscale),8*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 491 || parent,anim = 791
+trigger1 = parent,animelem = 7
+pos = 34*const(size.xscale),-19*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 491 || parent,anim = 791
+trigger1 = parent,animelem = 8
+pos = 38*const(size.xscale),-46*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 491 || parent,anim = 791
+trigger1 = parent,animelem = 9
+pos = 18*const(size.xscale),-62*const(size.yscale)
+time = -1
+
+;------------------
+;paentstate 805
+
+[State 1065, 3]
+type = sprpriority
+trigger1 = parent,anim = 801
+trigger1 = parent,animelem = 1
+value = 3
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 801
+trigger1 = parent,animelem = 1 || parent,time = 55
+trigger1 = anim != 1012
+value = 1012
+;persistent = 0
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 801
+trigger1 = parent,animelem = 2
+value = 10800
+;persistent = 0
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 801
+trigger1 = parent,animelem = 1
+pos = 34*const(size.xscale),-74*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 801
+trigger1 = parent,animelem = 2
+pos = 0,0
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 801
+trigger1 = parent,animelem = 10
+pos = 4*const(size.xscale),-6*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 801
+trigger1 = parent,time = 55
+pos = 63*const(size.xscale),-82*const(size.yscale)
+time = -1
+
+;------------------
+;paentstate 2100
+
+[State 1065, 3]
+type = sprpriority
+trigger1 = parent,anim = 2100
+trigger1 = parent,animelem = 1
+value = 3
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 2100
+trigger1 = parent,animelem = 1
+value = 1031
+;persistent = 0
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 2100
+trigger1 = parent,animelem = 11
+value = 1032
+;persistent = 0
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 2100
+trigger1 = parent,animelem = 1
+pos = 0,0
+time = -1
+
+;------------------
+;paentstate 1040
+
+[State 1065, 3]
+type = sprpriority
+trigger1 = parent,anim = 1040 || parent,anim = 1540
+trigger1 = parent,animelem = 1
+value = 3
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 1040 || parent,anim = 1540
+trigger1 = parent,animelem = 1
+trigger1 = anim != 1012
+value = 1012
+;persistent = 0
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 1040 || parent,anim = 1540
+trigger1 = parent,animelem = 6
+value = 11040
+;persistent = 0
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 1040 || parent,anim = 1540
+trigger1 = parent,animelem = 7
+value = 11041
+;persistent = 0
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 1040 || parent,anim = 1540
+trigger1 = parent,animelem = 8
+value = 11042
+;persistent = 0
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 1040 || parent,anim = 1540
+trigger1 = parent,animelem = 10
+value = 11043
+;persistent = 0
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 1040 || parent,anim = 1540
+trigger1 = parent,animelem = 1 || parent,animelem = 3
+pos = -1*const(size.xscale),-84*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 1040 || parent,anim = 1540
+trigger1 = parent,animelem = 2 || parent,animelem = 4
+pos = -1*const(size.xscale),-85*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 1040 || parent,anim = 1540
+trigger1 = parent,animelem = 5
+pos = 20*const(size.xscale),-64*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 1040 || parent,anim = 1540
+trigger1 = parent,animelem = 6
+pos = 0,0
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 1040 || parent,anim = 1540
+trigger1 = parent,animelem = 10
+pos = 21*const(size.xscale),-64*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 1040 || parent,anim = 1540
+trigger1 = parent,animelem = 11
+pos = 27*const(size.xscale),-66*const(size.yscale)
+time = -1
+
+;------------------
+;paentstate 1041
+
+[State 1065, 3]
+type = sprpriority
+trigger1 = parent,anim = 1041
+trigger1 = parent,animelem = 1
+value = 1
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 1041
+trigger1 = parent,animelem = 1
+value = 11044
+;persistent = 0
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 1041
+trigger1 = parent,animelem = 1
+pos = 0,0
+time = -1
+
+;------------------
+;paentstate 1045
+
+[State 1065, 3]
+type = sprpriority
+trigger1 = parent,anim = 1045
+trigger1 = parent,animelem = 1
+value = 1
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 1045
+trigger1 = parent,animelem = 1
+value = 11047
+;persistent = 0
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 1045
+trigger1 = parent,animelem = 3
+value = 11049
+;persistent = 0
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 1045
+trigger1 = parent,animelem = 1
+pos = -10*const(size.xscale),-65*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 1045
+trigger1 = parent,animelem = 2
+pos = -57*const(size.xscale),-92*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 1045
+trigger1 = parent,animelem = 3
+pos = -12*const(size.xscale),-79*const(size.yscale)
+time = -1
+
+;------------------
+;paentstate 1042
+
+[State 1065, 3]
+type = sprpriority
+trigger1 = parent,anim = 1044
+trigger1 = parent,animelem = 1
+value = 1
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 1044
+trigger1 = parent,animelem = 1
+value = 11045
+;persistent = 0
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 1044
+trigger1 = parent,animelem = 1
+pos = 0,0
+time = -1
+
+;------------------
+;paentstate 1046
+
+[State 1065, 3]
+type = sprpriority
+trigger1 = parent,anim = 1046
+trigger1 = parent,animelem = 1
+value = 1
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 1046
+trigger1 = parent,animelem = 1
+value = 11048
+;persistent = 0
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 1046
+trigger1 = parent,animelem = 3
+value = 11049
+;persistent = 0
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 1046
+trigger1 = parent,animelem = 1
+pos = -10*const(size.xscale),-65*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 1046
+trigger1 = parent,animelem = 2
+pos = -57*const(size.xscale),-92*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 1046
+trigger1 = parent,animelem = 3
+pos = -12*const(size.xscale),-79*const(size.yscale)
+time = -1
+
+;------------------
+;paentstate 1050
+
+[State 1065, 3]
+type = sprpriority
+trigger1 = parent,anim = 1050 || parent,anim = 1550
+trigger1 = parent,animelem = 1
+value = 3
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 1050 || parent,anim = 1550
+trigger1 = parent,animelem = 1
+trigger1 = anim != 1012
+value = 1012
+;persistent = 0
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 1050 || parent,anim = 1550
+trigger1 = parent,animelem = 6
+value = 11040
+;persistent = 0
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 1050 || parent,anim = 1550
+trigger1 = parent,animelem = 7
+value = 11041
+;persistent = 0
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 1050 || parent,anim = 1550
+trigger1 = parent,animelem = 8
+value = 11042
+;persistent = 0
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 1050 || parent,anim = 1550
+trigger1 = parent,animelem = 10
+value = 11043
+;persistent = 0
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 1050 || parent,anim = 1550
+trigger1 = parent,animelem = 1 || parent,animelem = 3
+pos = -1*const(size.xscale),-90*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 1050 || parent,anim = 1550
+trigger1 = parent,animelem = 2 || parent,animelem = 4
+pos = -1*const(size.xscale),-89*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 1050 || parent,anim = 1550
+trigger1 = parent,animelem = 5
+pos = 16*const(size.xscale),-68*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 1050 || parent,anim = 1550
+trigger1 = parent,animelem = 6
+pos = 11*const(size.xscale),26*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 1050 || parent,anim = 1550
+trigger1 = parent,animelem = 10
+pos = 21*const(size.xscale),-64*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 1050 || parent,anim = 1550
+trigger1 = parent,animelem = 11
+pos = 27*const(size.xscale),-66*const(size.yscale)
+time = -1
+
+;------------------
+;paentstate 1051
+
+[State 1065, 3]
+type = sprpriority
+trigger1 = parent,anim = 1051
+trigger1 = parent,animelem = 1
+value = 1
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 1051
+trigger1 = parent,animelem = 1
+value = 11044
+;persistent = 0
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 1051
+trigger1 = parent,animelem = 6
+pos = 11*const(size.xscale),26*const(size.yscale)
+time = -1
+
+;------------------
+;paentstate 1052
+
+[State 1065, 3]
+type = sprpriority
+trigger1 = parent,anim = 1052
+trigger1 = parent,animelem = 1
+value = 1
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 1052
+trigger1 = parent,animelem = 1
+value = 11045
+;persistent = 0
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 1052
+trigger1 = parent,animelem = 6
+pos = 11*const(size.xscale),26*const(size.yscale)
+time = -1
+
+;------------------
+;paentstate 1054
+
+[State 1065, 3]
+type = sprpriority
+trigger1 = parent,anim = 1054
+trigger1 = parent,animelem = 1
+value = 3
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 1054
+trigger1 = parent,animelem = 1
+value = 11043
+;persistent = 0
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 1054
+trigger1 = parent,animelem = 1
+pos = 82*const(size.xscale),-71*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 1054
+trigger1 = parent,animelem = 2
+pos = 27*const(size.xscale),-66*const(size.yscale)
+time = -1
+
+;------------------
+;paentstate 1055
+
+[State 1065, 3]
+type = sprpriority
+trigger1 = parent,anim = 1055
+trigger1 = parent,animelem = 1
+value = 3
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 1055
+trigger1 = parent,animelem = 1
+value = 11043
+;persistent = 0
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 1055
+trigger1 = parent,animelem = 1
+pos = 90*const(size.xscale),-46*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 1055
+trigger1 = parent,animelem = 2
+pos = 21*const(size.xscale),-64*const(size.yscale)
+time = -1
+
+;------------------
+;paentstate 1015
+
+[State 1065, 3]
+type = sprpriority
+trigger1 = parent,anim = 1010 || parent,anim = 1017 || parent,anim = 1510 || parent,anim = 1512
+trigger1 = parent,animelem = 1
+value = 3
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 1010 || parent,anim = 1017 || parent,anim = 1510 || parent,anim = 1512
+trigger1 = parent,animelem = 1
+trigger1 = anim != 1012
+value = 1012
+;persistent = 0
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 1010 || parent,anim = 1017 || parent,anim = 1510 || parent,anim = 1512
+trigger1 = parent,animelem = 1
+pos = 32*const(size.xscale),-73*const(size.yscale)
+time = 8
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 1010 || parent,anim = 1017 || parent,anim = 1510 || parent,anim = 1512
+trigger1 = parent,animelem = 4
+pos = 50*const(size.xscale),-75*const(size.yscale)
+time = 3
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 1010 || parent,anim = 1017 || parent,anim = 1510 || parent,anim = 1512
+trigger1 = parent,animelem = 5
+pos = 63*const(size.xscale),-39*const(size.yscale)
+time = 10
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 1010 || parent,anim = 1017 || parent,anim = 1510 || parent,anim = 1512
+trigger1 = parent,animelem = 6
+pos = 27*const(size.xscale),-66*const(size.yscale)
+time = 5
+
+;------------------
+;paentstate 1016
+
+[State 1065, 3]
+type = sprpriority
+trigger1 = parent,anim = 1011
+trigger1 = parent,animelem = 1
+value = 3
+
+[State 1013,9]
+type = SprPriority
+trigger1 = parent,anim = 1011
+trigger1 = parent,animelem = 19
+value = 1
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 1011
+trigger1 = parent,animelem = 1
+value = 1013
+;persistent = 0
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 1011
+trigger1 = parent,animelem = 1
+pos = 0,0
+time = 51
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 1011
+trigger1 = parent,animelem = 19
+pos = 53*const(size.xscale),-77*const(size.yscale)
+time = 2
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 1011
+trigger1 = parent,animelem = 20
+pos = 46*const(size.xscale),-75*const(size.yscale)
+time = 2
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 1011
+trigger1 = parent,animelem = 21
+pos = 44*const(size.xscale),-79*const(size.yscale)
+time = 40
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 1011
+trigger1 = parent,animelem = 22
+pos = 67*const(size.xscale),-75*const(size.yscale)
+time = 5
+
+;------------------
+;paentstate 1061
+
+[State 1065, 3]
+type = sprpriority
+trigger1 = parent,anim = 1018
+trigger1 = parent,animelem = 1
+value = 3
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 1018
+trigger1 = parent,animelem = 1
+value = 10800
+;persistent = 0
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 1018
+trigger1 = parent,animelem = 41
+trigger1 = anim != 1012
+value = 1012
+;persistent = 0
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 1018
+trigger1 = parent,animelem = 1
+pos = 1*const(size.xscale),0
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 1018
+trigger1 = parent,animelem = 11
+pos = 13*const(size.xscale),-6*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 1018
+trigger1 = parent,animelem = 41
+pos = 7*const(size.xscale),-82*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 1018
+trigger1 = parent,animelem = 42
+pos = -6*const(size.xscale),-86*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 1018
+trigger1 = parent,animelem = 43
+pos = -7*const(size.xscale),-85*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 1018
+trigger1 = parent,animelem = 44
+pos = 13*const(size.xscale),-87*const(size.yscale)
+time = -1
+
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 1018
+trigger1 = parent,animelem = 45
+pos = 25*const(size.xscale),-77*const(size.yscale)
+time = -1
+
+;------------------
+;paentstate 1025
+
+[State 1065, 3]
+type = sprpriority
+trigger1 = parent,anim = 1025 || parent,anim = 1520 || parent,anim = 1810 || parent,anim = 1525
+trigger1 = parent,animelem = 1
+value = 3
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 1025 || parent,anim = 1520 || parent,anim = 1810 || parent,anim = 1525
+trigger1 = parent,animelem = 1
+value = 10001
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 1025 || parent,anim = 1520 || parent,anim = 1810 || parent,anim = 1525
+trigger1 = parent,animelem = 1
+pos = 0,0
+time = -1
+
+;------------------
+;paentstate 210
+
+[State 1065, 3]
+type = sprpriority
+trigger1 = parent,anim = 3001
+trigger1 = parent,animelem = 1
+value = 3
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 3001
+trigger1 = parent,animelem = 2
+trigger1 = anim != 1012
+value = 1012
+;persistent = 0
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 3001
+trigger1 = parent,animelem = 1
+value = 10210
+;persistent = 0
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 3001
+trigger1 = parent,animelem = 4
+value = 10001
+;persistent = 0
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 3001
+trigger1 = parent,animelem = 1
+pos = 0,0
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 3001
+trigger1 = parent,animelem = 2
+pos = 43*const(size.xscale),-94*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 3001
+trigger1 = parent,animelem = 3
+pos = 39*const(size.xscale),-83*const(size.yscale)
+time = -1
+
+;------------------
+;paentstate 3020
+
+[State 1065, 3]
+type = sprpriority
+trigger1 = parent,anim = 3020
+trigger1 = parent,animelem = 1
+value = 3
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 3020
+trigger1 = parent,animelem = 1
+trigger1 = anim != 1012
+value = 1012
+;persistent = 0
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 3020
+trigger1 = parent,animelem = 1
+pos = 32*const(size.xscale),-73*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 3020
+trigger1 = parent,animelem = 2
+pos = 50*const(size.xscale),-75*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 3020
+trigger1 = parent,animelem = 4
+pos = 63*const(size.xscale),-39*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 3020
+trigger1 = parent,animelem = 5
+pos = 27*const(size.xscale),-66*const(size.yscale)
+time = -1
+
+;------------------
+;paentstate 3021
+
+[State 1065, 3]
+type = sprpriority
+trigger1 = parent,anim = 3021
+trigger1 = parent,animelem = 1
+value = 3
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 3021
+trigger1 = parent,animelem = 1
+value = 10800
+;persistent = 0
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 3021
+trigger1 = parent,animelem = 70
+value = 10001
+;persistent = 0
+
+[State 1065, 3]
+type = bindtoparent
+triggerall = parent,anim = 3021
+trigger1 = parent,animelem = 1
+trigger2 = parent,animelem = 3
+trigger3 = parent,animelem = 5
+pos = 0,3*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+triggerall = parent,anim = 3021
+trigger1 = parent,animelem = 2
+trigger1 = parent,animelem = 4
+trigger1 = parent,animelem = 6
+pos = 0,0
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 3021
+trigger1 = parent,animelem = 7
+pos = 12*const(size.xscale),-6*const(size.yscale)
+time = -1
+
+;------------------
+;paentstate 2300
+
+[State 1065, 3]
+type = sprpriority
+trigger1 = parent,anim = 2300
+trigger1 = parent,animelem = 1
+value = 1
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 2300
+trigger1 = parent,animelem = 1
+trigger1 = anim != 1012
+value = 1012
+;persistent = 0
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 2300
+trigger1 = parent,animelem = 1
+pos = 37*const(size.xscale),-35*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 2300
+trigger1 = parent,animelem = 2
+pos = 11*const(size.xscale),-22*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 2300
+trigger1 = parent,animelem = 3
+pos = -32*const(size.xscale),-6*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 2300
+trigger1 = parent,animelem = 4
+pos = -12*const(size.xscale),-48*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 2300
+trigger1 = parent,animelem = 5
+pos = 7*const(size.xscale),-43*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 2300
+trigger1 = parent,animelem = 6
+pos = 22*const(size.xscale),-32*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 2300
+trigger1 = parent,animelem = 7
+pos = 19*const(size.xscale),-51*const(size.yscale)
+time = -1
+
+;------------------
+;paentstate 745
+
+[State 1065, 3]
+type = sprpriority
+trigger1 = parent,anim = 745
+trigger1 = parent,animelem = 1 || parent,animelem = 8
+value = 3
+
+[State 1065, 3]
+type = sprpriority
+trigger1 = parent,anim = 745
+trigger1 = parent,animelem = 6
+value = 1
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 745
+trigger1 = parent,animelem = 1 || parent,animelem = 7
+trigger1 = anim != 1012
+value = 1012
+;persistent = 0
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 745
+trigger1 = parent,animelem = 6
+value = 10245
+;persistent = 0
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 745
+trigger1 = parent,animelem = 1
+pos = 5*const(size.xscale),-65*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 745
+trigger1 = parent,animelem = 2
+pos = -29*const(size.xscale),-69*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 745
+trigger1 = parent,animelem = 3
+pos = 8*const(size.xscale),-55*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 745
+trigger1 = parent,animelem = 4
+pos = 72*const(size.xscale),-73*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 745
+trigger1 = parent,animelem = 6
+pos = 0,0
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 745
+trigger1 = parent,animelem = 7
+pos = 15*const(size.xscale),-64*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 745
+trigger1 = parent,animelem = 8
+pos = 27*const(size.xscale),-66*const(size.yscale)
+time = -1
+
+;------------------
+;paentstate 790
+
+[State 1065, 3]
+type = sprpriority
+trigger1 = parent,anim = 790
+trigger1 = parent,animelem = 1
+value = 3
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 790
+trigger1 = parent,animelem = 1
+value = 10490
+;persistent = 0
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 790
+trigger1 = parent,animelem = 5 || parent,animelem = 8
+trigger1 = anim != 1012
+value = 1012
+;persistent = 0
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 790
+trigger1 = parent,animelem = 6
+value = 10405
+;persistent = 0
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 790
+trigger1 = parent,animelem = 1
+pos = 35*const(size.xscale),-11*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 790
+trigger1 = parent,animelem = 5
+pos = 15*const(size.xscale),-68*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 790
+trigger1 = parent,animelem = 6
+pos = 0,0
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 790
+trigger1 = parent,animelem = 8
+pos = 26*const(size.xscale),-44*const(size.yscale)
+time = -1
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 790
+trigger1 = parent,animelem = 9
+pos = 19*const(size.xscale),-51*const(size.yscale)
+time = -1
+
+;------------------
+;paentstate 1530
+
+[State 1065, 3]
+type = sprpriority
+trigger1 = parent,anim = 1530
+trigger1 = parent,animelem = 1
+value = 3
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 1530
+trigger1 = parent,animelem = 1
+value = 1531
+;persistent = 0
+
+[State 1065, 3]
+type = changeanim
+trigger1 = parent,anim = 1530
+trigger1 = parent,animelem = 9
+value = 1032
+;persistent = 0
+
+[State 1065, 3]
+type = bindtoparent
+trigger1 = parent,anim = 1530
+trigger1 = parent,animelem = 1
+pos = 0,0
+time = -1
+
+
+
+
+
+
+
+
+
+
+
+[State 1052, 5]
+type = changestate
+trigger1 = parent,animelem =  1
+trigger1 = parent,stateno = 2501 || parent,stateno = 2508
+trigger2 = parent,animelem =  1
+trigger2 = parent,stateno = 2504
+trigger3 = parent,stateno = 2506
+trigger4 = parent,alive =  0
+trigger4 = stateno != 10001
+trigger5 = parent,movetype = H
+trigger5 = Enemy,HitDefAttr = SCA, NT, ST, HT
+trigger5 = parent,stateno != 120 && parent,stateno != 130
+trigger5 = parent,stateno != 131 && parent,stateno != 132
+trigger5 = parent,stateno != 140 && parent,stateno != 150
+trigger5 = parent,stateno != 151 && parent,stateno != 152
+trigger5 = parent,stateno != 153 && parent,stateno != 154
+trigger5 = parent,stateno != 155
+trigger6 = !SelfAnimExist(Parent,Anim)
+trigger7 = parent,movetype = H
+trigger7 = parent,stateno != 5000 && parent,stateno != 5001
+trigger7 = parent,stateno != 5010 && parent,stateno != 5011
+trigger7 = parent,stateno != 5020 && parent,stateno != 5030
+trigger7 = parent,stateno != 5035 && parent,stateno != 5040
+trigger7 = parent,stateno != 5050 && parent,stateno != 5070
+trigger7 = parent,stateno != 5071 && parent,stateno != 5080
+trigger7 = parent,stateno != 5081 && parent,stateno != 5100
+trigger7 = parent,stateno != 5101 && parent,stateno != 5110
+trigger7 = parent,stateno != 5120 && parent,stateno != 5150
+trigger7 = parent,stateno != 120 && parent,stateno != 130
+trigger7 = parent,stateno != 131 && parent,stateno != 132
+trigger7 = parent,stateno != 140 && parent,stateno != 150
+trigger7 = parent,stateno != 151 && parent,stateno != 152
+trigger7 = parent,stateno != 153 && parent,stateno != 154
+trigger7 = parent,stateno != 155 && parent,stateno != 5200
+trigger7 = parent,stateno != 5201
+trigger8 = parent,lose =  1 || parent,drawgame = 1
+trigger9 = (parent,stateno != [700,1999]) && parent,stateno != 2300 && parent,fvar(27) <= 0
+trigger10 = parent,stateno = 3500
+value = 10001
+
+;------------------
+;stand
+
+[Statedef 10001]
+type    = A
+movetype= I
+physics = N
+velset = 0,0
+sprpriority = 3
+anim = 10001
+
+[State 191, 2] 
+type = parentvarset
+trigger1 = Time = 0
+v = 2
+value = 0
+
+[State 191, 2] 
+type = destroyself
+trigger1 = Time = 1

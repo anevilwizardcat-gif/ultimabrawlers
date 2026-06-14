@@ -1,0 +1,39 @@
+; ADD004 BASIC PIEs ReBuilded DEF (7/14/2015)
+;==============================================
+; This file is Made by PIE.
+; there is a backup of this file in the same folder, named "<samename>.a4bk".
+; use assist tool, or delete this file, then remove ".a4bk" from the neme of backup to Restore.
+;==============================================
+
+[Info]
+name="ShinScorpion"
+displayname="Scorpion"
+versiondate=
+mugenversion=1.0
+author="SeanAltly"
+Edited By ShinRei
+pal.defaults=1,2,3,4
+[Files]
+sprite=sz.sff
+sound=sz.snd
+anim=sz.air
+cmd=sz.cmd
+cns=add004basic.reb1
+st=add004basic.reb1
+stcommon=common1.cns
+pal13=smoke.act
+pal1=scorpion.act
+pal2=scorpion2.act
+pal3=scorpion3.act
+pal4=scorpion4.act
+pal5=scorpion5.act
+pal6=scorpion6.act
+pal7=scorpion.act
+pal8=scorpion2.act
+pal9=scorpion3.act
+pal10=scorpion4.act
+pal11=scorpion5.act
+pal12=scorpion6.act
+[Arcade]
+intro.storyboard=
+ending.storyboard=

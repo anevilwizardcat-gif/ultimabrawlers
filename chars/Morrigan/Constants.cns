@@ -1,0 +1,77 @@
+; ___________________________________
+;| Morrigan by Phantom.of.the.Server |
+; ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
+;===================<CONSTANTS>================
+
+[Data]
+life = 950
+power = 3000
+attack = 100
+defence = 100
+fall.defence_up = 50
+liedown.time = 60
+airjuggle = 15
+sparkno = s7010
+guard.sparkno = s7000
+KO.echo = 0
+volume = 0
+IntPersistIndex = 0
+FloatPersistIndex = 0
+
+[Size]
+xscale = 1
+yscale = 1
+ground.back = 20 
+ground.front = 20 
+air.back = 20
+air.front = 20
+height = 60
+attack.dist = 160 
+proj.attack.dist = 90
+proj.doscale = 0
+head.pos = 0, -80
+mid.pos = -2, -57
+shadowoffset = 0
+draw.offset = 0, 0 
+
+[Velocity]
+walk.fwd = 3.5
+walk.back = -3
+run.fwd = 8, -4
+run.back = -8, -4
+jump.neu = 0, -9.5
+jump.back = -3.5
+jump.fwd = 3.5
+runjump.back = -4.5, -10
+runjump.fwd = 4.5, -10 
+
+[Movement]
+airjump.num = 0
+airjump.height = 0
+yaccel = 0.5
+stand.friction = 0.85
+crouch.friction = 0.85
+stand.friction.threshold = 1.0
+crouch.friction.threshold = 1.0
+air.gethit.groundlevel = 25
+air.gethit.groundrecover.ground.threshold = -20
+air.gethit.groundrecover.groundlevel = 10
+air.gethit.airrecover.threshold = -1
+air.gethit.airrecover.yaccel = 0.35
+air.gethit.trip.groundlevel = 15
+down.bounce.offset = 0, 20
+down.bounce.yaccel = 0.4
+down.bounce.groundlevel = 12
+down.friction.threshold = 0.5
+
+[Quotes]
+victory1 = "Ahhh... I enjoyed abusing you. Care to try it again?"
+victory2 = "Attack me harder! I want to get all hot and sweaty too!"
+victory3 = "Your pain shall soon turn into ultimate pleasure, I promise!"
+victory4 = "Still afraid? Come and feel the climax together!"
+victory5 = "I thought you'd amuse me... Guess I was wrong."
+victory6 = "Shhh... Can you hear it? My heartbeat..."
+victory7 = "Maybe I should've given you a hint. Maybe next time..."
+victory8 = "Young men tend to use force. Don't be ashamed, I like it!"
+victory9 = "True peace can only be found in the cold darkness."
+victory10 = "These bats around me? They hold my stuff when I go shopping!"

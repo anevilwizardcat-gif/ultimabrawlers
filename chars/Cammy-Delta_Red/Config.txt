@@ -1,0 +1,49 @@
+;Config file for Cammy Delta Red, added by DeathScythe
+
+;---------------------------------------------------------------------------
+;Initialize
+[StateDef 5900]
+type = S
+
+[State 5900, Int VarReset]
+type = VarRangeSet
+trigger1 = !RoundsExisted
+value = 0
+
+[State 5900, Float VarReset]
+type = VarRangeSet
+trigger1 = !RoundsExisted
+fvalue = 0
+
+;---------------------------------------------------------------------------
+; @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+; @@@ ONLY MODIFY BELOW THIS LINE @@@
+; @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+;---------------------------------------------------------------------------
+
+;Stance
+[State 5900, Stance]
+type = VarSet
+trigger1 = 1
+var(57) = 1 ; MODIFY THIS LINE
+;0 = SF2 Stance
+;1 = SF4 Stance
+
+;Sniping Heel Supers
+[State 5900, Sniping Heel]
+type = VarSet
+trigger1 = 1
+var(56) = 0 ; MODIFY THIS LINE
+;0 = Off
+;1 = On
+
+;---------------------------------------------------------------------------
+; @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+; @@@ ONLY MODIFY ABOVE THIS LINE @@@
+; @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+;---------------------------------------------------------------------------
+
+[State 5900, End]
+type = ChangeState
+trigger1 = 1
+value = 5901

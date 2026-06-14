@@ -1,6 +1,0 @@
-I redid a lot of attacking clsn's as no priority is as bad as infinite priority, that and the sword stuff
-needed some more for it to be more effective. I also added 5 ticks of invul on QCFx2 because other wise
-it can be punished before it even starts. Also the attacking frame missed on some people so I increased the 
-range of it behind him. Feel free to edit any thing I've done clsn wise to fit what you wanted. I did make
-the projectiles super cancelable as well. Beyond that I did not alter anything else. I also removed all 
-links I could find as his combo system doesnt need any. For example s.hp was +4 which lp could be linked after causing silly damage. S.hk was + 5. Now s.hp is +2 and s.hk is +3

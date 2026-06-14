@@ -243,7 +243,9 @@ MK1_SUB-ZERO, mk2_pit2.def
 CvWScorpion, mk2_pit2.def
 SubZero, mk2_pit2.def
 Yu, mk2_pit2.def
-Ragna_S, mk2_pit2.def
+Ragna_S, Blazblue_Kagutsuchi_PM.def
+Terumi, Blazblue_Kagutsuchi_PM.def
+YTerumi, Blazblue_Kagutsuchi_PM.def
 Cloud, NibelReactorHR.def
 sephiroth_ak, NibelReactorHR.def
 TifaLockhart, NibelReactorHR.def

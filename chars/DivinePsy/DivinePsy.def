@@ -1,0 +1,42 @@
+;***************************************************************************;
+;******************* Created in Fighter Factory Ultimate *******************;
+;*******************      http://www.virtualltek.com     *******************;
+;***************************************************************************;
+
+[Info]
+name = "Psylocke"
+displayname = "Psylocke"
+versiondate = 10,28,2014
+mugenversion = 1.0
+author = "DivineWolf"
+pal.defaults = 4,5,6,1,2,3,10,11,12,7,8,9
+localcoord = 320,240
+
+[Files]
+sprite = DivinePsy.sff
+anim = DivinePsy.air
+sound = DivinePsy.snd
+cmd = DivinePsy.cmd
+cns = Coding\System.cns
+stcommon = common1.cns
+st = Coding\System.cns
+st1 = Coding\Normal.cns
+st2 = Coding\Specials.cns
+st3 = Coding\Helpers.cns
+st4 = Coding\Supers.cns
+pal1 = Colors\Goodaldo_MvC2Art.act
+pal2 = Colors\Gogngos_BrightBlue.act
+pal3 = Colors\SNT_Captain_Britain.act
+pal4 = Colors\CGU_Default.act
+pal5 = Colors\Froz_Comic.act
+pal6 = Colors\Senorfro_Strider_Hiryu.act
+pal7 = Colors\MC2_Custom3.act
+pal8 = Colors\Infinite_The_Queen.act
+pal9 = Colors\PAVGN_DarkSkinFireHair.act
+pal10 = Colors\Girard_DFORogue.act
+pal11 = Colors\SageHarpuiaJDJ_King.act
+pal12 = Colors\2OS_Custom.act
+
+[Arcade]
+intro.storyboard = 
+ending.storyboard = 

@@ -1,0 +1,72 @@
+; ________________________
+;| Cammy by Varo_Hades |
+; ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
+;Sprites by chuchoryu
+;
+;Edits by Tiger-Boy & DeathScythe
+;
+;====================<DEFINITION>====================
+[Info]
+name = "Cammy"
+displayname = "Cammy"
+versiondate =12,14,2011
+mugenversion=1.0;06,14,2003
+author      ="chuchoryu & Varo_Hades"
+pal.defaults=1,2
+
+[Files]
+cmd     =Command.cmd
+st      =States/System.st
+stcommon=common1.cns
+sprite  =CammyCS.sff
+cns = States/Constants.cns
+anim = Anim.air
+
+;************************************
+;Choose Cammy's Sound!
+
+;sound   =Sounds/CAMMYSFA.snd
+sound   =Sounds/CAMMYSF4.snd
+;sound   =Sounds/CammyCvS2.snd
+;sound   =Sounds/CAMMYSF4JAP.snd
+
+
+;************************************
+
+pal1=CammyCSPalettes/Default2.act
+pal2=CammyCSPalettes/Samus.act
+pal3=CammyCSPalettes/Bison.act
+pal4=CammyCSPalettes/SF2P.act
+pal5=CammyCSPalettes/SF2HF.act
+pal6=CammyCSPalettes/Purple&Green.act
+pal7=CammyCSPalettes/SFV.act
+pal8=CammyCSPalettes/Chun-Li.act
+pal9=CammyCSPalettes/Camo.act
+pal10=CammyCSPalettes/VioletButterfly.act
+pal11=CammyCSPalettes/Leona.act
+pal12=CammyCSPalettes/Morrigan.act
+
+st1=States/Normal.st
+st2=States/Special.st
+st3=States/Super.st
+st4=States/Helpers.st
+st5=Config.txt
+
+[Palette Keymap]
+x = 1
+y = 2
+z = 3
+a = 4
+b = 5
+c = 6
+x2 = 7
+y2 = 8
+z2 = 9
+a2 = 10
+b2 = 11
+c2 = 12
+
+; Arcade mode
+[Arcade]
+;intro.storyboard = .def
+;ending.storyboard = SSF2TCammyEnd\SSF2TCammyEnd.def 

@@ -1,0 +1,127 @@
+;==================================================================;
+;						  To change the 						   ;
+;					  settings, edit this file. 				   ;
+;==================================================================;
+
+;-------------------------------------------------------------------
+[Statedef 10001]
+type = S
+anim = 1
+
+;#region character_config.txt
+;===================================================;
+;				   EX COMMAND STYLE 				;
+;  To use Vampire Savior commands for EX moves, set ;
+;						 to 0						;
+;													;
+; ヴァンパイアセイヴァーのコマンドを使うために、	 ;
+;				 0に弄ってください。 			   ;
+;													;
+; CHANGES:											;
+; Dancing Flash 	   - 632146PP -> 41236PP		;
+; Please Help Me!	   - 632146KK -> 41236KK		;
+;													;
+; 変:											   ;
+; ダンシングフラッシュ - 632146PP -> 41236PP		  ; 
+; プリーズヘルプミー   - 632146KK -> 41236KK 	   ;
+;===================================================;
+[State 10010, ES CMD]
+type = VarAdd
+trigger1 = !Time
+var(0) = 128
+;..0.....VS CMD
+;128....CFJ CMD
+
+;===================================================;
+;					 ES SOUND FX					;
+;===================================================;
+[State 10010, ES SFX]
+type = VarAdd
+trigger1 = !Time
+var(0) = 16
+;.0.....ES SFX OFF/ES SFXの表示なし
+;16.....ES SFX ON/ES SFXの表示あり
+
+;===================================================;
+;					EX SUPER PAUSE					;
+;===================================================;
+[State 10010, EX SUPER PAUSE]
+type = VarAdd
+trigger1 = !Time
+var(0) = 0
+;.0.....EX SUPER PAUSE OFF/EX SUPER PAUSEの表示なし
+;64.....EX SUPER PAUSE ON/EX SUPER PAUSEの表示あり
+
+﻿;===================================================;
+;		  To change the character palettes, 		;
+;			set the variables accordingly.			;
+;			キャラのパレットを変えるために 		 ;
+;				可変を弄ってください				  ;
+;===================================================;
+[State 10010, PALETTE]
+type = Null
+trigger1 = e||(var(21) := 4)  ; LK
+trigger1 = e||(var(22) := 5)  ; MK
+trigger1 = e||(var(23) := 6)  ; HK
+trigger1 = e||(var(24) := 17) ; LP
+trigger1 = e||(var(25) := 2)  ; MP
+trigger1 = e||(var(26) := 3)  ; HP
+trigger1 = e||(var(27) := 7)  ; s+LK
+trigger1 = e||(var(28) := 45) ; s+MK
+trigger1 = e||(var(29) := 36) ; s+HK
+trigger1 = e||(var(30) := 37) ; s+LP
+trigger1 = e||(var(31) := 13) ; s+MP
+trigger1 = e||(var(32) := 48) ; s+HP
+
+
+;pal1=act001.act		;Vampire Savior LK
+;pal2=act002.act		;Vampire Savior MK
+;pal3=act003.act		;Vampire Savior HK
+;pal4=act017.act		;CFJ Default
+;pal5=act005.act		;Vampire Savior MP
+;pal6=act006.act		;Vampire Savior HP
+;pal7=act007.act		;Vampire Savior PPP
+;pal8=act045.act		;Yellow Iris by MC2
+;pal9=act036.act		;Shantae by MC2
+;pal10=act037.act		;Aisha Clanclan redux by me
+;pal11=act013.act		;Vampire Hunter HP
+;pal12=act048.act		;SSTK Cham-Cham redux by me
+;#endregion
+
+
+
+
+
+
+
+
+
+;***************************DO NOT MODIFY**************************;
+;***************************DO NOT MODIFY**************************;
+;==================================================================;
+;								DO NOT							   ;
+;						   MODIFY ANYTHING						   ;
+;								BELOW!							   ;
+;==================================================================;
+;***************************DO NOT MODIFY**************************;
+;***************************DO NOT MODIFY**************************;
+
+
+
+
+
+
+
+
+
+
+
+;-------------------------------------------------------------------
+; Groove Edit Set
+[State 10001, ParentVarSet]
+type = ParentVarSet
+trigger1 = Time
+var(0) = var(0)
+[State 10001, DestroySelf]
+type = DestroySelf
+trigger1 = RoundState = 2

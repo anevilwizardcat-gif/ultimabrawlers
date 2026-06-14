@@ -1,0 +1,31 @@
+[Info]
+name = "dizzy"
+displayname = "Dizzy"
+versiondate = 10,25,2007
+mugenversion = 04,14,2002
+author = "muteki"
+pal.defaults = 1
+
+[Files]
+cmd     = dizzy.cmd   ;Command set
+cns     = dizzy_const.txt   ;Constants
+st      = dizzy.cns   ;States
+stcommon = common1.cns ;Common states
+sprite  = dizzy.sff   ;Sprite
+anim    = dizzy.air   ;Animation
+sound   = dizzy.snd   ;Sound
+pal1    = dizzy01.act
+pal2    = dizzy02.act
+pal3    = dizzy03.act
+pal4    = dizzy04.act
+pal5    = dizzy05.act
+pal6    = dizzy06.act
+pal7    = dizzy07.act
+pal8    = dizzy08.act
+pal9    = dizzy09.act
+pal10    = dizzy10.act
+pal11    = dizzy11.act
+pal12    = dizzy12.act
+
+[Arcade]
+

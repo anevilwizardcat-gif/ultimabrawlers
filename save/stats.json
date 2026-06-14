@@ -1,5 +1,5 @@
 {
-  "playtime": 29792.72,
+  "playtime": 31917.87,
   "modes": {
     "training": {
       "playtime": 0,
@@ -51,10 +51,10 @@
       ]
     },
     "watch": {
-      "playtime": 29211.56,
-      "clear": 123,
+      "playtime": 31336.71,
+      "clear": 128,
       "clearcount": {
-        "jotaro": 32,
+        "jotaro": 33,
         "dio": 15,
         "mvc2_spiderman": 5,
         "ryu_pots": 1,
@@ -89,7 +89,10 @@
         "justice": 1,
         "cvshaohmaru": 1,
         "dizzy2": 1,
-        "juri": 1
+        "juri": 1,
+        "cammy-delta_red": 2,
+        "ragna_s": 1,
+        "kenshirou": 1
       }
     },
     "survival": {

@@ -1,0 +1,293 @@
+;====================<VARIABLE LIST>====================
+
+;var(3)  : Jump Type (0 = Normal; 1 = Low Jump; 2 = Long Low Jump; 3 = Long Jump)
+;var(4)  : Chain Combo (0 = Off; 1 = On)
+;var(5)  : Command Cancel Flag
+;var(6)  : Cancel Flag
+;var(7)  : Super Cancel Flag
+;var(8)  : Hyper Cancel Flag
+;var(9)  : Counter Flag
+;var(10) : Button Detect (0 = Light; 1 = Medium; 2 = Heavy)
+;var(11) : Secondary Button Detect
+;var(12) : Alternate Hit Count
+;var(13) : Hit Count
+;var(15) : Juggle Points
+;var(16) : Juggle Flag
+;var(17) : Ticks UnGuardable
+;var(18) : ProjContact (0 = No; 1 = Yes)
+;var(19) : Throw Escape
+;var(20) : Custom Combo Time
+;var(21) : Super Cancel Flag
+;var(22) : Hyper Cancel Flag
+;var(23) : Super Finish Type (900 = Custom Combo; 3000 = Raikoken; 3100 = Denei Spark; 3200 = Elec-Trigger; 3300 = Raiha Jinoken)
+
+;var(25) : Ticks to Apply EX FX
+;var(26) : Ticks Unable to Walk
+
+
+;var(30) : Hit Detection
+;var(31) : Hit Sound (0 = Light Punch; 1 = Medium Punch; 2 = Heavy Punch; 3 = Light Kick; 4 = Medium Kick; 5 = Heavy Kick; 6 = Projectile Hit; 800 = Grab)
+;var(32) : Guard Sound
+;var(33) : Hit Spark (8010 = Light; 8011 = Medium; 8012 = Heavy; 8013 = Special; 8014 = Super)
+;var(34) : Guard Spark (8000 = Normal; 8001 = Special)
+;var(35) : Spark xPos
+;var(36) : Spark yPos
+;var(37) : Special/Super Throws (0 = Allowed; 1 = Not Allowed)
+;var(38) : Throw (0 = Allowed; 1 = Not Allowed)
+;var(39) : Projectile Flag (0 = Off; 1 = On)
+
+;var(43) : Player ID to apply electric sparks to
+
+;var(45) : Number of times pushed punch in succession
+;var(46) : Electric Thunder Timer
+;var(47) : Ticks Back is held down
+;var(48) : Back Charge Buffer
+;var(49) : Ticks Down is held down
+;var(50) : Down Charge Buffer
+
+;var(58) : Game Time
+
+;fvar(5) : Amount of Corner Push
+;fvar(10): Damage Dampener
+;fvar(11): Damage Dampener with Counter Multiplier Added
+
+
+
+; _________________________________________________
+;| Blanka by KarmaCharmeleon			 |
+; ¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯
+;====================<CONSTANTS>====================
+[Data]
+life = 1036
+power = 3000
+attack = 100
+defence = 100
+fall.defence_up = 50
+lieDown.time = 30
+airJuggle = 15
+sparkNo = s8010
+guard.sparkNo = s8000
+KO.echo = 0
+volume = 128
+IntPersistIndex = 0
+FloatPersistIndex = 0
+
+[Size]
+xScale = 1
+yScale = 1
+ground.back = 21
+ground.front = 21
+air.back = 21
+air.front = 21
+height = 68
+attack.dist = 160
+proj.attack.dist = 90
+proj.doScale = 0
+head.pos = 26, -66
+mid.pos = 0, -44
+shadowOffset = -1
+draw.offset = 0,0
+
+[Velocity]
+walk.fwd = 2.8125
+walk.back = -2.34375
+run.fwd = 5.625, 0
+run.back = -8.125, -5.625
+jump.neu = 0, -13.90625
+jump.fwd = 4.375
+jump.back = -4.4921875
+runJump.fwd = 6.5625, -15.9921836853
+runJump.back = -5.40, -15.9921836853
+airjump.neu = 0,-6.5
+airjump.back = -2.8
+airjump.fwd = 2.8
+
+[Movement]
+airJump.num = 0
+airJump.height = 0
+yAccel = 0.87890625
+stand.friction = 0.85
+crouch.friction = 0.82
+stand.friction.threshold = 1.0
+crouch.friction.threshold = 1.0
+air.gethit.groundLevel = 25
+air.gethit.groundRecover.ground.threshold = -20
+air.gethit.groundRecover.groundLevel = 10
+air.gethit.airRecover.threshold = -1
+air.gethit.airRecover.yAccel = 0.35
+air.gethit.trip.groundLevel = 15
+down.bounce.offset = 0, 20
+down.bounce.yAccel = 0.4
+down.bounce.groundLevel = 12
+down.friction.threshold = 0.5
+
+
+;====================<WINQUOTES>====================
+[Quotes]
+victory0 = "Seeing you in action is a joke."
+victory1 = "Now you realize the powers I possess!"
+victory2 = "Anybody who makes fun of me will live to regret it!"
+victory3 = "The strong preys upon the weak. That is the law of the wilderness!"
+victory4 = "Nobody can match my brutal strength!"
+victory5 = "This place is a paradise compared to the harsh Amazon!"
+victory6 = "Tremble before my howl of victory! Vuo Vuo Vuo!"
+victory7 = "You are a loser!"
+victory8 = "You don't have what it takes to defeat me..."
+victory9 = "Your fighting style bores me! Vuo Vuo Vuo!"
+victory10 = "Maybe you should live in the jungle. It'd toughen you up!"
+victory11 = "You can't knock me out with shabby moves like that!"
+victory12 = "You might be the second strongest, but I'm number one!"
+victory13 = "Over already? Might as well go play with some monkeys if that's all you got!"
+victory14 = "My bite is worse than my bark!"
+victory15 = "You mean to tell me that you don't have electric powers? Lame!"
+victory16 = "You promised me a banana! Hurry up and bring it!"
+victory17 = "Your punches tickle. Feels like ants crawling on me. How annoying!"
+victory18 = "That's what you get for underestimating me! Bet you regret it now, huh?"
+victory19 = "Bring me some fruits! I'm in the mood for watermelon, oranges and bananas!"
+victory20 = "Waooooh!"
+victory21 = "You can't defeat me with moves like that!"
+victory22 = "Ogwow! Oh! Oh!"
+victory23 = "Arooooo!"
+victory24 = "Crocodiles are good, but I prefer the taste of a nice pirarucu!"
+victory25 = "I've gotta get stronger! I can't go home until I'm good enough for my mama!"
+victory26 = "You didn't keep your mind on the fight. That's why you lost!"
+victory27 = "Until you forget mankind's rules and fight like a beast, you can't beat me!"
+victory28 = "You're strong! We should hang out!"
+victory29 = "I'm stronger than you! I'm better than you!"
+victory30 = "I liked living in the jungle, but I'd rather be with my mama now."
+victory31 = "The king of the jungle is the king of the world!"
+victory32 = "Fighting with you has been fun!"
+victory33 = "When you win, you should let out a victory growl! Wooooo! Wooooo! Woooooo!"
+victory34 = "Awoooooooo!"
+
+;Adon
+victory35 = "My roar is bigger than yours! And I'm faster, too!"
+
+;Akuma
+victory36 = "You're scarier than any jungle creature. Just what are you, anyway?"
+victory37 = "You're making the hair on my back stand on end! Stay away from me!"
+
+;Balrog
+victory38 = "You call yourself a bull, but you fight like an insect!"
+victory39 = "The worst thing about you is your bark!"
+
+;Blanka
+victory40 = "I am the king of the jungle!"
+
+;Cammy
+victory41 = "Real killer bees are way stronger than you! Don't call yourself that!"
+victory42 = "Can I understand cat speak? You makin' fun of me?! Of course I can!"
+
+;Chun-Li
+victory43 = "Is this what people in your land call 'fast?'"
+victory44 = "I...C...P...O...? What is that? Can I eat it?"
+
+;Cody
+victory45 = "I'm onto you! Only bad men wear clothes like that!"
+
+;Dan
+victory46 = "Fighting your friends is fun. You think so, too, right?"
+victory47 = "Don't worry, Dan. You can be my apprentice if you want!"
+
+;Dee Jay
+victory48 = "I suddenly feel like dancing!"
+
+;Dhalsim
+victory49 = "You have a strange way of fighting. Are you even human?"
+victory50 = "Your arms look like snakes! How do you do that?"
+
+;Dudley
+victory51 = "Your attacks are weak! Stop worrying about appearances and go for it!"
+
+;E. Honda
+victory52 = "Nature has no room for fatsos! It's survival of the fittest!"
+victory53 = "There's no sumo ring in the jungle. You just fight until one guy goes down."
+
+;Elena
+victory54 = "I like your dancing! We're friends now!"
+
+;El Fuerte
+victory55 = "Your food tastes like garbage! Makes me wanna puke!"
+victory56 = "Now take off your mask, coward!"
+
+;Fei Long
+victory57 = "You cry like a wild animal, but your strength does not match!"
+victory58 = "I think I should be in movies! Mine would be way better than your stinkers!"
+
+;Gen
+victory59 = "You may be old, but you put up a fight! I hate you!"
+victory60 = "You've got too many moves! Fighting you is a pain!"
+
+;Guile
+victory61 = "How do you get your hair to stand up like that?"
+victory62 = "...Family? I know! I got my Mama!"
+
+;Guy
+victory63 = "What's a ninja? Is it a kind of animal?"
+
+;Ibuki
+victory64 = "You're weak! You should stick to fighting raccoons!"
+
+;Hugo
+victory65 = "In the jungle, everyone is big! You're one of the small ones!"
+
+;Jin Kazama
+victory66 = "That's what happens when you do bad things! Now apologize to everyone!"
+
+;Juri
+victory67 = "GRRRRRRRRRR! You tried to kill me, didn't you?"
+
+;Kazuya Mishima
+victory68 = "Why must you look so angry all the time? You must be thinking about very bad things!"
+
+;Ken
+victory69 = "I'm so much cooler than you. You can't even make electricity!"
+victory70 = "I'm not afraid of fire! I have electric power!"
+
+;Kuma
+victory71 = "Are you a fake bear? Real bears are stronger than that!"
+
+;Makoto
+victory72 = "You've got guts! What jungle are you from?"
+
+;M. Bison
+victory73 = "Bet you think you're pretty scary, huh? You don't scare me!"
+victory74 = "You smell like a bad man! I'm gonna bite you!"
+
+;Poison
+victory75 = "Your mane has an interesting color! What do I eat to make it like that?"
+
+;Rolento
+victory76 = "I can't be friends with someone so full of themselves!"
+
+;Rose
+victory77 = "You kinda creep me out, lady. My Mama is much prettier than you!"
+
+;Ryu
+victory78 = "The king of the jungle is more powerful than the ultimate fighter!"
+victory79 = "If you wanna get stronger, just go to the jungle! That's how I got strong!"
+
+;Sagat
+victory80 = "You say 'tiger' a lot, but you don't know the first thing about real tigers!"
+victory81 = "You don't scare me! You're just an ordinary man!"
+
+;Sakura
+victory82 = "For a little kitten, you sure are strong!"
+victory83 = "My original moves are better than your copies, girl!"
+
+;T. Hawk
+victory84 = "Living things live for themselves. You should do the same!"
+
+;Vega
+victory85 = "You jump around like a butterfly, but I squashed you like one!"
+victory86 = "Only bad men hide their faces!"
+
+;Yang
+victory87 = "Do they eat pirarucu in China too!?"
+
+;Yun
+victory88 = "I don't need no stinkin' skateboard! I can spin faster than anything!"
+
+;Zangief
+victory89 = "Now you understand that the wild is more powerful than anything you can muster!"
+victory90 = "You gotta be stronger than a bear if you wanna survive in the jungle!"
