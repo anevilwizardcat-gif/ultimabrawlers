@@ -118,7 +118,7 @@
 
 	select.bgm = 
 	select.bgm.loop = 1
-	select.bgm.volume = 100
+	select.bgm.volume = 255
 	select.bgm.loopstart = 0
 	select.bgm.loopend = 0
 	select.bgm.startposition = 0

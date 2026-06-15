@@ -1,0 +1,1649 @@
+
+;================================
+;^^^^^^^^^^^^^^ヨガストリーム(Yoga Stream)^^^^^^^^^^^^^^
+;LV.1ヨガストリーム(Lv.1 Yoga Stream)
+[Statedef 3000]
+type = S
+movetype = A
+physics = S
+ctrl = 0
+velset = 0,0
+anim = 3000
+poweradd = -1000+(!var(22)&&var(59)=3 && (100*Life/const(data.life))<=30)*1000-(var(59)=1&&!var(21))*500
+
+[State 1000, VarSet]
+type = VarSet
+trigger1 = Time=0
+var(1)=0
+
+[State 3000]
+type = varset
+trigger1 = time=0
+var(2)=0
+
+[State 3000]
+type = varset
+trigger1 = (prevstateno=3050||prevstateno=3150) && time=0
+var(2)=1
+
+[State 3000]
+type = varset
+trigger1 = (prevstateno=[1000,2099]) && time=0 && !var(21)
+trigger2 = (prevstateno=[3000,3999]) && time=0 && !var(21)
+var(19)=1
+
+[State 1000,2]
+type = ChangeState
+trigger1 = Time=0
+value = 3050
+
+;LV.2ヨガストリーム(Lv.2 Yoga Stream)
+[Statedef 3010]
+type = S
+movetype = A
+physics = S
+ctrl = 0
+velset = 0,0
+anim = 3000
+poweradd = -2000
+
+[State 1000, VarSet]
+type = VarSet
+trigger1 = Time=0
+var(1)=1
+
+[State 3000]
+type = varset
+trigger1 = time=0
+var(2)=0
+
+[State 3000]
+type = varset
+trigger1 = (prevstateno=3050||prevstateno=3150) && time=0
+var(2)=1
+
+[State 3000]
+type = varset
+trigger1 = (prevstateno=[1000,2099]) && time=0 && !var(21)
+trigger2 = (prevstateno=[3000,3999]) && time=0 && !var(21)
+var(19)=1
+
+[State 1000,2]
+type = ChangeState
+trigger1 = Time=0
+value = 3050
+
+;LV.3ヨガストリーム(Lv.3 Yoga Stream)
+[Statedef 3020]
+type = S
+movetype = A
+physics = S
+ctrl = 0
+velset = 0,0
+anim = 3000
+poweradd = ifelse(var(59)!=4,-3000,-1000)
+
+[State 1000, VarSet]
+type = VarSet
+trigger1 = Time=0
+var(1)=2
+
+[State 3000]
+type = varset
+trigger1 = time=0
+var(2)=0
+
+[State 3000]
+type = varset
+trigger1 = (prevstateno=3050||prevstateno=3150) && time=0
+var(2)=1
+
+[State 3000]
+type = varset
+trigger1 = (prevstateno=[1000,2099]) && time=0 && !var(21)
+trigger2 = (prevstateno=[3000,3999]) && time=0 && !var(21)
+var(19)=1
+
+[State 1000,2]
+type = ChangeState
+trigger1 = Time=0
+value = 3050
+
+;ヨガストリーム(Yoga Stream)
+[Statedef 3050]
+type = S
+movetype = A
+physics = S
+juggle = 15
+ctrl = 0
+velset = 0,0
+
+[State 3500, AfterImage]
+type = AfterImage
+trigger1 = time=3 && !var(56)
+time = 999
+length = 10
+TimeGap  = 3
+FrameGap = 4
+palbright = 1,1,1
+palContrast = ifelse(var(2)=1,50,ifelse(var(1)=1,50,ifelse(Var(1)=2,150,128))), ifelse(var(2)=1,50,ifelse(!var(1),128,50)), ifelse(var(2)=1,150,ifelse(var(1)=1,150,ifelse(Var(1)=2,50,128)))
+PalMul = .5,.5,.5
+trans = add1
+
+[State 4500, AfterImage]
+type = AfterImage
+trigger1 = Time=3 && var(56)
+time = 999
+length = 10
+TimeGap  = 3
+FrameGap = 4
+palbright = 1,1,1
+palContrast = 0, 100, 150
+palmul = .5,.5,.5
+trans = add1
+
+[State 3500,NotHitby]
+type = Varset
+trigger1 = Time=0
+fvar(11)=random%2
+
+[State 3500,NotHitby]
+type = NotHitBy
+trigger1 = Time=0
+value = SCA
+time = ifelse(var(1)=1,62,ifelse(var(1)=2,68,57))
+
+[State -2, fx]
+type = Helper
+trigger1 = !NumHelper(7500) && Time=3
+helpertype = normal
+name = "super_effect"
+id = 7500
+facing = 1
+pos = -ceil(36*const(size.xscale)),-ceil(90*const(size.yscale))
+postype = P1
+stateno = 7500+(var(59)=[3,5])*10
+keyctrl = 0
+pausemovetime = 9999
+supermovetime = 9999
+ownpal = 1
+ignorehitpause = 1
+
+[State 3000, Pause]
+type = Pause
+trigger1 = time=3 && !fvar(11)
+time = 52+ifelse(var(1)=1,2,ifelse(var(1)=2,4,0))
+movetime = 52+ifelse(var(1)=1,2,ifelse(var(1)=2,4,0))
+
+;強制停止時間のズレ
+[State 3000, Pause]
+type = Pause
+trigger1 = time=3 && fvar(11)
+time = 52+ifelse(var(1)=1,2,ifelse(var(1)=2,4,0))-1
+movetime = 52+ifelse(var(1)=1,2,ifelse(var(1)=2,4,0))-1
+
+;Yooogaa!
+[State 420,PlaySnd]
+type = PlaySnd
+trigger1 = Anim=3000 && AnimElem=2
+value = 950, 1
+channel = 1
+
+;Stream!
+[state 1950]
+type = PlaySND
+trigger1 = Anim=3000 && AnimElem=3
+value = 3000,0
+channel = 1
+
+[state 1000]
+type = Helper
+trigger1 = Anim=3000 && AnimElem=6
+stateno=6300
+id = 6300
+name = "stream"
+pos = floor(68*const(size.xscale)),-floor(0*const(size.yscale))
+postype = p1
+ownpal = 1
+ignorehitpause=1
+persistent=0
+size.xscale = 1.2*const(size.xscale)
+
+[state 1950]
+type = ChangeAnim
+triggerall = Anim=3000 && AnimElemTime(6)>0
+trigger1 = NumHelper(6300)
+trigger1 = Helper(6300),stateno!=6300
+trigger2 = !NumHelper(6300)
+value = 3050
+
+[state 1150]
+type = StateTypeSet
+trigger1 = Anim=3050 && AnimElem=1
+movetype = I
+
+[state 1950]
+type = ChangeState
+trigger1 = Anim=3050 && AnimTime=0
+value = 0
+ctrl = 1
+
+;---------------------------------------------------------------------------
+;ヨガストリーム/Yoga Stream (Projectile)
+[Statedef 6300]
+type    = S
+movetype = A
+physics = N
+ctrl = 0
+velset = 0,0
+anim = 6300
+sprpriority = 4
+
+[State 6000]
+type = AssertSpecial
+trigger1 = 1
+flag = noshadow
+
+[State 6000]
+type = BindToRoot
+trigger1 = 1
+pos = ceil(68*root,const(size.xscale)),-ceil(0*root,const(size.yscale))
+time = -1
+ignorehitpause = 1
+
+[state 1950]
+type = PlaySND
+trigger1 = time=0
+value = 5,4
+channle = 3
+
+[State 6000]
+type = varset
+trigger1 = time=0
+var(1) = root,var(1)
+
+[State 200,VarSet]
+type = varset
+trigger1 = time>0 && !(!root,var(18)||root,var(56))
+var(18) = 1
+
+[State 200,VarSet]
+type = varset
+trigger1 = time>0 && (!root,var(18)||root,var(56))
+var(18) = 0
+
+[State 4110, DestroySelf]
+type = VarSet
+trigger1 = time=0
+var(17) = 4
+
+[State 4110, DestroySelf]
+type = VarAdd
+trigger1 = var(17)
+var(17) = 1
+
+[State 4110, DestroySelf]
+type = VarSet
+trigger1 = !root,numprojid(6300) && time>1&&(var(17)!=[1,6])
+var(17) = 1
+
+[state 199]
+type = varAdd
+trigger1 = !root,numprojid(6300) && time>1&&(var(17)!=[1,5])
+var(16) = 1
+ignorehitpause=1
+
+[State 6300, VarSet]
+type = VarSet
+trigger1 = var(13) && root,projcontacttime(6300)=1
+var(13) = 0
+
+[State 4110, DestroySelf]
+type = PlaySnd
+trigger1 = !root,numprojid(6300) && time>1&&(var(17)!=[1,5]) && !var(13)
+value = 0,10
+channel = 9
+ignorehitpause=1
+
+;初段
+[State 1000,Projectile]
+type = Projectile
+trigger1 = time>0 && (var(17)!=[1,5]) && !var(16) && root,stateno=3050
+projanim = ifelse(var(18),8050,6310+(time>3))
+projID = 6300
+projshadow = -1
+velocity = 0, 0
+accel = 0, 0
+projhits = 1
+projmisstime = 0
+projremovetime=1
+projedgebound=50
+projstagebound=50
+sprpriority = 5
+; HitDefs
+attr = S, HP
+damage    = ifelse(ceil((56+var(1)*14)*parent,fvar(7))<7,7,ceil((56+var(1)*14)*parent,fvar(7))),ifelse(ceil(ceil((56+var(1)*14)*parent,fvar(7))/8)<7,7,ceil(ceil((56+var(1)*14)*parent,fvar(7))/8))
+animtype  = Hard
+getpower = 0,0
+givepower = 2*parent,var(6),2*parent,var(6)
+guardflag = L
+hitflag = MAF
+pausetime = 12,11
+guard.pausetime = 12,11
+sparkno = s7300+random%8
+guard.sparkno = s7010
+sparkxy = ifelse(P2bodydist X<10,-10,ceil(P2bodydist X)), 0
+hitsound   = S1,15
+guardsound = S0,0
+ground.type = Low
+ground.slidetime = 21
+guard.slidetime = 21
+ground.hittime = 21
+guard.hittime = 21
+air.hittime = 21
+ground.velocity = -8.65
+guard.velocity = -8.65
+airguard.velocity = -4
+air.animtype = Back
+air.velocity = -4,-6
+yaccel = .4
+air.fall = 1
+fall.recover = 0
+air.recover = 0
+forcestand=1
+palfx.color = 96
+palfx.add = 0,0,-256
+palfx.mul = 144,32,0
+palfx.time = ifelse(P2statetype!=A,32,46+floor(-enemynear,pos Y/8))
+
+;２段目
+[State 1000,Projectile]
+type = Projectile
+trigger1 = time>0 && (var(17)!=[1,5]) && var(16)=1 && root,stateno=3050
+projanim = ifelse(var(18),8050,6310+(time>3))
+projID = 6300
+projshadow = -1
+velocity = 0, 0
+accel = 0, 0
+projhits = 1
+projmisstime = 0
+projremovetime=1
+projedgebound=50
+projstagebound=50
+sprpriority = 5
+; HitDefs
+attr = S, HP
+damage    = ifelse(ceil((49+var(1)*14)*parent,fvar(7))<7,7,ceil((49+var(1)*14)*parent,fvar(7))),ifelse(ceil(ceil((49+var(1)*14)*parent,fvar(7))/8)<7,7,ceil(ceil((49+var(1)*14)*parent,fvar(7))/8))
+animtype  = Hard
+getpower = 0,0
+givepower = 2*parent,var(6),2*parent,var(6)
+guardflag = L
+hitflag = MAF
+pausetime = 12,11
+guard.pausetime = 12,11
+sparkno = s7300+random%8
+guard.sparkno = s7010
+sparkxy = ifelse(P2bodydist X<10,-10,ceil(P2bodydist X)), 0
+hitsound   = S1,15
+guardsound = S0,0
+ground.type = Low
+ground.slidetime = 21
+guard.slidetime = 21
+ground.hittime = 21
+guard.hittime = 21
+air.hittime = 21
+ground.velocity = -8.65
+guard.velocity = -8.65
+airguard.velocity = -4
+air.animtype = Back
+air.velocity = -4,-6
+yaccel = .4
+air.fall = 1
+fall.recover = 0
+air.recover = 0
+forcestand=1
+palfx.color = 96
+palfx.add = 0,0,-256
+palfx.mul = 144,32,0
+palfx.time = ifelse(P2statetype!=A,32,46+floor(-enemynear,pos Y/8))
+
+;３段目(LV.2,3)
+[State 1000,Projectile]
+type = Projectile
+trigger1 = time>0 && (var(17)!=[1,5]) && var(16)=2 && var(1) && root,stateno=3050
+projanim = ifelse(var(18),8050,6310+(time>3))
+projID = 6300
+projshadow = -1
+velocity = 0, 0
+accel = 0, 0
+projhits = 1
+projmisstime = 0
+projremovetime=1
+projedgebound=50
+projstagebound=50
+sprpriority = 5
+; HitDefs
+attr = S, HP
+damage    = ifelse(ceil((42+var(1)*14)*parent,fvar(7))<7,7,ceil((42+var(1)*14)*parent,fvar(7))),ifelse(ceil(ceil((42+var(1)*14)*parent,fvar(7))/8)<7,7,ceil(ceil((42+var(1)*14)*parent,fvar(7))/8))
+animtype  = Hard
+getpower = 0,0
+givepower = 2*parent,var(6),2*parent,var(6)
+guardflag = L
+hitflag = MAF
+pausetime = 12,11
+guard.pausetime = 12,11
+sparkno = s7300+random%8
+guard.sparkno = s7010
+sparkxy = ifelse(P2bodydist X<10,-10,ceil(P2bodydist X)), 0
+hitsound   = S1,15
+guardsound = S0,0
+ground.type = Low
+ground.slidetime = 21
+guard.slidetime = 21
+ground.hittime = 21
+guard.hittime = 21
+air.hittime = 21
+ground.velocity = -8.65
+guard.velocity = -8.65
+airguard.velocity = -4
+air.animtype = Back
+air.velocity = -4,-6
+yaccel = .4
+air.fall = 1
+fall.recover = 0
+air.recover = 0
+forcestand=1
+palfx.color = 96
+palfx.add = 0,0,-256
+palfx.mul = 144,32,0
+palfx.time = ifelse(P2statetype!=A,32,46+floor(-enemynear,pos Y/8))
+
+;４段目(LV.3)
+[State 1000,Projectile]
+type = Projectile
+trigger1 = time>0 && (var(17)!=[1,5]) && var(16)=3 && var(1)=2 && root,stateno=3050
+projanim = ifelse(var(18),8050,6310+(time>3))
+projID = 6300
+projshadow = -1
+velocity = 0, 0
+accel = 0, 0
+projhits = 1
+projmisstime = 0
+projremovetime=1
+projedgebound=50
+projstagebound=50
+sprpriority = 5
+; HitDefs
+attr = S, HP
+damage    = ifelse(ceil(63*parent,fvar(7))<7,7,ceil(63*parent,fvar(7))),ifelse(ceil(ceil(63*parent,fvar(7))/8)<7,7,ceil(ceil(63*parent,fvar(7))/8))
+animtype  = Hard
+getpower = 0,0
+givepower = 2*parent,var(6),2*parent,var(6)
+guardflag = L
+hitflag = MAF
+pausetime = 12,11
+guard.pausetime = 12,11
+sparkno = s7300+random%8
+guard.sparkno = s7010
+sparkxy = ifelse(P2bodydist X<10,-10,ceil(P2bodydist X)), 0
+hitsound   = S1,15
+guardsound = S0,0
+ground.type = Low
+ground.slidetime = 21
+guard.slidetime = 21
+ground.hittime = 21
+guard.hittime = 21
+air.hittime = 21
+ground.velocity = -8.65
+guard.velocity = -8.65
+airguard.velocity = -4
+air.animtype = Back
+air.velocity = -4,-6
+yaccel = .4
+air.fall = 1
+fall.recover = 0
+air.recover = 0
+forcestand=1
+palfx.color = 96
+palfx.add = 0,0,-256
+palfx.mul = 144,32,0
+palfx.time = ifelse(P2statetype!=A,32,46+floor(-enemynear,pos Y/8))
+
+;最終段
+[State 1000,Projectile]
+type = Projectile
+trigger1 = time>0 && (var(17)!=[1,5]) && var(16)=2+var(1) && root,stateno=3050
+projanim = ifelse(var(18),8050,6310+(time>3))
+projID = 6300
+projshadow = -1
+velocity = 0, 0
+accel = 0, 0
+projhits = 1
+projmisstime = 0
+projremovetime=1
+projedgebound=50
+projstagebound=50
+sprpriority = 5
+; HitDefs
+attr = S, HP
+damage    = ifelse(ceil((42+(var(1)=2)*7)*parent,fvar(7))<7,7,ceil((42+(var(1)=2)*7)*parent,fvar(7))),ifelse(ceil(ceil((42+(var(1)=2)*7)*parent,fvar(7))/8)<7,7,ceil(ceil((42+(var(1)=2)*7)*parent,fvar(7))/8))
+animtype  = Back
+getpower = 0,0
+givepower = 2*parent,var(6),2*parent,var(6)
+guardflag = L
+hitflag = MAF
+pausetime = 12,11
+guard.pausetime = 12,11
+sparkno = s7300+random%8
+guard.sparkno = s7010
+sparkxy = ifelse(P2bodydist X<10,-10,ceil(P2bodydist X)), 0
+hitsound   = S1,15
+guardsound = S0,0
+ground.type = Low
+ground.slidetime = 21
+guard.slidetime = 21
+ground.hittime = 21
+guard.hittime = 21
+air.hittime = 21
+ground.velocity = -4,-6
+guard.velocity = -8.65
+airguard.velocity = -4
+air.animtype = Back
+air.velocity = -4,-6
+yaccel = .4
+fall = 1
+fall.recover = 0
+air.recover = 0
+forcestand=1
+palfx.color = 96
+palfx.add = 0,0,-256
+palfx.mul = 144,32,0
+palfx.time = 46+floor(-enemynear,pos Y/8)
+
+[State 200,VarSet]
+type = ParentVarSet
+trigger1 = 1
+var(40) = ifelse(P2bodydist X<10,-10,ceil(P2bodydist X))
+
+[State 200,VarSet]
+type = ParentVarSet
+trigger1 = 1
+var(41) = -floor(2*root,const(size.yscale))
+
+[State 6300, VarSet]
+type = VarSet
+trigger1 = root,projcontacttime(6300)=1
+var(13) = 1
+
+[State 1000, 0]
+type = EnvShake
+trigger1 = root,projcontacttime(6300)=1
+time = 12
+ampl = 4
+ignorehitpause = 1
+
+[State 900, 4]
+type = ChangeState
+triggerall = time > 1
+trigger1 = time>23+var(1)*24 && (var(17)!=[1,6]) && root,numprojid(6300) && var(16)<3+var(1)
+trigger2 = root,stateno!=3050
+trigger3 = !root,numprojid(6300)&&((var(17)!=[1,6])||var(16)>2+var(1))
+value = 6350
+
+;---------------------------------------------------------------------------
+;ヨガストリーム(飛び道具・消滅)/Yoga Stream (Projectile)
+[Statedef 6350]
+type    = S
+movetype = I
+physics = N
+ctrl = 0
+velset = 0,0
+anim = 8050
+
+[State 1000, Spark]
+type = Explod
+trigger1 = !time
+Anim = 6350
+id = 6350
+pos = 0, 0
+postype = p1
+ownpal = 1
+bindtime = 1
+sprpriority = 3
+scale = const(size.xscale),const(size.yscale)
+
+[State 4110, DestroySelf]
+type = DestroySelf
+trigger1 = time=1
+
+;================================
+;^^^^^^^^^^^^^^ヨガボルケイノ(Yoga Volcano)^^^^^^^^^^^^^^
+;LV.1ヨガボルケイノ(Lv.1 Yoga Volcano)
+[Statedef 3100]
+type = S
+movetype = A
+physics = S
+ctrl = 0
+velset = 0,0
+anim = 3100
+poweradd = -1000+(!var(22)&&var(59)=3 && (100*Life/const(data.life))<=30)*1000-(var(59)=1&&!var(21))*500
+
+[State 1000, VarSet]
+type = VarSet
+trigger1 = Time=0
+var(1)=0
+
+[State 3000]
+type = varset
+trigger1 = time=0
+var(2)=0
+
+[State 3000]
+type = varset
+trigger1 = (prevstateno=3050||prevstateno=3150) && time=0
+var(2)=1
+
+[State 3000]
+type = varset
+trigger1 = (prevstateno=[1000,2099]) && time=0 && !var(21)
+trigger2 = (prevstateno=[3000,3999]) && time=0 && !var(21)
+var(19)=1
+
+[State 1000,2]
+type = ChangeState
+trigger1 = Time=0
+value = 3150
+
+;LV.2ヨガボルケイノ(Lv.2 Yoga Volcano)
+[Statedef 3110]
+type = S
+movetype = A
+physics = S
+ctrl = 0
+velset = 0,0
+anim = 3100
+poweradd = -2000
+
+[State 1000, VarSet]
+type = VarSet
+trigger1 = Time=0
+var(1)=1
+
+[State 3000]
+type = varset
+trigger1 = time=0
+var(2)=0
+
+[State 3000]
+type = varset
+trigger1 = (prevstateno=3050||prevstateno=3150) && time=0
+var(2)=1
+
+[State 3000]
+type = varset
+trigger1 = (prevstateno=[1000,2099]) && time=0 && !var(21)
+trigger2 = (prevstateno=[3000,3999]) && time=0 && !var(21)
+var(19)=1
+
+[State 1000,2]
+type = ChangeState
+trigger1 = Time=0
+value = 3150
+
+;LV.3ヨガボルケイノ(Lv.3 Yoga Volcano)
+[Statedef 3120]
+type = S
+movetype = A
+physics = S
+ctrl = 0
+velset = 0,0
+anim = 3100
+poweradd = ifelse(var(59)!=4,-3000,-1000)
+
+[State 1000, VarSet]
+type = VarSet
+trigger1 = Time=0
+var(1)=2
+
+[State 3000]
+type = varset
+trigger1 = time=0
+var(2)=0
+
+[State 3000]
+type = varset
+trigger1 = (prevstateno=3050||prevstateno=3150) && time=0
+var(2)=1
+
+[State 3000]
+type = varset
+trigger1 = (prevstateno=[1000,2099]) && time=0 && !var(21)
+trigger2 = (prevstateno=[3000,3999]) && time=0 && !var(21)
+var(19)=1
+
+[State 1000,2]
+type = ChangeState
+trigger1 = Time=0
+value = 3150
+
+;ヨガボルケイノ(Yoga Volcano)
+[Statedef 3150]
+type = S
+movetype = A
+physics = S
+juggle = 15
+ctrl = 0
+velset = 0,0
+
+[State 3500, AfterImage]
+type = AfterImage
+trigger1 = time=3 && !var(56)
+time = 999
+length = 10
+TimeGap  = 3
+FrameGap = 4
+palbright = 1,1,1
+palContrast = ifelse(var(2)=1,50,ifelse(var(1)=1,50,ifelse(Var(1)=2,150,128))), ifelse(var(2)=1,50,ifelse(!var(1),128,50)), ifelse(var(2)=1,150,ifelse(var(1)=1,150,ifelse(Var(1)=2,50,128)))
+PalMul = .5,.5,.5
+trans = add1
+
+[State 4500, AfterImage]
+type = AfterImage
+trigger1 = Time=3 && var(56)
+time = 999
+length = 10
+TimeGap  = 3
+FrameGap = 4
+palbright = 1,1,1
+palContrast = 0, 100, 150
+palmul = .5,.5,.5
+trans = add1
+
+[State 3500,NotHitby]
+type = Varset
+trigger1 = Time=0
+fvar(11)=random%2
+
+[State 3500,NotHitby]
+type = NotHitBy
+trigger1 = Time=0
+value = SCA
+time = ifelse(var(1)=1,62,ifelse(var(1)=2,68,57))
+
+[State -2, fx]
+type = Helper
+trigger1 = !NumHelper(7500) && Time=3
+helpertype = normal
+name = "super_effect"
+id = 7500
+facing = 1
+pos = -ceil(50*const(size.xscale)),-ceil(55*const(size.yscale))
+postype = P1
+stateno = 7500+(var(59)=[3,5])*10
+keyctrl = 0
+pausemovetime = 9999
+supermovetime = 9999
+ownpal = 1
+ignorehitpause = 1
+
+[State 3000, Pause]
+type = Pause
+trigger1 = time=3 && !fvar(11)
+time = 52+ifelse(var(1)=1,2,ifelse(var(1)=2,4,0))
+movetime = 52+ifelse(var(1)=1,2,ifelse(var(1)=2,4,0))
+
+;強制停止時間のズレ
+[State 3000, Pause]
+type = Pause
+trigger1 = time=3 && fvar(11)
+time = 52+ifelse(var(1)=1,2,ifelse(var(1)=2,4,0))-1
+movetime = 52+ifelse(var(1)=1,2,ifelse(var(1)=2,4,0))-1
+;Yooogaa!
+[State 420,PlaySnd]
+type = PlaySnd
+trigger1 = Anim=3100 && AnimElem=2
+value = 950, 1
+channel = 1
+
+[state 1000]
+type = Helper
+trigger1 = Anim=3100 && AnimElem=6
+stateno=6400
+id = 6400
+name = "volcano"
+pos = floor(79*const(size.xscale)),-floor(115*const(size.yscale))
+postype = p1
+ownpal = 1
+ignorehitpause=1
+persistent=0
+size.xscale = 1.2*const(size.xscale)
+
+[state 1950]
+type = ChangeAnim
+triggerall = Anim=3100 && AnimElemTime(6)>0
+trigger1 = NumHelper(6400)
+trigger1 = Helper(6400),stateno!=6400
+trigger2 = !NumHelper(6400)
+value = 3150
+
+[state 1150]
+type = StateTypeSet
+trigger1 = Anim=3150 && AnimElem=1
+movetype = I
+
+[state 1950]
+type = ChangeState
+trigger1 = Anim=3150 && AnimTime=0
+value = 0
+ctrl = 1
+
+;---------------------------------------------------------------------------
+;ヨガボルケイノ/Yoga Volcano (Projectile)
+[Statedef 6400]
+type    = A
+movetype = A
+physics = N
+ctrl = 0
+velset = 0,0
+anim = 6200
+sprpriority = 4
+
+[State 6000]
+type = AssertSpecial
+trigger1 = 1
+flag = noshadow
+
+[State 6000]
+type = BindToRoot
+trigger1 = 1
+pos = ceil(79*root,const(size.xscale)),-ceil(115*root,const(size.yscale))
+time = -1
+ignorehitpause = 1
+
+[state 1950]
+type = PlaySND
+trigger1 = time=0
+value = 5,4
+channle = 3
+
+[State 6000]
+type = varset
+trigger1 = time=0
+var(1) = root,var(1)
+
+[State 200,VarSet]
+type = varset
+trigger1 = time && !(root,var(18)<(3+var(1))||root,var(56))
+var(18) = 1
+
+[State 200,VarSet]
+type = varset
+trigger1 = time && (root,var(18)<(3+var(1))||root,var(56))
+var(18) = 0
+
+[State 4110, DestroySelf]
+type = VarSet
+trigger1 = time=0
+var(17) = 4
+
+[State 4110, DestroySelf]
+type = VarAdd
+trigger1 = var(17)
+var(17) = 1
+
+[State 4110, DestroySelf]
+type = VarSet
+trigger1 = !root,numprojid(6400) && time>1&&(var(17)!=[1,6])
+var(17) = 1
+
+[state 199]
+type = varAdd
+trigger1 = !root,numprojid(6400) && time>1&&(var(17)!=[1,5])
+var(16) = 1
+ignorehitpause=1
+
+[State 6300, VarSet]
+type = VarSet
+trigger1 = var(13) && root,projcontacttime(6400)=1
+var(13) = 0
+
+[State 4110, DestroySelf]
+type = PlaySnd
+trigger1 = !root,numprojid(6400) && time>1&&(var(17)!=[1,5]) && !var(13)
+value = 0,10
+channel = 9
+ignorehitpause=1
+
+;初段
+[State 1000,Projectile]
+type = Projectile
+trigger1 = time>0 && (var(17)!=[1,5]) && !var(16) && root,stateno=3150
+projanim = ifelse(var(18),8050,6210+(time>3))
+projID = 6400
+projshadow = -1
+velocity = 0, 0
+accel = 0, 0
+projhits = 1
+projmisstime = 0
+projremovetime=1
+projedgebound=50
+projstagebound=50
+sprpriority = 5
+; HitDefs
+attr = S, HP
+damage    = ifelse(ceil((63+var(1)*14)*parent,fvar(7))<7,7,ceil((63+var(1)*14)*parent,fvar(7))),ifelse(ceil(ceil((63+var(1)*14)*parent,fvar(7))/8)<7,7,ceil(ceil((63+var(1)*14)*parent,fvar(7))/8))
+animtype  = Hard
+getpower = 0,0
+givepower = 2*parent,var(6),2*parent,var(6)
+guardflag = M
+hitflag = MAF
+pausetime = 12,11
+guard.pausetime = 12,11
+sparkno = s7300+random%8
+guard.sparkno = s7010
+sparkxy = ifelse(P2bodydist X<10,-10,ceil(P2bodydist X)), 0
+hitsound   = S1,15
+guardsound = S0,0
+ground.type = High
+ground.slidetime = 21
+guard.slidetime = 21
+ground.hittime = 21
+guard.hittime = 21
+air.hittime = 21
+ground.velocity = -8.65
+guard.velocity = -8.65
+airguard.velocity = -4
+air.animtype = Back
+air.velocity = -4,-6
+yaccel = .4
+air.fall = 1
+fall.recover = 0
+air.recover = 0
+forcestand=1
+palfx.color = 96
+palfx.add = 0,0,-256
+palfx.mul = 144,32,0
+palfx.time = ifelse(P2statetype!=A,32,46+floor(-enemynear,pos Y/8))
+
+;２段目
+[State 1000,Projectile]
+type = Projectile
+trigger1 = time>0 && (var(17)!=[1,5]) && var(16)=1 && root,stateno=3150
+projanim = ifelse(var(18),8050,6210+(time>3))
+projID = 6400
+projshadow = -1
+velocity = 0, 0
+accel = 0, 0
+projhits = 1
+projmisstime = 0
+projremovetime=1
+projedgebound=50
+projstagebound=50
+sprpriority = 5
+; HitDefs
+attr = S, HP
+damage    = ifelse(ceil((56+floor(var(1)*1.5)*7)*parent,fvar(7))<7,7,ceil((56+floor(var(1)*1.5)*7)*parent,fvar(7))),ifelse(ceil(ceil((56+floor(var(1)*1.5)*7)*parent,fvar(7))/8)<7,7,ceil(ceil((56+floor(var(1)*1.5)*7)*parent,fvar(7))/8))
+animtype  = Hard
+getpower = 0,0
+givepower = 2*parent,var(6),2*parent,var(6)
+guardflag = M
+hitflag = MAF
+pausetime = 12,11
+guard.pausetime = 12,11
+sparkno = s7300+random%8
+guard.sparkno = s7010
+sparkxy = ifelse(P2bodydist X<10,-10,ceil(P2bodydist X)), 0
+hitsound   = S1,15
+guardsound = S0,0
+ground.type = High
+ground.slidetime = 21
+guard.slidetime = 21
+ground.hittime = 21
+guard.hittime = 21
+air.hittime = 21
+ground.velocity = -8.65
+guard.velocity = -8.65
+airguard.velocity = -4
+air.animtype = Back
+air.velocity = -4,-6
+yaccel = .4
+air.fall = 1
+fall.recover = 0
+air.recover = 0
+forcestand=1
+palfx.color = 96
+palfx.add = 0,0,-256
+palfx.mul = 144,32,0
+palfx.time = ifelse(P2statetype!=A,32,46+floor(-enemynear,pos Y/8))
+
+;３段目(Lv.2,3)
+[State 1000,Projectile]
+type = Projectile
+trigger1 = time>0 && (var(17)!=[1,5]) && var(16)=2 && var(1) && root,stateno=3150
+projanim = ifelse(var(18),8050,6210+(time>3))
+projID = 6400
+projshadow = -1
+velocity = 0, 0
+accel = 0, 0
+projhits = 1
+projmisstime = 0
+projremovetime=1
+projedgebound=50
+projstagebound=50
+sprpriority = 5
+; HitDefs
+attr = S, HP
+damage    = ifelse(ceil((42+var(1)*14)*parent,fvar(7))<7,7,ceil((42+var(1)*14)*parent,fvar(7))),ifelse(ceil(ceil((42+var(1)*14)*parent,fvar(7))/8)<7,7,ceil(ceil((42+var(1)*14)*parent,fvar(7))/8))
+animtype  = Hard
+getpower = 0,0
+givepower = 2*parent,var(6),2*parent,var(6)
+guardflag = M
+hitflag = MAF
+pausetime = 12,11
+guard.pausetime = 12,11
+sparkno = s7300+random%8
+guard.sparkno = s7010
+sparkxy = ifelse(P2bodydist X<10,-10,ceil(P2bodydist X)), 0
+hitsound   = S1,15
+guardsound = S0,0
+ground.type = High
+ground.slidetime = 21
+guard.slidetime = 21
+ground.hittime = 21
+guard.hittime = 21
+air.hittime = 21
+ground.velocity = -8.65
+guard.velocity = -8.65
+airguard.velocity = -4
+air.animtype = Back
+air.velocity = -4,-6
+yaccel = .4
+air.fall = 1
+fall.recover = 0
+air.recover = 0
+forcestand=1
+palfx.color = 96
+palfx.add = 0,0,-256
+palfx.mul = 144,32,0
+palfx.time = ifelse(P2statetype!=A,32,46+floor(-enemynear,pos Y/8))
+
+;４段目(Lv.3)
+[State 1000,Projectile]
+type = Projectile
+trigger1 = time>0 && (var(17)!=[1,5]) && var(16)=3 && var(1)=2 && root,stateno=3150
+projanim = ifelse(var(18),8050,6210+(time>3))
+projID = 6400
+projshadow = -1
+velocity = 0, 0
+accel = 0, 0
+projhits = 1
+projmisstime = 0
+projremovetime=1
+projedgebound=50
+projstagebound=50
+sprpriority = 5
+; HitDefs
+attr = S, HP
+damage    = ifelse(ceil(63*parent,fvar(7))<7,7,ceil(63*parent,fvar(7))),ifelse(ceil(ceil(63*parent,fvar(7))/8)<7,7,ceil(ceil(63*parent,fvar(7))/8))
+animtype  = Hard
+getpower = 0,0
+givepower = 2*parent,var(6),2*parent,var(6)
+guardflag = M
+hitflag = MAF
+pausetime = 12,11
+guard.pausetime = 12,11
+sparkno = s7300+random%8
+guard.sparkno = s7010
+sparkxy = ifelse(P2bodydist X<10,-10,ceil(P2bodydist X)), 0
+hitsound   = S1,15
+guardsound = S0,0
+ground.type = High
+ground.slidetime = 21
+guard.slidetime = 21
+ground.hittime = 21
+guard.hittime = 21
+air.hittime = 21
+ground.velocity = -8.65
+guard.velocity = -8.65
+airguard.velocity = -4
+air.animtype = Back
+air.velocity = -4,-6
+yaccel = .4
+air.fall = 1
+fall.recover = 0
+air.recover = 0
+forcestand=1
+palfx.color = 96
+palfx.add = 0,0,-256
+palfx.mul = 144,32,0
+palfx.time = ifelse(P2statetype!=A,32,46+floor(-enemynear,pos Y/8))
+
+;最終段
+[State 1000,Projectile]
+type = Projectile
+trigger1 = time>0 && (var(17)!=[1,5]) && var(16)=2+var(1) && root,stateno=3150
+projanim = ifelse(var(18),8050,6210+(time>3))
+projID = 6400
+projshadow = -1
+velocity = 0, 0
+accel = 0, 0
+projhits = 1
+projmisstime = 0
+projremovetime=1
+projedgebound=50
+projstagebound=50
+sprpriority = 5
+; HitDefs
+attr = S, HP
+damage    = ifelse(ceil((42+var(1)*7)*parent,fvar(7))<7,7,ceil((42+var(1)*7)*parent,fvar(7))),ifelse(ceil(ceil((42+var(1)*7)*parent,fvar(7))/8)<7,7,ceil(ceil((42+var(1)*7)*parent,fvar(7))/8))
+animtype  = Hard
+getpower = 0,0
+givepower = 2*parent,var(6),2*parent,var(6)
+guardflag = M
+hitflag = MAF
+pausetime = 12,11
+guard.pausetime = 12,11
+sparkno = s7300+random%8
+guard.sparkno = s7010
+sparkxy = ifelse(P2bodydist X<10,-10,ceil(P2bodydist X)), 0
+hitsound   = S1,15
+guardsound = S0,0
+ground.type = Low
+ground.slidetime = 21
+guard.slidetime = 21
+ground.hittime = 21
+guard.hittime = 21
+air.hittime = 21
+ground.velocity = -4,-6
+guard.velocity = -8.65
+airguard.velocity = -4
+air.animtype = Back
+air.velocity = -4,-6
+yaccel = .4
+fall = 1
+fall.recover = 0
+air.recover = 0
+forcestand=1
+palfx.color = 96
+palfx.add = 0,0,-256
+palfx.mul = 144,32,0
+palfx.time = 46+floor(-enemynear,pos Y/8)
+
+[State 200,VarSet]
+type = ParentVarSet
+trigger1 = 1
+var(40) = ifelse(P2bodydist X<10,-10,ceil(P2bodydist X))
+
+[State 200,VarSet]
+type = ParentVarSet
+trigger1 = 1
+var(41) = -floor(120*root,const(size.yscale))
+
+[State 6300, VarSet]
+type = VarSet
+trigger1 = root,projcontacttime(6400)=1
+var(13) = 1
+
+[State 1000, 0]
+type = EnvShake
+trigger1 = root,projcontacttime(6400)=1
+time = 12
+ampl = 4
+ignorehitpause = 1
+
+[State 900, 4]
+type = ChangeState
+triggerall = time > 1
+trigger1 = time>21+var(1)*24 && (var(17)!=[1,6]) && root,numprojid(6400) && var(16)<3+var(1)
+trigger2 = root,stateno!=3150
+trigger3 = root,NumProjID(6400) = 0&&((var(17)!=[1,6])||var(16)>2+var(1))
+value = 6450
+
+;---------------------------------------------------------------------------
+;ヨガボルケイノ(飛び道具・消滅)/Yoga Volcano (Projectile)
+[Statedef 6450]
+type    = A
+movetype = I
+physics = N
+ctrl = 0
+velset = 0,0
+anim = 8050
+
+[State 1000, Spark]
+type = Explod
+trigger1 = !time
+Anim = 6250
+id = 6450
+pos = 0, 0
+postype = p1
+ownpal = 1
+bindtime = 1
+sprpriority = 3
+scale = const(size.xscale),const(size.yscale)
+
+[State 4110, DestroySelf]
+type = DestroySelf
+trigger1 = time = 1
+
+;================================
+;^^^^^^^^^^^^^^ヨガテンペスト(Yoga Tempest)^^^^^^^^^^^^^^
+;ヨガテンペスト(Yoga Tempest)
+[Statedef 3200]
+type = S
+movetype = A
+physics = S
+ctrl = 0
+velset = 0,0
+anim = 3200
+poweradd = ifelse(var(59)!=4,-3000,-1000)
+
+[State 1000, VarSet]
+type = VarSet
+trigger1 = Time=0
+var(1)=2
+
+[State 3000]
+type = varset
+trigger1 = time=0
+var(2)=0
+
+[State 3000]
+type = varset
+trigger1 = (prevstateno=3050||prevstateno=3150) && time=0
+var(2)=1
+
+[State 3000]
+type = varset
+trigger1 = (prevstateno=[1000,2099]) && time=0 && !var(21)
+trigger2 = (prevstateno=[3000,3999]) && time=0 && !var(21)
+var(19)=1
+
+[State 3500, AfterImage]
+type = AfterImage
+trigger1 = time=3 && !var(56)
+time = 999
+length = 10
+TimeGap  = 3
+FrameGap = 4
+palbright = 1,1,1
+palContrast = ifelse(var(2)=1,50,ifelse(var(1)=1,50,ifelse(Var(1)=2,150,128))), ifelse(var(2)=1,50,ifelse(!var(1),128,50)), ifelse(var(2)=1,150,ifelse(var(1)=1,150,ifelse(Var(1)=2,50,128)))
+PalMul = .5,.5,.5
+trans = add1
+
+[State 4500, AfterImage]
+type = AfterImage
+trigger1 = Time=3 && var(56)
+time = 999
+length = 10
+TimeGap  = 3
+FrameGap = 4
+palbright = 1,1,1
+palContrast = 0, 100, 150
+palmul = .5,.5,.5
+trans = add1
+
+[State 3500,NotHitby]
+type = Varset
+trigger1 = Time=0
+fvar(11)=random%2
+
+[State 3500,NotHitby]
+type = NotHitBy
+trigger1 = Time=0
+value = SCA
+time = 68
+
+[State -2, fx]
+type = Helper
+trigger1 = !NumHelper(7500) && Time=3
+helpertype = normal
+name = "super_effect"
+id = 7500
+facing = 1
+pos = -ceil(36*const(size.xscale)),-ceil(90*const(size.yscale))
+postype = P1
+stateno = 7500+(var(59)=[3,5])*10
+keyctrl = 0
+pausemovetime = 9999
+supermovetime = 9999
+ownpal = 1
+ignorehitpause = 1
+
+[State 3000, Pause]
+type = Pause
+trigger1 = time=3 && !fvar(11)
+time = 56
+movetime = 56
+
+;強制停止時間のズレ
+[State 3000, Pause]
+type = Pause
+trigger1 = time=3 && fvar(11)
+time = 56-1
+movetime = 56-1
+
+;Yooogaa!
+[State 420,PlaySnd]
+type = PlaySnd
+trigger1 = Anim=3200 && AnimElem=2
+value = 950, 1
+channel = 1
+
+[state 1000]
+type = Helper
+trigger1 = Anim=3200 && AnimElem=6
+stateno=6500
+id = 6500
+name = "tempest"
+pos = floor(126*const(size.xscale)),-floor(53*const(size.yscale))
+postype = p1
+ownpal = 1
+ignorehitpause=1
+persistent=0
+size.xscale = 1.2*const(size.xscale)
+
+[state 1950]
+type = ChangeAnim
+triggerall = Anim=3200 && AnimElemTime(6)>0
+trigger1 = NumHelper(6500)
+trigger1 = Helper(6500),stateno!=6500
+trigger2 = !NumHelper(6500)
+value = 3250
+
+[state 1150]
+type = StateTypeSet
+trigger1 = Anim=3250 && AnimElem=1
+movetype = I
+
+[state 1950]
+type = ChangeState
+trigger1 = Anim=3250 && AnimTime=0
+value = 0
+ctrl = 1
+
+;---------------------------------------------------------------------------
+;ヨガテンペスト/Yoga Tempest (Projectile)
+[Statedef 6500]
+type    = A
+movetype = A
+physics = N
+ctrl = 0
+velset = 0,0
+anim = 6400
+sprpriority = 4
+
+[State 6000]
+type = AssertSpecial
+trigger1 = 1
+flag = noshadow
+
+[State 6000]
+type = BindToRoot
+trigger1 = 1
+pos = ceil(126*root,const(size.xscale)),-ceil(53*root,const(size.yscale))
+time = -1
+ignorehitpause = 1
+
+[state 1950]
+type = PlaySND
+trigger1 = !time
+value = 5,4
+channle = 3
+
+[State 6000]
+type = varset
+trigger1 = !time
+var(1) = root,var(1)
+
+[State 200,VarSet]
+type = varset
+trigger1 = time>1 && !(root,var(18)<5||root,var(56))
+var(18) = 1
+
+[State 200,VarSet]
+type = varset
+trigger1 = time>1 && (root,var(18)<5||root,var(56))
+var(18) = 0
+
+[State 4110, DestroySelf]
+type = VarSet
+trigger1 = !time
+var(17) = 4
+
+[State 4110, DestroySelf]
+type = VarAdd
+trigger1 = var(17)
+var(17) = 1
+
+[State 4110, DestroySelf]
+type = VarSet
+trigger1 = !root,numprojid(6500) && time>1&&(var(17)!=[1,6])
+var(17) = 1
+
+[state 199]
+type = varAdd
+trigger1 = !root,numprojid(6500) && time>1&&(var(17)!=[1,5])
+var(16) = 1
+ignorehitpause=1
+
+[State 6300, VarSet]
+type = VarSet
+trigger1 = var(13) && root,projcontacttime(6500)=1
+var(13) = 0
+
+[State 4110, DestroySelf]
+type = PlaySnd
+trigger1 = !root,numprojid(6500) && time>1&&(var(17)!=[1,5]) && !var(13)
+value = 0,10
+channel = 9
+ignorehitpause=1
+
+;初段
+[State 1000,Projectile]
+type = Projectile
+trigger1 = time>0 && (var(17)!=[1,5]) && !var(16) && root,stateno=3200
+projanim = ifelse(var(18),8050,6510+(time>3))
+projID = 6500
+projshadow = -1
+velocity = 0, 0
+accel = 0, 0
+projhits = 1
+projmisstime = 0
+projremovetime=1
+projedgebound=50
+projstagebound=50
+sprpriority = 5
+; HitDefs
+attr = S, HP
+damage    = ifelse(ceil(98*parent,fvar(7))<7,7,ceil(98*parent,fvar(7))),ifelse(ceil(ceil(98*parent,fvar(7))/8)<7,7,ceil(ceil(98*parent,fvar(7))/8))
+animtype  = Hard
+getpower = 0,0
+givepower = 2*parent,var(6),2*parent,var(6)
+guardflag = M
+hitflag = MAF
+pausetime = 12,11
+guard.pausetime = 12,11
+sparkno = s7300+random%8
+guard.sparkno = s7010
+sparkxy = ifelse(P2bodydist X<10,-10,ceil(P2bodydist X)), 0
+hitsound   = S1,15
+guardsound = S0,0
+ground.type = Low
+ground.slidetime = 21
+guard.slidetime = 21
+ground.hittime = 21
+guard.hittime = 21
+air.hittime = 21
+ground.velocity = -8.65
+guard.velocity = -8.65
+airguard.velocity = -4
+air.animtype = Back
+air.velocity = -4,-6
+yaccel = .4
+air.fall = 1
+fall.recover = 0
+air.recover = 0
+forcestand=1
+palfx.color = 96
+palfx.add = 0,0,-256
+palfx.mul = 144,32,0
+palfx.time = ifelse(P2statetype!=A,32,46+floor(-enemynear,pos Y/8))
+
+;２～４段目
+[State 1000,Projectile]
+type = Projectile
+trigger1 = time>0 && (var(17)!=[1,5]) && (var(16)=[1,3]) && root,stateno=3200
+projanim = ifelse(var(18),8050,6510+(time>3))
+projID = 6500
+projshadow = -1
+velocity = 0, 0
+accel = 0, 0
+projhits = 1
+projmisstime = 0
+projremovetime=1
+projedgebound=50
+projstagebound=50
+sprpriority = 5
+; HitDefs
+attr = S, HP
+damage    = ifelse(ceil((98-var(16)*7)*parent,fvar(7))<7,7,ceil((98-var(16)*7)*parent,fvar(7))),ifelse(ceil(ceil((98-var(16)*7)*parent,fvar(7))/8)<7,7,ceil(ceil((98-var(16)*7)*parent,fvar(7))/8))
+animtype  = Hard
+getpower = 0,0
+givepower = 2*parent,var(6),2*parent,var(6)
+guardflag = M
+hitflag = MAF
+pausetime = 12,11
+guard.pausetime = 12,11
+sparkno = s7300+random%8
+guard.sparkno = s7010
+sparkxy = ifelse(P2bodydist X<10,-10,ceil(P2bodydist X)), 0
+hitsound   = S1,15
+guardsound = S0,0
+ground.type = Low
+ground.slidetime = 21
+guard.slidetime = 21
+ground.hittime = 21
+guard.hittime = 21
+air.hittime = 21
+ground.velocity = -8.65
+guard.velocity = -8.65
+airguard.velocity = -4
+air.animtype = Back
+air.velocity = -4,-6
+yaccel = .4
+air.fall = 1
+fall.recover = 0
+air.recover = 0
+forcestand=1
+palfx.color = 96
+palfx.add = 0,0,-256
+palfx.mul = 144,32,0
+palfx.time = ifelse(P2statetype!=A,32,46+floor(-enemynear,pos Y/8))
+
+;最終段
+[State 1000,Projectile]
+type = Projectile
+trigger1 = time>0 && (var(17)!=[1,5]) && var(16)=4 && root,stateno=3200
+projanim = ifelse(var(18),8050,6510+(time>3))
+projID = 6500
+projshadow = -1
+velocity = 0, 0
+accel = 0, 0
+projhits = 1
+projmisstime = 0
+projremovetime=1
+projedgebound=50
+projstagebound=50
+sprpriority = 5
+; HitDefs
+attr = S, HP
+damage    = ifelse(ceil(70*parent,fvar(7))<7,7,ceil(70*parent,fvar(7))),ifelse(ceil(ceil(70*parent,fvar(7))/8)<7,7,ceil(ceil(70*parent,fvar(7))/8))
+animtype  = Back
+getpower = 0,0
+givepower = 2*parent,var(6),2*parent,var(6)
+guardflag = M
+hitflag = MAF
+pausetime = 12,11
+guard.pausetime = 12,11
+sparkno = s7300+random%8
+guard.sparkno = s7010
+sparkxy = ifelse(P2bodydist X<10,-10,ceil(P2bodydist X)), 0
+hitsound   = S1,15
+guardsound = S0,0
+ground.type = Low
+ground.slidetime = 21
+guard.slidetime = 21
+ground.hittime = 21
+guard.hittime = 21
+air.hittime = 21
+ground.velocity = -4,-6
+guard.velocity = -8.65
+airguard.velocity = -4
+air.animtype = Back
+air.velocity = -4,-6
+yaccel = .4
+fall = 1
+fall.recover = 0
+air.recover = 0
+forcestand=1
+palfx.color = 96
+palfx.add = 0,0,-256
+palfx.mul = 144,32,0
+palfx.time = 46+floor(-enemynear,pos Y/8)
+
+[State 200,VarSet]
+type = ParentVarSet
+trigger1 = 1
+var(40) = ifelse(P2bodydist X<10,-10,ceil(P2bodydist X))
+
+[State 200,VarSet]
+type = ParentVarSet
+trigger1 = 1
+var(41) = -floor(48*root,const(size.yscale))
+
+[State 6300, VarSet]
+type = VarSet
+trigger1 = root,projcontacttime(6500)=1
+var(13) = 1
+
+[State 1000, 0]
+type = EnvShake
+trigger1 = root,projcontacttime(6500)=1
+time = 12
+ampl = 4
+ignorehitpause = 1
+
+[State 900, 4]
+type = ChangeState
+triggerall = time > 1
+trigger1 = time>70 && (var(17)!=[1,6]) && root,numprojid(6500) && var(16)<5
+trigger2 = root,stateno!=3200
+trigger3 = root,NumProjID(6500) = 0&&((var(17)!=[1,6])||var(16)>4)
+value = 6550
+
+;---------------------------------------------------------------------------
+;ヨガテンペスト(飛び道具・消滅)/Yoga Tempest (Projectile)
+[Statedef 6550]
+type    = A
+movetype = I
+physics = N
+ctrl = 0
+velset = 0,0
+anim = 8050
+
+[State 1000, Spark]
+type = Explod
+trigger1 = !time
+Anim = 6450
+id = 6550
+pos = 0, 0
+postype = p1
+ownpal = 1
+bindtime = 1
+sprpriority = 3
+scale = const(size.xscale),const(size.yscale)
+
+[State 4110, DestroySelf]
+type = DestroySelf
+trigger1 = time = 1
+

@@ -206,46 +206,54 @@ IronMan, centralsuperheroes 1.1
 CaptainAmerica, centralsuperheroes 1.1
 Wolverine, Onslaught.def
 Cyclops, Onslaught.def
-Magneto, mshvsf_apocalypse_now.def
 DivinePsy, mshvsf_apocalypse_now.def
+Magneto, mshvsf_apocalypse_now.def
+Sentinel, mshvsf_apocalypse_now.def
 DoctorDoom, mshvsf_apocalypse_now.def
-sf3_ryu, SuzakuCastleWW.def
-sf3_ken, SuzakuCastleWW.def
-sf3_chun-li, SF3 Battle Arena Rd 02.def
-honda, TowerOfShogun.def
-zangief, TowerOfShogun.def
-Blanka, TowerOfShogun.def
-Guile, SF3 Battle Arena Rd 02.def
+cvsryu, SuzakuCastleWW.def
+cvsken, SuzakuCastleWW.def
+cvschunli, SF3 Battle Arena Rd 02.def
+cvs_honda, TowerOfShogun.def
+cvszangief, TowerOfShogun.def
+cvs2_blanka, TowerOfShogun.def
+cvsguile, SF3 Battle Arena Rd 02.def
 Cammy-Delta_Red, SF3 Battle Arena Rd 02.def
-Dhalsim, SF3 Battle Arena Rd 02.def
-sf3_ibuki, SF3 Battle Arena Rd 02.def
-sf3_gouki, MemoriaTimeInterval.def
-Juri, SF3 Battle Arena Rd 02.def
+cvs2_dhalsim, SF3 Battle Arena Rd 02.def
+Ibuki, SF3 Battle Arena Rd 02.def
+cvsgouki, MemoriaTimeInterval.def
+CFJ_JuriHan, SF3 Battle Arena Rd 02.def
 jedah, LiveHousePurple.def
 Morrigan, LiveHousePurple.def
 Felicia_Y, LiveHousePurple.def
 StriderHiryu, SF3 Battle Arena Rd 02.def
-cvsterry, DerelictChurch.def
 cvssakura, DerelictChurch.def
+cvsnakoruru, DerelictChurch.def
+cvsking, DerelictChurch.def
+cvsmai, DerelictChurch.def
+cvsterry, DerelictChurch.def
 cvshaohmaru, DerelictChurch.def
 Cvs_iori, DerelictChurch.def
 Cvskyo, DerelictChurch.def
-dizzy2, XX'KY'XX.def
-may_xx, XX'KY'XX.def
-justice, XX'KY'XX.def
-chipp, XX'KY'XX.def
-sol_b, XX'KY'XX.def
-ky_slash, XX'KY'XX.def
-pot, XX'KY'XX.def
-baiken_SLASH, XX'KY'XX.def
+;dizzy2, XX'KY'XX.def
+;may_xx, XX'KY'XX.def
+;justice, XX'KY'XX.def
+;chipp, XX'KY'XX.def
+;sol_b, XX'KY'XX.def
+;ky_slash, XX'KY'XX.def
+;pot, XX'KY'XX.def
+;baiken_SLASH, XX'KY'XX.def
+;Yu, mk2_pit2.def
+;Yosuke, mk2_pit2.def
+;Mitsuru, mk2_pit2.def
+;Aigis, mk2_pit2.def
+;Ragna_S, Blazblue_Kagutsuchi_PM.def
+;Terumi, Blazblue_Kagutsuchi_PM.def
+;Rachel_S, Blazblue_Kagutsuchi_PM.def
+;BB_Noel, Blazblue_Kagutsuchi_PM.def
 MK1_SCORPION, mk2_pit2.def
 MK1_SUB-ZERO, mk2_pit2.def
 CvWScorpion, mk2_pit2.def
 SubZero, mk2_pit2.def
-Yu, mk2_pit2.def
-Ragna_S, Blazblue_Kagutsuchi_PM.def
-Terumi, Blazblue_Kagutsuchi_PM.def
-YTerumi, Blazblue_Kagutsuchi_PM.def
 Cloud, NibelReactorHR.def
 sephiroth_ak, NibelReactorHR.def
 TifaLockhart, NibelReactorHR.def
@@ -256,6 +264,11 @@ Dante, MemoriaTimeInterval.def
 vergil, MemoriaTimeInterval.def
 nero_DMC4, MemoriaTimeInterval.def
 KENSHIROU, MemoriaTimeInterval.def
+sf3_ryu, mvc2-training.def
+sf3_ken, mvc2-training.def
+sf3_chun-li, mvc2-training.def
+sf3_gouki, mvc2-training.def
+sf3_ibuki, mvc2-training.def
 randomselect
 
 ;-------------------------------------------------------------------------------

@@ -1,0 +1,145 @@
+;^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[Statedef 9999]
+ctrl = 0
+anim = 8050
+velset = 0,0
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~EX Groove~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;選択数の上限はありませんが、４０００ポイントを越えると、越えた分に応じて防御力が下がります。また、２０００ポイント未満の場合攻撃力がポイント数に応じて攻撃力・防御力が上がります。
+;if you select over 4000 points, this char's defence is down.And if you select 2000 less points, this char's attack and defence is up.
+
+;=====================ゲージセレクト(Gauge Select)
+
+;ゲージ（０：Ｃゲージ(1800P)、１：Ａゲージ(2200P)、２：Ｐゲージ(800P)、３：Ｓゲージ(1600P)、４：Ｎゲージ(1200P)、５：Ｋゲージ(1000P)、６：ゲージなし(0P)）
+;Gauge(0:C-Gauge(1800P), 1:A-Gauge(2200P), 2:P-Gauge(800P), 3:S-Gauge(1600P), 4:N-Gauge(1200P), 5:K-Gauge(1000P),6:None(0P))
+[state 9999,varset]
+type = parentvarset
+trigger1 = time=0
+fvar(12) = 2
+
+;=====================システムセレクト(System Select)
+
+;システム1（０：なし(0P)、１：ブロッキング(1600P)、２：ジャストディフェンス(1400P)、３：両方(3000P)）
+;System1(0:None(0P), 1:Parry(1600P), 2:Just Defence(1400P), 3:Both(3000P))
+[state 9999,varset]
+type = varset
+trigger1 = time=0
+fvar(13) = 0
+
+;システム2（０：なし(0P)、１：チェーンコンボ(800P)、２：空中チェーンコンボ(700P)、３：両方(1500P)）
+;System2(0:None(0P), 1:Chain Combo(800P), 2:Air Chain Combo(700P), 3:Both Chain Combo and Air Chain Combo(1500P)) 
+[state 9999,varset]
+type = varset
+trigger1 = time=0
+fvar(14) = 1
+
+;システム3（０：なし(0P)、１：スーパーコンボキャンセル(1000P)、２：キャンセルエニィムーブ(1000P)、３：両方(2000P)）
+;System3(0:None(0P), 1:Super Aurts cancelling(1000P), 2:cancelling Any Move(1000P), 3:Both(2000P)) 
+[state 9999,varset]
+type = varset
+trigger1 = time=0
+fvar(15) = 0
+;=====================サブシステムセレクト
+
+;サブシステム1（０：なし(0P)、１：ステップ(200P)、２：ラン(300P)）
+;Sub System1(0:None(0P), 1:Dash(200P), 2:Run(300P))
+[state 9999,varset]
+type = varset
+trigger1 = time=0
+fvar(16) = 2
+
+;サブシステム2（０：なし(0P)、１：回り込み(400P)、２：避け(600P)）
+;Sub System2(0:None(0P), 1:Rolling(400P), 2:Dodge(600P))
+[state 9999,varset]
+type = varset
+trigger1 = time=0
+fvar(17) = 1
+
+;サブシステム3（０：なし(0P)、１：ガードキャンセル攻撃(400P)、２：ガードキャンセル移動(300P)、３：両方(700P)）
+;Sub System3(0:None(0P), 1:Counter Attack(400P), 2:Counter Movement(300P), 3:Both(700P))
+[state 9999,varset]
+type = varset
+trigger1 = time=0
+fvar(18) = 1
+
+;サブシステム4（０：なし(0P)、１：空中ガード(500P)、２：小ジャンプ(600P)、３：両方(1100)）
+;Sub System4(0:None(0P), 1:Air Guard(500P), 2:Small Jump(600P), 3:Both(1100P))
+[state 9999,varset]
+type = varset
+trigger1 = time=0
+fvar(19) = 3
+
+;サブシステム5（０：なし(0P)、１：時間差起き上がり(200P)、２：ダウン回避(300P)、３：両方(500P)）
+;Sub System5(0:None(0P), 1:Tactical Recovery(200P), 2:Safe Fall(300P), 3:Both(500P))
+[state 9999,varset]
+type = varset
+trigger1 = time=0
+fvar(20) = 1
+
+;~~~~~~~~~~~~~~~~~~~~~
+;エフェクト表示設定(Change Effect)
+[State -1]
+type = parentVarset
+trigger1 = time=0
+fvar(0)=0
+;(0 OR 1 OR 2(0:PS2版, 1：スーパーコンボ（超必殺技）発動エフェクトが小さい, 2:FINISH時のエフェクトを非表示, 3:1と2の両方))
+;(0 OR 1 OR 2(0:PS2, 1:Effect of Super Aurts is smaller, 2:Effect is invinsible in finish, 3:1and2))
+
+;キャンセル受付時間
+[State -1]
+type = parentVarset
+trigger1 = time=0
+fvar(21)=0;←(0 OR 1(0:原作どおり,1：キャンセル受付時間が長くなる（原作とは違う）))
+
+
+;グルーヴ別調整(some groove is weakened or stronged)
+[state 30000,varset]
+type = parentvarset
+trigger1 = time=0
+fvar(22) = 1
+;(0:なし、1:あり)
+;(0:OFF, 1:ON)
+
+;Ａグルーヴの調整（ガード時の削りダメージは２０回まで（それ以降は０）、オリジナルコンボ中に攻撃を食らうとゲージが0に）
+;A-Groove(When you're guarded 21 times or more, guarded damage is 0. When you're damaged using cutom combo, gauge is 0.)
+
+;Ｐグルーヴの調整（ブロッキング成功時のゲージ増加量が５ポイントから８ポイント及びガードクラッシュゲージ2ドット回復）
+;P-Groove(Blocking Bonus:increasing gauge 8 point(old 5 point) and guard clash gauge 2 dot.)
+
+;Ｓグルーヴの調整（避け終了後5Fの間は避けが使用できない、ゲージ溜め速度アップ、MAX時のLv.1超必殺技の威力1.3倍に）
+;S-Groove(If you use dodge, you can't use dodge while 5F. Power Charge is increased. When gauge is maximum, Lv.1 super combo is increasing damage(1.3(old1.0)).)
+
+;Ｋグルーヴの調整（食らったときのゲージ増加量を『ダメージ/100+2』→『ダメージ/100』に、怒り中の防御力増加なし、ジャストディフェンス成功時にガードクラッシュゲージ1ドット回復）
+;K-Groove(Amount of increasing gauge is decreased(damage/100(old:damage/100+2)). Increasing defence is nothing while gauge is maximum. Just Defence Bonus:increasing guard clash gauge 1 dot.)
+
+;======================
+;ガードクラッシュゲージ位置調整(Adjustment position of Guard Clash Gauge)
+;X座標
+[state 30000,varset]
+type = varset
+trigger1 = time=0
+fvar(9) = 0;(0:デフォルト、+：前、-：後)
+
+;Y座標
+[state 30000,varset]
+type = varset
+trigger1 = time=0
+fvar(10) = 0;(0:デフォルト、+：上、-：下)
+
+;~~~~~~気絶・ガードクラッシュON/OFF(Dizzy/Guard Clash Gauge ON/OFF)
+;気絶(Dizzy)
+[state 30000,varset]
+type = varset
+trigger1 = time=0&&root,roundsexisted<=0
+fvar(30) = 0;(0:デフォルト、0：あり、1：なし)(0:ON(Default), 1:OFF)
+
+;ガードクラッシュ(Guard Clash)
+[state 30000,varset]
+type = varset
+trigger1 = time=0&&root,roundsexisted<=0
+fvar(31) = 0;(0:デフォルト、0：あり、1：なし)(0:ON(Default), 1:OFF)
+
+[state 9999]
+type = changestate
+trigger1 = time=0
+value = 9998

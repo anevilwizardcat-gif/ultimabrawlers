@@ -1,0 +1,310 @@
+こちらは、system.cnsのほうに書いてあることです。
+以下の記述はレバガチャを行うとアニメーションが早くなるという現象の処理なので、見た目以外変わりません。AIRファイルを見て変えなければならないので消しておきました。
+こちらもvar(29)とvar(30)を変更してください。また、command="forward"の部分を、悪咲様のキャラの場合はcommand="block"に、H”様のキャラの場合command="fwd"に変えてください。
+
+[State 5300,varset]
+type = varSet
+trigger1 = 1
+var(1)=AnimElemNo(0)
+ignorehitpause=1
+
+[State 5910,Exit]
+type = ChangeAnim
+triggerall = Anim=5300
+trigger1 = command="forward" || command="back" || command="up" || command="down"
+trigger2 = command="x" || command="y" || command="z" || command="a" || command="b" || command="c"
+value = 5300
+elem = ifelse((AnimElemTime(4)>=0),1,var(1)+1)
+
+
+気絶処理を追加したキャラのcnsを開いて、[statedef -2]の記述の一行上に入れてください。
+
+;+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-
+;気絶
+[Statedef 5300]
+type = S
+movetype = I
+physics = S
+ctrl = 0
+velset = 0,0
+anim = 5300
+
+[State 5300,PlaySnd]
+type = PlaySnd
+trigger1 = time=0 && (var(59)=[3,5])
+value = 5300,1
+
+[State 5300,varset]
+type = varSet
+trigger1 = time=0
+var(30)=2
+ignorehitpause=1
+
+;var(29)=...,120))の後に-60をすると、気絶時間が1秒短縮、+60をすれば1秒増加します。
+[State 5300,varset]
+type = varSet
+trigger1 = time=0
+var(29)=ifelse(random%3=0,300,ifelse(random%3=1,180,120))
+ignorehitpause=1
+
+[State 5300,varset]
+type = varAdd
+trigger1 = command="x" || command="y" || command="z" || command="a" || command="b" || command="c"
+trigger2 = 1
+var(29)=-1
+
+[State 5300,varset]
+type = varAdd
+trigger1 = command="forward" || command="back" || command="up" || command="down"
+var(29)=-2
+
+[State 5910,Exit]
+type = ChangeState
+trigger1 = var(29)<=0
+value = 0
+ctrl = 1
+
+;+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-
+;気絶（吹き飛び）
+[Statedef 5310]
+type = A
+movetype = H
+physics = N
+ctrl = 0
+velset = 0,0
+anim = 5050
+
+[State 5310]
+type = VelSet
+trigger1 = time=0
+x = ifelse(gethitvar(yvel)<0,gethitvar(xvel)*ifelse(facing=-1,-1,1),-4*ifelse(P2Dist X<=0,-1,1))
+y = ifelse(gethitvar(yvel)<0,gethitvar(yvel),-6)
+
+[State 5300,varset]
+type = varSet
+trigger1 = time=0
+var(30)=2
+ignorehitpause=1
+
+[State 5300]
+type = NotHitby
+trigger1 = 1
+value = SCA
+
+[State 5300]
+type = VelAdd
+trigger1 = 1
+y = .45
+
+[State 5300]
+type = ChangeState
+trigger1 = Vel Y>0 && Pos Y>=0
+value = 5320
+
+;気絶（叩き付け）
+;Dizzy : HIT_BOUNCE (hit ground)
+[Statedef 5320]
+type = L
+movetype = H
+physics = N
+ctrl = 0
+velset = 0,0
+anim = 5100
+
+[State 5300]
+type = NotHitby
+trigger1 = 1
+value = SCA
+
+[State 5300]
+type = PosSet
+trigger1 = Time=0
+y = 0
+
+[State 5300]
+type = ChangeState
+trigger1 = AnimTime=0
+value = 5330
+
+;---------------------------------------------------------------------------
+; 気絶（バウンド）
+;Dizzy : HIT_BOUNCE (bounce into air)
+[Statedef 5330]
+type    = L
+movetype= H
+physics = N
+
+[State 5300]
+type = NotHitby
+trigger1 = 1
+value = SCA
+
+[State 5101, 1] ;Coming hit ground anim (normal)
+type = ChangeAnim
+trigger1 = time = 0
+value = 5160
+
+[State 5101, 3]
+type = VelSet
+trigger1 = Time = 0
+x = -1.5*ifelse(P2Dist X<=0,-1,1)
+y = -4.0
+
+[State 5101, 4]
+type = PosSet
+trigger1 = Time = 0
+y = 20
+
+[State 5101, 5] ;Acceleration
+type = VelAdd
+trigger1 = 1
+y = .4
+
+[State 5101, 6] ;Hit ground
+trigger1 = Vel Y > 0
+trigger1 = Pos Y >= 12
+type = ChangeState
+value = 5340
+
+;---------------------------------------------------------------------------
+;気絶（ダウン）
+;Dizzy : HIT_LIEDOWN
+[Statedef 5340]
+type    = L
+movetype= H
+physics = N
+
+[State 5300]
+type = NotHitby
+trigger1 = 1
+value = SCA
+
+[State 5110, EnvShake]
+type = FallEnvShake
+trigger1 = Time = 0 && prevstateno!=5120
+
+[State 5110, 1] ;For hit up/up-diag type (from state 5081)
+type = ChangeAnim
+persistent = 0
+trigger1 = SelfAnimExist(5110 + (anim % 10))
+trigger1 = anim = [5081,5089]
+value = 5110 + (anim % 10)
+
+[State 5110, 2] ;Hit ground anim (normal)
+type = ChangeAnim
+triggerall = time = 0
+triggerall = anim != [5110,5119] ;Not already changed anim
+trigger1 = anim != [5161,5169]
+trigger2 = !SelfAnimExist(5170 + (anim % 10))
+value = 5170
+
+[State 5110, 3] ;Hit ground anim (for hit up)
+type = ChangeAnim
+triggerall = time = 0
+triggerall = anim != [5110,5119] ;Not already changed anim
+trigger1 = anim = [5161,5169]
+trigger1 = SelfAnimExist(5170 + (anim % 10))
+value = 5170 + (anim % 10)
+
+[State 5110, 4]
+type = HitFallDamage
+trigger1 = Time = 0
+
+[State 5110, 5]
+type = PosSet
+trigger1 = Time = 0
+y = 0
+
+[State 5110, Var] ;Get fall velocity
+type = VarSet
+trigger1 = Time = 0
+trigger1 = GetHitVar(fall.yvel) != 0
+sysvar(1) = floor(vel y)
+
+[State 5110, 7]
+type = GameMakeAnim
+trigger1 = Time = 0 && prevstateno!=5120
+trigger1 = !SysVar(0)
+value = 60 + (sysvar(1) > 5) + (sysvar(1) > 14)
+pos = 0, 0
+under = sysvar(1) <= 14
+
+[State 5110, 8]
+type = VelSet
+trigger1 = Time = 0
+y = 0
+
+[State 5110, 10] ;For normal
+type = ChangeAnim
+persistent = 0
+triggerall = Anim != [5111,5119]
+trigger1 = AnimTime = 0
+value = 5110
+
+[State 5110, 11] ;If just died
+type = ChangeState
+triggerall = !alive
+trigger1 = AnimTime = 0
+trigger2 = SysVar(0) ;SysVar(0) = 1 avoids hit ground frame
+trigger3 = Anim = [5110,5119]
+value = 5150
+
+[State 5110, 13] ;Friction
+type = VelMul
+trigger1 = 1
+x = 0.5
+
+[State 5110, 14]
+type = ForceFeedback
+trigger1 = alive
+trigger1 = Time = 0
+time = 3
+ampl = 240
+waveform = sine
+
+[State 5110, 15]
+type = ForceFeedback
+trigger1 = !alive
+trigger1 = Time = 0
+ampl = 200, 7, -.467
+time = 30
+waveform = sine
+
+[State 5300]
+type = ChangeState
+trigger1 = Time=const(data.liedown.time)
+value = 5350
+
+;気絶（ダウン中）
+;Dizzy : HitLieDown
+[Statedef 5350]
+type = L
+movetype = I
+physics = N
+ctrl = 0
+velset = 0,0
+
+[State 5300]
+type = NotHitby
+trigger1 = 1
+value = SCA
+
+[State 5300]
+type = ChangeAnim
+trigger1 = Time=0
+value = 5120
+
+[State 5300]
+type = PosSet
+trigger1 = Time=0
+y = 0
+
+[State 5300]
+type = Hitfallset
+trigger1 = anim=5120 && AnimTime=0
+value = 1
+
+[State 5300]
+type = ChangeState
+trigger1 = anim=5120 && AnimTime=0
+value = 5300

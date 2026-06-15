@@ -259,6 +259,13 @@ ignoreHitPause if isHelper && teamSide != 0 && roundState = 2 {
 	if root, teamMode = Tag && root, stateNo >= const(StateTagLeavingScreen) && root, stateNo <= const(StateTagWaitingOutside) && map(rushCool) <= 0 {
 		assertSpecial{flag: invisible; flag2: noShadow}
 	}
+	# Jotaro/DIO tag-IN clone fix: their bound stand renders the owner's idle sprite
+	# during entry (Entering/JumpingIn), making a second standing copy beside the real
+	# dashing character. Hide it on entry too -- name-gated so stands that legitimately
+	# enter AS the stand (Polnareff, etc.) are untouched.
+	if root, teamMode = Tag && (root, stateNo = const(StateTagEnteringScreen) || root, stateNo = const(StateTagJumpingIn)) && (root, name = "Jotaro Kujo" || root, name = "dio") && map(rushCool) <= 0 {
+		assertSpecial{flag: invisible; flag2: noShadow}
+	}
 }
 
 # Benched roots must not act on the shared controller: without this, the benched partner's

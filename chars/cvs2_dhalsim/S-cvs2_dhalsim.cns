@@ -1,0 +1,1226 @@
+;---------------------------------------------------------------------------
+;^^^^^^^^^^^^^^^ヨガファイア/Yoga Fire^^^^^^^^^^^^^^
+
+;弱ヨガファイア/Light Yoga Fire
+[Statedef 1000]
+type = S
+movetype = A
+physics = S
+ctrl = 0
+velset = 0,0
+anim = 1000
+
+[State 1100, VarSet]
+type = VarSet
+trigger1 = Time=0
+var(1)=0
+
+[State 3000]
+type = varset
+trigger1 = (prevstateno=[3000,3999]) && time=0 && !var(21)
+var(19)=1
+
+[State 1100,Change]
+type = ChangeState
+trigger1 = ifelse((prevstateno=[200,999]),time=1,Time=0)
+value = 1050
+
+;中ヨガファイア/Medium Yoga Fire
+[Statedef 1010]
+type = S
+movetype = A
+physics = S
+ctrl = 0
+velset = 0,0
+anim = 1010
+
+[State 1110, VarSet]
+type = VarSet
+trigger1 = Time=0
+var(1)=1
+
+[State 3000]
+type = varset
+trigger1 = (prevstateno=[3000,3999]) && time=0 && !var(21)
+var(19)=1
+
+[State 1110,Change]
+type = ChangeState
+trigger1 = ifelse((prevstateno=[200,999]),time=1,Time=0)
+value = 1050
+
+;強ヨガファイア/High Yoga Fire
+[Statedef 1020]
+type = S
+movetype = A
+physics = S
+ctrl = 0
+velset = 0,0
+anim = 1020
+
+[State 1120, VarSet]
+type = VarSet
+trigger1 = Time=0
+var(1)=2
+
+[State 3000]
+type = varset
+trigger1 = (prevstateno=[3000,3999]) && time=0 && !var(21)
+var(19)=1
+
+[State 1120,Change]
+type = ChangeState
+trigger1 = ifelse((prevstateno=[200,999]),time=1,Time=0)
+value = 1050
+
+;ヨガファイア/Yoga Fire
+[Statedef 1050]
+type = S
+movetype = A
+physics = S
+juggle = 15
+poweradd = 4*var(5)
+ctrl = 0
+velset = 0,0
+anim = 1000+var(1)*10
+
+[State 3000]
+type = varset
+trigger1 = (prevstateno=[3000,3999]) && time=0 && !var(21)
+var(19)=1
+
+;Yoga Fire!
+[state 1950]
+type = PlaySND
+trigger1 = AnimElem=1
+value = 1000,0
+channel = 1
+
+[state 1000]
+type = Helper
+trigger1 = AnimElem=5
+stateno=6000
+id = 6000
+name = "fire"
+pos = floor(90*const(size.xscale)),-floor(56*const(size.yscale))
+postype = p1
+ownpal = 1
+ignorehitpause=1
+persistent=0
+size.xscale = 1.2*const(size.xscale)
+size.yscale = .6*const(size.yscale)
+
+[state 1950]
+type = ChangeState
+trigger1 = AnimTime=0
+value = 0
+ctrl = 1
+
+;---------------------------------------------------------------------------
+;ヨガファイア/Yoga Fire (Projectile)
+[Statedef 6000]
+type    = A
+movetype = A
+physics = N
+ctrl = 0
+velset = 0,0
+anim = 6000
+sprpriority = 4
+
+[State 6000]
+type = AssertSpecial
+trigger1 = 1
+flag = noshadow
+
+[state 6000]
+type = PlaySND
+trigger1 = time=0
+value = 5,2
+channle = 3
+
+[state 6000]
+type = velset
+trigger1 = time
+x = (3.0+var(1))*const(size.xscale)
+
+[State 6000]
+type = varset
+trigger1 = time=0
+var(1) = root,var(1)
+
+[State 6000,VarSet]
+type = varset
+trigger1 = time>=1 && !(!root,var(18)||root,var(56))
+var(18) = 1
+
+[State 6000,VarSet]
+type = varset
+trigger1 = time>=1 && (!root,var(18)||root,var(56))
+var(18) = 0
+
+[state 6000]
+type = varset
+trigger1 = !root,numprojid(6000) && time>1
+var(16) = 1
+ignorehitpause=1
+
+[State 6000,Projectile]
+type = Projectile
+trigger1 = time>0 && !var(16)
+projanim = ifelse(var(18),8050,6010+(time>1))
+projID = 6000
+projshadow = -1
+velocity = vel x, vel y
+accel = 0, 0
+projhits = 1
+projmisstime = 0
+projremovetime=1
+projedgebound=130
+projstagebound=130
+sprpriority = 5
+; HitDefs
+attr = S, SP
+damage    = ifelse(ceil((49+var(1)*7)*parent,fvar(7))<7,7,ceil((49+var(1)*7)*parent,fvar(7))),ifelse(ceil(ceil((49+var(1)*7)*parent,fvar(7))/8)<7,7,ceil(ceil((49+var(1)*7)*parent,fvar(7))/8))
+animtype  = Hard
+getpower = ifelse(root,var(16),4,8)*parent,var(5),2*parent,var(5)
+givepower = 2*parent,var(6),2*parent,var(6)
+guardflag = MA
+hitflag = MAF
+pausetime = 12,11
+guard.pausetime = 12,11
+sparkno = s7200+random%8
+guard.sparkno = s7010
+sparkxy = ifelse(P2bodydist X<10,-10,ceil(P2bodydist X)), 0
+hitsound   = S1,15
+guardsound = S0,0
+ground.type = Low
+ground.slidetime = 17
+guard.slidetime = 17
+ground.hittime  = 17
+guard.hittime  = 17
+air.hittime = 17
+ground.velocity = ifelse(!var(1),-10.65/ifelse(root,var(21),2,1),-4),-6*(var(1)>0)
+guard.velocity = -10.65/ifelse(root,var(21),2,1)
+airguard.velocity = -4
+air.animtype = Back
+air.velocity = -4,-6
+yaccel = .4
+fall = var(1)>0
+air.fall = 1
+fall.recover = 0
+air.recover = 0
+forcestand=1
+palfx.color = 96
+palfx.add = 0,0,-256
+palfx.mul = 144,32,0
+palfx.time = ifelse(P2statetype!=A&&!var(1),28,46+floor(-enemynear,pos Y/8))
+
+[State 6000,VarSet]
+type = ParentVarSet
+trigger1 = 1
+var(40) = ifelse(P2bodydist X<10,-10,ceil(P2bodydist X))
+
+[State 6000,VarSet]
+type = ParentVarSet
+trigger1 = 1
+var(41) = -ceil(55*root,const(size.yscale))
+
+[State 6000, DestroySelf]
+type = DestroySelf
+trigger1 = time && FrontEdgeDist <= -60
+
+[State 6000]
+type = ChangeState
+triggerall = time > 1
+trigger1 = !Root,NumProjID(6000)
+value = 6050
+
+[State 6000]
+type = ChangeState
+trigger1 = time > 88+var(1)*10
+value = 6010
+
+;---------------------------------------------------------------------------
+;ヨガファイア/Yoga Fire (Projectile)
+[Statedef 6010]
+type    = A
+movetype = I
+physics = N
+ctrl = 0
+velset = 0,0
+anim = 8050
+
+[State 1000, Spark]
+type = Explod
+trigger1 = !time
+Anim = 6001
+id = 6001
+pos = 0, 0
+postype = p1
+ownpal = 1
+bindtime = 1
+sprpriority = 3
+scale = const(size.xscale),const(size.yscale)
+
+[State 4110, DestroySelf]
+type = DestroySelf
+trigger1 = Time=1
+
+;---------------------------------------------------------------------------
+;ヨガファイア/Yoga Fire (Projectile)
+[Statedef 6050]
+type    = A
+movetype = I
+physics = N
+ctrl = 0
+velset = 0,0
+anim = 8050
+
+[State 1000, Spark]
+type = Explod
+trigger1 = !time
+Anim = 6050
+id = 6050
+pos = 0, 0
+postype = p1
+ownpal = 1
+bindtime = 1
+sprpriority = 3
+scale = const(size.xscale),const(size.yscale)
+
+[state 6000]
+type = varset
+trigger1 = root,projcontacttime(6000)=[1,5]
+var(13) = 1
+ignorehitpause=1
+
+[State 6000, PlaySnd]
+type = PlaySnd
+trigger1 = time = 1 && !var(13)
+value = 0,10
+channel = 9
+ignorehitpause=1
+
+[State 6000, EnvShake]
+type = EnvShake
+trigger1 = time = 1 && var(13)
+time = 12
+ampl = 2
+ignorehitpause = 1
+persistent=0
+
+[State 4110, DestroySelf]
+type = DestroySelf
+trigger1 = time = 1
+
+;---------------------------------------------------------------------------
+;^^^^^^^^^^^^^^^ヨガフレイム/Yoga Flame^^^^^^^^^^^^^^
+
+;弱ヨガフレイム/Light Yoga Flame
+[Statedef 1100]
+type = S
+movetype = A
+physics = S
+ctrl = 0
+velset = 0,0
+anim = 1100
+
+[State 1100, VarSet]
+type = VarSet
+trigger1 = Time=0
+var(1)=0
+
+[State 3000]
+type = varset
+trigger1 = (prevstateno=[3000,3999]) && time=0 && !var(21)
+var(19)=1
+
+[State 1100,Change]
+type = ChangeState
+trigger1 = ifelse((prevstateno=[200,999]),time=1,Time=0)
+value = 1150
+
+;中ヨガフレイム/Medium Yoga Flame
+[Statedef 1110]
+type = S
+movetype = A
+physics = S
+ctrl = 0
+velset = 0,0
+anim = 1110
+
+[State 1110, VarSet]
+type = VarSet
+trigger1 = Time=0
+var(1)=1
+
+[State 3000]
+type = varset
+trigger1 = (prevstateno=[3000,3999]) && time=0 && !var(21)
+var(19)=1
+
+[State 1110,Change]
+type = ChangeState
+trigger1 = ifelse((prevstateno=[200,999]),time=1,Time=0)
+value = 1150
+
+;強ヨガフレイム/High Yoga Flame
+[Statedef 1120]
+type = S
+movetype = A
+physics = S
+ctrl = 0
+velset = 0,0
+anim = 1120
+
+[State 1120, VarSet]
+type = VarSet
+trigger1 = Time=0
+var(1)=2
+
+[State 3000]
+type = varset
+trigger1 = (prevstateno=[3000,3999]) && time=0 && !var(21)
+var(19)=1
+
+[State 1120,Change]
+type = ChangeState
+trigger1 = ifelse((prevstateno=[200,999]),time=1,Time=0)
+value = 1150
+
+;ヨガフレイム/Yoga Flame
+[Statedef 1150]
+type = S
+movetype = A
+physics = S
+juggle = 15
+poweradd = 4*var(5)
+ctrl = 0
+velset = 0,0
+anim = 1100+var(1)*10
+
+[State 3000]
+type = varset
+trigger1 = (prevstateno=[3000,3999]) && time=0 && !var(21)
+var(19)=1
+
+;Yoga Flame!
+[state 1950]
+type = PlaySND
+trigger1 = (Anim=[1100,1120]) && AnimElem=1
+value = 1100,0
+channel = 1
+
+[state 1000]
+type = Helper
+trigger1 = (Anim=[1100,1120]) && AnimElem=6
+stateno=6100
+id = 6100
+name = "flame"
+pos = floor(100*const(size.xscale)),-floor(55*const(size.yscale))
+postype = p1
+ownpal = 1
+ignorehitpause=1
+persistent=0
+size.xscale = 1.2*const(size.xscale)
+
+;ガードクラッシュ減少値判別
+[State 100, Helper]
+type = Helper
+triggerall = fvar(20)!=.1&&fvar(20)!=1.1&&!enemynear,numpartner
+trigger1 = (Anim=[1100,1120]) && AnimElem=6,=4
+id = 15901
+stateno=15901
+pos = 0,0
+postype = p2
+ownpal = 1
+ignorehitpause = 1
+
+[state 1950]
+type = ChangeAnim
+triggerall = (Anim=[1100,1120])
+trigger1 = NumHelper(6100)
+trigger1 = Helper(6100),stateno!=6100
+trigger2 = AnimElemTime(6)>0
+trigger2 = !NumHelper(6100)
+value = 1150
+
+[state 1150]
+type = StateTypeSet
+trigger1 = Anim=1150 && AnimElem=1
+movetype = I
+
+[state 1150]
+type = ChangeState
+trigger1 = Anim=1150 && AnimTime=0
+value = 0
+ctrl = 1
+
+;---------------------------------------------------------------------------
+;ヨガフレイム/Yoga Flame (Projectile)
+[Statedef 6100]
+type    = A
+movetype = A
+physics = N
+ctrl = 0
+velset = 0,0
+anim = 6100
+sprpriority = 4
+
+[State 6000]
+type = AssertSpecial
+trigger1 = 1
+flag = noshadow
+
+[State 6000]
+type = BindToRoot
+trigger1 = 1
+pos = ceil(107*root,const(size.xscale)),-ceil(53*root,const(size.yscale))
+time = -1
+ignorehitpause = 1
+
+[state 1950]
+type = PlaySND
+trigger1 = !time
+value = 5,3
+channle = 3
+
+[State 6000]
+type = varset
+trigger1 = !time
+var(1) = root,var(1)
+
+[State 200,VarSet]
+type = varset
+trigger1 = time && !(!root,var(18)||root,var(56))
+var(18) = 1
+
+[State 200,VarSet]
+type = varset
+trigger1 = time && (!root,var(18)||root,var(56))
+var(18) = 0
+
+[state 199]
+type = varset
+trigger1 = !root,numprojid(6100) && time>1
+var(16) = 1
+ignorehitpause=1
+
+[State 1000,Projectile]
+type = Projectile
+trigger1 = (time=[1,3]) && !var(16) && root,stateno=1150
+projanim = ifelse(var(18),8050,6110)
+projID = 6100
+projshadow = -1
+velocity = 0, 0
+accel = 0, 0
+projhits = 1
+projmisstime = 0
+projremovetime=1
+projedgebound=50
+projstagebound=50
+sprpriority = 5
+; HitDefs
+attr = S, SP
+damage    = ifelse(ceil((98+var(1)*7)*parent,fvar(7))<7,7,ceil((98+var(1)*7)*parent,fvar(7))),ifelse(ceil(ceil((98+var(1)*7)*parent,fvar(7))/8)<7,7,ceil(ceil((98+var(1)*7)*parent,fvar(7))/8))
+animtype  = Hard
+getpower = ifelse(root,var(16),4,8)*parent,var(5),2*parent,var(5)
+givepower = 2*parent,var(6),2*parent,var(6)
+guardflag = MA
+hitflag = MAF
+pausetime = 2,1
+guard.pausetime = 2,1
+sparkno = s7200+random%8
+guard.sparkno = s7010
+sparkxy = ifelse(P2bodydist X<10,-10,ceil(P2bodydist X)), 0
+hitsound   = S1,15
+guardsound = S0,0
+ground.type = Low
+ground.slidetime = 17
+guard.slidetime = 17
+ground.hittime  = 17
+guard.hittime  = 17
+air.hittime = 17
+ground.velocity = -4,-6
+guard.velocity = -10.65
+airguard.velocity = -4
+air.animtype = Back
+air.velocity = -4,-6
+yaccel = .4
+fall = 1
+fall.recover = 0
+air.recover = 0
+forcestand=1
+palfx.color = 96
+palfx.add = 0,0,-256
+palfx.mul = 144,32,0
+palfx.time = 48+floor(-enemynear,pos Y/8)
+
+[State 1000,Projectile]
+type = Projectile
+trigger1 = time>3 && !var(16) && root,stateno=1150
+projanim = ifelse(var(18),8050,6111)
+projID = 6100
+projshadow = -1
+velocity = 0, 0
+accel = 0, 0
+projhits = 1
+projmisstime = 0
+projremovetime=1
+projedgebound=50
+projstagebound=50
+sprpriority = 5
+; HitDefs
+attr = S, SP
+damage    = ifelse(ceil((84+var(1)*7)*parent,fvar(7))<7,7,ceil((84+var(1)*7)*parent,fvar(7))),ifelse(ceil(ceil((84+var(1)*7)*parent,fvar(7))/8)<7,7,ceil(ceil((84+var(1)*7)*parent,fvar(7))/8))
+animtype  = Hard
+getpower = ifelse(root,var(16),4,8)*parent,var(5),2*parent,var(5)
+givepower = 2*parent,var(6),2*parent,var(6)
+guardflag = MA
+hitflag = MAF
+pausetime = 2,1
+guard.pausetime = 2,1
+sparkno = s7200+random%8
+guard.sparkno = s7010
+sparkxy = ifelse(P2bodydist X<10,-10,ceil(P2bodydist X)), 0
+hitsound   = S1,15
+guardsound = S0,0
+ground.type = Low
+ground.slidetime = 17
+guard.slidetime = 17
+ground.hittime  = 17
+guard.hittime  = 17
+air.hittime = 17
+ground.velocity = -4,-6
+guard.velocity = -10.65
+airguard.velocity = -4
+air.animtype = Back
+air.velocity = -4,-6
+yaccel = .4
+fall = 1
+fall.recover = 0
+air.recover = 0
+forcestand=1
+palfx.color = 96
+palfx.add = 0,0,-256
+palfx.mul = 144,32,0
+palfx.time = 48+floor(-enemynear,pos Y/8)
+
+[State 200,VarSet]
+type = ParentVarSet
+trigger1 = 1
+var(40) = ifelse(P2bodydist X<10,-10,ceil(P2bodydist X))
+
+[State 200,VarSet]
+type = ParentVarSet
+trigger1 = 1
+var(41) = -floor(52*root,const(size.yscale))
+
+[State 1000, 0]
+type = EnvShake
+trigger1 = root,projcontacttime(6100)=1
+time = 12
+ampl = 2
+ignorehitpause = 1
+persistent=0
+
+[State 200,VarSet]
+type = VarSet
+trigger1 = root,projcontacttime(6100)=1
+var(13) = 1
+
+[State 6200,VarSet]
+type = VarSet
+trigger1 = time > 1 && !root,NumProjID(6100)
+var(0) = 1
+
+[State 900, 4]
+type = ChangeState
+triggerall = time > 1
+trigger1 = time>23+var(1)*12
+trigger2 = root,stateno!=1150
+trigger3 = !root,NumProjID(6100)
+value = 6150
+
+;---------------------------------------------------------------------------
+;ヨガフレイム(飛び道具・消滅)/Yoga Flame (Projectile)
+[Statedef 6150]
+type    = A
+movetype = I
+physics = N
+ctrl = 0
+velset = 0,0
+anim = 8050
+
+[State 6150, DestroySelf]
+type = PlaySnd
+trigger1 = !time && !var(13) && var(0)
+value = 0,10
+channel = 9
+
+[State 6150, FX]
+type = Explod
+trigger1 = !time
+Anim = 6150
+id = 6150
+pos = 0, 0
+postype = p1
+ownpal = 1
+bindtime = 1
+sprpriority = 3
+scale = const(size.xscale),const(size.yscale)
+
+[State 6150, DestroySelf]
+type = DestroySelf
+trigger1 = time=1
+
+;---------------------------------------------------------------------------
+;^^^^^^^^^^^^^^^ヨガブラスト/Yoga Blast^^^^^^^^^^^^^^
+
+;弱ヨガブラスト/Light Yoga Blast
+[Statedef 1200]
+type = S
+movetype = A
+physics = S
+ctrl = 0
+velset = 0,0
+anim = 1200
+
+[State 1200, VarSet]
+type = VarSet
+trigger1 = Time=0
+var(1)=0
+
+[State 3000]
+type = varset
+trigger1 = (prevstateno=[3000,3999]) && time=0 && !var(21)
+var(19)=1
+
+[State 1200,Change]
+type = ChangeState
+trigger1 = ifelse((prevstateno=[200,999]),time=1,Time=0)
+value = 1250
+
+;中ヨガブラスト/Medium Yoga Blast
+[Statedef 1210]
+type = S
+movetype = A
+physics = S
+ctrl = 0
+velset = 0,0
+anim = 1210
+
+[State 1120, VarSet]
+type = VarSet
+trigger1 = Time=0
+var(1)=1
+
+[State 3000]
+type = varset
+trigger1 = (prevstateno=[3000,3999]) && time=0 && !var(21)
+var(19)=1
+
+[State 1120,Change]
+type = ChangeState
+trigger1 = ifelse((prevstateno=[200,999]),time=1,Time=0)
+value = 1250
+
+;強ヨガブラスト/High Yoga Blast
+[Statedef 1220]
+type = S
+movetype = A
+physics = S
+ctrl = 0
+velset = 0,0
+anim = 1220
+
+[State 1220, VarSet]
+type = VarSet
+trigger1 = Time=0
+var(1)=2
+
+[State 3000]
+type = varset
+trigger1 = (prevstateno=[3000,3999]) && time=0 && !var(21)
+var(19)=1
+
+[State 1220,Change]
+type = ChangeState
+trigger1 = ifelse((prevstateno=[200,999]),time=1,Time=0)
+value = 1250
+
+;ヨガブラスト/Yoga Blast
+[Statedef 1250]
+type = S
+movetype = A
+physics = S
+juggle = 15
+poweradd = 4*var(5)
+ctrl = 0
+velset = 0,0
+anim = 1200+var(1)*10
+
+[State 1000]
+type = varset
+trigger1 = (prevstateno=[3000,3999]) && time=0 && !var(21)
+var(19)=1
+
+;Yoga Blast!
+[state 1950]
+type = PlaySND
+trigger1 = (Anim=[1200,1220]) && AnimElem=4
+value = 1200,0
+channel = 1
+
+[state 1000]
+type = Helper
+trigger1 = (Anim=[1200,1220]) && AnimElem=6
+stateno=6200
+id = 6200
+name = "blast"
+pos = floor(79*const(size.xscale)),-floor(115*const(size.yscale))
+postype = p1
+ownpal = 1
+ignorehitpause=1
+persistent=0
+size.xscale = 1.2*const(size.xscale)
+
+;ガードクラッシュ減少値判別
+[State 100, Helper]
+type = Helper
+triggerall = fvar(20)!=.1&&fvar(20)!=1.1&&!enemynear,numpartner
+trigger1 = (Anim=[1200,1220]) && AnimElem=6,=4
+id = 15901
+stateno=15901
+pos = 0,0
+postype = p2
+ownpal = 1
+ignorehitpause = 1
+
+[state 1950]
+type = ChangeAnim
+triggerall = (Anim=[1200,1220])
+trigger1 = NumHelper(6200)
+trigger1 = Helper(6200),stateno!=6200
+trigger2 = AnimElemTime(6)>0
+trigger2 = !NumHelper(6200)
+value = 1250
+
+[state 1150]
+type = StateTypeSet
+trigger1 = Anim=1250 && AnimElem=1
+movetype = I
+
+[state 1950]
+type = ChangeState
+trigger1 = Anim=1250 && AnimTime=0
+value = 0
+ctrl = 1
+
+;---------------------------------------------------------------------------
+;ヨガブラスト/Yoga Blast (Projectile)
+[Statedef 6200]
+type    = A
+movetype = A
+physics = N
+ctrl = 0
+velset = 0,0
+anim = 6200
+sprpriority = 4
+
+[State 6000]
+type = AssertSpecial
+trigger1 = 1
+flag = noshadow
+
+[State 6000]
+type = BindToRoot
+trigger1 = 1
+pos = ceil(79*root,const(size.xscale)),-ceil(115*root,const(size.yscale))
+time = -1
+ignorehitpause = 1
+
+[state 1950]
+type = PlaySND
+trigger1 = time=0
+value = 5,3
+channle = 3
+
+[State 6000]
+type = varset
+trigger1 = time=0
+var(1) = root,var(1)
+
+[State 200,VarSet]
+type = varset
+trigger1 = time>=1 && !(!root,var(18)||root,var(56))
+var(18) = 1
+
+[State 200,VarSet]
+type = varset
+trigger1 = time>=1 && (!root,var(18)||root,var(56))
+var(18) = 0
+
+[state 199]
+type = varset
+trigger1 = !root,numprojid(6200) && time>1
+var(16) = 1
+ignorehitpause=1
+
+[State 1000,Projectile]
+type = Projectile
+trigger1 = (time=[1,3]) && !var(16) && root,stateno=1250
+projanim = ifelse(var(18),8050,6210)
+projID = 6200
+projshadow = -1
+velocity = 0, 0
+accel = 0, 0
+projhits = 1
+projmisstime = 0
+projremovetime=1
+projedgebound=50
+projstagebound=50
+sprpriority = 5
+; HitDefs
+attr = S, SP
+damage    = ifelse(ceil((105+var(1)*7)*parent,fvar(7))<7,7,ceil((105+var(1)*7)*parent,fvar(7))),ifelse(ceil(ceil((105+var(1)*7)*parent,fvar(7))/8)<7,7,ceil(ceil((105+var(1)*7)*parent,fvar(7))/8))
+animtype  = Hard
+getpower = ifelse(root,var(16),4,8)*parent,var(5),2*parent,var(5)
+givepower = 2*parent,var(6),2*parent,var(6)
+guardflag = MA
+hitflag = MAF
+pausetime = 2,1
+guard.pausetime = 2,1
+sparkno = s7200+random%8
+guard.sparkno = s7010
+sparkxy = ifelse(P2bodydist X<10,-10,ceil(P2bodydist X)), 0
+hitsound   = S1,15
+guardsound = S0,0
+ground.type = High
+ground.slidetime = 17
+guard.slidetime = 17
+ground.hittime  = 17
+guard.hittime  = 17
+air.hittime = 17
+ground.velocity = -4,-6
+guard.velocity = -10.65
+airguard.velocity = -4
+air.animtype = Back
+air.velocity = -4,-6
+yaccel = .4
+fall = 1
+fall.recover = 0
+air.recover = 0
+forcestand=1
+palfx.color = 96
+palfx.add = 0,0,-256
+palfx.mul = 144,32,0
+palfx.time = 52+floor(-enemynear,pos Y/8)
+
+[State 1000,Projectile]
+type = Projectile
+trigger1 = time>3 && !var(16) && root,stateno=1250
+projanim = ifelse(var(18),8050,6211)
+projID = 6200
+projshadow = -1
+velocity = 0, 0
+accel = 0, 0
+projhits = 1
+projmisstime = 0
+projremovetime=1
+projedgebound=50
+projstagebound=50
+sprpriority = 5
+; HitDefs
+attr = S, SP
+damage    = ifelse(ceil((91+var(1)*7)*parent,fvar(7))<7,7,ceil((91+var(1)*7)*parent,fvar(7))),ifelse(ceil(ceil((91+var(1)*7)*parent,fvar(7))/8)<7,7,ceil(ceil((91+var(1)*7)*parent,fvar(7))/8))
+animtype  = Hard
+getpower = ifelse(root,var(16),4,8)*parent,var(5),2*parent,var(5)
+givepower = 2*parent,var(6),2*parent,var(6)
+guardflag = MA
+hitflag = MAF
+pausetime = 2,1
+guard.pausetime = 2,1
+sparkno = s7200+random%8
+guard.sparkno = s7010
+sparkxy = ifelse(P2bodydist X<10,-10,ceil(P2bodydist X)), 0
+hitsound   = S1,15
+guardsound = S0,0
+ground.type = High
+ground.slidetime = 17
+guard.slidetime = 17
+ground.hittime  = 17
+guard.hittime  = 17
+air.hittime = 17
+ground.velocity = -4,-6
+guard.velocity = -10.65
+airguard.velocity = -4
+air.animtype = Back
+air.velocity = -4,-6
+yaccel = .4
+fall = 1
+fall.recover = 0
+air.recover = 0
+forcestand=1
+palfx.color = 96
+palfx.add = 0,0,-256
+palfx.mul = 144,32,0
+palfx.time = 52+floor(-enemynear,pos Y/8)
+
+[State 200,VarSet]
+type = ParentVarSet
+trigger1 = 1
+var(40) = ifelse(P2bodydist X<10,-10,ceil(P2bodydist X))
+
+[State 200,VarSet]
+type = ParentVarSet
+trigger1 = 1
+var(41) = -floor(120*root,const(size.yscale))
+
+[State 1000, 0]
+type = EnvShake
+trigger1 = root,projcontacttime(6200)=1
+time = 12
+ampl = 2
+ignorehitpause = 1
+persistent=0
+
+[State 200,VarSet]
+type = VarSet
+trigger1 = root,projcontacttime(6200)=1
+var(13) = 1
+
+[State 6200,VarSet]
+type = VarSet
+trigger1 = time > 1 && !root,NumProjID(6200)
+var(0) = 1
+
+[State 900, 4]
+type = ChangeState
+triggerall = time > 1
+trigger1 = time>12+var(1)*6
+trigger2 = root,stateno!=1250
+trigger3 = !root,NumProjID(6200)
+value = 6250
+
+;---------------------------------------------------------------------------
+;ヨガブラスト(飛び道具・消滅)/Yoga Blast (Projectile)
+[Statedef 6250]
+type    = A
+movetype = I
+physics = N
+ctrl = 0
+velset = 0,0
+anim = 8050
+
+[State 4120, DestroySelf]
+type = PlaySnd
+trigger1 = !time && !var(13) && var(0)
+value = 0,10
+
+[State 1000, Spark]
+type = Explod
+trigger1 = !time
+Anim = 6250
+id = 6250
+pos = 0, 0
+postype = p1
+ownpal = 1
+bindtime = 1
+sprpriority = 3
+scale = const(size.xscale),const(size.yscale)
+
+[State 4120, DestroySelf]
+type = DestroySelf
+trigger1 = !time
+
+;---------------------------------------------------------------------------
+;^^^^^^^^^^^^^^^ヨガテレポート/Yoga Teleport^^^^^^^^^^^^^^
+;623PPPヨガテレポート/Yoga Teleport
+[Statedef 1300]
+type = U
+movetype = I
+physics = N
+ctrl = 0
+velset = 0,0
+anim = 1300
+
+[State 1100, VarSet]
+type = VarSet
+trigger1 = Time=0
+var(1)=0
+
+[State 3000]
+type = varset
+trigger1 = (prevstateno=[3000,3999]) && time=0 && !var(21)
+var(19)=1
+
+[State 1100,Change]
+type = ChangeState
+trigger1 = ifelse((prevstateno=[200,999]),time=1,Time=0)
+value = 1350
+
+;421PPPヨガテレポート/Yoga Teleport
+[Statedef 1310]
+type = U
+movetype = I
+physics = N
+ctrl = 0
+velset = 0,0
+anim = 1300
+
+[State 1110, VarSet]
+type = VarSet
+trigger1 = Time=0
+var(1)=1
+
+[State 3000]
+type = varset
+trigger1 = (prevstateno=[3000,3999]) && time=0 && !var(21)
+var(19)=1
+
+[State 1110,Change]
+type = ChangeState
+trigger1 = ifelse((prevstateno=[200,999]),time=1,Time=0)
+value = 1350
+
+;623KKKヨガテレポート/Yoga Teleport
+[Statedef 1320]
+type = U
+movetype = I
+physics = N
+ctrl = 0
+velset = 0,0
+anim = 1300
+
+[State 1120, VarSet]
+type = VarSet
+trigger1 = Time=0
+var(1)=2
+
+[State 3000]
+type = varset
+trigger1 = (prevstateno=[3000,3999]) && time=0 && !var(21)
+var(19)=1
+
+[State 1120,Change]
+type = ChangeState
+trigger1 = ifelse((prevstateno=[200,999]),time=1,Time=0)
+value = 1350
+
+;421KKKヨガテレポート/Yoga Teleport
+[Statedef 1330]
+type = U
+movetype = I
+physics = N
+ctrl = 0
+velset = 0,0
+anim = 1300
+
+[State 1100, VarSet]
+type = VarSet
+trigger1 = Time=0
+var(1)=3
+
+[State 3000]
+type = varset
+trigger1 = (prevstateno=[3000,3999]) && time=0 && !var(21)
+var(19)=1
+
+[State 1100,Change]
+type = ChangeState
+trigger1 = ifelse((prevstateno=[200,999]),time=1,Time=0)
+value = 1350
+
+;ヨガテレポート/Yoga Teleport
+[Statedef 1350]
+type = U
+movetype = I
+physics = N
+juggle = 15
+poweradd = 4*var(5)
+ctrl = 0
+velset = 0,0
+anim = 1300
+
+[State 1100, VarSet]
+type = VarSet
+trigger1 = Time=0
+var(2)=0
+
+[State 1100, VarSet]
+type = VarSet
+trigger1 = Time=0 && statetype=A
+var(2)=1
+
+[State 1100, VarSet]
+type = statetypeset
+trigger1 = Time=0 && statetype!=A
+statetype=A
+
+[State 3000]
+type = varset
+trigger1 = (prevstateno=[3000,3999]) && time=0 && !var(21)
+var(19)=1
+
+[state 1950]
+type = NothitBy
+trigger1 = !time;AnimElemTime(10)<0
+value = SCA,AA,AT,AP
+time = 62
+
+;Yoga...
+[state 1950]
+type = PlaySND
+trigger1 = AnimElem=1
+value = 800,3
+channel = 1
+
+;フェードアウト
+[state 1950]
+type = Trans
+trigger1 = AnimElemTime(7)<0
+trans = AddAlpha
+alpha = 256-time*28,0+time*28
+
+;透明
+[state 1950]
+type = Trans
+trigger1 = AnimElemTime(7)>=0 && AnimElemTime(21)<0
+trans = AddAlpha
+alpha = 0,256
+
+[state 1950]
+type = PlaySND
+trigger1 = AnimElem=5
+value = 5,0
+channel = 2
+
+[state 1950]
+type = PosAdd
+trigger1 = AnimElem=13
+x = (ifelse(var(1)>1,240,120)*const(size.xscale))*ifelse(var(1)%2=1,-1,1)
+
+;フェードイン
+[state 1950]
+type = Trans
+trigger1 = AnimElemTime(19)>=0 && AnimElemTime(21)<0
+trans = AddAlpha
+alpha = 0+(time-51)*28,256-(time-51)*28
+
+[state 1950]
+type = PlaySND
+trigger1 = AnimElem=20
+value = 5,1
+channel = 2
+
+[state 1950]
+type = Turn
+trigger1 = AnimTime=0 &&P2dist X<=0 && var(2)
+
+[state 1950]
+type = ChangeState
+trigger1 = AnimTime=0
+value = 11+(var(2)>0)*39
+ctrl = 1
+

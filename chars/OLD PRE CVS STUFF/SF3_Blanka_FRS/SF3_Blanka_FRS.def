@@ -1,0 +1,43 @@
+;Char: SFIII: 3rd Strike Blanka, Blanka Sprites by Chuchoryu, Code and Extra Sprites/Sound Rip by IAteMySink
+[Info]
+name="SF3BlankaFRS/IAtemySink"
+displayname="Blanka"
+versiondate=3/10/2021
+mugenversion=1.0
+author="IAteMySink (FeetRShoes)"
+pal.defaults=1,2,3,4,5
+[Files]
+sprite=Blanka.sff
+sound=Blanka.snd
+anim=Blanka.air
+cmd=Command.cmd
+cns=Data.cns
+st=Data.cns
+st2=State.cns
+st3=Options.txt
+stcommon=System.cns
+pal1    = Blanka04.act  ;Palettes (can have up to 12)
+pal2    = Blanka02.act
+pal3    = Blanka03.act
+pal4    = Blanka01.act
+pal5    = Blanka05.act
+pal6    = Blanka06.act
+pal7    = Blanka07.act
+pal8    = Blanka08.act
+pal9    = Blanka09.act
+[Arcade]
+intro.storyboard=
+ending.storyboard=
+
+
+;Credits:
+
+;Char: SFIII: 3rd Strike Blanka 
+;Execution by IAteMySink (A.K.A. FeetRShoes)
+;Blanka Sprites by Chuchoryu 
+;Code and Extra Sprites/Sound Rips by IAteMySink 
+;Super Art bar code borrowed from Muteki
+;And you! For downloading this character and playing!
+
+;   YT: https://www.youtube.com/channel/UCzZ2WnDyffgPbPRGTnLXoIw
+;   Mugen Dojo Char Page: https://sites.google.com/view/iatemysinksmugendojo/characters

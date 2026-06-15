@@ -1,0 +1,85 @@
+ここでは、私のキャラの気絶処理について解説したいと思います。手っ取り早く気絶処理を追加する方法なので、効果音は考えてません。また、キャラ製作の知識を持っていない方を前提に書いてあります。ご了承ください。
+基本的には気絶処理の部分をコピー＆ペーストでよいのですが、少々手直しする部分があります。
+
+以下がN-cvs2_...cnsの気絶処理の部分の抜粋です（注意すべきことを少し書いておきましたが）。以下の部分を追加したいキャラのcnsの[statedef -2]の記述の一行したに入れてください。
+
+ただし、var(29),var(30)は既にそのキャラで使用されて場合がありますので、その場合は空いているvar（var(0)～var(59),fvar(0)～fvar(38)の中から選んでください)に書き換えてください。メモ帳などの「置換」機能を使用すると便利です。
+
+2007/4/3気絶処理修正。
+以下の部分を変えましたので、既に気絶処理を入れた方は変更を御願いします。
+
+;気絶値増加
+[State -2, 1]
+type = VarAdd
+trigger1 = movetype=H && time=0 && (StateNo!=[120,155]) && (enemynear,StateNo!=[3000,4999]) && !(enemynear,HitDefattr=SCA,HA,HT,HP) && (stateno=[5000,5199]) && fvar(10)!=2
+
+2007/4/8気絶処理修正。
+以下の部分を変えましたので、既に気絶処理を入れた方は変更を御願いします。
+;気絶
+[State 5300,varset]
+type = varSet
+triggerall = var(30)
+trigger1 = var(29)=0 && StateNo!=5300 && StateNo!=5310 && StateNo!=5320 && StateNo!=5330 && StateNo!=5340 && StateNo!=5120
+trigger2 = var(30)<=0 && (stateno=5000||stateno=5010||stateno=5020||stateno=5070||stateno=5080) && time=0
+var(30)=0
+
+;^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+;^^^^^^^^^^^^^^気絶(Dizzy)^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[State 5300,PlaySnd]
+type = PlaySnd
+trigger1 = (var(59)=[0,2]) && stateno=5300 && (time=1||time%35=0)
+value = 5300,0
+channel = 9
+
+[State 5300,PlaySnd]
+type = StopSnd
+trigger1 = (var(59)=[0,2]) && stateno!=5300
+channel = 9
+
+;気絶
+[State 5300,varset]
+type = varSet
+triggerall = var(30)
+trigger1 = var(29)=0 && StateNo!=5300 && StateNo!=5310 && StateNo!=5320 && StateNo!=5330 && StateNo!=5340 && StateNo!=5120
+trigger2 = var(30)<=0 && (stateno=5000||stateno=5010||stateno=5020||stateno=5070||stateno=5080) && time=0
+var(30)=0
+
+[State 5300,varset]
+type = varAdd
+trigger1 = var(30)<=0
+var(30)=-1
+
+[State -2, 1]
+type = ChangeState
+trigger1 = var(30)=1 && (StateNo=5000 || StateNo=5010 || StateNo=5020 || StateNo=5070||stateno=5080)
+value = 5310
+ignorehitpause=1
+
+;var(29)>=490は気絶値が70の場合です。60なら420、80なら560にしてください。
+[State -2, 1]
+type = varset
+trigger1 = var(29)>=490 && StateNo!=5300 && StateNo!=5310 && StateNo!=5320 && StateNo!=5330 && StateNo!=5340 && var(30)!=1 && var(30)!=2
+var(30) = 1
+ignorehitpause=1
+
+;気絶値
+[State -2, 1]
+type = varSet
+triggerall = var(29)
+trigger1 = roundstate=0 || var(29)<=0 || (var(30)=2 && stateno!=5300) || (var(30)!=2 && Anim=5300)
+trigger2 = var(30)<=-180
+var(29) = 0
+ignorehitpause=1
+
+;" && fvar(10)!=2"は超必殺技の飛び道具でも気絶値が増えないようにする記述なのですが、入れるとややこしくなるので消してしまってかまいません。
+;気絶値増加
+[State -2, 1]
+type = VarAdd
+triggerall = movetype=H && time=0 && (StateNo!=[120,155]) && (enemynear,StateNo!=[3000,4999]) && !(enemynear,HitDefattr=SCA,HA,HT,HP) && (stateno=[5000,5199]) && fvar(10)!=2
+trigger1 = ifelse(enemynear,authorname="Warusaki3",enemynear,var(18)=0,ifelse(enemynear,authorname="H”",((enemynear,var(30)=2 && enemynear,fvar(8)<=0) || enemynear,var(30)!=2),1))
+trigger1 = ifelse(enemynear,authorname="rei",((enemynear,var(21)=0 && enemynear,var(59)=1)||enemynear,var(59)!=1),1)
+trigger1 = !(enemynear,name="cvstodo"&&enemynear,stateno=ifelse(enemynear,authorname="rei",1351,1201))
+trigger1 = !(enemynear,name="cvschang"&&(P2stateno=[1000,1020]))
+var(29) = ifelse((enemynear,name="cvsrolento"&&(P2stateno=[1000,1099])),7,floor(GetHitvar(damage)))
+ignorehitpause=1
+

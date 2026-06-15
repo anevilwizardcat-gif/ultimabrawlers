@@ -19611,7 +19611,7 @@ sprpriority = 0
 
 [State 21560]
 type = BindToParent
-trigger1 = 1
+trigger1 = isHelper ; was 1 -- root has no parent; only the helper binds
 
 [State 21560]
 type = null;Turn

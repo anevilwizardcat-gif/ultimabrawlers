@@ -1,0 +1,146 @@
+This setting is a method of fixing the groove selection. 
+
+
+First of all, please look for "[statedef -2]" that exists in the N-cvs2_...CNS file.
+
+
+Please look for these sentences.
+
+;==========groove=============
+;グルーヴセレクト
+[State -2, 3]
+type = VarSet
+triggerall = time = 0
+triggerall = roundstate = 0
+trigger1 = roundsexisted <= 0
+persistent = 0
+var(59) = ifelse((random%10=6 && random<499),3,ifelse((random%10=[3,6]),0,ifelse((random%10=[0,3]) && random<800,2,ifelse(random%10=6 && random>=500,5,ifelse((random%10=[0,3]) && random>=800,4,1)))))
+
+;グルーヴ選択画面
+[state 190, groove]
+type = helper
+triggerall = time = 0
+triggerall = roundstate = 0 && roundsexisted <= 0
+triggerall = !NumHelper(8100)
+trigger1 = !numpartner
+trigger2 = numpartner
+trigger2 = !(partner,authorname="warusaki3")
+trigger2 = !(ID-partner,ID>0 && partner,authorname="rei"&&partner,name!="twelve"&&partner,name!="sakura")
+trigger2 = !(ID-partner,ID>0 && partner,authorname="gal129")
+ID = 8100
+stateno = 8100+var(59)*10
+postype = p1
+pos = 0,-180
+name = "groove"
+ontop = 1
+bindtime = -1
+;facing = facing*ifelse(teamside=1,1,-1)
+
+;グルーヴ選択画面
+[state 190, groove]
+type = helper
+triggerall = time = 0
+triggerall = roundstate = 0 && roundsexisted <= 0
+triggerall = !NumHelper(8000)
+trigger1 = !numpartner
+trigger2 = numpartner
+trigger2 = !(partner,authorname="warusaki3")
+trigger2 = !(ID-partner,ID>0 && partner,authorname="rei"&&partner,name!="twelve"&&partner,name!="sakura")
+trigger2 = !(ID-partner,ID>0 && partner,authorname="gal129")
+ID = 8000
+stateno = 8000
+postype = p1
+pos = 0,-140
+name = "groove"
+ontop = 1
+bindtime = -1
+
+============
+
+Please change the description as follows.
+
+============
+
+;==========groove=============
+;グルーヴセレクト
+[State -2, 3]
+type = VarSet
+triggerall = time = 0
+triggerall = roundstate = 0
+trigger1 = roundsexisted <= 0
+persistent = 0
+var(59) = 0;This is Groove Number.(0:C-Groove,1:A-Groove,2:P-Groove,3:S-Groove,4:N-Groove,5:K-Groove,6:EX-Groove)
+
+;グルーヴ選択画面
+[state 190, groove]
+type = null;helper
+triggerall = time = 0
+triggerall = roundstate = 0 && roundsexisted <= 0
+triggerall = !NumHelper(8100)
+trigger1 = !numpartner
+trigger2 = numpartner
+trigger2 = !(partner,authorname="warusaki3")
+trigger2 = !(ID-partner,ID>0 && partner,authorname="rei"&&partner,name!="twelve"&&partner,name!="sakura")
+trigger2 = !(ID-partner,ID>0 && partner,authorname="gal129")
+ID = 8100
+stateno = 8100+var(59)*10
+postype = p1
+pos = 0,-180
+name = "groove"
+ontop = 1
+bindtime = -1
+;facing = facing*ifelse(teamside=1,1,-1)
+
+;グルーヴ選択画面
+[state 190, groove]
+type = null;helper
+triggerall = time = 0
+triggerall = roundstate = 0 && roundsexisted <= 0
+triggerall = !NumHelper(8000)
+trigger1 = !numpartner
+trigger2 = numpartner
+trigger2 = !(partner,authorname="warusaki3")
+trigger2 = !(ID-partner,ID>0 && partner,authorname="rei"&&partner,name!="twelve"&&partner,name!="sakura")
+trigger2 = !(ID-partner,ID>0 && partner,authorname="gal129")
+ID = 8000
+stateno = 8000
+postype = p1
+pos = 0,-140
+name = "groove"
+ontop = 1
+bindtime = -1
+
+=============
+
+
+
+
+before
+var(59) = ifelse((random%10=6 && random<499),3,ifelse((random%10=[3,6]),0,ifelse((random%10=[0,3]) && random<800,2,ifelse(random%10=6 && random>=500,5,ifelse((random%10=[0,3]) && random>=800,4,1)))))
+
+
+after
+var(59) = 0;This is Groove Number.(0:C-Groove,1:A-Groove,2:P-Groove,3:S-Groove,4:N-Groove,5:K-Groove)
+(If you would like to setting Ex-Groove, you should read end of this text.)
+
+
+
+~~~~~~~~~
+before
+type = helper
+
+
+after
+type = null;helper
+
+
+||||||||||||||
+EX-Groove Setting
+
+before
+var(59) = ...
+
+
+after
+fvar(37)=1
+

@@ -12395,10 +12395,20 @@ v = 37
 value = 1
 ignorehitpause = 1
 
+;==========================================================================
+; add004 POWER/GUARD METER VISUAL -- DISABLED (stops the "invalid action F330" spam)
+; Cause: anim values were corrupted with an f-prefix (f330..f338) AND the add004
+; meter sprites/anims (SFF+AIR 330-338) were never imported into Squall, so the
+; explods could never render and retried every frame (!numexplod stayed true).
+; f-prefix fixed below; explods null'd. The guard-meter REGEN logic above (var 37)
+; is untouched -- only the missing-art display is off. The same f/missing-anim issue
+; also hit a getup effect (anim 60, state 5201), likewise disabled.
+; RESTORE: import the add004 meter sprites+anim defs, then set these back to type=Explod.
+;==========================================================================
 [State 0, Guard Fill]
-type = Explod
+type = null;Explod  ; DISABLED: add004 meter art (anims/sprites 330-338) never imported into squall.air/.sff
 trigger1 = 1 && !numexplod(330)
-anim = f330
+anim = 330
 ID = 330
 pos = 160,120;17
 postype = left  ;p2,front,back,left,right
@@ -12417,9 +12427,9 @@ ignorehitpause = 1
 bindtime = -1
 
 [State 0, Explod]
-type = Explod
+type = null;Explod  ; DISABLED: add004 meter art (anims/sprites 330-338) never imported into squall.air/.sff
 trigger1 = 1 && root,var(37) = 7
-anim = f331
+anim = 331
 ID = 331
 pos = 160,120;17
 postype = left  ;p2,front,back,left,right
@@ -12438,9 +12448,9 @@ ignorehitpause = 1
 bindtime = -1
 
 [State 0, Explod]
-type = Explod
+type = null;Explod  ; DISABLED: add004 meter art (anims/sprites 330-338) never imported into squall.air/.sff
 trigger1 = 1 && root,var(37) = 6
-anim = f332
+anim = 332
 ID = 332
 pos = 160,120;17
 postype = left  ;p2,front,back,left,right
@@ -12459,9 +12469,9 @@ ignorehitpause = 1
 bindtime = -1
 
 [State 0, Explod]
-type = Explod
+type = null;Explod  ; DISABLED: add004 meter art (anims/sprites 330-338) never imported into squall.air/.sff
 trigger1 = 1 && root,var(37) = 5
-anim = f333
+anim = 333
 ID = 333
 pos = 160,120;17
 postype = left  ;p2,front,back,left,right
@@ -12480,9 +12490,9 @@ ignorehitpause = 1
 bindtime = -1
 
 [State 0, Explod]
-type = Explod
+type = null;Explod  ; DISABLED: add004 meter art (anims/sprites 330-338) never imported into squall.air/.sff
 trigger1 = 1 && root,var(37) = 4
-anim = f334
+anim = 334
 ID = 334
 pos = 160,120;17
 postype = left  ;p2,front,back,left,right
@@ -12501,9 +12511,9 @@ ignorehitpause = 1
 bindtime = -1
 
 [State 0, Explod]
-type = Explod
+type = null;Explod  ; DISABLED: add004 meter art (anims/sprites 330-338) never imported into squall.air/.sff
 trigger1 = 1 && root,var(37) = 3
-anim = f335
+anim = 335
 ID = 335
 pos = 160,120;17
 postype = left  ;p2,front,back,left,right
@@ -12522,9 +12532,9 @@ ignorehitpause = 1
 bindtime = -1
 
 [State 0, Explod]
-type = Explod
+type = null;Explod  ; DISABLED: add004 meter art (anims/sprites 330-338) never imported into squall.air/.sff
 trigger1 = 1 && root,var(37) = 2
-anim = f336
+anim = 336
 ID = 336
 pos = 160,120;17
 postype = left  ;p2,front,back,left,right
@@ -12543,9 +12553,9 @@ ignorehitpause = 1
 bindtime = -1
 
 [State 0, Explod]
-type = Explod
+type = null;Explod  ; DISABLED: add004 meter art (anims/sprites 330-338) never imported into squall.air/.sff
 trigger1 = 1 && root,var(37) = 1
-anim = f337
+anim = 337
 ID = 337
 pos = 160,120;17
 postype = left  ;p2,front,back,left,right
@@ -12564,9 +12574,9 @@ ignorehitpause = 1
 bindtime = -1
 
 [State 0, Explod]
-type = Explod
+type = null;Explod  ; DISABLED: add004 meter art (anims/sprites 330-338) never imported into squall.air/.sff
 trigger1 = 1 && root,var(37) = 0
-anim = f338
+anim = 338
 ID = 338
 pos = 160,120;17
 postype = left  ;p2,front,back,left,right
@@ -12677,9 +12687,9 @@ value = 1
 ignorehitpause = 1
 
 [State 0, Guard Fill]
-type = Explod
+type = null;Explod  ; DISABLED: add004 meter art (anims/sprites 330-338) never imported into squall.air/.sff
 trigger1 = 1 && !numexplod(330)
-anim = f330
+anim = 330
 ID = 330
 pos = 159,120;17
 postype = left  ;p2,front,back,left,right
@@ -12698,9 +12708,9 @@ ignorehitpause = 1
 bindtime = -1
 
 [State 0, Explod]
-type = Explod
+type = null;Explod  ; DISABLED: add004 meter art (anims/sprites 330-338) never imported into squall.air/.sff
 trigger1 = 1 && root,var(37) = 7
-anim = f331
+anim = 331
 ID = 331
 pos = 160,120;17
 postype = left  ;p2,front,back,left,right
@@ -12719,9 +12729,9 @@ ignorehitpause = 1
 bindtime = -1
 
 [State 0, Explod]
-type = Explod
+type = null;Explod  ; DISABLED: add004 meter art (anims/sprites 330-338) never imported into squall.air/.sff
 trigger1 = 1 && root,var(37) = 6
-anim = f332
+anim = 332
 ID = 332
 pos = 160,120;17
 postype = left  ;p2,front,back,left,right
@@ -12740,9 +12750,9 @@ ignorehitpause = 1
 bindtime = -1
 
 [State 0, Explod]
-type = Explod
+type = null;Explod  ; DISABLED: add004 meter art (anims/sprites 330-338) never imported into squall.air/.sff
 trigger1 = 1 && root,var(37) = 5
-anim = f333
+anim = 333
 ID = 333
 pos = 160,120;17
 postype = left  ;p2,front,back,left,right
@@ -12761,9 +12771,9 @@ ignorehitpause = 1
 bindtime = -1
 
 [State 0, Explod]
-type = Explod
+type = null;Explod  ; DISABLED: add004 meter art (anims/sprites 330-338) never imported into squall.air/.sff
 trigger1 = 1 && root,var(37) = 4
-anim = f334
+anim = 334
 ID = 334
 pos = 160,120;17
 postype = left  ;p2,front,back,left,right
@@ -12782,9 +12792,9 @@ ignorehitpause = 1
 bindtime = -1
 
 [State 0, Explod]
-type = Explod
+type = null;Explod  ; DISABLED: add004 meter art (anims/sprites 330-338) never imported into squall.air/.sff
 trigger1 = 1 && root,var(37) = 3
-anim = f335
+anim = 335
 ID = 335
 pos = 160,120;17
 postype = left  ;p2,front,back,left,right
@@ -12803,9 +12813,9 @@ ignorehitpause = 1
 bindtime = -1
 
 [State 0, Explod]
-type = Explod
+type = null;Explod  ; DISABLED: add004 meter art (anims/sprites 330-338) never imported into squall.air/.sff
 trigger1 = 1 && root,var(37) = 2
-anim = f336
+anim = 336
 ID = 336
 pos = 160,120;17
 postype = left  ;p2,front,back,left,right
@@ -12824,9 +12834,9 @@ ignorehitpause = 1
 bindtime = -1
 
 [State 0, Explod]
-type = Explod
+type = null;Explod  ; DISABLED: add004 meter art (anims/sprites 330-338) never imported into squall.air/.sff
 trigger1 = 1 && root,var(37) = 1
-anim = f337
+anim = 337
 ID = 337
 pos = 160,120;17
 postype = left  ;p2,front,back,left,right
@@ -12845,9 +12855,9 @@ ignorehitpause = 1
 bindtime = -1
 
 [State 0, Explod]
-type = Explod
+type = null;Explod  ; DISABLED: add004 meter art (anims/sprites 330-338) never imported into squall.air/.sff
 trigger1 = 1 && root,var(37) = 0
-anim = f338
+anim = 338
 ID = 338
 pos = 160,120;17
 postype = left  ;p2,front,back,left,right
@@ -15030,9 +15040,9 @@ time = 3
 add = 128,128,128 ;256,256,256
 
 [State 5201, 6]
-type = Explod
+type = null;Explod  ; DISABLED: add004 fx anim 60 never imported into squall.air
 trigger1 = Time = 0
-anim = F60
+anim = 60
 pos = 0, -floor(vel y)
 sprpriority = -10
 

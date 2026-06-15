@@ -1,0 +1,49 @@
+;============================================================
+;  DEF File For "Blanka" From Capcom VS. SNK 2    
+;  By Gal129
+;                                       Ver. 0.978
+;  since 2007.01.05～
+;============================================================
+; Player Information
+[Info]
+name    = "cvsblanka"
+displayname = "Blanka"
+versiondate = 05,13,2007
+mugenversion = 04,14,2004
+author = "Gal129"
+pal.defaults=4,5,6,10
+
+; Files for the Player
+[Files]
+cmd = cvs2_blanka.cmd
+cns = data-cvs2_blanka.cns
+st  = cvs2_system.cns   
+st2 = N-cvs2_blanka.cns         ;States (Normal)
+st3 = S-cvs2_blanka.cns         ;States(Specialmove)
+st4 = H-cvs2_blanka.cns	        ;States(SuperAurts)
+st5 = system-cvs2_blanka.cns    ;States(System moves)
+st6 = option.cns
+stcommon = common1.cns         ;Common states (in data/)
+sprite  = cvs2_blanka.sff       ;Sprite
+anim    = cvs2_blanka.air       ;Animation
+sound   = cvs2_blanka.snd       ;Sound
+
+;Palettes
+pal1    = act/cvs2_blanka04.act ;弱キックカラー(Light Kick Color)
+pal2    = act/cvs2_blanka05.act ;中キックカラー(Medium Kick Color)
+pal3    = act/cvs2_blanka06.act ;強キックカラー(High Kick Color)
+pal4    = act/cvs2_blanka01.act ;弱パンチカラー(Light Punch Color)
+pal5    = act/cvs2_blanka02.act ;中パンチカラー(Medium Punch Color)
+pal6    = act/cvs2_blanka03.act ;強パンチカラー(High Punch Color)
+pal7    = act/cvs2_blanka08.act ;KKK同時押しカラー(KKK Color)
+pal8    = act/cvs2_blanka09.act  ;Original Color 1
+pal9    = act/cvs2_blanka11.act ;Original Color 3(青ブランカカラー/Blue Blanka Color)
+pal10   = act/cvs2_blanka07.act ;PPP同時押しカラー(PPP Color)
+pal11   = act/cvs2_blanka10.act  ;Original Color 2
+pal12   = act/cvs2_blanka12.act ;Original Color 4 (本田カラー/Honda Color)
+
+palX   = act/cvs2_blanka13.act ;SFZ3 X-ISM Kick Color 
+palXX  = act/cvs2_blanka14.act ;SFZ3 B-ISM Punch Color 
+palXXX  = act/cvs2_blanka15.act ;CVS1 LP+LK Color 
+palXXXX = act/cvs2_blanka16.act ;CVS1 HP+HK Color 
+

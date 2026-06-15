@@ -1,0 +1,4 @@
+If you tap 5 times in accepted time of command, you can use a special move of tap.
+And strength of the special move is decided with the button that you pushed to the fifth times. 
+
+The knack is to slide the finger and to input it.

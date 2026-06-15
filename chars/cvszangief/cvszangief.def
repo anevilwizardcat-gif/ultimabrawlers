@@ -1,0 +1,39 @@
+[Info]
+name = "cvszangief"		;ザンギエフ(cvs)
+displayname = "Zangief"	;ザンギエフ
+versiondate=09,08,2011	;Version date of character
+mugenversion=06,14,2003	;Version of M.U.G.E.N character works on
+author="Warusaki3"		;悪咲3号
+Pal.Defaults=4,5,10,11
+
+[Files]
+cmd=cvszangief.cmd
+cns=cvszangief.cns
+st=cvszangief.cns
+st1=cvs_common.cns
+st2=groove.cns
+st3=config.txt
+stcommon=common1.cns
+sprite=cvszangief.sff
+anim=cvszangief.air
+sound=cvszangief.snd
+pal1=act009.act;マヴカプ2カラー1
+pal2=act010.act;オリジナルカラー1
+pal3=act011.act;オリジナルカラー2
+pal4=act001.act;カプエス2弱Pカラー
+pal5=act004.act;カプエス2弱Kカラー
+pal6=act006.act;カプエス2強Kカラー
+pal7=act104.act;マヴカプ2メカカラー強Kカラー
+pal8=act105.act;マヴカプ2メカカラー同時押し1カラー
+pal9=act106.act;マヴカプ2メカカラー同時押し2カラー
+pal10=act101.act;マヴカプ2メカカラー弱Pカラー
+pal11=act102.act;マヴカプ2メカカラー強Pカラー
+pal12=act103.act;マヴカプ2メカカラー弱Kカラー
+
+
+;pal**=act002.act;カプエス2中Pカラー
+;pal**=act003.act;カプエス2強Pカラー
+;pal**=act005.act;カプエス2中Kカラー
+;pal**=act007.act;カプエス2P同時押しカラー
+;pal**=act008.act;カプエス2K同時押しカラー
+;pal**=act012.act;オリジナルカラー3

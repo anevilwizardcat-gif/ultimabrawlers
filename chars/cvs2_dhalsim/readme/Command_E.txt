@@ -1,0 +1,22 @@
+Dhalsim
+Command (Basic Moves, Special Moves, Super Moves)
+
+PÅFPunch, KÅFKick
+The figure is a position of the calculator.
+The command is 1P side standard.
+
+Basic Moves
+Drill HeadBut			2+HP(in air)
+Drill Kick			2+K(in air)
+
+Special Moves
+Yoga Fire			236+P
+Yoga Flame			63214+P
+Yoga Blast			63214+K
+Yoga Teleport			623or241+PPPorKKK(Capable using in air)
+
+
+Super Moves
+Yoga Stream			236236+P
+Yoga Volcano			236236+K
+Yoga Tempest			6321463214+P(Lv.3/MAX Only)

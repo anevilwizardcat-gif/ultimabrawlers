@@ -1,0 +1,32 @@
+[Info]
+name = "cvszangief_ex"	;メカザンギエフ(cvs)
+displayname = "M.Zangief"	;メカザンギエフ
+versiondate=09,08,2011	;Version date of character
+mugenversion=06,14,2003	;Version of M.U.G.E.N character works on
+author="Warusaki3"		;悪咲3号
+Pal.Defaults=4,5
+
+[Files]
+cmd=cvszangief.cmd
+cns=cvszangief.cns
+st=cvszangief.cns
+st1=cvs_common.cns
+st2=groove.cns
+st3=config.txt
+stcommon=common1.cns
+sprite=cvszangief_ex.sff
+anim=cvszangief.air
+sound=cvszangief.snd
+pal1=act104.act;マヴカプ2メカカラー強Kカラー
+pal2=act105.act;マヴカプ2メカカラー同時押し1カラー
+pal3=act106.act;マヴカプ2メカカラー同時押し2カラー
+pal4=act101.act;マヴカプ2メカカラー弱Pカラー
+pal5=act102.act;マヴカプ2メカカラー強Pカラー
+pal6=act103.act;マヴカプ2メカカラー弱Kカラー
+
+pal7=act110.act;オリジナルカラー4
+pal8=act111.act;オリジナルカラー5
+pal9=act112.act;オリジナルカラー6
+pal10=act107.act;オリジナルカラー1
+pal11=act108.act;オリジナルカラー2
+pal12=act109.act;オリジナルカラー3

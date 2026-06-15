@@ -1,0 +1,43 @@
+
+[Info]
+name = "cvsdhalsim"	   ;Name of character
+displayname = "Dhalsim"	   ;Name of character to display
+versiondate = 2012.03.18    ;Version date of character
+mugenversion = 2004.04.14  ;Version of M.U.G.E.N character works on
+author = "Gal129"	   ;Character author name
+pal.defaults = 4,5,1,2 ;Default palettes in order of preference
+
+;Files for the Player
+[Files]
+cmd = cvs2_dhalsim.cmd
+cns = data-cvs2_dhalsim.cns
+st  = cvs2_system.cns   
+st2 = N-cvs2_dhalsim.cns    ;States (Normal)
+st3 = S-cvs2_dhalsim.cns    ;States(Special moves)
+st4 = H-cvs2_dhalsim.cns	  ;States(Hyper moves)
+st5 = system-cvs2_dhalsim.cns   ;States(System moves)
+st6 = option.cns
+stcommon = common1.cns          ;Common states (in data/)
+sprite = cvs2_dhalsim.sff      ;Sprite
+anim  = cvs2_dhalsim.air      ;Animation
+sound = cvs2_dhalsim.snd      ;Sound
+pal1  = act/cvs2_dhalsim04.act ;LK
+pal2  = act/cvs2_dhalsim05.act ;MK
+pal3  = act/cvs2_dhalsim06.act ;HK
+
+pal4  = act/cvs2_dhalsim01.act ;LP
+pal5  = act/cvs2_dhalsim02.act ;MP
+pal6  = act/cvs2_dhalsim03.act ;HP
+
+pal7  = act/cvs2_dhalsim08.act ;KK
+pal8  = act/cvs2_dhalsim09.act ;CVS LK+HK
+pal9  = act/cvs2_dhalsim22.act ;Original3
+
+pal10 = act/cvs2_dhalsim07.act ;PP
+pal11 = act/cvs2_dhalsim10.act ;CVS LP+LK
+pal12 = act/cvs2_dhalsim21.act ;Original2
+
+
+;palXX  = act/cvs2_dhalsim11.act ;not used color
+;palXX  = act/cvs2_dhalsim20.act ;Original1
+

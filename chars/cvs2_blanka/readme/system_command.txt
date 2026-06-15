@@ -1,0 +1,31 @@
+P：Punch、K：Kick
+F : Forward, B : Back, D : Down, U : Up
+
+						コマンド(Command)
+ステップ(Dash)				素早く→→(Quickly,F F)
+ラン(Run)					素早く→→(Quickly,F F)
+バックステップ(Back Dash)		素早く←←(Quickly,B B)
+
+小ジャンプ(Small Jump)			↑要素へ素早く入力(Quickly,U or UB or UF)
+大ジャンプ(Long Jump)			素早く↓要素後↑要素へ入力(Quickly,DB or B or FB and U or UB or UF)
+空中ガード(Air Guard)			空中で←要素(In the Air,B or DB or UB)
+
+投げ(Throw)						相手の近くで←or→+ P or K(F or B and P or K, near opponent)
+投げ抜け(Avoid Throw)					投げられた直後に↑以外の↓方向+ P or K(Push direction except A and B, and push P or K)
+
+回り込み(Rolling)				弱P+弱K(Light P+Light K)
+避け(Dodge)					弱P+弱K(Light P+Light K)
+カウンター攻撃				避け中に(While Dodge)P or K
+
+時間差起き上がり(Tactical Recovery)				ダウン中にPP押しつづける(While LieDown, Leave PP push)
+ダウン回避(Safe Fall)					ダウン直前にPP(Before LieDown, PP)
+
+ガードキャンセル攻撃			ガード中に中P+中K(While Guarding Middle P+Middle K)
+ガードキャンセル移動			ガード中に→or←+弱P+弱K(While Guarding, F or B+Light P+Light K)
+
+オリジナルコンボ(Custom Combo)	強P+強K(Strong P+Strong K)
+ブロッキング(Parry)			相手の攻撃に合わせて→or↓(While Opponent Attack,F or B)
+ゲージ溜め動作(Power Charge)		強P+強K押しつづける(Hold Strong P+Strong K)
+パワーMAX発動(Power MAX ON)		強P+強K(Strong P+Strong K)
+ジャストディフェンス(Just Defence)	相手の攻撃に合わせて屈ガードor立ちガード(While Opponent Attack,DB or B)
+

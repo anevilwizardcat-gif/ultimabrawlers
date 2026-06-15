@@ -1,0 +1,21 @@
+ブランカ(Blanka) 特殊技(Basic Moves)、必殺技(Special Moves)、スーパーコンボ(Super Moves)
+
+P：Punch、K：Kick
+F : Forward, B : Back, D : Down, U : Up
+
+特殊技(Basic Moves)
+ロッククラッシュ(Rock Crash)					近距離で←OR→中P(near opponent,B or F+MiddleP)
+アマゾンリバーラン(Amazon River Run)			斜め右下+強K(FD+HighP)
+
+必殺技(Special Moves)
+エレクトリックサンダー(Electric Thunder)			P連打(P(tap))
+ローリングアタック(Rolling Attack)				←要素溜め→+P(Hold B and F + P)
+バックステップローリング(Back Step Rolling)		←要素溜め→+K(Hold B and F + K)
+バーチカルローリング(Vertical Rolling)			↓要素溜め↑要素+K(Hold D and U + K)
+サプライズフォワード(Surprise Forward)			K2つ以上同時押し(2 or more K)
+サプライズバック(Surprise Back)				←+K2つ以上同時押し(B+2 or more K)
+
+スーパーコンボ(Super Moves)
+ダイレクトライトニング(Direct Lightning)			←要素溜め→←→+P(Hold B and F and B and F+ P)
+シャウトオブアース(Shout of Earth)				斜め左下溜め斜め右下↑要素+P連打(Hold DB and DF and DB and U + P(Tap))
+グランドシェイブローリング(Ground Shave Rolling)	←要素溜め→←→+K(Hold B and F and B and F+ K)
