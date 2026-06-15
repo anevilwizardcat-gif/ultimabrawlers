@@ -1,0 +1,29 @@
+; Contains all the filenames needed for the character
+
+; Player information
+[Info]
+name			= "Sentinel"					; Name of character
+displayname		= "Sentinel"					; Name of character to display
+versiondate		= 7,30,2009						; Version date of character
+mugenversion = 1.0
+author			= "Kong"
+Editor = "REDHOT"
+pal.defaults	= 1,2,3,4,5,6
+
+
+[Files]
+cmd      = CMND/Sentinel.cmd
+cns      = CNS/Sentinel.cns
+st       = CNS/Sentinel.cns
+st1      = CNS/config.txt
+stcommon = CNS/common1.cns
+sprite   = SPRITES/Sentinel.sff
+anim     = ANIMATIONS/Sentinel.air
+sound    = SOUNDS/Sentinel.snd
+pal1     = PALETTES/Sentinel_01.act
+pal2     = PALETTES/Sentinel_02.act
+pal3     = PALETTES/Sentinel_03.act
+pal4     = PALETTES/Sentinel_04.act
+pal5     = PALETTES/Sentinel_05.act
+pal6     = PALETTES/Sentinel_06.act
+

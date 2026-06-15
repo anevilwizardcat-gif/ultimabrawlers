@@ -1,0 +1,31 @@
+[Info]
+name = "cvsgouki_ex"		;神人豪鬼(cvs)
+displayname = "S.Gouki"	;神人豪鬼
+versiondate=09,08,2011	;Version date of character
+mugenversion=06,14,2003	;Version of M.U.G.E.N character works on
+author="Warusaki3"		;悪咲3号
+Pal.Defaults=4,5
+
+[Files]
+cmd=cvsgouki.cmd
+cns=cvsgouki.cns
+st=cvsgouki.cns
+st1=cvs_common_add.cns
+st2=groove.cns
+st3=config.txt
+stcommon=common1.cns
+sprite=cvsgouki_ex.sff
+anim=cvsgouki.air
+sound=cvsgouki.snd
+pal1=act104.act;カプエス2神人弱Kカラー
+pal2=act105.act;カプエス2神人中Kカラー
+pal3=act106.act;カプエス2神人強Kカラー
+pal4=act101.act;カプエス2神人弱Pカラー
+pal5=act102.act;カプエス2神人中Pカラー
+pal6=act106.act;カプエス2神人強Kカラー
+pal7=act110.act;カプエス2神人オリジナルカラー2
+pal8=act111.act;カプエス2神人オリジナルカラー3
+pal9=act112.act;カプエス2神人オリジナルカラー4
+pal10=act107.act;カプエス2神人P同時押しカラー
+pal11=act108.act;カプエス2神人K同時押しカラー
+pal12=act109.act;カプエス2神人オリジナルカラー1

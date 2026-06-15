@@ -1,0 +1,41 @@
+; Definition file for Kung Fu Man
+; Contains all the filenames needed for the character
+
+; Player information
+[Info]
+name = "Mitsuru Kirijo" 
+displayname = "Mitsuru" 
+versiondate = 09,30,2009    
+mugenversion = 1.0          
+author = "OHMSBY"         
+pal.defaults = 1      
+
+[Files]
+cmd	= Mitsuru.cmd
+cns     = Mitsuru.cns
+st      = Mitsuru.cns
+st2     = Helpers.cns
+st3     = -2-3.cns
+stcommon = Mitsuru_common.cns
+sprite  = Mitsuru.sff
+anim    = Mitsuru.air
+sound   = Mitsuru.snd
+;sound   = Mitsuru JPN.snd
+
+[Palette Keymap]
+a = 1
+b = 2
+c = 3
+x = 4
+y = 5
+z = 6
+a2 = 7
+b2 = 8
+c2 = 9
+x2 = 10
+y2 = 11
+z2 = 12
+
+[Arcade]
+;intro.storyboard = intro.def
+;ending.storyboard = ending.def

@@ -3289,7 +3289,30 @@ triggerall = statetype != A
 triggerall = hitdefattr = SC, NA, SA && movecontact
 trigger1 = p2movetype = H
 
-;--- RECOVERY PUNISH -> Hundred Crack Fist: opponent recovering/open in range, has meter
+;--- MAXED DASH-IN: stars full + opponent stuck in a long recovery but out of range
+;    -> close the gap so the ultimate actually reaches (cutscene setup).
+[State -1, AI Ultimate Setup Dash]
+type = ChangeState
+value = 100
+triggerall = var(59) = 1 && roundstate = 2
+triggerall = var(24) = 7
+triggerall = ctrl && statetype = S && stateno != [100,107]
+triggerall = p2bodydist x = [75, 150]
+trigger1 = enemy,ctrl = 0 && enemy,movetype != A && enemy,statetype != A && enemy,animtime <= -8
+
+;--- GUARANTEED-PUNISH Ultimate (MAXED) -> CUTSCENE. Placed ABOVE the Hundred Crack
+;    Fist punish: a full star gauge now cashes the recovery read into the ultimate
+;    instead of the rush. THIS was why the cutscene never played -- 2000 punished first.
+[State -1, AI Punish Hokuto Ultimate]
+type = ChangeState
+value = 8800
+triggerall = var(59) = 1 && roundstate = 2
+triggerall = var(24) = 7
+triggerall = ctrl && statetype != A
+triggerall = p2bodydist x <= 85
+trigger1 = enemy,ctrl = 0 && enemy,movetype != A && enemy,statetype != A && enemy,animtime <= -4
+
+;--- RECOVERY PUNISH -> Hundred Crack Fist (not maxed): opponent recovering/open, has meter
 [State -1, AI Punish Hundred Crack Fist]
 type = ChangeState
 value = 2000
@@ -3299,16 +3322,6 @@ triggerall = ctrl && statetype != A
 triggerall = p2bodydist x <= 70
 trigger1 = enemy,ctrl = 0 && enemy,movetype != A && enemy,statetype != A && enemy,animtime <= -4
 trigger2 = enemy,movetype = H
-
-;--- GUARANTEED-PUNISH Ultimate: stars full + opponent in a real recovery window (safe)
-[State -1, AI Punish Hokuto Ultimate]
-type = ChangeState
-value = 8800
-triggerall = var(59) = 1 && roundstate = 2
-triggerall = var(24) = 7
-triggerall = ctrl && statetype != A
-triggerall = p2bodydist x <= 75
-trigger1 = enemy,ctrl = 0 && enemy,movetype != A && enemy,statetype != A && enemy,animtime <= -4
 
 ;--- PRESSURE POKE: quick normal in range to start offense & charge the star gauge
 [State -1, AI Poke]

@@ -1,0 +1,36 @@
+[Info]
+name         = "Aigis"
+displayname  = "Aigis"
+versiondate  = 06,08,2015
+mugenversion = 1.0
+author       = "SOA"
+pal.defaults = 1,2,3,4,5,6,7,8,9,10,11,12
+LocalCoord   = 320;400
+
+[Files]
+cmd      = Aigis.cmd
+cns      = Aigis.cns
+st       = Aigis.cns
+st2      = FX.cns
+st3      = State Z.cns
+stcommon = Aigis.cns
+sprite   = Aigis.sff
+anim     = Aigis.air
+sound    = Aigis.snd
+pal1     = Aigis_01.act
+pal2     = Aigis_01.act
+pal3     = Aigis_01.act
+pal4     = Aigis_01.act
+pal5     = Aigis_01.act
+pal6     = Aigis_01.act
+
+pal7     = Aigis_01.act
+pal8     = Aigis_01.act
+pal9     = Aigis_01.act
+pal10    = Aigis_01.act
+pal11    = Aigis_01.act
+pal12    = Aigis_01.act
+
+[Arcade]
+intro.storyboard =
+ending.storyboard =

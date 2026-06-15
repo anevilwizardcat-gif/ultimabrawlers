@@ -1,0 +1,40 @@
+;=====================================================================
+;  DEF File For "Mai"               	            Made By H"
+;                                       Ver. 1.32          
+;=====================================================================
+; Player Information
+[Info]
+name    = "cvsmai"
+displayname = "Mai"
+versiondate = 10,27,2008
+MugenVersion = 04,14,2002
+author = "HÅh"
+Pal.Defaults=4,5,6,1,2,3
+
+; Files for the Player
+[Files]
+cmd      = Mai.cmd
+cns      = Mai-N.cns     ;Constants
+st       = Mai-N.cns     ;States (Normal)
+st1      = Mai-S.cns     ;States (Special)
+st2      = Mai-H.cns     ;States (Hyper)
+st3      = cvs2_system.cns
+st4      = config.txt
+stcommon = common1.cns       ;Common states (in data/)
+sprite   = Mai.sff       ;Sprite
+anim     = Mai.air       ;Animation
+sound    = Mai.snd       ;Sound
+pal1     = act/004.act
+pal2     = act/005.act	
+pal3     = act/006.act
+pal4     = act/001.act	
+pal5     = act/002.act
+pal6     = act/003.act	
+pal7     = act/007.act
+pal8     = act/008.act
+pal9     = act/009.act
+pal10    = act/010.act
+pal11    = act/011.act
+pal12    = act/012.act
+
+

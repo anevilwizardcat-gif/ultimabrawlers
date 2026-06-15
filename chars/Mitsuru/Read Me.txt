@@ -1,0 +1,209 @@
+==========================================================================================
+Mitsuru Kirijo
+From Persona 3
+Version 1.02
+For M.U.G.E.N 1.0 and above
+==========================================================================================
+
+==========================================================================================
+Notes
+==========================================================================================
+-This character was made with only single and turns mode in mind, so using this in simul mode is probably not a good idea.
+
+-It is recommended that you set the WavChannels to 64 or higher in mugen.cfg. This will prevent sound effects from cutting each other off.
+
+-Due to the custom fall states, Stupa's Training character will not realize that they can recover despite "recover" being turned on. To fix this, Paste this code at the bottom of Training's config file:
+
+[State 5050, 4] ;Recover near ground
+type = SelfState
+triggerall = stateno = 6050
+triggerall = Vel Y > 0
+triggerall = Pos Y >= -20
+triggerall = alive
+triggerall = CanRecover
+trigger1 = Command = "recovery"
+trigger2 = var(16) = 1
+trigger2 = var(23)>=var(22)
+value = 5200 ;HITFALL_RECOVER
+
+[State -2]; Recover in mid air
+type = selfState
+triggerall = stateno = 6050
+triggerall = Vel Y > -1
+triggerall = alive
+triggerall = CanRecover
+trigger1 = Command = "recovery"
+trigger2 = var(16) = 1
+trigger2 = var(23)>=var(22)
+value = 5210 ;HITFALL_AIRRECOVER
+
+-Downloading this character from Mugen Guild or OHMSBY's Mugen site ensures that this is the latest version.
+ 
+==========================================================================================
+
+==========================================================================================
+Change log
+==========================================================================================
+08/22/2021 - 1.02
+-New Mechanic: Not Over Yet
+  -Upon reaching 35% health or below and not being in a hurt state, you will receive the following benefits for the rest of the round:
+   +All Distortion Drives deal 20% more damage (Stacks with Ultra Burst's damage buff)
+   +Immediately Gain 500 Meter
+   +Slowly gain meter overtime
+   +Gain a defense buff that scales up to 35% according to how much health you currently have (Less health means more defense)
+  -Only triggers once per round
+-New Mechanic: Ultra Dead Angle (Burst while Guarding)
+  -Using this will cancel your guard stun and make you invulnerable for ten frames after the super pause. This also puts you into the Ultra Burst state, but it will only last a third of the time it would if you were to Ultra Burst normally.
+-Ground throw now has 5 frames of startup, Dash Grab now has 3 frames of startup
+-Stationary, Forward, and air dodges now have less invul time against physical attacks
+-Invul time upon air recovery lasts a little longer and control is regained a little sooner
+-Directional inputs now have more influence over air recovery
+-Distortion Drives can now be triggered with any combination of A, B, and C rather than just A+B (Example: QCF B+C, QCB A+C)
+-Changed default Liedown time to 15 frames
+-A red X now appears over the Burst Icon when in a situation where it is not usable
+-Added an Invalid Combo Indicator
+-General Aesthetic Changes
+-5C no longer knocks down on grounded hit
+
+04/19/2021 - 1.01
+- Fixed an error where Coup Droit was flagged as a normal attack
+
+04/18/2021 - 1.00
+- First Release
+==========================================================================================
+
+==========================================================================================
+Introduction
+==========================================================================================
+This Mitsuru uses a custom gameplay style. Though she's not source accurate, she still plays similarly to how she does in Cross Tag while having new stuff and a couple of things that she had in Persona 4 Arena Ultimax. This read me will explain how this gameplay style works. Her move list can be found in the .png included in this folder.
+==========================================================================================
+
+==========================================================================================
+Default Button Layout
+==========================================================================================
+A, B, and C: Attack Buttons
+
+X: Rapid Cancel
+
+Y: Dodge
+
+Z: Grab
+==========================================================================================
+
+==========================================================================================
+Gameplay Mechanics
+==========================================================================================
+------------------------------------------------------------------------------------------
+Double Jump (Tap Up in the air)
+------------------------------------------------------------------------------------------
+Pretty self explanatory, allows you to jump a second time in the air. Can be canceled into after connecting any of your air normals. Can only be used once in the air, can't be used if you have already air dashed.
+
+------------------------------------------------------------------------------------------
+Air Dash (Double Tap Forward/Back while in the air)
+------------------------------------------------------------------------------------------
+Sends you flying forward or back for a set distance. Can be canceled into after connecting any of your air normals. Can only be used once in the air, can't be used if you have already double jumped.
+
+------------------------------------------------------------------------------------------
+Dodge (Y)
+------------------------------------------------------------------------------------------
+For a very short amount of time, you'll become invulnerable and can pass through the opponent and their projectiles. Just pressing Y will keep you stationary, pressing Y and forward at the same time will have you move forward a short distance, and pressing Y and back will have you back dash. The stationary dodge can also be done in the air. You will become vulnerable again near the end of the dodge animation, so be carful about how you time it.
+
+------------------------------------------------------------------------------------------
+Grab (Z)
+------------------------------------------------------------------------------------------
+Once again, pretty self explanatory. Overrides the opponent's guard, but only works if they're not in the air and not in a hit state. As long as the grab is not registered as a counter, The opponent will be able to break out of this by inputting A+B, B+C, X+Y, or Z within 14 frames after being grabbed. 
+
+------------------------------------------------------------------------------------------
+Air Grab (Z in the air)
+------------------------------------------------------------------------------------------
+Inversely, only works on airborne opponents and can work even when they're in a hit state. Can be used as a combo ender.
+
+------------------------------------------------------------------------------------------
+Running Grab (Z While Running)
+------------------------------------------------------------------------------------------
+Works on airborne opponents and standing opponents even when they're in a hit state. However, it won't work on crouching opponents.
+
+------------------------------------------------------------------------------------------
+Rapid Cancel (X When your attack has made contact with the opponent) (Costs 1000 meter) (Costs 500 meter if used during a Distortion Drive)
+------------------------------------------------------------------------------------------
+Using this will immediately put you in a neutral state, this can be used to extend combos, make otherwise unsafe moves safe, or make you more unpredictable to your opponent. Holding Forward or back while inputing the command will immediately have you run or back dash respectively (Air Dash Forward/Back when in the air), Holding up will immediately make you jump, and holding down while in the air will quickly bring you back to the ground.
+
+------------------------------------------------------------------------------------------
+Dead Angle Attack (Press Forward and X or Forward and B+C While guarding) (Costs 1000 meter)
+------------------------------------------------------------------------------------------
+Cancels your guard animation into an invulnerable attack animation that sends the opponent flying backward. Deals damage, but doesn't kill.
+
+------------------------------------------------------------------------------------------
+Burst (y+z while getting hit) (Can only be used once per round) (Doesn't work if you're being thrown or being hit by a super move)
+------------------------------------------------------------------------------------------
+Deploys a non damaging blast around your character that sends you opponent flying away from you. A poorly timed burst can leave open for even more damage, so be carful.
+
+------------------------------------------------------------------------------------------
+Ultra Burst (y+z while in a neutral state) (Can only be used once per round)
+------------------------------------------------------------------------------------------
+Using this will put you in a powered up state that gives the following benefits:
+ +Health and Meter will gradually recover overtime (Unless you're taking damage)
+ +Damage output will be increased by 20%
+ +Timer will be frozen
+ +Hitting the opponent with the Ultra Burst will launch them upward and will be unable to recover from it
+ +Hitting the opponent with the ultra burst will also grant 500 meter instantly
+The time that the Ultra Burst state will last is proportionate to the amount of health lost prior to activating, Attempting an astral heat will immediately end the Ultra Burst state
+
+------------------------------------------------------------------------------------------
+Ultra Dead Angle (y+z while Guarding) (Exhausts Burst)
+------------------------------------------------------------------------------------------
+Using this will cancel your guard stun and make you invulnerable for ten frames after the super pause. This also puts you into the Ultra Burst state, but it will only last a third of the time it would if you were to Ultra Burst normally.
+
+------------------------------------------------------------------------------------------
+Not Over Yet
+------------------------------------------------------------------------------------------
+Upon reaching 35% health or below and not being in a hurt state, you will receive the following benefits for the rest of the round:
+ +All Distortion Drives deal 20% more damage (Stacks with Ultra Burst's damage buff)
+ +Immediately Gain 500 Meter
+ +Slowly gain meter overtime
+ +Gain a defense buff that scales up to 35% according to how much health you currently have (Less health means more defense)
+Only triggers once per round
+
+
+------------------------------------------------------------------------------------------
+Wake up Action
+------------------------------------------------------------------------------------------
+The wake up animation can be canceled into a forward dodge or a back dash. In Mitsuru's case, she can also cancel into Getsu-ei
+
+------------------------------------------------------------------------------------------
+Counter hit properties
+------------------------------------------------------------------------------------------
+All attacks will deal bonus damage if they hit the opponent while they're attacking and in some cases, causes more hit stun and more unrecoverable time.
+
+==========================================================================================
+
+==========================================================================================
+Character Specific Mechanics
+==========================================================================================
+------------------------------------------------------------------------------------------
+Persona Break
+------------------------------------------------------------------------------------------
+Some of Mitsuru's attacks uses her Persona, Artemisia. If Artemisia gets hit while she's out on the field, Mitsuru will take damage and Artemisia will disappear.
+
+Mitsuru won't take damage if Artemisia is hit by a non damaging attack, such as a burst.
+
+------------------------------------------------------------------------------------------
+Marin Karin
+------------------------------------------------------------------------------------------
+This projectile will slowly home in on the opponent and will steal a small amount of meter from them on hit.
+
+Disappears if Mitsuru is hit.
+
+==========================================================================================
+
+==========================================================================================
+Thanks to:
+- CozySquirtle, for teaching me how to make small ports
+- Ricepigeon for his damage scaling system
+- Nep Heart for the Burst code
+- Mister Fael, Nep Heart, ZolidSone, Alchemist of Atlas, and waspennator for testing
+- Elecbyte and Mugen Guild, for their very helpful references and documentation on how the Mugen code works
+- Mugen Guild again for providing feedback for my characters
+- You, for checking this character out, Have fun
+==========================================================================================
+

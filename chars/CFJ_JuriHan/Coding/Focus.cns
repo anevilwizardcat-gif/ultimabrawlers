@@ -1,0 +1,839 @@
+;--------------------------------------------------------------------
+;Saving Attack
+[Statedef 950]
+type = S
+movetype = I
+physics = S
+ctrl = 0
+velset = 0,0
+anim = 950
+poweradd = ifelse((prevstateno=[200,1999])&&var(3)!=3,-1500,0)
+
+;--------------------------------------------------------------------
+;EX-SpecialMove
+[State 0, Explod]
+type = VarSet
+trigger1 = time=0&&(prevstateno!=[5000,5099])
+var(1) = ((prevstateno=[200,1999])&&var(3)!=3)
+
+;EX-SpecialMove
+[State 0, Explod]
+type = PlaySnd
+trigger1 = time=0&&(prevstateno=[200,1999])&&var(3)!=3
+value = 6000,0
+ignorehitpause =1
+persistent =1
+
+;EX-SpecialMove
+[State 0, Explod]
+type = Explod
+trigger1 = time=0&&(prevstateno=[200,1999])&&var(3)!=3
+anim =7800
+ID =7800
+pos = 0,-60
+postype = p1  ;p2,front,back,left,right
+bindtime = 1
+scale = 1,1
+sprpriority = 3
+ownpal = 1
+ignorehitpause =1
+persistent =1
+
+;EX-SpecialMove
+[State 0, Explod]
+type = PalFx
+trigger1 = gametime%2=0 && time<20&&var(1)
+time = 1
+add = 96,96,0
+;mul = floor(255-64*Abs(sin(gametime*.01*Pi))),floor(255-64*Abs(sin(gametime*.01*Pi))),floor(255-64*Abs(sin(gametime*.01*Pi)))
+;color = 128
+ignorehitpause =1
+
+[state 950]
+type = StopSND
+trigger1 = time=0&&((prevstateno=[200,799])||(prevstateno=[1000,1999]))
+channel = 1
+
+;Super Armor
+[state 950]
+type = varset
+trigger1 = time=0
+var(49) = 0
+
+[state 950]
+type = varset
+trigger1 = time=0
+var(49) = (prevstateno!=[5000,5099])
+
+[state 950]
+type = varset
+trigger1 = time=0&&(prevstateno!=[5000,5099])
+var(50) = 0
+
+[state 950]
+type = varadd
+trigger1 = time>0||((prevstateno=[5000,5099])&&time>=var(51))
+var(50) = 1
+
+[state 950]
+type = lifeadd
+trigger1 = (prevstateno=[5000,5099])&&time=0
+value = -var(52)
+
+;Super Armor
+[state 955]
+type = ChangeAnim
+trigger1 = (prevstateno=[5000,5099]) && var(49)=1 && (time=0||time<var(51))
+value = 950
+elem = 2
+
+[state 950]
+type = PlaySND
+trigger1 = time=0&&(prevstateno!=[5000,5099])
+value = 950,0
+channel = 1
+
+[state 950]
+type = PlaySND
+trigger1 = (prevstateno=[5000,5099])&&time=0
+value = 950,10
+
+[state 955]
+type = PalFx
+trigger1 = ((var(50)=[17,22])||(var(50)=[50,55]))&&time>=var(51)
+add = 128,128,128
+time = 1
+
+[State 200]
+type = ChangeState
+triggerall = var(50)>=1
+trigger1 = var(50)>=55
+trigger2 = (command!="hold_y"||command!="hold_b")&&var(50)<50&&time>=5&&!fvar(38)
+trigger3 = ((P2stateno=5120&&enemynear,animtime>-10&&var(54)%5<3)||P2statetype!=L)&&ifelse(P2statetype=L,random%5=0,(var(50)>=ifelse(var(54)%11<5,60,ifelse(var(54)%11<7,30,8))&&random%7=0))
+trigger3 = P2bodydist X<=(80+(var(51)>=17)*10)&&(prevstateno!=[200,1999]) && time>=var(51)&&time>=5&&var(50)<50&&fvar(38)
+trigger4 = (prevstateno=[5000,5099]) && P2bodydist X<=(80+(var(51)>=17)*10) && random%5<2 && time>=var(51)&&time>=5&&var(50)<50&&fvar(38)
+value = 955+(var(50)>=17)+(var(50)>=50)
+
+;--------------------------------------------------------------------
+;Saving Attack Lv.1
+[Statedef 955]
+type=A
+movetype=A
+physics=N
+juggle=ifelse(numtarget,15,8)
+anim= 242
+velset=vel x,0
+poweradd=50
+sprpriority=4
+ctrl=0
+facep2=1
+
+;Super Armor
+[state 950]
+type = varset
+trigger1 = time=0
+var(49) = 0
+
+[State 222, Vel]
+type=velset
+trigger1= animelem=2
+x=ifelse(prevstateno=100,5,3)
+y=-2.5
+
+[State 222, grav]
+type=gravity
+trigger1= animelemtime(4)>0
+
+[State 105, Dust Helper]
+type = Helper
+trigger1 = AnimElem = 2
+helperType = Normal
+stateNo = 8103
+ID = 8100
+name = "Dash Dust"
+posType = P1
+facing = 1
+pauseMoveTime = 255
+superMoveTime = 255
+ownPal = 1
+
+;Attack
+[State 200,HitDef]
+type = HitDef
+triggerall = !var(18)
+trigger1 = AnimElem=4
+attr = S,NA
+hitflag = MAF
+guardflag = M
+animtype = hard
+air.animtype = back
+priority = 5,Hit
+getpower = 20
+givepower = 10
+damage = 60,10
+pausetime = 20,21
+sparkno = s7100
+guard.sparkno = s7000
+sparkxy = ifelse((Abs(P2bodydist X)-10)<20,-20,-10),-72
+hitsound = s1,2
+guardsound = s0,0
+ground.type = Low
+ground.slidetime = 15
+guard.slidetime = 15
+ground.hittime = 15
+guard.hittime = 15
+air.hittime = 0
+yaccel = .5
+ground.velocity = -7.0
+guard.velocity = -7.0
+air.velocity = -5.0,-6.0
+air.cornerpush.veloff = 0
+ground.cornerpush.veloff = 0
+fall.recover = 1
+;fall = 0
+;air.fall = 0
+
+[state -2]
+type = varadd
+trigger1 = movehit=1 && numtarget && var(14)
+trigger1 = (target,stateno!=[966,968]) && target,statetype!=A
+var(38) = 1
+ignorehitpause=1
+
+[State 200]
+type = TargetState
+trigger1 = movehit=1 && numtarget && var(14)
+trigger1 = target,statetype!=A
+value = 966
+ignorehitpause=1
+persistent=0
+
+[State 200]
+type = varset
+trigger1 = time=0
+fvar(8) = 0
+ignorehitpause=1
+
+[State 200]
+type = velset
+trigger1 = movecontact=1 && (enemynear,backedgebodydist <=5||enemynear,frontedgebodydist<=5)
+x = fvar(8)
+ignorehitpause=1
+
+[State 200]
+type = varset
+trigger1 = moveguarded=1 && enemynear,backedgebodydist <=5
+fvar(6) = -7.0
+ignorehitpause=1
+
+[State 200]
+type = varset
+trigger1 = moveguarded=1 && enemynear,backedgebodydist <=5
+fvar(7) = 15-2
+ignorehitpause=1
+
+[state -2]
+type = varadd
+triggerall = numtarget
+trigger1 = (target,stateno=[5000,5099]) && target,time=0
+trigger1 = movehit=1
+var(32) = 11
+ignorehitpause=1
+
+[state 200]
+type = varset
+trigger1 = time=0
+var(1) = 0
+
+;Dash Cancel
+[State 200]
+type = VarSet
+triggerall = movecontact=1
+trigger1 = !fvar(38)&&(fvar(25)=17||command = "FF")
+trigger2 = fvar(38)&&var(52)
+var(1) = 100
+ignorehitpause=1
+persistent=0
+
+;Back Step Cancel
+[State 200]
+type = VarSet
+triggerall = movecontact=1
+trigger1 = !fvar(38)&&(fvar(25)=-17||command = "BB")
+trigger2 = fvar(38)&&var(54)%3=0&&!var(52)
+var(1) = 105
+ignorehitpause=1
+persistent=0
+
+;Dash/Back Step Cancel
+[State 200]
+type = ChangeState
+triggerall = movecontact=1
+trigger1 = var(1)
+value = 100+(var(1)=105)*5
+
+[State 222, End]
+type=changestate
+trigger1= pos y>0 && vel y>0
+value=0
+ctrl=1
+
+;--------------------------------------------------------------------
+;Saving Attack Lv.2
+[Statedef 956]
+type=A
+movetype=A
+physics=N
+juggle=ifelse(numtarget,15,8)
+anim= 242
+velset=vel x,0
+poweradd=50
+sprpriority=4
+ctrl=0
+facep2=1
+
+;Super Armor
+[state 950]
+type = varset
+trigger1 = time=0
+var(49) = 0
+
+[State 222, Vel]
+type=velset
+trigger1= animelem=2
+x=ifelse(prevstateno=100,5,3)
+y=-2.5
+
+[State 222, grav]
+type=gravity
+trigger1= animelemtime(4)>0
+
+[State 105, Dust Helper]
+type = Helper
+trigger1 = AnimElem = 2
+helperType = Normal
+stateNo = 8103
+ID = 8100
+name = "Dash Dust"
+posType = P1
+facing = 1
+pauseMoveTime = 255
+superMoveTime = 255
+ownPal = 1
+
+;Attack
+[State 200,HitDef]
+type = HitDef
+triggerall = !var(18)
+trigger1 = AnimElem=4
+attr = S,NA
+hitflag = MAF
+guardflag = M
+animtype = hard
+air.animtype = back
+priority = 5,Hit
+getpower = 20
+givepower = 10
+damage = 60,10
+pausetime = 20,21
+sparkno = s7100
+guard.sparkno = s7000
+sparkxy = ifelse((Abs(P2bodydist X)-10)<20,-20,-10),-72
+hitsound = s1,2
+guardsound = s0,0
+ground.type = Low
+ground.slidetime = 15
+guard.slidetime = 15
+ground.hittime = 15
+guard.hittime = 15
+air.hittime = 0
+yaccel = .5
+ground.velocity = -7.0
+guard.velocity = -7.0
+air.velocity = -5.0,-6.0
+air.cornerpush.veloff = 0
+ground.cornerpush.veloff = 0
+fall.recover = 1
+;fall = 0
+;air.fall = 0
+
+[state -2]
+type = varadd
+trigger1 = movehit=1 && numtarget
+trigger1 = (target,stateno!=[966,968]) && target,statetype!=A
+var(38) = 1
+ignorehitpause=1
+
+[State 200]
+type = TargetState
+trigger1 = movehit=1 && numtarget
+trigger1 = target,statetype!=A
+value = 966
+ignorehitpause=1
+persistent=0
+
+[State 200]
+type = varset
+trigger1 = time=0
+fvar(8) = 0
+ignorehitpause=1
+
+[State 200]
+type = velset
+trigger1 = movecontact=1 && (enemynear,backedgebodydist <=5||enemynear,frontedgebodydist<=5)
+x = fvar(8)
+ignorehitpause=1
+
+[State 200]
+type = varset
+trigger1 = moveguarded=1 && enemynear,backedgebodydist <=5
+fvar(6) = -8.25
+ignorehitpause=1
+
+[State 200]
+type = varset
+trigger1 = moveguarded=1 && enemynear,backedgebodydist <=5
+fvar(7) = 21-2
+ignorehitpause=1
+
+[state -2]
+type = varadd
+triggerall = numtarget
+trigger1 = (target,stateno=[5000,5099]) && target,time=0
+trigger1 = movehit=1
+var(32) = 11
+ignorehitpause=1
+
+[state 200]
+type = varset
+trigger1 = time=0
+var(1) = 0
+
+;Dash Cancel
+[State 200]
+type = VarSet
+triggerall = movecontact=1
+trigger1 = !fvar(38)&&(fvar(25)=17||command = "FF")
+trigger2 = fvar(38)
+var(1) = 100
+ignorehitpause=1
+persistent=0
+
+;Back Step Cancel
+[State 200]
+type = VarSet
+triggerall = movecontact=1
+trigger1 = !fvar(38)&&(fvar(25)=-17||command = "BB")
+var(1) = 105
+ignorehitpause=1
+persistent=0
+
+;Dash/Back Step Cancel
+[State 200]
+type = ChangeState
+triggerall = movecontact=1
+trigger1 = var(1)
+value = 100+(var(1)=105)*5
+
+[State 222, End]
+type=changestate
+trigger1= pos y>0 && vel y>0
+value=0
+ctrl=1
+
+;--------------------------------------------------------------------
+;Saving Attack Lv.3
+[Statedef 957]
+type=A
+movetype=A
+physics=N
+juggle=ifelse(numtarget,15,8)
+anim= 242
+velset=vel x,0
+poweradd=50
+sprpriority=4
+ctrl=0
+facep2=1
+
+;Super Armor
+[state 950]
+type = varset
+trigger1 = AnimElem=4||(prevstateno=[5000,5099])
+var(49) = 0
+
+[state 950]
+type = varset
+trigger1 = time=0&&(prevstateno!=[5000,5099])
+var(50) = 0
+
+[state 950]
+type = varadd
+trigger1 = time>0||((prevstateno=[5000,5099])&&time>=var(51))
+var(50) = 1
+
+[state 950]
+type = lifeadd
+trigger1 = (prevstateno=[5000,5099])&&time=0
+value = -var(52)
+
+;Super Armor
+[state 955]
+type = ChangeAnim
+trigger1 = (prevstateno=[5000,5099]) && var(49)=1 && (time=0||time<var(51))
+value = 955
+elem = ifelse((var(50)=[0,2]),1,ifelse((var(50)=[3,5]),2,ifelse((var(50)=[6,7]),3,ifelse((var(50)=[8,9]),4,ifelse((var(50)=[10,11]),5,6)))))
+
+[state 950]
+type = PlaySND
+trigger1 = (prevstateno=[5000,5099])&&time=0
+value = 950,11
+
+[state 200]
+type = envshake
+trigger1 = movecontact=1
+ampl = 4
+time = 12
+ignorehitpause=1
+persistent=0
+
+[state 950]
+type = Explod
+trigger1 = (prevstateno=[5000,5099])&&time=0
+anim = 6700
+pos = 0,-floor(60*const(size.yscale))
+postype = p1
+ownpal = 1
+sprpriority = 5
+pausemovetime=999
+supermovetime=999
+ignorehitpause=1
+scale = .5,.5
+
+[State 222, Vel]
+type=velset
+trigger1= animelem=2
+x=ifelse(prevstateno=100,5,3)
+y=-2.5
+
+[State 222, grav]
+type=gravity
+trigger1= animelemtime(4)>0
+
+[State 105, Dust Helper]
+type = Helper
+trigger1 = AnimElem = 2
+helperType = Normal
+stateNo = 8103
+ID = 8100
+name = "Dash Dust"
+posType = P1
+facing = 1
+pauseMoveTime = 255
+superMoveTime = 255
+ownPal = 1
+
+;Attack
+[State 200,HitDef]
+type = HitDef
+triggerall = !var(18)
+trigger1 = AnimElem=4
+attr = S,NA
+hitflag = MAF
+guardflag = M
+animtype = hard
+air.animtype = back
+priority = 5,Hit
+getpower = 20
+givepower = 10
+damage = 60,10
+pausetime = 20,21
+sparkno = s7100
+guard.sparkno = s7000
+sparkxy = ifelse((Abs(P2bodydist X)-10)<20,-20,-10),-72
+hitsound = s1,2
+guardsound = s0,0
+ground.type = Low
+ground.slidetime = 15
+guard.slidetime = 15
+ground.hittime = 15
+guard.hittime = 15
+air.hittime = 0
+yaccel = .5
+ground.velocity = -7.0
+guard.velocity = -7.0
+air.velocity = -5.0,-6.0
+air.cornerpush.veloff = 0
+ground.cornerpush.veloff = 0
+fall.recover = 1
+;fall = 0
+;air.fall = 0
+
+[State 200]
+type = TargetState
+trigger1 = movehit=1 && numtarget
+value = 969
+ignorehitpause=1
+persistent=0
+
+[State 200]
+type = varset
+trigger1 = time=0
+fvar(8) = 0
+ignorehitpause=1
+
+[State 200]
+type = velset
+trigger1 = movecontact=1 && (enemynear,backedgebodydist <=5||enemynear,frontedgebodydist<=5)
+x = fvar(8)
+ignorehitpause=1
+
+[State 200]
+type = varset
+trigger1 = moveguarded=1 && enemynear,backedgebodydist <=5
+fvar(6) = -11.0
+ignorehitpause=1
+
+[State 200]
+type = varset
+trigger1 = moveguarded=1 && enemynear,backedgebodydist <=5
+fvar(7) = 26-2
+ignorehitpause=1
+
+[state -2]
+type = varadd
+triggerall = numtarget
+trigger1 = (target,stateno=[5000,5099]) && target,time=0
+trigger1 = movehit=1
+var(32) = 11
+ignorehitpause=1
+
+[state 200]
+type = varset
+trigger1 = time=0
+var(1) = 0
+
+;Dash Cancel
+[State 200]
+type = VarSet
+triggerall = movecontact=1
+trigger1 = !fvar(38)&&(fvar(25)=17||command = "FF")
+trigger2 = fvar(38)
+var(1) = 100
+ignorehitpause=1
+persistent=0
+
+;Back Step Cancel
+[State 200]
+type = VarSet
+triggerall = movecontact=1
+trigger1 = !fvar(38)&&(fvar(25)=-17||command = "BB")
+var(1) = 105
+ignorehitpause=1
+persistent=0
+
+;Dash/Back Step Cancel
+[State 200]
+type = ChangeState
+triggerall = movecontact=1
+trigger1 = var(1)
+value = 100+(var(1)=105)*5
+
+[State 222, End]
+type=changestate
+trigger1= pos y>0 && vel y>0
+value=0
+ctrl=1
+
+;--------------------------------------------------------------------
+;Saving Attack Lv.1,2
+[Statedef 966]
+movetype = H
+
+[state 966]
+type = ChangeState
+trigger1 = time=0&&statetype=A
+value = 969
+
+[state 966]
+type = StatetypeSet
+trigger1 = time=0
+statetype=S
+physics = S
+
+[state 966]
+type = ChangeAnim2
+trigger1 = time=0
+value = 966
+
+;HitPause
+[state 966]
+type = ChangeAnim2
+trigger1 = time<21
+value = anim
+
+[state 966]
+type = VelSet
+trigger1 = time=21
+x = -8.75
+
+[state 966]
+type = ChangeAnim
+trigger1 = time=60
+value = 5070
+
+[state 966]
+type = StatetypeSet
+trigger1 = time=60
+statetype=A
+physics = N
+
+[state 966]
+type = SelfState
+trigger1 = time=93
+value = 5110
+
+;--------------------------------------------------------------------
+;Saving Attack Lv.3
+[Statedef 967]
+movetype = H
+
+[state 966]
+type = ChangeState
+trigger1 = time=0&&statetype=A
+value = 969
+
+[state 966]
+type = StatetypeSet
+trigger1 = time=0
+statetype=S
+physics = S
+
+[state 966]
+type = ChangeAnim2
+trigger1 = time=0
+value = 967
+
+;HitPause
+[state 966]
+type = ChangeAnim2
+trigger1 = time<21
+value = anim
+
+[state 966]
+type = VelSet
+trigger1 = time=21
+x = -8.75
+
+[state 966]
+type = ChangeAnim
+trigger1 = time=66
+value = 5070
+
+[state 966]
+type = StatetypeSet
+trigger1 = time=66
+statetype=A
+physics = N
+
+[state 966]
+type = SelfState
+trigger1 = time=99
+value = 5110
+
+;--------------------------------------------------------------------
+;Saving Attack Lv.1 Counter Hit or Lv.2 Hit (Air)
+[Statedef 968]
+movetype = H
+anim = 5030
+velset = 0,0
+
+[state 966]
+type = ChangeState
+trigger1 = time=0&&statetype!=A&&Pos Y>=0
+value = 966
+
+[state 966]
+type = StatetypeSet
+trigger1 = time=0
+statetype=A
+physics = N
+
+[state 966]
+type = HitFallSet
+trigger1 = time=0
+value = 1
+
+[state 966]
+type = ChangeAnim
+trigger1 = time<21
+value = anim
+
+[state 966]
+type = ChangeAnim
+trigger1 = time=21
+value = 5050
+
+[state 969]
+type = VelSet
+trigger1 = time=21
+x = -4
+y = -7
+
+[state 969]
+type = VelAdd
+trigger1 = time>=21
+y = .5
+
+[state 966]
+type = SelfState
+trigger1 = time>21 && Vel Y>0 && Pos Y>=0
+value = 5100
+
+;--------------------------------------------------------------------
+;Saving Attack Lv.3 Hit (Air)
+[Statedef 969]
+movetype = H
+anim = 5030
+velset = 0,0
+
+[state 966]
+type = ChangeState
+trigger1 = time=0&&statetype!=A&&Pos Y>=0
+value = 967
+
+[state 966]
+type = StatetypeSet
+trigger1 = time=0
+statetype=A
+physics = N
+
+[state 966]
+type = HitFallSet
+trigger1 = time=0
+value = 1
+
+[state 966]
+type = ChangeAnim
+trigger1 = time<21
+value = anim
+
+[state 966]
+type = ChangeAnim
+trigger1 = time=21
+value = 5050+(SelfAnimExist(5052))*2
+
+[state 969]
+type = VelSet
+trigger1 = time=21
+x = -6
+y = -10
+
+[state 969]
+type = VelAdd
+trigger1 = time>=21
+y = .5
+
+[state 966]
+type = SelfState
+trigger1 = time>21 && Vel Y>0 && Pos Y>=0
+value = 5100

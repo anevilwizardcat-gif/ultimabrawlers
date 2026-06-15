@@ -1155,6 +1155,115 @@ trigger2 = stateno = 155
 trigger2 = Time <= 10
 
 ;==========================================================================
+; HIGH-PRIORITY DEFENSE -- block FIRST when the enemy commits an attack.
+; His guard (from BB Hood) sat BELOW his offense at ~1608, so he'd throw a
+; Low Punch into your attack before ever reaching it. This copy sits above
+; all offense and is AILevel-scaled (~79% AI1 -> ~98% AI8).
+;==========================================================================
+[State -1, AI Guard Stand]
+type = ChangeState
+value = 130
+triggerall = var(9) = 1 && roundstate = 2
+triggerall = ctrl = 1 && statetype = S
+triggerall = (enemynear, movetype = A) || (enemy, NumProj >= 1)
+triggerall = enemynear, statetype != C
+triggerall = p2bodydist x <= 120
+trigger1 = random <= 760 + AILevel*28
+
+[State -1, AI Guard Crouch]
+type = ChangeState
+value = 131
+triggerall = var(9) = 1 && roundstate = 2
+triggerall = ctrl = 1 && statetype = S
+triggerall = (enemynear, movetype = A) || (enemy, NumProj >= 1)
+triggerall = enemynear, statetype = C
+triggerall = p2bodydist x <= 120
+trigger1 = random <= 760 + AILevel*28
+
+[State -1, AI Guard Air]
+type = ChangeState
+value = 132
+triggerall = var(9) = 1 && roundstate = 2
+triggerall = ctrl = 1 && statetype = A
+triggerall = (enemynear, movetype = A) || (enemy, NumProj >= 1)
+trigger1 = random <= 700 + AILevel*30
+
+;==========================================================================
+; RECOVERY PUNISH (Kenshiro principle) -- read the opponent's recovery and TAKE
+; THE TURN BACK. This is what stops him being out-pressured: a whiff or unsafe
+; move gets dashed-in-on and converted into the BnB. Reads enemy,ctrl=0 + animtime
+; (locked in recovery), not a dice roll. c.LK feeds straight into the combo route.
+;==========================================================================
+[State -1, AI Punish Starter]
+type = ChangeState
+value = 410
+triggerall = var(9) = 1 && roundstate = 2
+triggerall = statetype = S && ctrl
+triggerall = p2bodydist x <= 48
+triggerall = enemy,ctrl = 0 && enemy,movetype != A && enemy,statetype != A && enemy,animtime <= -4
+trigger1 = random <= 750 + AILevel*30
+
+[State -1, AI Punish Dash]
+type = ChangeState
+value = 100
+triggerall = var(9) = 1 && roundstate = 2
+triggerall = statetype = S && ctrl && stateno != [100,107]
+triggerall = p2bodydist x = [48, 130]
+triggerall = enemy,ctrl = 0 && enemy,movetype != A && enemy,statetype != A && enemy,animtime <= -6
+trigger1 = random <= 800 + AILevel*25
+
+;==========================================================================
+; DETERMINISTIC COMBO ROUTE (MVC2 BnB) -- rushdown. Any ground hit CONVERTS:
+; chain the magic series up to c.HP, then c.HP xx Berserker Barrage X with meter
+; (the cohesive ender the supers confirm off), or launcher -> air combo when meter
+; is empty -- a confirmed hit is NEVER wasted. Every link fires on contact, no random.
+; ANTI-AIR: launcher catches close jump-ins instead of standing there eating them
+[State -1, AI Anti-Air Launcher]
+type = ChangeState
+value = 250
+triggerall = var(9) = 1 && roundstate = 2
+triggerall = statetype = S && ctrl
+triggerall = p2statetype = A && p2movetype != H
+triggerall = p2bodydist x <= 48 && p2bodydist y <= 30
+trigger1 = random <= 600 + AILevel*40
+
+;==========================================================================
+
+; any light/early normal connects -> c.MK
+[State -1, AI Combo cMK]
+type = ChangeState
+value = 430
+triggerall = var(9) = 1 && roundstate = 2
+triggerall = statetype != A && p2statetype != A
+trigger1 = (stateno = 200 || stateno = 210 || stateno = 220 || stateno = 400 || stateno = 410 || stateno = 420) && movecontact
+
+; medium connects -> c.HP (the super-cancel heavy)
+[State -1, AI Combo cHP]
+type = ChangeState
+value = 440
+triggerall = var(9) = 1 && roundstate = 2
+triggerall = statetype != A && p2statetype != A
+trigger1 = (stateno = 230 || stateno = 430) && movecontact
+
+; c.HP / heavy connects + METER -> Berserker Barrage X  (COHESIVE ENDER)
+[State -1, AI Combo BBX Ender]
+type = ChangeState
+value = 6000
+triggerall = var(9) = 1 && roundstate = 2
+triggerall = power >= 1000
+trigger1 = (stateno = 440 || stateno = 240 || stateno = 450) && movecontact
+
+; c.HP / heavy connects + NO meter -> Berserker Barrage (reliable ground ender,
+; same chain his own code already uses off 440 -- no air float, no dead time)
+[State -1, AI Combo Barrage Ender]
+type = ChangeState
+value = 2020
+triggerall = var(9) = 1 && roundstate = 2
+triggerall = power < 1000
+triggerall = statetype != A && p2statetype != A
+trigger1 = (stateno = 440 || stateno = 240 || stateno = 450) && movecontact
+
+;==========================================================================
 
 [State -1, Super Jump]
 type = ChangeState
@@ -1591,21 +1700,21 @@ type = ChangeState
 value = 100
 triggerall = var(9) = 1
 trigger1 = (stateno != [100,107]) && statetype = S && ctrl
-trigger1 = p2bodydist x > 40 &&  p2movetype != A && random < 300
+trigger1 = p2bodydist x > 50 &&  p2movetype != A && random < 480 + AILevel*55
 
 [State -1,BACKDASH]
 type = ChangeState
 value = 105
 triggerall = var(9) = 1
 trigger1 = (stateno != [100,107]) && statetype = S && ctrl
-trigger1 = p2bodydist x > 100 &&  p2movetype != A && random < 100
+trigger1 = p2bodydist x > 100 &&  p2movetype != A && random < 35
 
 ;LP
 [State -1,Low Punch]
 type = ChangeState
 value = 200
 triggerall = var(9) = 1
-trigger1 = random <= 250 + AILevel*60
+trigger1 = random <= 560 + AILevel*50
 trigger1 = p2statetype != A && p2statetype != L
 trigger1 = p2bodydist x <= 50 && p2movetype != A
 trigger1 = statetype = S && ctrl && var(24) <= 15
@@ -1616,7 +1725,7 @@ value = 410
 triggerall = var(9) = 1
 triggerall = p2statetype != A
 triggerall = p2bodydist x <= 50
-trigger1 = p2statetype = S && statetype != A && ctrl && var(24) <= 15
+trigger1 = (p2statetype = S || p2statetype = C) && statetype != A && ctrl && var(24) <= 15
 trigger2 = stateno = 200 && animelemtime(3) > 0 && movecontact 
 trigger3 = stateno = 202 && animelemtime(3) > 0 && movecontact
 trigger4 = stateno = 400 && animelemtime(3) > 0 && movecontact 

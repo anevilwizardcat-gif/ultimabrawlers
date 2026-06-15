@@ -1,0 +1,43 @@
+; Definition file for Kung Fu Man
+; Contains all the filenames needed for the character
+
+; Player information
+[Info]
+name ="CFJ_JuriHan"
+displayname ="Juri Han"
+versiondate =06,06,2014  ;UP SFV 2016
+mugenversion =04,14,2002
+author ="chuchoryu"
+pal.defaults =6,3,4,2
+
+; Files for the player
+[Files]
+cmd     =CFJ_JuriHan.cmd
+cns     =Coding/System.cns
+st      =Coding/System.cns
+stcommon =common1.cns
+sprite  =JuriHan.sff
+anim    =CFJ_JuriHan.air
+sound   =CFJ_JuriHanJAP.snd
+pal1=Juri01.act
+pal2=Juri02.act
+pal3=Juri03.act
+pal4=Juri04.act
+pal5=Juri05.act
+pal6=Juri06.act
+pal7=Juri07.act
+pal8=Juri08.act
+pal9=Juri09.act
+pal10=Juri09.act
+pal11=JuriHanRYU.act
+pal12=JuriHanKEN.act
+st1=Coding/Normal.cns
+st2=Coding/Specials.cns
+st3=Coding/Helpers.cns
+st4=Coding/Supers.cns
+st5=Coding/Focus.cns
+
+; Arcade mode
+[Arcade]
+intro.storyboard = intro.def
+ending.storyboard =

@@ -1,0 +1,36 @@
+[Info]
+name         = "Yosuke Hanamura"
+displayname  = "Yosuke Hanamura"
+versiondate  = 12,08,2015
+mugenversion = 1.0
+author       = "Son Of Aura"
+pal.defaults = 1,2,3,4,5,6,7,8,9,10,11,12
+LocalCoord   = 320;400
+
+[Files]
+cmd      = Yosuke.cmd
+cns      = Yosuke.cns
+st       = Yosuke.cns
+st2      = FX.cns
+st3      = StateZ.cns
+stcommon = Yosuke.cns
+sprite   = Yosuke.sff
+anim     = Yosuke.air
+sound    = Yosuke.snd
+pal1     = Yosuke.act
+pal2     = Yosuke.act
+pal3     = Yosuke.act
+pal4     = Yosuke.act
+pal5     = Yosuke.act
+pal6     = Yosuke.act
+
+pal7     = Yosuke.act
+pal8     = Yosuke.act
+pal9     = Yosuke.act
+pal10    = Yosuke.act
+pal11    = Yosuke.act
+pal12    = Yosuke.act
+
+[Arcade]
+intro.storyboard =
+ending.storyboard =

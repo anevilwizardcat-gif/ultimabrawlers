@@ -1,0 +1,47 @@
+[Info]
+name = "cvsgouki"		;豪鬼(cvs)
+displayname = "Gouki"	;豪鬼
+versiondate=09,08,2011	;Version date of character
+mugenversion=06,14,2003	;Version of M.U.G.E.N character works on
+author="Warusaki3"	;悪咲3号
+Pal.Defaults=4,5,10,11
+
+[Files]
+cmd=cvsgouki.cmd
+cns=cvsgouki.cns
+st=cvsgouki.cns
+st1=cvs_common_add.cns
+st2=groove.cns
+st3=config.txt
+stcommon=common1.cns
+sprite=cvsgouki.sff
+anim=cvsgouki.air
+sound=cvsgouki.snd
+pal1=act004.act;カプエス2弱Kカラー
+pal2=act009.act;カプエスP同時押しカラー
+pal3=act012.act;オリジナルカラー2（悟飯ちゃんカラーｗ）
+pal4=act001.act;カプエス2弱Pカラー
+pal5=act002.act;カプエス2中Pカラー
+pal6=act011.act;オリジナルカラー1（動く石像カラーｗ）
+pal7=act105.act;カプエス2神中Kカラー
+pal8=act110.act;オリジナルカラー4
+pal9=act112.act;オリジナルカラー6
+pal10=act101.act;カプエス2神弱Pカラー
+pal11=act102.act;カプエス2神中Pカラー
+pal12=act109.act;オリジナルカラー3
+
+;通常カラー
+;pal**=act003.act;カプエス2強Pカラー
+;pal**=act005.act;カプエス2中Kカラー
+;pal**=act006.act;カプエス2強Kカラー
+;pal**=act008.act;カプエス2K同時押しカラー
+;pal**=act009.act;カプエスP同時押しカラー
+;pal**=act010.act;カプエス弱同時押しカラー
+
+;神人カラー
+;pal**=act103.act;カプエス2神強Pカラー
+;pal**=act104.act;カプエス2神弱Kカラー
+;pal**=act106.act;カプエス2神強Kカラー
+;pal**=act107.act;カプエス2神P同時押しカラー
+;pal**=act108.act;カプエス2神K同時押しカラー
+;pal**=act111.act;オリジナルカラー5

@@ -1,0 +1,34 @@
+[Info]
+name = "cvsnakoruru"		;ナコルル(cvs)
+displayname = "nakoruru"	;ナコルル
+versiondate=09,08,2011	;Version date of character
+mugenversion=06,14,2003	;Version of M.U.G.E.N character works on
+author="Warusaki3"		;悪咲3号
+Pal.Defaults=4,5
+
+[Files]
+cmd=cvsnakoruru.cmd
+cns=cvsnakoruru.cns
+st=cvsnakoruru.cns
+st1=cvs_common.cns
+st2=mamahaha.cns
+st3=groove.cns
+st4=config.txt
+stcommon=common1.cns
+sprite=cvsnakoruru.sff
+anim=cvsnakoruru.air
+sound=cvsnakoruru.snd
+pal1=act004.act;カプエス2弱Kカラー
+pal2=act005.act;カプエス2中Kカラー
+pal3=act006.act;カプエス2強Kカラー
+pal4=act001.act;カプエス2弱Pカラー
+pal5=act002.act;カプエス2中Pカラー
+pal6=act003.act;カプエス2強Pカラー
+pal7=act010.act;斬紅郎無双剣羅刹Kカラー
+pal8=act011.act;レラカラー
+pal9=act012.act;サムスピカラー
+pal10=act007.act;カプエス2P同時押しカラー
+pal11=act008.act;カプエス2K同時押しカラー
+pal12=act009.act;天草降臨羅刹Kカラー
+
+;pal**=act013.act;レラ零SPDカラー
