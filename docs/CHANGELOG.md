@@ -22,6 +22,27 @@ the entry's Status line (the only allowed in-place edit; everything else is appe
 > NOTE: P001–P006 are **backfilled** from the handoff doc. Exact dates/times were not recorded, so they
 > read "date-unknown (pre-2026-06-16)". Treat them as historical context, not precise audit.
 
+## [P011] 2026-06-16 22:00 CT — build nightly-06-07-2026
+Subsystem: bench-ui-meters / Family C (Gal129) — RESOLUTION + revert of P007-P010
+Files shipped: cvs2_blanka/N-cvs2_blanka.cns, cvs2_blanka/cvs2_system.cns,
+  cvs2_dhalsim/N-cvs2_dhalsim.cns, cvs2_dhalsim/cvs2_system.cns
+THE ANSWER: Gal129's cvs2_blanka/cvs2_dhalsim do NOT have a working custom power meter. The author's blurb
+  ("multiple grooves incl. custom EX-mode power bar, integrated Guard bar, integrated CVS2 system") oversells
+  it; a FRESH install of the character shows a plain ENGINE power meter. The 8000/8100 intro indicator and the
+  8200 gauge family exist in the code but do not render as a usable bar in this game. Every attempt to surface
+  the 8200 gauge (P008 un-gate + bench blocks, P009 var(59) guard, P010 groove clamp) was chasing a phantom.
+Change: (1) REVERTED P008/P009/P010 — N- 8200 spawn restored to Gal129 original (partner-exclusions intact, no
+  clamp/gates); cvs2_system restored to pristine (8200 bench Sweep/DestroySelf blocks removed). (2) Disabled the
+  `[State -2, Hide Engine Power Bar]` AssertSpecial (flag=noPowerBarDisplay) in each N- — that P001-era assert
+  hid the default engine power bar to make room for a custom bar that never displays. With it off, the normal
+  engine power meter shows and the engine handles tag-in/out natively (active char's bar shows, benched char's
+  doesn't) — exactly the desired behavior.
+Not touched: P007 (st5 intro-indicator arbitration comments) — affects only the never-relevant 8000/8100 intro
+  groove display, inert w.r.t. the power bar; left as-is to avoid disturbing prior work.
+Lesson: VERIFY a feature actually renders in a fresh install before building meter plumbing for it. An author's
+  feature blurb is marketing, not a spec.
+Status: shipped — should be the final word on Blanka/Dhalsim meters.
+
 ## [P010] 2026-06-16 20:30 CT — build nightly-06-07-2026
 Subsystem: bench-ui-meters / Family C (Gal129) — THE fix for "no visible meter" (completes P008/P009)
 Files shipped: cvs2_blanka/N-cvs2_blanka.cns, cvs2_dhalsim/N-cvs2_dhalsim.cns

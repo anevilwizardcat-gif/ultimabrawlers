@@ -46,6 +46,8 @@ CRITICAL: never sweep/restore a gameplay state (e.g. 5201). Restrict to gauge st
 - Do NOT touch `fvar(1)` team-pos VarSets or the `var(30)=1` Turns-Mode VarSet (gameplay).
 - **Iori: settled (state 21000). Leave alone.**
 
+> **RESOLVED (P011): Family C (Gal129 cvs2_blanka/cvs2_dhalsim) has NO usable custom meter.** A fresh install shows a plain ENGINE power meter; the author's 'custom EX/guard/CVS2 gauge' description does not render in practice. All 8200-gauge work (P008-P010) was reverted. The real fix was to DISABLE the `noPowerBarDisplay` assert in each char's N- `[Statedef -2]` so the default engine bar shows; the engine tag-swaps it natively. Do NOT reopen the 8200 gauge for these two — it is a phantom.
+
 ## Family C — CvS2-EX family (custom EX gauge in char-specific `system-cvs2_<c>.cns`, **author Gal129/rei**)
 - Members: **cvs2_blanka, cvs2_dhalsim** (both author "Gal129"). Roster folders: `cvs2_blanka`, `cvs2_dhalsim`.
 - Files (.def): `cns=data-cvs2_<c>.cns`, `st=cvs2_system.cns` (shared), `st2..st4=N/S/H`,
