@@ -22,6 +22,34 @@ the entry's Status line (the only allowed in-place edit; everything else is appe
 > NOTE: P001–P006 are **backfilled** from the handoff doc. Exact dates/times were not recorded, so they
 > read "date-unknown (pre-2026-06-16)". Treat them as historical context, not precise audit.
 
+## [P007] 2026-06-16 CT — build: repo main (anevilwizardcat-gif/ultimabrawlers)
+Subsystem: bench-ui-meters / Family C (Gal129 EX-meter, cvs2_blanka + cvs2_dhalsim)
+Files shipped: cvs2_blanka/system-cvs2_blanka.cns, cvs2_dhalsim/system-cvs2_dhalsim.cns
+Change: commented out the leftover MUGEN-simul bar arbitration in the in-match EX-meter display
+  states (8000 and 8100-8160). In each state's RemoveExplod AND DestroySelf, disabled the
+  trigger pair `triggerN = numpartner` + `triggerN = (partner,authorname="warusaki3"&&partner,fvar(39)=1)
+  ||(root,ID-partner,ID>0 && (partner rei/gal129)&&partner,fvar(39)=1)`. 16 pairs (32 lines) per char.
+Why: that pair is "if my teammate also has a meter, suppress/share mine" — correct for MUGEN simul
+  (one shared on-screen bar) but wrong for this 2v2 TAG game where only one teammate is on screen and
+  the bench UI already hides the benched meter. It was the only pick-order/partner-dependent thing in
+  the meter path, matching Blanka's symptom (picked 1st w/ another meter char = invisible; picked 2nd =
+  always visible even when benched).
+How (mechanism): `fvar(39)` = system-type flag (1 = CvS2 meter). The arbitration keyed off the
+  teammate's author + fvar(39). Removing it makes Blanka/Dhalsim always own their own meter; visibility
+  is then decided solely by the already-present bench Sweep+Guard (root,stateno bench check).
+Left untouched: the bench Sweep/Guard (kept, 9 sweeps + 39 guards intact per file); the pre-round groove
+  SELECTOR states 8098/8099 and their ID arbitration (transient, dies at roundstate=2, only fires vs
+  rei/gal129 partners); cvs2_system.cns (shared + overridden by st5; gameplay logic — NOT touched);
+  all gameplay states. Statedef counts unchanged (blanka 70, dhalsim 56).
+Test: (1) CVS Blanka picked FIRST alongside a groove char (e.g. Guile) -> his meter should now show when
+  he's tagged in and hide when benched. (2) CVS Blanka picked SECOND -> meter should now HIDE when benched
+  (not stay up). (3) Same for CVS Dhalsim. (4) Sanity: a Blanka+Dhalsim team (two Family-C chars) -> each
+  should show own meter when active, hide when benched.
+Status: shipped, awaiting-test. Supersedes: none (extends P004 which added the bench hide to these files).
+Confidence note: high that this removes the pick-order dependence; if "benched but visible" still occurs
+  for either char after this, that points to a bench-guard gap on a specific explod rather than the
+  arbitration -> send a screenshot of which bar lingers and I'll chase that explod id next.
+
 ## [P006] date-unknown (pre-2026-06-16) — build unknown
 Subsystem: stand-system / data/tag.zss
 Files shipped: data/tag.zss

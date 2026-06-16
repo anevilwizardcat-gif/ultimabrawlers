@@ -3613,15 +3613,15 @@ value = 8000, 1
 type = RemoveExplod
 triggerall = time > 1
 trigger1 = roundState=2
-trigger2 = numpartner
-trigger2 = (partner,authorname="warusaki3"&&partner,fvar(39)=1)||(root,ID-partner,ID>0 && (partner,authorname="rei"||partner,authorname="gal129")&&partner,fvar(39)=1)
+;trigger2 = numpartner
+;trigger2 = (partner,authorname="warusaki3"&&partner,fvar(39)=1)||(root,ID-partner,ID>0 && (partner,authorname="rei"||partner,authorname="gal129")&&partner,fvar(39)=1)
 
 [State 4110, DestroySelf]
 type = DestroySelf
 triggerall = time > 1
 trigger1 = roundState=2
-trigger2 = numpartner
-trigger2 = (partner,authorname="warusaki3"&&partner,fvar(39)=1)||(root,ID-partner,ID>0 && (partner,authorname="rei"||partner,authorname="gal129")&&partner,fvar(39)=1)
+;trigger2 = numpartner
+;trigger2 = (partner,authorname="warusaki3"&&partner,fvar(39)=1)||(root,ID-partner,ID>0 && (partner,authorname="rei"||partner,authorname="gal129")&&partner,fvar(39)=1)
 
 ;Ｃグルーヴセレクト
 [Statedef 8100]
@@ -3703,8 +3703,8 @@ type = RemoveExplod
 trigger1 = roundstate > 1
 trigger2 = parent,command="a" || parent,command="b" || parent,command="c" || parent,command="x" || parent,command="y" || parent,command="z"
 trigger3 = time > 6 && (parent,command = "up" || parent,command = "down")
-trigger4 = numpartner
-trigger4 = (partner,authorname="warusaki3"&&partner,fvar(39)=1)||(root,ID-partner,ID>0 && (partner,authorname="rei"||partner,authorname="gal129")&&partner,fvar(39)=1)
+;trigger4 = numpartner
+;trigger4 = (partner,authorname="warusaki3"&&partner,fvar(39)=1)||(root,ID-partner,ID>0 && (partner,authorname="rei"||partner,authorname="gal129")&&partner,fvar(39)=1)
 id = 8100
 
 [State 6000, ChangeState]
@@ -3723,8 +3723,8 @@ value = 8110
 type = DestroySelf
 trigger1 = roundstate > 1
 trigger2 = parent,command="a" || parent,command="b" || parent,command="c" || parent,command="x" || parent,command="y" || parent,command="z"
-trigger3 = numpartner
-trigger3 = (partner,authorname="warusaki3"&&partner,fvar(39)=1)||(root,ID-partner,ID>0 && (partner,authorname="rei"||partner,authorname="gal129")&&partner,fvar(39)=1)
+;trigger3 = numpartner
+;trigger3 = (partner,authorname="warusaki3"&&partner,fvar(39)=1)||(root,ID-partner,ID>0 && (partner,authorname="rei"||partner,authorname="gal129")&&partner,fvar(39)=1)
 
 ;Ａグルーヴセレクト
 [Statedef 8110]
@@ -3807,8 +3807,8 @@ type = RemoveExplod
 trigger1 = roundstate > 1
 trigger2 = parent,command="a" || parent,command="b" || parent,command="c" || parent,command="x" || parent,command="y" || parent,command="z"
 trigger3 = time > 6 && (parent,command = "up" || parent,command = "down")
-trigger4 = numpartner
-trigger4 = (partner,authorname="warusaki3"&&partner,fvar(39)=1)||(root,ID-partner,ID>0 && (partner,authorname="rei"||partner,authorname="gal129")&&partner,fvar(39)=1)
+;trigger4 = numpartner
+;trigger4 = (partner,authorname="warusaki3"&&partner,fvar(39)=1)||(root,ID-partner,ID>0 && (partner,authorname="rei"||partner,authorname="gal129")&&partner,fvar(39)=1)
 id = 8100
 
 [State 6000, ChangeState]
@@ -3827,8 +3827,8 @@ value = 8120
 type = DestroySelf
 trigger1 = roundstate > 1
 trigger2 = parent,command="a" || parent,command="b" || parent,command="c" || parent,command="x" || parent,command="y" || parent,command="z"
-trigger3 = numpartner
-trigger3 = (partner,authorname="warusaki3"&&partner,fvar(39)=1)||(root,ID-partner,ID>0 && (partner,authorname="rei"||partner,authorname="gal129")&&partner,fvar(39)=1)
+;trigger3 = numpartner
+;trigger3 = (partner,authorname="warusaki3"&&partner,fvar(39)=1)||(root,ID-partner,ID>0 && (partner,authorname="rei"||partner,authorname="gal129")&&partner,fvar(39)=1)
 
 ;Ｐグルーヴセレクト
 [Statedef 8120]
@@ -3910,8 +3910,8 @@ type = RemoveExplod
 trigger1 = roundstate > 1
 trigger2 = parent,command="a" || parent,command="b" || parent,command="c" || parent,command="x" || parent,command="y" || parent,command="z"
 trigger3 = time > 6 && (parent,command = "up" || parent,command = "down")
-trigger4 = numpartner
-trigger4 = (partner,authorname="warusaki3"&&partner,fvar(39)=1)||(root,ID-partner,ID>0 && (partner,authorname="rei"||partner,authorname="gal129")&&partner,fvar(39)=1)
+;trigger4 = numpartner
+;trigger4 = (partner,authorname="warusaki3"&&partner,fvar(39)=1)||(root,ID-partner,ID>0 && (partner,authorname="rei"||partner,authorname="gal129")&&partner,fvar(39)=1)
 id = 8100
 
 [State 6000, ChangeState]
@@ -3930,8 +3930,8 @@ value = 8130
 type = DestroySelf
 trigger1 = roundstate > 1
 trigger2 = parent,command="a" || parent,command="b" || parent,command="c" || parent,command="x" || parent,command="y" || parent,command="z"
-trigger3 = numpartner
-trigger3 = (partner,authorname="warusaki3"&&partner,fvar(39)=1)||(root,ID-partner,ID>0 && (partner,authorname="rei"||partner,authorname="gal129")&&partner,fvar(39)=1)
+;trigger3 = numpartner
+;trigger3 = (partner,authorname="warusaki3"&&partner,fvar(39)=1)||(root,ID-partner,ID>0 && (partner,authorname="rei"||partner,authorname="gal129")&&partner,fvar(39)=1)
 
 ;Sグルーヴセレクト
 [Statedef 8130]
@@ -4013,8 +4013,8 @@ type = RemoveExplod
 trigger1 = roundstate > 1
 trigger2 = parent,command="a" || parent,command="b" || parent,command="c" || parent,command="x" || parent,command="y" || parent,command="z"
 trigger3 = time > 6 && (parent,command = "up" || parent,command = "down")
-trigger4 = numpartner
-trigger4 = (partner,authorname="warusaki3"&&partner,fvar(39)=1)||(root,ID-partner,ID>0 && (partner,authorname="rei"||partner,authorname="gal129")&&partner,fvar(39)=1)
+;trigger4 = numpartner
+;trigger4 = (partner,authorname="warusaki3"&&partner,fvar(39)=1)||(root,ID-partner,ID>0 && (partner,authorname="rei"||partner,authorname="gal129")&&partner,fvar(39)=1)
 id = 8100
 
 [State 6000, ChangeState]
@@ -4033,8 +4033,8 @@ value = 8140
 type = DestroySelf
 trigger1 = roundstate > 1
 trigger2 = parent,command="a" || parent,command="b" || parent,command="c" || parent,command="x" || parent,command="y" || parent,command="z"
-trigger3 = numpartner
-trigger3 = (partner,authorname="warusaki3"&&partner,fvar(39)=1)||(root,ID-partner,ID>0 && (partner,authorname="rei"||partner,authorname="gal129")&&partner,fvar(39)=1)
+;trigger3 = numpartner
+;trigger3 = (partner,authorname="warusaki3"&&partner,fvar(39)=1)||(root,ID-partner,ID>0 && (partner,authorname="rei"||partner,authorname="gal129")&&partner,fvar(39)=1)
 
 ;Nグルーヴセレクト
 [Statedef 8140]
@@ -4116,8 +4116,8 @@ type = RemoveExplod
 trigger1 = roundstate > 1
 trigger2 = parent,command="a" || parent,command="b" || parent,command="c" || parent,command="x" || parent,command="y" || parent,command="z"
 trigger3 = time > 6 && (parent,command = "up" || parent,command = "down")
-trigger4 = numpartner
-trigger4 = (partner,authorname="warusaki3"&&partner,fvar(39)=1)||(root,ID-partner,ID>0 && (partner,authorname="rei"||partner,authorname="gal129")&&partner,fvar(39)=1)
+;trigger4 = numpartner
+;trigger4 = (partner,authorname="warusaki3"&&partner,fvar(39)=1)||(root,ID-partner,ID>0 && (partner,authorname="rei"||partner,authorname="gal129")&&partner,fvar(39)=1)
 id = 8100
 
 [State 6000, ChangeState]
@@ -4136,8 +4136,8 @@ value = 8150
 type = DestroySelf
 trigger1 = roundstate > 1
 trigger2 = parent,command="a" || parent,command="b" || parent,command="c" || parent,command="x" || parent,command="y" || parent,command="z"
-trigger3 = numpartner
-trigger3 = (partner,authorname="warusaki3"&&partner,fvar(39)=1)||(root,ID-partner,ID>0 && (partner,authorname="rei"||partner,authorname="gal129")&&partner,fvar(39)=1)
+;trigger3 = numpartner
+;trigger3 = (partner,authorname="warusaki3"&&partner,fvar(39)=1)||(root,ID-partner,ID>0 && (partner,authorname="rei"||partner,authorname="gal129")&&partner,fvar(39)=1)
 
 ;Ｋグルーヴセレクト
 [Statedef 8150]
@@ -4220,8 +4220,8 @@ type = RemoveExplod
 trigger1 = roundstate > 1
 trigger2 = parent,command="a" || parent,command="b" || parent,command="c" || parent,command="x" || parent,command="y" || parent,command="z"
 trigger3 = time > 6 && (parent,command = "up" || parent,command = "down")
-trigger4 = numpartner
-trigger4 = (partner,authorname="warusaki3"&&partner,fvar(39)=1)||(root,ID-partner,ID>0 && (partner,authorname="rei"||partner,authorname="gal129")&&partner,fvar(39)=1)
+;trigger4 = numpartner
+;trigger4 = (partner,authorname="warusaki3"&&partner,fvar(39)=1)||(root,ID-partner,ID>0 && (partner,authorname="rei"||partner,authorname="gal129")&&partner,fvar(39)=1)
 id = 8100
 
 [State 6000, ChangeState]
@@ -4240,8 +4240,8 @@ value = 8160
 type = DestroySelf
 trigger1 = roundstate > 1
 trigger2 = parent,command="a" || parent,command="b" || parent,command="c" || parent,command="x" || parent,command="y" || parent,command="z"
-trigger3 = numpartner
-trigger3 = (partner,authorname="warusaki3"&&partner,fvar(39)=1)||(root,ID-partner,ID>0 && (partner,authorname="rei"||partner,authorname="gal129")&&partner,fvar(39)=1)
+;trigger3 = numpartner
+;trigger3 = (partner,authorname="warusaki3"&&partner,fvar(39)=1)||(root,ID-partner,ID>0 && (partner,authorname="rei"||partner,authorname="gal129")&&partner,fvar(39)=1)
 
 
 ;EXグルーヴセレクト
@@ -4433,8 +4433,8 @@ type = RemoveExplod
 trigger1 = roundstate > 1
 trigger2 = parent,command="a" || parent,command="b" || parent,command="c" || parent,command="x" || parent,command="y" || parent,command="z"
 trigger3 = time > 6 && (parent,command = "up" || parent,command = "down")
-trigger4 = numpartner
-trigger4 = (partner,authorname="warusaki3"&&partner,fvar(39)=1)||(root,ID-partner,ID>0 && (partner,authorname="rei"||partner,authorname="gal129")&&partner,fvar(39)=1)
+;trigger4 = numpartner
+;trigger4 = (partner,authorname="warusaki3"&&partner,fvar(39)=1)||(root,ID-partner,ID>0 && (partner,authorname="rei"||partner,authorname="gal129")&&partner,fvar(39)=1)
 
 [State 6000, ChangeState]
 type = ChangeState
@@ -4452,8 +4452,8 @@ value = 8100
 type = DestroySelf
 trigger1 = roundstate > 1
 trigger2 = parent,command="a" || parent,command="b" || parent,command="c" || parent,command="x" || parent,command="y" || parent,command="z"
-trigger3 = numpartner
-trigger3 = (partner,authorname="warusaki3"&&partner,fvar(39)=1)||(root,ID-partner,ID>0 && (partner,authorname="rei"||partner,authorname="gal129")&&partner,fvar(39)=1)
+;trigger3 = numpartner
+;trigger3 = (partner,authorname="warusaki3"&&partner,fvar(39)=1)||(root,ID-partner,ID>0 && (partner,authorname="rei"||partner,authorname="gal129")&&partner,fvar(39)=1)
 
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

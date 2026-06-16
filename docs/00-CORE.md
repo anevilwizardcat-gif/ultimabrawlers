@@ -74,6 +74,23 @@ alternate character def. The character loaded is the folder's default def.
 
 ---
 
+## Terminology — Raven's words vs. what's in the code (READ THIS)
+
+Raven describes things the way he pictures them and uses **"meter / gauge / bar / power meter"
+interchangeably** to mean the same thing: the character's on-screen super/power meter. He does NOT
+read the .cns/code, so he is not naming a specific code token. When he says any of those words, he
+means *that character's visible super meter*, whatever it's literally called in the file.
+
+Do NOT latch onto a code token just because it matches his word. The same visible meter is called
+different things by different authors:
+- groove family (Warusaki3): "groove bar" (id 6000), "GP counter" (6500), "gauge" (6100), states 6100-6170
+- cvs2_system family: "Gauge" helper id 21000, states 21000-26000
+- Gal129 family (cvs2_blanka/dhalsim): EX/groove meter, states 8000 + 8100-8160
+- SF3: power gauge = state 50000 (NOT 25000, which is the stun gauge decoy)
+
+Rule: map his word to the RIGHT subsystem/family first (via ATLAS), then to that family's code token.
+If his phrasing is ambiguous about which on-screen element, ask one quick question rather than guess.
+
 ## Versioning scheme used by this doc system
 
 - **Patch IDs:** `P001`, `P002`, … monotonic, never reused. Used to cross-reference ("supersedes P014").
