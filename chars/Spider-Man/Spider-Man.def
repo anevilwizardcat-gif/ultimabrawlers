@@ -1,0 +1,29 @@
+[Info]
+name = "Spider-Man"
+displayname = "Spider-Man"
+versiondate = 7/20/2015
+mugenversion = 1.0
+author = "ferchogtx & DarkWolf13-MvC2"
+editor = "REDHOT"
+pal.defaults = 1,2,3,4,5,6
+
+[Files]
+cmd      = CMND/Spider-Man.cmd
+cns      = CNS/Spider-Man.cns
+st       = CNS/Spider-Man.cns
+st1      = CNS/config.txt
+stcommon = CNS/common1.cns
+sprite   = SPRITES/Spider-Man.sff
+anim     = ANIMATIONS/Spider-Man.air
+sound    = SOUNDS/Spider-Man.snd
+pal1     = PALETTES/Spider-Man_01.act
+pal2     = PALETTES/Spider-Man_02.act
+pal3     = PALETTES/Spider-Man_03.act
+pal4     = PALETTES/Spider-Man_04.act
+pal5     = PALETTES/Spider-Man_05.act
+pal6     = PALETTES/Spider-Man_06.act
+
+
+[Arcade]
+intro.storyboard = 
+ending.storyboard = 

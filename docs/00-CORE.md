@@ -97,3 +97,10 @@ If his phrasing is ambiguous about which on-screen element, ask one quick questi
 - **Timestamps:** ISO date + local time, Central Time (Raven is in TN). e.g. `2026-06-16 14:20 CT`.
 - **Build tags (optional):** tie a changelog entry to repo state, named for the backup it was built against,
   e.g. `ub-2026.06.15-bak`. Helps reconcile "repo ≠ live build."
+
+## GitHub fetch rule (default)
+Plain `github.com/<u>/<repo>/blob/<branch>/<path>` is an HTML **web page**, not file bytes -> fetching it
+returns markup, not code (the recurring '404 / wrong content'). `api.github.com` is hard rate-limited on
+shared IPs. **Default: rewrite any blob/tree URL to `raw.githubusercontent.com/<u>/<repo>/<branch>/<path>`
+and fetch that** — raw bytes, no HTML, no API limit. A ~14-byte raw response = real 404 (bad path/casing;
+raw is case-sensitive).

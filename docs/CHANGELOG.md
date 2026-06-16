@@ -22,6 +22,47 @@ the entry's Status line (the only allowed in-place edit; everything else is appe
 > NOTE: P001–P006 are **backfilled** from the handoff doc. Exact dates/times were not recorded, so they
 > read "date-unknown (pre-2026-06-16)". Treat them as historical context, not precise audit.
 
+## [P009] 2026-06-16 19:20 CT — build nightly-06-07-2026
+Subsystem: bench-ui-meters / Family C (Gal129) — completes P008
+Files shipped: cvs2_blanka/N-cvs2_blanka.cns, cvs2_dhalsim/N-cvs2_dhalsim.cns
+Change: added `triggerall = var(59) != -1` to the 8200 gauge-helper spawn in `[Statedef -2]`.
+Why: P008 un-gated the 8200 spawn but the meter still didn't show — a TIMING bug it exposed. `var(59)`
+  (groove index; selects the gauge state via `stateno = 8200 + var(59)*10`) is computed at frame 0 from
+  scratch var(1) and DEFAULTS TO -1 (var(1)=0 -> var(1)%6=0 -> -1). It only becomes valid (0-5) when copied
+  from the partner at roundstate=2 (the [State -3] VarSets). The un-gated spawn fired during intro
+  (roundstate=1, fvar(37)=1 branch) while var(59) was still -1 -> tried to enter **state 8190, which does not
+  exist** (8200-8265 exist, 8190 does not) -> dead helper that took id 8200 and blocked respawn -> no bar.
+  Guarding on `var(59) != -1` defers the spawn until the groove is valid (roundstate=2, post partner-copy),
+  so it always enters a real 82xx state. Order-independent (re-checks each tick).
+Left untouched: everything else from P008; the partner-groove copy (it's what provides a valid var(59) in
+  tag — so Blanka's gauge currently shows the PARTNER's groove styling; see watch item).
+Test: Blanka & Dhalsim 2v2 mirror — gauge should now appear at fight start when active, hide on tag-out /
+  round-end / KO, restore on tag-in.
+Status: shipped — awaiting test. Supersedes: none (completes P008).
+
+## [P008] 2026-06-16 18:30 CT — build nightly-06-07-2026
+Subsystem: bench-ui-meters / Family C (Gal129 CvS2-EX: cvs2_blanka, cvs2_dhalsim)
+Files shipped: cvs2_blanka/N-cvs2_blanka.cns, cvs2_blanka/cvs2_system.cns,
+  cvs2_dhalsim/N-cvs2_dhalsim.cns, cvs2_dhalsim/cvs2_system.cns
+Change: (1) In `[Statedef -2]` (N-cvs2_<c>.cns), un-gated the **8200** gauge-helper spawn — commented the 4
+  partner-exclusion `trigger2` lines so it spawns regardless of partner — and added `triggerall = stateno !=
+  [6565610,6565611]` so it does NOT respawn while the root is benched. (2) In cvs2_system.cns, added a bench
+  block (RemoveExplod sweep + DestroySelf, on root benched / roundstate>2 / !root,alive) to the TOP of all 8
+  in-match gauge states (8200/8210/8220/8230/8240/8250/8260/8265), which previously had NO bench handling.
+Why: **CORRECTION to the Family-C model.** The real in-match power meter is the **8200 family in
+  cvs2_system.cns**, NOT 8000/8100. States 8000 & 8100-8160 both DestroySelf at roundstate>1 — they are the
+  INTRO groove-selector/indicator, gone the instant the fight starts. The 8200 gauge's spawn was blocked by
+  the same `!(partner has a meter)` gate, so in any tag team with a meter-partner (e.g. + Guile) the fight
+  meter never spawned -> "no meter at all." 8200 also had zero teardown, so it needed bench handling added.
+Left untouched: 8200 gameplay/power-read logic; 8098/8099 selector; Family A/B; single-play (root never
+  benches, so the meter only hides at round-end/KO there — matches protocol).
+Test: Blanka & Dhalsim in 2v2 (incl. mirror Blanka+Guile vs Guile+Blanka): fight meter now (a) appears when
+  active regardless of pick order/partner, (b) hides on tag-out, (c) hides at round start/end + victory,
+  (d) restores on tag-in.
+Status: shipped — awaiting test. Supersedes: corrects the "8100-8160 = in-match meter" claim in P004/P007.
+Note on P007: P007 commented the simul-arbitration in 8000/8100-8160 (the intro indicator). Harmless but it
+  was the wrong target; it never touched the fight meter. Left in place (benign).
+
 ## [P007] 2026-06-16 CT — build: repo main (anevilwizardcat-gif/ultimabrawlers)
 Subsystem: bench-ui-meters / Family C (Gal129 EX-meter, cvs2_blanka + cvs2_dhalsim)
 Files shipped: cvs2_blanka/system-cvs2_blanka.cns, cvs2_dhalsim/system-cvs2_dhalsim.cns

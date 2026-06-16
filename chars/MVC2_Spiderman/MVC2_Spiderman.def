@@ -11,8 +11,8 @@ author="Spiderman"
 
 ; Files for the player
 [Files]
-;cmd     =MVC2_Spiderman_Hard.cmd
-cmd     =MVC2_Spiderman_Medium.cmd
+cmd     =MVC2_Spiderman_Hard.cmd
+;cmd     =MVC2_Spiderman_Medium.cmd
 ;cmd     =MVC2_Spiderman_Easy.cmd
 cns     =MVC2_Spiderman.cns
 st      =MVC2_Spiderman.cns

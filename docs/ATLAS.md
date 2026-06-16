@@ -16,11 +16,12 @@ Status legend: `card` = full detail card exists · `stub` = row only, write card
 - **Architecture:** MUGEN/CNS state + helper + explod. Custom meters are explods drawn from dedicated
   gauge *display states*. Hide = RemoveExplod sweep + per-explod guard trigger + (sometimes) a Restore
   ChangeState. Bench detection = `root,stateno = [6565610, 6565611]`. THREE distinct meter families
-  (A groove.cns / B cvs2_system.cns / C cvs2-EX) that look alike but live in different files.
+  (A groove.cns / B cvs2_system.cns id-21000 / C cvs2-EX) that look alike but live in different files.
+  NOTE (P008): Family C in-match meter = **8200 family in cvs2_system.cns**, NOT the 8000/8100 intro indicator.
 - **Lives in:** each char's `.cns` `[Statedef -2]` (spawn) + family meter file (display states).
 - **DO-NOT-confuse-with:** Lua/motif subsystems (stage-select, menu-text, variants) — those have NO
   explods, no bench states, no RemoveExplod. Also do not carry a fix between families A/B/C.
-- **Card:** `cards/bench-ui-meters.md` · **Status:** card
+- **Card:** `cards/bench-ui-meters.md` · **Status:** active (P008)
 
 ### stand-system — HFTF / Warusaki3 stand mechanics (jotaro, dio, polnareff, avdul)
 - **Architecture:** Warusaki3 stand engine. `var(8)` = stand mode (0 off/1 deployed/2 autonomous-special/

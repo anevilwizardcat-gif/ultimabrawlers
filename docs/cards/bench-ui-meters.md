@@ -52,9 +52,20 @@ CRITICAL: never sweep/restore a gameplay state (e.g. 5201). Restrict to gauge st
   **`st5=system-cvs2_<c>.cns`** = the operative EX-meter file, `st6=option.cns`.
 - **st5 overrides st:** statedefs 8000/8098/8099/8100… exist in BOTH cvs2_system.cns and system-cvs2_<c>.cns;
   the later-loaded st5 copy WINS. Always edit the **st5** copy (`system-cvs2_<c>.cns`), never the cvs2_system one.
-- **The visible meter** = a "painter" helper cycling states **8000** (intro/ISM-confirm, dies at roundstate=2)
-  and **8100-8160** (persistent in-match digits/bar). Explods: 8000/8010/8100/8540/8541/8542/8565, HUD/back
-  postype, bindtime=-1, removetime=-1, `!NumExplod` repaint. Bench Sweep+Guard live on these states (P004).
+- **CORRECTED MODEL (P008).** Two different things, easy to confuse:
+  - **Intro indicator** = states **8000 + 8100-8160** (st5). BOTH DestroySelf at `roundstate>1` -> gone the
+    instant the fight starts. This is the groove/ISM selector display, NOT the in-match meter. P004's bench
+    sweep and P007's arbitration removal both landed here — harmless but they never controlled the fight meter.
+  - **In-match power meter** = the **8200 family** (8200/8210/8220/8230/8240/8250/8260/8265) in
+    **cvs2_system.cns** (NOT overridden by st5; st5 has no 8200). ~23 power-gauge explods, postype=Back,
+    pos ~139,223, anim 8201 scale 1,5, removetime=-1. Spawned as helper id **8200** from `[Statedef -2]`
+    (line ~5329) and persists/respawns via `!NumHelper(8200)`.
+- **Why "no meter at all" in tag (P008):** the 8200 spawn carried the same `!(partner has a meter)` gate as the
+  intro spawns, so with a meter-partner (e.g. +Guile) the gauge never spawned. AND 8200 had **zero teardown**
+  (no RemoveExplod/DestroySelf/roundstate), so it had no bench hide. **Fix:** un-gate the 8200 spawn (+ add a
+  `stateno != [6565610,6565611]` not-benched gate), and add a bench Sweep+DestroySelf to the top of all 8
+  82xx states. Tag-out -> helper sweeps its explods + DestroySelf; -2 won't respawn while benched; tag-in ->
+  -2 respawns -> meter repaints. Applied to blanka + dhalsim.
 - **`fvar(39)` = system-type flag** (data-cvs2_<c>.cns comment: 1 = CvS2 meter, 2 = SF3). Used all over for
   enemy/partner system detection — mostly GAMEPLAY (damage scaling, var(8) detection). Do NOT touch those.
 - **Pre-round groove SELECTOR = states 8098/8099** (transient, self-destructs at roundstate=2). Their ID
@@ -73,15 +84,27 @@ CRITICAL: never sweep/restore a gameplay state (e.g. 5201). Restrict to gauge st
 ## Current state (update on every patch)
 - A: second-pick spawn fix (12 chars); EX-meter 6160 sweep in groove.cns. [P001-P003]
 - B: gauge-spawn fix (Honda/Mai, `ID<partner,ID` commented). [P005]  Iori settled.
-- C: bench hide on EX states (blanka/dhalsim) [P004]; **simul-arbitration removed (blanka/dhalsim) [P007] — awaiting test.**
+- C: **in-match meter is the 8200 family in cvs2_system.cns (corrected P008).** 8200 spawn un-gated + not-benched
+  gate + bench Sweep/DestroySelf added (blanka/dhalsim) [P008] — awaiting test. P004/P007 touched the 8000/8100
+  intro indicator only (benign, left in place).
 - Default engine power bar leak: `noPowerBarDisplay` AssertSpecial across groove + cvs2 family. [P001]
 
 ## Open / watch items
-- P007 test: confirm Blanka & Dhalsim meter shows-when-active / hides-when-benched in BOTH pick orders.
-  If "benched but visible" persists, suspect a bench-guard gap on a specific explod id (not the arbitration).
+- **TRAP (P009): `var(59) = -1` -> gauge state 8190, which DOES NOT EXIST.** `var(59)` (groove) defaults to -1
+  at frame 0 (from scratch var(1)) and only becomes valid when copied from the partner at roundstate=2. Any
+  8200 spawn MUST be guarded `var(59) != -1` or it enters a dead state and blocks its own id. State formula:
+  `8200 + var(59)*10 + (var(59)=6)*5` (valid: 8200/8210/8220/8230/8240/8250/8260/8265).
+- Cosmetic follow-up: in tag, Blanka/Dhalsim copy the PARTNER's groove (var(59)=partner,var(20)), so the gauge
+  is styled like the partner's groove, not their own. Fine for "meter shows" goal; revisit if own-groove wanted.
+- P008/P009 test: confirm Blanka & Dhalsim 8200 meter shows-when-active (any pick order/partner) / hides on
+  tag-out + round start/end + victory / restores on tag-in. If a sub-element lingers, check which explod id.
+- Family B (cvs_honda, cvsmai) also report "no meter at all" — SAME bug CLASS (partner-gated meter spawn) but
+  DIFFERENT family: gauge is id-21000, different file/author. Needs its own read; folder per select.def is
+  `cvs_honda` but raw 404s on the .def — confirm exact path before patching. Mai also redraws the PARTNER's
+  groove meter on tag (likely a helper-ID collision) — a distinct bug from the spawn gate.
 - Honda `var(30)=1` Turns-Mode caveat: verify higher-ID Honda shows correct groove, not groove-1.
 - Two same-family-C chars teamed (Blanka+Dhalsim): the 8098/8099 SELECTOR ID arbitration is still present
   (transient) — verify the pre-round ISM selector doesn't double-draw; chase only if Raven reports it.
 
 ## Changelog refs
-P001-P006 (backfilled), **P007** (Family C simul-arbitration removal).
+P001-P006 (backfilled), P007 (Family C intro-indicator arbitration removal), P008 (Family C in-match 8200 meter: spawn un-gate + bench hide), **P009** (8200 var(59)!=-1 spawn guard — the 8190 dead-state fix).
