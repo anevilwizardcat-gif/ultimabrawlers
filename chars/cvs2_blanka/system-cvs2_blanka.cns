@@ -4294,8 +4294,27 @@ value = 8099
 anim = 8050
 velset = 0,0
 
+
+	[State, Bench UI Sweep]
+	type = RemoveExplod
+	trigger1 = root,stateno = [6565610, 6565611]
+	trigger2 = roundstate > 2
+	trigger3 = !root,alive
+	ignorehitpause = 1
+
+	[State, Bench UI Restore]
+	type = ChangeState
+	trigger1 = roundstate <= 2
+	trigger1 = !(root,stateno = [6565610, 6565611])
+	trigger1 = root,alive
+	trigger1 = numexplod(8000) = 0
+	trigger1 = time > 0
+	value = stateno
+	ignorehitpause = 1
+
 [State 1000, Spark]
 type = Explod
+	triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2
 trigger1 = !NumExplod(8000)
 trigger1 = teamside=1
 Anim = 8000
@@ -4314,6 +4333,7 @@ facing = ifelse(teamside=1,1,-1)
 
 [State 1000, Spark]
 type = Explod
+	triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2
 trigger1 = !NumExplod(8000)
 trigger1 = teamside=2
 Anim = 8000
@@ -4332,6 +4352,7 @@ sprpriority = -4
 
 [State 1000, Spark]
 type = Explod
+	triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2
 trigger1 = !NumExplod(8010)
 trigger1 = teamside=1
 Anim = 8010
@@ -4350,6 +4371,7 @@ facing = ifelse(teamside=1,1,-1)
 
 [State 1000, Spark]
 type = Explod
+	triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2
 trigger1 = !NumExplod(8010)
 trigger1 = teamside=2
 Anim = 8010
@@ -4381,6 +4403,7 @@ flag = intro
 ;Žc‚è‘I‘ðŽžŠÔ•\Ž¦
 [State 8000]
 type = Explod
+	triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2
 trigger1 = time<300
 anim = ifelse(time<=100,8572,ifelse(time>=200,8582,8572)-(time/100))
 id = 8540
@@ -4398,6 +4421,7 @@ facing = ifelse(teamside=1,1,-1)
 
 [State 8000]
 type = Explod
+	triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2
 trigger1 = time<300
 anim = ifelse(time<=100,8570,ifelse(time>=200,8589,8579)-((time/10)-floor(time/100)*10))
 id = 8541
@@ -4415,6 +4439,7 @@ facing = ifelse(teamside=1,1,-1)
 
 [State 8000]
 type = Explod
+	triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2
 trigger1 = time<300
 anim = ifelse(time<=100,8570,ifelse(time>=200,8589,8579)-(time-floor(time/100)*100-(floor(time/10)*10-floor(time/100)*100)))
 id = 8542
@@ -4432,6 +4457,7 @@ facing = ifelse(teamside=1,1,-1)
 
 [State 8000]
 type = Explod
+	triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2
 trigger1 = !time
 anim = 8565
 id = 8565
@@ -4478,8 +4504,27 @@ trigger2 = (partner,authorname="warusaki3"&&partner,fvar(39)=1)||(root,ID-partne
 anim = 8050
 velset = 0,0
 
+
+	[State, Bench UI Sweep]
+	type = RemoveExplod
+	trigger1 = root,stateno = [6565610, 6565611]
+	trigger2 = roundstate > 2
+	trigger3 = !root,alive
+	ignorehitpause = 1
+
+	[State, Bench UI Restore]
+	type = ChangeState
+	trigger1 = roundstate <= 2
+	trigger1 = !(root,stateno = [6565610, 6565611])
+	trigger1 = root,alive
+	trigger1 = numexplod(8100) = 0
+	trigger1 = time > 0
+	value = stateno
+	ignorehitpause = 1
+
 [State 1000, Spark]
 type = Explod
+	triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2
 trigger1 = !NumExplod(8100) && teamside=1
 Anim = 8100
 pos = 19, 79
@@ -4497,6 +4542,7 @@ sprpriority = ifelse((PrevStateNo=8160 || PrevStateNo=8110),4,-3)
 
 [State 1000, Spark]
 type = Explod
+	triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2
 trigger1 = !NumExplod(8100) && teamside=2
 Anim = 8100
 pos = -101, 79
@@ -4561,8 +4607,27 @@ trigger3 = (partner,authorname="warusaki3"&&partner,fvar(39)=1)||(root,ID-partne
 anim = 8050
 velset = 0,0
 
+
+	[State, Bench UI Sweep]
+	type = RemoveExplod
+	trigger1 = root,stateno = [6565610, 6565611]
+	trigger2 = roundstate > 2
+	trigger3 = !root,alive
+	ignorehitpause = 1
+
+	[State, Bench UI Restore]
+	type = ChangeState
+	trigger1 = roundstate <= 2
+	trigger1 = !(root,stateno = [6565610, 6565611])
+	trigger1 = root,alive
+	trigger1 = numexplod(8100) = 0
+	trigger1 = time > 0
+	value = stateno
+	ignorehitpause = 1
+
 [State 1000, Spark]
 type = Explod
+	triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2
 trigger1 = !NumExplod(8100) && teamside=1
 Anim = 8110
 pos = 19, 98
@@ -4581,6 +4646,7 @@ sprpriority = ifelse((PrevStateNo=8100 || PrevStateNo=8120),4,-3)
 
 [State 1000, Spark]
 type = Explod
+	triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2
 trigger1 = !NumExplod(8100) && teamside=2
 Anim = 8110
 pos = -101, 98
@@ -4645,8 +4711,27 @@ trigger3 = (partner,authorname="warusaki3"&&partner,fvar(39)=1)||(root,ID-partne
 anim = 8050
 velset = 0,0
 
+
+	[State, Bench UI Sweep]
+	type = RemoveExplod
+	trigger1 = root,stateno = [6565610, 6565611]
+	trigger2 = roundstate > 2
+	trigger3 = !root,alive
+	ignorehitpause = 1
+
+	[State, Bench UI Restore]
+	type = ChangeState
+	trigger1 = roundstate <= 2
+	trigger1 = !(root,stateno = [6565610, 6565611])
+	trigger1 = root,alive
+	trigger1 = numexplod(8100) = 0
+	trigger1 = time > 0
+	value = stateno
+	ignorehitpause = 1
+
 [State 1000, Spark]
 type = Explod
+	triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2
 trigger1 = !NumExplod(8100) && teamside=1
 Anim = 8120
 pos = 19, 116
@@ -4664,6 +4749,7 @@ sprpriority = ifelse((PrevStateNo=8110 || PrevStateNo=8130),4,-3)
 
 [State 1000, Spark]
 type = Explod
+	triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2
 trigger1 = !NumExplod(8100) && teamside=2
 Anim = 8120
 pos = -101, 116
@@ -4728,8 +4814,27 @@ trigger3 = (partner,authorname="warusaki3"&&partner,fvar(39)=1)||(root,ID-partne
 anim = 8050
 velset = 0,0
 
+
+	[State, Bench UI Sweep]
+	type = RemoveExplod
+	trigger1 = root,stateno = [6565610, 6565611]
+	trigger2 = roundstate > 2
+	trigger3 = !root,alive
+	ignorehitpause = 1
+
+	[State, Bench UI Restore]
+	type = ChangeState
+	trigger1 = roundstate <= 2
+	trigger1 = !(root,stateno = [6565610, 6565611])
+	trigger1 = root,alive
+	trigger1 = numexplod(8100) = 0
+	trigger1 = time > 0
+	value = stateno
+	ignorehitpause = 1
+
 [State 1000, Spark]
 type = Explod
+	triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2
 trigger1 = !NumExplod(8100) && teamside=1
 Anim = 8130
 pos = 19, 135
@@ -4747,6 +4852,7 @@ sprpriority = ifelse((PrevStateNo=8120 || PrevStateNo=8140),4,-3)
 
 [State 1000, Spark]
 type = Explod
+	triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2
 trigger1 = !NumExplod(8100) && teamside=2
 Anim = 8130
 pos = -101, 135
@@ -4811,8 +4917,27 @@ trigger3 = (partner,authorname="warusaki3"&&partner,fvar(39)=1)||(root,ID-partne
 anim = 8050
 velset = 0,0
 
+
+	[State, Bench UI Sweep]
+	type = RemoveExplod
+	trigger1 = root,stateno = [6565610, 6565611]
+	trigger2 = roundstate > 2
+	trigger3 = !root,alive
+	ignorehitpause = 1
+
+	[State, Bench UI Restore]
+	type = ChangeState
+	trigger1 = roundstate <= 2
+	trigger1 = !(root,stateno = [6565610, 6565611])
+	trigger1 = root,alive
+	trigger1 = numexplod(8100) = 0
+	trigger1 = time > 0
+	value = stateno
+	ignorehitpause = 1
+
 [State 1000, Spark]
 type = Explod
+	triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2
 trigger1 = !NumExplod(8100) && teamside=1
 Anim = 8140
 pos = 19, 153
@@ -4830,6 +4955,7 @@ sprpriority = ifelse((PrevStateNo=8130 || PrevStateNo=8150),4,-3)
 
 [State 1000, Spark]
 type = Explod
+	triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2
 trigger1 = !NumExplod(8100) && teamside=2
 Anim = 8140
 pos = -101, 153
@@ -4895,8 +5021,27 @@ trigger3 = (partner,authorname="warusaki3"&&partner,fvar(39)=1)||(root,ID-partne
 anim = 8050
 velset = 0,0
 
+
+	[State, Bench UI Sweep]
+	type = RemoveExplod
+	trigger1 = root,stateno = [6565610, 6565611]
+	trigger2 = roundstate > 2
+	trigger3 = !root,alive
+	ignorehitpause = 1
+
+	[State, Bench UI Restore]
+	type = ChangeState
+	trigger1 = roundstate <= 2
+	trigger1 = !(root,stateno = [6565610, 6565611])
+	trigger1 = root,alive
+	trigger1 = numexplod(8100) = 0
+	trigger1 = time > 0
+	value = stateno
+	ignorehitpause = 1
+
 [State 1000, Spark]
 type = Explod
+	triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2
 trigger1 = !NumExplod(8100) && teamside=1
 Anim = 8150
 pos = 19, 171
@@ -4914,6 +5059,7 @@ sprpriority = ifelse((PrevStateNo=8140 || PrevStateNo=8160),4,-3)
 
 [State 1000, Spark]
 type = Explod
+	triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2
 trigger1 = !NumExplod(8100) && teamside=2
 Anim = 8150
 pos = -101, 171
@@ -4979,8 +5125,27 @@ trigger3 = (partner,authorname="warusaki3"&&partner,fvar(39)=1)||(root,ID-partne
 anim = 8050
 velset = 0,0
 
+
+	[State, Bench UI Sweep]
+	type = RemoveExplod
+	trigger1 = root,stateno = [6565610, 6565611]
+	trigger2 = roundstate > 2
+	trigger3 = !root,alive
+	ignorehitpause = 1
+
+	[State, Bench UI Restore]
+	type = ChangeState
+	trigger1 = roundstate <= 2
+	trigger1 = !(root,stateno = [6565610, 6565611])
+	trigger1 = root,alive
+	trigger1 = numexplod(8100) = 0
+	trigger1 = time > 0
+	value = stateno
+	ignorehitpause = 1
+
 [State 1000, Spark]
 type = Explod
+	triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2
 trigger1 = !NumExplod(8100) && teamside=1
 Anim = 8160
 pos = 19, 190
@@ -4998,6 +5163,7 @@ sprpriority = ifelse((PrevStateNo=8100 || PrevStateNo=8150),4,-3)
 
 [State 1000, Spark]
 type = Explod
+	triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2
 trigger1 = !NumExplod(8100) && teamside=2
 Anim = 8160
 pos = -101, 190
@@ -5015,6 +5181,7 @@ sprpriority = ifelse((PrevStateNo=8100 || PrevStateNo=8150),4,-3)
 
 [State 8000]
 type = Explod
+	triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2
 trigger1 = time=1 && root,fvar(26)>=10000
 anim = 8591
 id = 8640
@@ -5033,6 +5200,7 @@ scale = .5,.5
 
 [State 8000]
 type = Explod
+	triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2
 trigger1 = time=1
 anim = 8590+floor((root,fvar(26)-(root,fvar(26)>=10000)*10000)/1000)
 id = 8641
@@ -5051,6 +5219,7 @@ scale = .5,.5
 
 [State 8000]
 type = Explod
+	triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2
 trigger1 = time=1
 anim = 8590+floor(((root,fvar(26)-(root,fvar(26)>=10000)*10000) - floor((root,fvar(26)-(root,fvar(26)>=10000)*10000)/1000)*1000)/100)
 id = 8642
@@ -5069,6 +5238,7 @@ scale = .5,.5
 
 [State 8000]
 type = Explod
+	triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2
 trigger1 = time=1
 anim = 8590
 id = 8643
@@ -5087,6 +5257,7 @@ scale = .5,.5
 
 [State 8000]
 type = Explod
+	triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2
 trigger1 = time=1
 anim = 8590
 id = 8644
@@ -5105,6 +5276,7 @@ scale = .5,.5
 
 [State 8000]
 type = Explod
+	triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2
 trigger1 = time=1
 anim = 8161
 id = 8645
@@ -5195,6 +5367,24 @@ velset = 0,0
 ownpal = 1
 
 ;Œø‰Ê‰¹(Finish)
+
+	[State, Bench UI Sweep]
+	type = RemoveExplod
+	trigger1 = root,stateno = [6565610, 6565611]
+	trigger2 = roundstate > 2
+	trigger3 = !root,alive
+	ignorehitpause = 1
+
+	[State, Bench UI Restore]
+	type = ChangeState
+	trigger1 = roundstate <= 2
+	trigger1 = !(root,stateno = [6565610, 6565611])
+	trigger1 = root,alive
+	trigger1 = numexplod(8500) = 0
+	trigger1 = time > 0
+	value = stateno
+	ignorehitpause = 1
+
 [State 3001, Super]
 type = PlaySnd
 trigger1 = time=0
@@ -5272,6 +5462,7 @@ size.yscale = 1
 ;Finest KO
 [State 8507, Helper]
 type = Explod
+	triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2
 triggerall = !NumExplod(8500) && time=0 && root,fvar(17)<0
 triggerall = teamside=1
 trigger1 = (root,movecontact||root,var(13))&&(root,stateno=[3000,3999]) && (root,var(1)=2||root,fvar(17)=-2)
@@ -5295,6 +5486,7 @@ scale = .5,.5
 ;Finest KO
 [State 8230, Explod]
 type = Explod
+	triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2
 triggerall = !NumExplod(8500) && time=0 && root,fvar(17)<0
 triggerall = teamside=2
 trigger1 = (root,movecontact||root,var(13))&&(root,stateno=[3000,3999]) && (root,var(1)=2||root,fvar(17)=-2)
@@ -5317,6 +5509,7 @@ scale = .5,.5
 
 [State 8230, Explod]
 type = Explod
+	triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2
 triggerall = !NumExplod(8500) && time=0
 triggerall = teamside=1 && parent,var(56)
 trigger1 = root,var(56)
@@ -5338,6 +5531,7 @@ scale = .5,.5
 
 [State 8230, Explod]
 type = Explod
+	triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2
 triggerall = !NumExplod(8500) && time=0
 triggerall = teamside=2 && parent,var(56)
 trigger1 = root,var(56)
@@ -5359,6 +5553,7 @@ scale = .5,.5
 
 [State 8230, Explod]
 type = Explod
+	triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2
 triggerall = !NumExplod(8500) && teamside=1 && time=0 && Parent,var(56)=0
 trigger1 = ((parent,stateno=[3000,3999])&&(root,movecontact||root,var(13)))
 anim = 8509+(root,var(59)=[3,5])*2
@@ -5376,6 +5571,7 @@ scale = .5,.5
 
 [State 8230, Explod]
 type = Explod
+	triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2
 triggerall = !NumExplod(8500) && teamside=2 && time=0 && Parent,var(56)=0
 trigger1 = ((parent,stateno=[3000,3999])&&(root,movecontact||root,var(13)))
 anim = 8539+(root,var(59)=[3,5])*2
@@ -5393,6 +5589,7 @@ scale = .5,.5
 
 [State 8230, Explod]
 type = Explod
+	triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2
 trigger1 = !NumExplod(8500) && time=0
 trigger1 = teamside=1 && (((parent,stateno=195||(parent,stateno=[1000,1999]))&&(root,movecontact||root,var(13)))) && Parent,var(56)=0
 anim = 8508
@@ -5410,6 +5607,7 @@ scale = .5,.5
 
 [State 8230, Explod]
 type = Explod
+	triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2
 trigger1 = !NumExplod(8500) && time=0
 trigger1 = teamside=2 && (((parent,stateno=195||(parent,stateno=[1000,1999]))&&(root,movecontact||root,var(13)))) && Parent,var(56)=0
 anim = 8538
@@ -5427,6 +5625,7 @@ scale = .5,.5
 
 [State 8230, Explod]
 type = Explod
+	triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2
 trigger1 = !NumExplod(8500) && time=0
 trigger1 = teamside=1
 anim = 8507
@@ -5444,6 +5643,7 @@ scale = .5,.5
 
 [State 8230, Explod]
 type = Explod
+	triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2
 trigger1 = !NumExplod(8500) && time=0
 trigger1 = teamside=2
 anim = 8537
@@ -5484,6 +5684,7 @@ ignorehitpause = 1
 
 [State 1000, Spark]
 type = Explod
+	triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2
 trigger1 = Time = 70
 Anim = 8560
 id = 8560

@@ -2372,6 +2372,13 @@ ignorehitpause = 1
 anim = 6900
 ownpal = 1
 
+	[State 6160, Bench UI Sweep]
+	type = RemoveExplod
+	trigger1 = root,stateno = [6565610, 6565611]
+	trigger2 = roundstate > 2
+	trigger3 = !root,alive
+	ignorehitpause = 1
+
 [State 6160, PalFX]
 type = PalFX
 trigger1 = time = 0
@@ -2382,6 +2389,7 @@ ignorehitpause = 1
 
 [State 6160, Explod];îwåi
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = !NumExplod(6101)
 anim = 6101
 id = 6101
@@ -2397,6 +2405,7 @@ supermovetime = -1
 ;ÉQÅ[ÉWLv.1
 [State 6160, Explod];ÉQÅ[ÉW
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = !NumExplod(6102)
 anim = 6102
 id = 6102
@@ -2412,6 +2421,7 @@ scale = 1,5
 
 [State 6160, Explod];ÉQÅ[ÉWMAX
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = !NumExplod(6103)
 anim = 6103
 id = 6103
@@ -2429,6 +2439,7 @@ scale = 1,5
 ;ÉQÅ[ÉWLv.2
 [State 6160, Explod];ÉQÅ[ÉW
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = !NumExplod(6104)
 anim = 6102
 id = 6104
@@ -2444,6 +2455,7 @@ scale = 1,7
 
 [State 6160, Explod];ÉQÅ[ÉWMAX
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = !NumExplod(6105)
 anim = 6103
 id = 6105
@@ -2461,6 +2473,7 @@ scale = 1,7
 ;ÉQÅ[ÉWLv.3
 [State 6160, Explod];ÉQÅ[ÉW
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = !NumExplod(6106)
 anim = 6102
 id = 6106
@@ -2476,6 +2489,7 @@ scale = 1,8
 
 [State 6160, Explod];ÉQÅ[ÉWMAX
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = !NumExplod(6107)
 anim = 6103
 id = 6107
@@ -2492,6 +2506,7 @@ scale = 1,8
 
 [State 6160, Explod];òg1P
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = !NumExplod(6160)
 trigger1 = teamside = 1
 anim = 6160+ceil(((root,var(0)&2**1)/2**1)*200)
@@ -2509,6 +2524,7 @@ scale = ifelse(!((root,var(0)&2**1)/2**1),.5,1),ifelse(!((root,var(0)&2**1)/2**1
 
 [State 6160, Explod];òg2P
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = !NumExplod(6160)
 trigger1 = teamside = 2
 anim = 6260+ceil(((root,var(0)&2**1)/2**1)*200)
@@ -2526,6 +2542,7 @@ scale = ifelse(!((root,var(0)&2**1)/2**1),.5,1),ifelse(!((root,var(0)&2**1)/2**1
 
 [State 6160, Explod];Lv.1_1P
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = !NumExplod(6201)
 trigger1 = teamside = 1
 anim = 6104+ceil(((root,var(0)&2**1)/2**1)*200)
@@ -2544,6 +2561,7 @@ scale = ifelse(!((root,var(0)&2**1)/2**1),.5,1),ifelse(!((root,var(0)&2**1)/2**1
 
 [State 6160, Explod];1_2P
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = !NumExplod(6201)
 trigger1 = teamside = 2
 anim = 6204+ceil(((root,var(0)&2**1)/2**1)*200)
@@ -2562,6 +2580,7 @@ scale = ifelse(!((root,var(0)&2**1)/2**1),.5,1),ifelse(!((root,var(0)&2**1)/2**1
 
 [State 6160, Explod];2_1P
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = !NumExplod(6202)
 trigger1 = teamside = 1
 anim = 6105+ceil(((root,var(0)&2**1)/2**1)*200)
@@ -2580,6 +2599,7 @@ scale = ifelse(!((root,var(0)&2**1)/2**1),.5,1),ifelse(!((root,var(0)&2**1)/2**1
 
 [State 6160, Explod];2_2P
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = !NumExplod(6202)
 trigger1 = teamside = 2
 anim = 6205+ceil(((root,var(0)&2**1)/2**1)*200)
@@ -2598,6 +2618,7 @@ scale = ifelse(!((root,var(0)&2**1)/2**1),.5,1),ifelse(!((root,var(0)&2**1)/2**1
 
 [State 6160, Explod];3_1P
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = !NumExplod(6203)
 trigger1 = teamside = 1
 anim = 6106+ceil(((root,var(0)&2**1)/2**1)*200)
@@ -2616,6 +2637,7 @@ scale = ifelse(!((root,var(0)&2**1)/2**1),.5,1),ifelse(!((root,var(0)&2**1)/2**1
 
 [State 6160, Explod];3_2P
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- hidden when benched, KOd, or round over
 trigger1 = !NumExplod(6203)
 trigger1 = teamside = 2
 anim = 6206+ceil(((root,var(0)&2**1)/2**1)*200)
