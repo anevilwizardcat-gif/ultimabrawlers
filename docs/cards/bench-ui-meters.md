@@ -90,7 +90,15 @@ CRITICAL: never sweep/restore a gameplay state (e.g. 5201). Restrict to gauge st
 - Default engine power bar leak: `noPowerBarDisplay` AssertSpecial across groove + cvs2 family. [P001]
 
 ## Open / watch items
-- **TRAP (P009): `var(59) = -1` -> gauge state 8190, which DOES NOT EXIST.** `var(59)` (groove) defaults to -1
+- **TRAP (P010): the gauge groove var(59) is GARBAGE in tag — do NOT trust it; CLAMP it.** The 8200 helper
+  enters `8200 + var(59)*10`. In tag, [State -3] copies `var(59) = partner,var(20)`, but a groove char's
+  var(20) is a REUSED scratch var holding a groove-point DISPLAY COORDINATE during the match (config `var(20)=5`;
+  states 6713/6723 set it to `root,var(47)*5`, `(root,var(47)-9)*3+45`, up to 999) — NOT a 0-6 groove. So
+  var(59) becomes 5/45/999 and the gauge enters a non-existent state -> no bar. Spawn MUST clamp:
+  `8200 + ifelse(var(59)=[0,6], var(59), 0)*10 + (var(59)=6)*5`. Power display is groove-independent, so the
+  bar shows/fills regardless; clamp just defaults the STYLE to groove 0 when var(59) is junk. (P009's
+  `var(59)!=-1` guard was insufficient — junk values aren't -1 — and is disabled.)
+- **(superseded) TRAP P009: `var(59) = -1` -> gauge state 8190, which DOES NOT EXIST.** `var(59)` (groove) defaults to -1
   at frame 0 (from scratch var(1)) and only becomes valid when copied from the partner at roundstate=2. Any
   8200 spawn MUST be guarded `var(59) != -1` or it enters a dead state and blocks its own id. State formula:
   `8200 + var(59)*10 + (var(59)=6)*5` (valid: 8200/8210/8220/8230/8240/8250/8260/8265).
@@ -107,4 +115,4 @@ CRITICAL: never sweep/restore a gameplay state (e.g. 5201). Restrict to gauge st
   (transient) — verify the pre-round ISM selector doesn't double-draw; chase only if Raven reports it.
 
 ## Changelog refs
-P001-P006 (backfilled), P007 (Family C intro-indicator arbitration removal), P008 (Family C in-match 8200 meter: spawn un-gate + bench hide), **P009** (8200 var(59)!=-1 spawn guard — the 8190 dead-state fix).
+P001-P006 (backfilled), P007 (Family C intro-indicator arbitration removal), P008 (Family C in-match 8200 meter: spawn un-gate + bench hide), P009 (8200 var(59)!=-1 guard — superseded), **P010** (8200 stateno groove-clamp — THE no-visible-meter fix; partner var(20) is a coord not a groove).

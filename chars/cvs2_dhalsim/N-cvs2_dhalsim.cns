@@ -7334,7 +7334,7 @@ type = Helper
 triggerall = !NumHelper(8200)
 triggerall = ifelse(NumHelper(8100),roundstate > 1,ifelse(fvar(37)=1,roundstate>0,1))
 triggerall = stateno != [6565610, 6565611]  ;TAGFIX(P008): don't spawn gauge while benched
-triggerall = var(59) != -1  ;TAGFIX(P009): wait for a valid groove (set from partner at roundstate=2); -1 -> nonexistent state 8190
+;triggerall = var(59) != -1  ;TAGFIX(P009): wait for a valid groove (set from partner at roundstate=2); -1 -> nonexistent state 8190   ;[P010] superseded by stateno clamp below
 trigger1 = !numpartner
 trigger2 = numpartner
 ;trigger2 = !(partner,authorname="warusaki3"&&partner,fvar(39)=1)
@@ -7345,7 +7345,7 @@ id = 8200
 name = "gauge"
 pos = 0,250
 postype = P1
-stateno = 8200+var(59)*10+(var(59)=6)*5
+stateno = 8200 + ifelse(var(59)=[0,6], var(59), 0)*10 + (var(59)=6)*5  ;TAGFIX(P010): clamp garbage var(59) (partner var(20) is a coord, not a groove) to a valid gauge state
 helpertype = normal
 keyctrl = 0
 ownpal = 1

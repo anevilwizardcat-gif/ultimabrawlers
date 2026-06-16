@@ -22,6 +22,26 @@ the entry's Status line (the only allowed in-place edit; everything else is appe
 > NOTE: P001–P006 are **backfilled** from the handoff doc. Exact dates/times were not recorded, so they
 > read "date-unknown (pre-2026-06-16)". Treat them as historical context, not precise audit.
 
+## [P010] 2026-06-16 20:30 CT — build nightly-06-07-2026
+Subsystem: bench-ui-meters / Family C (Gal129) — THE fix for "no visible meter" (completes P008/P009)
+Files shipped: cvs2_blanka/N-cvs2_blanka.cns, cvs2_dhalsim/N-cvs2_dhalsim.cns
+Change: clamped the 8200 gauge-helper spawn stateno to a valid groove:
+  `stateno = 8200 + ifelse(var(59)=[0,6], var(59), 0)*10 + (var(59)=6)*5`. Disabled the P009 `var(59)!=-1`
+  guard (insufficient — it only caught -1).
+ROOT CAUSE (the piece missed in P008/P009): the gauge picks its state by `8200 + var(59)*10`, and in tag
+  `var(59)` is copied from the partner via `var(59) = partner,var(20)` (the [State -3] VarSets). **The
+  partner's var(20) is NOT a groove index.** In groove.cns it is a reused scratch var that during the match
+  holds a GROOVE-POINT DISPLAY COORDINATE — config.txt sets `var(20)=5`, and states 6713/6723 compute
+  `var(20)=root,var(47)*5`, `(root,var(47)-9)*3+45`, up to 999. So Blanka copied values like 5/45/999 into
+  var(59) -> gauge tried to enter states 8450/8200+9990/etc. that DON'T EXIST -> helper spawned into a dead
+  state -> no bar. The original design never hit this because, paired with a meter-partner, the gauge spawn
+  was gated OFF entirely (the deference gate removed in P008). Clamping to [0,6] makes the helper always enter
+  a real 82xx state (out-of-range -> groove 0). Power display is identical across groove styles, so the bar
+  shows and fills correctly; only the groove STYLING defaults to 0 when var(59) is garbage (cosmetic).
+Test: Blanka & Dhalsim 2v2 mirror — gauge should finally be VISIBLE when active, hide on tag-out/round-end/KO,
+  restore on tag-in.
+Status: shipped — awaiting test.
+
 ## [P009] 2026-06-16 19:20 CT — build nightly-06-07-2026
 Subsystem: bench-ui-meters / Family C (Gal129) — completes P008
 Files shipped: cvs2_blanka/N-cvs2_blanka.cns, cvs2_dhalsim/N-cvs2_dhalsim.cns
