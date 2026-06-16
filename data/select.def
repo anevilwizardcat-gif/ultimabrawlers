@@ -205,6 +205,7 @@ Venom, DailyBugleRooftopsMVC.def
 IronMan, centralsuperheroes 1.1
 CaptainAmerica, centralsuperheroes 1.1
 Wolverine, Onslaught.def
+Storm, Onslaught.def
 Cyclops, Onslaught.def
 DivinePsy, mshvsf_apocalypse_now.def
 Magneto, mshvsf_apocalypse_now.def
@@ -250,10 +251,10 @@ Cvskyo, DerelictChurch.def
 ;Terumi, Blazblue_Kagutsuchi_PM.def
 ;Rachel_S, Blazblue_Kagutsuchi_PM.def
 ;BB_Noel, Blazblue_Kagutsuchi_PM.def
-MK1_SCORPION, mk2_pit2.def
-MK1_SUB-ZERO, mk2_pit2.def
-CvWScorpion, mk2_pit2.def
-SubZero, mk2_pit2.def
+;MK1_SCORPION, mk2_pit2.def
+;MK1_SUB-ZERO, mk2_pit2.def
+;CvWScorpion, mk2_pit2.def
+;SubZero, mk2_pit2.def
 Cloud, NibelReactorHR.def
 sephiroth_ak, NibelReactorHR.def
 TifaLockhart, NibelReactorHR.def
@@ -363,8 +364,8 @@ stages/NibelReactorHR.def
 stages/MemoriaTimeInterval.def
 stages/IceCavernIcicleFields.def
 stages/BarricadedStation.def
-stages/XX'KY'XX.def
-stages/mk2_pit2.def
+;stages/XX'KY'XX.def
+;stages/mk2_pit2.def
 ;-------------------------------------------------------------------------------
 [Options]
  ;Here you set the maximum number of matches to fight before the game ends in

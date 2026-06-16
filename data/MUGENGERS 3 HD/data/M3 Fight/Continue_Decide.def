@@ -1,0 +1,16 @@
+﻿[FNT v2]
+; FNT v2 version number.  Don't change this.
+fntversion = 2,00
+name = "MUGENGERS 3 Continue Decide Menu"
+
+[Def]
+; This is a bitmap font
+Type = bitmap
+Size = 1280,0
+Spacing = 0,0
+Offset = 0,0
+File = Continue_Decide.sff
+
+; Note: All units are in pixels.
+; Text rendered with bitmap fonts may be in ASCII only.
+; See files in work/font for information on creating the sff.

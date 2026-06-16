@@ -1,0 +1,75 @@
+;==============================================================
+[Info]
+name = "MUGENGERS 3"
+author = "Duralminn"
+versiondate = 
+localcoord = 1280,720
+
+;==============================================================
+
+[SceneDef]
+spr = logo.sff
+startscene = 0
+
+;==============================================================
+
+[Scene 0]
+fadein.time = 40
+fadeout.time = 40
+end.time = 200
+bg.name = BG0
+
+[BG0Def]
+
+[BG0 Elecbyte]
+type = normal
+spriteno = 0,0
+start = -640,0
+
+
+;==============================================================
+
+[Scene 1]
+fadein.time = 40
+fadeout.time = 40
+end.time = 200
+bg.name = BG1
+
+[BG1Def]
+
+[BG1 MFFA]
+type = normal
+spriteno = 0,1
+start = -640,0
+
+;==============================================================
+
+[Scene 2]
+fadein.time = 40
+fadeout.time = 40
+end.time = 200
+bg.name = BG2
+
+[BG2Def]
+
+[BG2 Mugen Wind]
+type = normal
+spriteno = 0,2
+start = -640,0
+
+;==============================================================
+
+[Scene 3]
+fadein.time = 40
+fadeout.time = 40
+end.time = 200
+bg.name = BG3
+
+[BG3Def]
+
+[BG3 Duralminn]
+type = normal
+spriteno = 0,3
+start = -640,0
+
+;==============================================================

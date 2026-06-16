@@ -1,0 +1,15 @@
+﻿[FNT v2]
+; FNT v2 version number.  Don't change this.
+fntversion = 2,00
+name = "MUGENGERS 3 Menu"
+
+[Def]
+Type = bitmap
+Size = 1280,720
+Spacing = 0,0
+Offset = 0,0
+File = Menu Image.sff
+
+; Note: All units are in pixels.
+; Text rendered with bitmap fonts may be in ASCII only.
+; See files in work/font for information on creating the sff.

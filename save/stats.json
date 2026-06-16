@@ -1,5 +1,5 @@
 {
-  "playtime": 31917.87,
+  "playtime": 40843.15,
   "modes": {
     "training": {
       "playtime": 0,
@@ -51,20 +51,20 @@
       ]
     },
     "watch": {
-      "playtime": 31336.71,
-      "clear": 128,
+      "playtime": 40261.99,
+      "clear": 152,
       "clearcount": {
-        "jotaro": 33,
-        "dio": 15,
-        "mvc2_spiderman": 5,
+        "jotaro": 35,
+        "dio": 17,
+        "mvc2_spiderman": 9,
         "ryu_pots": 1,
         "sf3_ryu": 6,
         "sephiroth_ak": 1,
         "sf3_ibuki": 1,
-        "sf3_gouki": 2,
+        "sf3_gouki": 3,
         "lightning": 2,
         "josuke": 2,
-        "shadowdio": 4,
+        "shadowdio": 6,
         "tifalockhart": 2,
         "sf3_chun-li": 16,
         "nero_dmc4": 1,
@@ -81,10 +81,10 @@
         "albertwesker": 2,
         "guile": 1,
         "mk1_scorpion": 3,
-        "sol_b": 2,
+        "sol_b": 4,
         "pot": 4,
         "ironman": 1,
-        "wolverine": 1,
+        "wolverine": 2,
         "sonya": 1,
         "justice": 1,
         "cvshaohmaru": 1,
@@ -92,7 +92,15 @@
         "juri": 1,
         "cammy-delta_red": 2,
         "ragna_s": 1,
-        "kenshirou": 1
+        "kenshirou": 1,
+        "yu": 1,
+        "cfj_jurihan": 1,
+        "squall": 2,
+        "sentinel": 1,
+        "cvsryu": 1,
+        "cvwscorpion": 1,
+        "cvsguile": 1,
+        "cvsgouki": 2
       }
     },
     "survival": {

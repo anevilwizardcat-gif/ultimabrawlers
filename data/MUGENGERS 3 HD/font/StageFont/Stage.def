@@ -1,0 +1,12 @@
+﻿[FNT v2]
+fntversion = 2,00
+name = "SF Theramin Gothic"
+author = "???"
+
+[Def]
+Type = truetype
+Size = 8,15
+Spacing = 1,0
+Offset = 0,0
+File = SF Theramin Gothic.ttf
+Blend = 1

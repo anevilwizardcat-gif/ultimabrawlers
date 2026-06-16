@@ -1,0 +1,119 @@
+[Info]
+name = "UNIB Training Room"           
+author = "Excahm"
+
+[Camera]
+startx =0           
+starty = 0   
+boundleft = -573    
+boundright = 573     
+boundhigh = -270      
+boundlow = 0           
+verticalfollow = .7      
+tension = 70  
+floortension = 50
+overdrawhigh = 120
+overdrawlow = 120
+cuthigh = 0
+cutlow = 0      
+
+[PlayerInfo]
+p1startx = -270         
+p1starty = 0           
+p1startz = 0           
+p1facing = 1           
+p2startx = 270          
+p2starty = 0          
+p2startz = 0          
+p2facing = -1          
+leftbound  = -2000     
+rightbound =  2000     
+topbound  =  0         
+botbound  =  0         
+
+[Scaling]
+topz     = 0
+botz     = 50
+topscale = 1
+botscale = 1.2
+
+[Bound]
+screenleft = 25     
+screenright = 25      
+
+[StageInfo]
+zoffset = 628    
+autoturn = 1           
+resetBG = 1
+localcoord = 1280,720
+xscale = 0.72
+yscale = 0.72
+
+[Shadow]
+color = 256,256,256  
+intensity = 0 
+yscale = 0.40,0.25  
+fade.range = -400,-100                     
+
+[Reflection]
+intensity = 75
+
+[Music]
+bgmusic = sound/Chemistry Gontran.mp3             
+bgvolume = 255    
+
+[BGdef]
+spr = stages/UNIB_Training_Room.sff
+debugbg = 0
+;------------------------------------------------
+[BG Main 1]
+type  = normal     
+spriteno = 0, 0                       
+start = 0,695     
+delta = .541, .538
+mask = 1
+
+[BG Main 2]
+type  = normal     
+spriteno = 0, 1                       
+start = 0,695     
+delta = .541, .538
+mask = 1
+Trans = add
+
+[BG Main 3]
+type  = normal     
+spriteno = 0, 2                     
+start = 0,695     
+delta = .541, .538
+mask = 1
+Trans = add
+
+[BG Floor]
+type  = parallax
+spriteno = 1, 0
+start = 0,695
+delta = .541, .538
+xscale = 2,5
+yscalestart = 100
+yscaledelta = .1700
+mask = 1
+
+[BG Reflection]
+type  = normal     
+spriteno = 2, 0                       
+start = 0,695     
+delta = .541, .538
+mask = 1
+Trans = addalpha
+Alpha = 200,256
+
+[BG Hud]
+type  = normal     
+spriteno = 3, 0                       
+start = 0,695    
+delta = 0,0
+mask = 1
+Trans = addalpha
+Alpha = 70,240
+layerno = 1

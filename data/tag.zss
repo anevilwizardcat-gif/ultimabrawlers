@@ -344,7 +344,13 @@ ignoreHitPause if !const(Default.Enable.Tag) || isHelper || teamSide = 0 {
 					}
 					# having control, command buffered, partner standby
 					# ownStop: set by sustained-timestop owners (e.g. HFTF characters) while their stop runs; the switch is deferred until it ends.
-					if ctrl && map(ownStop) = 0 && $partnerId > 0 && playerId($partnerId),stateNo = playerId($partnerId),const(StateTagWaitingOutside) {
+					# Tandem exemption: HFTF tandems run an internal timestop (var(0)=1 -> ownStop=1) for the
+					# rush's duration, which would otherwise defer the switch until the tandem ends. ownTandem
+					# (= var(8)=2) is set ONLY by the stand's tandem-rush states (11000-13100), never by a
+					# standalone timestop super, so it is a safe discriminator. Tagging out mid-tandem is safe:
+					# the stop helper (3210) self-destructs on bench via its Tag Bench Cleanup, which is why
+					# this worked before the ownStop gate existed. Non-HFTF chars never set ownTandem (=0).
+					if ctrl && (map(ownStop) = 0 || map(ownTandem) = 1) && $partnerId > 0 && playerId($partnerId),stateNo = playerId($partnerId),const(StateTagWaitingOutside) {
 						mapSet{map: "_iksys_tagSwitchCooldown"; value: playerId($partnerId),const(TagSwitchCooldown); redirectid: $partnerId}
 						map(_iksys_tagPartnerId) := 0;
 						lifebarAction{spr: const(MsgPartnerChange), 0; top: 1}

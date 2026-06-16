@@ -3,7 +3,7 @@
 ;////***DAILY BUGLE ROOFTOPS STAGE BY  MASTER YODA***////
 ;--------------------------------------------------------
 [Info]
-name = "Daily Bugle Rooftops MVC"; 
+name = "The Daily Bugle";
 author= "Master Yoda"
 ;DATE = 15/03/2015
 ;My site: http://senseiyoda.mugen-infantry.net/
@@ -20,7 +20,7 @@ debugbg = 0
 ;--------------------------------------------------------
 [Music]
 bgmusic = spiderman.mp3
-bgvolume = 255
+bgvolume = 165
 
 ;--------------------------------------------------------
 [Camera]

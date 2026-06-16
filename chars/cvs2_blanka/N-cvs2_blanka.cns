@@ -5062,6 +5062,12 @@ trigger1 = time>0
 
 ;\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 [Statedef -2]
+[State -2, Hide Engine Power Bar]
+type = AssertSpecial
+trigger1 = 1
+flag = noPowerBarDisplay
+ignorehitpause = 1
+
 
 [State 0, DisplayToClipboard]
 type = DisplayToClipboard

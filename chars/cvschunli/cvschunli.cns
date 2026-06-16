@@ -10889,6 +10889,12 @@ value = 5150
 
 ;---------------------------------------------------------------------------
 [Statedef -2]
+[State -2, Hide Engine Power Bar]
+type = AssertSpecial
+trigger1 = 1
+flag = noPowerBarDisplay
+ignorehitpause = 1
+
 
 ;configŒÄ‚Ño‚µ
 [State 3001, Super]
@@ -10914,7 +10920,7 @@ triggerall = roundstate = 0
 triggerall = roundsexisted <= 0
 trigger1 = numpartner
 trigger1 = ID>partner,ID
-trigger1 = !partner,authorname = "warusaki3"
+;trigger1 = !partner,authorname = "warusaki3"	;BENCH: was blocking a 2nd Warusaki3 teammate from spawning its own bar in tag (each spawns its own; bench-hide stops overlap)
 trigger1 = !(partner,authorname = "mouser" && partner,name = "Hibiki Takane")
 trigger1 = !partner,authorname = "Hh"
 trigger1 = !partner,authorname = "Jesuszilla"
@@ -10937,7 +10943,7 @@ triggerall = !fvar(3)
 triggerall = !NumHelper(6500) && !NumHelper(6000)
 trigger1 = numpartner
 trigger1 = ID>partner,ID
-trigger1 = !partner,authorname = "warusaki3"
+;trigger1 = !partner,authorname = "warusaki3"	;BENCH: was blocking a 2nd Warusaki3 teammate from spawning its own bar in tag (each spawns its own; bench-hide stops overlap)
 trigger1 = !(partner,authorname = "mouser" && partner,name = "Hibiki Takane")
 trigger1 = !partner,authorname = "Hh"
 trigger1 = !partner,authorname = "Jesuszilla"
@@ -11531,7 +11537,7 @@ triggerall = !NumHelper(6100) && !NumHelper(6000)
 triggerall = numenemy
 trigger1 = numpartner
 trigger1 = ID>partner,ID
-trigger1 = !partner,authorname = "warusaki3"
+;trigger1 = !partner,authorname = "warusaki3"	;BENCH: was blocking a 2nd Warusaki3 teammate from spawning its own bar in tag (each spawns its own; bench-hide stops overlap)
 trigger1 = !(partner,authorname = "mouser" && partner,name = "Hibiki Takane")
 trigger1 = !partner,authorname = "Hh"
 trigger1 = !partner,authorname = "Jesuszilla"

@@ -37,7 +37,7 @@ verticalfollow = .3
 floortension = 0
 tension = 50
 zoomin = 1.0
-zoomout = 0.85
+zoomout = 1.0
 
 ;--------------------------------------------------------
 [PlayerInfo]

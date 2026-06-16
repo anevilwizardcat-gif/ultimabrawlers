@@ -1,0 +1,26 @@
+﻿; Enter 48 - 48 point font
+; Indexed 8-bank
+; Bank 0 - mono
+; Bank 1 - red
+; Bank 2 - green
+; Bank 3 - blue
+; Bank 4 - brown
+; Bank 5 - cyan
+; Bank 6 - purple
+; Bank 7 - yellow
+
+[FNT v2]
+fntversion = 2,00
+name = "MUGENGERS 3 Gauge Number"
+
+[Def]
+Type = bitmap
+BankType = palette
+Size = 13,0
+Spacing = 0,0
+Offset = 0,0
+File = Gauge_number.sff
+
+; Note: All units are in pixels.
+; Text rendered with bitmap fonts may be in ASCII only.
+; See files in work/font for information on creating the sff.

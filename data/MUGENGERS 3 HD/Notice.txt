@@ -1,0 +1,5 @@
+4gb_patch.exe
+MUGENGERS 3.exe.Backup
+
+I created these files to solve memory problem.
+Please do not delete.

@@ -1,0 +1,8996 @@
+;~~~~コモンステート
+;---------------------------------------------------------------------------
+; GUARD (start)
+[Statedef 120]
+type = U    ;Leave state type unchanged
+physics = U ;Leave physics unchanged
+
+[State 120, 1]
+type = ChangeAnim
+trigger1 = Time = 0
+value = 120 + (statetype = C) + (statetype = A)*2
+
+[State 120, 2]
+type = StateTypeSet
+trigger1 = Time = 0 && statetype = S
+physics = S
+
+[State 120, 3]
+type = StateTypeSet
+trigger1 = Time = 0 && statetype = C
+physics = C
+
+[State 120, 4]
+type = StateTypeSet
+trigger1 = Time = 0 && statetype = A
+physics = A
+
+[State 120, Hi to Lo]
+type = StateTypeSet
+trigger1 = statetype = S && command = "holddown"&&!fvar(38)
+trigger2 = statetype = S && fvar(33) && !((P2statetype=A && (enemynear,vel Y>-1||enemynear,pos Y<-70))||(P2statetype=A&&enemynear,time>ifelse(fvar(33),15,18))) && fvar(38)
+statetype = C
+physics = C
+
+[State 120, Lo to Hi]
+type = StateTypeSet
+trigger1 = statetype = C && command != "holddown"&&!fvar(38)
+trigger2 = statetype = C && ((P2statetype=A && (enemynear,vel Y>-1||enemynear,pos Y<-70))||(P2statetype=A&&enemynear,time>ifelse(fvar(33),15,18))) && random%7<5 && fvar(38)
+statetype = S
+physics = S
+
+[State 131, Lo to Hi]
+type = CtrlSet
+trigger1 = fvar(38)
+value = 0
+
+[State 131, Lo to Hi]
+type = CtrlSet
+trigger1 = time>=(16+(random%5))&&fvar(38)
+value = 1
+
+[State 120, 5]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 130 + (statetype = C) + (statetype = A)*2
+
+[State 120, Stop Guarding]
+type = ChangeState
+trigger1 = command != "holdback" && (statetype!=A ||(statetype=A && P2Dist X>=0))&&!fvar(38)
+trigger2 = !inguarddist
+trigger3 = command != "holdfwd" && P2Dist X<0 && Statetype=A&&!fvar(38)
+value = 140
+
+;---------------------------------------------------------------------------
+; STAND GUARD (guarding)
+[Statedef 130]
+type    = S
+physics = S
+
+[State 130, 1]
+type = ChangeAnim
+trigger1 = Anim != 130
+value = 130
+
+[State 130, Hi to Lo]
+type = ChangeState
+trigger1 = command = "holddown" && !fvar(38)
+trigger2 = time&&P2statetype!=A&&!(P2statetype=A&&enemynear,time>ifelse(fvar(33),15,18))&&fvar(38)
+value = 131
+
+[State 131, Lo to Hi]
+type = CtrlSet
+trigger1 = fvar(38)
+value = 0
+
+[State 131, Lo to Hi]
+type = CtrlSet
+trigger1 = time>=(24+(random%5))&&!fvar(35)&&fvar(38)
+value = 1
+
+[State 131, Stop Guarding]
+type = ChangeState
+trigger1 = command != "holdback"&&!fvar(38)
+trigger2 = !inguarddist&&!fvar(38)
+trigger3 = !inguarddist&&!NumHelper(91000)&&fvar(38)
+trigger4 = !inguarddist&&NumHelper(91000)&&fvar(38)
+trigger4 = !Helper(91000),Inguarddist
+value = 140
+
+;---------------------------------------------------------------------------
+; CROUCH GUARD (guarding)
+[Statedef 131]
+type    = C
+physics = C
+
+[State 131, 1]
+type = ChangeAnim
+trigger1 = Anim != 131
+value = 131
+
+[State 131, Lo to Hi]
+type = ChangeState
+trigger1 = command != "holddown" && !fvar(38)
+trigger2 = time&&((P2statetype=A && (enemynear,vel Y>-1||enemynear,pos Y<-70))||(P2statetype=A&&enemynear,time>ifelse(fvar(33),15,18))) && random%7<5 && fvar(38)
+value = 130
+
+[State 131, Lo to Hi]
+type = CtrlSet
+trigger1 = fvar(38)
+value = 0
+
+[State 131, Lo to Hi]
+type = CtrlSet
+trigger1 = time>=(24+(random%5))&&!fvar(35)&&fvar(38)
+value = 1
+
+[State 131, Stop Guarding]
+type = ChangeState
+trigger1 = command != "holdback"&&!fvar(38)
+trigger2 = !inguarddist&&!fvar(38)
+trigger3 = !inguarddist&&!NumHelper(91000)&&fvar(38)
+trigger4 = !inguarddist&&NumHelper(91000)&&fvar(38)
+trigger4 = !Helper(91000),Inguarddist
+value = 140
+
+;---------------------------------------------------------------------------
+; AIR GUARD (guarding)
+[Statedef 132]
+type    = A
+physics = N
+
+[State 132, 1]
+type = ChangeAnim
+trigger1 = Anim != 132
+value = 132
+
+[State 132, 2]
+type = VelAdd
+trigger1 = 1
+y = Const(movement.yaccel)
+
+[State 132, 3]
+type = VarSet
+trigger1 = 1
+sysvar(0) = (pos y >= 0) && (vel y > 0)
+
+[State 132, 4]
+type = VelSet
+trigger1 = sysvar(0)
+y = 0
+
+[State 132, 5]
+type = PosSet
+trigger1 = sysvar(0)
+y = 0
+
+[State 132, 6]
+type = ChangeState
+triggerall = sysvar(0)
+trigger1 = command = "holdback"&&!fvar(38)
+trigger1 = inguarddist
+trigger2 = fvar(38)
+value = 130
+
+[State 132, 7]
+type = ChangeState
+trigger1 = sysvar(0)
+value = 52
+
+[State 132, Stop Guarding]
+type = ChangeState
+trigger1 = command != "holdback" && P2Dist X>=0&&!fvar(38)
+trigger2 = !inguarddist&&!fvar(38)
+trigger3 = command != "holdfwd" && P2Dist X<0 && Statetype=A&&!fvar(38)
+trigger4 = !inguarddist&&!NumHelper(91000)&&fvar(38)
+trigger5 = !inguarddist&&NumHelper(91000)&&fvar(38)
+trigger5 = !Helper(91000),Inguarddist
+value = 140
+
+;---------------------------------------------------------------------------
+; GUARD (end)
+[Statedef 140]
+type = U    ;Leave state type unchanged
+physics = U ;Leave physics unchanged
+ctrl = 1
+
+[State 140, 1]
+type = ChangeAnim
+trigger1 = Time = 0
+value = 140 + (statetype = C) + (statetype = A)*2
+
+[State 140, 2]
+type = StateTypeSet
+trigger1 = Time = 0 && statetype = S
+physics = S
+
+[State 140, 3]
+type = StateTypeSet
+trigger1 = Time = 0 && statetype = C
+physics = C
+
+[State 140, 4]
+type = StateTypeSet
+trigger1 = Time = 0 && statetype = A
+physics = A
+
+[State 120, Hi to Lo]
+type = StateTypeSet
+trigger1 = statetype = S && command = "holddown"&&!fvar(38)
+trigger2 = statetype = S && fvar(33) && !((P2statetype=A && (enemynear,vel Y>-1||enemynear,pos Y<-70))||(P2statetype=A&&enemynear,time>ifelse(fvar(33),15,18))) && fvar(38)
+statetype = C
+physics = C
+
+[State 120, Lo to Hi]
+type = StateTypeSet
+trigger1 = statetype = C && command != "holddown"&&!fvar(38)
+trigger2 = statetype = C && ((P2statetype=A && (enemynear,vel Y>-1||enemynear,pos Y<-70))||(P2statetype=A&&enemynear,time>ifelse(fvar(33),15,18))) && random%7<5 && fvar(38)
+statetype = S
+physics = S
+
+;[State 140, 5] ;Implemented within engine
+;type = ChangeState
+;trigger1 = AnimTime = 0
+;value = (statetype = C)*11 + (statetype = A)*51
+
+;---------------------------------------------------------------------------
+; SGUARDHIT (shaking)
+[Statedef 150]
+type    = S
+movetype= H
+physics = N
+velset = 0,0
+
+[State 150, 1]
+type = ChangeAnim
+trigger1 = 1
+value = 150
+
+[State 150, 2]
+type = ChangeState
+trigger1 = HitShakeOver
+value = 151 + 2*((command = "holddown" && command = "holdback" && !fvar(38)&&!var(11))||fvar(38))
+
+[State 120, Hi to Lo]
+type = StateTypeSet
+trigger1 = statetype = S && command = "holddown"&&!fvar(38)
+trigger2 = statetype = S && fvar(33) && !((P2statetype=A && (enemynear,vel Y>-1||enemynear,pos Y<-70))||(P2statetype=A&&enemynear,time>ifelse(fvar(33),15,18))) && fvar(38)
+statetype = C
+physics = C
+
+[State 120, Lo to Hi]
+type = StateTypeSet
+trigger1 = statetype = C && command != "holddown"&&!fvar(38)
+trigger2 = statetype = C && ((P2statetype=A && (enemynear,vel Y>-1||enemynear,pos Y<-70))||(P2statetype=A&&enemynear,time>ifelse(fvar(33),15,18))) && random%7<5 && fvar(38)
+statetype = S
+physics = S
+
+[State 5300,Pause]
+type = VarSet
+trigger1 = Time>=1 && (prevstateno!=[4100,4120])
+trigger2 = time<=0 && var(50)>1
+var(11) = 0
+ignorehitpause=1
+persistent=0
+
+[State 5300,Pause]
+type = VarSet
+trigger1 = Time>=1 && (prevstateno!=[4100,4120])
+var(50) = 0
+ignorehitpause=1
+persistent=0
+
+[State 5300,Pause]
+type = VarAdd
+trigger1 = var(50)>0
+var(50) = 1
+ignorehitpause=1
+
+[State 5300,Pause]
+type = Pause
+trigger1 = Time=1 && var(11) && !(enemy,numproj=0 && fvar(10)>0)
+time = 5+(fvar(10)>0)*9
+movetime = 5+(fvar(10)>0)*9
+ignorehitpause=1
+persistent=0
+
+[State -2,JustDefence]
+type = LifeSet
+trigger1 = Life<var(38) && var(11)
+value = var(38)+7+floor(var(20)/14)*7
+ignorehitpause = 1
+
+[State 150, 3]
+type = ForceFeedback
+trigger1 = time = 0
+waveform = square
+time = 3
+;-----------------------------------------------
+; SGUARDHIT2 (knocked back)
+[Statedef 151]
+type    = S
+movetype= H
+physics = S
+anim = 150
+
+[State 152, 3]
+type = ChangeState
+trigger1 = time>0 && !var(11) && command = "holddown" && command = "holdback" && !fvar(38)
+trigger2 = time>0 && !var(11) && fvar(38) && P2statetype!=A
+value = 153
+
+[State 151, 1]
+type = HitVelSet
+trigger1 = Time = 0 && !var(11) && prevstateno!=153
+x = 1
+
+[State 151, 2]
+type = VelSet
+trigger1 = Time = GetHitVar(slidetime)
+trigger2 = HitOver
+trigger3 = var(11)
+x = 0
+
+[State 151, 3]
+type = CtrlSet
+trigger1 = Time = GetHitVar(ctrltime)
+value = 1
+
+[State 120, Hi to Lo]
+type = StateTypeSet
+trigger1 = statetype = S && command = "holddown"&&!fvar(38)
+trigger2 = statetype = S && fvar(33) && !((P2statetype=A && (enemynear,vel Y>-1||enemynear,pos Y<-70))||(P2statetype=A&&enemynear,time>ifelse(fvar(33),15,18))) && fvar(38)
+statetype = C
+physics = C
+
+[State 120, Lo to Hi]
+type = StateTypeSet
+trigger1 = statetype = C && command != "holddown"&&!fvar(38)
+trigger2 = statetype = C && ((P2statetype=A && (enemynear,vel Y>-1||enemynear,pos Y<-70))||(P2statetype=A&&enemynear,time>ifelse(fvar(33),15,18))) && random%7<5 && fvar(38)
+statetype = S
+physics = S
+
+[State 151, 4]
+type = ChangeState
+trigger1 = ifelse(var(11),ifelse(fvar(10)>0&&enemy,numproj=0,var(11)<=0,var(11)<=5),HitOver)
+value = 140
+ctrl = 1
+
+;---------------------------------------------------------------------------
+; CGUARDHIT (shaking)
+[Statedef 152]
+type    = C
+movetype= H
+physics = N
+velset = 0,0
+
+[State 152, 1]
+type = ChangeAnim
+trigger1 = 1
+value = 151
+
+[State 152, 3]
+type = ChangeState
+trigger1 = HitShakeOver
+value = 153 - 2*((command = "holdback" && command!="holddown" && var(11) && !fvar(38)))
+
+[State 120, Hi to Lo]
+type = StateTypeSet
+trigger1 = statetype = S && command = "holddown"&&!fvar(38)
+trigger2 = statetype = S && fvar(33) && !((P2statetype=A && (enemynear,vel Y>-1||enemynear,pos Y<-70))||(P2statetype=A&&enemynear,time>ifelse(fvar(33),15,18))) && fvar(38)
+statetype = C
+physics = C
+
+[State 120, Lo to Hi]
+type = StateTypeSet
+trigger1 = statetype = C && command != "holddown"&&!fvar(38)
+trigger2 = statetype = C && ((P2statetype=A && (enemynear,vel Y>-1||enemynear,pos Y<-70))||(P2statetype=A&&enemynear,time>ifelse(fvar(33),15,18))) && random%7<5 && fvar(38)
+statetype = S
+physics = S
+
+[State 5300,Pause]
+type = VarSet
+trigger1 = Time>=1 && (prevstateno!=[4100,4120])
+trigger2 = time<=0 && var(50)>1
+var(11) = 0
+ignorehitpause=1
+persistent=0
+
+[State 5300,Pause]
+type = VarSet
+trigger1 = Time>=1 && (prevstateno!=[4100,4120])
+var(50) = 0
+ignorehitpause=1
+persistent=0
+
+[State 5300,Pause]
+type = VarAdd
+trigger1 = var(50)>0
+var(50) = 1
+ignorehitpause=1
+
+[State 5300,Pause]
+type = Pause
+trigger1 = Time=1 && var(11) && !(enemy,numproj=0 && fvar(10)>0)
+time = 5+(fvar(10)>0)*9
+movetime = 5+(fvar(10)>0)*9
+ignorehitpause=1
+persistent=0
+
+[State -2,JustDefence]
+type = LifeSet
+trigger1 = Life<var(38) && var(11)
+value = var(38)+7+floor(var(20)/14)*7
+ignorehitpause = 1
+
+[State 152, 4]
+type = ForceFeedback
+trigger1 = time = 0
+waveform = square
+time = 4
+;^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+; CGUARDHIT2 (knocked back)
+[Statedef 153]
+type    = C
+movetype= H
+physics = C
+anim = 151
+
+[State 152, 3]
+type = ChangeState
+trigger1 = time>0 && command = "holdback" && command!="holddown" && !fvar(38) && !var(11)
+trigger2 = time>0 && !var(11) && fvar(38) && P2statetype=A
+value = 151
+
+[State 151, 1]
+type = HitVelSet
+trigger1 = Time = 0 && !var(11) && prevstateno!=151
+x = 1
+
+[State 151, 2]
+type = VelSet
+trigger1 = Time = GetHitVar(slidetime)
+trigger2 = HitOver
+trigger3 = var(11)
+x = 0
+
+[State 151, 3]
+type = CtrlSet
+trigger1 = Time = GetHitVar(ctrltime)
+value = 1
+
+[State 120, Hi to Lo]
+type = StateTypeSet
+trigger1 = statetype = S && command = "holddown"&&!fvar(38)
+trigger2 = statetype = S && fvar(33) && !((P2statetype=A && (enemynear,vel Y>-1||enemynear,pos Y<-70))||(P2statetype=A&&enemynear,time>ifelse(fvar(33),15,18))) && fvar(38)
+statetype = C
+physics = C
+
+[State 120, Lo to Hi]
+type = StateTypeSet
+trigger1 = statetype = C && command != "holddown"&&!fvar(38)
+trigger2 = statetype = C && ((P2statetype=A && (enemynear,vel Y>-1||enemynear,pos Y<-70))||(P2statetype=A&&enemynear,time>ifelse(fvar(33),15,18))) && random%7<5 && fvar(38)
+statetype = S
+physics = S
+
+[State 151, 4]
+type = ChangeState
+trigger1 = ifelse(var(11),ifelse(fvar(10)>0&&enemy,numproj=0,var(11)<=0,var(11)<=5),HitOver)
+value = 140
+ctrl = 1
+;---------------------------------------------------------------------------
+; AGUARDHIT (shaking)
+[Statedef 154]
+type    = A
+movetype= H
+physics = N
+velset = 0,0
+
+[State 154, 1]
+type = ChangeAnim
+trigger1 = 1
+value = 152
+
+[State 154, 2]
+type = ChangeState
+trigger1 = HitShakeOver
+value = 155 ;AGUARDHIT2
+
+[State 154, 3]
+type = ForceFeedback
+trigger1 = time = 0
+waveform = square
+time = 4
+
+;---------------------------------------------------------------------------
+; AGUARDHIT2 (knocked away)
+[Statedef 155]
+type    = A
+movetype= H
+physics = N
+anim = 152
+
+[State 155, 1]
+type = HitVelSet
+trigger1 = Time = 0
+x = 1
+;y = 1
+
+[State 155, 2]
+type = VelAdd
+trigger1 = 1
+y = Const(movement.yaccel)
+
+[State 155, 3]
+type = null;CtrlSet
+trigger1 = Time = GetHitVar(ctrltime)
+value = 1
+
+[State 155, 4]
+type = VarSet
+trigger1 = 1
+sysvar(0) = (pos y >= 0) && (vel y > 0)
+
+[State 155, 5]
+type = VelSet
+trigger1 = sysvar(0)
+y = 0
+
+[State 155, 6]
+type = PosSet
+trigger1 = sysvar(0)
+y = 0
+
+[State 155, 6]
+type = null;ChangeState
+trigger1 = sysvar(0)
+trigger1 = command = "holdback"
+trigger1 = inguarddist
+value = 130
+
+[State 155, 6]
+type = ChangeAnim
+trigger1 = Time = GetHitVar(ctrltime)
+value = 142
+
+[State 155, 7]
+type = ChangeState
+trigger1 = sysvar(0)
+value = 52
+
+;相手側吹き飛び用
+;---------------------------------------------------------------------------
+; HITA_SHAKE
+[Statedef 840]
+type    = A
+movetype= H
+physics = N
+velset = 0,0
+
+[State 1000, 0]
+type = HitFallSet
+trigger1 = time = 0
+value = 0
+
+[State 5020, 1] ;Anim for HIT_LIGHT to HIT_HARD
+type = ChangeAnim
+trigger1 = Time = 0
+trigger1 = GetHitVar(animtype) != [3,5]
+value = ifelse((GetHitVar(airtype) = 1),5000,5010) + GetHitVar(animtype)
+
+[State 5020, 2] ;Anim for HIT_BACK
+type = ChangeAnim
+trigger1 = Time = 0
+trigger1 = GetHitVar(animtype) = [3,5]
+value = 5030
+
+[State 5020, 3] ;Anim for HIT_UP/HIT_DIAGUP (only if it exists)
+type = ChangeAnim
+trigger1 = Time = 0
+trigger1 = (GetHitVar(animtype) = [4,5]) && (SelfAnimExist(5047 + GetHitVar(animtype)))
+value = 5047 + GetHitVar(animtype) ;5051 - 4 + type
+
+[State 5020, 4] ;Freeze anim
+type = ChangeAnim
+trigger1 = Time > 0
+value = anim
+
+[State 5020, 5]
+type = ChangeState
+trigger1 = HitShakeOver
+value = 841
+
+[State 5020, FFB Light]
+type = ForceFeedback
+trigger1 = anim = 5000
+trigger2 = anim = 5010
+persistent = 0
+time = 6
+waveform = square
+
+[State 5020, FFB Medium]
+type = ForceFeedback
+trigger1 = anim = 5001
+trigger2 = anim = 5011
+persistent = 0
+time = 8
+waveform = sinesquare
+ampl = 110,-1,-.3
+
+[State 5020, FFB Hard]
+type = ForceFeedback
+trigger1 = anim = 5012
+trigger2 = anim = 5002
+trigger3 = anim = 5030
+trigger4 = anim = [5051,5059]
+persistent = 0
+time = 15
+waveform = sinesquare
+ampl = 140
+;---------------------------------------------------------------------------
+; HITA_UP (initial going up)
+[Statedef 841]
+type    = A
+movetype= H
+physics = N
+ctrl = 0
+
+[State 5030, 1]
+type = VelAdd;Gravity
+trigger1 = 1
+y = GetHitVar(yaccel)
+
+[State 5030, 2]
+type = HitVelSet
+trigger1 = Time = 0
+x = 1
+y = 1
+
+[state 5020]
+type = SelfState
+triggerall = (authorname="rei"||authorname="gal129")&&(fvar(39)=[1,3])&&hitshakeover
+trigger1 = HitOver
+trigger2 = Vel Y > 0    ;Hit ground
+trigger2 = Pos Y >= 10
+value = 5040
+
+[State 5030, 3]
+type = ChangeState
+triggerall = !HitFall
+trigger1 = HitOver
+trigger2 = Vel Y > 0    ;Hit ground
+trigger2 = Pos Y >= 10  ;.
+value = 845 ;HITA_RECOV
+
+[State 5030, 4]
+type = SelfState
+triggerall = HitFall
+trigger1 = HitOver
+trigger2 = Vel Y > 0    ;Hit ground
+trigger2 = Pos Y >= 10  ;.
+value = 5050 ;HITA_FALL
+
+[State 5030, 5]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 842 ;HITA_UP (transition)
+
+;---------------------------------------------------------------------------
+; HITA_UP_T (transition)
+[Statedef 842]
+type    = A
+movetype= H
+physics = N
+
+[State 5035, 1]
+type = ChangeAnim
+trigger1 = Time = 0
+trigger1 = SelfAnimExist(5035)
+trigger1 = Anim != [5051,5059] ;Not if in hit up anim
+trigger1 = Anim != 5090 ;Not if hit off ground anim
+value = 5035
+
+[State 5035, 2]
+type = VelAdd
+trigger1 = 1
+y = GetHitVar(yaccel)
+
+[State 5035, 3]
+type = ChangeState
+triggerall = !HitFall
+trigger1 = HitOver  ;Hit is over
+trigger2 = AnimTime = 0 ;Animation over
+trigger3 = Vel Y > 0    ;Hit ground
+trigger3 = Pos Y >= 10  ;.
+trigger4 = Time = 0     ;No transition anim
+trigger4 = Anim != 5035 ;.
+value = 845 ;HITA_RECOV
+
+[State 5035, 4]
+type = SelfState
+triggerall = HitFall
+trigger1 = HitOver  ;Hit is over
+trigger2 = AnimTime = 0 ;Anim is over
+trigger3 = Vel Y > 0    ;Hit ground
+trigger3 = Pos Y >= 10  ;.
+trigger4 = Time = 0     ;No transition anim
+trigger4 = Anim != 5035 ;.
+value = 5050 ;HITA_FALL
+;---------------------------------------------------------------------------
+; HITA_RECOV (recovering in air, not falling)
+[Statedef 845]
+type    = A
+movetype= H
+physics = N
+
+[State 5040, 1]
+type = SelfState
+trigger1 = !Alive
+value = 5050
+
+[State 5040, 2]
+type = ChangeAnim
+trigger1 = AnimTime = 0
+trigger1 = Anim != 5040
+trigger2 = Time = 0
+trigger2 = Anim != 5035
+value = 5040
+
+[State 5040, 3]
+type = null;CtrlSet
+trigger1 = HitOver
+value = 1
+
+[State 5040, 4]
+type = StateTypeSet
+trigger1 = HitOver
+movetype = I
+
+[State 5040, 4]
+type = NotHitBy
+trigger1 = HitOver
+value = SCA,AA
+
+[State 5040, 5]
+type = VelAdd
+trigger1 = 1
+y = GetHitVar(yaccel)
+
+[State 5040, 6]
+type = SelfState
+trigger1 = Vel Y > 0
+trigger1 = Pos Y >= 0
+value = 52 ;JUMPLAND
+ctrl = 1
+
+;---------------------------------------------------------------------------
+; HIT_TRIP (shaking)
+[Statedef 875]
+type    = A
+movetype= H
+physics = N
+velset = 0,0
+
+[State 5070, 1]
+type = ChangeAnim 
+trigger1 = 1
+value = 5070
+
+[State 5070, 2]
+type = ChangeState
+trigger1 = HitShakeOver
+value = 876
+
+[State 5070, 3]
+type = ForceFeedback
+trigger1 = time = 0
+time = 12
+waveform = sinesquare
+ampl = 140
+
+;---------------------------------------------------------------------------
+; HIT_TRIP2 (fall through air)
+[Statedef 876]
+type    = A
+movetype= H
+physics = N
+
+[State 5071, 1]
+type = HitVelSet
+trigger1 = Time = 0
+x = 1
+y = 1
+
+[State 5071, 2] ;Acceleration
+type = VelAdd
+trigger1 = 1
+y = GetHitVar(yaccel)
+
+[State 5071, 3] ;Hit ground
+trigger1 = Vel Y > 0
+trigger1 = Pos Y >= 15
+type = SelfState
+value = 5110
+;+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-
+;==========相手用==============
+;気絶
+[Statedef 15300]
+type = S
+movetype = I
+physics = S
+ctrl = 0
+velset = 0,0
+anim = 5300
+
+[State 5910,Exit]
+type = SelfState
+trigger1 = time>=144
+value = 0
+ctrl = 1
+
+;気絶
+[Statedef 15310]
+type = A
+movetype = H
+physics = N
+ctrl = 0
+anim = ifelse(GetHitVar(groundtype)=3,5070,ifelse(GetHitVar(animtype)=5&&SelfAnimExist(5052),5052,ifelse(GetHitVar(animtype)=4&&SelfAnimExist(5051),5051,5030)))
+
+[State 5310]
+type = ChangeAnim
+trigger1 = !hitshakeover
+value = Anim
+
+[State 5310]
+type = ChangeAnim
+trigger1 = hitshakeover&&Anim=5030&&AnimTime=0
+value = 5050
+
+[State 5050, 2] ;Coming down anim
+type = ChangeAnim
+triggerall = hitshakeover
+trigger1 = anim = [5050,5059]
+trigger1 = Vel Y >= ifelse(anim = 5050, 1, -2)
+trigger1 = SelfAnimExist(anim+10)
+value = anim+10
+persistent = 0
+
+[State 5310]
+type = VelSet
+trigger1 = hitshakeover
+x = gethitvar(xvel)*ifelse(facing=-1,-1,1)
+y = gethitvar(yvel)
+persistent=0
+
+[State 5300]
+type = NotHitby
+trigger1 = 1
+value = SCA
+
+[State 5300]
+type = VelAdd
+trigger1 = hitshakeover
+y = gethitvar(yaccel)
+
+[State 5300]
+type = SelfState
+trigger1 = Time=1 && ((authorname="rei"||authorname="gal129")&&fvar(39)=1)
+value = 5310
+
+[State 5300]
+type = ChangeState
+trigger1 = Vel Y>0
+trigger1 = Pos Y >= ifelse((anim = [5051,5059]) || (anim = [5061,5069]), 0, 25)
+value = 15320+(gethitvar(groundtype)=3||gethitvar(yvel)>0)*20
+
+;気絶
+[Statedef 15320]
+type = L
+movetype = H
+physics = S
+ctrl = 0
+velset = 0,0
+anim = 5100
+
+[State 5300]
+type = PosSet
+trigger1 = Time=0
+y = 0
+
+;叩きつけ
+[State -2,PlaySnd]
+type = PlaySnd
+trigger1 = Time=0 && (authorname="rei"||authorname="gal129")
+value = 5100,0
+
+[State 5100, 10]
+type = PlaySnd
+trigger1 = Time = 0 && !(authorname="rei"||authorname="gal129")
+value = F7, (sysvar(1) > 5) + (sysvar(1) > 14)
+
+[state 816]
+type = EnvShake
+trigger1 = Time=0
+time = 8
+ampl = 4
+
+[State 5110, 7]
+type = GameMakeAnim
+trigger1 = Time = 0 && prevstateno!=5120
+trigger1 = !SysVar(0)
+value = 60 + (sysvar(1) > 5) + (sysvar(1) > 14)
+pos = 0, 0
+under = sysvar(1) <= 14
+
+[State 5300]
+type = ChangeState
+trigger1 = AnimTime=0
+value = 15330
+
+;---------------------------------------------------------------------------
+; 気絶（バウンド）
+;Dizzy : HIT_BOUNCE (bounce into air)
+[Statedef 15330]
+type    = L
+movetype = H
+physics = N
+
+[State 5300]
+type = NotHitby
+trigger1 = 1
+value = SCA
+
+[State 5101, 1] ;Coming hit ground anim (normal)
+type = ChangeAnim
+trigger1 = time = 0
+value = 5160
+
+[State 5101, 3]
+type = VelSet
+trigger1 = Time = 0
+x = -2.0*ifelse(P2Dist X<=0,-1,1)
+y = -4.0
+
+[State 5101, 4]
+type = PosSet
+trigger1 = Time = 0
+y = 20
+
+[State 5101, 5] ;Acceleration
+type = VelAdd
+trigger1 = 1
+y = .4
+
+[State 5101, 6] ;Hit ground
+trigger1 = Vel Y > 0
+trigger1 = Pos Y >= 12
+type = ChangeState
+value = 15340
+
+;気絶
+[Statedef 15340]
+type = L
+movetype = I
+physics = N
+ctrl = 0
+velset = 0,0
+anim = 5170
+
+[State 1000, 0]
+type = HitFallSet
+trigger1 = anim=5120 && AnimTime=0
+value = 1
+
+;叩きつけ
+[State -2,PlaySnd]
+type = PlaySnd
+trigger1 = Time=0 && (authorname="rei"||authorname="gal129") && fvar(39)=1
+value = 5100,1
+
+;叩きつけ
+[State -2,PlaySnd]
+type = PlaySnd
+trigger1 = Time=0 && prevstateno=15310 && (authorname="rei"||authorname="gal129")
+value = 5100,0
+
+[State 5100, 10]
+type = PlaySnd
+trigger1 = Time = 0 && prevstateno=15310 && !((authorname="rei"||authorname="gal129") && fvar(39)=1)
+value = F7, (sysvar(1) > 5) + (sysvar(1) > 14)
+
+[state 816]
+type = EnvShake
+trigger1 = Time=0 && prevstateno=15310
+time = 8
+ampl = 4
+
+[State 5110, 7]
+type = GameMakeAnim
+trigger1 = Time = 0
+trigger1 = !SysVar(0)
+value = 60 + (sysvar(1) > 5) + (sysvar(1) > 14)
+pos = 0, 0
+under = sysvar(1) <= 14
+
+[State 5300]
+type = NotHitby
+trigger1 = 1
+value = SCA
+
+[State 5300]
+type = ChangeState
+trigger1 = anim=5170 && animTime=0 && !Alive
+value = 5150
+
+[State 5300]
+type = ChangeAnim
+trigger1 = anim=5170 && animTime=0
+value = 5120
+
+[State 5300]
+type = PosSet
+trigger1 = Time=0
+y = 0
+
+[State 5300]
+type = ChangeState
+trigger1 = anim=5120 && AnimTime=0
+value = 15300
+
+;---------------------------------------------------------------------------
+;気絶音
+[Statedef 15390]
+type    = S
+movetype = I
+physics = N
+ctrl = 0
+velset = 0,0
+anim = 8050
+
+[State 1000, Spark]
+type = Explod
+trigger1 = enemynear,hitshakeover
+Anim = 7950+(enemynear,facing=-1)*5
+id = 7950
+pos = 0, enemynear,const(size.head.pos.y)-5
+postype = p2
+sprpriority = 5
+ownpal = 1
+bindtime = -1
+removetime=-1
+ignorehitpause = 1
+scale = .5,.5
+facing=ifelse(enemynear,facing=-1,-1,1)
+persistent=0
+
+[State 1000, Spark]
+type = Explod
+trigger1 = enemynear,hitshakeover
+Anim = 7951+(enemynear,facing=-1)*5
+id = 7950
+pos = 0, enemynear,const(size.head.pos.y)-5
+postype = p2
+sprpriority = -5
+ownpal = 1
+bindtime = -1
+removetime=-1
+ignorehitpause = 1
+facing=ifelse(enemynear,facing=-1,-1,1)
+scale = .5,.5
+persistent=0
+
+[State -2]
+type = PlaySnd
+trigger1 = P2stateno=15320 && !(authorname="rei"||authorname="gal129")
+value = 5100,0
+persistent=0
+
+[State -2]
+type = PlaySnd
+trigger1 = P2stateno=15340 && !(authorname="rei"||authorname="gal129")
+value = 5100,1
+persistent=0
+
+[State -3,Varset]
+type = varSet
+trigger1 = time=0
+var(8)=ifelse(enemynear,authorname="Warusaki3"&&enemynear,fvar(39)=1,enemynear,var(20),ifelse(enemynear,authorname="H”",enemynear,var(30),ifelse((enemynear,authorname="rei"||enemynear,authorname="gal129"),enemynear,var(59),3)))
+
+;気絶耐久値増加
+[State 3001, Super]
+type = parentvaradd
+trigger1 = time=0 && (root,fvar(25)-floor(root,fvar(25)))<.997
+fvar(25) = .003
+
+[State -2]
+type = PlaySnd
+trigger1 = P2stateno=15300 && (var(8)<=2||var(8)=6)
+value = 5300,0
+persistent=35
+channel = 9
+
+[State -2]
+type = PlaySnd
+trigger1 = P2stateno=15300 && (var(8)=[3,5])
+value = 5300,1
+persistent=0
+
+[State 1000, Spark]
+type = RemoveExplod
+trigger1 = P2stateno!=[15300,15340]
+id = 7950
+
+[State 5300,PlaySnd]
+type = StopSnd
+trigger1 = P2stateno!=[15300,15340]
+channel = 9
+
+[State 4110, DestroySelf]
+type = DestroySelf
+trigger1 = P2stateno!=[15300,15340]
+
+;---------------------------------------------------------------------------
+;気絶ヒット数
+[Statedef 15395]
+type    = S
+movetype = I
+physics = N
+ctrl = 0
+velset = 0,0
+anim = 8050
+
+[State 4110, DestroySelf]
+type = varset
+trigger1 = Time=0
+var(16) = root,var(16)
+
+[State 4110, DestroySelf]
+type = parentvarset
+trigger1 = 1
+var(16) = var(16)
+ignorehitpause=1
+
+[State 4110, DestroySelf]
+type = parentvaradd
+trigger1 = root,movehit=1
+var(16) = 1
+ignorehitpause=1
+
+[State 4110, DestroySelf]
+type = DestroySelf
+trigger1 = (P2stateno!=[15300,15340]) && !((P2stateno=[5300,5350])&&(enemynear,authorname="rei"||enemynear,authorname="gal129")&&enemynear,fvar(39)=1)
+ignorehitpause=1
+
+;|||||||||||||||||||||||
+;相手側ガードクラッシュ
+;|||||||||||||||||||||||
+;---------------------------------------------------------------------------
+;相手側ガードクラッシュ（立ち）
+[Statedef 15910]
+type    = S
+movetype = I
+physics = N
+ctrl = 0
+velset = 0,0
+
+[state 15910]
+type = ChangeAnim
+trigger1 = time=0
+value = 5002
+
+[state 15910]
+type = ChangeAnim
+trigger1 = time>0&&animtime=-1&(anim=[5000,5029])
+value = anim
+elem = AnimElemNo(0)
+
+[state 15910]
+type = ChangeAnim
+trigger1 = time=37
+value = 5007
+
+[state 15910]
+type = ChangeAnim
+trigger1 = time=0
+trigger1 = SelfAnimExist(5910)
+value = 5910
+
+[state 15910]
+type = ChangeAnim
+trigger1 = time=37
+trigger1 = SelfAnimExist(5911)
+value = 5911
+
+[state 831]
+type = PlaySND
+trigger1 = time=0&&(authorname="rei"||authorname="gal129")&&fvar(39)=1
+value = 5910,1
+channel = 1
+
+[state 831]
+type = PlaySND
+trigger1 = time=0&&authorname="rei"&&name="cvsbalrog"
+value = 5000,2
+channel = 1
+
+[state 831]
+type = PlaySND
+trigger1 = time=0&&authorname="rei"&&name="cvsurien"
+value = 5950,0
+channel = 1
+
+[state 15910]
+type = SelfState
+trigger1 = time=48
+value = 0
+ctrl = 1
+
+;---------------------------------------------------------------------------
+;相手側ガードクラッシュ（立ち開始）
+[Statedef 15915]
+type = S
+movetype=I
+physics = N
+ctrl = 0
+velset = 0,0
+anim = 150
+
+[state 15910]
+type = SelfState
+trigger1 = (authorname="rei"||authorname="gal129")&&fvar(39)=1
+value = 5915
+
+[state 15910]
+type = ChangeState
+trigger1 = !enemynear,hitpausetime
+value = 15910
+;---------------------------------------------------------------------------
+;相手側ガードクラッシュ（屈）
+[Statedef 15920]
+type    = C
+movetype = I
+physics = N
+ctrl = 0
+velset = 0,0
+
+[state 15910]
+type = PosSet
+trigger1 = time=0
+y = 0
+
+[state 15910]
+type = ChangeAnim
+trigger1 = time=0
+value = 5022
+
+[state 15910]
+type = ChangeAnim
+trigger1 = time>0&&animtime=-1&(anim=[5000,5029])
+value = anim
+elem = AnimElemNo(0)
+
+[state 15910]
+type = ChangeAnim
+trigger1 = time=37
+value = 5027
+
+[state 15910]
+type = ChangeAnim
+trigger1 = time=0
+trigger1 = SelfAnimExist(5920)
+value = 5920
+
+[state 15910]
+type = ChangeAnim
+trigger1 = time=37
+trigger1 = SelfAnimExist(5921)
+value = 5921
+
+[state 831]
+type = PlaySND
+trigger1 = time=0&&(authorname="rei"||authorname="gal129")&&fvar(39)=1&&prevstateno!=15930
+value = 5910,1
+channel = 1
+
+[state 831]
+type = PlaySND
+trigger1 = time=0&&authorname="rei"&&name="cvsbalrog"&&prevstateno!=15930
+value = 5000,2
+channel = 1
+
+[state 831]
+type = PlaySND
+trigger1 = time=0&&authorname="rei"&&name="cvsurien"&&prevstateno!=15930
+value = 5950,0
+channel = 1
+
+[state 15910]
+type = SelfState
+trigger1 = time=48
+value = 11
+ctrl = 1
+
+;---------------------------------------------------------------------------
+;相手側ガードクラッシュ（屈開始）
+[Statedef 15925]
+type    = C
+movetype = H
+physics = N
+ctrl = 0
+velset = 0,0
+anim = 151
+
+[state 15910]
+type = SelfState
+trigger1 = (authorname="rei"||authorname="gal129")&&fvar(39)=1
+value = 5925
+
+[state 15910]
+type = ChangeState
+trigger1 = !enemynear,hitpausetime
+value = 15920
+;---------------------------------------------------------------------------
+;相手側ガードクラッシュ（空中）
+[Statedef 15930]
+type    = A
+movetype = I
+physics = N
+ctrl = 0
+velset = 0,0
+
+[state 15910]
+type = ChangeAnim
+trigger1 = time=0
+value = 5002
+
+[state 15910]
+type = ChangeAnim
+trigger1 = time>0&&animtime=-1&(anim=[5000,5029])
+value = anim
+elem = AnimElemNo(0)
+
+[state 15910]
+type = ChangeAnim
+trigger1 = time=0
+trigger1 = SelfAnimExist(5930)
+value = 5930
+
+[state 831]
+type = PlaySND
+trigger1 = time=0&&(authorname="rei"||authorname="gal129")&&fvar(39)=1
+value = 5910,1
+channel = 1
+
+[state 831]
+type = PlaySND
+trigger1 = time=0&&authorname="rei"&&name="cvsbalrog"
+value = 5000,2
+channel = 1
+
+[state 831]
+type = PlaySND
+trigger1 = time=0&&authorname="rei"&&name="cvsurien"
+value = 5950,0
+channel = 1
+
+[state 15910]
+type = VelAdd
+trigger1 = 1
+y = .5
+
+[state 15910]
+type = ChangeState
+trigger1 = time>0 && vel Y>0 && Pos Y>=0
+value = 15920
+
+;---------------------------------------------------------------------------
+;相手側ガードクラッシュ（空中開始）
+[Statedef 15935]
+type    = A
+movetype = H
+physics = N
+ctrl = 0
+velset = 0,0
+anim = 152
+
+[state 15910]
+type = SelfState
+trigger1 = (authorname="rei"||authorname="gal129")&&fvar(39)=1
+value = 5935
+
+[state 15910]
+type = ChangeState
+trigger1 = !enemynear,hitpausetime
+value = 15930
+;---------------------------------------------------------------------------
+;自分側ガードクラッシュ用（相手側のヒットバック無効化）
+[Statedef 15940]
+type    = S
+movetype = I
+physics = N
+ctrl = 0
+velset = 0,0
+anim = 15925
+
+[state 15940]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+
+[state 15940]
+type = PlayerPush
+trigger1 = 1
+value = 1
+
+[state 15940]
+type = PosSet
+trigger1 = time=0
+x = floor(enemynear,pos x)
+
+[state 15940]
+type = PosAdd
+trigger1 = time=0
+x = -enemynear,const(size.ground.back)-const(size.ground.front)
+
+[state 15940]
+type = VelSet
+trigger1 = var(2)
+x = ifelse(ifelse(facing=-1,enemynear,screenpos x<var(1),enemynear,screenpos x>var(1)),0,abs(enemynear,pos x-var(0)))
+
+[state 15940]
+type = varset
+trigger1 = 1
+var(0) = floor(enemynear,pos x)
+
+[state 15940]
+type = varset
+trigger1 = 1
+var(1) = floor(enemynear,screenpos x)
+
+[state 15940]
+type = varadd
+trigger1 = var(2)
+var(2) = 1
+
+[state 15940]
+type = varset
+trigger1 = !enemynear,hitpausetime&&!var(2)
+var(2) = 1
+
+[state 15940]
+type = PosAdd
+trigger1 = var(2)=1
+x = 8
+persistent=0
+
+[state 15940]
+type = PosAdd
+trigger1 = var(2)=10
+x = 10
+
+[state 15940]
+type = destroyself
+trigger1 = var(2)>10
+trigger2 = var(2)&&enemynear,hitpausetime
+;^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+;コモンステート
+;---------------------------------------------------------------------------
+; HITG_SHAKE
+[Statedef 5000]
+type    = S
+movetype= H
+physics = N
+velset = 0,0
+
+[State 5000, 1] ;Anim for HIT_LIGHT to HIT_HARD
+type = ChangeAnim
+trigger1 = Time = 0
+trigger1 = GetHitVar(animtype) != [3,5]
+value = ifelse((GetHitVar(groundtype) = 1),5000,5010) + GetHitVar(animtype)
+
+[State 5000, 2] ;Anim for HIT_BACK
+type = ChangeAnim
+trigger1 = Time = 0
+trigger1 = GetHitVar(animtype) = [3,5]
+value = 5030
+
+[State 5000, 3] ;Anim for HIT_UP/HIT_DIAGUP (only if it exists)
+type = ChangeAnim
+trigger1 = Time = 0
+trigger1 = (GetHitVar(animtype) = [4,5]) && (SelfAnimExist(5047 + GetHitVar(animtype)))
+value = 5047 + GetHitVar(animtype) ;5051 - 4 + type
+
+[State 5030, 4]
+type = ChangeAnim
+trigger1 = time=0 && GetHitVar(animtype)=4
+trigger1 = Abs(gethitvar(xvel))>2
+value = 5051
+elem = 2
+
+[State 5020, 4] ;Freeze anim
+type = ChangeAnim
+trigger1 = Time > 0
+value = anim
+elem = ifelse(GetHitVar(animtype)=4&&Abs(gethitvar(xvel))>2,2,1)
+
+[State 5000, 5] ;State type gets set to aerial if getting hit up
+type = StateTypeSet
+trigger1 = Time = 0
+trigger1 = GetHitVar(yvel) != 0 || GetHitVar(fall)
+trigger2 = Pos Y != 0
+statetype = a
+
+[State 5000, 6]
+type = ChangeState
+trigger1 = HitShakeOver
+trigger1 = GetHitVar(yvel) = 0 && !GetHitVar(fall)
+value = 5001 ;HITG_SLIDE
+
+[State 5000, 7]
+type = ChangeState
+trigger1 = HitShakeOver
+value = 5030
+
+[State 5000, FFB Light]
+type = ForceFeedback
+trigger1 = anim = 5000
+trigger2 = anim = 5010
+persistent = 0
+time = 6
+waveform = square
+
+[State 5000, FFB Medium]
+type = ForceFeedback
+trigger1 = anim = 5001
+trigger2 = anim = 5011
+persistent = 0
+time = 8
+waveform = sinesquare
+ampl = 110,-1,-.3
+
+[State 5000, FFB Hard]
+type = ForceFeedback
+trigger1 = anim = 5012
+trigger2 = anim = 5002
+trigger3 = anim = 5030
+persistent = 0
+time = 15
+waveform = sinesquare
+ampl = 140
+;---------------------------------------------------------------------------
+; HITC_SHAKE
+[Statedef 5010]
+type    = C
+movetype= H
+physics = N
+velset = 0,0
+
+[State 5010, 1] ;Anim for HIT_LIGHT to HIT_HARD
+type = ChangeAnim
+trigger1 = Time = 0
+trigger1 = GetHitVar(animtype) != [3,5]
+value = 5020 + GetHitVar(animtype)
+
+[State 5010, 2] ;Anim for HIT_BACK
+type = ChangeAnim
+trigger1 = Time = 0
+trigger1 = GetHitVar(animtype) = [3,5]
+value = 5030
+
+[State 5010, 3] ;Anim for HIT_UP/HIT_DIAGUP (only if it exists)
+type = ChangeAnim
+trigger1 = Time = 0
+trigger1 = (GetHitVar(animtype) = [4,5]) && (SelfAnimExist(5047 + GetHitVar(animtype)))
+value = 5047 + GetHitVar(animtype) ;5051 - 4 + type
+
+[State 5030, 4]
+type = ChangeAnim
+trigger1 = time=0 && GetHitVar(animtype)=4
+trigger1 = Abs(gethitvar(xvel))>2
+value = 5051
+elem = 2
+
+[State 5020, 4] ;Freeze anim
+type = ChangeAnim
+trigger1 = Time > 0
+value = anim
+elem = ifelse(GetHitVar(animtype)=4&&Abs(gethitvar(xvel))>2,2,1)
+
+[State 5010, 5] ;State type gets set to aerial if getting hit up
+type = StateTypeSet
+triggerall = Time = 0
+trigger1 = GetHitVar(yvel) != 0 || GetHitVar(fall)
+trigger2 = Pos Y != 0
+statetype = a
+
+[State 5010, 6]
+type = ChangeState
+trigger1 = HitShakeOver
+trigger1 = GetHitVar(yvel) = 0 && !GetHitVar(fall)
+value = 5011 ;HITC_SLIDE
+
+[State 5010, 7]
+type = ChangeState
+trigger1 = HitShakeOver
+value = 5030
+
+[State 5010, FFB Light]
+type = ForceFeedback
+trigger1 = anim = 5020
+persistent = 0
+time = 6
+waveform = square
+
+[State 5010, FFB Medium]
+type = ForceFeedback
+trigger1 = anim = 5021
+persistent = 0
+time = 8
+waveform = sinesquare
+ampl = 110,-1,-.3
+
+[State 5010, FFB Hard]
+type = ForceFeedback
+trigger1 = anim = 5022
+persistent = 0
+time = 15
+waveform = sinesquare
+ampl = 140
+
+;---------------------------------------------------------------------------
+; HIT_BOUNCE (hit ground)
+[Statedef 5100]
+type    = L
+movetype= H
+physics = N
+
+[State 5100, 1]
+type = VelSet
+trigger1 = Time = 0
+trigger1 = GetHitVar(fall.yvel) = 0
+trigger1 = vel x > 1
+x = 1
+
+[State 5100, EnvShake]
+type = FallEnvShake
+trigger1 = Time = 0
+
+[State 5100, Var] ;Save fall velocity
+type = VarSet
+trigger1 = Time = 0
+sysvar(1) = floor(vel y)
+
+[State 5100, 2] ;Hit ground anim (normal)
+type = ChangeAnim
+triggerall = time = 0
+trigger1 = (anim != [5051,5059]) && (anim != [5061,5069])
+trigger2 = !SelfAnimExist(5100 + (anim % 10))
+value = 5100
+
+[State 5100, 3] ;Hit ground anim (for hit up)
+type = ChangeAnim
+trigger1 = time = 0
+trigger1 = (anim = [5051,5059]) || (anim = [5061,5069])
+trigger1 = SelfAnimExist(5100 + (anim % 10))
+value = 5100 + (anim % 10)
+
+[State 5100, 4]
+type = PosSet
+trigger1 = Time = 0
+y = 0
+
+[State 5100, 5]
+type = VelSet
+trigger1 = Time = 0
+y = 0
+
+[State 5100, 6] ;Reduce speed
+type = VelMul
+trigger1 = Time = 0
+x = 0.75
+
+[State 5110, 6]
+type = PlaySnd
+trigger1 = Time = 0
+value = 5100, 0
+
+[state 816]
+type = EnvShake
+trigger1 = Time=0
+time = 8
+ampl = 4
+
+[State 100, Explod]
+type = Explod
+trigger1 = Time=0
+Anim = 7910
+pos = 0, 0
+postype = p1
+ownpal = 1
+bindtime = 1
+pausemovetime = -1
+supermove = 1
+ignorehitpause = 1
+sprpriority = -2
+scale = 1,1
+
+[State 5100, 7]
+type = ChangeState
+trigger1 = Time = 0
+trigger1 = GetHitVar(fall.yvel) = 0
+value = 5110 ;HIT_LIEDOWN
+
+[State 5100, 8]
+type = null;GameMakeAnim
+trigger1 = Time = 1
+value = 60 + (sysvar(1) > 5) + (sysvar(1) > 14)
+pos = 0, 0
+under = sysvar(1) <= 14
+
+[State 5100, 9]
+type = HitFallDamage
+trigger1 = Time = 3
+
+[State 5100, 10]
+type = null;PlaySnd
+trigger1 = Time = 1
+value = F7, (sysvar(1) > 5) + (sysvar(1) > 14)
+
+[State 5100, 11]
+type = PosFreeze
+trigger1 = 1
+
+[State 5100, 12]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 5101
+
+[State 5100, 13]
+type = ForceFeedback
+trigger1 = Time = 0
+waveform = sinesquare
+ampl = 128,-3,-.2,.005
+time = 20
+;---------------------------------------------------------------------------
+; HIT_LIEDOWN
+[Statedef 5110]
+type    = L
+movetype= H
+physics = N
+
+[state -3,varset]
+type = varset
+trigger1 = time=0&&(prevstateno=[5100,5101])
+fvar(11)=1
+
+[state -3,varset]
+type = varset
+trigger1 = time=0&&prevstateno!=5120
+var(1)=0
+
+[state -3,varset]
+type = varset
+trigger1 = time=0&&prevstateno!=5120
+var(2)=0
+
+[state -3,varset]
+type = varAdd
+trigger1 = 1
+var(2)=1
+
+[State 5110, EnvShake]
+type = FallEnvShake
+trigger1 = Time = 0 && prevstateno!=5120
+
+[State 5110, 1] ;For hit up/up-diag type (from state 5081)
+type = ChangeAnim
+persistent = 0
+trigger1 = SelfAnimExist(5110 + (anim % 10))
+trigger1 = anim = [5081,5089]
+value = 5110 + (anim % 10)
+
+[State 5110, 2] ;Hit ground anim (normal)
+type = ChangeAnim
+triggerall = time = 0 && prevstateno!=5120
+triggerall = anim != [5110,5119] ;Not already changed anim
+trigger1 = anim != [5161,5169]
+trigger2 = !SelfAnimExist(5170 + (anim % 10))
+value = 5170
+
+[State 5110, 3] ;Hit ground anim (for hit up)
+type = ChangeAnim
+triggerall = time = 0 && prevstateno!=5120
+triggerall = anim != [5110,5119] ;Not already changed anim
+trigger1 = anim = [5161,5169]
+trigger1 = SelfAnimExist(5170 + (anim % 10))
+value = 5170 + (anim % 10)
+
+[State 5110, 4]
+type = HitFallDamage
+trigger1 = Time = 0
+
+[State 5110, 5]
+type = PosSet
+trigger1 = Time = 0
+y = 0
+
+[State 5110, Var] ;Get fall velocity
+type = VarSet
+trigger1 = Time = 0
+trigger1 = GetHitVar(fall.yvel) != 0
+sysvar(1) = floor(vel y)
+
+[State 5110, 6]
+type = null;PlaySnd
+trigger1 = Time = 0
+trigger1 = !SysVar(0)
+value = F7, (sysvar(1) > 5) + (sysvar(1) > 14)
+
+[State 5110, 6]
+type = PlaySnd
+trigger1 = Time = 0 && prevstateno!=5120
+value = 5100, (prevstateno=5101)
+
+[State 5110, 6]
+type = PlaySnd
+trigger1 = Anim=5170 && AnimTime=0 && gethitvar(airtype)=3
+value = 5100, 1
+
+[state 816]
+type = EnvShake
+trigger1 = Time=0 && Prevstateno=5071
+time = 8
+ampl = 4
+
+[State 5110, 7]
+type = null;GameMakeAnim
+trigger1 = Time = 0
+trigger1 = !SysVar(0)
+value = 60 + (sysvar(1) > 5) + (sysvar(1) > 14)
+pos = 0, 0
+under = sysvar(1) <= 14
+
+[State 100, Explod]
+type = Explod
+trigger1 = Time=0 && Prevstateno=5071
+Anim = 7910
+pos = 0, 0
+postype = p1
+ownpal = 1
+bindtime = 1
+pausemovetime = -1
+supermove = 1
+ignorehitpause = 1
+sprpriority = -2
+scale = 1,1
+
+[State 5110, 8]
+type = VelSet
+trigger1 = Time = 0
+y = 0
+
+[State 5110, 9] ;For hit up type
+type = ChangeAnim
+persistent = 0
+triggerall = anim = [5171,5179]
+triggerall = SelfAnimExist(5110 + (anim % 10))
+trigger1 = AnimTime = 0
+trigger2 = SysVar(0) ;SysVar(0) = 1 avoids hit ground anim
+value = 5110 + (anim % 10)
+
+[State 5110, 10] ;For normal
+type = ChangeAnim
+persistent = 0
+triggerall = Anim != [5111,5119]
+trigger1 = AnimTime = 0
+trigger2 = SysVar(0) ;SysVar(0) = 1 avoids hit ground frame
+value = 5110
+
+[State 5110, 11] ;If just died
+type = ChangeState
+triggerall = !alive
+trigger1 = AnimTime = 0
+trigger2 = SysVar(0) ;SysVar(0) = 1 avoids hit ground frame
+trigger3 = Anim = [5110,5119]
+value = 5150
+
+[State 5110, 12]
+type = VarSet
+trigger1 = SysVar(0)
+trigger1 = Time = 0
+sysvar(0) = 0
+
+[State 5110, 13] ;Friction
+type = VelMul
+trigger1 = 1
+x = 0.85
+
+[State 5110, 14]
+type = ForceFeedback
+trigger1 = alive
+trigger1 = Time = 0
+time = 3
+ampl = 240
+waveform = sine
+
+[State 5110, 15]
+type = ForceFeedback
+trigger1 = !alive
+trigger1 = Time = 0
+ampl = 200, 7, -.467
+time = 30
+waveform = sine
+
+[State 50, AfterImage]
+type = AfterImage
+trigger1 = (var(2)=[1,2]) && var(1)
+time = 99
+PalBright = 1,1,1
+PalContrast = 128,128,128
+PalAdd = 0,0,0
+PalMul = .5,.5,.5
+length = 9
+trans = add1
+TimeGap  = 2
+FrameGap = 4
+;---------------------------------------------------------------------------
+;起き上がり
+; HIT_GETUP
+[Statedef 5120]
+type    = L
+movetype= I
+physics = N
+
+[state -3,varset]
+type = varset
+trigger1 = time=0&&prevstateno!=5110
+var(1)=0
+
+[state -3,varset]
+type = varSet
+trigger1 = time>0 && var(1)<2
+var(2)=0
+
+[state -3,varset]
+type = ChangeState
+triggerall = time=0 && prevstateno=5110
+trigger1 = var(2)<(const(data.liedown.time)) && !var(1)
+trigger2 = var(2)<(const(data.liedown.time)+12) && var(1)
+value = 5110
+
+[State 5120, 1a] ;Get up anim (normal)
+type = ChangeAnim
+triggerall = time = 0
+trigger1 = anim != [5111,5119]
+trigger2 = !SelfAnimExist(5120 + (anim % 10))
+value = 5120
+
+[State 5120, 1b] ;Get up anim (for hit up/diag-up)
+type = ChangeAnim
+triggerall = time = 0
+trigger1 = anim = [5111,5119]
+trigger1 = SelfAnimExist(5120 + (anim % 10))
+value = 5120 + (anim % 10)
+
+[State 5120, 2]
+type = VelSet
+trigger1 = Time = 0
+x = 0
+
+[State 5120, 3]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+time = 1
+
+[State 5120, 4]
+type = HitFallSet
+trigger1 = AnimTime = 0
+value = 1
+
+[State 5120, 5] ;Can't be thrown right after getting up
+type = NotHitBy
+trigger1 = AnimTime = 0
+value = , NT,ST,HT
+time = 5;12
+
+[State 5120, 6] ;Can't be hit right after getting up (short time)
+type = NotHitBy
+trigger1 = AnimTime = 0
+value2 = SCA
+time = 1;3
+
+[State 5120, 7]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;~~~~~~~~ガードクラッシュ・気絶ON/OFF設定画面~~~~~
+[statedef 8099]
+anim = 8050
+velset = 0,0
+
+[State 1000, Spark]
+type = RemoveExplod
+trigger1 = time=0
+
+[State 1000, Spark]
+type = Explod
+trigger1 = !NumExplod(8094)
+Anim = 8094
+id = 8094
+pos = 15+(teamside=2)*110, 105
+postype = back
+ownpal = 1
+bindtime = -1
+pausemovetime = -1
+removetime= -1
+ignorehitpause = 1
+scale = .5,.5
+ontop = 1
+sprpriority = 4
+facing = ifelse(teamside=1,1,-1)
+
+[State 1000, Spark]
+type = Explod
+trigger1 = !NumExplod(8099)
+Anim = 8099
+id = 8099
+pos = 30+(teamside=2)*80, 125
+postype = back
+ownpal = 1
+bindtime = -1
+pausemovetime = -1
+removetime= -1
+ignorehitpause = 1
+scale = .5,.5
+ontop = 1
+sprpriority = 4
+facing = ifelse(teamside=1,1,-1)
+
+[State 1000, Spark]
+type = Explod
+trigger1 = !NumExplod(8098)
+Anim = 8098
+id = 8098
+pos = 30+(teamside=2)*80, 145
+postype = back
+ownpal = 1
+bindtime = -1
+pausemovetime = -1
+removetime= -1
+ignorehitpause = 1
+scale = .5,.5
+ontop = 1
+sprpriority = 4
+facing = ifelse(teamside=1,1,-1)
+
+[State 1000, Spark]
+type = Explod
+trigger1 = !NumExplod(8097)
+Anim = 8097
+id = 8097
+pos = 60+(teamside=2)*20, 110
+postype = back
+ownpal = 1
+bindtime = -1
+pausemovetime = -1
+removetime= -1
+ignorehitpause = 1
+scale = .5,.5
+ontop = 1
+sprpriority = 4
+facing = ifelse(teamside=1,1,-1)
+
+[State 1000, Spark]
+type = Explod
+trigger1 = !NumExplod(8096)
+Anim = 8096
+id = 8096
+pos = 20+(teamside=2)*100, 110
+postype = back
+ownpal = 1
+bindtime = -1
+pausemovetime = -1
+removetime= -1
+ignorehitpause = 1
+scale = .5,.5
+ontop = 1
+sprpriority = 4
+facing = ifelse(teamside=1,1,-1)
+
+[State 1000, Spark]
+type = Explod
+trigger1 = !NumExplod(8095)
+Anim = 8095
+id = 8095
+pos = 22+(teamside=2)*95, 125+ifelse(fvar(0)=1,20,0)
+postype = back
+ownpal = 1
+bindtime = -1
+pausemovetime = -1
+removetime= -1
+ignorehitpause = 1
+scale = .5,.5
+ontop = 1
+sprpriority = 5
+facing = ifelse(teamside=1,1,-1)
+
+[State 900,PlaySnd]
+type = PlaySnd
+triggerall = time > 1
+trigger1 = root,command="back"||root,command="fwd"||root,command="down"||root,command="up"
+value = 8000, 0
+
+[state 30000,varset]
+type = varset
+trigger1 = time=0&&prevstateno!=8098
+fvar(0) = floor(root,fvar(20))
+
+[state 30000,varset]
+type = varset
+trigger1 = time=0&&prevstateno!=8098
+fvar(1) = (root,fvar(20)-floor(root,fvar(20)))*10
+
+[state 30000,varset]
+type = varset
+triggerall = time > 1
+trigger1 = parent,command="up"||parent,command="down"
+fvar(0) = ifelse(parent,command="up",ifelse(!fvar(0),1,0),ifelse(fvar(0)=1,0,1))
+
+[state 30000,varset]
+type = parentvarset
+trigger1 = time>1
+fvar(20) = fvar(0)+fvar(1)*.1
+
+[State 4110, DestroySelf]
+type = ModifyExplod
+triggerall = time > 1 && numexplod(8095)
+trigger1 = parent,command="up"||parent,command="down"
+id = 8095
+pos = 22+(teamside=2)*95, 125+ifelse(fvar(0)=1,20,0)
+postype = back
+facing = ifelse(teamside=1,1,-1)
+
+[State 4110, DestroySelf]
+type = RemoveExplod
+triggerall = time > 1
+trigger1 = roundstate=2
+trigger2 = numpartner
+trigger2 = ID-partner,ID>0 &&(partner,authorname="rei"||partner,authorname="gal129")&&partner,fvar(39)=1
+trigger3 = root,command="s"||root,command="x"||root,command="y"||root,command="z"||root,command="a"||root,command="b"||root,command="c"
+
+[State 4110, DestroySelf]
+type = DestroySelf
+triggerall = time > 1
+trigger1 = roundState=2
+trigger2 = numpartner
+trigger2 = ID-partner,ID>0 &&(partner,authorname="rei"||partner,authorname="gal129")&&partner,fvar(39)=1
+trigger3 = root,command="s"||root,command="x"||root,command="y"||root,command="z"||root,command="a"||root,command="b"||root,command="c"
+
+[state 8099]
+type = changeState
+triggerall = time>1
+trigger1 = root,command="back"||root,command="fwd"
+value = 8098
+
+[statedef 8098]
+anim = 8050
+velset = 0,0
+
+[State 1000, Spark]
+type = RemoveExplod
+trigger1 = time=0
+
+[State 1000, Spark]
+type = Explod
+trigger1 = !NumExplod(8094)
+Anim = 8094
+id = 8094
+pos = 15+(teamside=2)*110, 105
+postype = back
+ownpal = 1
+bindtime = -1
+pausemovetime = -1
+removetime= -1
+ignorehitpause = 1
+scale = .5,.5
+ontop = 1
+sprpriority = 4
+facing = ifelse(teamside=1,1,-1)
+
+[State 1000, Spark]
+type = Explod
+trigger1 = !NumExplod(8099)
+Anim = 8099
+id = 8099
+pos = 80-(teamside=2)*20, 125
+postype = back
+ownpal = 1
+bindtime = -1
+pausemovetime = -1
+removetime= -1
+ignorehitpause = 1
+scale = .5,.5
+ontop = 1
+sprpriority = 4
+facing = ifelse(teamside=1,1,-1)
+
+[State 1000, Spark]
+type = Explod
+trigger1 = !NumExplod(8098)
+Anim = 8098
+id = 8098
+pos = 80-(teamside=2)*20, 145
+postype = back
+ownpal = 1
+bindtime = -1
+pausemovetime = -1
+removetime= -1
+ignorehitpause = 1
+scale = .5,.5
+ontop = 1
+sprpriority = 4
+facing = ifelse(teamside=1,1,-1)
+
+[State 1000, Spark]
+type = Explod
+trigger1 = !NumExplod(8097)
+Anim = 8097
+id = 8097
+pos = 60+(teamside=2)*20, 110
+postype = back
+ownpal = 1
+bindtime = -1
+pausemovetime = -1
+removetime= -1
+ignorehitpause = 1
+scale = .5,.5
+ontop = 1
+sprpriority = 4
+facing = ifelse(teamside=1,1,-1)
+
+[State 1000, Spark]
+type = Explod
+trigger1 = !NumExplod(8096)
+Anim = 8096
+id = 8096
+pos = 20+(teamside=2)*100, 110
+postype = back
+ownpal = 1
+bindtime = -1
+pausemovetime = -1
+removetime= -1
+ignorehitpause = 1
+scale = .5,.5
+ontop = 1
+sprpriority = 4
+facing = ifelse(teamside=1,1,-1)
+
+[State 1000, Spark]
+type = Explod
+trigger1 = !NumExplod(8095)
+Anim = 8095
+id = 8095
+pos = 72-(teamside=2)*5, 125+ifelse(fvar(1)=1,20,0)
+postype = back
+ownpal = 1
+bindtime = -1
+pausemovetime = -1
+removetime= -1
+ignorehitpause = 1
+scale = .5,.5
+ontop = 1
+sprpriority = 5
+facing = ifelse(teamside=1,1,-1)
+
+[State 900,PlaySnd]
+type = PlaySnd
+triggerall = time > 1
+trigger1 = root,command="back"||root,command="fwd"||root,command="down"||root,command="up"
+value = 8000, 0
+
+[state 30000,varset]
+type = varset
+triggerall = time > 1
+trigger1 = parent,command="up"||parent,command="down"
+fvar(1) = ifelse(parent,command="up",ifelse(!fvar(1),1,0),ifelse(fvar(1)=1,0,1))
+
+[state 30000,varset]
+type = parentvarset
+trigger1 = time>1
+fvar(20) = fvar(0)+fvar(1)*.1
+
+[State 4110, DestroySelf]
+type = ModifyExplod
+triggerall = time > 1 && numexplod(8095)
+trigger1 = parent,command="up"||parent,command="down"
+id = 8095
+pos = 72-(teamside=2)*5, 125+ifelse(fvar(1)=1,20,0)
+postype = back
+facing = ifelse(teamside=1,1,-1)
+
+[State 0, DisplayToClipboard]
+type = DisplayToClipboard
+trigger1 = 1
+text = "fvar(1) = %f  Numhelper = %d  P2bodydist X = %d  P2bodydist Y = %d Dizzies = %d"
+params = fvar(1), Numhelper, ceil(P2bodydist X), ceil(P2bodydist Y), var(47)
+ignorehitpause =1
+
+[State 4110, DestroySelf]
+type = RemoveExplod
+triggerall = time > 1
+trigger1 = roundState=2
+trigger2 = numpartner
+trigger2 = ID-partner,ID>0 &&(partner,authorname="rei"||partner,authorname="gal129")&&partner,fvar(39)=1
+trigger3 = root,command="s"||root,command="x"||root,command="y"||root,command="z"||root,command="a"||root,command="b"||root,command="c"
+
+[State 4110, DestroySelf]
+type = DestroySelf
+triggerall = time > 1
+trigger1 = roundState=2
+trigger2 = numpartner
+trigger2 = ID-partner,ID>0 &&(partner,authorname="rei"||partner,authorname="gal129")&&partner,fvar(39)=1
+trigger3 = root,command="s"||root,command="x"||root,command="y"||root,command="z"||root,command="a"||root,command="b"||root,command="c"
+
+[state 8099]
+type = changeState
+triggerall = time>1
+trigger1 = root,command="back"||root,command="fwd"
+value = 8099
+
+;||||||||||||||||||||||||||||||||||||||||||||||
+;グルーヴゲージ
+;||||||||||||||||||||||||||||||||||||||||||||||
+
+;Ｃグルーヴゲージ表示
+[Statedef 8200]
+ctrl = 0
+anim = 8050
+velset = 0,0
+
+[State, Bench UI Sweep]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611]
+trigger2 = roundstate > 2
+trigger3 = !root,alive
+ignorehitpause = 1
+
+[State, Bench UI Restore]
+type = ChangeState
+trigger1 = roundstate <= 2
+trigger1 = !(root,stateno = [6565610, 6565611])
+trigger1 = root,alive
+trigger1 = numexplod(8209) = 0
+trigger1 = time > 0
+value = stateno
+ignorehitpause = 1
+
+[State 8100, PosSet]
+type = ParentVarSet
+trigger1 = Time=0
+var(59) = 0
+
+;ゲージ背景
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8209)
+anim = 8203
+id = 8209
+postype = Back
+pos = 139,223
+ownpal = 1
+bindtime = -1
+ignorehitpause = 1
+ontop = 1
+pausemovetime = -1
+supermovetime = -1
+scale = 1,1
+
+;LV1
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8201); && Parent,Power<1000
+trigger1 = teamside=1
+anim = 8201
+id = 8201
+postype = Back
+pos = 141,227
+ownpal = 1
+bindtime = -1
+ignorehitpause = 1
+ontop = 1
+removetime = -1
+pausemovetime = -1
+supermovetime = -1
+scale = 1,5
+
+;LV1
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8201); && Parent,Power<1000
+trigger1 = teamside=2
+anim = 8201
+id = 8201
+postype = Back
+pos = 141,227
+ownpal = 1
+bindtime = -1
+ignorehitpause = 1
+ontop = 1
+removetime = -1
+pausemovetime = -1
+supermovetime = -1
+scale = 1,5
+
+;LV1
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8202); && Parent,Power>=1000
+trigger1 = teamside=1
+anim = 8202
+id = 8202
+postype = Back
+pos = 140,226
+ownpal = 1
+bindtime = -1
+ignorehitpause = 1
+ontop = 1
+removetime = -1
+pausemovetime = -1
+supermovetime = -1
+scale = 1,5
+
+;LV1
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8202); && Parent,Power>=1000
+trigger1 = teamside=2
+anim = 8202
+id = 8202
+postype = Back
+pos = 140,226
+ownpal = 1
+bindtime = -1
+ignorehitpause = 1
+ontop = 1
+removetime = -1
+pausemovetime = -1
+supermovetime = -1
+scale = 1,5
+
+;LV2
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8203); && (Parent,Power=[1000,1999])
+trigger1 = teamside=1
+anim = 8201
+id = 8203
+postype = Back
+pos = 97,225
+ownpal = 1
+bindtime = -1
+ignorehitpause = 1
+ontop = 1
+removetime = -1
+pausemovetime = -1
+supermovetime = -1
+scale = 1,6
+
+;LV2
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8203); && (Parent,Power=[1000,1999])
+trigger1 = teamside=2
+anim = 8201
+id = 8203
+postype = Back
+pos = 97,225
+ownpal = 1
+bindtime = -1
+ignorehitpause = 1
+ontop = 1
+removetime = -1
+pausemovetime = -1
+supermovetime = -1
+scale = 1,6
+
+;LV2
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8204); && Parent,Power>=2000
+trigger1 = teamside=1
+anim = 8202
+id = 8204
+postype = Back
+pos = 97,225
+ownpal = 1
+bindtime = -1
+ignorehitpause = 1
+ontop = 1
+removetime = -1
+pausemovetime = -1
+supermovetime = -1
+scale = 1,6
+
+;LV2
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8204); && Parent,Power>=2000
+trigger1 = teamside=2
+anim = 8202
+id = 8204
+postype = Back
+pos = 97,225
+ownpal = 1
+bindtime = -1
+ignorehitpause = 1
+ontop = 1
+removetime = -1
+pausemovetime = -1
+supermovetime = -1
+scale = 1,6
+
+;LV3
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8205)
+trigger1 = teamside=1
+anim = 8201
+id = 8205
+postype = Back
+pos = 56,223
+ownpal = 1
+bindtime = -1
+ignorehitpause = 1
+ontop = 1
+removetime = -1
+pausemovetime = -1
+supermovetime = -1
+scale = 1,8
+
+;LV3
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8205)
+trigger1 = teamside=2
+anim = 8201
+id = 8205
+postype = Back
+pos = 55,223
+ownpal = 1
+bindtime = -1
+ignorehitpause = 1
+ontop = 1
+removetime = -1
+pausemovetime = -1
+supermovetime = -1
+scale = 1,8
+
+;LV3
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8206)
+trigger1 = teamside=1
+anim = 8202
+id = 8206
+postype = Back
+pos = 54,223
+ownpal = 1
+bindtime = -1
+ignorehitpause = 1
+ontop = 1
+removetime = -1
+pausemovetime = -1
+supermovetime = -1
+scale = 1,8
+
+;LV3
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8206)
+trigger1 = teamside=2
+anim = 8202
+id = 8206
+postype = Back
+pos = 54,223
+ownpal = 1
+bindtime = -1
+ignorehitpause = 1
+ontop = 1
+removetime = -1
+pausemovetime = -1
+supermovetime = -1
+scale = 1,8
+
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = teamside = 1 && !NumExplod(8200)
+anim = 8200
+id = 8200
+postype = Left
+pos = 9,218
+ownpal = 1
+bindtime = -1
+ignorehitpause = 1
+ontop = 1
+facing = 1
+pausemovetime = -1
+supermovetime = -1
+scale = .5, .5
+
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = teamside = 2 && !NumExplod(8200)
+anim = 8205
+id = 8200
+postype = Right
+pos = -145,218
+ownpal = 1
+bindtime = -1
+ignorehitpause = 1
+ontop = 1
+facing = 1
+pausemovetime = -1
+supermovetime = -1
+scale = .5, .5
+
+;LV1
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8300)
+trigger1 = teamside=1
+anim = 8300
+id = 8300
+postype = Left
+pos = 12,216
+ownpal = 1
+bindtime = -1
+ignorehitpause = 1
+ontop = 1
+facing = 1
+pausemovetime = -1
+supermovetime = -1
+scale = .5,.5
+
+;LV1
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8300)
+trigger1 = teamside=2
+anim = 8305
+id = 8300
+postype = Right
+pos = -38,216
+ownpal = 1
+bindtime = -1
+ignorehitpause = 1
+ontop = 1
+facing = 1
+pausemovetime = -1
+supermovetime = -1
+scale = .5,.5
+
+;LV2
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8301)
+trigger1 = teamside=1
+anim = 8301
+id = 8301
+postype = Left
+pos = 12,216
+ownpal = 1
+bindtime = -1
+ignorehitpause = 1
+ontop = 1
+facing = 1
+pausemovetime = -1
+supermovetime = -1
+scale = .5,.5
+
+;LV2
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8301)
+trigger1 = teamside=2
+anim = 8306
+id = 8301
+postype = Right
+pos = -38,216
+ownpal = 1
+bindtime = -1
+ignorehitpause = 1
+ontop = 1
+facing = 1
+pausemovetime = -1
+supermovetime = -1
+scale = .5,.5
+
+;LV3
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8302)
+trigger1 = teamside=1
+anim = 8302
+id = 8302
+postype = Left
+pos = 12,216
+ownpal = 1
+bindtime = -1
+ignorehitpause = 1
+ontop = 1
+facing = 1
+pausemovetime = -1
+supermovetime = -1
+scale = .5,.5
+
+;LV3
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8302)
+trigger1 = teamside=2
+anim = 8307
+id = 8302
+postype = Right
+pos = -38,216
+ownpal = 1
+bindtime = -1
+ignorehitpause = 1
+ontop = 1
+facing = 1
+pausemovetime = -1
+supermovetime = -1
+scale = .5,.5
+
+;EX-Groove
+[State 1000, Spark]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8165) && teamside=1 && root,fvar(37)
+Anim = 8165
+pos = 99, 217
+postype = left
+id = 8165
+ownpal = 1
+bindtime = -1
+pausemovetime = -1
+supermovetime = -1
+removetime=-1
+ignorehitpause = 1
+ontop=1
+scale = .5,.5
+facing = 1
+
+[State 1000, Spark]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8165) && teamside=2 && root,fvar(37)
+Anim = 8165
+pos = -145, 217
+postype = Right
+id = 8165
+ownpal = 1
+bindtime = -1
+pausemovetime = -1
+supermovetime = -1
+removetime=-1
+ontop=1
+ignorehitpause = 1
+scale = 1,5
+facing = 1
+
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+triggerall = Parent,power<1000
+trigger1 = NumExplod(8201)
+Id = 8201
+scale = (Parent,power)/1000.0,5
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+triggerall = Parent,power>=1000
+trigger1 = NumExplod(8201)
+Id = 8201
+scale = 1,5
+ignorehitpause = 1
+
+[state 8200, ModifyExplod3]
+type = ModifyExplod
+triggerall = Parent,power<1000
+trigger1 = NumExplod(8203)
+Id = 8203
+scale = 0,0
+ignorehitpause = 1
+
+[state 8200, ModifyExplod3]
+type = ModifyExplod
+triggerall = Parent,power = [1000,1999]
+trigger1 = NumExplod(8203)
+Id = 8203
+scale = ((Parent,power)-1000)/1000.0,6
+ignorehitpause = 1
+
+[state 8200, ModifyExplod3]
+type = ModifyExplod
+triggerall = Parent,power>=2000
+trigger1 = NumExplod(8203)
+Id = 8203
+scale = 1,6
+ignorehitpause = 1
+
+[state 8200, ModifyExplod3]
+type = ModifyExplod
+triggerall = Parent,power<2000
+trigger1 = NumExplod(8205)
+Id = 8205
+scale = 0,0
+ignorehitpause = 1
+
+[state 8200, ModifyExplod3]
+type = ModifyExplod
+triggerall = Parent,power = [2000,2999]
+trigger1 = NumExplod(8205)
+Id = 8205
+scale = ((Parent,power)-2000)/1000.0,8
+ignorehitpause = 1
+
+[state 8200, ModifyExplod3]
+type = ModifyExplod
+triggerall = Parent,power>=3000
+trigger1 = NumExplod(8205)
+Id = 8205
+scale = 1,8
+ignorehitpause = 1
+
+[state 8200, ModifyExplod]
+type = ModifyExplod
+triggerall = parent,power < 1000
+trigger1 = NumExplod(8202)
+Id = 8202
+scale = 0,0
+ignorehitpause = 1
+
+[state 8200, ModifyExplod]
+type = ModifyExplod
+triggerall = parent,power >= 1000
+trigger1 = NumExplod(8202)
+Id = 8202
+scale = 1,5
+ignorehitpause = 1
+
+[state 8200, ModifyExplod]
+type = ModifyExplod
+triggerall = Parent,power < 2000
+trigger1 = NumExplod(8204)
+Id = 8204
+scale = 0,0
+ignorehitpause = 1
+
+[state 8200, ModifyExplod]
+type = ModifyExplod
+triggerall = parent,power >= 2000
+trigger1 = NumExplod(8204)
+Id = 8204
+scale = 1,6
+ignorehitpause = 1
+
+[state 8200, ModifyExplod]
+type = ModifyExplod
+triggerall = Parent,power < 3000
+trigger1 = NumExplod(8206)
+Id = 8206
+scale = 0,0
+ignorehitpause = 1
+
+[state 8200, ModifyExplod]
+type = ModifyExplod
+triggerall = parent,power >= 3000
+trigger1 = NumExplod(8206)
+Id = 8206
+scale = 1,8
+ignorehitpause = 1
+
+[state 8200, ModifyExplod]
+type = ModifyExplod
+triggerall = parent,power < 1000 || Parent,Power>=2000
+trigger1 = NumExplod(8300)
+Id = 8300
+scale = 0,0
+ignorehitpause = 1
+
+[state 8200, ModifyExplod]
+type = ModifyExplod
+triggerall = parent,power=[1000,1999]
+trigger1 = NumExplod(8300)
+Id = 8300
+scale = .5,.5
+ignorehitpause = 1
+
+[state 8200, ModifyExplod]
+type = ModifyExplod
+triggerall = parent,power < 2000 || Parent,Power>=3000
+trigger1 = NumExplod(8301)
+Id = 8301
+scale = 0,0
+ignorehitpause = 1
+
+[state 8200, ModifyExplod]
+type = ModifyExplod
+triggerall = parent,power=[2000,2999]
+trigger1 = NumExplod(8301)
+Id = 8301
+scale = .5,.5
+ignorehitpause = 1
+
+[state 8200, ModifyExplod]
+type = ModifyExplod
+triggerall = parent,power < 3000
+trigger1 = NumExplod(8302)
+Id = 8302
+scale = 0,0
+ignorehitpause = 1
+
+[state 8200, ModifyExplod]
+type = ModifyExplod
+triggerall = parent,power >= 3000
+trigger1 = NumExplod(8302)
+Id = 8302
+scale = .5,.5
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8200)
+Id = 8200
+scale = .5,.5
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8165)
+Id = 8165
+scale = .5,.5
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = varset
+trigger1 = Power<1000
+var(2)=-1
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = varset
+trigger1 = Power>=1000 && var(2)=-1
+var(2)=1
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = PlaySnd
+trigger1 = Power>=1000 && var(2)=1
+value = 8200,0
+channel = 20
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = varset
+trigger1 = Power>=1000 && var(2)=1
+var(2) = 0
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = varset
+trigger1 = Power<2000
+var(3)=-1
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = varset
+trigger1 = Power>=2000 && var(3)=-1
+var(3)=1
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = StopSnd
+trigger1 = Power>=2000 && var(3)=1
+channel = 20
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = PlaySnd
+trigger1 = Power>=2000 && var(3)=1
+value = 8200,0
+channel = 20
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = varset
+trigger1 = Power>=2000 && var(3)=1
+var(3) = 0
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = varset
+trigger1 = Power<3000
+var(4)=-1
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = varset
+trigger1 = Power>=3000 && var(4)=-1
+var(4)=1
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = StopSnd
+trigger1 = Power>=3000 && var(4)=1
+channel = 20
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = PlaySnd
+trigger1 = Power>=3000 && var(4)=1
+value = 8200,0
+channel = 20
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = varset
+trigger1 = Power>=3000 && var(4)=1
+var(4) = 0
+ignorehitpause = 1
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;Aグルーヴゲージ表示
+[Statedef 8210]
+ctrl = 0
+anim = 8050
+velset = 0,0
+
+[State, Bench UI Sweep]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611]
+trigger2 = roundstate > 2
+trigger3 = !root,alive
+ignorehitpause = 1
+
+[State, Bench UI Restore]
+type = ChangeState
+trigger1 = roundstate <= 2
+trigger1 = !(root,stateno = [6565610, 6565611])
+trigger1 = root,alive
+trigger1 = numexplod(8219) = 0
+trigger1 = time > 0
+value = stateno
+ignorehitpause = 1
+
+[State 8100, PosSet]
+type = ParentVarSet
+trigger1 = Time=0
+var(59) = 1
+
+;ゲージ背景
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8219)
+anim = 8213
+id = 8219
+postype = Back
+pos = 141,222
+ownpal = 1
+bindtime = -1
+ignorehitpause = 1
+ontop = 1
+pausemovetime = -1
+supermovetime = -1
+scale = 1,1
+
+;LV1
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8214)
+trigger1 = teamside=1
+anim = 8212
+id = 8214
+postype = Back
+pos = 140,227
+ownpal = 0
+bindtime = -1
+ignorehitpause = 1
+ontop = 1
+pausemovetime = -1
+supermovetime = -1
+scale = 1,1
+
+;LV1
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8214)
+trigger1 = teamside=2
+anim = 8212
+id = 8214
+postype = Back
+pos = 139,227
+ownpal = 0
+bindtime = -1
+ignorehitpause = 1
+ontop = 1
+pausemovetime = -1
+supermovetime = -1
+scale = 1,1
+
+;LV1(1)
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8211)
+trigger1 = teamside=1
+anim = 8211
+id = 8211
+postype = Back
+pos = 138,225
+ownpal = 0
+bindtime = -1
+ignorehitpause = 1
+ontop = 1
+pausemovetime = -1
+supermovetime = -1
+scale = 1,1
+
+;LV1(1)
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8211)
+trigger1 = teamside=2
+anim = 8211
+id = 8211
+postype = Back
+pos = 137,225
+ownpal = 0
+bindtime = -1
+ignorehitpause = 1
+ontop = 1
+pausemovetime = -1
+supermovetime = -1
+scale = 1,1
+
+;LV1
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8212)
+trigger1 = teamside=1
+anim = 8212
+id = 8212
+postype = Back
+pos = 83,223
+ownpal = 0
+bindtime = -1
+ignorehitpause = 1
+ontop = 1
+pausemovetime = -1
+supermovetime = -1
+scale = 1,1
+
+;LV1
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8212)
+trigger1 = teamside=2
+anim = 8212
+id = 8212
+postype = Back
+pos = 83,223
+ownpal = 0
+bindtime = -1
+ignorehitpause = 1
+ontop = 1
+pausemovetime = -1
+supermovetime = -1
+scale = 1,1
+
+;LV1(2)
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8213)
+trigger1 = teamside=1
+anim = 8211
+id = 8213
+postype = Back
+pos = 74,221
+ownpal = 0
+bindtime = -1
+ignorehitpause = 1
+ontop = 1
+pausemovetime = -1
+supermovetime = -1
+scale = 1,1
+
+;LV1(2)
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8213)
+trigger1 = teamside=2
+anim = 8211
+id = 8213
+postype = Back
+pos = 73,221
+ownpal = 0
+bindtime = -1
+ignorehitpause = 1
+ontop = 1
+pausemovetime = -1
+supermovetime = -1
+scale = 1,1
+
+[State 8210, PalFX]
+type = PalFX
+trigger1 = time=0
+time = 1
+add = 0,0,0
+ignorehitpause = 1
+
+[State 8210, PalFX]
+type = PalFX
+triggerall = (GameTime%3)=0
+trigger1 = Parent,Power >= 3000 && Parent,var(21)=0
+trigger2 = Parent,StateNo = [2400,2450]
+time = 1
+add = 256,256,256
+ignorehitpause = 1
+
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = teamside = 1 && !NumExplod(8210)
+anim = 8210
+id = 8210
+postype = Left
+pos = 12,218
+ownpal = 1
+bindtime = -1
+ignorehitpause = 1
+ontop = 1
+facing = 1
+pausemovetime = -1
+supermovetime = -1
+scale = .5,.5
+
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = teamside = 2 && !NumExplod(8210)
+anim = 8215
+id = 8210
+postype = Right
+pos = -145,218
+ownpal = 1
+bindtime = -1
+ignorehitpause = 1
+ontop = 1
+facing = 1
+pausemovetime = -1
+supermovetime = -1
+scale = .5,.5
+
+;FULL_1P
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8310)
+trigger1 = teamside = 1
+anim = 8310
+id = 8310
+postype = Left
+pos = 14,223
+ownpal = 1
+bindtime = -1
+ignorehitpause = 1
+ontop = 1
+facing = 1
+removetime = -1
+pausemovetime = -1
+supermovetime = -1
+scale = .5,.5
+
+;FULL_1P
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8310)
+trigger1 = teamside = 2
+anim = 8310
+id = 8310
+postype = Right
+pos = -48,223
+ownpal = 1
+bindtime = -1
+ignorehitpause = 1
+ontop = 1
+facing = 1
+removetime = -1
+pausemovetime = -1
+supermovetime = -1
+scale = .5,.5
+
+;EX-Groove
+[State 1000, Spark]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8165) && teamside=1 && root,fvar(37)
+Anim = 8165
+pos = 100, 218
+postype = left
+id = 8165
+ownpal = 1
+bindtime = -1
+pausemovetime = -1
+supermovetime = -1
+removetime=-1
+ignorehitpause = 1
+ontop=1
+scale = .5,.5
+facing = 1
+
+[State 1000, Spark]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8165) && teamside=2 && root,fvar(37)
+Anim = 8165
+pos = -145, 218
+postype = Right
+id = 8165
+ownpal = 1
+bindtime = -1
+pausemovetime = -1
+supermovetime = -1
+removetime=-1
+ontop=1
+ignorehitpause = 1
+scale = .5,.5
+facing = 1
+
+[state 8200, ModifyExplod]
+type = ModifyExplod
+triggerall = parent,power=0
+trigger1 = NumExplod(8214)
+Id = 8214
+scale = 0,0
+ignorehitpause = 1
+
+[state 8200, ModifyExplod]
+type = ModifyExplod
+triggerall = (parent,power=[1, 95]) && Parent,var(21)=0
+trigger1 = NumExplod(8214)
+Id = 8214
+scale = (Parent,Power)/148.0,.9
+ignorehitpause = 1
+
+[state 8200, ModifyExplod]
+type = ModifyExplod
+triggerall = parent,power>=96 && Parent,var(21)=0
+trigger1 = NumExplod(8214)
+Id = 8214
+scale = .685,.9
+ignorehitpause = 1
+
+[state 8200, ModifyExplod]
+type = ModifyExplod
+triggerall = parent,power<97 && Parent,var(21)=0
+trigger1 = NumExplod(8211)
+Id = 8211
+scale = 0,0
+ignorehitpause = 1
+
+[state 8200, ModifyExplod]
+type = ModifyExplod
+triggerall = (parent,power=[97,1349]) && Parent,var(21)=0
+trigger1 = NumExplod(8211) && teamside=1
+Id = 8211
+scale = (Parent,Power-97)/1410.0,1
+ignorehitpause = 1
+
+[state 8200, ModifyExplod]
+type = ModifyExplod
+triggerall = (parent,power=[97,1349]) && Parent,var(21)=0
+trigger1 = NumExplod(8211) && teamside=2
+Id = 8211
+scale = (Parent,Power-97)/1440.0,1
+ignorehitpause = 1
+
+[state 8200, ModifyExplod]
+type = ModifyExplod
+triggerall = parent,power>=1350 && Parent,var(21)=0
+trigger1 = NumExplod(8211) && teamside=1
+Id = 8211
+scale = .89,1
+ignorehitpause = 1
+
+[state 8200, ModifyExplod]
+type = ModifyExplod
+triggerall = parent,power>=1350 && Parent,var(21)=0
+trigger1 = NumExplod(8211) && teamside=2
+Id = 8211
+scale = .87,1
+ignorehitpause = 1
+
+[state 8200, ModifyExplod]
+type = ModifyExplod
+triggerall = parent,power<1350 && Parent,var(21)=0
+trigger1 = NumExplod(8212)
+Id = 8212
+scale = 0,0
+ignorehitpause = 1
+
+[state 8200, ModifyExplod]
+type = ModifyExplod
+triggerall = (parent,power= [1350,1648]) && Parent,var(21)=0
+trigger1 = NumExplod(8212) && teamside=1
+Id = 8212
+scale = (Parent,Power-1350)/99.0,1.5
+ignorehitpause = 1
+
+[state 8200, ModifyExplod]
+type = ModifyExplod
+triggerall = (parent,power= [1350,1648]) && Parent,var(21)=0
+trigger1 = NumExplod(8212) && teamside=2
+Id = 8212
+scale = (Parent,Power-1350)/110.0,1.5
+ignorehitpause = 1
+
+[state 8200, ModifyExplod]
+type = ModifyExplod
+triggerall = parent,power >= 1649 && Parent,var(21)=0
+trigger1 = NumExplod(8212) && teamside=1
+Id = 8212
+scale = 3.01,1.5
+ignorehitpause = 1
+
+[state 8200, ModifyExplod]
+type = ModifyExplod
+triggerall = parent,power >= 1649 && Parent,var(21)=0
+trigger1 = NumExplod(8212) && teamside=2
+Id = 8212
+scale = 2.70,1.5
+ignorehitpause = 1
+
+[state 8200, ModifyExplod]
+type = ModifyExplod
+triggerall = parent,power < 1650 && Parent,var(21)=0
+trigger1 = NumExplod(8213)
+Id = 8213
+scale = 0,0
+ignorehitpause = 1
+
+[state 8200, ModifyExplod]
+type = ModifyExplod
+triggerall = (parent,power = [1650,2999]) && Parent,var(21)=0
+trigger1 = NumExplod(8213)
+Id = 8213
+scale = (Parent,Power-1650)/1425.0,1
+ignorehitpause = 1
+
+[state 8200, ModifyExplod]
+type = ModifyExplod
+triggerall = parent,power >= 3000 && Parent,var(21)=0
+trigger1 = NumExplod(8213)
+Id = 8213
+scale = .95,1
+ignorehitpause = 1
+
+;-------------------------
+;オリコン中
+
+[state 8200, ModifyExplod]
+type = ModifyExplod
+triggerall = Parent,var(21)=1 && Parent,var(56)<11
+trigger1 = NumExplod(8214)
+Id = 8214
+scale = (Parent,var(56))/17.70,.9
+ignorehitpause = 1
+
+[state 8200, ModifyExplod]
+type = ModifyExplod
+triggerall = Parent,var(21)=1 && Parent,var(56)>=11
+trigger1 = NumExplod(8214)
+Id = 8214
+scale = .685,.9
+ignorehitpause = 1
+
+[state 8200, ModifyExplod]
+type = ModifyExplod
+triggerall = Parent,var(21)=1 && Parent,var(56)>=11
+trigger1 = NumExplod(8214) && roundstate=4
+Id = 8214
+scale = 0,0
+ignorehitpause = 1
+
+[state 8200, ModifyExplod]
+type = ModifyExplod
+triggerall = Parent,var(21)=1 && Parent,var(56)<11
+trigger1 = NumExplod(8211)
+Id = 8211
+scale = 0,0
+ignorehitpause = 1
+
+[state 8200, ModifyExplod]
+type = ModifyExplod
+triggerall = Parent,var(21)=1 && (Parent,var(56)=[11,159])
+trigger1 = NumExplod(8211) && teamside=1
+Id = 8211
+scale = (Parent,var(56)-11)/167.001,1
+ignorehitpause = 1
+
+[state 8200, ModifyExplod]
+type = ModifyExplod
+triggerall = Parent,var(21)=1 && (Parent,var(56)=[11,159])
+trigger1 = NumExplod(8211) && teamside=2
+Id = 8211
+scale = (Parent,var(56)-11)/172.001,1
+ignorehitpause = 1
+
+[state 8200, ModifyExplod]
+type = ModifyExplod
+triggerall = Parent,var(21)=1 && Parent,var(56)>=160
+trigger1 = NumExplod(8211) && teamside=1
+Id = 8211
+scale = .88,1
+ignorehitpause = 1
+
+[state 8200, ModifyExplod]
+type = ModifyExplod
+triggerall = Parent,var(21)=1 && Parent,var(56)>=160
+trigger1 = NumExplod(8211) && teamside=2
+Id = 8211
+scale = .86,1
+ignorehitpause = 1
+
+[state 8200, ModifyExplod]
+type = ModifyExplod
+triggerall = Parent,var(21)=1 && Parent,var(56)>=160
+trigger1 = NumExplod(8211) && roundstate=4
+Id = 8211
+scale = 0,0
+ignorehitpause = 1
+
+[state 8200, ModifyExplod]
+type = ModifyExplod
+triggerall = Parent,var(21)=1 && Parent,var(56)<160
+trigger1 = NumExplod(8212)
+Id = 8212
+scale = 0,0
+ignorehitpause = 1
+
+[state 8200, ModifyExplod]
+type = ModifyExplod
+triggerall = Parent,var(21)=1 && (Parent,var(56)=[160,183])
+trigger1 = NumExplod(8212) && teamside=1
+Id = 8212
+scale = (Parent,var(56)-160)/7.5,1.5
+ignorehitpause = 1
+
+[state 8200, ModifyExplod]
+type = ModifyExplod
+triggerall = Parent,var(21)=1 && (Parent,var(56)=[160,183])
+trigger1 = NumExplod(8212) && teamside=2
+Id = 8212
+scale = (Parent,var(56)-160)/8.5,1.5
+ignorehitpause = 1
+
+[state 8200, ModifyExplod]
+type = ModifyExplod
+triggerall = Parent,var(21)=1 && Parent,var(56)>=184
+trigger1 = NumExplod(8212) && teamside=1
+Id = 8212
+scale = 3.0,1.5
+ignorehitpause = 1
+
+[state 8200, ModifyExplod]
+type = ModifyExplod
+triggerall = Parent,var(21)=1 && Parent,var(56)>=184
+trigger1 = NumExplod(8212) && teamside=2
+Id = 8212
+scale = 2.7,1.5
+ignorehitpause = 1
+
+[state 8200, ModifyExplod]
+type = ModifyExplod
+triggerall = Parent,var(21)=1 && Parent,var(56)>=184
+trigger1 = NumExplod(8212) && roundstate=4
+Id = 8212
+scale = 0,0
+ignorehitpause = 1
+
+[state 8200, ModifyExplod]
+type = ModifyExplod
+triggerall = Parent,var(21)=1 && Parent,var(56)<184
+trigger1 = NumExplod(8213)
+Id = 8213
+scale = 0,0
+ignorehitpause = 1
+
+[state 8200, ModifyExplod]
+type = ModifyExplod
+triggerall = Parent,var(21)=1 && Parent,var(56)>184
+trigger1 = NumExplod(8213)
+Id = 8213
+scale = (Parent,var(56)-184)/179.701,1
+ignorehitpause = 1
+
+[state 8200, ModifyExplod]
+type = ModifyExplod
+triggerall = Parent,var(21)=1 && Parent,var(56)>184
+trigger1 = NumExplod(8213) && roundstate=4
+Id = 8213
+scale = 0,0
+ignorehitpause = 1
+
+[state 8200, ModifyExplod]
+type = ModifyExplod
+triggerall = ((parent,power < 3000 && Parent,var(21)=0) ||(Parent,var(21)=1 && Parent,var(56)<354))
+trigger1 = NumExplod(8310)
+Id = 8310
+scale = 0,0
+ignorehitpause = 1
+
+[state 8200, ModifyExplod]
+type = ModifyExplod
+triggerall = ((parent,power >= 3000 && Parent,var(21)=0) ||(Parent,var(21)=1 && Parent,var(56)>=354))
+trigger1 = NumExplod(8310)
+Id = 8310
+scale = .5,.5
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8200)
+Id = 8210
+scale = .5,.5
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8165)
+Id = 8165
+scale = .5,.5
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = varset
+trigger1 = Power<1500
+var(2)=-1
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = varset
+trigger1 = Power>=1500 && var(2)=-1
+var(2)=1
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = StopSnd
+trigger1 = Power>=1500 && var(2)=1
+channel = 20
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = PlaySnd
+trigger1 = Power>=1500 && var(2)=1
+value = 8200,0
+channel = 20
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = varset
+trigger1 = Power>=1500 && var(2)=1
+var(2) = 0
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = varset
+trigger1 = Power<3000
+var(4)=-1
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = varset
+trigger1 = Power>=3000 && var(4)=-1
+var(4)=1
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = StopSnd
+trigger1 = Power>=3000 && var(4)=1
+channel = 20
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = PlaySnd
+trigger1 = Power>=3000 && var(4)=1
+value = 8200,0
+channel = 20
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = varset
+trigger1 = Power>=3000 && var(4)=1
+var(4) = 0
+ignorehitpause = 1
+;==========================
+;==========================
+;Pグルーヴゲージ表示
+[Statedef 8220]
+ctrl = 0
+anim = 8050
+velset = 0,0
+
+[State, Bench UI Sweep]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611]
+trigger2 = roundstate > 2
+trigger3 = !root,alive
+ignorehitpause = 1
+
+[State, Bench UI Restore]
+type = ChangeState
+trigger1 = roundstate <= 2
+trigger1 = !(root,stateno = [6565610, 6565611])
+trigger1 = root,alive
+trigger1 = numexplod(8229) = 0
+trigger1 = time > 0
+value = stateno
+ignorehitpause = 1
+
+[State 8100, PosSet]
+type = ParentVarSet
+trigger1 = Time=0
+var(59) = 2
+
+;ゲージ背景
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8229)
+anim = 8226
+id = 8229
+postype = Back
+pos = 141,221
+ownpal = 1
+bindtime = -1
+ignorehitpause = 1
+ontop = 1
+pausemovetime = -1
+supermovetime = -1
+scale = 1,1
+
+;ゲージ1
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8221)
+trigger1 = teamside=1
+anim = 8221
+id = 8221
+postype = Back
+pos = 141,227
+ownpal = 1
+bindtime = -1
+removetime = -1
+ignorehitpause = 1
+ontop = 1
+pausemovetime = -1
+supermovetime = -1
+scale = 1,1
+
+;ゲージ1
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8221)
+trigger1 = teamside=2
+anim = 8221
+id = 8221
+postype = Back
+pos = 142,227
+ownpal = 1
+bindtime = -1
+removetime = -1
+ignorehitpause = 1
+ontop = 1
+pausemovetime = -1
+supermovetime = -1
+scale = 1,1
+
+;ゲージ2
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8222)
+trigger1 = teamside=1
+anim = 8222
+id = 8222
+postype = Back
+pos = 138,224
+ownpal = 1
+bindtime = -1
+removetime = -1
+ignorehitpause = 1
+ontop = 1
+pausemovetime = -1
+supermovetime = -1
+scale = 1,1
+
+;ゲージ2
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8222)
+trigger1 = teamside=2
+anim = 8222
+id = 8222
+postype = Back
+pos = 138,224
+ownpal = 1
+bindtime = -1
+removetime = -1
+ignorehitpause = 1
+ontop = 1
+pausemovetime = -1
+supermovetime = -1
+scale = 1,1
+
+;ゲージ3
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8223)
+trigger1 = teamside=1
+anim = 8223
+id = 8223
+postype = Back
+pos = 36,222
+ownpal = 1
+bindtime = -1
+removetime = -1
+ignorehitpause = 1
+ontop = 1
+pausemovetime = -1
+supermovetime = -1
+scale = 1,1
+
+;ゲージ3
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8223)
+trigger1 = teamside=2
+anim = 8223
+id = 8223
+postype = Back
+pos = 35,222
+ownpal = 1
+bindtime = -1
+removetime = -1
+ignorehitpause = 1
+ontop = 1
+pausemovetime = -1
+supermovetime = -1
+scale = 1,1
+
+;ゲージMAX
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8224)
+trigger1 = teamside=1
+anim = 8224
+id = 8224
+postype = Back
+pos = 140,221
+ownpal = 1
+bindtime = -1
+removetime = -1
+ignorehitpause = 1
+ontop = 1
+pausemovetime = -1
+supermovetime = -1
+scale = 1,1
+
+;ゲージMAX
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8224)
+trigger1 = teamside=2
+anim = 8224
+id = 8224
+postype = Back
+pos = 141,221
+ownpal = 1
+bindtime = -1
+removetime = -1
+ignorehitpause = 1
+ontop = 1
+pausemovetime = -1
+supermovetime = -1
+scale = 1,1
+
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = teamside = 1 && !NumExplod(8220)
+anim = 8220
+id = 8220
+postype = Left
+pos = 145,218
+ownpal = 1
+bindtime = -1
+ignorehitpause = 1
+ontop = 1
+facing = 1
+pausemovetime = -1
+supermovetime = -1
+scale = .5,.5
+
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = teamside = 2 && !NumExplod(8220)
+anim = 8225
+id = 8220
+postype = Right
+pos = -145,218
+ownpal = 1
+bindtime = -1
+ignorehitpause = 1
+ontop = 1
+facing = 1
+pausemovetime = -1
+supermovetime = -1
+scale = .5, .5
+
+;ゲージMAX
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8320)
+trigger1 = teamside=1
+anim = 8320
+id = 8320
+postype = Left
+pos = 16,217
+ownpal = 1
+bindtime = -1
+ignorehitpause = 1
+ontop = 1
+facing = 1
+pausemovetime = -1
+supermovetime = -1
+scale = 1,1
+
+;ゲージMAX
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8320)
+trigger1 = teamside=2
+anim = 8320
+id = 8320
+postype = Right
+pos = -52,217
+ownpal = 1
+bindtime = -1
+ignorehitpause = 1
+ontop = 1
+facing = 1
+pausemovetime = -1
+supermovetime = -1
+scale = 1,1
+
+;EX-Groove
+[State 1000, Spark]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8165) && teamside=1 && root,fvar(37)
+Anim = 8165
+pos = 100, 218
+postype = left
+id = 8165
+ownpal = 1
+bindtime = -1
+pausemovetime = -1
+supermovetime = -1
+removetime=-1
+ignorehitpause = 1
+ontop=1
+scale = .5,.5
+facing = 1
+
+[State 1000, Spark]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8165) && teamside=2 && root,fvar(37)
+Anim = 8165
+pos = -146, 218
+postype = Right
+id = 8165
+ownpal = 1
+bindtime = -1
+pausemovetime = -1
+supermovetime = -1
+removetime=-1
+ontop=1
+ignorehitpause = 1
+scale = .5,.5
+facing = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+triggerall = Parent,power>=3000 || Parent,Power<=31
+trigger1 = NumExplod(8221)
+Id = 8221
+scale = 0,0
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+triggerall = Parent,power=[32,62]
+trigger1 = NumExplod(8221)
+Id = 8221
+scale = (Parent,Power/62.0),1
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+triggerall = Parent,power=[63,2999]
+trigger1 = NumExplod(8221)
+Id = 8221
+scale = 1.1,1
+ignorehitpause = 1
+
+[state 8200, ModifyExplod3]
+type = ModifyExplod
+triggerall = Parent,power<63 || Parent,Power>=3000
+trigger1 = NumExplod(8222)
+Id = 8222
+scale = 0,0
+ignorehitpause = 1
+
+[state 8200, ModifyExplod3]
+type = ModifyExplod
+triggerall = Parent,power=[63,2532]
+trigger1 = NumExplod(8222)
+Id = 8222
+scale = ((Parent,power-47)/2469.0),1
+ignorehitpause = 1
+
+[state 8200, ModifyExplod3]
+type = ModifyExplod
+triggerall = Parent,power>=2533
+trigger1 = NumExplod(8222) && teamside=1
+Id = 8222
+scale = 1.01,1;1.008,1
+ignorehitpause = 1
+
+[state 8200, ModifyExplod3]
+type = ModifyExplod
+triggerall = Parent,power>=2533
+trigger1 = NumExplod(8222) && teamside=2
+Id = 8222
+scale = 1.015,1;1.008,1
+ignorehitpause = 1
+
+[state 8200, ModifyExplod3]
+type = ModifyExplod
+triggerall = Parent,power>=2700
+trigger1 = NumExplod(8222)
+Id = 8222
+scale = 1.02,1;1.008,1
+ignorehitpause = 1
+
+[state 8200, ModifyExplod3]
+type = ModifyExplod
+triggerall = Parent,power<2533 || Parent,Power>=3000
+trigger1 = NumExplod(8223)
+Id = 8223
+scale = 0,0
+ignorehitpause = 1
+
+[state 8200, ModifyExplod3]
+type = ModifyExplod
+triggerall = Parent,power=[2532,2999]
+trigger1 = NumExplod(8223) && teamside=2
+Id = 8223
+scale = ((Parent,power-2532)/482.0),1
+ignorehitpause = 1
+
+[state 8200, ModifyExplod3]
+type = ModifyExplod
+triggerall = Parent,power=[2532,2999]
+trigger1 = NumExplod(8223) && teamside=1
+Id = 8223
+scale = ((Parent,power-2532)/435.0),1
+ignorehitpause = 1
+
+[state 8200, ModifyExplod3]
+type = ModifyExplod
+triggerall = Parent,Power<3000
+trigger1 = NumExplod(8224)
+Id = 8224
+scale = 0,0
+ignorehitpause = 1
+
+[state 8200, ModifyExplod3]
+type = ModifyExplod
+triggerall = Parent,Power>=3000
+trigger1 = NumExplod(8224)
+Id = 8224
+scale = 1.000,1
+ignorehitpause = 1
+
+[state 8200, ModifyExplod]
+type = ModifyExplod
+triggerall = parent,power < 3000
+trigger1 = NumExplod(8320)
+Id = 8320
+scale = 0,0
+ignorehitpause = 1
+
+[state 8200, ModifyExplod]
+type = ModifyExplod
+triggerall = parent,power >= 3000
+trigger1 = NumExplod(8320)
+Id = 8320
+scale = .5,.5
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8220)
+Id = 8200
+scale = .5,.5
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8165)
+Id = 8165
+scale = .5,.5
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = varset
+trigger1 = Power<3000
+var(4)=-1
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = varset
+trigger1 = Power>=3000 && var(4)=-1
+var(4)=1
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = PlaySnd
+trigger1 = Power>=3000 && var(4)=1
+value = 8200,0
+channel = 20
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = varset
+trigger1 = Power>=3000 && var(4)=1
+var(4) = 0
+ignorehitpause = 1
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;Sグルーヴゲージ表示
+[Statedef 8230]
+ctrl = 0
+anim = 8050
+velset = 0,0
+ownpal = 1
+
+[State, Bench UI Sweep]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611]
+trigger2 = roundstate > 2
+trigger3 = !root,alive
+ignorehitpause = 1
+
+[State, Bench UI Restore]
+type = ChangeState
+trigger1 = roundstate <= 2
+trigger1 = !(root,stateno = [6565610, 6565611])
+trigger1 = root,alive
+trigger1 = numexplod(8232) = 0
+trigger1 = time > 0
+value = stateno
+ignorehitpause = 1
+
+[State 8100, PosSet]
+type = ParentVarSet
+trigger1 = Time=0
+var(59) = 3
+
+[State -3,Powerset]
+type = PowerSet
+trigger1 = time=0
+value = 0
+
+;ゲージ背景
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8232)
+anim = 8232
+id = 8232
+postype = Back
+pos = 138,225
+ownpal = 1
+bindtime = -1
+ignorehitpause = 1
+ontop = 1
+pausemovetime = -1
+supermovetime = -1
+scale = 1,1
+
+[State 8230, PalFX]
+type = PalFX
+trigger1 = time=0
+time = 1
+add = 0,0,0
+ignorehitpause = 1
+
+[State 8230, PalFX]
+type = PalFX
+trigger1 = (100*parent,life/parent,const(data.life))<=30
+trigger1 = GameTime%3=0 && roundstate!=4
+time = 1
+add = 144,144,144
+ignorehitpause = 1
+
+;ゲージ
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8231); && Parent,Power>=1000
+trigger1 = teamside=1
+anim = 8231
+id = 8231
+postype = Back
+pos = 138,225
+ownpal = 1
+bindtime = -1
+ignorehitpause = 1
+ontop = 1
+pausemovetime = -1
+supermovetime = -1
+scale = 1,1
+
+;ゲージ
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8231); && Parent,Power>=1000
+trigger1 = teamside=2
+anim = 8231
+id = 8231
+postype = Back
+pos = 138,225
+ownpal = 1
+bindtime = -1
+ignorehitpause = 1
+ontop = 1
+pausemovetime = -1
+supermovetime = -1
+scale = 1,1
+
+[State 8230, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = teamside = 1 && !NumExplod(8230)
+anim = 8230
+id = 8230
+postype = Left
+pos = 12,217
+ownpal = 0
+bindtime = -1
+ignorehitpause = 1
+ontop = 1
+facing = 1
+pausemovetime = -1
+supermovetime = -1
+scale = .5,.5
+
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = teamside = 2 && !NumExplod(8230)
+anim = 8235
+id = 8230
+postype = Right
+pos = -143,217
+bindtime = -1
+ignorehitpause = 1
+ontop = 1
+facing = 1
+ownpal = 0
+pausemovetime = -1
+supermovetime = -1
+scale = .5, .5
+
+;MAX
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8330)
+trigger1 = teamside=1
+anim = 8330
+id = 8330
+postype = Left
+pos = 16,214
+ownpal = 1
+bindtime = -1
+ignorehitpause = 1
+ontop = 1
+facing = 1
+pausemovetime = -1
+supermovetime = -1
+scale = .5,.5
+
+;MAX
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8330)
+trigger1 = teamside=2
+anim = 8330
+id = 8330
+postype = Right
+pos = -43,214
+ownpal = 1
+bindtime = -1
+ignorehitpause = 1
+ontop = 1
+facing = 1
+pausemovetime = -1
+supermovetime = -1
+scale = .5,.5
+
+;EX-Groove
+[State 1000, Spark]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8165) && teamside=1 && root,fvar(37)
+Anim = 8165
+pos = 99, 218
+postype = left
+id = 8165
+ownpal = 1
+bindtime = -1
+pausemovetime = -1
+supermovetime = -1
+removetime=-1
+ignorehitpause = 1
+ontop=1
+scale = .5,.5
+facing = 1
+
+[State 1000, Spark]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8165) && teamside=2 && root,fvar(37)
+Anim = 8165
+pos = -145, 218
+postype = Right
+id = 8165
+ownpal = 1
+bindtime = -1
+pausemovetime = -1
+supermovetime = -1
+removetime=-1
+ontop=1
+ignorehitpause = 1
+scale = .5,.5
+facing = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8231) && parent,var(22)=0
+Id = 8231
+scale = (Parent,Power)/1000.0,1
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8231) && parent,var(22)=1
+Id = 8231
+scale = (1.255*Parent,var(22)*Parent,var(23))/1000.0,1
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8230) && (roundstate=4||stateno=5150)
+Id = 8231
+scale = 0,0
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8230)
+Id = 8230
+scale = .5,.5
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8330) && Parent,var(22)=0
+Id = 8330
+scale = 0,0
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8330) && Parent,var(22)=1
+Id = 8330
+scale = .5,.5
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8330) && (roundstate=4||stateno=5150)
+Id = 8330
+scale = 0,0
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8230)
+Id = 8200
+scale = .5,.5
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8165)
+Id = 8165
+scale = .5,.5
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = varset
+trigger1 = Power<1000
+var(2)=-1
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = varset
+trigger1 = Power>=1000 && var(2)=-1
+var(2)=1
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = PlaySnd
+trigger1 = Power>=1000 && var(2)=1
+value = 8200,1
+channel = 20
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = varset
+trigger1 = Power>=1000 && var(2)=1
+var(2) = 0
+ignorehitpause = 1
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;Nグルーヴゲージ表示
+[Statedef 8240]
+ctrl = 0
+anim = 8050
+velset = 0,0
+ownpal = 1
+
+[State, Bench UI Sweep]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611]
+trigger2 = roundstate > 2
+trigger3 = !root,alive
+ignorehitpause = 1
+
+[State, Bench UI Restore]
+type = ChangeState
+trigger1 = roundstate <= 2
+trigger1 = !(root,stateno = [6565610, 6565611])
+trigger1 = root,alive
+trigger1 = numexplod(8242) = 0
+trigger1 = time > 0
+value = stateno
+ignorehitpause = 1
+
+[State 8100, PosSet]
+type = ParentVarSet
+trigger1 = Time=0
+var(59) = 4
+
+;ゲージ背景
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8242)
+anim = 8242
+id = 8242
+postype = Back
+pos = 114,225
+ownpal = 1
+bindtime = -1
+ignorehitpause = 1
+ontop = 1
+pausemovetime = -1
+supermovetime = -1
+scale = 1,1
+
+;ゲージ
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8241)
+trigger1 = teamside=1
+anim = 8241
+id = 8241
+postype = Back
+pos = 114,225
+ownpal = 1
+bindtime = -1
+ignorehitpause = 1
+ontop = 1
+pausemovetime = -1
+supermovetime = -1
+scale = 1,1
+
+;ゲージ
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8241)
+trigger1 = teamside=2
+anim = 8241
+id = 8241
+postype = Back
+pos = 115,225
+ownpal = 1
+bindtime = -1
+ignorehitpause = 1
+ontop = 1
+pausemovetime = -1
+supermovetime = -1
+scale = 1,1
+
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = teamside = 1 && !NumExplod(8240)
+anim = 8240
+id = 8240
+postype = Left
+pos = 12,217
+ownpal = 1
+bindtime = -1
+ignorehitpause = 1
+ontop = 1
+facing = 1
+pausemovetime = -1
+supermovetime = -1
+scale = .5,.5
+
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = teamside = 2 && !NumExplod(8245)
+anim = 8245
+id = 8245
+postype = Right
+pos = -143,217
+ownpal = 1
+bindtime = -1
+ignorehitpause = 1
+ontop = 1
+facing = 1
+pausemovetime = -1
+supermovetime = -1
+scale = .5,.5
+
+;パワーランプ1
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8340)
+anim = 8340
+id = 8340
+postype = Back
+pos = 137,227
+ownpal = 0
+bindtime = -1
+ignorehitpause = 1
+ontop = 1
+pausemovetime = -1
+supermovetime = -1
+scale = .5,.5
+
+;パワーランプ2
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8341)
+anim = 8340
+id = 8341
+postype = Back
+pos = 129,227
+ownpal = 0
+bindtime = -1
+ignorehitpause = 1
+ontop = 1
+pausemovetime = -1
+supermovetime = -1
+scale = .5,.5
+
+;パワーランプ3
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8342)
+anim = 8340
+id = 8342
+postype = Back
+pos = 121,227
+ownpal = 0
+bindtime = -1
+ignorehitpause = 1
+ontop = 1
+pausemovetime = -1
+supermovetime = -1
+scale = .5,.5
+
+;パワーランプ1
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8345)
+anim = 8345
+id = 8345
+postype = Back
+pos = 138,227
+ownpal = 0
+bindtime = -1
+ignorehitpause = 1
+ontop = 1
+pausemovetime = -1
+supermovetime = -1
+scale = .5,.5
+
+;パワーランプ2
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8346)
+anim = 8345
+id = 8346
+postype = Back
+pos = 129,227
+ownpal = 0
+bindtime = -1
+ignorehitpause = 1
+ontop = 1
+pausemovetime = -1
+supermovetime = -1
+scale = .5,.5
+
+;パワーランプ3
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8347)
+anim = 8345
+id = 8347
+postype = Back
+pos = 121,227
+ownpal = 0
+bindtime = -1
+ignorehitpause = 1
+ontop = 1
+pausemovetime = -1
+supermovetime = -1
+scale = .5,.5
+
+;POWERUP!
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8343)
+anim = 8342
+id = 8343
+postype = Back
+pos = 29+(teamside=2),217
+ownpal = 1
+bindtime = -1
+ignorehitpause = 1
+ontop = 1
+facing = ifelse(teamside=1,1,-1)
+pausemovetime = -1
+supermovetime = -1
+scale = .5,.5
+
+;EX-Groove
+[State 1000, Spark]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8165) && teamside=1 && root,fvar(37)
+Anim = 8165
+pos = 100, 218
+postype = left
+id = 8165
+ownpal = 1
+bindtime = -1
+pausemovetime = -1
+supermovetime = -1
+removetime=-1
+ignorehitpause = 1
+ontop=1
+scale = .5,.5
+facing = 1
+
+[State 1000, Spark]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8165) && teamside=2 && root,fvar(37)
+Anim = 8165
+pos = -145, 218
+postype = Right
+id = 8165
+ownpal = 1
+bindtime = -1
+pausemovetime = -1
+supermovetime = -1
+removetime=-1
+ontop=1
+ignorehitpause = 1
+scale = .5,.5
+facing = 1
+
+[State 8240, PalFX]
+type = PalFX
+trigger1 = 1
+Time = 1
+add = 0-ifelse((time%39)>=0,1,-1)*var(1)*12,0-ifelse((time%39)>=0,1,-1)*var(1)*4,0;ifelse(ceil(sin(2*Pi*(time%39)/38))>=0,1,-1)*(19+(GameTime%38))*4,0
+
+[State 8240,VarAdd]
+type = VarAdd
+triggerall = Var(1)<19
+trigger1 = (time%39)<19
+var(1) = 1
+
+[State 8240,VarAdd]
+type = VarAdd
+triggerall = Var(1)>0
+trigger1 = (time%39)>=19
+var(1) = -1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8242)
+Id = 8242
+scale = 1,1
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8343) && Parent,Power<3000
+Id = 8343
+scale = 0,0
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8343) && Parent,Power>=3000
+Id = 8343
+scale = .5,.5
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8241) && Parent,Power<1000
+Id = 8241
+scale = (Parent,Power)/1000.0,1
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8241) && (Parent,Power=[1000,1999])
+Id = 8241
+scale = (((Parent,Power)-1000)/1000.0),1
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8241) && (Parent,Power=[2000,2999])
+Id = 8241
+scale = (((Parent,Power)-2000)/1000.0),1
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8241) && Parent,Power>=3000
+Id = 8241
+scale = 1,1
+ignorehitpause = 1
+
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8340) && Parent,Power<1000
+Id = 8340
+scale = 0,0
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8340) && Parent,Power>=1000
+Id = 8340
+scale = .5,.5
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8341) && Parent,Power<2000
+Id = 8341
+scale = 0,0
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8341) && Parent,Power>=2000
+Id = 8341
+scale = .5,.5
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8342) && Parent,Power<3000
+Id = 8342
+scale = 0,0
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8342) && Parent,Power>=3000
+Id = 8342
+scale = .5,.5
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8345) && Parent,Power<1000
+Id = 8345
+scale = 0,0
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8345) && Parent,Power>=1000
+Id = 8345
+scale = .5,.5
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8346) && Parent,Power<2000
+Id = 8346
+scale = 0,0
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8346) && Parent,Power>=2000
+Id = 8346
+scale = .5,.5
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8347) && Parent,Power<3000
+Id = 8347
+scale = 0,0
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8347) && Parent,Power>=3000
+Id = 8347
+scale = .5,.5
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8240)
+Id = 8200
+scale = .5,.5
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8165)
+Id = 8165
+scale = .5,.5
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = varset
+trigger1 = Power<1000
+var(2)=-1
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = varset
+trigger1 = Power>=1000 && var(2)=-1
+var(2)=1
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = StopSnd
+trigger1 = Power>=1000 && var(2)=1
+channel = 20
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = PlaySnd
+trigger1 = Power>=1000 && var(2)=1
+value = 8200,2
+channel = 20
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = varset
+trigger1 = Power>=1000 && var(2)=1
+var(2) = 0
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = varset
+trigger1 = Power<2000
+var(3)=-1
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = varset
+trigger1 = Power>=2000 && var(3)=-1
+var(3)=1
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = StopSnd
+trigger1 = Power>=2000 && var(3)=1
+channel = 20
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = PlaySnd
+trigger1 = Power>=2000 && var(3)=1
+value = 8200,2
+channel = 20
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = varset
+trigger1 = Power>=2000 && var(3)=1
+var(3) = 0
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = varset
+trigger1 = Power<3000
+var(4)=-1
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = varset
+trigger1 = Power>=3000 && var(4)=-1
+var(4)=1
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = StopSnd
+trigger1 = Power>=3000 && var(4)=1
+channel = 20
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = PlaySnd
+trigger1 = Power>=3000 && var(4)=1
+value = 8200,2
+channel = 20
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = varset
+trigger1 = Power>=3000 && var(4)=1
+var(4) = 0
+ignorehitpause = 1
+
+;NグルーヴパワーMAXゲージ表示
+[Statedef 8260]
+ctrl = 0
+anim = 8050
+velset = 0,0
+ownpal = 1
+
+[State, Bench UI Sweep]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611]
+trigger2 = roundstate > 2
+trigger3 = !root,alive
+ignorehitpause = 1
+
+[State, Bench UI Restore]
+type = ChangeState
+trigger1 = roundstate <= 2
+trigger1 = !(root,stateno = [6565610, 6565611])
+trigger1 = root,alive
+trigger1 = numexplod(8262) = 0
+trigger1 = time > 0
+value = stateno
+ignorehitpause = 1
+
+[State 3150,PlaySnd]
+type = PlaySnd
+trigger1 = Time=0
+value = 2500,0
+
+;ゲージ
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8262)
+anim = 8262
+id = 8262
+postype = Back
+pos = 142,212
+ownpal = 1
+bindtime = -1
+ignorehitpause = 1
+ontop = 1
+pausemovetime = -1
+supermovetime = -1
+
+;ゲージ
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8263)
+anim = 8263
+id = 8263
+postype = Back
+pos = 142,215
+ownpal = 1
+bindtime = -1
+ignorehitpause = 1
+ontop = 1
+pausemovetime = -1
+supermovetime = -1
+scale = 1,.5
+
+;ゲージ
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8261)
+trigger1 = teamside=1
+anim = 8261
+id = 8261
+postype = Back
+pos = 142,212
+ownpal = 0
+bindtime = -1
+ignorehitpause = 1
+ontop = 1
+pausemovetime = -1
+supermovetime = -1
+
+;ゲージ
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8261)
+trigger1 = teamside=2
+anim = 8261
+id = 8261
+postype = Back
+pos = 142,212
+ownpal = 0
+bindtime = -1
+ignorehitpause = 1
+ontop = 1
+pausemovetime = -1
+supermovetime = -1
+
+[State 8230, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8260)
+trigger1 = teamside=1
+anim = 8260
+id = 8260
+postype = Left
+pos = 50,211
+ownpal = 0
+bindtime = -1
+ignorehitpause = 1
+ontop = 1
+facing = 1
+pausemovetime = -1
+supermovetime = -1
+scale = .5,.5
+
+[State 8230, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8260)
+trigger1 = teamside=2
+anim = 8265
+id = 8260
+postype = Right
+pos = -143,211
+ownpal = 0
+bindtime = -1
+ignorehitpause = 1
+ontop = 1
+facing = 1
+pausemovetime = -1
+supermovetime = -1
+scale = .5,.5
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8261)
+Id = 8261
+scale = (Parent,var(23))/720.0,1
+ignorehitpause = 1
+
+[State 8260]
+type = RemoveExplod
+trigger1 = !parent,var(22) || roundstate=4 || root,stateno=5150
+
+[State 8260]
+type = DestroySelf
+trigger1 = !parent,var(22) || roundstate=4 || root,stateno=5150; || (Parent,StateNo=[3020,3599])←これが相手のstateも判断してしまう
+
+;Kグルーヴゲージ表示
+[Statedef 8250]
+ctrl = 0
+anim = 8050
+velset = 0,0
+ownpal = 1
+
+[State, Bench UI Sweep]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611]
+trigger2 = roundstate > 2
+trigger3 = !root,alive
+ignorehitpause = 1
+
+[State, Bench UI Restore]
+type = ChangeState
+trigger1 = roundstate <= 2
+trigger1 = !(root,stateno = [6565610, 6565611])
+trigger1 = root,alive
+trigger1 = numexplod(8252) = 0
+trigger1 = time > 0
+value = stateno
+ignorehitpause = 1
+
+[State 8100, PosSet]
+type = ParentVarSet
+trigger1 = Time=0
+var(59) = 5
+
+[State -3,Powerset]
+type = PowerSet
+trigger1 = time=0
+value = 0
+
+;ゲージ背景
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8252)
+anim = 8252
+id = 8252
+postype = Back
+pos = 140,225
+ownpal = 1
+bindtime = -1
+ignorehitpause = 1
+ontop = 1
+pausemovetime = -1
+supermovetime = -1
+scale = 1,1
+
+;ゲージ
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8251)
+anim = 8251
+id = 8251
+postype = Back
+pos = 140,225
+ownpal = 1
+bindtime = -1
+ignorehitpause = 1
+ontop = 1
+pausemovetime = -1
+supermovetime = -1
+scale = 1,1
+
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = teamside = 1 && !NumExplod(8250)
+anim = 8250
+id = 8250
+postype = Left
+pos = 12,216
+ownpal = 1
+bindtime = -1
+ignorehitpause = 1
+ontop = 1
+facing = 1
+pausemovetime = -1
+supermovetime = -1
+scale = .5,.5
+
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = teamside = 2 && !NumExplod(8255)
+anim = 8255
+id = 8255
+postype = Right
+pos = -144,216
+ownpal = 1
+bindtime = -1
+ignorehitpause = 1
+ontop = 1
+facing = 1
+pausemovetime = -1
+supermovetime = -1
+scale = .5, .5
+
+;MAX
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8350)
+anim = 8350
+id = 8350
+postype = Back
+pos = 22,234
+ownpal = 1
+bindtime = -1
+ignorehitpause = 1
+ontop = 1
+facing = ifelse(teamside=1,1,-1)
+pausemovetime = -1
+supermovetime = -1
+scale = .5,.5
+
+;MAX(炎)
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8351)
+anim = 8351
+id = 8351
+postype = Back
+pos = 23,234
+ownpal = 1
+removetime = -1
+bindtime = -1
+ignorehitpause = 1
+ontop = 1
+facing = ifelse(teamside=1,1,-1)
+pausemovetime = -1
+supermovetime = -1
+scale = .5,.5
+
+;EX-Groove
+[State 1000, Spark]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8165) && teamside=1 && root,fvar(37)
+Anim = 8165
+pos = 99, 217
+postype = left
+id = 8165
+ownpal = 1
+bindtime = -1
+pausemovetime = -1
+supermovetime = -1
+removetime=-1
+ignorehitpause = 1
+ontop=1
+scale = .5,.5
+facing = 1
+
+[State 1000, Spark]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8165) && teamside=2 && root,fvar(37)
+Anim = 8165
+pos = -145, 217
+postype = Right
+id = 8165
+ownpal = 1
+bindtime = -1
+pausemovetime = -1
+supermovetime = -1
+removetime=-1
+ontop=1
+ignorehitpause = 1
+scale = .5,.5
+facing = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8251) && Parent,var(57)<=0 && ((Parent,var(22)=0 && roundstate<4)||(parent,var(23)>0&&(roundstate=4 || root,stateno=5150)))
+Id = 8251
+scale = 0,0
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8251) && Parent,var(57)>0 && Parent,var(22)=0 && roundstate<4 && root,stateno!=5150
+Id = 8251
+scale = (Parent,var(57))/72.00,1
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8251) && Parent,var(23)>0 && Parent,var(22)=1 && roundstate<4 && root,stateno!=5150
+Id = 8251
+scale = (Parent,var(23))/864.00,1
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8251) && Parent,var(23)>0 && Parent,var(22)=1 && (roundstate=4 || root,stateno=5150)
+Id = 8251
+scale = 0,0
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8350) && (Parent,var(22)=0 || roundstate=4 || root,stateno=5150)
+Id = 8350
+scale = 0,0
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8350) && Parent,var(23)>0 && Parent,var(22)=1 && roundstate!=4 && root,stateno!=5150
+Id = 8350
+scale = .5-.1*Abs(sin(gametime/(Pi*10))),.5-.1*Abs(sin(gametime/(Pi*10)))
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8351) && (Parent,var(22)=0 || roundstate=4 || root,stateno=5150)
+Id = 8351
+scale = 0,0
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8351) && Parent,var(23)>0 && Parent,var(22)=1 && roundstate!=4 && root,stateno!=5150
+Id = 8351
+scale = .5,.5
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8250)
+Id = 8200
+scale = .5,.5
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8165)
+Id = 8165
+scale = .5,.5
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = varset
+trigger1 = Power<3000
+var(4)=-1
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = varadd
+trigger1 = Power>=3000 && var(4)>0
+var(4)=1
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = varset
+trigger1 = Power>=3000 && var(4)=-1 && root,numexplod(7630)
+var(4)=1
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = StopSnd
+trigger1 = var(4)=60
+channel = 20
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = PlaySnd
+trigger1 = var(4)=60
+value = 8200,1
+channel = 20
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = varset
+trigger1 = var(4)=60
+var(4) = 0
+ignorehitpause = 1
+
+;EX-ゲージ
+[Statedef 8265]
+ctrl = 0
+anim = 8050
+velset = 0,0
+
+;EX-Groove
+[State, Bench UI Sweep]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611]
+trigger2 = roundstate > 2
+trigger3 = !root,alive
+ignorehitpause = 1
+
+[State, Bench UI Restore]
+type = ChangeState
+trigger1 = roundstate <= 2
+trigger1 = !(root,stateno = [6565610, 6565611])
+trigger1 = root,alive
+trigger1 = numexplod(8165) = 0
+trigger1 = time > 0
+value = stateno
+ignorehitpause = 1
+
+[State 1000, Spark]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = NumExplod(8165)<=1 && teamside=1 && root,fvar(37)
+Anim = 8165
+pos = 103, 217
+postype = left
+id = 8165
+ownpal = 1
+bindtime = -1
+pausemovetime = -1
+supermovetime = -1
+removetime=1
+ignorehitpause = 1
+ontop=1
+scale = .5,.5
+facing = 1
+
+[State 1000, Spark]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = NumExplod(8165)<=1 && teamside=2 && root,fvar(37)
+Anim = 8165
+pos = -146, 217
+postype = Right
+id = 8165
+ownpal = 1
+bindtime = -1
+pausemovetime = -1
+supermovetime = -1
+removetime=1
+ontop=1
+ignorehitpause = 1
+scale = .5,.5
+facing = 1
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;ガードクラッシュゲージ表示
+[Statedef 8400]
+ctrl = 0
+anim = 8050
+velset = 0,0
+ownpal = 1
+
+;ゲージ
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8410)
+anim = 8410
+id = 8410
+postype = Back
+pos = 142+floor(root,fvar(9)),45+ifelse((root,fvar(9)*1000-floor(root,fvar(9)*1000)),-floor(1000000*(root,fvar(9)-floor(root,fvar(9))))-1000*floor(1000*(root,fvar(9)-floor(root,fvar(9)))),floor(1000*(root,fvar(9)-floor(root,fvar(9)))))
+ownpal = 1
+bindtime = -1
+ignorehitpause = 1
+sprpriority = -5
+pausemovetime = -1
+supermovetime = -1
+scale = .5,.6
+
+;ゲージ
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8415)
+anim = 8410
+id = 8415
+postype = Back
+pos = 143+floor(root,fvar(9)),48+ifelse((root,fvar(9)*1000-floor(root,fvar(9)*1000)),-floor(1000000*(root,fvar(9)-floor(root,fvar(9))))-1000*floor(1000*(root,fvar(9)-floor(root,fvar(9)))),floor(1000*(root,fvar(9)-floor(root,fvar(9)))))
+ownpal = 1
+bindtime = -1
+ignorehitpause = 1
+sprpriority = -5
+pausemovetime = -1
+supermovetime = -1
+scale = .0125,.2
+
+;背景
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8420)
+anim = 8420
+id = 8420
+postype = Back
+pos = 142+floor(root,fvar(9)),45+ifelse((root,fvar(9)*1000-floor(root,fvar(9)*1000)),-floor(1000000*(root,fvar(9)-floor(root,fvar(9))))-1000*floor(1000*(root,fvar(9)-floor(root,fvar(9)))),floor(1000*(root,fvar(9)-floor(root,fvar(9)))))
+ownpal = 1
+bindtime = -1
+ignorehitpause = 1
+sprpriority = -5
+pausemovetime = -1
+supermovetime = -1
+scale = .5,.6
+
+[State, Bench UI Sweep]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611]
+trigger2 = roundstate > 2
+trigger3 = !root,alive
+ignorehitpause = 1
+
+[State, Bench UI Restore]
+type = ChangeState
+trigger1 = roundstate <= 2
+trigger1 = !(root,stateno = [6565610, 6565611])
+trigger1 = root,alive
+trigger1 = numexplod(8410) = 0
+trigger1 = time > 0
+value = stateno
+ignorehitpause = 1
+
+[State 8230, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8400)
+trigger1 = teamside=1
+anim = 8400
+id = 8400
+postype = Left
+pos = 148+floor(root,fvar(9)),44+ifelse((root,fvar(9)*1000-floor(root,fvar(9)*1000)),-floor(1000000*(root,fvar(9)-floor(root,fvar(9))))-1000*floor(1000*(root,fvar(9)-floor(root,fvar(9)))),floor(1000*(root,fvar(9)-floor(root,fvar(9)))))
+ownpal = 0
+bindtime = -1
+ignorehitpause = 1
+sprpriority = -4
+facing = 1
+pausemovetime = -1
+supermovetime = -1
+scale = .5,.5
+
+[State 8230, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8400)
+trigger1 = teamside=2
+anim = 8405
+id = 8400
+postype = Right
+pos = -148-floor(root,fvar(9)),44+ifelse((root,fvar(9)*1000-floor(root,fvar(9)*1000)),-floor(1000000*(root,fvar(9)-floor(root,fvar(9))))-1000*floor(1000*(root,fvar(9)-floor(root,fvar(9)))),floor(1000*(root,fvar(9)-floor(root,fvar(9)))))
+ownpal = 0
+bindtime = -1
+ignorehitpause = 1
+sprpriority = -4
+facing = 1
+pausemovetime = -1
+supermovetime = -1
+scale = .5,.5
+
+[State 8230, PalFX]
+type = PalFX
+trigger1 = time=0
+trigger2 = (100*root,var(31)/ifelse(root,fvar(37),48-(ceil(root,fvar(13))%2>0)*10-(ceil(root,fvar(13))%4>1)*5,ifelse(root,var(59)=2,38,ifelse(root,var(59)=5,43,48))))>30
+time = 1
+add = 0,0,0
+ignorehitpause = 1
+
+[State 8230, PalFX]
+type = PalFX
+trigger1 = (100*root,var(31)/ifelse(root,fvar(37),48-(ceil(root,fvar(13))%2>0)*10-(ceil(root,fvar(13))%4>1)*5,ifelse(root,var(59)=2,38,ifelse(root,var(59)=5,43,48))))<=30
+trigger1 = Time%6>0
+time = 1
+add = 50*(time%6),50*(time%6),50*(time%6)
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8410) && root,var(31)<=0
+Id = 8410
+scale = 0,0
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8410) && root,var(31)>0 && roundstate>=2
+Id = 8410
+scale = (100*root,var(31)/ifelse(root,fvar(37),48-(ceil(root,fvar(13))%2>0)*10-(ceil(root,fvar(13))%4>1)*5,ifelse(root,var(59)=2,38,ifelse(root,var(59)=5,43,48))))/200.0,.6
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+triggerall = NumExplod(8410) && numpartner && teamside=1
+triggerall = partner,fvar(39)=1
+trigger1 = (root,ID-partner,ID>0 && partner,authorname="rei")
+trigger2 = (root,ID-partner,ID>0 && partner,authorname="gal129")
+Id = 8400
+pos = 148+floor(root,fvar(9)),54+ceil(100*(root,fvar(9)-floor(root,fvar(9))))
+postype = left
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+triggerall = NumExplod(8410) && numpartner && teamside=2
+triggerall = partner,fvar(39)=1
+trigger1 = (root,ID-partner,ID>0 && partner,authorname="rei")
+trigger2 = (root,ID-partner,ID>0 && partner,authorname="gal129")
+Id = 8400
+pos = -148-floor(root,fvar(9)),54+ceil(100*(root,fvar(9)-floor(root,fvar(9))))
+postype = right
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+triggerall = NumExplod(8410) && numpartner
+trigger1 = (root,ID-partner,ID>0 && partner,authorname="rei")
+trigger2 = (root,ID-partner,ID>0 && partner,authorname="gal129")
+Id = 8410
+pos = 142+floor(root,fvar(9)),55+ceil(100*(root,fvar(9)-floor(root,fvar(9))))
+postype = back
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+triggerall = NumExplod(8410) && numpartner
+triggerall = partner,fvar(39)=1
+trigger1 = (root,ID-partner,ID>0 && partner,authorname="rei")
+trigger2 = (root,ID-partner,ID>0 && partner,authorname="gal129")
+Id = 8420
+pos = 142+floor(root,fvar(9)),55+ceil(100*(root,fvar(9)-floor(root,fvar(9))))
+postype = back
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8415)
+Id = 8415
+scale = .0125,.2
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8415) && Root,var(31)<=0
+Id = 8415
+scale = 0,0
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8400)
+Id = 8400
+scale = .5,.5
+ignorehitpause = 1
+
+[state 8100]
+type= RemoveExplod
+triggerall = time>1
+trigger1 = root,fvar(20)=.1||root,fvar(20)=1.1
+trigger2 = (enemynear,authorname="rei"||enemynear,authorname="gal129")&&enemynear,fvar(39)=1
+trigger3 = enemynear,numpartner
+trigger3 = (100*root,var(31)/ifelse(root,fvar(37),48-(ceil(root,fvar(13))%2>0)*10-(ceil(root,fvar(13))%4>1)*5,ifelse(root,var(59)=2,38,ifelse(root,var(59)=5,43,48))))>30
+
+[state 8100]
+type= DestroySelf
+triggerall = time>1
+trigger1 = root,fvar(20)=.1||root,fvar(20)=1.1
+trigger2 = (enemynear,authorname="rei"||enemynear,authorname="gal129")&&enemynear,fvar(39)=1
+trigger3 = enemynear,numpartner
+trigger3 = (100*root,var(31)/ifelse(root,fvar(37),48-(ceil(root,fvar(13))%2>0)*10-(ceil(root,fvar(13))%4>1)*5,ifelse(root,var(59)=2,38,ifelse(root,var(59)=5,43,48))))>30
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;ガードクラッシュゲージ表示(相手側)
+[Statedef 8450]
+ctrl = 0
+anim = 8050
+velset = 0,0
+ownpal = 1
+
+;ゲージ
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8410)
+anim = 8410
+id = 8410
+postype = Back
+pos = 142+floor(root,fvar(9)),45+ifelse((root,fvar(9)*1000-floor(root,fvar(9)*1000)),-floor(1000000*(root,fvar(9)-floor(root,fvar(9))))-1000*floor(1000*(root,fvar(9)-floor(root,fvar(9)))),floor(1000*(root,fvar(9)-floor(root,fvar(9)))))
+ownpal = 1
+bindtime = -1
+ignorehitpause = 1
+sprpriority = -5
+pausemovetime = -1
+supermovetime = -1
+scale = .5,.6
+
+;ゲージ
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8415)
+anim = 8410
+id = 8415
+postype = Back
+pos = 143+floor(root,fvar(9)),48+ifelse((root,fvar(9)*1000-floor(root,fvar(9)*1000)),-floor(1000000*(root,fvar(9)-floor(root,fvar(9))))-1000*floor(1000*(root,fvar(9)-floor(root,fvar(9)))),floor(1000*(root,fvar(9)-floor(root,fvar(9)))))
+ownpal = 1
+bindtime = -1
+ignorehitpause = 1
+sprpriority = -5
+pausemovetime = -1
+supermovetime = -1
+scale = .0125,.2
+
+;背景
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8420)
+anim = 8420
+id = 8420
+postype = Back
+pos = 142+floor(root,fvar(9)),45+ifelse((root,fvar(9)*1000-floor(root,fvar(9)*1000)),-floor(1000000*(root,fvar(9)-floor(root,fvar(9))))-1000*floor(1000*(root,fvar(9)-floor(root,fvar(9)))),floor(1000*(root,fvar(9)-floor(root,fvar(9)))))
+ownpal = 1
+bindtime = -1
+ignorehitpause = 1
+sprpriority = -5
+pausemovetime = -1
+supermovetime = -1
+scale = .5,.6
+
+[State, Bench UI Sweep]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611]
+trigger2 = roundstate > 2
+trigger3 = !root,alive
+ignorehitpause = 1
+
+[State, Bench UI Restore]
+type = ChangeState
+trigger1 = roundstate <= 2
+trigger1 = !(root,stateno = [6565610, 6565611])
+trigger1 = root,alive
+trigger1 = numexplod(8410) = 0
+trigger1 = time > 0
+value = stateno
+ignorehitpause = 1
+
+[State 8230, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8400)
+trigger1 = teamside=2
+anim = 8400
+id = 8400
+postype = Left
+pos = 148+floor(root,fvar(9)),44+ifelse((root,fvar(9)*1000-floor(root,fvar(9)*1000)),-floor(1000000*(root,fvar(9)-floor(root,fvar(9))))-1000*floor(1000*(root,fvar(9)-floor(root,fvar(9)))),floor(1000*(root,fvar(9)-floor(root,fvar(9)))))
+ownpal = 0
+bindtime = -1
+ignorehitpause = 1
+sprpriority = -4
+facing = 1
+pausemovetime = -1
+supermovetime = -1
+scale = .5,.5
+
+[State 8230, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !NumExplod(8400)
+trigger1 = teamside=1
+anim = 8405
+id = 8400
+postype = Right
+pos = -148-floor(root,fvar(9)),44+ifelse((root,fvar(9)*1000-floor(root,fvar(9)*1000)),-floor(1000000*(root,fvar(9)-floor(root,fvar(9))))-1000*floor(1000*(root,fvar(9)-floor(root,fvar(9)))),floor(1000*(root,fvar(9)-floor(root,fvar(9)))))
+ownpal = 0
+bindtime = -1
+ignorehitpause = 1
+sprpriority = -4
+facing = 1
+pausemovetime = -1
+supermovetime = -1
+scale = .5,.5
+
+[State 8230, PalFX]
+type = PalFX
+trigger1 = time=0
+trigger2 = (100*root,fvar(23)/48)>30
+time = 1
+add = 0,0,0
+ignorehitpause = 1
+
+[State 8230, PalFX]
+type = PalFX
+trigger1 = time=0
+trigger2 = (enemynear,authorname="rei"||enemynear,authorname="gal129")&&enemynear,fvar(39)=1
+trigger2 = (100*root,fvar(23)/ifelse(enemynear,fvar(37),48-(ceil(enemynear,fvar(13))%2>0)*10-(ceil(enemynear,fvar(13))%4>1)*5,ifelse(enemynear,var(59)=2,38,ifelse(enemynear,var(59)=5,43,48))))>30
+time = 1
+add = 0,0,0
+ignorehitpause = 1
+
+[State 8230, PalFX]
+type = PalFX
+trigger1 = time=0
+trigger2 = enemynear,authorname="warusaki3"&&enemynear,fvar(39)=1
+trigger2 = (100*root,fvar(23)/ifelse(enemynear,var(20)=6,33,ifelse(enemynear,var(20)=2,38,ifelse(enemynear,var(20)=5,43,48))))>30
+time = 1
+add = 0,0,0
+ignorehitpause = 1
+
+[State 8230, PalFX]
+type = PalFX
+trigger1 = time=0
+trigger2 = enemynear,authorname="H”"&&enemynear,fvar(39)=1
+trigger2 = (100*root,fvar(23)/ifelse(enemynear,var(43),48-(floor(enemynear,var(50)/10%10)=1)*10-(floor(enemynear,var(50)/100%10)=1)*5,ifelse(enemynear,var(30)=3,38,ifelse(enemynear,var(30)=6,43,48))))>30
+time = 1
+add = 0,0,0
+ignorehitpause = 1
+
+[State 8230, PalFX]
+type = PalFX
+trigger1 = time=0
+trigger2 = ((enemynear,authorname="N64Mario"&&enemynear,name="zero")||enemynear,authorname="Jesuszilla"||enemynear,authorname=".\/.")
+trigger2 = (100*root,fvar(23)/ifelse(enemynear,var(20)=0,48-(enemynear,var(8)=2)*10-(enemynear,var(7)=2)*5,ifelse(enemynear,var(20)=3,38,ifelse(enemynear,var(20)=6,43,48))))>30
+time = 1
+add = 0,0,0
+ignorehitpause = 1
+
+[State 8230, PalFX]
+type = PalFX
+trigger1 = (100*root,fvar(23)/48)<=30
+trigger1 = Time%6>0
+time = 1
+add = 50*(time%6),50*(time%6),50*(time%6)
+ignorehitpause = 1
+
+[State 8230, PalFX]
+type = PalFX
+trigger1 = (enemynear,authorname="rei"||enemynear,authorname="gal129")&&enemynear,fvar(39)=1
+trigger1 = (100*root,fvar(23)/ifelse(enemynear,fvar(37),48-(ceil(enemynear,fvar(13))%2>0)*10-(ceil(enemynear,fvar(13))%4>1)*5,ifelse(enemynear,var(59)=2,38,ifelse(enemynear,var(59)=5,43,48))))<=30
+trigger1 = Time%6>0
+time = 1
+add = 50*(time%6),50*(time%6),50*(time%6)
+ignorehitpause = 1
+
+[State 8230, PalFX]
+type = PalFX
+trigger1 = enemynear,authorname="warusaki3"&&enemynear,fvar(39)=1
+trigger1 = (100*root,fvar(23)/ifelse(enemynear,var(20)=6,33,ifelse(enemynear,var(20)=2,38,ifelse(enemynear,var(20)=5,43,48))))<=30
+trigger1 = Time%6>0
+time = 1
+add = 50*(time%6),50*(time%6),50*(time%6)
+ignorehitpause = 1
+
+[State 8230, PalFX]
+type = PalFX
+trigger1 = enemynear,authorname="H”"&&enemynear,fvar(39)=1
+trigger1 = (100*root,fvar(23)/ifelse(enemynear,var(43),48-(floor(enemynear,var(50)/10%10)=1)*10-(floor(enemynear,var(50)/100%10)=1)*5,ifelse(enemynear,var(30)=3,38,ifelse(enemynear,var(30)=6,43,48))))<=30
+trigger1 = Time%6>0
+time = 1
+add = 50*(time%6),50*(time%6),50*(time%6)
+ignorehitpause = 1
+
+[State 8230, PalFX]
+type = PalFX
+trigger1 = ((enemynear,authorname="N64Mario"&&enemynear,name="zero")||enemynear,authorname="Jesuszilla"||enemynear,authorname=".\/.")
+trigger1 = (100*root,fvar(23)/ifelse(enemynear,var(20)=0,48-(enemynear,var(8)=2)*10-(enemynear,var(7)=2)*5,ifelse(enemynear,var(20)=3,38,ifelse(enemynear,var(20)=6,43,48))))<=30
+trigger1 = Time%6>0
+time = 1
+add = 50*(time%6),50*(time%6),50*(time%6)
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8410) && root,fvar(23)<=0
+Id = 8410
+scale = 0,0
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8410) && root,fvar(23)>0
+Id = 8410
+scale = (100*root,fvar(23)/48)/200.0,.6
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8410) && root,fvar(23)>0
+trigger1 = (enemynear,authorname="rei"||enemynear,authorname="gal129")&&enemynear,fvar(39)=1
+Id = 8410
+scale = (100*root,fvar(23)/ifelse(enemynear,fvar(37),48-(ceil(enemynear,fvar(13))%2>0)*10-(ceil(enemynear,fvar(13))%4>1)*5,ifelse(enemynear,var(59)=2,38,ifelse(enemynear,var(59)=5,43,48))))/200.0,.6
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8410) && root,fvar(23)>0
+trigger1 = enemynear,authorname="H”"&&enemynear,fvar(39)=1
+Id = 8410
+scale = (100*root,fvar(23)/ifelse(enemynear,var(43),48-(floor(enemynear,var(50)/10%10)=1)*10-(floor(enemynear,var(50)/100%10)=1)*5,ifelse(enemynear,var(30)=3,38,ifelse(enemynear,var(30)=6,43,48))))/200.0,.6
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8410) && root,fvar(23)>0
+trigger1 = enemynear,authorname="warusaki3"&&enemynear,fvar(39)=1
+Id = 8410
+scale = (100*root,fvar(23)/ifelse(enemynear,var(20)=6,33,ifelse(enemynear,var(20)=2,38,ifelse(enemynear,var(20)=5,43,48))))/200.0,.6
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8410) && root,fvar(23)>0
+trigger1 = ((enemynear,authorname="N64Mario"&&enemynear,name="zero")||enemynear,authorname="Jesuszilla"||enemynear,authorname=".\/.")
+Id = 8410
+scale = (100*root,fvar(23)/ifelse(enemynear,var(20)=0,48-(enemynear,var(8)=2)*10-(enemynear,var(7)=2)*5,ifelse(enemynear,var(20)=3,38,ifelse(enemynear,var(20)=6,43,48))))/200.0,.6
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+triggerall = NumExplod(8410) && numpartner && teamside=1
+triggerall = partner,fvar(39)=1
+trigger1 = (root,ID-partner,ID>0 && partner,authorname="rei")
+trigger2 = (root,ID-partner,ID>0 && partner,authorname="gal129")
+Id = 8400
+pos = 148+floor(root,fvar(9)),54+ceil(100*(root,fvar(9)-floor(root,fvar(9))))
+postype = left
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+triggerall = NumExplod(8410) && numpartner && teamside=2
+triggerall = partner,fvar(39)=1
+trigger1 = (root,ID-partner,ID>0 && partner,authorname="rei")
+trigger2 = (root,ID-partner,ID>0 && partner,authorname="gal129")
+Id = 8400
+pos = -148-floor(root,fvar(9)),54+ceil(100*(root,fvar(9)-floor(root,fvar(9))))
+postype = right
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+triggerall = NumExplod(8410) && numpartner
+trigger1 = (root,ID-partner,ID>0 && partner,authorname="rei")
+trigger2 = (root,ID-partner,ID>0 && partner,authorname="gal129")
+Id = 8410
+pos = 142+floor(root,fvar(9)),55+ceil(100*(root,fvar(9)-floor(root,fvar(9))))
+postype = back
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+triggerall = NumExplod(8410) && numpartner
+triggerall = partner,fvar(39)=1
+trigger1 = (root,ID-partner,ID>0 && partner,authorname="rei")
+trigger2 = (root,ID-partner,ID>0 && partner,authorname="gal129")
+Id = 8420
+pos = 142+floor(root,fvar(9)),55+ceil(100*(root,fvar(9)-floor(root,fvar(9))))
+postype = back
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8415)
+Id = 8415
+scale = .0125,.2
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8415) && root,fvar(23)<=0
+Id = 8415
+scale = 0,0
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8400)
+Id = 8400
+scale = .5,.5
+ignorehitpause = 1
+
+[state 8100]
+type= RemoveExplod
+triggerall = time>1
+trigger1 = root,fvar(20)=.1||root,fvar(20)=1.1
+trigger2 = enemynear,numpartner
+
+[state 8100]
+type= DestroySelf
+triggerall = time>1
+trigger1 = root,fvar(20)=.1||root,fvar(20)=1.1
+trigger2 = enemynear,numpartner
+
+
+;||||||||||||||||||||||||||||
+;エフェクト
+;||||||||||||||||||||||||||||
+;==========================================
+;==========================================
+;ガードキャンセル発動エフェクト
+[Statedef 7560]
+ctrl = 0
+anim = 8050
+velset = 0,0
+
+[State 3150,PlaySnd]
+type = PlaySnd
+trigger1 = Time=0
+value = 5910,0
+
+[State -2, 1]
+type = PalFX
+trigger1 = time = 0
+time = 1
+add = 0,0,0
+
+[state 8200, Explod]
+type = Explod
+trigger1 = Time=0 && !numexplod(7560)
+anim = 7560
+id = 7560
+postype = p1
+pos = 0,0
+ownpal = 0
+bindtime = -1
+ignorehitpause = 1
+removetime = -1
+pausemovetime = -1
+supermovetime = -1
+sprpriority = 5
+persistent = 0
+pausemovetime = 9999
+Supermovetime = 9999
+scale = .15,.15
+
+[State 4900, ModifyExplod]
+type = ModifyExplod
+trigger1 = 1
+Id = 7560
+scale = (.15+Time*.05),(.15+Time*.05)
+
+[State -2, 1]
+type = PalFX
+trigger1 = time>3
+time = 1
+add = -((Time-3)*43),-((Time-3)*43),-((Time-3)*43)
+
+[state 7500,removeExplod]
+type = removeExplod
+trigger1 = time>10
+
+[state 7500,DestroySelf]
+type = DestroySelf
+trigger1 = time>10
+
+;==========================================
+;==========================================
+;スーパーコンボ発動エフェクト
+[Statedef 7500]
+ctrl = 0
+anim = 8050
+velset = 0,0
+
+[State 3150,PlaySnd]
+type = PlaySnd
+trigger1 = Time=1
+value = 7000,0
+
+[State 1000, 0]
+type = BGPalFX
+trigger1 = time<50
+time = 1
+invertall = 1
+
+[State -2, 1]
+type = PalFX
+trigger1 = time = 0
+time = 1
+add = 0,0,0
+
+[state 8200, Explod]
+type = Explod
+trigger1 = Time=1 && !numexplod(7500)
+anim = 7500
+id = 7500
+postype = p1
+pos = 0,0
+ownpal = 0
+bindtime = -1
+ignorehitpause = 1
+removetime=10
+sprpriority = 5
+persistent = 0
+supermove = 1
+pausemovetime = -1
+Supermovetime = -1
+scale = .5,.5
+
+[State 4900, ModifyExplod]
+type = ModifyExplod
+trigger1 = 1
+Id = 7500
+scale = (.5+Time*.15),(.5+Time*.15)
+
+[State -2, 1]
+type = PalFX
+trigger1 = 1
+time = 1
+add = -(Time*15),-(Time*15),-(Time*15)
+
+[State 3000, Super]
+type = Helper
+trigger1 = Time = 1 || Time = 6 || Time = 11 || Time = 16
+id = 7511-10*(root,fvar(0)=1||root,fvar(0)=3)
+pos = 0,0
+postype = P1
+stateno = 7511-10*(root,fvar(0)=1||root,fvar(0)=3)
+helpertype = normal
+supermove = 1
+keyctrl = 0
+ownpal = 1
+supermovetime = 99999999
+pausemovetime = 99999999
+
+;
+[State 3000, Super]
+type = Helper
+trigger1 = Time = 1
+id = 7514-12*(root,fvar(0)=1||root,fvar(0)=3)
+pos = 0,0
+postype = P1
+stateno = 7514-12*(root,fvar(0)=1||root,fvar(0)=3)
+helpertype = normal
+supermove = 1
+keyctrl = 0
+ownpal = 1
+supermovetime = 99999999
+pausemovetime = 99999999
+size.xscale = 1
+size.yscale = 1
+
+;Lv.2/Lv.3
+[State 3000, Super]
+type = Helper
+trigger1 = Time = 9 && root,var(1)
+id = 7503
+pos = 0,0
+postype = P1
+stateno = 7503
+helpertype = normal
+supermove = 1
+keyctrl = 0
+ownpal = 1
+supermovetime = 99999999
+pausemovetime = 99999999
+size.xscale = 1
+size.yscale = 1
+
+;Lv.2/Lv.3
+[State 3000, Super]
+type = Helper
+trigger1 = Time = 9 && root,var(1)
+id = 7504
+pos = 0,0
+postype = P1
+stateno = 7504
+helpertype = normal
+supermove = 1
+keyctrl = 0
+ownpal = 1
+supermovetime = 99999999
+pausemovetime = 99999999
+size.xscale = 1
+size.yscale = 1
+
+;Lv.2/Lv.3
+[State 3000, Super]
+type = Helper
+trigger1 = Time = 9 && root,var(1)
+id = 7505
+pos = 0,0
+postype = P1
+stateno = 7505
+helpertype = normal
+supermove = 1
+keyctrl = 0
+ownpal = 1
+supermovetime = 99999999
+pausemovetime = 99999999
+size.xscale = 1
+size.yscale = 1
+
+;Lv.2/Lv.3
+[State 3000, Super]
+type = Helper
+trigger1 = Time = 9 && root,var(1)=2
+id = 7506
+pos = 0,0
+postype = P1
+stateno = 7506
+helpertype = normal
+supermove = 1
+keyctrl = 0
+ownpal = 1
+supermovetime = 99999999
+pausemovetime = 99999999
+size.xscale = 1
+size.yscale = 1
+
+;Lv.2/Lv.3
+[State 3000, Super]
+type = Helper
+trigger1 = Time = 9 && root,var(1)=2
+id = 7507
+pos = 0,0
+postype = P1
+stateno = 7507
+helpertype = normal
+supermove = 1
+keyctrl = 0
+ownpal = 1
+supermovetime = 99999999
+pausemovetime = 99999999
+size.xscale = 1
+size.yscale = 1
+
+;Lv.2/Lv.3
+[State 3000, Super]
+type = Helper
+trigger1 = Time = 9 && root,var(1)=2
+id = 7508
+pos = 0,0
+postype = P1
+stateno = 7508
+helpertype = normal
+supermove = 1
+keyctrl = 0
+ownpal = 1
+supermovetime = 99999999
+pausemovetime = 99999999
+size.xscale = 1
+size.yscale = 1
+
+[state 7500,removeExplod]
+type = removeExplod
+trigger1 = time=51
+
+[state 7500,DestroySelf]
+type = DestroySelf
+trigger1 = time=51
+
+[Statedef 7501]
+ctrl = 0
+anim = 8050
+velset = 0,0
+
+[State 7500, 0]
+type = BindToParent
+trigger1 = 1
+pos = 0,0
+
+[State 7500, 1]
+type = PalFX
+trigger1 = time = 0
+time = 1
+add = 0,0,0
+
+[state 8200, Explod]
+type = Explod
+trigger1 = Time=0 && !numexplod(7501)
+anim = 7501
+id = 7501
+postype = p1
+pos = 0,0
+ownpal = 0
+bindtime = -1
+ignorehitpause = 1
+removetime = -1
+ontop = 1
+pausemovetime = -1
+supermovetime = -1
+scale = .5,.5
+
+[State 4900, ModifyExplod]
+type = ModifyExplod
+trigger1 = 1
+Id = 7501
+scale = (.5+Time*.025),(.5+Time*.025)
+
+[State -2, 1]
+type = PalFX
+trigger1 = 1
+time = 1
+add = -(Time*15),-(Time*15),-(Time*15)
+
+[state 7500,removeExplod]
+type = removeExplod
+trigger1 = time=17
+
+[state 7500,DestroySelf]
+type = DestroySelf
+trigger1 = time=17
+
+;スーパーコンボ発動エフェクト
+[Statedef 7502]
+ctrl = 0
+anim = 7510
+velset = 0,0
+ownpal = 1
+sprpriority = 100
+
+[state 7500,trans]
+type = AssertSpecial
+trigger1 = 1
+flag = noshadow
+
+[State -2, 1]
+type = Trans
+trigger1 = 1
+trans = add
+
+[State -2, 1]
+type = AngleAdd
+trigger1 = 1
+value = -5.3
+
+[State 4900, ModifyExplod]
+type = AngleDraw
+trigger1 = time>=26
+scale = .5,.5
+
+[State 4900, ModifyExplod]
+type = AngleDraw
+trigger1 = time<26
+scale = (1-Time*.02),(1-Time*.02)
+
+[state 7500,DestroySelf]
+type = DestroySelf
+trigger1 = time=50
+
+;Lv.2・Lv.3スーパーコンボ発動エフェクト
+[Statedef 7503]
+ctrl = 0
+anim = 7520
+velset = 0,0
+ownpal = 1
+sprpriority = 99
+
+;位置固定
+[state 7500,trans]
+type = Bindtoparent
+trigger1 = time=0
+pos = 0,0
+time= 999
+
+;影消去
+[state 7500,trans]
+type = AssertSpecial
+trigger1 = 1
+flag = noshadow
+
+;半透明化
+[state 7500,trans]
+type = Trans
+trigger1 = 1
+trans = add
+
+;回転角度指定
+[state 7500,trans]
+type = AngleSet
+trigger1 = time=0
+value = 53
+
+;回転角度増減
+[state 7500,trans]
+type = AngleAdd
+trigger1 = time>10
+value = -(time-10)*.075
+
+;回転開始
+[state 7500,trans]
+type = AngleDraw
+trigger1 = time<=10
+scale = .5,.2+(time-1)*0.03
+
+;回転開始
+[state 7500,trans]
+type = AngleDraw
+trigger1 = time>10
+scale = .5-(time-11)*0.025,.5
+
+[state 7500,DestroySelf]
+type = DestroySelf
+trigger1 = time=30
+
+;Lv.2・Lv.3スーパーコンボ発動エフェクト
+[Statedef 7504]
+ctrl = 0
+anim = 7520
+velset = 0,0
+ownpal = 1
+sprpriority = 99
+
+;位置固定
+[state 7500,trans]
+type = Bindtoparent
+trigger1 = time=0
+pos = 0,0
+time= 999
+
+;影消去
+[state 7500,trans]
+type = AssertSpecial
+trigger1 = 1
+flag = noshadow
+
+;半透明化
+[state 7500,trans]
+type = Trans
+trigger1 = 1
+trans = add
+
+;回転角度指定
+[state 7500,trans]
+type = AngleSet
+trigger1 = time=0
+value = -65
+
+;回転角度増減
+[state 7500,trans]
+type = AngleAdd
+trigger1 = time>10
+value = -(time-10)*.075
+
+;回転開始
+[state 7500,trans]
+type = AngleDraw
+trigger1 = time<=10
+scale = .5,.2+(time-1)*0.03
+
+;回転開始
+[state 7500,trans]
+type = AngleDraw
+trigger1 = time>10
+scale = .5-(time-11)*0.025,.5
+
+[state 7500,DestroySelf]
+type = DestroySelf
+trigger1 = time=30
+
+;Lv.2・Lv.3スーパーコンボ発動エフェクト
+[Statedef 7505]
+ctrl = 0
+anim = 7520
+velset = 0,0
+ownpal = 1
+sprpriority = 99
+
+;位置固定
+[state 7500,trans]
+type = Bindtoparent
+trigger1 = time=0
+pos = 0,0
+time= 999
+
+;影消去
+[state 7500,trans]
+type = AssertSpecial
+trigger1 = 1
+flag = noshadow
+
+;半透明化
+[state 7500,trans]
+type = Trans
+trigger1 = 1
+trans = add
+
+;回転角度指定
+[state 7500,trans]
+type = AngleSet
+trigger1 = time=0
+value = 180
+
+;回転角度増減
+[state 7500,trans]
+type = AngleAdd
+trigger1 = time>10
+value = -(time-10)*.075
+
+;回転開始
+[state 7500,trans]
+type = AngleDraw
+trigger1 = time<=10
+scale = .5,.2+(time-1)*0.03
+
+;回転開始
+[state 7500,trans]
+type = AngleDraw
+trigger1 = time>10
+scale = .5-(time-11)*0.025,.5
+
+[state 7500,DestroySelf]
+type = DestroySelf
+trigger1 = time=30
+
+
+;Lv.2・Lv.3スーパーコンボ発動エフェクト
+[Statedef 7506]
+ctrl = 0
+anim = 7520
+velset = 0,0
+ownpal = 1
+sprpriority = 99
+
+;位置固定
+[state 7500,trans]
+type = Bindtoparent
+trigger1 = time=0
+pos = 0,0
+time= 999
+
+;影消去
+[state 7500,trans]
+type = AssertSpecial
+trigger1 = 1
+flag = noshadow
+
+;半透明化
+[state 7500,trans]
+type = Trans
+trigger1 = 1
+trans = add
+
+;回転角度指定
+[state 7500,trans]
+type = AngleSet
+trigger1 = time=0
+value = 137
+
+;回転角度増減
+[state 7500,trans]
+type = AngleAdd
+trigger1 = time>10
+value = -(time-10)*.075
+
+;回転開始
+[state 7500,trans]
+type = AngleDraw
+trigger1 = time<=10
+scale = .5,.2+(time-1)*0.03
+
+;回転開始
+[state 7500,trans]
+type = AngleDraw
+trigger1 = time>10
+scale = .5-(time-11)*0.025,.5
+
+[state 7500,DestroySelf]
+type = DestroySelf
+trigger1 = time=30
+
+
+;Lv.3スーパーコンボ発動エフェクト
+[Statedef 7507]
+ctrl = 0
+anim = 7520
+velset = 0,0
+ownpal = 1
+sprpriority = 99
+
+;位置固定
+[state 7500,trans]
+type = Bindtoparent
+trigger1 = time=0
+pos = 0,0
+time= 999
+
+;影消去
+[state 7500,trans]
+type = AssertSpecial
+trigger1 = 1
+flag = noshadow
+
+;半透明化
+[state 7500,trans]
+type = Trans
+trigger1 = 1
+trans = add
+
+;回転角度指定
+[state 7500,trans]
+type = AngleSet
+trigger1 = time=0
+value = -95
+
+;回転角度増減
+[state 7500,trans]
+type = AngleAdd
+trigger1 = time>10
+value = -(time-10)*.075
+
+;回転開始
+[state 7500,trans]
+type = AngleDraw
+trigger1 = time<=10
+scale = .5,.2+(time-1)*0.03
+
+;回転開始
+[state 7500,trans]
+type = AngleDraw
+trigger1 = time>10
+scale = .5-(time-11)*0.025,.5
+
+[state 7500,DestroySelf]
+type = DestroySelf
+trigger1 = time=30
+
+
+;Lv.2・Lv.3スーパーコンボ発動エフェクト
+[Statedef 7508]
+ctrl = 0
+anim = 7520
+velset = 0,0
+ownpal = 1
+sprpriority = 99
+
+;位置固定
+[state 7500,trans]
+type = Bindtoparent
+trigger1 = time=0
+pos = 0,0
+time= 999
+
+;影消去
+[state 7500,trans]
+type = AssertSpecial
+trigger1 = 1
+flag = noshadow
+
+;半透明化
+[state 7500,trans]
+type = Trans
+trigger1 = 1
+trans = add
+
+;回転角度指定
+[state 7500,trans]
+type = AngleSet
+trigger1 = time=0
+value = 20
+
+;回転角度増減
+[state 7500,trans]
+type = AngleAdd
+trigger1 = time>10
+value = -(time-10)*.075
+
+;回転開始
+[state 7500,trans]
+type = AngleDraw
+trigger1 = time<=10
+scale = .5,.2+(time-1)*0.03
+
+;回転開始
+[state 7500,trans]
+type = AngleDraw
+trigger1 = time>10
+scale = .5-(time-11)*0.025,.5
+
+[state 7500,DestroySelf]
+type = DestroySelf
+trigger1 = time=30
+
+;==========================================
+;==========================================
+;超必殺技発動エフェクト
+[Statedef 7510]
+ctrl = 0
+anim = 8050
+velset = 0,0
+ownpal = 1
+
+[State 3150,PlaySnd]
+type = PlaySnd
+trigger1 = Time=1
+value = 7000,1
+
+[State 1000, 1]
+type = AssertSpecial
+trigger1 = time=[1,50]
+flag = noFG
+flag2 = noBG
+
+[State 3000, Super]
+type = Helper
+trigger1 = Time = 1
+id = 7514-(root,fvar(0)=1||root,fvar(0)=3)*12
+pos = 0,0
+postype = P1
+stateno = 7514-(root,fvar(0)=1||root,fvar(0)=3)*12
+helpertype = normal
+supermove = 1
+keyctrl = 0
+ownpal = 1
+supermovetime = 99999999
+pausemovetime = 99999999
+size.xscale = 1
+size.yscale = 1
+
+[state 8200, Explod]
+type = Helper
+trigger1 = time=1 || ((time=9 || time=17 || time=25) && root,var(1)=2)
+id = 7512
+pos = 0,0
+postype = P1
+stateno = 7512
+helpertype = normal
+supermove = 1
+keyctrl = 0
+ownpal = 1
+supermovetime = 99999999
+pausemovetime = 99999999
+size.xscale = 1
+size.yscale = 1
+
+[State 3000, Super]
+type = Helper
+trigger1 = Time = 1
+id = 7513
+pos = 0,0
+postype = P1
+stateno = 7513
+helpertype = normal
+supermove = 1
+keyctrl = 0
+ownpal = 1
+supermovetime = 99999999
+pausemovetime = 99999999
+size.xscale = 1
+size.yscale = 1
+
+[State 3000, Super]
+type = Helper
+trigger1 = Time = 1 || Time = 6 || Time = 11 || Time = 17
+id = 7511-(root,fvar(0)=1||root,fvar(0)=3)*10
+pos = 0,0
+postype = P1
+stateno = 7511-(root,fvar(0)=1||root,fvar(0)=3)*10
+helpertype = normal
+supermove = 1
+keyctrl = 0
+ownpal = 1
+supermovetime = 9999
+pausemovetime = 9999
+size.xscale = 1
+size.yscale = 1
+
+[state 7500,removeExplod]
+type = removeExplod
+trigger1 = time=51
+
+[state 7500,DestroySelf]
+type = DestroySelf
+trigger1 = time=51
+
+
+[Statedef 7511]
+ctrl = 0
+anim = 8050
+velset = 0,0
+
+[State 7500, 0]
+type = BindToParent
+trigger1 = 1
+pos = 0,0
+
+[State 7500, 1]
+type = PalFX
+trigger1 = time = 0
+time = 1
+add = 0,0,0
+
+[state 8200, Explod]
+type = Explod
+trigger1 = Time=0
+anim = 7501
+id = 7501
+postype = p1
+pos = 0,0
+ownpal = 0
+bindtime = -1
+ignorehitpause = 1
+removetime = -1
+ontop = 1
+pausemovetime = -1
+supermovetime = -1
+scale = .75,.75
+
+[State 4900, ModifyExplod]
+type = ModifyExplod
+trigger1 = 1
+Id = 7501
+scale = (.5+Time*.06),(.5+Time*.06)
+
+[State 4900, ModifyExplod]
+type = ModifyExplod
+trigger1 = 1
+Id = 7501
+scale = (.5+Time*.06),(.5+Time*.06)
+
+[State -2, 1]
+type = PalFX
+trigger1 = 1
+time = 1
+add = -(Time*10),-(Time*10),-(Time*10)
+
+[state 7500,removeExplod]
+type = removeExplod
+trigger1 = time=15
+
+[state 7500,DestroySelf]
+type = DestroySelf
+trigger1 = time=15
+
+;超必殺技発動エフェクト
+[Statedef 7512]
+ctrl = 0
+anim = 8050
+velset = 0,0
+
+[State -2, 1]
+type = PalFX
+trigger1 = time = 0
+time = 1
+add = 0,0,0
+
+[state 8200, Explod]
+type = Explod
+trigger1 = time=0
+anim = 7500
+id = 7500
+postype = p1
+pos = 0,0
+ownpal = 0
+bindtime = -1
+ignorehitpause = 1
+removetime = -1;ifelse(parent,var(1)=2,32,8)
+ontop = 1
+pausemovetime = -1
+supermovetime = -1
+scale = 2,.5
+
+[State 4900, ModifyExplod]
+type = ModifyExplod
+trigger1 = 1
+Id = 7500
+scale = (2-(Time*.125))*ifelse((root,fvar(0)=1||root,fvar(0)=3),.75,1),(.625-(Time*.045))*ifelse((root,fvar(0)=1||root,fvar(0)=3),.75,1)
+
+[State -2, 1]
+type = PalFX
+trigger1 = 1
+time = 1
+add = 0-(Time*12),0-(Time*12),0-(Time*12)
+
+[state 7500,DestroySelf]
+type = RemoveExplod
+trigger1 = time=15
+
+[state 7500,DestroySelf]
+type = DestroySelf
+trigger1 = time=15
+
+;超必殺技発動エフェクト
+[Statedef 7513]
+ctrl = 0
+anim = 7540
+velset = 0,0
+ownpal = 1
+sprpriority = 98
+
+[state 7500,trans]
+type = AssertSpecial
+trigger1 = 1
+flag = noshadow
+
+[State -2, 1]
+type = Trans
+trigger1 = 1
+trans = add
+
+[State -2, 1]
+type = AngleAdd
+trigger1 = 1
+value = -5.3
+
+[State 4900, ModifyExplod]
+type = AngleDraw
+trigger1 = root,var(1)!=2 && time<15
+scale = .5*ifelse((root,fvar(0)=1||root,fvar(0)=3),.75,1),.5*ifelse((root,fvar(0)=1||root,fvar(0)=3),.75,1)
+
+[State 4900, ModifyExplod]
+type = AngleDraw
+trigger1 = root,var(1)!=2 && time>=15
+scale = (.5-(Time-15)*.0125)*ifelse((root,fvar(0)=1||root,fvar(0)=3),.75,1),(.5-(Time-15)*.0125)*ifelse((root,fvar(0)=1||root,fvar(0)=3),.75,1)
+
+[State 4900, ModifyExplod]
+type = AngleDraw
+trigger1 = root,var(1)=2 && time<30
+scale = .5*ifelse((root,fvar(0)=1||root,fvar(0)=3),.75,1),.5*ifelse((root,fvar(0)=1||root,fvar(0)=3),.75,1)
+
+[State 4900, ModifyExplod]
+type = AngleDraw
+trigger1 = root,var(1)=2 && time>=30
+scale = (.5-(Time-30)*.025)*ifelse((root,fvar(0)=1||root,fvar(0)=3),.75,1),(.5-(Time-30)*.025)*ifelse((root,fvar(0)=1||root,fvar(0)=3),.75,1)
+
+[state 7500,DestroySelf]
+type = DestroySelf
+trigger1 = time=50
+
+;超必殺技発動エフェクト
+[Statedef 7514]
+ctrl = 0
+anim = 7510
+velset = 0,0
+ownpal = 1
+sprpriority = 100
+
+[state 7500,trans]
+type = AssertSpecial
+trigger1 = 1
+flag = noshadow
+
+[State -2, 1]
+type = Trans
+trigger1 = 1
+trans = add
+
+[State -2, 1]
+type = AngleAdd
+trigger1 = 1
+value = -5.3
+
+[State 4900, ModifyExplod]
+type = AngleDraw
+trigger1 = time>=26
+scale = .75,.75
+
+[State 4900, ModifyExplod]
+type = AngleDraw
+trigger1 = time<26
+scale = (1.25-Time*.02),(1.25-Time*.02)
+
+[state 7500,DestroySelf]
+type = DestroySelf
+trigger1 = time=50
+
+;==========================================
+;==========================================
+;スーパーコンボフィニッシュエフェクト
+[Statedef 7530]
+ctrl = 0
+anim = 8050
+velset = 0,0
+ownpal = 1
+sprpriority = -10
+
+[State 9000, Assert]
+type = AssertSpecial
+trigger1 = Time < 30
+flag = NoMusic
+
+[State 1000, 1]
+type = AssertSpecial
+trigger1 = time=[0,79]
+flag = noFG
+flag2 = noBG
+flag3 = Globalnoshadow
+
+[State 9000, Assert]
+type = ChangeAnim
+trigger1 = Time =0
+value = 7530
+
+[State 7530]
+type = PosSet
+trigger1 = 1
+x = 0
+y = -80
+
+[State 8527]
+type = PlaySnd
+trigger1 = time=0
+value = 8500,1
+
+[State 7530]
+type = AngleAdd
+trigger1 = 1
+value = 25
+
+[State 7530]
+type = AngleDraw
+trigger1 = time<6
+scale = .5+(time)*.025,.5+(time)*.025
+
+[State 7530]
+type = AngleDraw
+trigger1 = time=[6,25]
+scale = .625-(time-6)*.025,.625-(time-6)*.025
+
+[State 7530]
+type = AngleDraw
+trigger1 = time=[26,80]
+scale = .2+(time-26)*.025,.2+(time-26)*.025
+
+[State 7530]
+type = Trans
+trigger1 = 1
+trans = add
+
+[State 7530]
+type = DestroySelf
+trigger1 = time=80
+
+
+;~~~~~~~~~~~~~
+;超必殺技フィニッシュエフェクト
+[Statedef 7540]
+ctrl = 0
+anim = 8050
+velset = 0,0
+ownpal = 1
+
+[State 9000, Assert]
+type = AssertSpecial
+trigger1 = Time < 30
+flag = NoMusic
+
+[State 1000, 1]
+type = AssertSpecial
+trigger1 = time=[0,46]
+flag = noFG
+flag2 = noBG
+flag3 = Globalnoshadow
+
+[State 1000, 1]
+type = EnvColor
+trigger1 = time=[10,46]
+time = 1
+value = ifelse(8*(time-10)>255,255,8*(time-10)),ifelse(8*(time-10)>255,255,8*(time-10)),ifelse(8*(time-10)>255,255,8*(time-10))
+under = 1
+
+[State 1000, 1]
+type = EnvColor
+trigger1 = time=[46,56]
+time = 1
+value = ifelse(8*(time-46)>255,255,255-8*(time-46)),ifelse(8*(time-46)>255,255,255-8*(time-46)),ifelse(8*(time-46)>255,255,255-8*(time-46))
+under = 1
+
+[State 1000, 1]
+type = BGPalFX
+trigger1 = time=[56,82]
+time = 1
+add = 255-ifelse(8*(time-46)>255,255,8*(time-46)),255-ifelse(8*(time-46)>255,255,8*(time-46)),255-ifelse((time-46)*8>255,255,8*(time-46))
+
+[State 7530]
+type = DestroySelf
+trigger1 = time=82
+;==========================================
+;==========================================
+;オリジナルコンボ発動エフェクト
+[Statedef 7600]
+ctrl = 0
+anim = 8050
+velset = 0,0
+
+[State 1000, 0]
+type = BGPalFX
+trigger1 = 1
+time = 1
+invertall = 1
+
+[State 3150,PlaySnd]
+type = PlaySnd
+trigger1 = Time=1
+value = 2400,0
+
+[State -2, 1]
+type = PalFX
+trigger1 = time = 0
+time = 1
+add = 0,0,0
+
+[state 8200, Explod]
+type = Explod
+trigger1 = Time=1 && !numexplod(7600)
+anim = 7600
+id = 7600
+postype = p1
+pos = 0,0
+ownpal = 0
+bindtime = -1
+ignorehitpause = 1
+sprpriority = 5
+persistent = 0
+supermove = 1
+pausemovetime = -1
+Supermovetime = -1
+scale = 1,1
+
+[state 8200, Explod]
+type = Explod
+trigger1 = Time=4 && !numexplod(7601)
+anim = 7601
+id = 7601
+postype = p1
+pos = 0,0
+ownpal = 0
+bindtime = -1
+ignorehitpause = 1
+sprpriority = 5
+persistent = 0
+supermove = 1
+pausemovetime = -1
+Supermovetime = -1
+scale = .075,.075
+
+[State -2, 1]
+type = PalFX
+trigger1 = time=18
+time = 1
+add = -100,-100,-100
+
+[State 4900, ModifyExplod]
+type = ModifyExplod
+trigger1 = Time < 18
+Id = 7600
+scale = (1-Time*.06),(1-Time*.06)
+
+[State 4900, ModifyExplod]
+type = ModifyExplod
+trigger1 = time>=18
+Id = 7600
+scale = (1-(Time-18)*.45),(1-(Time-18)*.45)
+
+[State 4900, ModifyExplod]
+type = ModifyExplod
+trigger1 = time>=3
+Id = 7601
+scale = .075+(Time-3)*.075,.075+(Time-3)*.075
+
+[state 7500,removeExplod]
+type = removeExplod
+trigger1 = time=30
+
+[state 7500,DestroySelf]
+type = DestroySelf
+trigger1 = time=30
+
+;==========================================
+;==========================================
+;パワー溜めエフェクト
+[Statedef 7610]
+ctrl = 0
+anim = 8050
+velset = 0,0
+
+[State 4110, BindToParent]
+type = BindToRoot
+trigger1 = 1
+pos = 0,0
+
+[state 8200, Explod]
+type = Explod
+trigger1 = Time=0 && !numexplod(7610)
+anim = 7610
+id = 7610
+postype = p1
+pos = 0,0
+ownpal = 0
+bindtime = -1
+removetime = -1
+ignorehitpause = 1
+sprpriority = -3
+persistent = 0
+scale = .5,.5
+
+[state 8200, Explod]
+type = Explod
+trigger1 = Time=0 && !numexplod(7615)
+anim = 7615
+id = 7615
+postype = p1
+pos = 0,0
+ownpal = 0
+bindtime = -1
+removetime = -1
+ignorehitpause = 1
+sprpriority = 3
+persistent = 0
+scale = .5,.5
+
+[State 7600, ModifyExplod]
+type = ModifyExplod
+trigger1 = power = [0,199]
+ID = 7615
+scale  = .5,0
+
+[State 7600, ModifyExplod]
+type = ModifyExplod
+trigger1 = power = [200,299]
+ID = 7615
+scale  = .5,.0625
+
+[State 7600, ModifyExplod]
+type = ModifyExplod
+trigger1 = power = [300,499]
+ID = 7615
+scale  = .5,.1275
+
+[State 7600, ModifyExplod]
+type = ModifyExplod
+trigger1 = power = [500,799]
+ID = 7615
+scale  = .5,.25
+
+[State 7600, ModifyExplod]
+type = ModifyExplod
+trigger1 = power = [800,1000]
+ID = 7615
+scale  = .5,.5
+
+[State 7610, RemoveExplod]
+type = RemoveExplod
+trigger1 = root,Anim!=950
+
+[State 7610, DestroySelf]
+type = DestroySelf
+trigger1 = root,Anim!=950
+
+;---------------------------------------------------------------------------
+; ジャンプ開始エフェクト
+[Statedef 7920]
+ctrl = 0
+anim = 8050
+velset = 0,0
+
+[State 7920, BindToRoot]
+type = BindToRoot
+trigger1 = Time > 0
+pos = 0,0
+
+[State 7920, Explod]
+type = Explod
+trigger1 = Time=0 && !numexplod(7920)
+anim = 7920
+pos = 0,0
+postype = P1
+ownpal = 0
+sprpriority = 5
+scale = .5,.5
+
+[State 7920, Explod]
+type = Explod
+trigger1 = Time=0||Time=2||Time=6
+anim = 7925
+pos = 0,0
+postype = P1
+ownpal = 0
+sprpriority = 5
+scale = .5,.5
+
+[State 4110, DestroySelf]
+type = DestroySelf
+trigger1 = Time=12
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;カウンターヒットエフェクト
+[Statedef 7550]
+anim = 8050
+velset = 0,0
+ctrl = 0
+
+[State 7500,varset]
+type = Parentvarset
+trigger1 = time=0
+var(14)=0
+
+[State 7500, 1]
+type = PalFX
+trigger1 = time = 0
+time = 1
+add = 0,0,0
+
+[State 6100, Explod]
+type = Explod
+trigger1 = Time=0&&!NumExplod(7500); && time<6
+anim = 7550
+id = 7550
+postype = P1
+pos = 0,0
+sprpriority = 6
+bindtime = -1
+removetime = -1
+persistent = 0
+ownpal = 0
+ignorehitpause = 1
+pausemovetime = 9999
+Supermovetime = 9999
+scale = .275,.275
+
+[State 6100,ExPlod]
+type = ModifyExplod
+trigger1 = 1
+id = 7550
+scale = .275+(time*.05),.275+(time*.05)
+ignorehitpause=1
+
+[State 7500, 1]
+type = PalFX
+trigger1 = time = 5
+time = 1
+add = -50,-50,-50
+
+[State 7500, 1]
+type = PalFX
+trigger1 = time = 6
+time = 1
+add = -120,-120,-120
+
+[State 7500, 1]
+type = PalFX
+trigger1 = time = 7
+time = 1
+add = -190,-190,-190
+
+[State 6100,ExPlod]
+type = RemoveExplod
+trigger1 = NumExplod(7550) && Time=8
+id = 7550
+
+[State 8200, DestroySelf]
+type = DestroySelf
+trigger1 = Time=8
+
+
+;==========================================
+;==========================================
+;ファイネストKOフィニッシュエフェクト
+[Statedef 7590]
+ctrl = 0
+anim = 8050
+velset = 0,0
+ownpal = 1
+sprpriority = -1000
+
+[State, Bench UI Sweep]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611]
+trigger2 = roundstate > 2
+trigger3 = !root,alive
+ignorehitpause = 1
+
+[State, Bench UI Restore]
+type = ChangeState
+trigger1 = roundstate <= 2
+trigger1 = !(root,stateno = [6565610, 6565611])
+trigger1 = root,alive
+trigger1 = numexplod(7590) = 0
+trigger1 = time > 0
+value = stateno
+ignorehitpause = 1
+
+[State 9000, Assert]
+type = AssertSpecial
+trigger1 = Time < 36
+flag = NoMusic
+
+[State 1000, 1]
+type = AssertSpecial
+trigger1 = 1
+flag = noFG
+flag2 = noBG
+flag3 = Globalnoshadow
+ignorehitpause = 1
+
+[State 8527]
+type = PlaySnd
+trigger1 = !time
+value = 8500,2
+
+;Finest KO!
+[State 8527]
+type = PlaySnd
+trigger1 = !time
+value = 9000,10
+
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = !Time && !numexplod(7590)
+anim = 7590
+id = 7590
+postype = Left
+pos = 160,120
+ownpal = 0
+bindtime = -1
+ignorehitpause = 1
+sprpriority = -1000
+persistent = 0
+supermove = 999
+pausemovetime = 999999
+Supermovetime = 99999
+scale = .5,.5
+
+[State 7530]
+type = ModifyExplod
+trigger1 = time<48
+scale = .5+(time)*.00175+(time-46)*(time>=46)*.005,.5+(time)*.00175+(time-46)*(time>=46)*.005
+id = 7590
+
+[State 8527]
+type = PlaySnd
+trigger1 = time=48
+value = 8500,3
+ignorehitpause = 1
+
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = Time=48 && !numexplod(7595)
+anim = 7595
+id = 7595
+postype = Left
+pos = 0,0
+ownpal = 0
+bindtime = -1
+ignorehitpause = 1
+sprpriority = -1000
+persistent = 0
+supermove = 999
+pausemovetime = 999999
+Supermovetime = 99999
+scale = .5,.5
+
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = Time=48 && !numexplod(7596)
+anim = 7595
+id = 7596
+postype = Left
+pos = 0,320
+ownpal = 0
+bindtime = -1
+ignorehitpause = 1
+sprpriority = -1000
+persistent = 0
+supermove = 999
+pausemovetime = 999999
+Supermovetime = 99999
+scale = .5,.5
+
+[State 7530]
+type = RemoveExplod
+trigger1 = time>=90
+
+[State 7530]
+type = DestroySelf
+trigger1 = time>=90
+
+;==========================================
+;==========================================
+
+
+;|||||||||||||||||||||||||
+;ボーナスメッセージ
+;|||||||||||||||||||||||||
+;==========================================
+;==========================================
+;ボーナスメッセージ(BlOCKING/JUST DEFENCED)１段目
+[Statedef 8500]
+ctrl = 0
+anim = 8050
+velset = 0,0
+ownpal = 1
+
+[state 8500]
+type = ChangeState
+trigger1 = time=0
+value = 8520
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;ボーナスメッセージ(BlOCKING/JUST DEFENCED)２段目
+[Statedef 8510]
+ctrl = 0
+anim = 8050
+velset = 0,0
+ownpal = 1
+
+[state 8500]
+type = ChangeState
+trigger1 = time=0
+value = 8520
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;ボーナスメッセージ(BlOCKING/JUST DEFENCED)３段目
+[Statedef 8520]
+ctrl = 0
+anim = 8050
+velset = 0,0
+ownpal = 1
+
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = time=0 && (root,stateno=[4000,4020])
+trigger1 = teamside=1
+anim = 8500
+id = 8500
+postype = Left
+pos = 80,80
+ownpal = 1
+bindtime = -1
+ignorehitpause = 1
+removetime=100
+ontop = 1
+pausemovetime = -1
+supermovetime = -1
+scale = .5,.5
+;
+[state 8200, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = time=0 && (root,stateno=[4000,4020])
+trigger1 = teamside=2
+anim = 8530
+id = 8500
+postype = Right
+pos = 80,80
+ontop = 1
+bindtime = -1
+ignorehitpause = 1
+removetime=100
+pausemovetime = -1
+supermovetime = -1
+scale = .5,.5
+
+[State, Bench UI Sweep]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611]
+trigger2 = roundstate > 2
+trigger3 = !root,alive
+ignorehitpause = 1
+
+[State, Bench UI Restore]
+type = ChangeState
+trigger1 = roundstate <= 2
+trigger1 = !(root,stateno = [6565610, 6565611])
+trigger1 = root,alive
+trigger1 = numexplod(8500) = 0
+trigger1 = time > 0
+value = stateno
+ignorehitpause = 1
+
+[State 8230, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = time=0 && (root,stateno=150||root,stateno=152||root,stateno=4120) && root,var(11)
+trigger1 = teamside=1
+anim = 8504
+id = 8500
+postype = Left
+pos = -100,-200
+ownpal = 1
+bindtime = -1
+ontop = 1
+ignorehitpause = 1
+removetime=100
+facing = 1
+pausemovetime = -1
+supermovetime = -1
+scale = .5,.5
+
+[State 8230, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = time=0 && (root,stateno=150||root,stateno=152||root,stateno=4120) && root,var(11)
+trigger1 = teamside=2
+anim = 8534
+id = 8500
+postype = Right
+pos = -100,-200
+ownpal = 1
+bindtime = -1
+ignorehitpause = 1
+removetime=100
+ontop = 1
+facing = 1
+pausemovetime = -1
+supermovetime = -1
+scale = .5,.5
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8500) && Time<4 && teamside=1
+Id = 8500
+postype = Left
+pos = ceil(30+(time*25)),90+ifelse(Ishelper(8500),0,ifelse(Ishelper(8510),20,40))
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8500) && Time<4 && teamside=2
+Id = 8500
+postype = Right
+pos = ceil(-30-(time*25)),90+ifelse(Ishelper(8500),0,ifelse(Ishelper(8510),20,40))
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8500) && Time>46
+Id = 8500
+scale = .5,.5-((time-46)*.05)
+ignorehitpause = 1
+
+[State 1000, Spark]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = Time = 46
+Anim = 8560
+id = 8560
+pos = ifelse((facing=-1&&teamside=1)||(facing=1&&teamside=2),250,70), 90+ifelse(Ishelper(8500),0,ifelse(Ishelper(8510),20,40))
+postype = Back
+ownpal = 1
+ontop = 1
+bindtime = -1
+pausemovetime = -1
+supermove = 1
+ignorehitpause = 1
+scale = .5,.5
+
+[state 8200]
+type = ParentVarAdd
+trigger1 = Time = 46
+trigger2 = Time>1 && ((Parent,StateNo=[4000,4020]) || (Parent,var(50)>0 && (parent,stateno=150 || parent,stateno=152 || parent,stateno=154 || parent,stateno=4120))) && root,time=1
+var(52) = -(2**(floor((ifelse(IsHelper(stateno),stateno,prevstateno)-8500)*.1)))
+
+[state 8200, RemoveExplod1]
+type = RemoveExplod
+trigger1 = Time = 46
+trigger2 = Time>1 && ((Parent,StateNo=[4000,4020]) || (Parent,var(50)>0 && (parent,stateno=150 || parent,stateno=152 || parent,stateno=154 || parent,stateno=4120))) && root,time=1
+Id = 8500
+
+[State 8200, DestroySelf]
+type = DestroySelf
+trigger1 = Time = 46
+trigger2 = Time>1 && ((Parent,StateNo=[4000,4020]) || (Parent,var(50)>0 && (parent,stateno=150 || parent,stateno=152 || parent,stateno=154 || parent,stateno=4120))) && root,time=1
+
+;=======================================
+;ボーナスメッセージ(COUNTER HIT)１段目
+[Statedef 8501]
+ctrl = 0
+anim = 8050
+velset = 0,0
+ownpal = 1
+
+[state 8500]
+type = ChangeState
+trigger1 = time=0
+value = 8521
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;ボーナスメッセージ(COUNTER HIT)２段目
+[Statedef 8511]
+ctrl = 0
+anim = 8050
+velset = 0,0
+ownpal = 1
+
+[state 8500]
+type = ChangeState
+trigger1 = time=0
+value = 8521
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;ボーナスメッセージ(COUNTER HIT)３段目
+[Statedef 8521]
+ctrl = 0
+anim = 8050
+velset = 0,0
+ownpal = 1
+
+[State, Bench UI Sweep]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611]
+trigger2 = roundstate > 2
+trigger3 = !root,alive
+ignorehitpause = 1
+
+[State, Bench UI Restore]
+type = ChangeState
+trigger1 = roundstate <= 2
+trigger1 = !(root,stateno = [6565610, 6565611])
+trigger1 = root,alive
+trigger1 = numexplod(8500) = 0
+trigger1 = time > 0
+value = stateno
+ignorehitpause = 1
+
+[State 8230, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = time=0
+trigger1 = teamside=1
+anim = 8501
+id = 8500
+postype = Left
+pos = -100,-200
+ownpal = 1
+bindtime = -1
+ignorehitpause = 1
+removetime=100
+ontop = 1
+facing = 1
+pausemovetime = -1
+supermovetime = -1
+scale = .5,.5
+
+[State 8230, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = time=0
+trigger1 = teamside=2
+anim = 8531
+id = 8500
+postype = Right
+pos = -100,-200
+ownpal = 1
+removetime=100
+bindtime = -1
+ignorehitpause = 1
+ontop = 1
+facing = 1
+pausemovetime = -1
+supermovetime = -1
+scale = .5,.5
+
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8500) && Time<4 && teamside=1
+Id = 8500
+postype = Left
+pos = ceil(30+(time*25)),90+ifelse(Ishelper(8501),0,ifelse(Ishelper(8511),20,40))
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8500) && Time<4 && teamside=2
+Id = 8500
+postype = Right
+pos = ceil(-30-(time*25)),90+ifelse(Ishelper(8501),0,ifelse(Ishelper(8511),20,40))
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8500) && Time>46
+Id = 8500
+scale = .5,.5-((time-46)*.1)
+ignorehitpause = 1
+
+[State 1000, Spark]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = Time = 46
+Anim = 8560
+id = 8560
+pos = ifelse((facing=-1&&teamside=1)||(facing=1&&teamside=2),250,70), 90+ifelse(Ishelper(8501),0,ifelse(Ishelper(8511),20,40))
+postype = Back
+ownpal = 1
+ontop = 1
+bindtime = -1
+pausemovetime = -1
+supermove = 1
+ignorehitpause = 1
+scale = .5,.5
+
+[state 8200]
+type = ParentVarAdd
+trigger1 = Time=46
+var(52) = -(2**(floor((ifelse(IsHelper(stateno),stateno,prevstateno)-8500)*.1)))
+
+[state 8200, RemoveExplod1]
+type = RemoveExplod
+trigger1 = Time=46
+Id = 8500
+
+[State 8200, DestroySelf]
+type = DestroySelf
+trigger1 = Time = 46
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;ボーナスメッセージ(First Attack)１段目
+[Statedef 8502]
+ctrl = 0
+anim = 8050
+velset = 0,0
+ownpal = 1
+
+[state 8200, RemoveExplod1]
+type = ChangeState
+trigger1 = Time=0
+value = 8522
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;ボーナスメッセージ(First Attack)２段目
+[Statedef 8512]
+ctrl = 0
+anim = 8050
+velset = 0,0
+ownpal = 1
+
+[state 8200, RemoveExplod1]
+type = ChangeState
+trigger1 = Time=0
+value = 8522
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;ボーナスメッセージ(First Attack)３段目
+[Statedef 8522]
+ctrl = 0
+anim = 8050
+velset = 0,0
+ownpal = 1
+
+[State, Bench UI Sweep]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611]
+trigger2 = roundstate > 2
+trigger3 = !root,alive
+ignorehitpause = 1
+
+[State, Bench UI Restore]
+type = ChangeState
+trigger1 = roundstate <= 2
+trigger1 = !(root,stateno = [6565610, 6565611])
+trigger1 = root,alive
+trigger1 = numexplod(8500) = 0
+trigger1 = time > 0
+value = stateno
+ignorehitpause = 1
+
+[State 8502]
+type = ParentVarSet
+trigger1 = time=0
+var(26)=-1
+
+[State 8230, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = time=0
+trigger1 = teamside=1
+anim = 8502
+id = 8500
+postype = Left
+pos = -100,-200
+ownpal = 1
+bindtime = -1
+ignorehitpause = 1
+ontop = 1
+facing = 1
+pausemovetime = -1
+supermovetime = -1
+scale = .5,.5
+
+[State 8230, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = time=0
+trigger1 = teamside=2
+anim = 8532
+id = 8500
+postype = Right
+pos = -100,-200
+ownpal = 1
+bindtime = -1
+ignorehitpause = 1
+ontop = 1
+facing = 1
+pausemovetime = -1
+supermovetime = -1
+scale = .5,.5
+
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8500) && Time<4 && teamside=1
+Id = 8500
+postype = Left
+pos = ceil(30+(time*25)),90+ifelse(Ishelper(8502),0,ifelse(Ishelper(8512),20,40))
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8500) && Time<4 && teamside=2
+Id = 8500
+postype = Right
+pos = ceil(-30-(time*25)),90+ifelse(Ishelper(8502),0,ifelse(Ishelper(8512),20,40))
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8500) && Time>46
+Id = 8500
+scale = .5,.5-((time-46)*.05)
+ignorehitpause = 1
+
+[State 1000, Spark]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = Time = 46
+Anim = 8560
+id = 8560
+pos = ifelse((facing=-1&&teamside=1)||(facing=1&&teamside=2),250,70), 90+ifelse(Ishelper(8502),0,ifelse(Ishelper(8512),20,40))
+postype = Back
+ownpal = 1
+ontop = 1
+bindtime = -1
+pausemovetime = -1
+supermove = 1
+ignorehitpause = 1
+scale = .5,.5
+
+[state 8200]
+type = ParentVarAdd
+trigger1 = Time=46
+var(52) = -(2**(floor((ifelse(IsHelper(stateno),stateno,prevstateno)-8500)*.1)))
+
+[state 8200, RemoveExplod1]
+type = RemoveExplod
+trigger1 = Time=46
+Id = 8500
+
+[State 8200, DestroySelf]
+type = DestroySelf
+trigger1 = Time = 46
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;ボーナスメッセージ(GUARD CANCEL)１段目
+[Statedef 8503]
+ctrl = 0
+anim = 8050
+velset = 0,0
+ownpal = 1
+
+[state 8500]
+type = ChangeState
+trigger1 = time=0
+value = 8523
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;ボーナスメッセージ(GUARD CANCEL)２段目
+[Statedef 8513]
+ctrl = 0
+anim = 8050
+velset = 0,0
+ownpal = 1
+
+[state 8500]
+type = ChangeState
+trigger1 = time=0
+value = 8523
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;ボーナスメッセージ(GUARD CANCEL)３段目
+[Statedef 8523]
+ctrl = 0
+anim = 8050
+velset = 0,0
+ownpal = 1
+
+[State, Bench UI Sweep]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611]
+trigger2 = roundstate > 2
+trigger3 = !root,alive
+ignorehitpause = 1
+
+[State, Bench UI Restore]
+type = ChangeState
+trigger1 = roundstate <= 2
+trigger1 = !(root,stateno = [6565610, 6565611])
+trigger1 = root,alive
+trigger1 = numexplod(8500) = 0
+trigger1 = time > 0
+value = stateno
+ignorehitpause = 1
+
+[State 8230, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = time=0
+trigger1 = teamside=1
+anim = 8503
+id = 8500
+postype = Left
+pos = -100,-200
+ownpal = 1
+bindtime = -1
+ignorehitpause = 1
+removetime=100
+ontop = 1
+facing = 1
+pausemovetime = -1
+supermovetime = -1
+scale = .5,.5
+
+[State 8230, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = time=0
+trigger1 = teamside=2
+anim = 8533
+id = 8500
+postype = Right
+pos = -100,-200
+ownpal = 1
+bindtime = -1
+ignorehitpause = 1
+removetime=100
+ontop = 1
+facing = 1
+pausemovetime = -1
+supermovetime = -1
+scale = .5,.5
+
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8500) && Time<4 && teamside=1
+Id = 8500
+postype = Left
+pos = ceil(30+(time*25)),90+ifelse(Ishelper(8503),0,ifelse(Ishelper(8513),20,40))
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8500) && Time<4 && teamside=2
+Id = 8500
+postype = Right
+pos = ceil(-30-(time*25)),90+ifelse(Ishelper(8503),0,ifelse(Ishelper(8513),20,40))
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8500) && Time>46
+Id = 8500
+scale = .5,.5-((time-46)*.05)
+ignorehitpause = 1
+
+[State 1000, Spark]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = Time = 46
+Anim = 8560
+id = 8560
+pos = ifelse((facing=-1&&teamside=1)||(facing=1&&teamside=2),250,70), 90+ifelse(Ishelper(8503),0,ifelse(Ishelper(8513),20,40))
+postype = Back
+ownpal = 1
+ontop = 1
+bindtime = -1
+pausemovetime = -1
+supermove = 1
+ignorehitpause = 1
+scale = .5,.5
+
+[state 8200]
+type = ParentVarAdd
+trigger1 = Time=46
+var(52) = -(2**(floor((ifelse(IsHelper(stateno),stateno,prevstateno)-8500)*.1)))
+
+[state 8200, RemoveExplod1]
+type = RemoveExplod
+trigger1 = Time=46
+Id = 8500
+
+[State 8200, DestroySelf]
+type = DestroySelf
+trigger1 = Time = 46
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;ボーナスメッセージ(REVERSAL)１段目
+[Statedef 8504]
+ctrl = 0
+anim = 8050
+velset = 0,0
+ownpal = 1
+
+[state 8500]
+type = ChangeState
+trigger1 = time=0
+value = 8524
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;ボーナスメッセージ(REVERSAL)２段目
+[Statedef 8514]
+ctrl = 0
+anim = 8050
+velset = 0,0
+ownpal = 1
+
+[state 8500]
+type = ChangeState
+trigger1 = time=0
+value = 8524
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;ボーナスメッセージ(REVERSAL)３段目
+[Statedef 8524]
+ctrl = 0
+anim = 8050
+velset = 0,0
+ownpal = 1
+
+[State, Bench UI Sweep]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611]
+trigger2 = roundstate > 2
+trigger3 = !root,alive
+ignorehitpause = 1
+
+[State, Bench UI Restore]
+type = ChangeState
+trigger1 = roundstate <= 2
+trigger1 = !(root,stateno = [6565610, 6565611])
+trigger1 = root,alive
+trigger1 = numexplod(8500) = 0
+trigger1 = time > 0
+value = stateno
+ignorehitpause = 1
+
+[State 8502]
+type = ParentVarSet
+trigger1 = time=0
+var(27)=0
+
+[State 8230, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = time=0
+trigger1 = teamside=1
+anim = 8505
+id = 8500
+postype = Left
+pos = -100,-200
+ownpal = 1
+bindtime = -1
+ignorehitpause = 1
+removetime=100
+ontop = 1
+facing = 1
+pausemovetime = -1
+supermovetime = -1
+scale = .5,.5
+
+[State 8230, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = time=0
+trigger1 = teamside=2
+anim = 8535
+id = 8500
+postype = Right
+pos = -100,-200
+ownpal = 1
+bindtime = -1
+ignorehitpause = 1
+removetime=100
+ontop = 1
+facing = 1
+pausemovetime = -1
+supermovetime = -1
+scale = .5,.5
+
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8500) && Time<4 && teamside=1
+Id = 8500
+postype = Left
+pos = ceil(30+(time*25)),90+ifelse(Ishelper(8504),0,ifelse(Ishelper(8514),20,40))
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8500) && Time<4 && teamside=2
+Id = 8500
+postype = Right
+pos = ceil(-30-(time*25)),90+ifelse(Ishelper(8504),0,ifelse(Ishelper(8514),20,40))
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8500) && Time>46
+Id = 8500
+scale = .5,.5-((time-46)*.05)
+ignorehitpause = 1
+
+[State 1000, Spark]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = Time = 46
+Anim = 8560
+id = 8560
+pos = ifelse((facing=-1&&teamside=1)||(facing=1&&teamside=2),250,70), 90+ifelse(Ishelper(8504),0,ifelse(Ishelper(8514),20,40))
+postype = Back
+ownpal = 1
+ontop = 1
+bindtime = -1
+pausemovetime = -1
+supermove = 1
+ignorehitpause = 1
+scale = .5,.5
+
+[state 8200]
+type = ParentVarAdd
+trigger1 = Time=46
+var(52) = -(2**(floor((ifelse(IsHelper(stateno),stateno,prevstateno)-8500)*.1)))
+
+[state 8200, RemoveExplod1]
+type = RemoveExplod
+trigger1 = Time=46
+Id = 8500
+
+[State 8200, DestroySelf]
+type = DestroySelf
+trigger1 = Time = 46
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;ボーナスメッセージ(Tech Bonus)１段目
+[Statedef 8505]
+ctrl = 0
+anim = 8050
+velset = 0,0
+ownpal = 1
+
+[state 8500]
+type = ChangeState
+trigger1 = time=0
+value = 8525
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;ボーナスメッセージ(Tech Bonus)２段目
+[Statedef 8515]
+ctrl = 0
+anim = 8050
+velset = 0,0
+ownpal = 1
+
+[state 8500]
+type = ChangeState
+trigger1 = time=0
+value = 8525
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;ボーナスメッセージ(Tech Bonus)３段目
+[Statedef 8525]
+ctrl = 0
+anim = 8050
+velset = 0,0
+ownpal = 1
+
+[State, Bench UI Sweep]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611]
+trigger2 = roundstate > 2
+trigger3 = !root,alive
+ignorehitpause = 1
+
+[State, Bench UI Restore]
+type = ChangeState
+trigger1 = roundstate <= 2
+trigger1 = !(root,stateno = [6565610, 6565611])
+trigger1 = root,alive
+trigger1 = numexplod(8500) = 0
+trigger1 = time > 0
+value = stateno
+ignorehitpause = 1
+
+[State 8230, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = time=0
+trigger1 = ifelse(root,stateno=831,teamside=2,teamside=1)
+anim = 8506
+id = 8500
+postype = Left
+pos = -100,-200
+ownpal = 1
+bindtime = -1
+ignorehitpause = 1
+removetime=100
+ontop = 1
+facing = 1
+pausemovetime = -1
+supermovetime = -1
+scale = .5,.5
+
+[State 8230, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = time=0
+trigger1 = ifelse(root,stateno=831,teamside=1,teamside=2)
+anim = 8536
+id = 8500
+postype = Right
+pos = -100,-200
+ownpal = 1
+bindtime = -1
+ignorehitpause = 1
+removetime=100
+ontop = 1
+facing = 1
+pausemovetime = -1
+supermovetime = -1
+scale = .5,.5
+
+[state 8200, varset]
+type = varset
+trigger1 = Time=0
+var(1)=0
+
+[state 8200, varset]
+type = varset
+trigger1 = Time=0
+var(1)=root,stateno=831
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8500) && Time<10 && ifelse(var(1),teamside=2,teamside=1)
+Id = 8500
+postype = Left
+pos = ceil(30+(time*25)),90+ifelse(Ishelper(8505),0,ifelse(Ishelper(8515),20,40))
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8500) && Time<10 && ifelse(var(1),teamside=1,teamside=2)
+Id = 8500
+postype = Right
+pos = ceil(-30-(time*25)),90+ifelse(Ishelper(8505),0,ifelse(Ishelper(8515),20,40))
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8500) && Time>46
+Id = 8500
+scale = .5,.5-((time-46)*.05)
+ignorehitpause = 1
+
+[State 1000, Spark]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = Time = 46
+Anim = 8560
+id = 8560
+pos = ifelse((facing=-1&&teamside=1)||(facing=1&&teamside=2),ifelse(var(1),60,260),ifelse(var(1),260,60)), 90+ifelse(Ishelper(8505),0,ifelse(Ishelper(8515),20,40))
+postype = Back
+ownpal = 1
+ontop = 1
+bindtime = -1
+pausemovetime = -1
+supermove = 1
+ignorehitpause = 1
+scale = .5,.5
+
+[state 8200]
+type = ParentVarAdd
+trigger1 = Time=46
+var(52) = -(2**(floor((ifelse(IsHelper(stateno),stateno,prevstateno)-8500)*.1)))
+
+[state 8200, RemoveExplod1]
+type = RemoveExplod
+trigger1 = Time=46
+Id = 8500
+
+[State 8200, DestroySelf]
+type = DestroySelf
+trigger1 = Time = 46
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;ボーナスメッセージ(GUARD CLASH)１段目
+[Statedef 8507]
+ctrl = 0
+anim = 8050
+velset = 0,0
+ownpal = 1
+
+[state 8500]
+type = ChangeState
+trigger1 = time=0
+value = 8527
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;ボーナスメッセージ(GUARD CLASH)２段目
+[Statedef 8517]
+ctrl = 0
+anim = 8050
+velset = 0,0
+ownpal = 1
+
+[state 8500]
+type = ChangeState
+trigger1 = time=0
+value = 8527
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;ボーナスメッセージ(GUARD CLASH)３段目
+[Statedef 8527]
+ctrl = 0
+anim = 8050
+velset = 0,0
+ownpal = 1
+
+[State, Bench UI Sweep]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611]
+trigger2 = roundstate > 2
+trigger3 = !root,alive
+ignorehitpause = 1
+
+[State, Bench UI Restore]
+type = ChangeState
+trigger1 = roundstate <= 2
+trigger1 = !(root,stateno = [6565610, 6565611])
+trigger1 = root,alive
+trigger1 = numexplod(8507) = 0
+trigger1 = time > 0
+value = stateno
+ignorehitpause = 1
+
+[State 8500,VelSet]
+type = varset
+trigger1 = time=0&&(P2stateno=15915||P2stateno=15925||P2stateno=15935||P2stateno=5910||P2stateno=5920||P2stateno=5930)&&P2movetype=I
+var(10)=1
+
+[State 8230, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = time=0
+trigger1 = ifelse(var(10)=1,teamside=1,teamside=2)
+anim = 8513
+id = 8507
+postype = Left
+pos = -100,-200
+ownpal = 1
+bindtime = -1
+ignorehitpause = 1
+ontop = 1
+facing = 1
+pausemovetime = -1
+supermovetime = -1
+scale = .5,.5
+
+[State 8230, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = time=0
+trigger1 = ifelse(var(10)=1,teamside=2,teamside=1)
+anim = 8543
+id = 8507
+postype = Right
+pos = -100,-200
+ownpal = 1
+bindtime = -1
+ignorehitpause = 1
+ontop = 1
+facing = 1
+pausemovetime = -1
+supermovetime = -1
+scale = .5,.5
+
+[State 8230, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = time=0
+trigger1 = ifelse(var(10)=1,teamside=2,teamside=1)
+anim = 8514
+id = 8508
+postype = Left
+pos = -100,-200
+ownpal = 1
+bindtime = -1
+ignorehitpause = 1
+ontop = 1
+facing = 1
+pausemovetime = -1
+supermovetime = -1
+scale = .5,.5
+
+[State 8230, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = time=0
+trigger1 = ifelse(var(10)=1,teamside=1,teamside=2)
+anim = 8544
+id = 8508
+postype = Right
+pos = -100,-200
+ownpal = 1
+bindtime = -1
+ignorehitpause = 1
+ontop = 1
+facing = 1
+pausemovetime = -1
+supermovetime = -1
+scale = .5,.5
+
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8507) && Time<4 && ifelse(var(10)=1,teamside=1,teamside=2)
+Id = 8507
+postype = Left
+pos = ceil(30+(time*25)),90+ifelse(Ishelper(8507),0,ifelse(Ishelper(8517),20,40))
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8507) && Time<4 && ifelse(var(10)=1,teamside=2,teamside=1)
+Id = 8507
+postype = Right
+pos = ceil(-30-(time*25)),90+ifelse(Ishelper(8507),0,ifelse(Ishelper(8517),20,40))
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8508) && Time<4 && ifelse(var(10)=1,teamside=2,teamside=1)
+Id = 8508
+postype = Left
+pos = ceil(30+(time*25)),90+ifelse(Ishelper(8507),0,ifelse(Ishelper(8517),20,40))
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8508) && Time<4 && ifelse(var(10)=1,teamside=1,teamside=2)
+Id = 8508
+postype = Right
+pos = ceil(-30-(time*25)),90+ifelse(Ishelper(8507),0,ifelse(Ishelper(8517),20,40))
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8507) && Time>46
+Id = 8507
+scale = .5,.5-((time-46)*.05)
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8508) && Time>46
+Id = 8508
+scale = .5,.5-((time-46)*.05)
+ignorehitpause = 1
+
+[State 1000, Spark]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = Time = 46
+Anim = 8560
+id = 8560
+pos = ifelse((facing=-1&&ifelse(var(10)=1,teamside=2,teamside=1))||(facing=1&&ifelse(var(10)=1,teamside=1,teamside=2)),270,50), 90+ifelse(Ishelper(8507),0,ifelse(Ishelper(8517),20,40))
+postype = Back
+ownpal = 1
+ontop = 1
+bindtime = -1
+pausemovetime = -1
+supermove = 1
+ignorehitpause = 1
+scale = .5,.5
+
+[State 1000, Spark]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = Time = 46
+Anim = 8560
+id = 8561
+pos = ifelse((facing=-1&&ifelse(var(10)=1,teamside=2,teamside=1))||(facing=1&&ifelse(var(10)=1,teamside=1,teamside=2)),50,270), 90+ifelse(Ishelper(8507),0,ifelse(Ishelper(8517),20,40))
+postype = Back
+ownpal = 1
+ontop = 1
+bindtime = -1
+pausemovetime = -1
+supermove = 1
+ignorehitpause = 1
+scale = .5,.5
+
+[state 8200]
+type = ParentVarAdd
+trigger1 = Time=46
+var(52) = -(2**(floor((ifelse(IsHelper(stateno),stateno,prevstateno)-8500)*.1)))
+
+[state 8200, RemoveExplod1]
+type = RemoveExplod
+trigger1 = Time = 46
+Id = 8507
+
+[state 8200, RemoveExplod1]
+type = RemoveExplod
+trigger1 = Time = 46
+Id = 8508
+
+[State 8200, DestroySelf]
+type = DestroySelf
+trigger1 = Time = 46
+
+;=======================================
+;ボーナスメッセージ(GOOD,GREAT,VERY GOOD,WONDERFULL,FANTASTIC!,!!)１段目
+[Statedef 8508]
+ctrl = 0
+anim = 8050
+velset = 0,0
+ownpal = 1
+
+[state 8500]
+type = varset
+trigger1 = time=0||(parent,var(16)>var(16)&&var(16)>0)
+var(16) = parent,var(16)
+
+[state 8500]
+type = varset
+trigger1 = var(16)>0&&(!parent,var(16)||parent,var(16)<var(16))
+var(16) = -1*var(16)
+
+[state 8500]
+type = ChangeState
+trigger1 = var(16)<-1
+value = 8518
+
+[state 8500]
+type = DestroySelf
+trigger1 = (var(16)=[-1,0])
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;ボーナスメッセージ(GOOD,GREAT,VERY GOOD,WONDERFULL,FANTASTIC!,!!)待機
+[Statedef 8518]
+ctrl = 0
+anim = 8050
+velset = 0,0
+ownpal = 1
+
+[state 8500]
+type = ChangeState
+trigger1 = time=40
+value = 8528
+
+;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+;ボーナスメッセージ(GOOD,GREAT,VERY GOOD,WONDERFULL,FANTASTIC!,!!)
+[Statedef 8528]
+ctrl = 0
+anim = 8050
+velset = 0,0
+ownpal = 1
+
+[State, Bench UI Sweep]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611]
+trigger2 = roundstate > 2
+trigger3 = !root,alive
+ignorehitpause = 1
+
+[State, Bench UI Restore]
+type = ChangeState
+trigger1 = roundstate <= 2
+trigger1 = !(root,stateno = [6565610, 6565611])
+trigger1 = root,alive
+trigger1 = numexplod(8500) = 0
+trigger1 = time > 0
+value = stateno
+ignorehitpause = 1
+
+[State 8500,VelSet]
+type = varset
+trigger1 = time=0
+var(1) = ifelse(root,var(52)%2<1,0,ifelse(root,var(52)%4<2,1,2))
+
+[State 8500,VelSet]
+type = parentvaradd
+trigger1 = time=0
+var(52) = ifelse(root,var(52)%2<1,1,ifelse(root,var(52)%4<2,2,4))
+
+[State 8230, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = time=0
+trigger1 = teamside=1
+anim = 8515-ifelse(var(16)<-11,-9,(var(16)+2))
+id = 8500
+postype = Left
+pos = -100,-200
+ownpal = 1
+bindtime = -1
+ignorehitpause = 1
+removetime=100
+ontop = 1
+facing = 1
+pausemovetime = -1
+supermovetime = -1
+scale = .5,.5
+
+[State 8230, Explod]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = time=0
+trigger1 = teamside=2
+anim = 8545-ifelse(var(16)<-11,-9,(var(16)+2))
+id = 8500
+postype = Right
+pos = -100,-200
+ownpal = 1
+removetime=100
+bindtime = -1
+ignorehitpause = 1
+ontop = 1
+facing = 1
+pausemovetime = -1
+supermovetime = -1
+scale = .5,.5
+
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8500) && Time<4 && teamside=1
+Id = 8500
+postype = Left
+pos = ceil(30+(time*25)),90+var(1)*20
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8500) && Time<4 && teamside=2
+Id = 8500
+postype = Right
+pos = ceil(-30-(time*25)),90+var(1)*20
+ignorehitpause = 1
+
+[state 8200, ModifyExplod1]
+type = ModifyExplod
+trigger1 = NumExplod(8500) && Time>46
+Id = 8500
+scale = .5,.5-((time-46)*.05)
+ignorehitpause = 1
+
+[State 1000, Spark]
+type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive && roundstate <= 2 ;<-- bench UI: hide when tagged out/KOd/round over
+trigger1 = Time = 46
+Anim = 8560
+id = 8560
+pos = ifelse((facing=-1&&teamside=1)||(facing=1&&teamside=2),250,70), 90+var(1)*20
+postype = Back
+ownpal = 1
+ontop = 1
+bindtime = -1
+pausemovetime = -1
+supermove = 1
+ignorehitpause = 1
+scale = .5,.5
+
+[state 8200]
+type = ParentVarAdd
+trigger1 = Time=46
+var(52) = -(2**var(1))
+
+[state 8200, RemoveExplod1]
+type = RemoveExplod
+trigger1 = Time=46
+Id = 8500
+
+[State 8200, DestroySelf]
+type = DestroySelf
+trigger1 = Time = 46
+
+;-------------------------------------
+
+;===AI(CPU)
+;AI起動用ヘルパー（ヘルパー側でAI起動）
+[statedef 90000]
+ctrl = 0
+anim= -1
+
+[state 98765]
+type = Assertspecial
+trigger1 = 1
+flag = invisible
+flag2 = noshadow
+
+[state 98765]
+type = nothitby
+trigger1 = 1
+value = SCA
+time=-1
+
+[state 98765]
+type = turn
+trigger1 = facing!=root,facing
+
+;プレイヤー判定
+[state 98765]
+type = varset
+triggerall = fvar(38)!=1
+trigger1 = command="up"&&root,command="up"
+trigger2 = command="down"&&root,command="down"
+trigger3 = command="fwd"&&root,command="fwd"
+trigger4 = command="back"&&root,command="back"
+trigger5 = command="x"&&root,command="x"
+trigger6 = command="y"&&root,command="y"
+trigger7 = command="z"&&root,command="z"
+trigger8 = command="a"&&root,command="a"
+trigger9 = command="b"&&root,command="b"
+trigger10 = command="c"&&root,command="c"
+trigger11 = command="s"&&root,command="s"
+fvar(38) = -1
+
+;AIかプレイヤーが操作したら消滅
+[state -1]
+type = DestroySelf
+trigger1 = root,fvar(38)||fvar(38)=-1||((var(1)=2||var(3))&&var(0))
+trigger2 = command="down"&&root,command="down"
+trigger3 = command="fwd"&&root,command="fwd"
+trigger4 = command="back"&&root,command="back"
+trigger5 = command="x"&&root,command="x"
+trigger6 = command="y"&&root,command="y"
+trigger7 = command="z"&&root,command="z"
+trigger8 = command="a"&&root,command="a"
+trigger9 = command="b"&&root,command="b"
+trigger10 = command="c"&&root,command="c"
+trigger11 = command="s"&&root,command="s"
+trigger12 = command="up"&&root,command="up"
+
+[state 90000]
+type = varset
+trigger1 = roundstate=2&&root,ctrl
+var(0) = 1
+
+[state 90000]
+type = varset
+trigger1 = !var(0)&&(power-var(2)=[1,const(data.power)/20])
+var(3) = 1
+
+[state 90000]
+type = poweradd
+trigger1 = (TeamMode=Single) && (enemy,TeamMode=Single) && (power>=const(data.power)) && !var(1) && !var(0)
+value = -1
+
+[state 90000]
+type = poweradd
+trigger1 = (TeamMode=Single) && (enemy,TeamMode=Single) && (power=const(data.power)-1) && var(0)
+value = 1
+
+[state 90000]
+type = varset
+trigger1 = 1
+var(2) = power
+
+[state 90000]
+type = varset
+trigger1 = (TeamMode=Single) && (enemy,TeamMode=Single) && (power>=const(data.power)) && !var(1) && !var(0)
+var(1) = 1
+
+[state 90000]
+type = varset
+trigger1 = (TeamMode=Single) && (enemy,TeamMode=Single) && (power=const(data.power)-1) && var(1)=1
+var(1) = 2
+
+[state 90000]
+type = varadd
+trigger1 = var(1)=2
+var(1) = 1
+
+;AI判定
+[state 98765]
+type = varset
+triggerall = fvar(38)!=-1&&var(0)
+trigger1 = root,command="up"
+trigger2 = root,command="down"
+trigger3 = root,command="fwd"
+trigger4 = root,command="back"
+trigger5 = root,command="x"
+trigger6 = root,command="y"
+trigger7 = root,command="z"
+trigger8 = root,command="a"
+trigger9 = root,command="b"
+trigger10 = root,command="c"
+trigger11 = root,command="s"
+fvar(38) = 1
+
