@@ -1,0 +1,42 @@
+
+; VERSAO 18/09/20
+[Info]
+name = "Dante"
+displayname = "Dante"
+versiondate = 04,14,2024
+mugenversion = 1.0 ;04,06,2004
+author = "Wou" ;edit by Engel '86BR ;editado com base no dante do YAMATO
+pal.defaults = 1,2,3,4,5,6,7,8,9,10,11,12
+
+[Files]
+sprite=Dante.sff
+sound=Dante.snd
+anim =Dante.air
+cmd = Dante.cmd
+cns = Dante.cns
+st  = Dante.cns
+st1 = Dante - N.cns
+st2 = Dante - S.cns
+st3 = Dante - H.cns
+st4 = misc.cns
+st5 = common.cns
+stcommon = common1.cns
+;movelist = movelist.dat 
+;
+pal1=01.act ;Default
+pal2=02.act
+pal3=03.act
+pal4=04.act
+pal5=05.act
+pal6=06.act
+pal7=07.act
+pal8=08.act
+pal9=09.act
+pal10=10.act
+pal11=11.act
+pal12=12.act
+
+[Arcade]
+;arcadepath = external/historia/dante.lua
+intro.storyboard=
+ending.storyboard=

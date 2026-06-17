@@ -1,5 +1,5 @@
 {
-  "playtime": 44108.76,
+  "playtime": 45434.56,
   "modes": {
     "training": {
       "playtime": 0,
@@ -51,8 +51,8 @@
       ]
     },
     "watch": {
-      "playtime": 43371.18,
-      "clear": 163,
+      "playtime": 44696.98,
+      "clear": 165,
       "clearcount": {
         "jotaro": 38,
         "dio": 17,
@@ -103,7 +103,8 @@
         "cvsgouki": 4,
         "divinepsy": 1,
         "cvs_honda": 1,
-        "cvs2_dhalsim": 1
+        "cvs2_dhalsim": 1,
+        "koldraptor": 2
       }
     },
     "survival": {

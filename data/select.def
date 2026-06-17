@@ -211,6 +211,9 @@ DivinePsy, mshvsf_apocalypse_now.def
 Magneto, mshvsf_apocalypse_now.def
 Sentinel, mshvsf_apocalypse_now.def
 DoctorDoom, mshvsf_apocalypse_now.def
+StriderHiryu, SF3 Battle Arena Rd 02.def
+Megaman, Slither Inc ZX.def
+MegamanEXE, Slither Inc ZX.def
 cvsryu, SuzakuCastleWW.def
 cvsken, SuzakuCastleWW.def
 cvschunli, SF3 Battle Arena Rd 02.def
@@ -223,17 +226,17 @@ cvs2_dhalsim, SF3 Battle Arena Rd 02.def
 Ibuki, SF3 Battle Arena Rd 02.def
 cvsgouki, MemoriaTimeInterval.def
 CFJ_JuriHan, SF3 Battle Arena Rd 02.def
+cvssakura, SF3 Battle Arena Rd 02.def
 jedah, LiveHousePurple.def
 KoldRaptor, LiveHousePurple.def
 Morrigan, LiveHousePurple.def
 Felicia_Y, LiveHousePurple.def
-StriderHiryu, SF3 Battle Arena Rd 02.def
-cvssakura, DerelictChurch.def
+cvshaohmaru, DerelictChurch.def
 cvsnakoruru, DerelictChurch.def
 cvsking, DerelictChurch.def
-cvsmai, DerelictChurch.def
+cvsgeese, DerelictChurch.def
 cvsterry, DerelictChurch.def
-cvshaohmaru, DerelictChurch.def
+cvsmai, DerelictChurch.def
 Cvs_iori, DerelictChurch.def
 Cvskyo, DerelictChurch.def
 ;dizzy2, XX'KY'XX.def
@@ -263,6 +266,8 @@ Squall, IceCavernIcicleFields.def
 Leon, BarricadedStation.def
 Wesker, BarricadedStation.def
 Dante, MemoriaTimeInterval.def
+Dante[Public], MemoriaTimeInterval.def
+Dante_KOF, MemoriaTimeInterval.def
 vergil, MemoriaTimeInterval.def
 nero_DMC4, MemoriaTimeInterval.def
 KENSHIROU, MemoriaTimeInterval.def
@@ -365,6 +370,7 @@ stages/NibelReactorHR.def
 stages/MemoriaTimeInterval.def
 stages/IceCavernIcicleFields.def
 stages/BarricadedStation.def
+stages/Slither Inc ZX.def
 ;stages/XX'KY'XX.def
 ;stages/mk2_pit2.def
 ;-------------------------------------------------------------------------------

@@ -1,0 +1,21 @@
+[Info]
+name=" "
+displayname="Megaman"
+versiondate=
+mugenversion=1.0
+author="SeanAltly & DG"
+pal.defaults=1,2,3,4
+[Files]
+sprite=Megaman.sff
+sound=Megaman.snd
+anim=Megaman.air
+cmd=Megaman.cmd
+cns=Megaman.cns
+st=Megaman.cns
+stcommon=common1.cns
+pal1=Megaman.act
+pal2=red.act
+st1=UTbar.st
+[Arcade]
+intro.storyboard=
+ending.storyboard=

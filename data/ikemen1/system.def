@@ -52,6 +52,7 @@ font6 = infofont.def
 font7 = Open_Sans.def
 font8 = ikemen1/fonts/Timer.def
 font9 = ikemen1/fonts/PixelFlat.def
+;font10 = ikemen1/fonts/VT323.def   ;TAGFIX(P018b): menu font (FNT v2 truetype wrapper, like Open_Sans)   ;TAGFIX(P018c): TTF parked - will repoint to a bitmap VT323.def (.sff) instead
 module =                    ;External Lua code
 
 ;----------------------------
@@ -123,11 +124,11 @@ hiscore.bgm.loopend =
 [Title Info]
 fadein.time = 10
 fadeout.time = 10
-menu.pos = 1240,330
+menu.pos = 640,330   ;TAGFIX(P018): centered (was 1240,330)
 menu.tween.factor = 0.5
-menu.item.font = 4,0,-1
-menu.item.active.font = 4,0,-1, 123,206,255
-menu.item.spacing = 0, 54
+menu.item.font = 2,0,0   ;TAGFIX(P018d): Pixel bitmap font (font2), center-align
+menu.item.active.font = 2,0,0, 123,206,255   ;TAGFIX(P018d): Pixel, active=blue tint
+menu.item.spacing = 0, 30   ;TAGFIX(P018d): tightened for 18px Pixel font (was 0,54)
 menu.item.layerno = 2
 menu.item.active.layerno = 2
 
@@ -307,7 +308,7 @@ mask = 1
 type = normal
 spriteno = 0, 2
 layerno = 1
-start = -250,155
+start = 0,155   ;TAGFIX(P018): logo centered (x -250->0), y unchanged
 mask = 1
 alpha = 256,96
 trans = add
@@ -317,7 +318,7 @@ sin.y = 15, 264, 2
 type = normal
 spriteno = 0, 3
 layerno = 1
-start = -250,155
+start = 0,155   ;TAGFIX(P018): logo centered (x -250->0), y unchanged
 mask = 1
 alpha = 256,96
 trans = add
@@ -327,7 +328,7 @@ sin.y = 15, 264, 32
 type = normal
 spriteno = 0, 0
 layerno = 1
-start = -250,155
+start = 0,155   ;TAGFIX(P018): logo centered (x -250->0), y unchanged
 mask = 1
 sin.y = 15, 264, 2
 
@@ -335,7 +336,7 @@ sin.y = 15, 264, 2
 type = normal
 spriteno = 0, 1
 layerno = 1
-start = -250,155
+start = 0,155   ;TAGFIX(P018): logo centered (x -250->0), y unchanged
 mask = 1
 sin.y = 15, 264, 32
 

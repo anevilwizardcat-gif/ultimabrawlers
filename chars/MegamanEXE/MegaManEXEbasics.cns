@@ -1,0 +1,175 @@
+;---------------------------------------------------------------------------
+; Variable usage:
+; Var(1) - Intro Facing
+; Var(2) - Bass Shot
+;---------------------------------------------------------------------------
+; RUN_BACK2 (land)
+[Statedef 106]
+type = S
+physics = S
+ctrl = 0
+anim = 47
+
+[State 0]
+type = VelSet
+trigger1 = Time = 0
+y = 0
+
+[State 0]
+type = PosSet
+trigger1 = Time = 0
+y = 0
+
+[State 0]
+type = Explod
+trigger1 = Time = 2
+anim = 307
+bindtime = 1
+pos = 15, -35
+facing = -1
+sprpriority = 3
+ownpal = 1
+
+[State 0]
+type = ChangeState
+trigger1 = !AnimTime
+value = 0
+ctrl = 1
+
+;---------------------------------------------------------------------------
+; Lose by Time Over
+[Statedef 170]
+type = S
+ctrl = 0
+anim = 170
+velset = 0,0
+
+[State 0]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+time = 1
+
+;---------------------------------------------------------------------------
+; Win state decider
+[Statedef 180]
+type = S
+anim = 181
+ctrl = 0
+velset = 0,0
+
+[State 0]
+type = AssertSpecial
+trigger1 = 1
+flag = nobardisplay
+
+[State 0]
+type = PlaySnd
+trigger1 = AnimElem = 3
+value = 180,0
+channel = 0
+
+[State 0]
+type = AssertSpecial
+trigger1 = Time = [0,360]
+flag = RoundNotOver
+
+;---------------------------------------------------------------------------
+; Win pose 1 - Bow
+[Statedef 181]
+type = S
+ctrl = 0
+anim = 181
+velset = 0,0
+
+[State 0]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+time = 1
+
+;---------------------------------------------------------------------------
+; Introduction
+[Statedef 191]
+type = S
+ctrl = 0
+anim = 190
+velset = 0,0
+
+[State 0]
+type = VarSet
+trigger1 = !Time
+v = 1
+value = ifelse((Facing = 1),0,1)
+
+[State 0]
+type = Turn
+trigger1 = (!Time && Facing = -1) || (AnimElem = 11 && Var(1))
+
+[State 0]
+type = AssertSpecial
+trigger1 = 1
+flag = Intro
+
+[State 0]
+type = PlaySnd
+trigger1 = AnimElem = 7
+value = 900,0
+volume = 0
+
+[State 0]
+type = ChangeState
+trigger1 = !AnimTime
+value = 0
+
+;---------------------------------------------------------------------------
+; Taunt
+[Statedef 195]
+type = S
+ctrl = 0
+anim = 195
+velset = 0,0
+movetype = I
+physics = S
+sprpriority = 1
+
+[State 0]
+type = CtrlSet
+trigger1 = Time = 10
+value = 1
+
+[State 0]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+;---------------------------------------------------------------------------
+; Override common states (use same number to override) :
+;---------------------------------------------------------------------------
+
+;---------------------------------------------------------------------------
+; States that are always executed (use statedef -2)
+;---------------------------------------------------------------------------
+
+;---------------------------------------------------------------------------
+; States that are executed when in self's state file (use statedef -3)
+;---------------------------------------------------------------------------
+
+[Statedef -3]
+
+[State -3, Landing Sound]
+type = PlaySnd
+trigger1 = (Time = 1) && ((StateNo = 52) || (StateNo = 106))
+value = 40, 0
+
+[State -3, PET]
+type = Explod
+trigger1 = !NumExplod(8000)
+anim = 8000
+id = 8000
+pos = 2,240
+postype = back
+bindtime = -1
+ownpal = 1
+ontop = 1

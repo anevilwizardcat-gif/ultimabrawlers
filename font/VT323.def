@@ -1,0 +1,18 @@
+[FNT v2]
+fntversion = 2,00
+name = "VT323"
+author = "Peter Hull"
+
+[Def]
+; This is a truetype font.
+Type = truetype
+; Size of font: width, height.  Only height is used for truetype fonts.
+Size = 22,44
+; Spacing between font glyphs.  Only height is used for truetype fonts.
+Spacing = 1,1
+; Drawing offset: x, y.
+Offset = 0,0
+; Filename of the font to load (relative to this .def's folder).
+File = VT323.ttf
+; Preferred blending mode: 0 - none, 1 - blended.
+Blend = 1

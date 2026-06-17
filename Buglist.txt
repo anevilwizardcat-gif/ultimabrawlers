@@ -1,1 +1,2 @@
-to be updated
+ex-gauge on Sakura (and others) doesn't disappear on tagout.
+jedah's darkstalkers power bar doesn't appear.

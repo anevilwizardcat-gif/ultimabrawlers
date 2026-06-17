@@ -22,6 +22,30 @@ the entry's Status line (the only allowed in-place edit; everything else is appe
 > NOTE: P001–P006 are **backfilled** from the handoff doc. Exact dates/times were not recorded, so they
 > read "date-unknown (pre-2026-06-16)". Treat them as historical context, not precise audit.
 
+## [P018]  (font baked in - see P018b note in body)
+ Font BAKED IN (P018b): chose VT323 (Raven's pick; Silkscreen secondary). Added to [Files]:
+font10 = ikemen1/fonts/VT323.ttf + font10.height = 44 (verified via centered-menu mock render vs 54px spacing;
+40-48 all readable, 44 chosen). Repointed [Title Info] menu.item.font + menu.item.active.font from 4 to 10.
+VT323.ttf must be dropped into data/ikemen1/fonts/. Height is a single tweakable number. To switch to
+Silkscreen later: swap the font10 file + maybe height ~32.
+ 2026-06-16 — menu/logo centered (ikemen1 motif) + pixel font options
+File: data/ikemen1/system.def (active motif). Menu was hard-right (menu.pos=1240,330, font align -1).
+Centered: menu.pos -> 640,330 (top-left origin, 1280 wide => 640); menu.item.font / menu.item.active.font
+align -1 -> 0. Logo (sprites 0,0-0,3 in system.sff, 699x257, centered axis 349) sat at start=-250,155 on the
+4 [TitleBG Title Logo*] layers; BG layers use SCREEN-CENTER origin (proof: [AttractBG Title Logo] same sprite
+at start=0; negative -250 only makes sense center-relative) so start.x -250 -> 0 centers it; y=155 + sin.y bob
+untouched. Two coordinate systems coexist: menu/foreground = top-left (center=640), BG layers = center
+(center=0). Fonts: motif declares font1-9 in [Files]; menu uses font4=ikemen1/fonts/Menu1.def. To swap: add
+fontN = ikemen1/fonts/<file>.ttf (Ikemen takes TTF/.fnt/.def), set fontN.height, point menu.item.font at N.
+Provided pixel TTF options (Silkscreen Bold recommended, Press Start 2P / Silkscreen / VT323) + rendered
+preview. Did NOT wire a font into system.def (TTF height needs a visual test pass).
+
+### P017b — cvszcammy default power bar hidden
+Cammy showed BOTH her custom groove gauge AND the default engine power bar (+level number). Added the standard
+Warusaki3 `[State -2, Hide Engine Power Bar]` AssertSpecial flag=noPowerBarDisplay to cvscammy.cns -2 (Guile
+and the roster already have it; her fresh version lacked it). This is the INVERSE of the Gal129/Honda P011 fix
+(those chars REMOVE the assert because they use the default bar). Verified her groove gauge spawn (6100) is
+untouched - the assert only flips the engine power-bar flag, independent of the custom gauge helper.
 ## [P017] 2026-06-16 — cvszcammy (Warusaki3) full Warusaki3 treatment
 Files: cvszcammy/cvscammy.cns (popups/announcer) + cvszcammy/groove.cns (bench-UI + intro-hide).
 New Warusaki3 char (folder cvszcammy, main cns = cvscammy.cns, NOT cvszcammy.cns). Standard groove
@@ -328,3 +352,30 @@ Why: default engine power bar was leaking through on groove chars that use a cus
 Left untouched: custom meter logic.
 Test: no default engine power bar on groove/cvs2 chars.
 Status: shipped. Supersedes: none.
+
+## [P018c] Menu items invisible -> revert to bitmap font (TTF not rendered by build)
+SYMPTOM: after P018b, main-menu logo centered fine but menu CHOICES invisible; cursor sounds
+still play (menu logic + position OK, only glyph drawing fails). DIAGNOSIS: menu.item.font was
+pointed at font10 = VT323 (FNT v2 Type=truetype). This build does not draw TrueType to screen --
+consistent with Raven's own observation that the motif's Open_Sans (also truetype .def) is shipped
+but never visibly used. The author made BITMAP fonts (Menu1.def + Menu1.sff, indexed 8-bank) for all
+visible UI for this reason. FIX (surgical, centering preserved): menu.item.font + menu.item.active.font
+reverted 10 -> 4 (original Menu1 bitmap), align kept 0 (center), menu.pos kept 640,330. font10 VT323.def
+line commented (parked). NEXT: to get the VT323 LOOK, must render VT323 into a .sff bitmap glyph sheet +
+bitmap .def matching Menu1 format (fixed size; active-color via palette bank or RGB tint). TTF wrapper
+route abandoned for this build. HARD LESSON: in this motif, custom UI fonts MUST be bitmap .def+.sff;
+truetype .def loads without error but renders nothing.
+
+## [P018d] Menu font -> Pixel (bitmap, renders in this build)
+Raven picked "Pixel" from a rendered comparison of the motif's existing bitmap fonts (Menu1/Menu2/Pixel/
+PixelFlat), as the closest guaranteed-render match to the VT323 look. Font already shipped in motif
+(font2 = ikemen1/fonts/Pixel.def + Pixel.sff) -> NO new font files needed. system.def changes only:
+menu.item.font 4->2, menu.item.active.font 4->2 (bank 0, active blue tint 123,206,255 preserved),
+menu.item.spacing 0,54 -> 0,30 (Pixel native height 18px vs Menu1 42px). menu.pos kept 640,330 (centered).
+Tweakables: spacing 2nd number = line gap; pos.y = vertical start. NOTE for future: bitmap fonts are
+fixed-size; to enlarge Pixel "Smash-thick" would require a 2x nearest-neighbor re-rendered Pixel.sff
+(offered, Raven chose native size). FONT GLYPH FORMAT (hard-won, for any future bitmap font work):
+SFFv2, group 0, image = ASCII code; sprites are fmt=12 PNG32 in ldata block, each preceded by a
+4-BYTE LENGTH PREFIX -> PNG signature starts at (ldata_off + node.data_offset + 4). Header: 0x24=node
+array off, 0x28=sprite count, 0x34=ldata off. Node=28B: +2 item(ascii), +16 data_off(u32), +20 data_len(u32).
+

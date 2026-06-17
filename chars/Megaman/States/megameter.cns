@@ -1,0 +1,1520 @@
+;------------------------------------
+;Mega Meter P1
+;------------------------------------
+[Statedef 90005]
+type = s
+movetype = i
+physics = n
+ignorehitpause = 1
+
+[State 0, ]
+type = AssertSpecial
+trigger1 = 1
+flag = noshadow
+flag2 = invisible
+ignorehitpause = 1
+
+[State 0]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+ignorehitpause = 1
+
+
+;---------Guard fill p1-------------
+[State 0, ParentVarSet];Sets meter on full
+type = ParentVarSet
+trigger1 = root,roundstate <= 0
+trigger2 = root,var(46) > 24; keeps meter from over flowing
+v = 46
+value = 24
+ignorehitpause = 1
+
+;[State 0, ParentVarAdd];regenerates meter by 1 point every 200 game ticks
+;type = ParentVarAdd
+;triggerall = root,var(46) != 24
+;triggerall = root,var(46) < 24
+;trigger1 = (gametime%340)=1
+;v = 46
+;value = 1
+;ignorehitpause = 1
+
+
+[State 0, Guard Fill]
+type = Explod
+trigger1 = 1 && !numexplod(6500)
+anim = 6500
+ID = 6500
+pos = 50,220;17
+postype = left  ;p2,front,back,left,right
+random = 0,0
+removetime = -1
+supermovetime = 9999999
+pausemove = 9999999
+scale = .65,.65
+facing = 1
+sprpriority = 3
+ontop = 1
+shadow = 0,0,0
+ownpal = 0
+removeongethit = 0
+ignorehitpause = 1
+bindtime = -1
+
+[State 0, Explod]
+type = Explod
+triggerall = !numexplod(6501)
+trigger1 = 1 && root,var(46) = 23
+anim = 6501
+ID = 6501
+pos = 50,220;17
+postype = left  ;p2,front,back,left,right
+random = 0,0
+removetime = -1
+supermovetime = 9999999
+pausemove = 9999999
+scale = .65,.65
+facing = 1
+sprpriority = 3
+ontop = 1
+shadow = 0,0,0
+ownpal = 0
+removeongethit = 0
+ignorehitpause = 1
+bindtime = -1
+
+[State 0, Explod]
+type = Explod
+triggerall = !numexplod(6502)
+trigger1 = 1 && root,var(46) = 22
+anim = 6502
+ID = 6502
+pos = 50,220;17
+postype = left  ;p2,front,back,left,right
+random = 0,0
+removetime = -1
+supermovetime = 9999999
+pausemove = 9999999
+scale = .65,.65
+facing = 1
+sprpriority = 3
+ontop = 1
+shadow = 0,0,0
+ownpal = 0
+removeongethit = 0
+ignorehitpause = 1
+bindtime = -1
+
+[State 0, Explod]
+type = Explod
+triggerall = !numexplod(6503)
+trigger1 = 1 && root,var(46) = 21
+anim = 6503
+ID = 6503
+pos = 50,220;17
+postype = left  ;p2,front,back,left,right
+random = 0,0
+removetime = -1
+supermovetime = 9999999
+pausemove = 9999999
+scale = .65,.65
+facing = 1
+sprpriority = 3
+ontop = 1
+shadow = 0,0,0
+ownpal = 0
+removeongethit = 0
+ignorehitpause = 1
+bindtime = -1
+
+[State 0, Explod]
+type = Explod
+triggerall = !numexplod(6504)
+trigger1 = 1 && root,var(46) = 20
+anim = 6504
+ID = 6504
+pos = 50,220;17
+postype = left  ;p2,front,back,left,right
+random = 0,0
+removetime = -1
+supermovetime = 9999999
+pausemove = 9999999
+scale = .65,.65
+facing = 1
+sprpriority = 3
+ontop = 1
+shadow = 0,0,0
+ownpal = 0
+removeongethit = 0
+ignorehitpause = 1
+bindtime = -1
+
+[State 0, Explod]
+type = Explod
+triggerall = !numexplod(6505)
+trigger1 = 1 && root,var(46) = 19
+anim = 6505
+ID = 6505
+pos = 50,220;17
+postype = left  ;p2,front,back,left,right
+random = 0,0
+removetime = -1
+supermovetime = 9999999
+pausemove = 9999999
+scale = .65,.65
+facing = 1
+sprpriority = 3
+ontop = 1
+shadow = 0,0,0
+ownpal = 0
+removeongethit = 0
+ignorehitpause = 1
+bindtime = -1
+
+[State 0, Explod]
+type = Explod
+triggerall = !numexplod(6506)
+trigger1 = 1 && root,var(46) = 18
+anim = 6506
+ID = 6506
+pos = 50,220;17
+postype = left  ;p2,front,back,left,right
+random = 0,0
+removetime = -1
+supermovetime = 9999999
+pausemove = 9999999
+scale = .65,.65
+facing = 1
+sprpriority = 3
+ontop = 1
+shadow = 0,0,0
+ownpal = 0
+removeongethit = 0
+ignorehitpause = 1
+bindtime = -1
+
+[State 0, Explod]
+type = Explod
+triggerall = !numexplod(6507)
+trigger1 = 1 && root,var(46) = 17
+anim = 6507
+ID = 6507
+pos = 50,220;17
+postype = left  ;p2,front,back,left,right
+random = 0,0
+removetime = -1
+supermovetime = 9999999
+pausemove = 9999999
+scale = .65,.65
+facing = 1
+sprpriority = 3
+ontop = 1
+shadow = 0,0,0
+ownpal = 0
+removeongethit = 0
+ignorehitpause = 1
+bindtime = -1
+
+[State 0, Explod]
+type = Explod
+triggerall = !numexplod(6508)
+trigger1 = 1 && root,var(46) = 16
+anim = 6508
+ID = 6508
+pos = 50,220;17
+postype = left  ;p2,front,back,left,right
+random = 0,0
+removetime = -1
+supermovetime = 9999999
+pausemove = 9999999
+scale = .65,.65
+facing = 1
+sprpriority = 3
+ontop = 1
+shadow = 0,0,0
+ownpal = 0
+removeongethit = 0
+ignorehitpause = 1
+bindtime = -1
+
+[State 0, Explod]
+type = Explod
+triggerall = !numexplod(6509)
+trigger1 = 1 && root,var(46) = 15
+anim = 6509
+ID = 6509
+pos = 50,220;17
+postype = left  ;p2,front,back,left,right
+random = 0,0
+removetime = -1
+supermovetime = 9999999
+pausemove = 9999999
+scale = .65,.65
+facing = 1
+sprpriority = 3
+ontop = 1
+shadow = 0,0,0
+ownpal = 0
+removeongethit = 0
+ignorehitpause = 1
+bindtime = -1
+
+[State 0, Explod]
+type = Explod
+triggerall = !numexplod(6510)
+trigger1 = 1 && root,var(46) = 14
+anim = 6510
+ID = 6510
+pos = 50,220;17
+postype = left  ;p2,front,back,left,right
+random = 0,0
+removetime = -1
+supermovetime = 9999999
+pausemove = 9999999
+scale = .65,.65
+facing = 1
+sprpriority = 3
+ontop = 1
+shadow = 0,0,0
+ownpal = 0
+removeongethit = 0
+ignorehitpause = 1
+bindtime = -1
+
+[State 0, Explod]
+type = Explod
+triggerall = !numexplod(6511)
+trigger1 = 1 && root,var(46) = 13
+anim = 6511
+ID = 6511
+pos = 50,220;17
+postype = left  ;p2,front,back,left,right
+random = 0,0
+removetime = -1
+supermovetime = 9999999
+pausemove = 9999999
+scale = .65,.65
+facing = 1
+sprpriority = 3
+ontop = 1
+shadow = 0,0,0
+ownpal = 0
+removeongethit = 0
+ignorehitpause = 1
+bindtime = -1
+
+[State 0, Explod]
+type = Explod
+triggerall = !numexplod(6512)
+trigger1 = 1 && root,var(46) = 12
+anim = 6512
+ID = 6512
+pos = 50,220;17
+postype = left  ;p2,front,back,left,right
+random = 0,0
+removetime = -1
+supermovetime = 9999999
+pausemove = 9999999
+scale = .65,.65
+facing = 1
+sprpriority = 3
+ontop = 1
+shadow = 0,0,0
+ownpal = 0
+removeongethit = 0
+ignorehitpause = 1
+bindtime = -1
+
+[State 0, Explod]
+type = Explod
+triggerall = !numexplod(6513)
+trigger1 = 1 && root,var(46) = 11
+anim = 6513
+ID = 6513
+pos = 50,220;17
+postype = left  ;p2,front,back,left,right
+random = 0,0
+removetime = -1
+supermovetime = 9999999
+pausemove = 9999999
+scale = .65,.65
+facing = 1
+sprpriority = 3
+ontop = 1
+shadow = 0,0,0
+ownpal = 0
+removeongethit = 0
+ignorehitpause = 1
+bindtime = -1
+
+[State 0, Explod]
+type = Explod
+triggerall = !numexplod(6514)
+trigger1 = 1 && root,var(46) = 10
+anim = 6514
+ID = 6514
+pos = 50,220;17
+postype = left  ;p2,front,back,left,right
+random = 0,0
+removetime = -1
+supermovetime = 9999999
+pausemove = 9999999
+scale = .65,.65
+facing = 1
+sprpriority = 3
+ontop = 1
+shadow = 0,0,0
+ownpal = 0
+removeongethit = 0
+ignorehitpause = 1
+bindtime = -1
+
+[State 0, Explod]
+type = Explod
+triggerall = !numexplod(6515)
+trigger1 = 1 && root,var(46) = 9
+anim = 6515
+ID = 6515
+pos = 50,220;17
+postype = left  ;p2,front,back,left,right
+random = 0,0
+removetime = -1
+supermovetime = 9999999
+pausemove = 9999999
+scale = .65,.65
+facing = 1
+sprpriority = 3
+ontop = 1
+shadow = 0,0,0
+ownpal = 0
+removeongethit = 0
+ignorehitpause = 1
+bindtime = -1
+
+[State 0, Explod]
+type = Explod
+triggerall = !numexplod(6516)
+trigger1 = 1 && root,var(46) = 8
+anim = 6516
+ID = 6516
+pos = 50,220;17
+postype = left  ;p2,front,back,left,right
+random = 0,0
+removetime = -1
+supermovetime = 9999999
+pausemove = 9999999
+scale = .65,.65
+facing = 1
+sprpriority = 3
+ontop = 1
+shadow = 0,0,0
+ownpal = 0
+removeongethit = 0
+ignorehitpause = 1
+bindtime = -1
+
+[State 0, Explod]
+type = Explod
+triggerall = !numexplod(6517)
+trigger1 = 1 && root,var(46) = 7
+anim = 6517
+ID = 6517
+pos = 50,220;17
+postype = left  ;p2,front,back,left,right
+random = 0,0
+removetime = -1
+supermovetime = 9999999
+pausemove = 9999999
+scale = .65,.65
+facing = 1
+sprpriority = 3
+ontop = 1
+shadow = 0,0,0
+ownpal = 0
+removeongethit = 0
+ignorehitpause = 1
+bindtime = -1
+
+[State 0, Explod]
+type = Explod
+triggerall = !numexplod(6518)
+trigger1 = 1 && root,var(46) = 6
+anim = 6518
+ID = 6518
+pos = 50,220;17
+postype = left  ;p2,front,back,left,right
+random = 0,0
+removetime = -1
+supermovetime = 9999999
+pausemove = 9999999
+scale = .65,.65
+facing = 1
+sprpriority = 3
+ontop = 1
+shadow = 0,0,0
+ownpal = 0
+removeongethit = 0
+ignorehitpause = 1
+bindtime = -1
+
+[State 0, Explod]
+type = Explod
+triggerall = !numexplod(6519)
+trigger1 = 1 && root,var(46) = 5
+anim = 6519
+ID = 6519
+pos = 50,220;17
+postype = left  ;p2,front,back,left,right
+random = 0,0
+removetime = -1
+supermovetime = 9999999
+pausemove = 9999999
+scale = .65,.65
+facing = 1
+sprpriority = 3
+ontop = 1
+shadow = 0,0,0
+ownpal = 0
+removeongethit = 0
+ignorehitpause = 1
+bindtime = -1
+
+[State 0, Explod]
+type = Explod
+triggerall = !numexplod(6520)
+trigger1 = 1 && root,var(46) = 4
+anim = 6520
+ID = 6520
+pos = 50,220;17
+postype = left  ;p2,front,back,left,right
+random = 0,0
+removetime = -1
+supermovetime = 9999999
+pausemove = 9999999
+scale = .65,.65
+facing = 1
+sprpriority = 3
+ontop = 1
+shadow = 0,0,0
+ownpal = 0
+removeongethit = 0
+ignorehitpause = 1
+bindtime = -1
+
+[State 0, Explod]
+type = Explod
+triggerall = !numexplod(6521)
+trigger1 = 1 && root,var(46) = 3
+anim = 6521
+ID = 6521
+pos = 50,220;17
+postype = left  ;p2,front,back,left,right
+random = 0,0
+removetime = -1
+supermovetime = 9999999
+pausemove = 9999999
+scale = .65,.65
+facing = 1
+sprpriority = 3
+ontop = 1
+shadow = 0,0,0
+ownpal = 0
+removeongethit = 0
+ignorehitpause = 1
+bindtime = -1
+
+[State 0, Explod]
+type = Explod
+triggerall = !numexplod(6522)
+trigger1 = 1 && root,var(46) = 2
+anim = 6522
+ID = 6522
+pos = 50,220;17
+postype = left  ;p2,front,back,left,right
+random = 0,0
+removetime = -1
+supermovetime = 9999999
+pausemove = 9999999
+scale = .65,.65
+facing = 1
+sprpriority = 3
+ontop = 1
+shadow = 0,0,0
+ownpal = 0
+removeongethit = 0
+ignorehitpause = 1
+bindtime = -1
+
+[State 0, Explod]
+type = Explod
+triggerall = !numexplod(6523)
+trigger1 = 1 && root,var(46) = 1
+anim = 6523
+ID = 6523
+pos = 50,220;17
+postype = left  ;p2,front,back,left,right
+random = 0,0
+removetime = -1
+supermovetime = 9999999
+pausemove = 9999999
+scale = .65,.65
+facing = 1
+sprpriority = 3
+ontop = 1
+shadow = 0,0,0
+ownpal = 0
+removeongethit = 0
+ignorehitpause = 1
+bindtime = -1
+
+[State 0, Explod]
+type = Explod
+triggerall = !numexplod(6524)
+trigger1 = 1 && root,var(46) = 0
+anim = 6524
+ID = 6524
+pos = 50,220;17
+postype = left  ;p2,front,back,left,right
+random = 0,0
+removetime = -1
+supermovetime = 9999999
+pausemove = 9999999
+scale = .65,.65
+facing = 1
+sprpriority = 3
+ontop = 1
+shadow = 0,0,0
+ownpal = 0
+removeongethit = 0
+ignorehitpause = 1
+bindtime = -1
+
+[State 0, RemoveExplod]
+type = RemoveExplod
+trigger1 = 1 && root,var(46) != 23
+id = 6501
+;ignorehitpause =
+;persistent =
+
+[State 0, RemoveExplod]
+type = RemoveExplod
+trigger1 = 1 && root,var(46) != 22
+id = 6502
+;ignorehitpause =
+;persistent =
+
+[State 0, RemoveExplod]
+type = RemoveExplod
+trigger1 = 1 && root,var(46) != 21
+id = 6503
+;ignorehitpause =
+;persistent =
+
+[State 0, RemoveExplod]
+type = RemoveExplod
+trigger1 = 1 && root,var(46) != 20
+id = 6504
+;ignorehitpause =
+;persistent =
+
+[State 0, RemoveExplod]
+type = RemoveExplod
+trigger1 = 1 && root,var(46) != 19
+id = 6505
+;ignorehitpause =
+;persistent =
+
+[State 0, RemoveExplod]
+type = RemoveExplod
+trigger1 = 1 && root,var(46) != 18
+id = 6506
+;ignorehitpause =
+;persistent =
+
+[State 0, RemoveExplod]
+type = RemoveExplod
+trigger1 = 1 && root,var(46) != 17
+id = 6507
+;ignorehitpause =
+;persistent =
+
+[State 0, RemoveExplod]
+type = RemoveExplod
+trigger1 = 1 && root,var(46) != 16
+id = 6508
+;ignorehitpause =
+;persistent =
+
+[State 0, RemoveExplod]
+type = RemoveExplod
+trigger1 = 1 && root,var(46) != 15
+id = 6509
+;ignorehitpause =
+;persistent =
+
+[State 0, RemoveExplod]
+type = RemoveExplod
+trigger1 = 1 && root,var(46) != 14
+id = 6510
+;ignorehitpause =
+;persistent =
+
+[State 0, RemoveExplod]
+type = RemoveExplod
+trigger1 = 1 && root,var(46) != 13
+id = 6511
+;ignorehitpause =
+;persistent =
+
+[State 0, RemoveExplod]
+type = RemoveExplod
+trigger1 = 1 && root,var(46) != 12
+id = 6512
+;ignorehitpause =
+;persistent =
+
+[State 0, RemoveExplod]
+type = RemoveExplod
+trigger1 = 1 && root,var(46) != 11
+id = 6513
+;ignorehitpause =
+;persistent =
+
+[State 0, RemoveExplod]
+type = RemoveExplod
+trigger1 = 1 && root,var(46) != 10
+id = 6514
+;ignorehitpause =
+;persistent =
+
+[State 0, RemoveExplod]
+type = RemoveExplod
+trigger1 = 1 && root,var(46) != 9
+id = 6515
+;ignorehitpause =
+;persistent =
+
+[State 0, RemoveExplod]
+type = RemoveExplod
+trigger1 = 1 && root,var(46) != 8
+id = 6516
+;ignorehitpause =
+;persistent =
+
+[State 0, RemoveExplod]
+type = RemoveExplod
+trigger1 = 1 && root,var(46) != 7
+id = 6517
+;ignorehitpause =
+;persistent =
+
+[State 0, RemoveExplod]
+type = RemoveExplod
+trigger1 = 1 && root,var(46) != 6
+id = 6518
+;ignorehitpause =
+;persistent =
+
+[State 0, RemoveExplod]
+type = RemoveExplod
+trigger1 = 1 && root,var(46) != 5
+id = 6519
+;ignorehitpause =
+;persistent =
+
+[State 0, RemoveExplod]
+type = RemoveExplod
+trigger1 = 1 && root,var(46) != 4
+id = 6520
+;ignorehitpause =
+;persistent =
+
+[State 0, RemoveExplod]
+type = RemoveExplod
+trigger1 = 1 && root,var(46) != 3
+id = 6521
+;ignorehitpause =
+;persistent =
+
+[State 0, RemoveExplod]
+type = RemoveExplod
+trigger1 = 1 && root,var(46) != 2
+id = 6522
+;ignorehitpause =
+;persistent =
+
+[State 0, RemoveExplod]
+type = RemoveExplod
+trigger1 = 1 && root,var(46) != 1
+id = 6523
+;ignorehitpause =
+;persistent =
+
+[State 0, RemoveExplod]
+type = RemoveExplod
+trigger1 = 1 && root,var(46) != 0
+id = 6524
+;ignorehitpause =
+;persistent =
+
+
+;------------------------------------
+;Mega Meter P2
+;------------------------------------
+[Statedef 90006]
+type = s
+movetype = i
+physics = n
+ignorehitpause = 1
+
+[State 0, ]
+type = AssertSpecial
+trigger1 = 1
+flag = noshadow
+flag2 = invisible
+ignorehitpause = 1
+
+[State 0]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+ignorehitpause = 1
+
+
+;---------Guard fill p2-------------
+[State 0, ParentVarSet];Sets meter on full
+type = ParentVarSet
+trigger1 = root,roundstate <= 0
+trigger2 = root,var(46) > 24; keeps meter from over flowing
+v = 46
+value = 24
+ignorehitpause = 1
+
+;[State 0, ParentVarAdd];regenerates meter by 1 point every 200 game ticks
+;type = ParentVarAdd
+;triggerall = root,var(46) != 24
+;triggerall = root,var(46) < 24
+;trigger1 = (gametime%340)=1
+;v = 46
+;value = 1
+;ignorehitpause = 1
+
+[State 0, Guard Fill]
+type = Explod
+trigger1 = 1 && !numexplod(6500)
+anim = 6500
+ID = 6500
+pos = 268,220;17
+postype = left  ;p2,front,back,left,right
+random = 0,0
+removetime = -1
+supermovetime = 9999999
+pausemove = 9999999
+scale = .65,.65
+facing = -1
+sprpriority = 3
+ontop = 1
+shadow = 0,0,0
+ownpal = 0
+removeongethit = 0
+ignorehitpause = 1
+bindtime = -1
+
+[State 0, Explod]
+type = Explod
+triggerall = !numexplod(6501)
+trigger1 = 1 && root,var(46) = 23
+anim = 6501
+ID = 6501
+pos = 268,220;17
+postype = left  ;p2,front,back,left,right
+random = 0,0
+removetime = -1
+supermovetime = 9999999
+pausemove = 9999999
+scale = .65,.65
+facing = -1
+sprpriority = 3
+ontop = 1
+shadow = 0,0,0
+ownpal = 0
+removeongethit = 0
+ignorehitpause = 1
+bindtime = -1
+
+[State 0, Explod]
+type = Explod
+triggerall = !numexplod(6502)
+trigger1 = 1 && root,var(46) = 22
+anim = 6502
+ID = 6502
+pos = 268,220;17
+postype = left  ;p2,front,back,left,right
+random = 0,0
+removetime = -1
+supermovetime = 9999999
+pausemove = 9999999
+scale = .65,.65
+facing = -1
+sprpriority = 3
+ontop = 1
+shadow = 0,0,0
+ownpal = 0
+removeongethit = 0
+ignorehitpause = 1
+bindtime = -1
+
+[State 0, Explod]
+type = Explod
+triggerall = !numexplod(6503)
+trigger1 = 1 && root,var(46) = 21
+anim = 6503
+ID = 6503
+pos = 268,220;17
+postype = left  ;p2,front,back,left,right
+random = 0,0
+removetime = -1
+supermovetime = 9999999
+pausemove = 9999999
+scale = .65,.65
+facing = -1
+sprpriority = 3
+ontop = 1
+shadow = 0,0,0
+ownpal = 0
+removeongethit = 0
+ignorehitpause = 1
+bindtime = -1
+
+[State 0, Explod]
+type = Explod
+triggerall = !numexplod(6504)
+trigger1 = 1 && root,var(46) = 20
+anim = 6504
+ID = 6504
+pos = 268,220;17
+postype = left  ;p2,front,back,left,right
+random = 0,0
+removetime = -1
+supermovetime = 9999999
+pausemove = 9999999
+scale = .65,.65
+facing = -1
+sprpriority = 3
+ontop = 1
+shadow = 0,0,0
+ownpal = 0
+removeongethit = 0
+ignorehitpause = 1
+bindtime = -1
+
+[State 0, Explod]
+type = Explod
+triggerall = !numexplod(6505)
+trigger1 = 1 && root,var(46) = 19
+anim = 6505
+ID = 6505
+pos = 268,220;17
+postype = left  ;p2,front,back,left,right
+random = 0,0
+removetime = -1
+supermovetime = 9999999
+pausemove = 9999999
+scale = .65,.65
+facing = -1
+sprpriority = 3
+ontop = 1
+shadow = 0,0,0
+ownpal = 0
+removeongethit = 0
+ignorehitpause = 1
+bindtime = -1
+
+[State 0, Explod]
+type = Explod
+triggerall = !numexplod(6506)
+trigger1 = 1 && root,var(46) = 18
+anim = 6506
+ID = 6506
+pos = 268,220;17
+postype = left  ;p2,front,back,left,right
+random = 0,0
+removetime = -1
+supermovetime = 9999999
+pausemove = 9999999
+scale = .65,.65
+facing = -1
+sprpriority = 3
+ontop = 1
+shadow = 0,0,0
+ownpal = 0
+removeongethit = 0
+ignorehitpause = 1
+bindtime = -1
+
+[State 0, Explod]
+type = Explod
+triggerall = !numexplod(6507)
+trigger1 = 1 && root,var(46) = 17
+anim = 6507
+ID = 6507
+pos = 268,220;17
+postype = left  ;p2,front,back,left,right
+random = 0,0
+removetime = -1
+supermovetime = 9999999
+pausemove = 9999999
+scale = .65,.65
+facing = -1
+sprpriority = 3
+ontop = 1
+shadow = 0,0,0
+ownpal = 0
+removeongethit = 0
+ignorehitpause = 1
+bindtime = -1
+
+[State 0, Explod]
+type = Explod
+triggerall = !numexplod(6508)
+trigger1 = 1 && root,var(46) = 16
+anim = 6508
+ID = 6508
+pos = 268,220;17
+postype = left  ;p2,front,back,left,right
+random = 0,0
+removetime = -1
+supermovetime = 9999999
+pausemove = 9999999
+scale = .65,.65
+facing = -1
+sprpriority = 3
+ontop = 1
+shadow = 0,0,0
+ownpal = 0
+removeongethit = 0
+ignorehitpause = 1
+bindtime = -1
+
+[State 0, Explod]
+type = Explod
+triggerall = !numexplod(6509)
+trigger1 = 1 && root,var(46) = 15
+anim = 6509
+ID = 6509
+pos = 268,220;17
+postype = left  ;p2,front,back,left,right
+random = 0,0
+removetime = -1
+supermovetime = 9999999
+pausemove = 9999999
+scale = .65,.65
+facing = -1
+sprpriority = 3
+ontop = 1
+shadow = 0,0,0
+ownpal = 0
+removeongethit = 0
+ignorehitpause = 1
+bindtime = -1
+
+[State 0, Explod]
+type = Explod
+triggerall = !numexplod(6510)
+trigger1 = 1 && root,var(46) = 14
+anim = 6510
+ID = 6510
+pos = 268,220;17
+postype = left  ;p2,front,back,left,right
+random = 0,0
+removetime = -1
+supermovetime = 9999999
+pausemove = 9999999
+scale = .65,.65
+facing = -1
+sprpriority = 3
+ontop = 1
+shadow = 0,0,0
+ownpal = 0
+removeongethit = 0
+ignorehitpause = 1
+bindtime = -1
+
+[State 0, Explod]
+type = Explod
+triggerall = !numexplod(6511)
+trigger1 = 1 && root,var(46) = 13
+anim = 6511
+ID = 6511
+pos = 268,220;17
+postype = left  ;p2,front,back,left,right
+random = 0,0
+removetime = -1
+supermovetime = 9999999
+pausemove = 9999999
+scale = .65,.65
+facing = -1
+sprpriority = 3
+ontop = 1
+shadow = 0,0,0
+ownpal = 0
+removeongethit = 0
+ignorehitpause = 1
+bindtime = -1
+
+[State 0, Explod]
+type = Explod
+triggerall = !numexplod(6512)
+trigger1 = 1 && root,var(46) = 12
+anim = 6512
+ID = 6512
+pos = 268,220;17
+postype = left  ;p2,front,back,left,right
+random = 0,0
+removetime = -1
+supermovetime = 9999999
+pausemove = 9999999
+scale = .65,.65
+facing = -1
+sprpriority = 3
+ontop = 1
+shadow = 0,0,0
+ownpal = 0
+removeongethit = 0
+ignorehitpause = 1
+bindtime = -1
+
+[State 0, Explod]
+type = Explod
+triggerall = !numexplod(6513)
+trigger1 = 1 && root,var(46) = 11
+anim = 6513
+ID = 6513
+pos = 268,220;17
+postype = left  ;p2,front,back,left,right
+random = 0,0
+removetime = -1
+supermovetime = 9999999
+pausemove = 9999999
+scale = .65,.65
+facing = -1
+sprpriority = 3
+ontop = 1
+shadow = 0,0,0
+ownpal = 0
+removeongethit = 0
+ignorehitpause = 1
+bindtime = -1
+
+[State 0, Explod]
+type = Explod
+triggerall = !numexplod(6514)
+trigger1 = 1 && root,var(46) = 10
+anim = 6514
+ID = 6514
+pos = 268,220;17
+postype = left  ;p2,front,back,left,right
+random = 0,0
+removetime = -1
+supermovetime = 9999999
+pausemove = 9999999
+scale = .65,.65
+facing = -1
+sprpriority = 3
+ontop = 1
+shadow = 0,0,0
+ownpal = 0
+removeongethit = 0
+ignorehitpause = 1
+bindtime = -1
+
+[State 0, Explod]
+type = Explod
+triggerall = !numexplod(6515)
+trigger1 = 1 && root,var(46) = 9
+anim = 6515
+ID = 6515
+pos = 268,220;17
+postype = left  ;p2,front,back,left,right
+random = 0,0
+removetime = -1
+supermovetime = 9999999
+pausemove = 9999999
+scale = .65,.65
+facing = -1
+sprpriority = 3
+ontop = 1
+shadow = 0,0,0
+ownpal = 0
+removeongethit = 0
+ignorehitpause = 1
+bindtime = -1
+
+[State 0, Explod]
+type = Explod
+triggerall = !numexplod(6516)
+trigger1 = 1 && root,var(46) = 8
+anim = 6516
+ID = 6516
+pos = 268,220;17
+postype = left  ;p2,front,back,left,right
+random = 0,0
+removetime = -1
+supermovetime = 9999999
+pausemove = 9999999
+scale = .65,.65
+facing = -1
+sprpriority = 3
+ontop = 1
+shadow = 0,0,0
+ownpal = 0
+removeongethit = 0
+ignorehitpause = 1
+bindtime = -1
+
+[State 0, Explod]
+type = Explod
+triggerall = !numexplod(6517)
+trigger1 = 1 && root,var(46) = 7
+anim = 6517
+ID = 6517
+pos = 268,220;17
+postype = left  ;p2,front,back,left,right
+random = 0,0
+removetime = -1
+supermovetime = 9999999
+pausemove = 9999999
+scale = .65,.65
+facing = -1
+sprpriority = 3
+ontop = 1
+shadow = 0,0,0
+ownpal = 0
+removeongethit = 0
+ignorehitpause = 1
+bindtime = -1
+
+[State 0, Explod]
+type = Explod
+triggerall = !numexplod(6518)
+trigger1 = 1 && root,var(46) = 6
+anim = 6518
+ID = 6518
+pos = 268,220;17
+postype = left  ;p2,front,back,left,right
+random = 0,0
+removetime = -1
+supermovetime = 9999999
+pausemove = 9999999
+scale = .65,.65
+facing = -1
+sprpriority = 3
+ontop = 1
+shadow = 0,0,0
+ownpal = 0
+removeongethit = 0
+ignorehitpause = 1
+bindtime = -1
+
+[State 0, Explod]
+type = Explod
+triggerall = !numexplod(6519)
+trigger1 = 1 && root,var(46) = 5
+anim = 6519
+ID = 6519
+pos = 268,220;17
+postype = left  ;p2,front,back,left,right
+random = 0,0
+removetime = -1
+supermovetime = 9999999
+pausemove = 9999999
+scale = .65,.65
+facing = -1
+sprpriority = 3
+ontop = 1
+shadow = 0,0,0
+ownpal = 0
+removeongethit = 0
+ignorehitpause = 1
+bindtime = -1
+
+[State 0, Explod]
+type = Explod
+triggerall = !numexplod(6520)
+trigger1 = 1 && root,var(46) = 4
+anim = 6520
+ID = 6520
+pos = 268,220;17
+postype = left  ;p2,front,back,left,right
+random = 0,0
+removetime = -1
+supermovetime = 9999999
+pausemove = 9999999
+scale = .65,.65
+facing = -1
+sprpriority = 3
+ontop = 1
+shadow = 0,0,0
+ownpal = 0
+removeongethit = 0
+ignorehitpause = 1
+bindtime = -1
+
+[State 0, Explod]
+type = Explod
+triggerall = !numexplod(6521)
+trigger1 = 1 && root,var(46) = 3
+anim = 6521
+ID = 6521
+pos = 268,220;17
+postype = left  ;p2,front,back,left,right
+random = 0,0
+removetime = -1
+supermovetime = 9999999
+pausemove = 9999999
+scale = .65,.65
+facing = -1
+sprpriority = 3
+ontop = 1
+shadow = 0,0,0
+ownpal = 0
+removeongethit = 0
+ignorehitpause = 1
+bindtime = -1
+
+[State 0, Explod]
+type = Explod
+triggerall = !numexplod(6522)
+trigger1 = 1 && root,var(46) = 2
+anim = 6522
+ID = 6522
+pos = 268,220;17
+postype = left  ;p2,front,back,left,right
+random = 0,0
+removetime = -1
+supermovetime = 9999999
+pausemove = 9999999
+scale = .65,.65
+facing = -1
+sprpriority = 3
+ontop = 1
+shadow = 0,0,0
+ownpal = 0
+removeongethit = 0
+ignorehitpause = 1
+bindtime = -1
+
+[State 0, Explod]
+type = Explod
+triggerall = !numexplod(6523)
+trigger1 = 1 && root,var(46) = 1
+anim = 6523
+ID = 6523
+pos = 268,220;17
+postype = left  ;p2,front,back,left,right
+random = 0,0
+removetime = -1
+supermovetime = 9999999
+pausemove = 9999999
+scale = .65,.65
+facing = -1
+sprpriority = 3
+ontop = 1
+shadow = 0,0,0
+ownpal = 0
+removeongethit = 0
+ignorehitpause = 1
+bindtime = -1
+
+[State 0, Explod]
+type = Explod
+triggerall = !numexplod(6524)
+trigger1 = 1 && root,var(46) = 0
+anim = 6524
+ID = 6524
+pos = 268,220;17
+postype = left  ;p2,front,back,left,right
+random = 0,0
+removetime = -1
+supermovetime = 9999999
+pausemove = 9999999
+scale = .65,.65
+facing = -1
+sprpriority = 3
+ontop = 1
+shadow = 0,0,0
+ownpal = 0
+removeongethit = 0
+ignorehitpause = 1
+bindtime = -1
+
+[State 0, RemoveExplod]
+type = RemoveExplod
+trigger1 = 1 && root,var(46) != 23
+id = 6501
+;ignorehitpause =
+;persistent =
+
+[State 0, RemoveExplod]
+type = RemoveExplod
+trigger1 = 1 && root,var(46) != 22
+id = 6502
+;ignorehitpause =
+;persistent =
+
+[State 0, RemoveExplod]
+type = RemoveExplod
+trigger1 = 1 && root,var(46) != 21
+id = 6503
+;ignorehitpause =
+;persistent =
+
+[State 0, RemoveExplod]
+type = RemoveExplod
+trigger1 = 1 && root,var(46) != 20
+id = 6504
+;ignorehitpause =
+;persistent =
+
+[State 0, RemoveExplod]
+type = RemoveExplod
+trigger1 = 1 && root,var(46) != 19
+id = 6505
+;ignorehitpause =
+;persistent =
+
+[State 0, RemoveExplod]
+type = RemoveExplod
+trigger1 = 1 && root,var(46) != 18
+id = 6506
+;ignorehitpause =
+;persistent =
+
+[State 0, RemoveExplod]
+type = RemoveExplod
+trigger1 = 1 && root,var(46) != 17
+id = 6507
+;ignorehitpause =
+;persistent =
+
+[State 0, RemoveExplod]
+type = RemoveExplod
+trigger1 = 1 && root,var(46) != 16
+id = 6508
+;ignorehitpause =
+;persistent =
+
+[State 0, RemoveExplod]
+type = RemoveExplod
+trigger1 = 1 && root,var(46) != 15
+id = 6509
+;ignorehitpause =
+;persistent =
+
+[State 0, RemoveExplod]
+type = RemoveExplod
+trigger1 = 1 && root,var(46) != 14
+id = 6510
+;ignorehitpause =
+;persistent =
+
+[State 0, RemoveExplod]
+type = RemoveExplod
+trigger1 = 1 && root,var(46) != 13
+id = 6511
+;ignorehitpause =
+;persistent =
+
+[State 0, RemoveExplod]
+type = RemoveExplod
+trigger1 = 1 && root,var(46) != 12
+id = 6512
+;ignorehitpause =
+;persistent =
+
+[State 0, RemoveExplod]
+type = RemoveExplod
+trigger1 = 1 && root,var(46) != 11
+id = 6513
+;ignorehitpause =
+;persistent =
+
+[State 0, RemoveExplod]
+type = RemoveExplod
+trigger1 = 1 && root,var(46) != 10
+id = 6514
+;ignorehitpause =
+;persistent =
+
+[State 0, RemoveExplod]
+type = RemoveExplod
+trigger1 = 1 && root,var(46) != 9
+id = 6515
+;ignorehitpause =
+;persistent =
+
+[State 0, RemoveExplod]
+type = RemoveExplod
+trigger1 = 1 && root,var(46) != 8
+id = 6516
+;ignorehitpause =
+;persistent =
+
+[State 0, RemoveExplod]
+type = RemoveExplod
+trigger1 = 1 && root,var(46) != 7
+id = 6517
+;ignorehitpause =
+;persistent =
+
+[State 0, RemoveExplod]
+type = RemoveExplod
+trigger1 = 1 && root,var(46) != 6
+id = 6518
+;ignorehitpause =
+;persistent =
+
+[State 0, RemoveExplod]
+type = RemoveExplod
+trigger1 = 1 && root,var(46) != 5
+id = 6519
+;ignorehitpause =
+;persistent =
+
+[State 0, RemoveExplod]
+type = RemoveExplod
+trigger1 = 1 && root,var(46) != 4
+id = 6520
+;ignorehitpause =
+;persistent =
+
+[State 0, RemoveExplod]
+type = RemoveExplod
+trigger1 = 1 && root,var(46) != 3
+id = 6521
+;ignorehitpause =
+;persistent =
+
+[State 0, RemoveExplod]
+type = RemoveExplod
+trigger1 = 1 && root,var(46) != 2
+id = 6522
+;ignorehitpause =
+;persistent =
+
+[State 0, RemoveExplod]
+type = RemoveExplod
+trigger1 = 1 && root,var(46) != 1
+id = 6523
+;ignorehitpause =
+;persistent =
+
+[State 0, RemoveExplod]
+type = RemoveExplod
+trigger1 = 1 && root,var(46) != 0
+id = 6524
+;ignorehitpause =
+;persistent =
+
+
+

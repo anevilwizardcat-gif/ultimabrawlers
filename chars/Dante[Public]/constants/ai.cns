@@ -1,0 +1,53 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;     
+;Nekkyou no Hiryu, selfstates.cns ;
+;Author = The SyNdicate           ;
+;http://www.mugen-infantry.net    ;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;---------------------------------------------------------------
+;Combo Damage Dampener helper (Thanks Reu your for the guidance)
+;---------------------------------------------------------------
+[Statedef 10965]
+type = s
+ctrl = 0
+physics = n
+
+[State 0, ]
+type = AssertSpecial
+trigger1 = 1
+flag = invisible
+
+[State 0, ]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+
+[State 0, ]
+type = PlayerPush
+trigger1 = 1
+value = 1
+
+[State 0, ]
+type = AttackMulSet
+trigger1 = time = 1
+value = .5
+
+[State 0, ]
+type = destroyself
+trigger1 = root,var(13) = 0 ;(!movetype = H || stateno = 0 || stateno = 12 || stateno = 699 || stateno = 899)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;                 AI states                       ;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;--------------------------------------------------
+;[Statedef -3]
+;--------------
+
+;AI
+;Not yet implemented
+
+
+;we dont tolerate warehousing and if we find this warehoused we will either pull dante till the end or we might just go and raid it...then pull dante)
+;This version is the beta 2
+;Uploaded on the 18th of august 2007
+;this will go in every file XD

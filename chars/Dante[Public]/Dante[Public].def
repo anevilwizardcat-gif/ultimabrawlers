@@ -1,0 +1,40 @@
+[Info]
+name ="Dante"
+displayname ="Dante"
+versiondate =04,14,2002
+mugenversion =04,14,2002
+author ="Alexlexus, Zeckle(laxxe23) & WanteD"
+pal.defaults =2,1,2,3,3,4
+
+[files]
+cns =constants/Dante.cns
+cmd =commands/Dante.cmd
+stcommon =common1.cns
+sprite =sprites/Dante.sff
+anim =animations/Dante.air
+st =constants/basics.cns
+sound =sounds/Dante.snd
+pal1=act/test.act
+pal2=act/test2.act
+pal3=act/test3.act
+pal4=act/test4.act
+pal5=act/test5.act
+pal6=act/test6.act
+pal7=newact.act
+st1=constants/combos.cns
+st2=constants/specials_&_hypers.cns
+st3=constants/death_moves.cns
+st4=constants/ai.cns
+st5=constants/common1.cns
+st6=constants/common1.cns
+st7=states/weapons.st
+st8=constants/common1.cns
+st9=constants/common1.cns
+
+[arcade]
+intro.storyboard=
+ending.storyboard=
+
+
+
+
