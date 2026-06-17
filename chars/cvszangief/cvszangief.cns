@@ -18503,6 +18503,7 @@ trigger1 = P2movetype != H
 var(53) = P2life
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P014): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = numenemy
 triggerall = roundstate = 2
@@ -18557,6 +18558,7 @@ var(50) = -500
 persistent = 1
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P014): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = !(var(0)&2**13)
 triggerall = numenemy
@@ -19023,6 +19025,7 @@ fvar(8) = 10
 ignorehitpause = 1
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P014): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = var(58)&2**0
 triggerall = var(58)&2**1
@@ -19045,6 +19048,7 @@ supermovetime = 999999
 facing = facing*ifelse(teamside=1,1,-1)
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P014): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = var(58)&2**0
 triggerall = var(58)&2**1
@@ -19067,6 +19071,7 @@ supermovetime = 999999
 facing = facing*ifelse(teamside=1,1,-1)
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P014): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = var(58)&2**0
 triggerall = var(58)&2**1
@@ -19088,6 +19093,7 @@ supermovetime = 999999
 facing = facing*ifelse(teamside=1,1,-1)
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P014): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = var(58)&2**0
 triggerall = !(var(58)&2**1)
@@ -19108,6 +19114,7 @@ supermovetime = 999999
 facing = facing*ifelse(teamside=1,1,-1)
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P014): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = !(var(58)&2**0)
 triggerall = !NumHelper(6600)
@@ -19127,6 +19134,7 @@ supermovetime = 999999
 facing = facing*ifelse(teamside=1,1,-1)
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P014): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = var(58)&2**0
 triggerall = var(58)&2**1
@@ -19149,6 +19157,7 @@ supermovetime = 999999
 facing = facing*ifelse(teamside=1,1,-1)
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P014): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = var(58)&2**0
 triggerall = var(58)&2**1
@@ -19171,6 +19180,7 @@ supermovetime = 999999
 facing = facing*ifelse(teamside=1,1,-1)
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P014): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = var(58)&2**0
 triggerall = var(58)&2**1
@@ -19192,6 +19202,7 @@ supermovetime = 999999
 facing = facing*ifelse(teamside=1,1,-1)
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P014): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = var(58)&2**0
 triggerall = !(var(58)&2**1)
@@ -19212,6 +19223,7 @@ supermovetime = 999999
 facing = facing*ifelse(teamside=1,1,-1)
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P014): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = !(var(58)&2**0)
 triggerall = !NumHelper(6602)
@@ -19231,6 +19243,7 @@ supermovetime = 999999
 facing = facing*ifelse(teamside=1,1,-1)
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P014): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = var(58)&2**0
 triggerall = var(58)&2**1
@@ -19252,6 +19265,7 @@ supermovetime = 999999
 facing = facing*ifelse(teamside=1,1,-1)
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P014): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = var(58)&2**0
 triggerall = var(58)&2**1
@@ -19273,6 +19287,7 @@ supermovetime = 999999
 facing = facing*ifelse(teamside=1,1,-1)
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P014): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = var(58)&2**0
 triggerall = var(58)&2**1
@@ -19293,6 +19308,7 @@ supermovetime = 999999
 facing = facing*ifelse(teamside=1,1,-1)
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P014): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = var(58)&2**0
 triggerall = !(var(58)&2**1)
@@ -19312,6 +19328,7 @@ supermovetime = 999999
 facing = facing*ifelse(teamside=1,1,-1)
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P014): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = !(var(58)&2**0)
 triggerall = !NumHelper(6601)
@@ -19330,6 +19347,7 @@ supermovetime = 999999
 facing = facing*ifelse(teamside=1,1,-1)
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P014): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = var(58)&2**0
 triggerall = var(58)&2**1
@@ -19351,6 +19369,7 @@ supermovetime = 999999
 facing = facing*ifelse(teamside=1,1,-1)
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P014): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = var(58)&2**0
 triggerall = var(58)&2**1
@@ -19372,6 +19391,7 @@ supermovetime = 999999
 facing = facing*ifelse(teamside=1,1,-1)
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P014): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = var(58)&2**0
 triggerall = var(58)&2**1
@@ -19392,6 +19412,7 @@ supermovetime = 999999
 facing = facing*ifelse(teamside=1,1,-1)
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P014): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = var(58)&2**0
 triggerall = !(var(58)&2**1)
@@ -19411,6 +19432,7 @@ supermovetime = 999999
 facing = facing*ifelse(teamside=1,1,-1)
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P014): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = !(var(58)&2**0)
 triggerall = !NumHelper(6603)
@@ -19429,6 +19451,7 @@ supermovetime = 999999
 facing = facing*ifelse(teamside=1,1,-1)
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P014): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = var(58)&2**0
 triggerall = var(58)&2**1
@@ -19450,6 +19473,7 @@ supermovetime = 999999
 facing = facing*ifelse(teamside=1,1,-1)
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P014): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = var(58)&2**0
 triggerall = var(58)&2**1
@@ -19471,6 +19495,7 @@ supermovetime = 999999
 facing = facing*ifelse(teamside=1,1,-1)
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P014): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = var(58)&2**0
 triggerall = var(58)&2**1
@@ -19491,6 +19516,7 @@ supermovetime = 999999
 facing = facing*ifelse(teamside=1,1,-1)
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P014): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = var(58)&2**0
 triggerall = !(var(58)&2**1)
@@ -19510,6 +19536,7 @@ supermovetime = 999999
 facing = facing*ifelse(teamside=1,1,-1)
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P014): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = !(var(58)&2**0)
 triggerall = !NumHelper(6604)
@@ -19609,6 +19636,7 @@ fvar(9) = 3
 ignorehitpause = 1
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P014): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = var(58)&2**0
 triggerall = var(58)&2**1
@@ -19634,6 +19662,7 @@ supermovetime = 999999
 facing = facing*ifelse(teamside=1,1,-1)
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P014): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = var(58)&2**0
 triggerall = var(58)&2**1
@@ -19658,6 +19687,7 @@ supermovetime = 999999
 facing = facing*ifelse(teamside=1,1,-1)
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P014): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = var(58)&2**0
 triggerall = var(58)&2**1
@@ -19681,6 +19711,7 @@ supermovetime = 999999
 facing = facing*ifelse(teamside=1,1,-1)
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P014): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = var(58)&2**0
 triggerall = var(58)&2**1
@@ -19703,6 +19734,7 @@ supermovetime = 999999
 facing = facing*ifelse(teamside=1,1,-1)
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P014): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = var(58)&2**0
 triggerall = !(var(58)&2**1)
@@ -19724,6 +19756,7 @@ supermovetime = 999999
 facing = facing*ifelse(teamside=1,1,-1)
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P014): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = !(var(58)&2**0)
 triggerall = !NumHelper(6700)
@@ -19744,6 +19777,7 @@ supermovetime = 999999
 facing = facing*ifelse(teamside=1,1,-1)
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P014): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = var(58)&2**0
 triggerall = var(58)&2**1
@@ -19770,6 +19804,7 @@ supermovetime = 999999
 facing = facing*ifelse(teamside=1,1,-1)
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P014): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = var(58)&2**0
 triggerall = var(58)&2**1
@@ -19796,6 +19831,7 @@ supermovetime = 999999
 facing = facing*ifelse(teamside=1,1,-1)
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P014): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = var(58)&2**0
 triggerall = var(58)&2**1
@@ -19821,6 +19857,7 @@ supermovetime = 999999
 facing = facing*ifelse(teamside=1,1,-1)
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P014): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = var(58)&2**0
 triggerall = var(58)&2**1
@@ -19845,6 +19882,7 @@ supermovetime = 999999
 facing = facing*ifelse(teamside=1,1,-1)
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P014): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = var(58)&2**0
 triggerall = var(58)&2**1
@@ -19868,6 +19906,7 @@ supermovetime = 999999
 facing = facing*ifelse(teamside=1,1,-1)
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P014): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = var(58)&2**0
 triggerall = !(var(58)&2**1)
@@ -19890,6 +19929,7 @@ supermovetime = 999999
 facing = facing*ifelse(teamside=1,1,-1)
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P014): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = !(var(58)&2**0)
 triggerall = !NumHelper(6704)
@@ -19911,6 +19951,7 @@ supermovetime = 999999
 facing = facing*ifelse(teamside=1,1,-1)
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P014): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = !(var(58)&2**0)
 triggerall = !fvar(3)
@@ -19931,6 +19972,7 @@ supermovetime = 999999
 facing = facing*ifelse(teamside=1,1,-1)
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P014): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = !(var(58)&2**1)
 triggerall = !fvar(3)
@@ -19952,6 +19994,7 @@ supermovetime = 999999
 facing = facing*ifelse(teamside=1,1,-1)
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P014): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = !(var(58)&2**1)
 triggerall = !fvar(3)
@@ -19973,6 +20016,7 @@ supermovetime = 999999
 facing = facing*ifelse(teamside=1,1,-1)
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P014): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = !(var(58)&2**2)
 triggerall = !fvar(3)
@@ -20144,6 +20188,7 @@ var(17) = 1
 ignorehitpause = 1
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P014): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = numenemy
 triggerall = roundstate = 2
@@ -20169,6 +20214,7 @@ var(50) = 5000
 ignorehitpause = 1
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P014): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = numenemy
 triggerall = roundstate = 2
@@ -20974,6 +21020,7 @@ ignorehitpause = 1
 ownpal = 1
 
 [State -2, HyperComboFinish]
+triggerall = 0  ;TAGFIX(P014): char-side CvS announcer OFF (engine has its own)
 type = PlaySnd
 triggerall = roundstate >= 2
 trigger1 = WinKo && !var(32)
@@ -20981,6 +21028,7 @@ value = 9000,0
 ignorehitpause = 1
 
 [State 9020, PlaySnd]
+triggerall = 0  ;TAGFIX(P014): char-side CvS announcer OFF (engine has its own)
 type = PlaySnd
 triggerall = roundstate >= 2
 trigger1 = WinKo && !var(32)

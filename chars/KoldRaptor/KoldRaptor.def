@@ -1,0 +1,39 @@
+; Player information
+[Info]
+name = "Zabel"        
+displayname = "L.Raptor"
+versiondate = 1/25/2013
+mugenversion = 1.0
+author = "Koldskool";originally by Zelgadis296
+pal.defaults = 1,4
+localcoord = 320,240
+
+; Files for the player
+[Files]
+cmd = zabel.cmd   ;Command set
+cns = zabel.cns   ;Constants
+st = zabel.cns
+st1 = zabelN.cns
+st2 = zabelSP.cns
+st3 = zabelEX.cns
+stcommon = common1.cns ;Common states
+sprite  = zabel.sff   ;Sprite
+anim    = zabel.air   ;Animation
+sound   = zabel.snd   ;Sound
+pal1 = Default.act  ;Palettes (can have up to 12)
+pal2 = zabel2.act
+pal3 = zabel3.act
+pal4 = zabel.act
+pal5 = zabel4.act
+pal6 = zabel5.act
+pal7 = zabel6.act
+pal8 = zabel7.act
+pal9 = zabel8.act
+pal10 = zabel9.act
+pal11 = zabel10.act
+pal12 = zabel11.act
+
+; Arcade mode
+[Arcade]
+;intro.storyboard = intro.def
+ending.storyboard = ending.def

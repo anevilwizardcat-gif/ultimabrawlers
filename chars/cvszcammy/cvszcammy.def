@@ -1,0 +1,31 @@
+[Info]
+name = "cvscammy"		;キャミィ(cvs)
+displayname = "Cammy"	;キャミィ
+versiondate=09,08,2011	;Version date of character
+mugenversion=06,14,2003	;Version of M.U.G.E.N character works on
+author="Warusaki3"		;悪咲3号
+Pal.Defaults=4,5,6,1,2,3
+
+[Files]
+cmd      = cvscammy.cmd
+cns      = cvscammy.cns
+st       = cvscammy.cns
+st1      = cvs_common.cns
+st2      = groove.cns
+st3      = config.txt
+stcommon = common1.cns
+sprite   = cvszcammy.sff
+anim     = cvscammy.air
+sound    = cvscammy.snd
+pal1     = act/act004.act
+pal2     = act/act005.act
+pal3     = act/act006.act
+pal4     = act/act001.act
+pal5     = act/act002.act
+pal6     = act/act003.act
+pal7     = act/act007.act
+pal8     = act/act008.act
+pal9     = act/act009.act
+pal10    = act/act010.act
+pal11    = act/act011.act
+pal12    = act/act012.act

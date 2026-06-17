@@ -9799,6 +9799,7 @@ trigger1 = P2movetype != H
 fvar(7) = P2life
 
 [State -2,naration]
+triggerall = 0  ;TAGFIX(P016): Iori (H) char-side popup OFF [naration_1]
 type = Helper
 triggerall = numenemy
 triggerall = roundstate = 2
@@ -9837,6 +9838,7 @@ trigger1 = roundstate = 0
 fvar(14) = 0
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P016): Iori (H) char-side popup OFF [naration_1]
 type = Helper
 triggerall = numenemy
 triggerall = !var(48) && fvar(14) = 400
@@ -9889,6 +9891,7 @@ var(45) = 4
 ignorehitpause = 1
 
 [State -2,FIRST ATTACK]
+triggerall = 0  ;TAGFIX(P016): Iori (H) char-side popup OFF [FIRST ATTACK]
 type = helper
 triggerall = roundstate = 2
 trigger1 = var(45)<3
@@ -9920,6 +9923,7 @@ ignorehitpause = 1
 persistent = 0
 
 [State -3,FINEST KO FINISH]
+triggerall = 0  ;TAGFIX(P016): Iori (H) char-side popup OFF [FINEST KO FINISH]
 type = helper
 triggerall = var(45)<3
 triggerall = winKO && alive
@@ -9938,6 +9942,7 @@ supermovetime = 9999999999999999
 pausemovetime = 9999999999999999
 
 [State -3, SUPER COMBO FINISH]
+triggerall = 0  ;TAGFIX(P016): Iori (H) char-side popup OFF [SUPER COMBO FINISH]
 type = helper
 triggerall = var(45)<3
 triggerall = winKO && alive
@@ -9958,6 +9963,7 @@ supermovetime = 9999999999999999
 pausemovetime = 9999999999999999
 
 [State -3, SPECIAL MOVE FINISH]
+triggerall = 0  ;TAGFIX(P016): Iori (H) char-side popup OFF [SPECIAL MOVE FINISH]
 type = helper
 triggerall = var(45)<3
 triggerall = winKO && alive
@@ -9983,6 +9989,7 @@ fvar(18) = 1
 ignorehitpause = 1
 
 [State -3, BLOCKING]
+triggerall = 0  ;TAGFIX(P016): Iori (H) char-side popup OFF [BLOCKING]
 type = helper
 triggerall = var(30) && var(39)
 trigger1 = var(45)<3
@@ -10001,6 +10008,7 @@ supermovetime = 9999999999999999
 pausemovetime = 9999999999999999
 
 [State -3, GUARD CANCEL]
+triggerall = 0  ;TAGFIX(P016): Iori (H) char-side popup OFF [GUARD CANCEL]
 type = helper
 triggerall = var(30) && var(39)
 trigger1 = var(45)<3
@@ -10019,6 +10027,7 @@ supermovetime = 9999999999999999
 pausemovetime = 9999999999999999
 
 [State -3, JUST DEFENDED]
+triggerall = 0  ;TAGFIX(P016): Iori (H) char-side popup OFF [JUST DEFENDED]
 type = helper
 triggerall = var(30) && var(39)
 trigger1 = var(45)<3
@@ -10037,6 +10046,7 @@ supermovetime = 9999999999999999
 pausemovetime = 9999999999999999
 
 [State -3, TECH BOUNS]
+triggerall = 0  ;TAGFIX(P016): Iori (H) char-side popup OFF [TECH BOUNS]
 type = helper
 triggerall = var(30) && var(39)
 trigger1 = var(45)<3
@@ -10070,6 +10080,7 @@ fvar(13) = 1
 ignorehitpause = 1
 
 [State -2,Reversal]
+triggerall = 0  ;TAGFIX(P016): Iori (H) char-side popup OFF [Reversal]
 type = helper
 triggerall = var(45)<3
 triggerall = fvar(13) = 1
@@ -10129,6 +10140,7 @@ var(41) = 1
 ignorehitpause = 1
 
 [State -2,naration]
+triggerall = 0  ;TAGFIX(P016): Iori (H) char-side popup OFF [naration_2]
 type = Helper
 triggerall = var(48)=100 && fvar(14) < 400
 trigger1 = (!NumHelper(6800)&&!Ceil(fvar(2))) || (!NumHelper(6800)&&Ceil(fvar(2))=1&&!enemynear,NumHelper(6800))
@@ -10166,6 +10178,7 @@ ignorehitpause = 1
 ;---------------------------------------------------------------------
 ;‘½’iƒqƒbƒg
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P016): Iori (H) char-side popup OFF [naration_3]
 type = Helper
 triggerall = numenemy
 triggerall = roundstate = 2
@@ -10237,6 +10250,7 @@ supermovetime = 9999999999999999
 pausemovetime = 9999999999999999
 
 [State -3, Counter3]
+triggerall = 0  ;TAGFIX(P016): Iori (H) char-side popup OFF [COUNTER HIT]
 type = helper
 triggerall = !var(28)
 triggerall = StateNo != 4505
