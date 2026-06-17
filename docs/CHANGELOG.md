@@ -22,6 +22,46 @@ the entry's Status line (the only allowed in-place edit; everything else is appe
 > NOTE: P001–P006 are **backfilled** from the handoff doc. Exact dates/times were not recorded, so they
 > read "date-unknown (pre-2026-06-16)". Treat them as historical context, not precise audit.
 
+## [P015] 2026-06-16 — groove meters hidden until round starts
+Files: groove.cns (variant A: guile/ryu/ken/chunli/zangief/gouki/king/nakoruru ; variant B: haohmaru/kyo/
+terry/sakura)
+The groove EX/super meter (the "gauge" helper, stateno 6100+(var(20)*10), display states 6100/6110/6120/6130/
+6140/6150/6160/6170 in groove.cns) was guarded by `roundstate <= 2`, which INCLUDES the intro (roundstate 0/1)
+- so the meter showed during the walk-in before FIGHT. Fix: in the 8 gauge states only, create-guards
+`roundstate <= 2` -> `roundstate = 2` and the bench sweep `roundstate > 2` -> `roundstate != 2`. Net: meter
+visible ONLY during the active fight (roundstate 2); hidden during intro (0/1) AND post-KO (3/4). Bench/KO/dead
+hiding preserved (other sweep triggers untouched). GP state 6500 and all non-gauge states verified byte-
+identical. groove.cns has 2 variants so 2 files; covers all 12 groove chars. Other meter families (cvs2_system,
+SF3, Chun-Li, Jedah, Morrigan) still to be audited for the same intro-hide.
+
+### P014 addendum — computed-stateno popup survivors fixed
+First test (Guile): combos/grades gone, but "Counter Hit" (and possibly its voice) survived. CAUSE: the active
+Counter Hit spawn uses a COMPUTED stateno `stateno = ifelse(!(var(0)&2**13),6641,6631)` - the first numeric
+gate matched only LITERAL statenos, so the 4 ifelse-based spawns slipped through. FIX: gate by ANY 6600-6803
+integer appearing in the stateno expression (literal or inside ifelse). Now 46 popup spawns + 2 announcer
+gated; all popup-named helpers (Guard/First Attack/Counter Hit/Tech Hit/Reversal/Finish Hit/Complete/Vital/
+Perfect/Max Combo/naration) confirmed gated. LESSON: message spawns can carry computed statenos - match by
+number-in-expression or by helper name, not literal stateno only.
+
+## [P014] 2026-06-16 — char-side popup + announcer suppression (Guile reference; roster rollout pending)
+File shipped: cvsguile/cvsguile.cns  (reference; identical generic patch to roll to other 11 once verified)
+
+The CvS chars spam their OWN combo counter, action messages, grade calls, AND announcer voice over the
+engine's native ones. All of it is cosmetic helpers spawned from the MAIN cns `[Statedef -2]`:
+  - 6600-6644 : combo / action messages (FIRST ATTACK, COUNTER, etc.)
+  - 6700-6764 : additional message family
+  - 6800-6803 : grade narration helpers (Fantastic/Great/Finish/Complete) - helper name "naration_N",
+                these also PLAY the announcer voice (snd group 10000), so gating them kills grade voice too
+  - announcer : root-side PlaySnd snd group 9000 (e.g. [State -2,HyperComboFinish] 9000,0; 9000,4)
+FIX (P014): add `triggerall = 0` to each popup helper spawn (42) + each group-9000 PlaySnd (2) in -2.
+Pure cosmetic gating - CANNOT affect gameplay or cause a clone (worst case a popup remains). Fully reversible
+(remove the triggerall=0 lines). GP (state 6500 spawn) intentionally NOT touched here - handled by config
+var(0) bit 0 (P013), kept separate.
+NOTE: groove.cns has TWO variants across roster (md5 edb94315 x8: guile/ryu/ken/chunli/zangief/gouki/king/
+nakoruru ; e6abe860 x4: haohmaru/kyo/terry/sakura) but the popup SPAWNS live in each char's own cns -2, so the
+generic patch (gate helper spawns with stateno in 6600-6644/6700-6799/6800-6803 + 9000 PlaySnds) applies
+per-file regardless. Rollout: same programmatic patch to the other 11 cvs*.cns after Raven verifies Guile.
+
 ## [P013] 2026-06-16 — GP counter hide (groove roster) + Mai groove-gauge bench fix + announcer/popup recon
 Files shipped: config.txt (drop into all 12 groove folders), cvsmai/cvs2_system.cns
 
