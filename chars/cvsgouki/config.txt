@@ -9,7 +9,7 @@ anim = 6900
 [State 10000, see GROOVE POINT]
 type = ParentVarAdd
 trigger1 = !(root,var(0)&2**0)
-var(0) = 0
+var(0) = 2**0  ;TAGFIX(P013): GP/Grade-Point counter OFF (author switch, bit 0)
 ;0...GROOVE POINT ON /グルーヴポイントの表示あり
 ;2**0...GROOVE POINT OFF/グルーヴポイントの表示なし
 

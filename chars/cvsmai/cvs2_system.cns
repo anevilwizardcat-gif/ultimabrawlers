@@ -5615,9 +5615,86 @@ type = ParentVarSet
 trigger1 = 1
 var(30) = 1
 
+
+;TAGFIX(P013v2): bench-UI for Mai (H) gauge - SAFE (no re-entry). Hide on bench/KO/round-end; create-gating restores on tag-in.
+[State 21000, Bench Sweep 21000]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611] || roundstate > 2 || !root,alive
+id = 21000
+ignorehitpause = 1
+
+[State 21000, Bench Sweep 21001]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611] || roundstate > 2 || !root,alive
+id = 21001
+ignorehitpause = 1
+
+[State 21000, Bench Sweep 21010]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611] || roundstate > 2 || !root,alive
+id = 21010
+ignorehitpause = 1
+
+[State 21000, Bench Sweep 21020]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611] || roundstate > 2 || !root,alive
+id = 21020
+ignorehitpause = 1
+
+[State 21000, Bench Sweep 21021]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611] || roundstate > 2 || !root,alive
+id = 21021
+ignorehitpause = 1
+
+[State 21000, Bench Sweep 21022]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611] || roundstate > 2 || !root,alive
+id = 21022
+ignorehitpause = 1
+
+[State 21000, Bench Sweep 21030]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611] || roundstate > 2 || !root,alive
+id = 21030
+ignorehitpause = 1
+
+[State 21000, Bench Sweep 21031]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611] || roundstate > 2 || !root,alive
+id = 21031
+ignorehitpause = 1
+
+[State 21000, Bench Sweep 21032]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611] || roundstate > 2 || !root,alive
+id = 21032
+ignorehitpause = 1
+
+[State 21000, Bench Sweep 21041]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611] || roundstate > 2 || !root,alive
+id = 21041
+ignorehitpause = 1
+
+[State 21000, Bench Sweep 21042]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611] || roundstate > 2 || !root,alive
+id = 21042
+ignorehitpause = 1
+
+[State 21000, Bench Sweep 21043]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611] || roundstate > 2 || !root,alive
+id = 21043
+ignorehitpause = 1
+
 [State -2, Explod(P1)]
 type = Explod
-trigger1 = Time = 0 && teamside = 1
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(21010) = 0 && teamside = 1
 anim = 21010
 id = 21010
 pos = 140,230
@@ -5634,7 +5711,10 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
-trigger1 = Time = 0 && teamside = 2
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(21010) = 0 && teamside = 2
 anim = 21015
 id = 21010
 pos = -140,230
@@ -5664,7 +5744,10 @@ scale = 0,0
 ;------------------------ Lv.1
 [State -2, Explod(P1-Lv.1)]
 type = Explod
-trigger1 = Time = 0 && teamside = 1
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(21020) = 0 && teamside = 1
 anim = 21020
 id = 21020
 pos = 140,227
@@ -5682,7 +5765,10 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
-trigger1 = Time = 0 && teamside = 2
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(21020) = 0 && teamside = 2
 anim = 21025
 id = 21020
 pos = -140,227
@@ -5715,7 +5801,10 @@ ignorehitpause = 1
 
 [State -2, Explod(P1-Lv.1)]
 type = Explod
-trigger1 = Time = 0 && teamside = 1
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(21030) = 0 && teamside = 1
 anim = 21030
 id = 21030
 pos = 140,227
@@ -5733,7 +5822,10 @@ Supermovetime = -1
 
 [State -2, Explod(P1-Lv.1)]
 type = Explod
-trigger1 = Time = 0 && teamside = 2
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(21030) = 0 && teamside = 2
 anim = 21035
 id = 21030
 pos = -140,227
@@ -5766,7 +5858,10 @@ scale = 0,5
 ;------------------------ Lv.2
 [State -2, Explod(P1-Lv.2)]
 type = Explod
-trigger1 = Time = 0 && teamside = 1
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(21021) = 0 && teamside = 1
 anim = 21020
 id = 21021
 pos = 98,225
@@ -5784,7 +5879,10 @@ Supermovetime = -1
 
 [State -2, Explod(P2-Lv.2)]
 type = Explod
-trigger1 = Time = 0 && teamside = 2
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(21021) = 0 && teamside = 2
 anim = 21025
 id = 21021
 pos = -98,225
@@ -5819,7 +5917,10 @@ ignorehitpause = 1
 
 [State -2, Explod(P1-Lv.1)]
 type = Explod
-trigger1 = Time = 0 && teamside = 1
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(21031) = 0 && teamside = 1
 anim = 21030
 id = 21031
 pos = 97,225
@@ -5837,7 +5938,10 @@ Supermovetime = -1
 
 [State -2, Explod(P1-Lv.1)]
 type = Explod
-trigger1 = Time = 0 && teamside = 2
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(21031) = 0 && teamside = 2
 anim = 21035
 id = 21031
 pos = -97,225
@@ -5871,7 +5975,10 @@ ignorehitpause = 1
 ;------------------------ Lv.3
 [State -2, Explod(P1-Lv.3)]
 type = Explod
-trigger1 = Time = 0 && teamside = 1
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(21022) = 0 && teamside = 1
 anim = 21020
 id = 21022
 pos = 54,223
@@ -5889,7 +5996,10 @@ Supermovetime = -1
 
 [State -2, Explod(P2-Lv.3)]
 type = Explod
-trigger1 = Time = 0 && teamside = 2
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(21022) = 0 && teamside = 2
 anim = 21025
 id = 21022
 pos = -54,223
@@ -5924,7 +6034,10 @@ ignorehitpause = 1
 
 [State -2, Explod(P1-Lv.3)]
 type = Explod
-trigger1 = Time = 0 && teamside = 1
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(21032) = 0 && teamside = 1
 anim = 21030
 id = 21032
 pos = 54,223
@@ -5941,7 +6054,10 @@ Supermovetime = -1
 
 [State -2, Explod(P1-Lv.3)]
 type = Explod
-trigger1 = Time = 0 && teamside = 2
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(21032) = 0 && teamside = 2
 anim = 21035
 id = 21032
 pos = -54,223
@@ -5974,7 +6090,10 @@ ignorehitpause = 1
 ;------------------------ 枠
 [State -2, Explod(P1)]
 type = Explod
-trigger1 = Time = 0 && teamside = 1
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(21000) = 0 && teamside = 1
 anim = 21000
 id = 21000
 pos = 140,230
@@ -5991,7 +6110,10 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
-trigger1 = Time = 0 && teamside = 2
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(21000) = 0 && teamside = 2
 anim = 21005
 id = 21000
 pos = -140,230
@@ -6021,7 +6143,10 @@ scale = 0,0
 ;------------------------ レベル表記
 [State -2, Explod(P1-Lv.1)]
 type = Explod
-trigger1 = Time = 0 && teamside = 1
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(21041) = 0 && teamside = 1
 anim = 21041
 id = 21041
 pos = 31,223
@@ -6037,7 +6162,10 @@ Supermovetime = -1
 
 [State -2, Explod(P1-Lv.1)]
 type = Explod
-trigger1 = Time = 0 && teamside = 2
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(21041) = 0 && teamside = 2
 anim = 21051
 id = 21041
 pos = -31,223
@@ -6068,7 +6196,10 @@ ignorehitpause = 1
 
 [State -2, Explod(P1-Lv.1)]
 type = Explod
-trigger1 = Time = 0 && teamside = 1
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(21042) = 0 && teamside = 1
 anim = 21042
 id = 21042
 pos = 31,223
@@ -6084,7 +6215,10 @@ Supermovetime = -1
 
 [State -2, Explod(P1-Lv.1)]
 type = Explod
-trigger1 = Time = 0 && teamside = 2
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(21042) = 0 && teamside = 2
 anim = 21052
 id = 21042
 pos = -31,223
@@ -6115,7 +6249,10 @@ ignorehitpause = 1
 
 [State -2, Explod(P1-Lv.1)]
 type = Explod
-trigger1 = Time = 0 && teamside = 1
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(21043) = 0 && teamside = 1
 anim = 21043
 id = 21043
 pos = 31,223
@@ -6131,7 +6268,10 @@ Supermovetime = -1
 
 [State -2, Explod(P1-Lv.1)]
 type = Explod
-trigger1 = Time = 0 && teamside = 2
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(21043) = 0 && teamside = 2
 anim = 21053
 id = 21043
 pos = -31,223
@@ -6163,7 +6303,10 @@ ignorehitpause = 1
 ;------------------------ グルーヴ表記
 [State -2, Explod(C-GROOVE)]
 type = Explod
-trigger1 = Time = 0 && teamside = 1
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(21001) = 0 && teamside = 1
 anim = Ifelse((Root,var(43)),27001,21001)
 id = 21001
 pos = 123,221
@@ -6180,7 +6323,10 @@ Supermovetime = -1
 ;------------------------ グルーヴ表記
 [State -2, Explod(C-GROOVE)]
 type = Explod
-trigger1 = Time = 0 && teamside = 2
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(21001) = 0 && teamside = 2
 anim = Ifelse((Root,var(43)),27001,21001)
 id = 21001
 pos = -123,221

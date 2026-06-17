@@ -1,5 +1,5 @@
 {
-  "playtime": 40843.15,
+  "playtime": 44108.76,
   "modes": {
     "training": {
       "playtime": 0,
@@ -51,16 +51,16 @@
       ]
     },
     "watch": {
-      "playtime": 40261.99,
-      "clear": 152,
+      "playtime": 43371.18,
+      "clear": 163,
       "clearcount": {
-        "jotaro": 35,
+        "jotaro": 38,
         "dio": 17,
-        "mvc2_spiderman": 9,
+        "mvc2_spiderman": 11,
         "ryu_pots": 1,
         "sf3_ryu": 6,
         "sephiroth_ak": 1,
-        "sf3_ibuki": 1,
+        "sf3_ibuki": 2,
         "sf3_gouki": 3,
         "lightning": 2,
         "josuke": 2,
@@ -100,7 +100,10 @@
         "cvsryu": 1,
         "cvwscorpion": 1,
         "cvsguile": 1,
-        "cvsgouki": 2
+        "cvsgouki": 4,
+        "divinepsy": 1,
+        "cvs_honda": 1,
+        "cvs2_dhalsim": 1
       }
     },
     "survival": {
@@ -121,6 +124,10 @@
           "ailevel": 8
         }
       ]
+    },
+    "freebattle": {
+      "playtime": 156.42,
+      "clear": 0
     }
   }
 }

@@ -22,6 +22,73 @@ the entry's Status line (the only allowed in-place edit; everything else is appe
 > NOTE: P001–P006 are **backfilled** from the handoff doc. Exact dates/times were not recorded, so they
 > read "date-unknown (pre-2026-06-16)". Treat them as historical context, not precise audit.
 
+## [P013] 2026-06-16 — GP counter hide (groove roster) + Mai groove-gauge bench fix + announcer/popup recon
+Files shipped: config.txt (drop into all 12 groove folders), cvsmai/cvs2_system.cns
+
+GP / Grade-Point counter — HIDE (groove family): the author's switch is var(0) bit 0 ("2**0 = GROOVE POINT
+  OFF", documented in config.txt; state 6500 ChangeStates to empty state 6501 when the bit is set). Edited the
+  one line in config.txt `[State 10000, see GROOVE POINT]`: `var(0) = 0` -> `var(0) = 2**0`. config.txt is
+  BYTE-IDENTICAL (md5 80eff3a4) across all 12 groove chars (cvsguile/haohmaru/kyo/terry/sakura/ryu/ken/chunli/
+  zangief/gouki/king/nakoruru), so ONE file covers the roster. NOTE: Haohmaru was NOT actually hidden before —
+  his config/groove.cns/cns are identical to Guile's on GP; the whole roster showed it. GP is display-only
+  (CvS2 grade score, never consumed) so hiding is cosmetic and safe. Honda's GP is Family-B (cvs2_system,
+  different config structure) — deferred to Family-B pass.
+
+Mai (author "H", Family-B cvs2_system, gauge state 21000): her groove gauge had 24 explods and ZERO bench
+  handling (showed always). Added the standard kyo/terry bench pattern (Sweep RemoveExplod + Restore
+  ChangeState) at the TOP of state 21000, so it hides on tag-out/KO/round-end and re-draws on tag-in. Does NOT
+  remove the gauge (the prior fix had deleted it entirely).
+
+Announcer + action popups — RECON (not yet changed): announcer = sound GROUP 9000 (PlaySnd in the main cns,
+  e.g. value=9000,0 on WinKo). Action/combo popups = the message-helper family (states 6600-6644 in groove.cns)
+  spawned from the MAIN cns `[Statedef -2]` (cvsguile L9867-10350), gated by var(58) bits; with var(58)=0
+  (default) only the base set (6600/6602/6603/6604) spawns. Plan: patch ONE char (Guile) as reference - gate
+  those base message spawns + the 9000 PlaySnds - have Raven verify, THEN roll to all. Do NOT mass-edit 12
+  chars unverified. Open Q for Raven: kill the combo COUNTER (hit number) too, or only action messages?
+
+
+### P013 addendum — Mai gauge v1 REVERTED (clone) -> v2 (safe)
+v1 (Sweep + Restore ChangeState value=21000) caused a Mai CLONE that attacked with its own CPU + console
+"invalid state 30000" error. ROOT CAUSE: state 21000 is run by a keyctrl=1 helper named "groove" (id 20000,
+home state 30000), gated by a var(30) / Root,Numhelper(20000) handshake. The Restore's ChangeState re-entry
+reset that helper's timeline and broke the handshake -> it fell to state 0 as a keyctrl entity (clone).
+HARD LESSON: NEVER use a ChangeState/re-entry "restore" on Mai's 21000 (or any state that is itself the
+groove-helper/keyctrl machinery). v2 hides the gauge WITHOUT re-entry: each gauge-explod CREATE is gated on
+`numexplod(id)=0 && !benched && root,alive && roundstate<=2`, plus a per-id RemoveExplod sweep on bench/KO/
+round-end. All runs inside the helper's existing per-tick loop; var(30)/DestroySelf/29000-spawn untouched.
+v2 cannot reproduce the clone (no ChangeState). Worst case = behaves like always-on original.
+
+
+### P011 extension — Honda (Cvs_Honda) normal-meter
+Honda is another Gal129 normal-meter char (folder Cvs_Honda, def Cvs_honda.def, uses Cvs2_system.cns). Same
+treatment as cvs2_blanka/cvs2_dhalsim: disabled `[State -2, Hide Engine Power Bar]` AssertSpecial
+(flag=noPowerBarDisplay) in Cvs2_system.cns L9643 (trigger1 = 1 -> 0) so the default engine power bar shows.
+No GP for Honda (per Raven). No custom-gauge plumbing existed on Honda, so nothing to revert.
+
+## [P012] 2026-06-16 23:10 CT — build nightly-06-07-2026
+Subsystem: HUD / fight.def [Powerbar]
+Files shipped: data/fight.def
+Change: normalized every `p{1,2}.front<N>.palfx.sinmul` (front500..front10000 + frontMax) to the base
+  `front` value `18, 18, 18, 70`. They previously varied per power threshold (front500=12,12,12,90, etc.).
+Why: the power bar is one fill sprite (43,0) with mul=256,256,256; the per-threshold sinmul is a white shimmer
+  added over the blue sprite. Lower sinmul = less white = darker/more-saturated blue. At 500 power (half of
+  level 0) it switched front->front500 and visibly dropped to a darker blue, staying dark up the levels. Making
+  all thresholds match the initial `front` shimmer keeps brightness uniform across the whole fill.
+Note: there is a separate `front.palfx.sinmul = 128,128,128,15` in a DIFFERENT bar section (not [Powerbar]) —
+  do not confuse it with the powerbar base; scope edits to inside [Powerbar].
+
+## [INVESTIGATION] 2026-06-16 — GP / Grade-Point counter (state 6500)
+GP = CvS2 grade/score (var(50)); awards points for win quality (remaining life, combos, perfects, no-damage,
+  round wins). It is DISPLAY-ONLY — var(50) is never consumed and gives no combat advantage; purely cosmetic.
+Lives in: groove.cns state 6500 (groove family, PER-CHAR copies) + Family-B cvs2_system (Honda/Mai/Iori).
+  NOT present in Family-C Gal129 cvs2_blanka/cvs2_dhalsim (no statedef 6500). Display = box (anim 6500/6550),
+  "GP" label (6501/6551), digits (explods 6510-6517), near top-center below health bars.
+Current state: only BENCH-guarded (shows when active, hides when benched). Checked cvsterry's groove.cns — its
+  GP counter is still active-visible, identical to cvsguile's — so despite the note that kyo/terry/etc were
+  "hidden", the GP counter itself does NOT appear hard-hidden in those files. Flag to Raven before mass-editing.
+To hide fully: set the ~20 GP-display explod `triggerall` to 0 (or comment them) per char's 6500 state; leave
+  the score calc (harmless). Low-risk, cosmetic, per-char (groove.cns is not shared).
+
 ## [P011] 2026-06-16 22:00 CT — build nightly-06-07-2026
 Subsystem: bench-ui-meters / Family C (Gal129) — RESOLUTION + revert of P007-P010
 Files shipped: cvs2_blanka/N-cvs2_blanka.cns, cvs2_blanka/cvs2_system.cns,

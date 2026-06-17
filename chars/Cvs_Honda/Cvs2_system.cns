@@ -9640,7 +9640,7 @@ trigger1 = P2movetype != H && Time >= 360
 [Statedef -2] 
 [State -2, Hide Engine Power Bar]
 type = AssertSpecial
-trigger1 = 1
+trigger1 = 0  ;TAGFIX(P011): Honda is Gal129 normal-meter - re-enable default engine power bar (custom gauge never renders, same as cvs2_blanka/cvs2_dhalsim)
 flag = noPowerBarDisplay
 ignorehitpause = 1
 
