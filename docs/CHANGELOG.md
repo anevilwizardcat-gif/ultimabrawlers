@@ -22,6 +22,40 @@ the entry's Status line (the only allowed in-place edit; everything else is appe
 > NOTE: P001–P006 are **backfilled** from the handoff doc. Exact dates/times were not recorded, so they
 > read "date-unknown (pre-2026-06-16)". Treat them as historical context, not precise audit.
 
+## [P017] 2026-06-16 — cvszcammy (Warusaki3) full Warusaki3 treatment
+Files: cvszcammy/cvscammy.cns (popups/announcer) + cvszcammy/groove.cns (bench-UI + intro-hide).
+New Warusaki3 char (folder cvszcammy, main cns = cvscammy.cns, NOT cvszcammy.cns). Standard groove
+architecture (cvs_common + groove.cns + config.txt). Treatment:
+  - GP: ALREADY off in her config.txt (var(0) = 2**0 in [State 10000, see GROOVE POINT]) - no action.
+  - Popups/announcer: P014 generic patch on cvscammy.cns -> 46 popups + 2 announcer gated (uniform w/ roster).
+  - Meter bench-UI + intro-hide: her groove.cns (md5 014ce641) was the PRE-bench-UI version - 0 bench guards,
+    meters never hid when benched AND showed during intro. Diff vs roster groove.cns: her file is a STRICT
+    SUBSET (0 Cammy-only lines; the 165 missing lines are exactly the bench-UI guards+sweeps). So replaced her
+    groove.cns with the finished variant-A groove.cns (grooveA_P015: bench-UI + roundstate=2 intro-hide).
+    Verified zero content loss. Her gauge explod-id sequence is byte-identical to variant A's.
+LESSON: a freshly-pushed Warusaki3 char may ship the ORIGINAL groove.cns (no bench-UI). Diff vs a known-good
+variant; if it's a strict subset, swap in the finished groove.cns rather than hand-adding 165 lines.
+
+## [P016] 2026-06-16 — P014 rolled to 11 groove chars + Iori (H) bespoke popup gate
+Files: cvsryu/ken/chunli/zangief/gouki/king/nakoruru/haohmaru/kyo/terry/sakura .cns (popup+announcer, P014
+generic patch, uniform 46 popups + 2 announcer each) ; Cvs_iori/Cvs2_system.cns (bespoke).
+
+GROOVE ROLLOUT: the P014 patch (gate -2 helper spawns whose stateno expression contains a 6600-6803 integer,
+literal or ifelse, + group-9000 PlaySnds) applied identically to all 11 remaining groove chars. Identical
+counts confirm the -2 spawn block is boilerplate across the roster.
+
+IORI (author "H", Family-B): his popups are H's OWN system, NOT the groove 6600-6803 range - they live at
+6000-6109 (e.g. COUNTER HIT=6001+var(45)*10, FIRST ATTACK=6002+var(45)*10, BLOCKING/GUARD CANCEL/JUST DEFENDED/
+TECH BONUS/Reversal/SPECIAL+SUPER+FINEST finish text) + naration 6800-6803, all spawned in cvs2_system [-2].
+That's why his "Counter!" survived the groove patch. FIX: gate -2 helper spawns whose stateno contains a number
+in 6000-6109 or 6800-6803. CRITICAL PROTECTIONS (NOT gated): the "Gauge" helper (20000+Var(30)*1000 = the
+meter) and the "groove" keyctrl helper (stateno 30000) - gating that keyctrl helper would clone Iori exactly
+like the Mai v1 bug. The 8130 "COUNTER HIT EFFECT" (hit spark VFX) is also left (not in range). LEFT ALONE:
+the 9000/9010/9020/9030 "finish" helpers - these are the dramatic super-KO CINEMATIC (assert NoBG/NoMusic/NoFG
+to darken the screen), not a text bubble; pending Raven's call on whether to also kill that.
+GENERAL LESSON: H/Family-B chars use a different popup state range AND carry a keyctrl groove helper in their
+own cns -2 - always gate by stateno-range + protect name~groove/keyctrl, never blanket-gate -2 helpers.
+
 ## [P015] 2026-06-16 — groove meters hidden until round starts
 Files: groove.cns (variant A: guile/ryu/ken/chunli/zangief/gouki/king/nakoruru ; variant B: haohmaru/kyo/
 terry/sakura)
