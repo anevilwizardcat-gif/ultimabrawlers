@@ -1,0 +1,38 @@
+[Statedef 10000]
+anim = 9999
+ID = 10000
+
+[State PvarSet, 1];必殺ヒットエフェクト設定
+type = parentvarset
+trigger1 = 1
+var(51) = 3 ;min 0 - default 3 - max 5
+;表示したいエフェクトの数を記入してください。
+;デフェルトは3です。
+
+[State PvarSet, 1];覚醒エフェクト設定
+type = parentvarset
+trigger1 = 1
+var(52) = 0
+;0 = デフォルト設定
+;1 = 覚醒背景消去
+;2 = オーラ消去
+;3 = 光の粒消去
+;4 = 覚醒背景、オーラ、光の粒消去
+
+[State PvarSet, 1];ヒットエフェクト設定
+type = parentvarset
+trigger1 = 1
+var(53) = 0
+;0 = デフォルト設定
+;1 = 光の粒消去
+;2 = 血しぶき消去
+;3 = 光の粒、血しぶき消去
+
+[State PvarSet, 1];ガードゲージ、サイクバーストゲージ表設定
+type = parentvarset
+trigger1 = 1
+var(54) = 0
+;0 = デフォルト設定
+;1 = ガードゲージ消去
+;2 = サイクバーストゲージ消去
+;3 = ガードゲージ、サイクバーストゲージ消去

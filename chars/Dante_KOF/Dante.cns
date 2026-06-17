@@ -1643,3 +1643,53 @@ value = SCA
 
 ; fVar(22) - StateDef -2
 
+
+;========================================================================
+; TAGFIX(P019): inert stub for the ABSENT ADD004 system helper (state 90900)
+;------------------------------------------------------------------------
+; The [Statedef -2] helper (ID 90900) is sent to Stateno 90900, but state
+; 90900 is NOT defined in any of this char's loaded files (verified: the
+; number is referenced ~20x across Dante.cns/common.cns but defined 0x;
+; the ADD004 style/JD/bar system Wou's Dante expects was never carried into
+; this variant). With no state 90900, the helper fell to state 0 and stood
+; as a no-AI clone (keyctrl=0). This stub gives it a VALID, invisible, inert
+; home so the clone disappears. It deliberately sets NO variables -> his
+; var(22) style value stays 0, exactly as it already is now, so nothing about
+; his real gameplay changes; only the clone is removed.
+;
+; REVERSIBLE: delete this whole block to undo.
+; IF Wou's original system file is restored (defining 90900 + 90901/90902/
+; 99996/99997/99998/195500), REMOVE this stub to avoid a duplicate Statedef.
+;========================================================================
+[Statedef 90900]
+type = S
+movetype = I
+physics = N
+ctrl = 0
+
+[State 90900, invisible every tick]
+type = AssertSpecial
+trigger1 = 1
+flag = Invisible
+ignorehitpause = 1
+
+[State 90900, no shadow]
+type = AssertSpecial
+trigger1 = 1
+flag = NoShadow
+ignorehitpause = 1
+
+[State 90900, intangible]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+ignorehitpause = 1
+
+[State 90900, hold still]
+type = VelSet
+trigger1 = 1
+x = 0
+y = 0
+ignorehitpause = 1
+; (no DestroySelf: the helper must persist so NumHelper(90900)=1 stays
+;  identical to current behavior; it simply sits inert and invisible.)

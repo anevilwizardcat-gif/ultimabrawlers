@@ -1,0 +1,48 @@
+﻿; ---- Created by Uno Tag Team Patcher ---- ;
+[Info]
+name ="Leon"
+displayname ="Leon"
+versiondate = 11,02,2020
+mugenversion = 1.0
+author ="Ryny"
+pal.defaults = 1,2,3,4,5,6
+[Files]
+cmd =Leon_unotag\Command.cmd
+cns =Leon_unotag\System.cns
+st  =Leon_unotag\System.cns
+stcommon = common1.cns
+sprite = Leon.sff
+anim = Animation.air
+sound = Sound.snd
+st1 = Normal.cns
+st2 = Specials.cns
+st3 = Helpers.cns
+st4 = Supers.cns
+
+pal1 = Pal\Default.act
+pal2 = Pal\Brown.act
+pal3 = Pal\SWAT2.act
+pal4 = Pal\Red.act
+pal5 = Pal\Red V2.act
+pal6 = Pal\Default.act
+st9=Leon_unotag\tag_system.cns
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[Arcade]
+intro.storyboard = Leonintro.def
+ending.storyboard =

@@ -379,3 +379,31 @@ SFFv2, group 0, image = ASCII code; sprites are fmt=12 PNG32 in ldata block, eac
 4-BYTE LENGTH PREFIX -> PNG signature starts at (ldata_off + node.data_offset + 4). Header: 0x24=node
 array off, 0x28=sprite count, 0x34=ldata off. Node=28B: +2 item(ascii), +16 data_off(u32), +20 data_len(u32).
 
+## [P018e] Menu highlight -> gold; select-screen title -> Pixel
+menu.item.active.font RGB 123,206,255 (blue) -> 255,210,40 (gold/yellow). [Select Info] title.font
+4,0,0 -> 2,0,0 (was font4 Menu1 = the OLD main-menu font; now Pixel to match P018d). Tweak gold via the
+RGB triplet. NOTE: select-screen NAMES/stage/record/teammenu still on font3 (Menu2) - a different
+secondary font, left as-is (can switch to Pixel on request).
+BACKGROUNDS (reported, NOT changed - baked sprites): main-menu blue = [TitleBG Background Sky] spriteno
+100,0; char-select red = [SelectBG Background Sky] spriteno 101,0; both inside data/ikemen1/system.sff.
+Recolor requires editing the sprite (Fighter Factory) or a programmatic extract->hue-shift->reinject
+into the SFFv2 (risky on the 8MB sff; do with preview + care). Not a .def edit.
+
+## [P019] Dante_KOF round-start clone — DIAGNOSED, fix needs missing file (OPEN)
+Char CNS work (separate from P018* motif/font). Clone = helper ID 90900 spawned (Dante.cns [Statedef -2])
+into Stateno 90900, which is undefined in all loaded files -> falls to state 0 -> visible clone, no AI.
+Console "Dante's helper (59)" -> 59 is runtime index, gameplay ID is 90900. Root cause: def references
+st4=misc.cns + stcommon=common1.cns, BOTH 404 in repo; misc.cns is Wou's system-states file holding
+[Statedef 90900] (+ 90901/90902/99996/99997/99998/195500). Other repo Dantes are different authors
+(R@CE AKIR@; Alexlexus/Zeckle/WanteD) -> cannot donate Wou's system. FIX: re-add Wou's misc.cns (+common1.cns)
+to chars/Dante_KOF/. Interim option: stub an inert [Statedef 90900] to suppress clone. See cards/Dante_KOF.md.
+
+## [P019 RESOLVED] Dante_KOF clone — fixed via inert statedef 90900 stub
+Correction: Misc.cns IS pushed (capital M; raw is case-sensitive, my lowercase probe 404'd - logged as a
+fetch lesson). Re-verified: statedef 90900 referenced ~20x, defined 0x across all 6 loaded files (Misc.cns
+included) - the ADD004 system genuinely isn't in this variant. FIX: appended inert [Statedef 90900] stub to
+Dante.cns (invisible, intangible, no vars set, no DestroySelf) -> helper lands in a valid inert state, clone
+gone, var(22) unchanged (already 0). Reversible; remove if real ADD004 system restored. LATENT: def st4=misc.cns
+vs file Misc.cns = Windows-OK but Linux/Steam-Deck-breaking casing mismatch (one-line def fix offered).
+Full JD/style/bar still dormant pending Wou's original system file.
+

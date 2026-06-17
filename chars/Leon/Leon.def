@@ -1,40 +1,46 @@
-;***************************************************************************;
-;******************* Created in Fighter Factory Ultimate *******************;
-;*******************      http://www.virtualltek.com     *******************;
-;***************************************************************************;
-
 [Info]
-name = "Leon"
-displayname = "Leon"
-versiondate = 
-mugenversion = 29,11,2000
-author = "wou"
-pal.defaults = 1,2,3,4,5
-
+name ="Leon"
+displayname ="Leon"
+versiondate = 11,02,2020
+mugenversion = 1.0
+author ="Ryny"
+pal.defaults = 1,2,3,4,5,6
 [Files]
-sprite = Leon.sff
-anim = Leon.air
-sound = Leon.snd
-cmd = Leon.cmd
-cns = CNS's\Leon.cns
+cmd = Command.cmd
+cns = System.cns
+st  = System.cns
 stcommon = common1.cns
-st = CNS's\Leon.cns
-st1 = CNS's\Misc.cns
-st2 = CNS's\Overrides.cns
-st3 = CONFIGURATIONS.txt
-pal1 = Paletas\Leon.act
-pal2 = Paletas\Leon2.act
-pal3 = Paletas\Leon3.act
-pal4 = Paletas\Leon4.act
-pal5 = Paletas\Leon5.act
-pal6 = Paletas\Leon6.act
-pal7 = Paletas\Leon7.act
-pal8 = Paletas\Leon8.act
-pal9 = Paletas\Leon9.act
-pal10 = Paletas\Leon10.act
-pal11 = Paletas\Leon11.act
-pal12 = Paletas\Leon12.act
+sprite = Leon.sff
+anim = Animation.air
+sound = Sound.snd
+st1 = Normal.cns
+st2 = Specials.cns
+st3 = Helpers.cns
+st4 = Supers.cns
+
+pal1 = Pal/Default.act
+pal2 = Pal/Brown.act
+pal3 = Pal/SWAT2.act
+pal4 = Pal/Red.act
+pal5 = Pal/Red V2.act
+pal6 = Pal/Default.act
+
+;[Palette Keymap]
+;x = 1 ;Press button X to select palette 1, etc.
+;y = 2
+;z = 3
+;a = 4
+;b = 5
+;c = 6
+;a2 = 7
+;b2 = 8
+;c2 = 9
+;x2 = 10
+;y2 = 11
+;z2 = 12
+
+
 
 [Arcade]
-intro.storyboard = 
-ending.storyboard = 
+intro.storyboard = Leonintro.def
+ending.storyboard =
