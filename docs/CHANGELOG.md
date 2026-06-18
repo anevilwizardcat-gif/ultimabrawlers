@@ -606,3 +606,84 @@ SFF rebuild = same-count REPLACE (13 sprites) + palette restore; 294 sprites, 27
 Shipped system.sff + system.def. NOTE: vsscreen may be gated by [Demo Mode] vsscreen.enabled / [VS Screen]
 order settings - art is in place regardless of when the screen shows.
 
+## [P037] VS screen text tweaks + custom power-meter concept R&D
+- [VS Screen] names: p1.name.font + p2.name.font -> WHITE (255,255,255) (were gold/cyan) per request.
+  Section-scoped (select-screen names + other screens untouched).
+- [VS Screen] stage.font ("Next Stage: %s") -> gold 255,210,40 (was silver/default) so it's not the lone
+  silver text now that VS+NEXT MATCH are gold/yellow. Shipped system.def.
+- LIFEBAR R&D (concepts only, nothing baked): studied data/ilifebar/ilifebar.def (Raven's reference, SFA-style
+  custom lifebar w/ Tag/Simul/Turns variants). Ikemen [Powerbar] architecture = bg0 frame spr + front fill spr
+  (clipped across range.x proportional to power) + front<N> level-glow variants (palfx.sinmul/sinadd pulse) +
+  counter (level number font) + levelN.snd; supports up to 9 levels. ilifebar uses bg0=5,0 / front=6,0 /
+  front3000 MAX glow / counter font6 / levelbars=1.
+  CURRENT PROBLEM (data/fight.def [Powerbar]): sprites scaled 2.35,1.4 (NON-INTEGER) -> stretched/blurry,
+  inconsistent w/ crisp SF3-era meters. Fix = draw bar sprites at final display size (or integer scale only).
+  Delivered 3 concepts -> menu_sprites/powermeter_concepts.png: A) SF3 EX-gauge (segmented bar + stock pip),
+  B) Stock Blocks (discrete arcade chunks), C) Ultimabrawlers Gold (purple frame + gold halftone, matches
+  menu/VS). Each shown empty/level2/MAX. Awaiting Raven's pick before building sprites + [Powerbar] def.
+
+## [P038] Power-meter direction locked (A+C hybrid) + full lifebar HUD concept
+- POWER METER (concept locked, not built): A+C hybrid per Raven - C's purple-bevel-frame + gold-edge + gold
+  halftone empty + gold-chrome fill, A's segmentation/level-ticks + stock-pip spacing. Stock pip restyled to
+  MATCH the bar (purple-gold frame + gold number, not the dull steel). P2 = full mirror (pip on right, fill
+  runs right->left). States empty/level2/MAX shown -> menu_sprites/powermeter_AC_hybrid.png.
+- LIFEBAR HUD concept (accounts for all ilifebar elements) -> menu_sprites/lifebar_hud_concept.png:
+  health bars (yellow->orange fill + lighter damage-lag layer + RED low-health pulse, P2 shown low), center
+  timer box (purple-gold, gold number), inward active portraits + small benched-PARTNER mugs at outer corners
+  (tag), name plates, win pips, transient ROUND callout, A+C power meters at bottom corners. Purple/gold ties
+  to menu/VS. Portraits/round-text are placeholders.
+- Next: on Raven's ok, draw real frame+fill sprites at display size (NO 2.35x stretch), inject into fight.sff,
+  write [Lifebar]+[Powerbar]+[Tag *] sections (bg0/mid/front/front26/front51/red + range.x; powerbar bg0/front/
+  front3000 + counter + levelbars). Tag variants needed since ultimabrawlers is 2v2.
+
+## [P039] SUPER METER built (sprites + animation), A+C hybrid — not yet injected
+Authored the power-meter sprites at DISPLAY SIZE (frame 200x24, inner well 164x12) so NO stretch (kills the old
+2.35,1.4 blur). Pieces in menu_sprites/super_meter/:
+- pbar_bg_p1/p2.png = bg0 frame: pip box (sized for 1 digit + padding, not oversized) + bar frame + gold
+  halftone empty well + level ticks. Gold-on-purple, matches menu/VS.
+- pbar_front.png (+ pbar_front_0..7 shimmer frames) = the gold-chrome FILL the engine clips across range.x
+  (this is the smooth SF3-style fill+drain — engine-driven, automatic).
+- pbar_max_0..7.png = white-gold STROBE anim for the MAX-charge state (front<max>.anim + palfx).
+- POWERBAR_def_reference.txt = full [Powerbar] wiring (bg0/front.anim/range.x/front<N> level glows/counter/
+  level snds + P2 mirror + differing-max handling note).
+Demo: super_meter_demo.gif (P1+P2, smooth charge -> level-ups w/ pip count -> MAX flash -> Jotaro-style drain).
+SF3 smoothness = engine range.x clip for fill/drain + animated front<max> strobe for MAX.
+DIFFERING MAX AMOUNTS: bar fills 0->char's powermax so "full"=that char's max; MAX strobe via front<N> threshold
+variants defined up to each roster max (front3000/4000/5000...), top tier = strobe. (Honest caveat: front<N> is
+threshold-based, not a literal per-char "is max" flag.)
+NOT injected into fight.sff yet — placement/scale finalized when integrated with the lifebar (next).
+
+## [P040] Lifebar HUD — 3 variants (concepts) + P2 super-meter fill-anchor fix
+- P2 SUPER METER FIX: fill was anchoring at the bar's inner edge (read as "from center"); corrected so it
+  fills FROM the stock-pip side outward (mirror of P1). In def: p2.range.x runs from the well edge nearest the
+  pip toward center. Applies at build; meter art unchanged (as Raven said, design is decided).
+- 3 lifebar HUD variants -> menu_sprites/lifebar_variant_A/B/C.png. ALL account for the real engine elements:
+  health (yellow->orange + damage-lag bright edge), RECOVERABLE HP band (teal - the tag HP that regens while
+  benched, drawn between current HP and max), low-HP red state, center TIMER, ROUNDS-WON pips, active portrait
+  + small benched-PARTNER mug (tag p3/p4), name plates, decided super meter, and combo/round = center overlay.
+  - A) Third Strike Classic: long horizontal bars, outer portraits, center timer, pips under names.
+  - B) Tag Block: each player ONE unified corner unit (portrait+partner+name+HP+pips+super). Cleanest/dense.
+  - C) Angled Arcade: sheared bars, inset portraits, gem win-pips, dynamic energy.
+  Portraits/names are placeholders. Awaiting Raven's pick (or hybrid) before building sprites + fight.def
+  ([Lifebar]+[Powerbar]+[Tag *] with recoverable layer, range.x, front26/front51 low-hp, counters).
+
+## [P041] Variant C lifebar BUILT (v1, testable) — fight.def + fight.sff shipped
+Restyled the existing (already-sheared) lifebar to Variant C purple/gold and wired the requested layout.
+fight.sff: replaced 19 sprites IN PLACE at matching sizes (so the working shear/range/pos geometry is kept):
+  lifebar 10,0(well)/11,0(gold border)/12,0(mid lag)/13,0-3(HP tiers gold->orange->red)/14,0(RECOVERABLE teal,
+  the tag red layer); face frames 50,0+51,0(big)/70,0+71,0(small partner); win gems 100/101/102 + 120,0;
+  power 40,0(frame+pip box+well)/43,0(gold fill), 41,0->transparent. 117 sprites, all decode, 0 bad, 0 palettes.
+fight.def edits:
+  - [Powerbar] FULLY rewritten: decided super-meter sprites, scale 1,1 (KILLS the 2.35x stretch), repositioned
+    on-screen bottom (was pos y=901, off-screen), stock-pip counter.font=8 (Pixel), range.x for the new well,
+    P2 facing -1 with fill anchored at the pip side (the P2 fix).
+  - [WinIcon] moved below the HP bars (150,82 / 1130,82; was center 544/736).
+  - [Tag_2P Name] p3/p4 (benched) names commented out -> tagged-OUT name hidden; tagged-IN char's name shows
+    under the big box (native: incoming char becomes p1/p2 on tag, name appears).
+Preview: menu_sprites/fight_hud_preview.png. SHIPPED data/fight.def + data/fight.sff (back up originals).
+HONEST v1 NOTES: lifebar/faces are solid (same geometry); POWER BAR + WIN-ICON + NAME positions are blind
+best-guesses that WILL need tuning from Raven's in-engine test. Bars/fills/meters animate smoothly natively
+(engine range.x clip). TAG FACE SWAP = native engine swap (incoming->big slot+name, outgoing->small slot+name
+hidden) - it's a clean INSTANT swap, NOT a sliding animation; a smooth slide needs a Lua mod to the lifebar
+draw script (offered as next step). Recoverable HP = tag red layer (14,0); exact regen depends on tag config.
+
