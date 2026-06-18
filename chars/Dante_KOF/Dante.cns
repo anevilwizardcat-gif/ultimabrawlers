@@ -31,7 +31,7 @@ fall.defence_up = 30
 liedown.time = 50
 airjuggle = 15
 sparkno = 1
-guard.sparkno = 41
+guard.sparkno = 40   ;TAGFIX(P023): 41 absent->guard spark 40
 KO.echo = 0
 volume = 0
 IntPersistIndex = 30
@@ -338,6 +338,7 @@ value = 180,1
 
 [State 0, Explod]
 type = Explod
+	triggerall = 0	;TAGFIX(P023): anim absent (ADD004 fx not installed) - gated to stop console spam
 trigger1 = animelem = 3 || animelem = 6 || animelem = 9 || animelem = 12
 anim = 1031
 pos = 30,-75
@@ -434,6 +435,7 @@ ignorehitpause=1
 
 [State -2, Spray Anim P1];地面水花
 type = Explod
+	triggerall = 0	;TAGFIX(P023): anim absent (ADD004 fx not installed) - gated to stop console spam
 triggerall = StageVar(info.author) = "water"
 triggerall = pos Y = 0
 trigger1 = time >= 0 && timemod = 16,0
@@ -456,6 +458,7 @@ ID = 20
 
 [State -3, 落地水花]
 type = Explod
+	triggerall = 0	;TAGFIX(P023): anim absent (ADD004 fx not installed) - gated to stop console spam
 triggerall = StageVar(info.author) = "water"
 triggerall = Time = 1
 trigger1 = StateNo=5200;||StateNo=199
@@ -971,6 +974,7 @@ ignorehitpause = 1
 
 [State -2]
 type = explod
+	triggerall = 0	;TAGFIX(P023): anim absent (ADD004 fx not installed) - gated to stop console spam
 trigger1 = stateno != [800,899]
 trigger1 = var(10) = 1 && var(11) = 1 && var(12) = 1
 ID = 4472

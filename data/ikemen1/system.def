@@ -127,7 +127,7 @@ fadeout.time = 10
 menu.pos = 640,330   ;TAGFIX(P018): centered (was 1240,330)
 menu.tween.factor = 0.5
 menu.item.font = 2,0,0   ;TAGFIX(P018d): Pixel bitmap font (font2), center-align
-menu.item.active.font = 2,0,0, 123,206,255   ;TAGFIX(P018d): Pixel, active=blue tint
+menu.item.active.font = 2,0,0, 255,210,40   ;TAGFIX(P018e): gold highlight (was blue 123,206,255)
 menu.item.spacing = 0, 30   ;TAGFIX(P018d): tightened for 18px Pixel font (was 0,54)
 menu.item.layerno = 2
 menu.item.active.layerno = 2
@@ -304,37 +304,37 @@ start = 640,282
 trans = add1
 mask = 1
 
-[TitleBG Title LogoShadow]
-type = normal
-spriteno = 0, 2
-layerno = 1
-start = 0,155   ;TAGFIX(P018): logo centered (x -250->0), y unchanged
-mask = 1
-alpha = 256,96
-trans = add
-sin.y = 15, 264, 2
+;[TitleBG Title LogoShadow]   ;TAGFIX(P033): old shadow disabled (glow baked into logo frames)
+;type = normal
+;spriteno = 0, 2
+;layerno = 1
+;start = 0,155   ;TAGFIX(P018): logo centered (x -250->0), y unchanged
+;mask = 1
+;alpha = 256,96
+;trans = add
+;sin.y = 15, 264, 2
 
-[TitleBG Title LogoShadow]
-type = normal
-spriteno = 0, 3
-layerno = 1
-start = 0,155   ;TAGFIX(P018): logo centered (x -250->0), y unchanged
-mask = 1
-alpha = 256,96
-trans = add
-sin.y = 15, 264, 32
+;[TitleBG Title LogoShadow]   ;TAGFIX(P033): old shadow disabled (glow baked into logo frames)
+;type = normal
+;spriteno = 0, 3
+;layerno = 1
+;start = 0,155   ;TAGFIX(P018): logo centered (x -250->0), y unchanged
+;mask = 1
+;alpha = 256,96
+;trans = add
+;sin.y = 15, 264, 32
 
 [TitleBG Title Logo]
-type = normal
-spriteno = 0, 0
+type = anim   ;TAGFIX(P033)
+actionno = 50   ;TAGFIX(P033): animated ARCADE ALLSTARS letter-bob wave
 layerno = 1
 start = 0,155   ;TAGFIX(P018): logo centered (x -250->0), y unchanged
 mask = 1
-sin.y = 15, 264, 2
+;sin.y = 15, 264, 2   ;TAGFIX(P033): wave baked into frames
 
 [TitleBG Title Logo 2]
-type = normal
-spriteno = 0, 1
+type = anim   ;TAGFIX(P033)
+actionno = 51   ;TAGFIX(P033): floating rainbow ULTIMA (sin.y keeps the independent float)
 layerno = 1
 start = 0,155   ;TAGFIX(P018): logo centered (x -250->0), y unchanged
 mask = 1
@@ -425,7 +425,7 @@ portrait.spr = 9000,0
 portrait.offset = 0,0
 portrait.scale = .4375,.4375
 title.offset = 640,48              ;Position of title (Arcade Mode, etc)
-title.font = 4,0,0                 ;Font of title (-1 for none)
+title.font = 2,0,0                 ;TAGFIX(P018e): Pixel to match main menu (was font4 Menu1)
 title.layerno = 2
 
 ; Text rendered using title element (hardcoded in Mugen)
@@ -539,20 +539,23 @@ p2.face2.random.focallength = 400
 
 ;Name
 p1.name.offset = 50,620                   ;Position to put name
-p1.name.font = 3,0,1, 210,210,255         ;Set to -1 for no display
+p1.name.font = 2,0,1, 255,210,40        ;TAGFIX(P025): Pixel + gold (was font3 + blue 210,210,255)
+p1.name.scale = 1.4,1.4                    ;TAGFIX(P026): larger Pixel name
 p1.name.spacing = 15,25                   ;Space between each name for players on the same team
 p1.name.layerno = 2
 p2.name.offset = 1230,620
-p2.name.font = 3,0,-1, 255,210,239
+p2.name.font = 2,0,-1, 90,225,255   ;TAGFIX(P026): cyan, contrasts gold+purple (was pink)
+p2.name.scale = 1.4,1.4                    ;TAGFIX(P026): larger Pixel name
 p2.name.spacing = -15,25
 p2.name.layerno = 2
 
 ;Stage select
 stage.pos = 640,707
-stage.font = 3,0,0
-stage.active.font = 3,0,0
-stage.active2.font = 3,0,0, 200,256,200  ;Second font color for blinking
-stage.done.font = 3,0
+stage.scale = 1.4,1.4                      ;TAGFIX(P026): larger Pixel stage name
+stage.font = 2,0,0                       ;TAGFIX(P025): Pixel
+stage.active.font = 2,0,0, 255,210,40    ;TAGFIX(P025): Pixel + gold highlight
+stage.active2.font = 2,0,0, 255,210,40   ;TAGFIX(P026): Pixel (was font3 - caused the flicker)
+stage.done.font = 2,0   ;TAGFIX(P026): Pixel (was font3)
 stage.layerno = 2
 
 ;Stage portraits
@@ -585,18 +588,18 @@ record.window =
 teammenu.move.wrapping = 1
 p1.teammenu.pos = 80, 160
 ;p1.teammenu.bg.spr = 
-p1.teammenu.selftitle.font = 3,0,0, 210,210,255
+p1.teammenu.selftitle.font = 2,0,0, 255,210,40   ;TAGFIX(P026): Pixel gold
 p1.teammenu.selftitle.text = TEAM MODE              ;\n can create a line break here.
-p1.teammenu.selftitle.scale = 0.75,0.75
+p1.teammenu.selftitle.scale = 1,1   ;TAGFIX(P026): up from .75 for Pixel
 p1.teammenu.selftitle.offset = 130, 15
 p1.teammenu.selftitle.layerno = 2
 p1.teammenu.selftitle.projection = perspective
 p1.teammenu.selftitle.yangle = 52.5
 p1.teammenu.selftitle.focallength = 600
-p1.teammenu.enemytitle.font = 3,0,0, 210,210,255
+p1.teammenu.enemytitle.font = 2,0,0, 255,210,40   ;TAGFIX(P026): Pixel gold
 p1.teammenu.enemytitle.text = TEAM MODE
 p1.teammenu.enemytitle.layerno = 2
-p1.teammenu.enemytitle.scale = 0.75,0.75
+p1.teammenu.enemytitle.scale = 1,1   ;TAGFIX(P026): up from .75 for Pixel
 p1.teammenu.enemytitle.offset = 130, 15
 p1.teammenu.enemytitle.projection = perspective
 p1.teammenu.enemytitle.yangle = 52.5
@@ -606,10 +609,10 @@ p1.teammenu.value.snd = 100,0
 p1.teammenu.done.snd = 100,1
 p1.teammenu.item.offset = 0,90
 p1.teammenu.item.spacing = 0,60
-p1.teammenu.item.font = 3,0,1
+p1.teammenu.item.font = 2,0,1   ;TAGFIX(P026): Pixel
 p1.teammenu.item.layerno = 2
-p1.teammenu.item.active.font = 3,0,1, 210,210,255
-p1.teammenu.item.active2.font = 3,0,1, 175,175,255  ;Second font color for blinking
+p1.teammenu.item.active.font = 2,0,1, 255,210,40   ;TAGFIX(P026): Pixel gold
+p1.teammenu.item.active2.font = 2,0,1, 255,180,60   ;TAGFIX(P026): Pixel gold-blink
 p1.teammenu.item.active.layerno = 2
 p1.teammenu.item.cursor.offset = -30, 0
 p1.teammenu.item.cursor.anim = 180
@@ -625,17 +628,17 @@ p1.teammenu.value.spacing = 30,0
 ;P2 Team menu
 p2.teammenu.pos = 1197, 160
 ;p2.teammenu.bg.spr = 
-p2.teammenu.selftitle.font = 3,1,0, 255,210,239
+p2.teammenu.selftitle.font = 2,1,0, 90,225,255   ;TAGFIX(P026): Pixel cyan
 p2.teammenu.selftitle.text = TEAM MODE
-p2.teammenu.selftitle.scale = 0.75,0.75
+p2.teammenu.selftitle.scale = 1,1   ;TAGFIX(P026): up from .75 for Pixel
 p2.teammenu.selftitle.layerno = 2
 p2.teammenu.selftitle.offset = -130, 15
 p2.teammenu.selftitle.projection = perspective
 p2.teammenu.selftitle.yangle = -52.5
 p2.teammenu.selftitle.focallength = 600
-p2.teammenu.enemytitle.font = 3,1,0, 255,210,239
+p2.teammenu.enemytitle.font = 2,1,0, 90,225,255   ;TAGFIX(P026): Pixel cyan
 p2.teammenu.enemytitle.text = TEAM MODE
-p2.teammenu.enemytitle.scale = 0.75,0.75
+p2.teammenu.enemytitle.scale = 1,1   ;TAGFIX(P026): up from .75 for Pixel
 p2.teammenu.enemytitle.layerno = 2
 p2.teammenu.enemytitle.offset = -130, 15
 p2.teammenu.enemytitle.projection = perspective
@@ -646,10 +649,10 @@ p2.teammenu.value.snd = 100,0
 p2.teammenu.done.snd = 100,1
 p2.teammenu.item.offset = 0,90
 p2.teammenu.item.spacing = 0,60
-p2.teammenu.item.font = 3,0,-1
+p2.teammenu.item.font = 2,0,-1   ;TAGFIX(P026): Pixel
 p2.teammenu.item.layerno = 2
-p2.teammenu.item.active.font = 3,1,-1, 255,210,239
-p2.teammenu.item.active2.font = 3,1,-1, 255,175,207  ;Second font color for blinking
+p2.teammenu.item.active.font = 2,1,-1, 90,225,255   ;TAGFIX(P026): Pixel cyan
+p2.teammenu.item.active2.font = 2,1,-1, 130,235,255   ;TAGFIX(P026): Pixel cyan-blink
 p2.teammenu.item.active.layerno = 2
 p2.teammenu.item.cursor.offset = 30, 0
 p2.teammenu.item.cursor.anim = 190
@@ -902,11 +905,13 @@ p2.done.anim = 181
 ;Names
 p1.name.num = 1              ;Not used for co-op
 p1.name.offset = 20,615      ;Position to put name
-p1.name.font = 3,0,1         ;Set to -1 for no display
+p1.name.font = 2,0,1, 255,210,40   ;TAGFIX(P036): Pixel gold - same font as P2 (was font3, mismatched)
+p1.name.scale = 1.4,1.4            ;TAGFIX(P036): match P2 name scale
 p1.name.spacing = 15,25      ;Space between each name for players on the same team
 p2.name.num = 1              ;Not used for co-op
 p2.name.offset = 1260,615
-p2.name.font = 3,0,-1
+p2.name.font = 2,0,-1, 90,225,255   ;TAGFIX(P026): cyan, contrasts gold+purple (was pink)
+p2.name.scale = 1.4,1.4                    ;TAGFIX(P026): larger Pixel name
 p2.name.spacing = -15,25
 
 orderselect.enabled = 1
@@ -1078,9 +1083,10 @@ p8.value.empty.icon.spr = 810, 9
 
 ;Stage preview
 stage.pos = 640,707
+stage.scale = 1.4,1.4                      ;TAGFIX(P026): larger Pixel stage name
 stage.text = Next Stage: %s
 stage.offset = 0, -10
-stage.font = 3,0,0
+stage.font = 2,0,0                       ;TAGFIX(P025): Pixel
 stage.scale = 0.6, 0.6
 ;stage.portrait.anim = 
 stage.portrait.spr = 9000,1
@@ -2344,7 +2350,8 @@ p1.name.offset = 270, 135
 p1.name.font = 7,0,1
 p1.name.scale = 1.0, 1.0
 p2.name.offset = 30, 471
-p2.name.font = 7,0,1
+p2.name.font = 2,0,-1, 90,225,255   ;TAGFIX(P026): cyan, contrasts gold+purple (was pink)
+p2.name.scale = 1.4,1.4                    ;TAGFIX(P026): larger Pixel name
 p2.name.scale = 1.0, 1.0
 p1.text.offset = 270, 177
 p1.text.font = 7,0,1
@@ -2551,3 +2558,47 @@ overlay.col = 0, 0, 0
 overlay.alpha = 0, 128
 done.snd = 100, 0
 cancel.snd = 100, 2
+
+;TAGFIX(P033): logo animations (1 tick/frame = fast; ask to re-bake for slower/faster)
+
+;TAGFIX(P034): logo anim speed 1->4 ticks/frame (was overcompensated/too fast; ~demo pace)
+
+[Begin Action 50]
+50,0, 0,0, 4
+50,1, 0,0, 4
+50,2, 0,0, 4
+50,3, 0,0, 4
+50,4, 0,0, 4
+50,5, 0,0, 4
+50,6, 0,0, 4
+50,7, 0,0, 4
+50,8, 0,0, 4
+50,9, 0,0, 4
+50,10, 0,0, 4
+50,11, 0,0, 4
+50,12, 0,0, 4
+50,13, 0,0, 4
+50,14, 0,0, 4
+50,15, 0,0, 4
+50,16, 0,0, 4
+50,17, 0,0, 4
+
+[Begin Action 51]
+51,0, 0,0, 4
+51,1, 0,0, 4
+51,2, 0,0, 4
+51,3, 0,0, 4
+51,4, 0,0, 4
+51,5, 0,0, 4
+51,6, 0,0, 4
+51,7, 0,0, 4
+51,8, 0,0, 4
+51,9, 0,0, 4
+51,10, 0,0, 4
+51,11, 0,0, 4
+51,12, 0,0, 4
+51,13, 0,0, 4
+51,14, 0,0, 4
+51,15, 0,0, 4
+51,16, 0,0, 4
+51,17, 0,0, 4

@@ -30,6 +30,7 @@ poweradd = -1000
 ;--------------------------------------SC
 [State 9000, 5]
 type = Explod
+	triggerall = 0	;TAGFIX(P023): anim absent (ADD004 fx not installed) - gated to stop console spam
 trigger1 = (prevstateno = [1000,1999]) && time = 0
 persistent = 0
 anim = f7500
@@ -80,6 +81,7 @@ value = 0, 0, 0
 
 [State Explod, Flash DM]
 type = Explod
+	triggerall = 0	;TAGFIX(P023): anim absent (ADD004 fx not installed) - gated to stop console spam
 trigger1 = time = 1
 anim = F7000 ;20050
 pos = 18,-130;-28,-65
@@ -96,6 +98,7 @@ supermovetime = 9999999
 
 [State Explod, Flash DM]
 type = Explod
+	triggerall = 0	;TAGFIX(P023): anim absent (ADD004 fx not installed) - gated to stop console spam
 trigger1 = time = 1
 anim = F7010 ;20051
 pos = 18,-130;-28,-65
@@ -113,7 +116,7 @@ supermovetime = 9999999
 [State 9000, Som Flash DM]
 type = PlaySnd
 trigger1 = time = 1
-value = f9000,0;
+value = 9000,0   ;TAGFIX(P024): F removed - 9000,0 is a local sound
 
 ;-------------------------
 
@@ -655,6 +658,7 @@ poweradd = -1000
 ;--------------------------------------SC
 [State 9000, 5]
 type = Explod
+	triggerall = 0	;TAGFIX(P023): anim absent (ADD004 fx not installed) - gated to stop console spam
 trigger1 = (prevstateno = [1000,1999]) && time = 0
 persistent = 0
 anim = f7500
@@ -705,6 +709,7 @@ value = 0, 0, 0
 
 [State Explod, Flash DM]
 type = Explod
+	triggerall = 0	;TAGFIX(P023): anim absent (ADD004 fx not installed) - gated to stop console spam
 trigger1 = time = 1
 anim = F7000 ;20050
 pos = -30,-75
@@ -720,6 +725,7 @@ supermovetime = 9999999
 
 [State Explod, Flash DM]
 type = Explod
+	triggerall = 0	;TAGFIX(P023): anim absent (ADD004 fx not installed) - gated to stop console spam
 trigger1 = time = 1
 anim = F7010 ;20051
 pos = -30,-75
@@ -736,7 +742,7 @@ supermovetime = 9999999
 [State 9000, Som Flash DM]
 type = PlaySnd
 trigger1 = time = 1
-value = f9000,0;
+value = 9000,0   ;TAGFIX(P024): F removed - 9000,0 is a local sound
 
 ;-------------------------
 
@@ -821,7 +827,7 @@ sprpriority = 5
 [State a];
 type = PlaySnd
 trigger1 = time = 0
-value = 1000, 3
+value = 1000,0   ;TAGFIX(P024): 1000,3 absent -> 1000,0
 
 [state a]
 type = velset
@@ -849,8 +855,8 @@ pausetime = 0,10
 sparkno = 2
 sparkxy = -21, 0
 hitsound = s4,10
-guard.sparkno = 42
-guardsound = 6,2
+guard.sparkno = 40   ;TAGFIX(P022): 42 absent in fightfx -> 40 (std guard spark)
+guardsound = 6,0   ;TAGFIX(P022): 6,2 absent in common.snd -> 6,0 (std guard snd)
 ground.type = High
 ground.slidetime = 18
 ground.hittime   = 18
@@ -946,7 +952,7 @@ sprpriority = 5
 [State a];
 type = PlaySnd
 trigger1 = time = 0
-value = 1000, 3
+value = 1000,0   ;TAGFIX(P024): 1000,3 absent -> 1000,0
 
 [state a]
 type = velset
@@ -973,8 +979,8 @@ pausetime = 0,17
 sparkno = 2
 sparkxy = -21, 0
 hitsound = S4,10
-guard.sparkno = 42
-guardsound = 6,2
+guard.sparkno = 40   ;TAGFIX(P022): 42 absent in fightfx -> 40 (std guard spark)
+guardsound = 6,0   ;TAGFIX(P022): 6,2 absent in common.snd -> 6,0 (std guard snd)
 ground.type = High
 ground.slidetime = 18
 ground.hittime   = 18
@@ -1139,6 +1145,7 @@ poweradd = -1000
 ;--------------------------------------SC
 [State 9000, 5]
 type = Explod
+	triggerall = 0	;TAGFIX(P023): anim absent (ADD004 fx not installed) - gated to stop console spam
 trigger1 = (prevstateno = [1000,1999]) && time = 0
 persistent = 0
 anim = f7500
@@ -1189,6 +1196,7 @@ value = 0, 0, 0
 
 [State Explod, Flash DM]
 type = Explod
+	triggerall = 0	;TAGFIX(P023): anim absent (ADD004 fx not installed) - gated to stop console spam
 trigger1 = time = 1
 anim = F7000 ;20050
 pos = -27,-90
@@ -1204,6 +1212,7 @@ supermovetime = 9999999
 
 [State Explod, Flash DM]
 type = Explod
+	triggerall = 0	;TAGFIX(P023): anim absent (ADD004 fx not installed) - gated to stop console spam
 trigger1 = time = 1
 anim = F7010 ;20051
 pos = -27,-90
@@ -1220,7 +1229,7 @@ supermovetime = 9999999
 [State 9000, Som Flash DM]
 type = PlaySnd
 trigger1 = time = 1
-value = f9000,0;
+value = 9000,0   ;TAGFIX(P024): F removed - 9000,0 is a local sound
 
 ;-------------------------
 
@@ -1368,11 +1377,11 @@ guardflag = M
 hitflag = MAF
 priority = 7, Hit
 pausetime = 2,18
-sparkno = 6
+sparkno = 2   ;TAGFIX(P023): 6 absent->default hit spark 2
 sparkxy = -21, -85
 hitsound = s4,6
-guard.sparkno = 42
-guardsound = 6,2
+guard.sparkno = 40   ;TAGFIX(P022): 42 absent in fightfx -> 40 (std guard spark)
+guardsound = 6,0   ;TAGFIX(P022): 6,2 absent in common.snd -> 6,0 (std guard snd)
 ground.type = High
 ground.slidetime = 18
 ground.hittime   = 20
@@ -1429,11 +1438,11 @@ guardflag = M
 hitflag = MAF
 priority = 7, Hit
 pausetime = 2,19
-sparkno = 6
+sparkno = 2   ;TAGFIX(P023): 6 absent->default hit spark 2
 sparkxy = -21, -35
 hitsound = s4, 6
-guard.sparkno = 42
-guardsound = 6,2
+guard.sparkno = 40   ;TAGFIX(P022): 42 absent in fightfx -> 40 (std guard spark)
+guardsound = 6,0   ;TAGFIX(P022): 6,2 absent in common.snd -> 6,0 (std guard snd)
 ground.type = Low
 ground.slidetime = 18
 ground.hittime   = 20
@@ -1504,11 +1513,11 @@ guardflag = M
 hitflag = MAF
 priority = 7, Hit
 pausetime = 13,13
-sparkno = 6
+sparkno = 2   ;TAGFIX(P023): 6 absent->default hit spark 2
 sparkxy = -21, -65
 hitsound = s4, 7
-guard.sparkno = 42
-guardsound = 6,2
+guard.sparkno = 40   ;TAGFIX(P022): 42 absent in fightfx -> 40 (std guard spark)
+guardsound = 6,0   ;TAGFIX(P022): 6,2 absent in common.snd -> 6,0 (std guard snd)
 ground.type = High
 ground.slidetime = 18
 ground.hittime   = 19
@@ -1549,6 +1558,7 @@ poweradd = -1000
 ;--------------------------------------SC
 [State 9000, 5]
 type = Explod
+	triggerall = 0	;TAGFIX(P023): anim absent (ADD004 fx not installed) - gated to stop console spam
 trigger1 = (prevstateno = [1000,1999]) && time = 0
 persistent = 0
 anim = f7500
@@ -1599,6 +1609,7 @@ value = 0, 0, 0
 
 [State Explod, Flash DM]
 type = Explod
+	triggerall = 0	;TAGFIX(P023): anim absent (ADD004 fx not installed) - gated to stop console spam
 trigger1 = time = 1
 anim = F7000 ;20050
 pos = -11,-105
@@ -1614,6 +1625,7 @@ supermovetime = 9999999
 
 [State Explod, Flash DM]
 type = Explod
+	triggerall = 0	;TAGFIX(P023): anim absent (ADD004 fx not installed) - gated to stop console spam
 trigger1 = time = 1
 anim = F7010 ;20051
 pos = -11,-105
@@ -1630,7 +1642,7 @@ supermovetime = 9999999
 [State 9000, Som Flash DM]
 type = PlaySnd
 trigger1 = time = 1
-value = f9000,0;
+value = 9000,0   ;TAGFIX(P024): F removed - 9000,0 is a local sound
 
 ;-------------------------
 
@@ -1736,7 +1748,7 @@ juggle = 0
 [State a];
 type = PlaySnd
 trigger1 = time = 0
-value = 1000, 3
+value = 1000,0   ;TAGFIX(P024): 1000,3 absent -> 1000,0
 
 [State 2, hit.spark som]
 type = PlaySnd
@@ -1762,11 +1774,11 @@ guardflag = M
 hitflag = MAF
 priority = 7, Hit
 pausetime = 0,17
-sparkno = 6
+sparkno = 2   ;TAGFIX(P023): 6 absent->default hit spark 2
 sparkxy = -21, -8
-hitsound = 8, 5
-guard.sparkno = 42
-guardsound = 6,2
+hitsound = 5,0   ;TAGFIX(P024): 8,5 absent in common.snd -> std hit 5,0
+guard.sparkno = 40   ;TAGFIX(P022): 42 absent in fightfx -> 40 (std guard spark)
+guardsound = 6,0   ;TAGFIX(P022): 6,2 absent in common.snd -> 6,0 (std guard snd)
 ground.type = High
 ground.slidetime = 18
 ground.hittime   = 18
@@ -1830,6 +1842,7 @@ poweradd = -2000
 ;--------------------------------------SC
 [State 9000, 5]
 type = Explod
+	triggerall = 0	;TAGFIX(P023): anim absent (ADD004 fx not installed) - gated to stop console spam
 trigger1 = (prevstateno = [1000,1999]) && time = 0
 persistent = 0
 anim = f7500
@@ -1848,6 +1861,7 @@ ownpal = 1
 ;--------------------------------------DC
 [State 9000, 5]
 type = Explod
+	triggerall = 0	;TAGFIX(P023): anim absent (ADD004 fx not installed) - gated to stop console spam
 trigger1 = (prevstateno = [3000,3299]) && time = 0
 persistent = 0
 anim = f7550
@@ -1898,6 +1912,7 @@ value = 0, 0, 0
 
 [State Explod, Flash SDM]
 type = Explod
+	triggerall = 0	;TAGFIX(P023): anim absent (ADD004 fx not installed) - gated to stop console spam
 trigger1 = time = 1
 anim = F7100 ;20050
 pos = 18,-130
@@ -1913,6 +1928,7 @@ supermovetime = 9999999
 
 [State Explod, Flash SDM]
 type = Explod
+	triggerall = 0	;TAGFIX(P023): anim absent (ADD004 fx not installed) - gated to stop console spam
 trigger1 = time = 1
 anim = F7110 ;20051
 pos = 18,-130
@@ -1929,7 +1945,7 @@ supermovetime = 9999999
 [State 9000, Som Flash SDM]
 type = PlaySnd
 trigger1 = time = 1
-value = f9000,1;
+value = 9000,1   ;TAGFIX(P024): F removed - 9000,1 is a local sound
 
 ;-------------------------
 
@@ -2088,8 +2104,8 @@ priority = 5, Hit
 sparkno = s7070 ;7
 sparkxy = -12,-50
 hitsound = s5,12
-guard.sparkno = 42
-guardsound = 6,2
+guard.sparkno = 40   ;TAGFIX(P022): 42 absent in fightfx -> 40 (std guard spark)
+guardsound = 6,0   ;TAGFIX(P022): 6,2 absent in common.snd -> 6,0 (std guard snd)
 ground.type = low
 pausetime = 5,13
 guard.pausetime = 7,10
@@ -2129,8 +2145,8 @@ priority = 5, Hit
 sparkno = s7070 ;7
 sparkxy = -12,-50
 hitsound = s8,7
-guard.sparkno = 42
-guardsound = 6,2
+guard.sparkno = 40   ;TAGFIX(P022): 42 absent in fightfx -> 40 (std guard spark)
+guardsound = 6,0   ;TAGFIX(P022): 6,2 absent in common.snd -> 6,0 (std guard snd)
 ground.type = low
 pausetime = 15,17
 guard.pausetime = 12,11
@@ -2180,6 +2196,7 @@ poweradd = -2000
 ;--------------------------------------SC
 [State 9000, 5]
 type = Explod
+	triggerall = 0	;TAGFIX(P023): anim absent (ADD004 fx not installed) - gated to stop console spam
 trigger1 = (prevstateno = [1000,1999]) && time = 0
 persistent = 0
 anim = f7500
@@ -2198,6 +2215,7 @@ ownpal = 1
 ;--------------------------------------DC
 [State 9000, 5]
 type = Explod
+	triggerall = 0	;TAGFIX(P023): anim absent (ADD004 fx not installed) - gated to stop console spam
 trigger1 = (prevstateno = [3000,3299]) && time = 0
 persistent = 0
 anim = f7550
@@ -2248,6 +2266,7 @@ value = 0, 0, 0
 
 [State Explod, Flash SDM]
 type = Explod
+	triggerall = 0	;TAGFIX(P023): anim absent (ADD004 fx not installed) - gated to stop console spam
 trigger1 = time = 1
 anim = F7100 ;20050
 pos = -30,-75
@@ -2263,6 +2282,7 @@ supermovetime = 9999999
 
 [State Explod, Flash SDM]
 type = Explod
+	triggerall = 0	;TAGFIX(P023): anim absent (ADD004 fx not installed) - gated to stop console spam
 trigger1 = time = 1
 anim = F7110 ;20051
 pos = -30,-75
@@ -2279,7 +2299,7 @@ supermovetime = 9999999
 [State 9000, Som Flash SDM]
 type = PlaySnd
 trigger1 = time = 1
-value = f9000,1;
+value = 9000,1   ;TAGFIX(P024): F removed - 9000,1 is a local sound
 
 ;-------------------------
 
@@ -2422,7 +2442,7 @@ sprpriority = 5
 [State a];
 type = PlaySnd
 trigger1 = time = 0
-value = 1000, 3
+value = 1000,0   ;TAGFIX(P024): 1000,3 absent -> 1000,0
 
 [state a]
 type = velset
@@ -2450,8 +2470,8 @@ pausetime = 0,10
 sparkno = 2
 sparkxy = -21, 0
 hitsound = s4,10
-guard.sparkno = 42
-guardsound = 6,2
+guard.sparkno = 40   ;TAGFIX(P022): 42 absent in fightfx -> 40 (std guard spark)
+guardsound = 6,0   ;TAGFIX(P022): 6,2 absent in common.snd -> 6,0 (std guard snd)
 ground.type = High
 ground.slidetime = 18
 ground.hittime   = 18
@@ -2519,6 +2539,7 @@ poweradd = -2000
 ;--------------------------------------SC
 [State 9000, 5]
 type = Explod
+	triggerall = 0	;TAGFIX(P023): anim absent (ADD004 fx not installed) - gated to stop console spam
 trigger1 = (prevstateno = [1000,1999]) && time = 0
 persistent = 0
 anim = f7500
@@ -2537,6 +2558,7 @@ ownpal = 1
 ;--------------------------------------DC
 [State 9000, 5]
 type = Explod
+	triggerall = 0	;TAGFIX(P023): anim absent (ADD004 fx not installed) - gated to stop console spam
 trigger1 = (prevstateno = [3000,3299]) && time = 0
 persistent = 0
 anim = f7550
@@ -2588,6 +2610,7 @@ value = 0, 0, 0
 
 [State Explod, Flash SDM]
 type = Explod
+	triggerall = 0	;TAGFIX(P023): anim absent (ADD004 fx not installed) - gated to stop console spam
 trigger1 = time = 1
 anim = F7100 ;20050
 pos = -47,-74
@@ -2603,6 +2626,7 @@ supermovetime = 9999999
 
 [State Explod, Flash SDM]
 type = Explod
+	triggerall = 0	;TAGFIX(P023): anim absent (ADD004 fx not installed) - gated to stop console spam
 trigger1 = time = 1
 anim = F7110 ;20051
 pos = -47,-74
@@ -2619,7 +2643,7 @@ supermovetime = 9999999
 [State 9000, Som Flash SDM]
 type = PlaySnd
 trigger1 = time = 1
-value = f9000,1;
+value = 9000,1   ;TAGFIX(P024): F removed - 9000,1 is a local sound
 
 ;-------------------------
 
@@ -2759,11 +2783,11 @@ guardflag = M
 hitflag = MAF
 priority = 7, Hit
 pausetime = 2,13
-sparkno = 6
+sparkno = 2   ;TAGFIX(P023): 6 absent->default hit spark 2
 sparkxy = -21, -71
 hitsound = S4,6
-guard.sparkno = 42
-guardsound = 6,2
+guard.sparkno = 40   ;TAGFIX(P022): 42 absent in fightfx -> 40 (std guard spark)
+guardsound = 6,0   ;TAGFIX(P022): 6,2 absent in common.snd -> 6,0 (std guard snd)
 ground.type = High
 ground.slidetime = 18
 ground.hittime   = 20
@@ -2818,11 +2842,11 @@ guardflag = M
 hitflag = MAF
 priority = 7, Hit
 pausetime = 2,13
-sparkno = 6
+sparkno = 2   ;TAGFIX(P023): 6 absent->default hit spark 2
 sparkxy = -21, -85
 hitsound = S4,6
-guard.sparkno = 42
-guardsound = 6,2
+guard.sparkno = 40   ;TAGFIX(P022): 42 absent in fightfx -> 40 (std guard spark)
+guardsound = 6,0   ;TAGFIX(P022): 6,2 absent in common.snd -> 6,0 (std guard snd)
 ground.type = High
 ground.slidetime = 18
 ground.hittime   = 20
@@ -2878,11 +2902,11 @@ guardflag = M
 hitflag = MAF
 priority = 7, Hit
 pausetime = 2,16
-sparkno = 6
+sparkno = 2   ;TAGFIX(P023): 6 absent->default hit spark 2
 sparkxy = -21, -35
 hitsound = S4, 6
-guard.sparkno = 42
-guardsound = 6,2
+guard.sparkno = 40   ;TAGFIX(P022): 42 absent in fightfx -> 40 (std guard spark)
+guardsound = 6,0   ;TAGFIX(P022): 6,2 absent in common.snd -> 6,0 (std guard snd)
 ground.type = Low
 ground.slidetime = 18
 ground.hittime   = 20
@@ -2937,11 +2961,11 @@ guardflag = M
 hitflag = MAF
 priority = 7, Hit
 pausetime = 13,13
-sparkno = 6
+sparkno = 2   ;TAGFIX(P023): 6 absent->default hit spark 2
 sparkxy = -21, -65
 hitsound = S4, 7
-guard.sparkno = 42
-guardsound = 6,2
+guard.sparkno = 40   ;TAGFIX(P022): 42 absent in fightfx -> 40 (std guard spark)
+guardsound = 6,0   ;TAGFIX(P022): 6,2 absent in common.snd -> 6,0 (std guard snd)
 ground.type = High
 ground.slidetime = 18
 ground.hittime   = 18
@@ -2984,6 +3008,7 @@ poweradd = -3000
 ;--------------------------------------SC
 [State 9000, 5]
 type = Explod
+	triggerall = 0	;TAGFIX(P023): anim absent (ADD004 fx not installed) - gated to stop console spam
 trigger1 = (prevstateno = [1000,1999]) && time = 0
 persistent = 0
 anim = f7500
@@ -3002,6 +3027,7 @@ ownpal = 1
 ;--------------------------------------DC
 [State 9000, 5]
 type = Explod
+	triggerall = 0	;TAGFIX(P023): anim absent (ADD004 fx not installed) - gated to stop console spam
 trigger1 = (prevstateno = [3000,3899]) && time = 0
 persistent = 0
 anim = f7550
@@ -3088,6 +3114,7 @@ value = 0, 0, 0
 
 [State Explod, Flash HSDM]
 type = Explod
+	triggerall = 0	;TAGFIX(P023): anim absent (ADD004 fx not installed) - gated to stop console spam
 trigger1 = time = 0
 anim = F7300 ;20050
 pos = 15,-135
@@ -3103,6 +3130,7 @@ supermovetime = 9999999
 
 [State Explod, Flash HSDM]
 type = Explod
+	triggerall = 0	;TAGFIX(P023): anim absent (ADD004 fx not installed) - gated to stop console spam
 trigger1 = time = 0
 anim = F7310 ;20051
 pos = 15,-135
@@ -3119,12 +3147,13 @@ supermovetime = 9999999
 [State 9000, Som Flash HSDM]
 type = PlaySnd
 trigger1 = time = 0
-value = f9000,2;
+value = 9000,2   ;TAGFIX(P024): F removed - 9000,2 is a local sound
 
 ;-------------------------
 
 [State 3000, Flash]
 type = explod
+	triggerall = 0	;TAGFIX(P023): anim absent (ADD004 fx not installed) - gated to stop console spam
 trigger1 = animelem = 1
 anim = f104
 pos = 15,-135
@@ -3261,11 +3290,11 @@ guardflag = M
 hitflag = MAF
 priority = 4, Hit
 pausetime = 4,13
-sparkno = 6
+sparkno = 2   ;TAGFIX(P023): 6 absent->default hit spark 2
 sparkxy = -40, -65
 hitsound = S4,6
-guard.sparkno = 42
-guardsound = 6,2
+guard.sparkno = 40   ;TAGFIX(P022): 42 absent in fightfx -> 40 (std guard spark)
+guardsound = 6,0   ;TAGFIX(P022): 6,2 absent in common.snd -> 6,0 (std guard snd)
 ground.type = High
 ground.slidetime = 17
 ground.hittime = 17
@@ -3300,11 +3329,11 @@ guardflag = M
 hitflag = MAF
 priority = 7, Hit
 pausetime = 13,13
-sparkno = 6
+sparkno = 2   ;TAGFIX(P023): 6 absent->default hit spark 2
 sparkxy = -21, -65
 hitsound = s4, 9 ;finish corte
-guard.sparkno = 42
-guardsound = 6,2
+guard.sparkno = 40   ;TAGFIX(P022): 42 absent in fightfx -> 40 (std guard spark)
+guardsound = 6,0   ;TAGFIX(P022): 6,2 absent in common.snd -> 6,0 (std guard snd)
 ground.type = High
 ground.slidetime = 18
 ground.hittime   = 18
@@ -3385,6 +3414,7 @@ scale = .2,.2
 
 [State , 2Explod]
 type = Explod
+	triggerall = 0	;TAGFIX(P023): anim absent (ADD004 fx not installed) - gated to stop console spam
 trigger1 = time = 0
 anim = f108
 ID = 4060
@@ -3403,6 +3433,7 @@ removeongethit = 0
 
 [State , 2Explod]
 type = Explod
+	triggerall = 0	;TAGFIX(P023): anim absent (ADD004 fx not installed) - gated to stop console spam
 trigger1 = time = 0
 trigger2 = time = 20
 trigger3 = time = 40
@@ -3450,6 +3481,7 @@ accel = .4, 0
 
 [State , 2Explod]
 type = Explod
+	triggerall = 0	;TAGFIX(P023): anim absent (ADD004 fx not installed) - gated to stop console spam
 trigger1 = time = 0
 trigger2 = time = 10
 trigger3 = time = 20
@@ -3540,6 +3572,7 @@ ignorehitpause = 1
 
 [State 40001, P1 BG]
 type = Explod
+	triggerall = 0	;TAGFIX(P023): anim absent (ADD004 fx not installed) - gated to stop console spam
 triggerall = !numexplod(15650)
 triggerall = teamside = 1
 trigger1 = !time
@@ -3577,6 +3610,7 @@ ignorehitpause = 1
 
 [State 40001, P2 BG]
 type = Explod
+	triggerall = 0	;TAGFIX(P023): anim absent (ADD004 fx not installed) - gated to stop console spam
 triggerall = !numexplod(15651)
 triggerall = teamside = 2
 trigger1 = !time
@@ -3799,6 +3833,7 @@ ignorehitpause = 1
 
 [State 191, Wood 1]
 type = Explod
+	triggerall = 0	;TAGFIX(P023): anim absent (ADD004 fx not installed) - gated to stop console spam
 trigger1 = time = 0
 anim = F28001
 id = 8000
@@ -3812,6 +3847,7 @@ supermovetime = 999999
 
 [State 191, Wood 1]
 type = Explod
+	triggerall = 0	;TAGFIX(P023): anim absent (ADD004 fx not installed) - gated to stop console spam
 trigger1 = time = 0
 anim = F28001
 id = 8000
@@ -3825,6 +3861,7 @@ supermovetime = 999999
 
 [State 191, Wood 1]
 type = Explod
+	triggerall = 0	;TAGFIX(P023): anim absent (ADD004 fx not installed) - gated to stop console spam
 trigger1 = time = 0
 anim = F28002
 id = 8000
@@ -3838,6 +3875,7 @@ supermovetime = 999999
 
 [State 191, Wood 1]
 type = Explod
+	triggerall = 0	;TAGFIX(P023): anim absent (ADD004 fx not installed) - gated to stop console spam
 trigger1 = time = 0
 anim = F28002
 id = 8000
@@ -3851,6 +3889,7 @@ supermovetime = 999999
 
 [State 191, Wood 1]
 type = Explod
+	triggerall = 0	;TAGFIX(P023): anim absent (ADD004 fx not installed) - gated to stop console spam
 trigger1 = time = 0
 anim = F28003
 id = 8000
@@ -3864,6 +3903,7 @@ supermovetime = 999999
 
 [State 191, Wood 1]
 type = Explod
+	triggerall = 0	;TAGFIX(P023): anim absent (ADD004 fx not installed) - gated to stop console spam
 trigger1 = time = 0
 anim = F28003
 id = 8000
@@ -3877,6 +3917,7 @@ supermovetime = 999999
 
 [State 191, Wood 1]
 type = Explod
+	triggerall = 0	;TAGFIX(P023): anim absent (ADD004 fx not installed) - gated to stop console spam
 trigger1 = time = 0
 anim = F28004
 id = 8000
@@ -3890,6 +3931,7 @@ supermovetime = 999999
 
 [State 191, Wood 1]
 type = Explod
+	triggerall = 0	;TAGFIX(P023): anim absent (ADD004 fx not installed) - gated to stop console spam
 trigger1 = time = 0
 anim = F28004
 id = 8000
@@ -3903,6 +3945,7 @@ supermovetime = 999999
 
 [State 191, Wood 1]
 type = Explod
+	triggerall = 0	;TAGFIX(P023): anim absent (ADD004 fx not installed) - gated to stop console spam
 trigger1 = time = 0
 anim = F28005
 id = 8000
@@ -3916,6 +3959,7 @@ supermovetime = 999999
 
 [State 191, Wood 1]
 type = Explod
+	triggerall = 0	;TAGFIX(P023): anim absent (ADD004 fx not installed) - gated to stop console spam
 trigger1 = time = 0
 anim = F28005
 id = 8000
@@ -3929,6 +3973,7 @@ supermovetime = 999999
 
 [State 191, Wood 1]
 type = Explod
+	triggerall = 0	;TAGFIX(P023): anim absent (ADD004 fx not installed) - gated to stop console spam
 trigger1 = time = 0
 anim = F28006
 id = 8000
@@ -3942,6 +3987,7 @@ supermovetime = 999999
 
 [State 191, Wood 1]
 type = Explod
+	triggerall = 0	;TAGFIX(P023): anim absent (ADD004 fx not installed) - gated to stop console spam
 trigger1 = time = 0
 anim = F28006
 id = 8000
@@ -3955,6 +4001,7 @@ supermovetime = 999999
 
 [State 191, Wood 1]
 type = Explod
+	triggerall = 0	;TAGFIX(P023): anim absent (ADD004 fx not installed) - gated to stop console spam
 trigger1 = time = 0
 anim = F28007
 id = 8000
@@ -3968,6 +4015,7 @@ supermovetime = 999999
 
 [State 191, Wood 1]
 type = Explod
+	triggerall = 0	;TAGFIX(P023): anim absent (ADD004 fx not installed) - gated to stop console spam
 trigger1 = time = 0
 anim = F28007
 id = 8000
@@ -3986,12 +4034,14 @@ id = 8000
 
 [State Snd]
 type = PlaySnd
+	triggerall = 0	;TAGFIX(P024): sound absent (ADD004 snd not present) - gated to stop spam
 trigger1 = root,StateNo != [3900,3900]
 value = F23997,3
 persistent = 0
 
 [State 4300]
 type = Explod
+	triggerall = 0	;TAGFIX(P023): anim absent (ADD004 fx not installed) - gated to stop console spam
 triggerall = !NumExplod(4291)
 trigger1 = root,StateNo != [3900,3900]
 anim = F24291

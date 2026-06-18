@@ -17,7 +17,7 @@ Status legend: `card` = full detail card exists · `stub` = row only, write card
   gauge *display states*. Hide = RemoveExplod sweep + per-explod guard trigger + (sometimes) a Restore
   ChangeState. Bench detection = `root,stateno = [6565610, 6565611]`. THREE distinct meter families
   (A groove.cns / B cvs2_system.cns id-21000 / C cvs2-EX) that look alike but live in different files.
-  NOTE (P008): Family C in-match meter = **8200 family in cvs2_system.cns**, NOT the 8000/8100 intro indicator.
+  NOTE (P011): Family C (blanka/dhalsim) has NO usable custom meter — uses the DEFAULT engine power bar (the noPowerBarDisplay assert in N- was disabled). The 8200 gauge is a phantom; do not reopen it.
 - **Lives in:** each char's `.cns` `[Statedef -2]` (spawn) + family meter file (display states).
 - **DO-NOT-confuse-with:** Lua/motif subsystems (stage-select, menu-text, variants) — those have NO
   explods, no bench states, no RemoveExplod. Also do not carry a fix between families A/B/C.
@@ -50,6 +50,19 @@ Status legend: `card` = full detail card exists · `stub` = row only, write card
 - **DO-NOT-confuse-with:** per-char meter spawn/hide logic (that's CNS, this is motif coords). Editing
   fight.def changes the *default engine* bar, not author custom meters.
 - **Card:** `cards/lifebar-layout.md` · **Status:** stub
+
+
+
+### ui-motif — Ikemen screenpack (menu/select/VS/logo/backgrounds)
+- **Architecture:** motif `system.def` (fonts/layout/bg elements/[Begin Action]) + `system.sff` (sprites).
+  font2=Pixel is THE UI font; P1 gold / P2 cyan. Animated logo via type=anim+actionno (50/51 wave+rainbow).
+  Backgrounds = procedural purple-pixel; scroll layers = seamless star lattices. SFF rebuild = replace
+  (recompute offsets) or append (offsets relative); **PNG8 needs the SFFv2 palette node, not embedded**.
+- **Lives in:** `data/ikemen1/system.def` + `data/ikemen1/system.sff`.
+- **DO-NOT-confuse-with:** bench-ui-meters / stand / gauge CNS work (this has NO explods, no bench states,
+  no CNS - motif+sprites+Lua only). A full ldata rebuild that ignores palette data breaks indexed sprites.
+- **Card:** `cards/ui-motif.md` · **Status:** active (P025-P036). Supersedes the planned `menu-text-styling` row.
+
 
 ---
 

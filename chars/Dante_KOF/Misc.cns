@@ -39,6 +39,7 @@ under = 1
 
 [State 700, Explod];иа╧Б
 type = Explod
+	triggerall = 0	;TAGFIX(P023): anim absent (ADD004 fx not installed) - gated to stop console spam
 trigger1 = prevstateno = [150,153]
 trigger1 = time = 0
 anim = f700
@@ -169,6 +170,7 @@ under = 1
 
 [State 700, Explod];иа╧Б
 type = Explod
+	triggerall = 0	;TAGFIX(P023): anim absent (ADD004 fx not installed) - gated to stop console spam
 trigger1 = prevstateno = [150,153]
 trigger1 = time = 0
 anim = f700
@@ -301,9 +303,9 @@ priority = 7, Hit
 pausetime = 13, 13
 sparkno = s4467
 sparkxy = -45, -75
-hitsound = S400,9;3
-guard.sparkno = 41
-guardsound = s350, 1
+hitsound = 5,0   ;TAGFIX(P024b): S400,9 absent -> 5,0
+guard.sparkno = 40   ;TAGFIX(P023): 41 absent->guard spark 40
+guardsound = 6,0   ;TAGFIX(P024b): S350,1 absent -> 6,0
 ground.type = High
 ground.slidetime = 17
 ground.hittime = 17
@@ -371,6 +373,7 @@ ownpal = 1
 
 [State 0, Explod]
 type = Explod
+	triggerall = 0	;TAGFIX(P023): anim absent (ADD004 fx not installed) - gated to stop console spam
 trigger1 =  animelem = 3
 anim = 911
 ID = 911
@@ -383,11 +386,13 @@ ignorehitpause = 0
 
 [State 0, PlaySnd]
 type = PlaySnd
+	triggerall = 0	;TAGFIX(P024): sound absent (ADD004 snd not present) - gated to stop spam
 trigger1 = animelem = 6
 value = 900,0
 
 [State 0, PlaySnd]
 type = PlaySnd
+	triggerall = 0	;TAGFIX(P024): sound absent (ADD004 snd not present) - gated to stop spam
 trigger1 = animelem = 3
 value = 900,1
 
@@ -411,9 +416,9 @@ priority = 7, Hit
 pausetime = 7, 9
 sparkno = 3
 sparkxy = -30, -75
-hitsound = 1,6
-guard.sparkno = 42
-guardsound = 2,1
+hitsound = 5,0   ;TAGFIX(P024): 1,6 absent in common.snd -> std hit 5,0
+guard.sparkno = 40   ;TAGFIX(P022): 42 absent in fightfx -> 40 (std guard spark)
+guardsound = 6,0   ;TAGFIX(P024): 2,1 absent in common.snd -> std guard 6,0
 ground.type = High
 ground.slidetime = 17
 ground.hittime = 17
@@ -496,11 +501,13 @@ value = 0,1
 
 [State 0, PlaySnd]
 type = PlaySnd
+	triggerall = 0	;TAGFIX(P024): sound absent (ADD004 snd not present) - gated to stop spam
 trigger1 = animelem = 4
 value = f3,6
 
 [State 0, Explod]
 type = Explod
+	triggerall = 0	;TAGFIX(P023): anim absent (ADD004 fx not installed) - gated to stop console spam
 trigger1 =  animelem = 4
 anim = 271
 ID = 271
@@ -543,9 +550,9 @@ priority = 4, Hit
 pausetime = 11, 13
 sparkno = 2
 sparkxy = -30, -15
-hitsound = 1,6
-guard.sparkno = 41
-guardsound = 2,1
+hitsound = 5,0   ;TAGFIX(P024): 1,6 absent in common.snd -> std hit 5,0
+guard.sparkno = 40   ;TAGFIX(P023): 41 absent->guard spark 40
+guardsound = 6,0   ;TAGFIX(P024): 2,1 absent in common.snd -> std guard 6,0
 ground.type = Low
 ground.slidetime = 17
 ground.hittime = 17
@@ -579,9 +586,9 @@ priority = 4, Hit
 pausetime = 11, 13
 sparkno = 2
 sparkxy = -30, -75
-hitsound = 1,6
-guard.sparkno = 41
-guardsound = 2,1
+hitsound = 5,0   ;TAGFIX(P024): 1,6 absent in common.snd -> std hit 5,0
+guard.sparkno = 40   ;TAGFIX(P023): 41 absent->guard spark 40
+guardsound = 6,0   ;TAGFIX(P024): 2,1 absent in common.snd -> std guard 6,0
 ground.type = High
 ground.slidetime = 17
 ground.hittime = 17
@@ -666,6 +673,7 @@ velset = 0,0
 
 [State 0, PlaySnd]
 type = PlaySnd
+	triggerall = 0	;TAGFIX(P024): sound absent (ADD004 snd not present) - gated to stop spam
 trigger1 = animelem = 8
 value = f3,6
 
@@ -774,9 +782,9 @@ priority = 4, Hit
 pausetime = 0, 11
 sparkno = 2
 sparkxy = -20, -10
-hitsound = 1,6
-guard.sparkno = 41
-guardsound = 2,1
+hitsound = 5,0   ;TAGFIX(P024): 1,6 absent in common.snd -> std hit 5,0
+guard.sparkno = 40   ;TAGFIX(P023): 41 absent->guard spark 40
+guardsound = 6,0   ;TAGFIX(P024): 2,1 absent in common.snd -> std guard 6,0
 ground.type = High
 ground.slidetime = 17
 ground.hittime = 17
@@ -2155,6 +2163,7 @@ under = 1
 
 [State 0, Explod]
 type = Explod
+	triggerall = 0	;TAGFIX(P023): anim absent (ADD004 fx not installed) - gated to stop console spam
 trigger1 = time = 60
 anim = f30002
 ID = 30002
@@ -2169,6 +2178,7 @@ vel = 0,0
 
 [State 0, Explod]
 type = Explod
+	triggerall = 0	;TAGFIX(P023): anim absent (ADD004 fx not installed) - gated to stop console spam
 trigger1 = time = 40
 anim = f30002
 ID = 30000
@@ -2183,6 +2193,7 @@ vel = 0,6
 
 [State 0, Explod]
 type = Explod
+	triggerall = 0	;TAGFIX(P023): anim absent (ADD004 fx not installed) - gated to stop console spam
 trigger1 = time = 40
 anim = f30002
 ID = 30001

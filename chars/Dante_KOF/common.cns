@@ -572,6 +572,7 @@ ctrl = 0
 
 [State 191, Spray Anim P1]
 type = Explod
+	triggerall = 0	;TAGFIX(P023): anim absent (ADD004 fx not installed) - gated to stop console spam
 trigger1 = time >= 0 && timemod = 10,0
 trigger1 = StageVar(info.author) = "water"
 ID = 20
@@ -586,7 +587,7 @@ removetime = -2
 [State 00]
 type = PlaySnd
 trigger1 = Time= 0
-value = f100,0+(StageVar(info.author) = "water")
+value = 100,0+(StageVar(info.author) = "water")   ;TAGFIX(P024): F removed - 100,0 is a local sound
 loop = 1
 channel = 1
 
@@ -709,6 +710,7 @@ physics = A
 
 [State 191, Spray Anim P1]
 type = Explod
+	triggerall = 0	;TAGFIX(P023): anim absent (ADD004 fx not installed) - gated to stop console spam
 trigger1 = animelem = 2
 trigger1 = StageVar(info.author) = "water"
 anim = F21
@@ -721,6 +723,7 @@ removetime = -2
 
 [State 105, 3]
 type = PlaySnd
+	triggerall = 0	;TAGFIX(P024): sound absent (ADD004 snd not present) - gated to stop spam
 trigger1 = StageVar(info.author) = "water"
 trigger1 = animelem = 2
 value = f47,1
@@ -769,7 +772,7 @@ velset = 0,0
 [State 191,]
 type = PlaySnd
 trigger1 = Time = 0
-value = f47,0+(StageVar(info.author) = "water")
+value = 47,0+(StageVar(info.author) = "water")   ;TAGFIX(P024): F removed - 47,0 is a local sound
 
 [State 106, 3];Ð¡»Ò³¾
 type = GameMakeAnim
@@ -2512,6 +2515,7 @@ value = 47,0;+(StageVar(info.author) = "water")
 
 [State 191,]
 type = PlaySnd
+	triggerall = 0	;TAGFIX(P024): sound absent (ADD004 snd not present) - gated to stop spam
 triggerall = StageVar(info.author) = "water"
 trigger1 = Time = 0
 value = f47,1
@@ -2918,6 +2922,7 @@ channel = 0
 
 [State 5950, KO Sound]
 type = PlaySnd
+	triggerall = 0	;TAGFIX(P024): sound absent (ADD004 snd not present) - gated to stop spam
 trigger1 = AnimElem = 2 && !Alive
 value = S15000,20
 
@@ -2951,6 +2956,7 @@ trigger1 = StageVar(info.author) = "water"
 
 [State 446,PlaySnd]
 	type = PlaySnd
+	triggerall = 0	;TAGFIX(P024): sound absent (ADD004 snd not present) - gated to stop spam
 trigger1 = StageVar(info.author) = "water"
 	trigger1 = AnimElem = 9
 	value = F5000,10
@@ -3227,6 +3233,7 @@ MoveTime = 15
 
 [State 191, 1]
 Type = PlaySnd
+	triggerall = 0	;TAGFIX(P024b): sound 7000,1 absent - gated
 Trigger1 = !time
 Value = 7000,1
 Channel = 5
@@ -3305,6 +3312,7 @@ id = 9840
 
 [State , 2Explod]
 type = Explod
+	triggerall = 0	;TAGFIX(P023): anim absent (ADD004 fx not installed) - gated to stop console spam
 trigger1 = time = 0 
 anim = 4070
 pos = 100,200

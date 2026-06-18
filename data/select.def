@@ -193,11 +193,11 @@
  ;Insert your characters below.
 
 jotaro, bridgemoon.def
-kakyoin, ctower.def
 joseph2, ctower.def
 avdul, desert.def
-iggy, desert.def
+kakyoin, ctower.def
 polnareff, coffin.def
+iggy, desert.def
 dio, jjba-ctower2-alt.def
 shadowdio, jjba-ctower2-alt.def
 MVC2_Spiderman, DailyBugleRooftopsMVC.def
@@ -213,7 +213,6 @@ Sentinel, mshvsf_apocalypse_now.def
 DoctorDoom, mshvsf_apocalypse_now.def
 StriderHiryu, SF3 Battle Arena Rd 02.def
 Megaman, Slither Inc ZX.def
-MegamanEXE, Slither Inc ZX.def
 cvsryu, SuzakuCastleWW.def
 cvsken, SuzakuCastleWW.def
 cvschunli, SF3 Battle Arena Rd 02.def
@@ -223,7 +222,6 @@ cvs2_blanka, TowerOfShogun.def
 cvsguile, SF3 Battle Arena Rd 02.def
 cvszcammy, SF3 Battle Arena Rd 02.def
 cvs2_dhalsim, SF3 Battle Arena Rd 02.def
-Ibuki, SF3 Battle Arena Rd 02.def
 cvsgouki, MemoriaTimeInterval.def
 CFJ_JuriHan, SF3 Battle Arena Rd 02.def
 cvssakura, SF3 Battle Arena Rd 02.def

@@ -130,7 +130,7 @@ sparkno = 1;s7031
 sparkxy = -17, -80
 hitsound = 5,1
 guardsound = 6,0
-guard.sparkno = 41 ;s8041
+guard.sparkno = 40 ;s8041   ;TAGFIX(P023): 41 absent->guard spark 40
 ground.type = Low
 pausetime = 12,13
 guard.pausetime = 12,11
@@ -217,7 +217,7 @@ pausetime = 11, 13
 sparkno = 1
 sparkxy = -30, -76
 hitsound = 5,1
-guard.sparkno = 41
+guard.sparkno = 40   ;TAGFIX(P023): 41 absent->guard spark 40
 guardsound = 6,0
 ground.type = High
 ground.slidetime = 17
@@ -421,7 +421,7 @@ pausetime = 11, 13
 sparkno = 1
 sparkxy = -10, -70
 hitsound = 5,3
-guard.sparkno = 41
+guard.sparkno = 40   ;TAGFIX(P023): 41 absent->guard spark 40
 guardsound = 6,0
 ground.type = High
 ground.slidetime = 17
@@ -491,7 +491,7 @@ pausetime = 11, 13
 sparkno = 1
 sparkxy = -10, -80
 hitsound = 5,3
-guard.sparkno = 41
+guard.sparkno = 40   ;TAGFIX(P023): 41 absent->guard spark 40
 guardsound = 6,0
 ground.type = High
 ground.slidetime = 17
@@ -581,6 +581,7 @@ under = 1
 
 [State 700, Explod];闪光
 type = Explod
+	triggerall = 0	;TAGFIX(P023): anim absent (ADD004 fx not installed) - gated to stop console spam
 trigger1 = prevstateno = [150,153]
 trigger1 = time = 0
 anim = f700
@@ -660,7 +661,7 @@ damage = 180
 priority = 5
 pausetime = 11,11
 sparkno = s7036 ;6
-guard.sparkno = 42 ;s8042
+guard.sparkno = 40   ;TAGFIX(P022): 42 absent in fightfx -> 40 (std guard spark) ;s8042
 sparkxy = -15,ifelse(P2StateType = A,-77,-75)
 hitsound = s4,10
 guardsound = s6,2
@@ -690,8 +691,8 @@ damage = ifelse(P2movetype = A,125,105)
 hitflag = MA
 guardflag = MA
 pausetime = 12,12
-sparkno = 5
-guard.sparkno = 41
+sparkno = 2   ;TAGFIX(P023): 5 absent->default hit spark 2
+guard.sparkno = 40   ;TAGFIX(P023): 41 absent->guard spark 40
 sparkxy = -15,ifelse(P2StateType = A,-77,-75)
 hitsound = s4,10
 guardsound = s6,0
@@ -723,8 +724,8 @@ animtype  = Diagup
 damage = 130
 priority = 5
 pausetime = 12,12
-sparkno = 5
-guard.sparkno = 41
+sparkno = 2   ;TAGFIX(P023): 5 absent->default hit spark 2
+guard.sparkno = 40   ;TAGFIX(P023): 41 absent->guard spark 40
 sparkxy = -15,ifelse(P2StateType = A,-77,-75)
 hitsound = s4,10
 guardsound = s6,0
@@ -759,8 +760,8 @@ animtype  = Diagup
 damage = 50
 priority = 5
 pausetime = 12,12
-sparkno = 5
-guard.sparkno = 41
+sparkno = 2   ;TAGFIX(P023): 5 absent->default hit spark 2
+guard.sparkno = 40   ;TAGFIX(P023): 41 absent->guard spark 40
 hitsound = s4,10
 guardsound = s6,0
 sparkxy = -15,ifelse(P2StateType = A,-77,-75)
@@ -902,6 +903,7 @@ x = 3
 
 [State 0, Explod]
 type = Explod
+	triggerall = 0	;TAGFIX(P023): anim absent (ADD004 fx not installed) - gated to stop console spam
 trigger1 =  animelemtime(2) = 0
 anim = 268
 ID = 268
@@ -923,10 +925,10 @@ guardflag = H
 hitflag = MAF
 priority = 4, Hit
 pausetime = 5, 20
-sparkno = 5
+sparkno = 2   ;TAGFIX(P023): 5 absent->default hit spark 2
 sparkxy = -15, -65
 hitsound = s4,5
-guard.sparkno = 41
+guard.sparkno = 40   ;TAGFIX(P023): 41 absent->guard spark 40
 guardsound = 6,0
 ground.type = High
 ground.slidetime = 17
@@ -956,10 +958,10 @@ guardflag = H
 hitflag = MAF
 priority = 4, Hit
 pausetime = 11, 13
-sparkno = 5
+sparkno = 2   ;TAGFIX(P023): 5 absent->default hit spark 2
 sparkxy = -15, -65
 hitsound = s4,5
-guard.sparkno = 41
+guard.sparkno = 40   ;TAGFIX(P023): 41 absent->guard spark 40
 guardsound = 6,0
 ground.type = High
 ground.slidetime = 17
@@ -1147,7 +1149,7 @@ pausetime = 11, 13
 sparkno = 1
 sparkxy = -10, -82
 hitsound = 5,1
-guard.sparkno = 41
+guard.sparkno = 40   ;TAGFIX(P023): 41 absent->guard spark 40
 guardsound = 6,0
 ground.type = Low
 ground.slidetime = 17
@@ -1290,7 +1292,7 @@ pausetime = 11, 13
 sparkno = 1
 sparkxy = -21, -15
 hitsound = 5,3
-guard.sparkno = 41
+guard.sparkno = 40   ;TAGFIX(P023): 41 absent->guard spark 40
 guardsound = 6,0
 ground.type = high
 ground.slidetime = 13
@@ -1566,6 +1568,7 @@ trigger1 = StageVar(info.author) = "water"
 
 [State 444,PlaySnd]
 	type = PlaySnd
+	triggerall = 0	;TAGFIX(P024): sound absent (ADD004 snd not present) - gated to stop spam
 trigger1 = StageVar(info.author) = "water"
 	trigger1 = Time = 1
 	value = F5000,10
@@ -1705,6 +1708,7 @@ trigger1 = StageVar(info.author) = "water"
 
 [State 446,PlaySnd]
 	type = PlaySnd
+	triggerall = 0	;TAGFIX(P024): sound absent (ADD004 snd not present) - gated to stop spam
 trigger1 = StageVar(info.author) = "water"
 	trigger1 = Time = 1
 	value = F5000,10
@@ -1838,10 +1842,10 @@ guardflag = H
 hitflag = MAF
 priority = 6, Hit
 pausetime = 11, 13
-sparkno = 4
+sparkno = 2   ;TAGFIX(P023): 4 absent->default hit spark 2
 sparkxy = -13, -84
 hitsound = s4,4
-guard.sparkno = 41
+guard.sparkno = 40   ;TAGFIX(P023): 41 absent->guard spark 40
 guardsound = 6,0
 ground.type = High
 ground.slidetime = 11
@@ -1914,10 +1918,10 @@ guardflag = H
 hitflag = MAF
 priority = 5, Hit
 pausetime = 9, 13
-sparkno = 5
+sparkno = 2   ;TAGFIX(P023): 5 absent->default hit spark 2
 sparkxy = -10, -50
 hitsound = s4,5
-guard.sparkno = 42
+guard.sparkno = 40   ;TAGFIX(P022): 42 absent in fightfx -> 40 (std guard spark)
 guardsound = 6,0
 ground.type = High
 ground.slidetime = 17
@@ -1998,9 +2002,9 @@ hitflag = MAF
 priority = 5, Hit
 pausetime = 9, 13
 sparkxy = -10, -35
-sparkno = 5
+sparkno = 2   ;TAGFIX(P023): 5 absent->default hit spark 2
 hitsound = s4,5
-guard.sparkno = 42
+guard.sparkno = 40   ;TAGFIX(P022): 42 absent in fightfx -> 40 (std guard spark)
 guardsound = 6,0
 ground.type = High
 ground.slidetime = 18
@@ -2121,7 +2125,7 @@ pausetime = 11, 13
 sparkno = 1
 sparkxy = 8, -55
 hitsound = 5,3
-guard.sparkno = 41
+guard.sparkno = 40   ;TAGFIX(P023): 41 absent->guard spark 40
 guardsound = 6,0
 ground.type = High
 ground.slidetime = 17
@@ -2193,10 +2197,10 @@ guardflag = H
 hitflag = MAF
 priority = 4, Hit
 pausetime = 11, 13
-sparkno = 5
+sparkno = 2   ;TAGFIX(P023): 5 absent->default hit spark 2
 sparkxy = -20, -60
 hitsound = s4,10
-guard.sparkno = 41
+guard.sparkno = 40   ;TAGFIX(P023): 41 absent->guard spark 40
 guardsound = 6,0
 ground.type = High
 ground.slidetime = 17
@@ -2233,10 +2237,10 @@ guardflag = HA
 hitflag = MAF
 priority = 4, Hit
 pausetime = 11, 13
-sparkno = 5
+sparkno = 2   ;TAGFIX(P023): 5 absent->default hit spark 2
 sparkxy = -20, -60
 hitsound = s4,10
-guard.sparkno = 41
+guard.sparkno = 40   ;TAGFIX(P023): 41 absent->guard spark 40
 guardsound = 6,0
 ground.type = High
 ground.slidetime = 17
@@ -2302,6 +2306,7 @@ ctrl = 1
 
 [State 52, 落地水花]
 type = Explod
+	triggerall = 0	;TAGFIX(P023): anim absent (ADD004 fx not installed) - gated to stop console spam
 triggerall = StageVar(info.author) = "water"
 trigger1 = Time = 0
 ID = 22
@@ -2372,6 +2377,7 @@ under = 1
 
 [State 700, Explod];闪光
 type = Explod
+	triggerall = 0	;TAGFIX(P023): anim absent (ADD004 fx not installed) - gated to stop console spam
 trigger1 = prevstateno = [150,153]
 trigger1 = time = 0
 anim = f700
@@ -2514,6 +2520,7 @@ under = 1
 
 [State 700, Explod];闪光
 type = Explod
+	triggerall = 0	;TAGFIX(P023): anim absent (ADD004 fx not installed) - gated to stop console spam
 trigger1 = prevstateno = [150,153]
 trigger1 = time = 0
 anim = f700
@@ -2643,6 +2650,7 @@ under = 1
 
 [State 700, Explod];闪光
 type = Explod
+	triggerall = 0	;TAGFIX(P023): anim absent (ADD004 fx not installed) - gated to stop console spam
 trigger1 = prevstateno = [150,153]
 trigger1 = time = 0
 anim = f700
@@ -2751,9 +2759,9 @@ Trigger1 = Time = 0
 attr = S, NT          ;Attributes: Standing, Normal Throw
 hitflag = M-          ;Affect only ground people who are not being hit
 priority = 1, Miss    ;Throw has low priority, must be miss or dodge type.
-sparkno = 8;s7080          ;No spark
+sparkno = 2;s7080          ;No spark   ;TAGFIX(P023): 8 absent->default hit spark 2
 sparkxy = -15,-55
-hitsound = 800,0
+hitsound = 5,0   ;TAGFIX(P024): 800,0 absent in common.snd -> std hit 5,0
 sprpriority =  2    ;Draw in front of p2
 p1facing = 1;ifelse (command = "holdfwd", -1, 1) ;Turn if holding forwards
 p2facing = 1          ;Force p2 to face KFM
@@ -2852,10 +2860,10 @@ guardflag = M
 hitflag = MAFD
 priority = 4, Hit
 pausetime = 13, 13
-sparkno = 5
+sparkno = 2   ;TAGFIX(P023): 5 absent->default hit spark 2
 sparkxy = -35, -75
 hitsound = s4,5
-guard.sparkno = 41
+guard.sparkno = 40   ;TAGFIX(P023): 41 absent->guard spark 40
 guardsound = 6,0
 ground.type = High
 ground.slidetime = 17
@@ -2929,9 +2937,9 @@ Trigger1 = Time = 0
 attr = S, NT          ;Attributes: Standing, Normal Throw
 hitflag = M-          ;Affect only ground people who are not being hit
 priority = 1, Miss    ;Throw has low priority, must be miss or dodge type.
-sparkno = 8;s7080          ;No spark
+sparkno = 2;s7080          ;No spark   ;TAGFIX(P023): 8 absent->default hit spark 2
 sparkxy = -15,-55
-hitsound = 800,0
+hitsound = 5,0   ;TAGFIX(P024): 800,0 absent in common.snd -> std hit 5,0
 sprpriority =  2    ;Draw in front of p2
 p1facing = 1;ifelse (command = "holdfwd", -1, 1) ;Turn if holding forwards
 p2facing = 1          ;Force p2 to face KFM
@@ -3014,10 +3022,10 @@ guardflag = M
 hitflag = MAFD
 priority = 4, Hit
 pausetime = 13, 13
-sparkno = 5
+sparkno = 2   ;TAGFIX(P023): 5 absent->default hit spark 2
 sparkxy = -35, -75
 hitsound = s4,5
-guard.sparkno = 41
+guard.sparkno = 40   ;TAGFIX(P023): 41 absent->guard spark 40
 guardsound = 6,0
 ground.type = High
 ground.slidetime = 17
@@ -3093,9 +3101,9 @@ Trigger1 = Time = 0
 attr = A, NT          ;Attributes: Standing, Normal Throw
 hitflag = AF         ;Affect only ground people who are not being hit
 priority = 1, Miss    ;Throw has low priority, must be miss or dodge type.
-sparkno = 5          ;No spark
+sparkno = 2          ;No spark   ;TAGFIX(P023): 5 absent->default hit spark 2
 sparkxy = -15,-55
-hitsound = 4,0
+hitsound = 5,0   ;TAGFIX(P024): 4,0 absent in common.snd -> std hit 5,0
 sprpriority =  2    ;Draw in front of p2
 p1facing = 1;ifelse (command = "holdfwd", -1, 1) ;Turn if holding forwards
 p2facing = 1          ;Force p2 to face KFM
@@ -3127,6 +3135,7 @@ pos = 10,40
 
 [State , 2Explod]
 type = Explod
+	triggerall = 0	;TAGFIX(P023): anim absent (ADD004 fx not installed) - gated to stop console spam
 trigger1 = animelem = 1 || animelem = 4 || animelem = 8
 anim = 7006
 pos = 30,-10
@@ -3145,6 +3154,7 @@ removeongethit = 1
 
 [State , 2Explod]
 type = Explod
+	triggerall = 0	;TAGFIX(P023): anim absent (ADD004 fx not installed) - gated to stop console spam
 trigger1 = animelem = 1 ||  animelem = 8
 anim = 879
 ID = 811
@@ -3169,6 +3179,7 @@ value = 1
 
  [State 0, 1PlaySnd]
 type = PlaySnd
+	triggerall = 0	;TAGFIX(P024): sound absent (ADD004 snd not present) - gated to stop spam
 trigger1 = animelem = 1 || animelem = 4 || animelem = 8
 value = S410,1
 
@@ -3304,11 +3315,13 @@ value = -1000
  
 [State 00];som da estourada adicione algum caso nao tenha
 type = PlaySnd
+	triggerall = 0	;TAGFIX(P024): sound absent (ADD004 snd not present) - gated to stop spam
 trigger1 = animelem  =2
 value = f2001,0
 
 [State 0, Explod]
 type = Explod
+	triggerall = 0	;TAGFIX(P023): anim absent (ADD004 fx not installed) - gated to stop console spam
 trigger1 = animelem  =1
 anim = f2001
 pos = 0,0
@@ -3505,6 +3518,7 @@ flag2 = noshadow
 
 [State 713, p1]
 type = Explod
+	triggerall = 0	;TAGFIX(P023): anim absent (ADD004 fx not installed) - gated to stop console spam
 trigger1 = Time = 0
 trigger1 = teamside = 1
 anim = f2000
@@ -3521,6 +3535,7 @@ sprpriority = 3
 
 [State 713, p2]
 type = Explod
+	triggerall = 0	;TAGFIX(P023): anim absent (ADD004 fx not installed) - gated to stop console spam
 trigger1 = Time = 0
 trigger1 = teamside = 2
 anim = f2000

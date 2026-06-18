@@ -407,3 +407,202 @@ gone, var(22) unchanged (already 0). Reversible; remove if real ADD004 system re
 vs file Misc.cns = Windows-OK but Linux/Steam-Deck-breaking casing mismatch (one-line def fix offered).
 Full JD/style/bar still dormant pending Wou's original system file.
 
+## [P020] Dante_KOF - Dante - S.cns trigger6 gaps fixed
+States 1405/1420 PlaySnd: triggers [1-5,7,8] -> renumbered to [1-7] so the skipped swing sounds fire. Only 2
+gap blocks in all his files. Shipped Dante - S.cns.
+## [P020b] Dante_KOF - explod anim 4472 missing (OPEN)
+[Statedef -2] persistent Explod ID 4472 anim=4472 not in Dante.air -> invalid-action warning, invisible effect.
+Missing asset; offered to gate it or take the correct anim. Not changed yet.
+## [P021] Wolverine - throw/jump clone fixed (missing jump-dust state 8100)
+ADD004 engine "Jump Dust" helper run in char state 8100, which was undefined (had 8200 land-dust, not 8100)
+-> state-0 clone. Added [Statedef 8100] mirroring 8200 + existing anim 8100 -> clone gone, jump dust restored.
+Minor: sounds 5000,11 / 40,0 missing (silent, harmless). See cards/Wolverine.md.
+
+## [P022] Dante_KOF - guard spark/sound spam fixed (42/6,2 absent from ultimabrawlers fightfx)
+HitDef guard.sparkno=42 -> 40 (std guard spark, exists in data/fightfx.air); guardsound=6,2 -> 6,0 (only 6,0
+exists in data/common.snd). Swept N/S/H.cns + Misc.cns (21 + 17). Real fix, not mute. Verified fightfx actions
+[0,1,2,3,10,11,12,40,60..130] and common.snd groups [5,6,7,20]/g6 idx [0].
+## [P022b OPEN] hit sparkno=6 also absent from fightfx -> will warn on hit; remap pending Raven's spark choice.
+
+## [P023 DECISION NEEDED] Dante_KOF - whole effect layer needs ADD004 fightfx (not installed)
+"Each attack warns" = systemic: 83 explods + hit/guard sparks reference ADD004 fightfx absent from
+ultimabrawlers' minimal data/fightfx.air. Options: (A) mute-all sweep (gate 83 explods + remap sparks; plain
+look, clean console, reversible) or (B) install ADD004 fightfx (restores effects; global file, riskier).
+Awaiting Raven. Folds in earlier P020b (4472 explod) + P022b (sparkno 6) as part of the same root cause.
+
+## [P023 DONE] Dante_KOF - effect layer reconciled to ultimabrawlers' default fightfx
+Raven: ADD004 route or default fx for damage hits. ADD004 fightfx not installable (3rd-party + global risk),
+so: hit sparks 4/5/6/8 -> 2 (40x), guard 41/42 -> 40 (48x), and 83 decorative explods with absent anims gated
+(triggerall=0). Result: every hit/block shows a proper default spark+sound; no console spam; no on-screen loss
+(gated effects were already invisible); fully reversible. Closes P020b (4472) + P022b (sparkno 6). 6 files shipped.
+
+## [P024 DONE] Dante_KOF - sound refs reconciled (F6,1 / F9000,0 / 1000,3 etc.)
+Invalid hitsound->5,0, guardsound->6,0; stray F-prefixes stripped to local (F9000,0->9000,0); bad local idx
+remapped (1000,3->1000,0); missing voice/effect PlaySnds gated. EnvColor RGB values correctly ignored.
+0 live invalid sounds left. 6 files shipped.
+
+## [P025] Menu - select-screen fonts -> Pixel + gold highlights
+[Select Info]: p1.name.font 3->2 + colour 210,210,255(blue)->255,210,40(gold); p2.name.font 3->2 (pink kept);
+stage.font 3->2; stage.active.font 3->2 +gold; title already 2 (P018e). 6 refs. NOTE: the select CURSOR box
+(the actual selection highlight) is sprite anim 160/161 (p1) & 170/171 (p2) in system.sff - a sprite recolor,
+not a .def value. Menu sprite map: title bg 100,0; menu logo 0,0-0,3; select bg 101,0; cell bg 150,0 - all in
+data/ikemen1/system.sff. Active lifebar = data/fight.def (motif system.def [Files] fight = fight.def).
+
+## [P026] Menu - team-menu fonts, stage flicker, name sizes, P2 colour
+Stage-name FLICKER root cause: stage.active2.font (the active blink colour) was still font3 - active stage
+blinked between Pixel-gold (active.font) and Menu2 (active2.font). Fixed: stage.active2.font + stage.done.font
+-> font2. Team-mode text ("Single"/"Tag" = teammenu.item.font; "TEAM MODE" = teammenu.selftitle/enemytitle)
+p1+p2 -> font2 (p1 gold, p2 cyan); teammenu title scale .75->1 for Pixel. P2 name/teammenu colour 255,210,239
+(pink) -> 90,225,255 (cyan) to contrast gold+purple (NOTE: p2 colour is independent of p1, always was).
+Larger text: added p1.name.scale/p2.name.scale/stage.scale = 1.4,1.4 (Ikemen text elements take .scale, e.g.
+teammenu titles already did - if names/stage don't grow in-engine, fallback = build a 2x Pixel bitmap font).
+Extracted bg sprites from system.sff -> menu_sprites/: menu bg (100,0), charselect bg (101,0), logo (0,0), all
+PNG32 1280x960 / 699x257. Backgrounds are NOT loose files; they live inside data/ikemen1/system.sff.
+
+## [P027] Menu/Select background REMIX - purple Persona-pixel + scrolling starfields (system.sff rebuilt)
+From-scratch redesign (not a recolour). Replaced 7 sprites inside data/ikemen1/system.sff:
+  100,0 menu bg (1280x960)   - purple dithered gradient, gold halftone burst (top-right), gold diagonal
+                               accent lines, clean star outlines, sparse pixel symbols, scanlines.
+  101,0 select bg (1280x960) - same language, darker/more saturated, GOLD accent (per Raven; was cyan),
+                               halftone bottom-left.
+  100,1 (1280x960), 100,2 (2559x782), 100,3 (2467x960), 101,2 (2559x782), 101,3 (2467x960)
+                             - transparent seamless STARFIELDS replacing the cloud scroll layers.
+                               Mostly-transparent stars/diamonds/plus, wrap-seamless on X (drew each star
+                               at x, x-W, x+W) so tile=1,0 loops cleanly R->L. Two densities = parallax
+                               (slow faint back .2 layer / fast bright front .3 layer).
+Kept each sprite at its EXACT original WxH so the existing [TitleBG]/[SelectBG] start/tile/velocity config
+applies unchanged - NO system.def edit needed for the bg swap.
+SFF REBUILD METHOD (verified): SFFv2, all data in ldata (tdata empty), 258 nodes @1360, ldata @8584.
+PNG sprite ldata entry = uint32(W*H*4 uncompressed size) + PNG bytes; dataLength = 4 + len(png) (the 4-byte
+prefix is the RAW size, NOT png length - confirmed 100,0 prefix 4915200 = 1280*960*4). 22 linked sprites
+(fmt1/len0) preserved verbatim (resolve via linked-index, offset ignored). Rebuilt ldata in node order,
+patched each node dataOffset/Length + header ldata_len/tdata_off. VERIFIED: 235 PNG decode ok, 1 LZ5 intact,
+22 links valid, 0 failures, all 7 targets decode at native dims. New file 5.85MB (was 8.04MB; my PNGs
+compress better). Editable source PNGs also shipped in menu_sprites/.
+
+## [P028] FIX scroll layers - restore 100,1 (my error) + visible star LATTICE
+Two issues from P027, found via full [TitleBGdef]/[SelectBGdef] re-read:
+ (1) MY ERROR: replaced sprite 100,1 = "Background Black Bars" (static, trans=add1, NO velocity/tile,
+     reused in BOTH TitleBG + SelectBG) with a starfield. 100,1 is a static additive UI overlay, NOT a
+     panning cloud. -> RESTORED 100,1 to original (rebuilt from clean /tmp/system.sff; confirmed byte-identical).
+ (2) The genuine panning layers ARE 100,2/100,3 (menu) + 101,2/101,3 (select) [tile=1,0, vel -0.1 back /
+     -0.7 front]. P027 filled them with a UNIFORM RANDOM starfield -> pans but reads as static (no distinct
+     feature to track motion). FIX: regenerated as a REGULAR DIAGONAL STAR LATTICE (even spacing, distinct
+     bright star/sparkle/diamond stamps, brighter alpha) -> drift is now clearly visible + satisfying.
+     Back layer dim/small (spacing150 sc4), front bright/big (spacing128 sc6) = parallax. Seamless on X
+     (N=round(W/spacing) exact cells, wrap copies at x,x-W,x+W).
+Rebuilt system.sff (now 6 sprites: 100,0 menu bg, 101,0 select bg, 100,2/3 + 101,2/3 lattices; 100,1 + all
+others verbatim). VERIFIED: 235 PNG decode, 22 links valid, 0 fail, 100,1 byte-identical to original.
+Shipped NEW_scroll_DEMO.gif (parallax loop preview) + lattice source PNGs in menu_sprites/.
+LESSON: a sprite being in the cloud sprite-group (100,x) does NOT mean it's a scrolling layer - check the
+.def element it's bound to (velocity/tile) before replacing. 100,1 = static bars; only x,2 and x,3 scroll.
+
+## [P029] LOGO location documented + 6 replacement mockups (awaiting Raven's pick)
+LOGO LIVES IN data/ikemen1/system.sff as a 4-sprite stack (all 699x257, axis 349,128, fmt12 PNG32):
+  0,0 = MAIN logo            (bbox ~2,10..688,192 - full width)  drawn by [TitleBG Title Logo], layerno1, sin.y 15,264,2
+  0,1 = secondary element    (bbox ~416,137..628,245 - lower-right small)  [TitleBG Title Logo 2], sin.y 15,264,32
+  0,2 = shadow of 0,0        (additive, alpha 256,96)  [TitleBG Title LogoShadow], sin.y 15,264,2
+  0,3 = shadow of 0,1        (additive, alpha 256,96)  [TitleBG Title LogoShadow], sin.y 15,264,32
+  All start=0,155 (centered via P018), layerno=1. The two shadow sprites bob at a different sin phase = glow echo.
+TO REPLACE THE LOGO CLEANLY: new art -> 0,0; regenerate 0,2 as a silhouette/glow of the new art; BLANK 0,1 + 0,3
+(fully transparent) so the old secondary element doesn't ghost. Same SFF rebuild method as P027/P028.
+Generated 6 mockups for "ULTIMA ARCADE ALLSTARS" / "ARCADE ALLSTARS: ULTIMA" (Persona slant, black stroke,
+gold/magenta/cyan-on-purple), shipped menu_sprites/LOGO_1..6 + LOGO_contact_sheet.png. NOT baked - waiting on
+Raven to choose a number. Fonts used from /mnt/skills/examples/canvas-design/canvas-fonts/ (BigShoulders-Bold,
+Tektur, FreeSansBold, PixelifySans, EricaOne, Boldonse/Outfit).
+
+## [P030] Logo mockups v2 - "fantastic" pixelated chrome + float plan confirmed
+Raven confirmed the floating "GO" element = sprite 0,1 (bobs at sin.y phase 32 vs main 0,0 phase 2). PLAN
+LOCKED: main "ARCADE ALLSTARS" -> 0,0; "ULTIMA" -> 0,1 as an independently-floating SUBTITLE; shadows 0,2/0,3
+follow. Feedback on v1: more pizzazz + "pixelated like a retro logo but NOT crappy pixel-text fonts" + must
+contrast vs the busy purple bg. v2 approach: render a real bold font (BigShoulders/EricaOne/Outfit), add
+chrome gradient fill (highlight band), double outline (black + white/magenta), glow halo (contrast), optional
+3D extrude / starburst / sparkles, THEN pixelate (LANCZOS downscale /3 + hard alpha threshold + NEAREST upscale)
+= retro by resolution, not by typeface. Shipped LOGO2_A_goldchrome / B_magenta3D / C_cyanice / D_starburst +
+LOGO2_contact_sheet.png. Awaiting Raven's pick (mix-and-match offered). NOT baked yet.
+
+## [P031] Animated logo demos - pixel ripple wave + ULTIMA purple vs rainbow
+Raven picked Logo A (gold chrome). Requests: (1) per-letter floating/ripple WAVE on the letters; (2) ULTIMA
+recolored purple OR animated rainbow wave; (3) ULTIMA moved to hover BELOW ARCADE ALLSTARS at bottom-right
+(was a kicker above). Built 2 animated GIF demos (LOGO_A_wave_purple.gif / LOGO_A_wave_rainbow.gif): gold-chrome
+"ARCADE ALLSTARS" with a column-wise pixel ripple (np.roll per col, sine phase travels = letters bob in
+sequence), ULTIMA tucked bottom-right; purple = purple chrome, rainbow = HSV fill scrolled per frame. 24-frame
+seamless loops, pixelated (LANCZOS/3 + hard alpha + NEAREST up), composited over menu bg.
+ANIMATION FEASIBILITY (Ikemen): static sprites only bob whole (sin.y); per-letter wave + rainbow REQUIRE either
+(a) per-letter sprites w/ staggered sin.y (smooth, no rainbow) or (b) PRE-RENDERED FRAME ANIM via actionno ->
+[Begin Action N] cycling frame sprites + bg element actionno=N. Rainbow forces route (b). Bake plan when Raven
+picks: render ~24 frames of main wave -> sprites grp e.g. 10,0..; ULTIMA frames -> grp 11,0..; define
+[Begin Action]s; repoint [TitleBG Title Logo]/[Logo 2] from spriteno to actionno; shadows 0,2/0,3 from frames or
+keep simple. Tradeoff: +sprite slots, bigger sff. NOT baked - awaiting purple/rainbow + wave-intensity call.
+
+## [P032] Logo anim corrected - RIGID per-letter bob (no morph) + vivid rainbow
+Raven feedback on P031: letters should lift/drop as RIGID whole letters (same staggered timing) NOT morph/ripple;
+rainbow too dull. FIX: render cohesive pixel logo, SLICE into per-letter vertical strips at font-advance
+boundaries (bnd[i] from getlength prefixes), bob each strip rigidly dy=2.5*sin(ph+i*0.55) -> letters keep shape,
+wave reads via staggered phase. ULTIMA = whole-sprite bob (no per-letter). Rainbow now FULL saturation
+(hsv s=1 v=1, span 1.15) computed at small-res (no LANCZOS hue-averaging), white glow removed (was washing it),
+GIF palette 256. Shipped LOGO_A_bob_purple.gif / LOGO_A_bob_rainbow.gif. Raven: "this is the look." Awaiting
+final purple-vs-rainbow pick to BAKE (frame anim via actionno: main strips bob -> N frames sprite grp; ULTIMA
+-> floating 0,1 anim; shadows follow).
+
+## [P033] LOGO BAKED - animated rainbow build (system.sff + system.def)
+Raven picked rainbow, wanted it faster + verified-transparent. Baked:
+SFF: appended 36 sprites to data/ikemen1/system.sff via SAFE-APPEND (existing 258 sprites + 53 palettes kept
+BYTE-IDENTICAL - their data offsets are relative to ldata start so they stay valid; only added new nodes +
+data + bumped header count/ldata_off/tdata_off). New: grp 50 img 0..17 = ARCADE ALLSTARS per-letter rigid bob
+wave; grp 51 img 0..17 = ULTIMA full-sat rainbow (hue scroll, fixed pos). All 699x257 axis 349,128 PNG32
+transparent. VERIFIED: 294 sprites, 271 png decode, 22 links ok, 0 bad, 18/18 rainbow frames carry alpha,
+100,0 bg byte-identical. File 6.27MB.
+DEF: [TitleBG Title Logo] 0,0 -> type=anim actionno=50 (sin.y removed, wave baked). [TitleBG Title Logo 2]
+0,1 -> type=anim actionno=51, sin.y=15,264,32 KEPT (engine floats ULTIMA independently like old "GO").
+Both [TitleBG Title LogoShadow] (0,2/0,3) COMMENTED OUT (glow baked into frames). Appended [Begin Action 50]
++ [Begin Action 51] at EOF, 18 frames each @ 1 tick/frame (fast; per-anim tick is the speed knob - re-bake to
+change). Confirmed motif uses type=anim+actionno elsewhere (lines 1207/1605/1710) - mirrored that.
+INSTALL: BOTH system.sff + system.def go in data/ikemen1/ (def carries the anim wiring, sff the frames).
+Shipped LOGO_transparency_check.png (checkerboard proof). Old 0,0/0,1 sprites left in sff (unreferenced, harmless).
+SPEED NOTE: 1 tick/frame chosen because Raven says engine slows anims; trivial to re-bake slower if needed.
+
+## [P034] Logo anim speed fix - 1 -> 4 ticks/frame
+Raven: P033's 1 tick/frame overcompensated (too fast, ~0.3s/cycle vs demo ~1.7s). Set [Begin Action 50] +
+[Begin Action 51] frame durations 1 -> 4 (18 frames * 4/60 = ~1.2s/cycle = near demo pace, kept a hair brisk to
+hedge the engine's anim slowdown). system.def ONLY (sff unchanged - re-drop just the def). Speed knob = the
+trailing number on each frame line in [Begin Action 50]/[51]; re-bake/edit to retune.
+
+## [P035] Sprite re-texture capability + Dante coat demo (preview, not baked)
+Demonstrated reading/decoding + re-shading CHARACTER sprites. chars/Dante (author "R@CE AKIR@ Editado por
+Magno Cesar") = Dante.sff (SFFv2, 2763 sprites, mostly PNG8 fmt10). QUIRK: PNG8's embedded palette is a BLACK
+placeholder - real colors live in the SFFv2 PALETTE NODE referenced by node paletteIndex; index 0 = transparent
+magenta (252,2,252,a0). Decode = load PNG8 indices, remap through palette node, idx0->alpha0. Idle = .air
+Action 0: breathing loop sprites 0,7 / 0,9 / 0,11 (10 ticks each) + fidget 0,19..0,36.
+FEEDBACK ARC: v1 "refine" was just sat/brightness/rim = a filter (Raven rejected). REAL re-texture (v2, coat):
+the coat's amateur ramp = 21 red indices all hue ~345 that only darken, capped V~0.47 (no highlight, no hue
+shift). Re-authored as an arcade leather ramp: cool purple-shifted creases -> rich red body -> warm pink
+SPECULAR sheen (control-point ramp, indices remapped by V-rank), THEN fold-sharpen (unsharp on coat luminance,
+re-snap to ramp) for crisp leather sheen on fold ridges. Targeted ONLY coat-red indices (H 325-360 & S>0.45),
+skin/hair/pants untouched. Silhouette + fold placement preserved. Applied to all 3 idle frames -> animates
+consistently. Shipped dante_coat_retexture_demo.gif + dante_coat_retexture_5x.png. PREVIEW ONLY - nothing baked
+into Dante.sff yet. NEXT IF APPROVED: hair (same technique on silver ramp - watch shared gray indices w/ sword),
+tune specular strength, then roll across all of Dante's frames + re-inject into Dante.sff.
+TECHNIQUE NOTE: this re-authors the EXISTING shade placement into a pro ramp + adds sheen; adding brand-new fold
+GEOMETRY the artist never drew is deeper manual per-area work (possible, slower, iterative).
+
+## [P036] VS / "NEXT MATCH" loading screen restyle + palette corruption FIX
+The pre-match VS screen ([VS Screen] + [VersusBGdef] in system.def). Changes:
+- NAMES font consistency: p1.name.font was 3,0,1 (Menu2) while p2 was font2 Pixel -> p1 unified to
+  2,0,1, 255,210,40 (Pixel gold) + p1.name.scale 1.4 to match p2 (Pixel cyan 90,225,255). Both names now
+  same font, our gold/cyan scheme. (Other screens [Victory]/[Dialogue Info] left alone.)
+- NEW purple-pixel VS background -> sprite 204,0 (1280x960); scroll cloud layers -> seamless star lattices
+  102,2 (2366x505) + 102,3 (2467x960). Same procedural style as menu/select (gold accent, symmetric halftone
+  top corners, star outlines flanking where fighters stand).
+- Custom arcadey YELLOW pixel "VS" -> replaced VS-logo anim frames 200,0..200,8 (304x334) [VersusBG 5
+  actionno 200 keeps its zoom-in; all 9 frames = same yellow VS so no old chrome flickers].
+- "NEXT MATCH" in our gold style -> replaced sprite 202,0 (516x44) [VersusBG 6 actionno 202 keeps slide-in].
+- PALETTE FIX (bonus): P027/P028's ldata rebuild had DROPPED the 53 palette color tables (palette node
+  offsets went stale -> 7 indexed sprites 203,0/1, 400-403, 700,0 rendered from garbage; they were just not
+  prominently visible). Re-fetched repo system.sff (still the clean original w/ valid palettes), extracted the
+  53 palette data blocks, and restored them in this rebuild (fixed palette node offsets). VERIFIED 203,0
+  palette back to 1019 nonzero bytes.
+SFF rebuild = same-count REPLACE (13 sprites) + palette restore; 294 sprites, 271 png decode, 22 links, 0 bad.
+Shipped system.sff + system.def. NOTE: vsscreen may be gated by [Demo Mode] vsscreen.enabled / [VS Screen]
+order settings - art is in place regardless of when the screen shows.
+
