@@ -12,7 +12,8 @@
 ;   Var(24)  : KÉOÉãÅ[ÉuÉQÅ[ÉWëùâ¡ó 2
 ;   Var(25)  : ãÛíÜÉRÉìÉ{ÉqÉbÉgêßå¿1
 ;   Var(26)  : ãÛíÜÉRÉìÉ{ÉqÉbÉgêßå¿2
-;   Var(27)  : ÉRÅ[ÉiÉbÉvÉbÉVÉÖèàóù1
+;   Var(27)  : ÉRÅ[ÉiÉbÉvÉbÉVÉ
+èàóù1
 ;   Var(28)  : ÉJÉEÉìÉ^Å[ÉtÉâÉO
 ;   Var(29)  : ïœêgÉLÉÉÉâîªï 
 ;   var(30)  : ÉOÉãÅ[ÉîÅi1:CÉOÉãÅ[Éî 2:AÉOÉãÅ[Éî 3:PÉOÉãÅ[Éî 4:SÉOÉãÅ[Éî 5:NÉOÉãÅ[Éî 6:KÉOÉãÅ[Éî)
@@ -59,15 +60,19 @@
 ;	fvar(8)  : éùë±éûä‘
 ;	fvar(9)  : ÉQÅ[ÉWí~êœÇ…ÇÊÇÈçUåÇóÕÇÃëùâ¡
 ;	fvar(10) : çUåÇílï‚ê≥
-;	fvar(11) : ÉtÉBÉjÉbÉVÉÖÉuÉçÅ[îªï 
+;	fvar(11) : ÉtÉBÉjÉbÉVÉ
+ÉuÉçÅ[îªï 
 ;	fvar(12) : ëäéËÉXÉeÅ[ÉgÉiÉìÉoÅ[éÊìæ
 ;	fvar(13) : ÉäÉoÅ[ÉTÉãÉtÉâÉO
 ;	fvar(14) : ÉâÉEÉìÉhäJénÇ©ÇÁÇÃåoâﬂéûä‘
-;	fvar(15) : ÉRÅ[ÉiÉbÉvÉbÉVÉÖèàóù2
+;	fvar(15) : ÉRÅ[ÉiÉbÉvÉbÉVÉ
+èàóù2
 ;	fvar(16) : é©ï™Life
 ;	fvar(17) : ëäéËctrlâ¬î€
-;	fvar(18) : ÉtÉBÉjÉbÉVÉÖÉtÉâÉO1
-;	fvar(19) : ÉtÉBÉjÉbÉVÉÖÉtÉâÉO2
+;	fvar(18) : ÉtÉBÉjÉbÉVÉ
+ÉtÉâÉO1
+;	fvar(19) : ÉtÉBÉjÉbÉVÉ
+ÉtÉâÉO2
 ;	fvar(20) : MAXÉRÉìÉ{êîï€ë∂
 ;	fvar(21) : É_ÉEÉìâÒîîªíË
 ;	fvar(22) : ã≠êßí‚é~íÜÉKÅ[Éhïsî\éûä‘
@@ -272,7 +277,8 @@ persistent = 0
 value = Anim + 3
 
 ;---------------------------------------------------------------------------
-; íÖín
+; í
+ín
 [Statedef 52]
 type    = S
 physics = S
@@ -3493,7 +3499,8 @@ trigger2 = !root,NumHelper(8001)
 trigger3 = !root,NumHelper(8002)
   
 ;-------------------------------------------------------------------
-;KOÉtÉBÉjÉbÉVÉÖââèo 
+;KOÉtÉBÉjÉbÉVÉ
+ââèo 
 ;---------------------------------------------------------------------------
 ; âπÇÃÇ›
 [Statedef 9030]
@@ -6400,6 +6407,50 @@ velset = 0,0
 ctrl = 0
 ownpal = 1
 
+
+;TAGFIX(P068): KO/bench sweep for this groove's gauge explods (was missing -> gauge lingered on KO)
+[State 22000, KO Sweep 22000]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611] || roundstate > 2 || !root,alive
+id = 22000
+ignorehitpause = 1
+
+[State 22000, KO Sweep 22001]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611] || roundstate > 2 || !root,alive
+id = 22001
+ignorehitpause = 1
+
+[State 22000, KO Sweep 22010]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611] || roundstate > 2 || !root,alive
+id = 22010
+ignorehitpause = 1
+
+[State 22000, KO Sweep 22020]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611] || roundstate > 2 || !root,alive
+id = 22020
+ignorehitpause = 1
+
+[State 22000, KO Sweep 22021]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611] || roundstate > 2 || !root,alive
+id = 22021
+ignorehitpause = 1
+
+[State 22000, KO Sweep 22022]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611] || roundstate > 2 || !root,alive
+id = 22022
+ignorehitpause = 1
+
+[State 22000, KO Sweep 22030]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611] || roundstate > 2 || !root,alive
+id = 22030
+ignorehitpause = 1
+
 [State 5900, 1]
 type = ParentVarSet
 trigger1 = 1
@@ -6414,7 +6465,10 @@ ignorehitpause = 1
 
 [State -2, Explod(P1)]
 type = Explod
-trigger1 = Time = 0 && teamside = 1
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(22010) = 0 && teamside = 1   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 22010
 id = 22010
 pos = 140,230
@@ -6431,7 +6485,10 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
-trigger1 = Time = 0 && teamside = 2
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(22010) = 0 && teamside = 2   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 22015
 id = 22010
 pos = -140,230
@@ -6460,7 +6517,10 @@ scale = 0,0
 
 [State -2, Explod(P1)]
 type = Explod
-trigger1 = Time = 0 && teamside = 1
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(22020) = 0 && teamside = 1   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 22020
 id = 22020
 pos = 140,230
@@ -6478,7 +6538,10 @@ Supermovetime = -1
 
 [State -2, Explod(P1)]
 type = Explod
-trigger1 = Time = 0 && teamside = 1
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(22021) = 0 && teamside = 1   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 22021
 id = 22021
 pos = 140,230
@@ -6496,7 +6559,10 @@ Supermovetime = -1
 
 [State -2, Explod(P1)]
 type = Explod
-trigger1 = Time = 0 && teamside = 1
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(22022) = 0 && teamside = 1   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 22022
 id = 22022
 pos = 77,227
@@ -6513,7 +6579,10 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
-trigger1 = Time = 0 && teamside = 2
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(22020) = 0 && teamside = 2   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 22025
 id = 22020
 pos = -140,230
@@ -6531,7 +6600,10 @@ Supermovetime = -1
 
 [State -2, Explod(P1)]
 type = Explod
-trigger1 = Time = 0 && teamside = 2
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(22021) = 0 && teamside = 2   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 22026
 id = 22021
 pos = -140,230
@@ -6549,7 +6621,10 @@ Supermovetime = -1
 
 [State -2, Explod(P1)]
 type = Explod
-trigger1 = Time = 0 && teamside = 2
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(22022) = 0 && teamside = 2   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 22027
 id = 22022
 pos = -77,227
@@ -6566,7 +6641,10 @@ Supermovetime = -1
 
 [State -2, Explod(P1)]
 type = Explod
-trigger1 = Time = 0 && teamside = 1
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(22000) = 0 && teamside = 1   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 22000
 id = 22000
 pos = 140,230
@@ -6584,7 +6662,10 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
-trigger1 = Time = 0 && teamside = 2
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(22000) = 0 && teamside = 2   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 22005
 id = 22000
 pos = -140,230
@@ -6614,7 +6695,10 @@ scale = 0,0
 
 [State -2, Explod(P1)]
 type = Explod
-trigger1 = Time = 0 && teamside = 1
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(22030) = 0 && teamside = 1   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 22030
 id = 22030
 pos = 31,228
@@ -6632,7 +6716,10 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
-trigger1 = Time = 0 && teamside = 2
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(22030) = 0 && teamside = 2   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 22030
 id = 22030
 pos = -31,228
@@ -6732,7 +6819,10 @@ ignorehitpause = 1
 ;------------------------ ÉOÉãÅ[Éîï\ãL
 [State -2, Explod(A-GROOVE)]
 type = Explod
-trigger1 = Time = 0 && teamside = 1
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(22001) = 0 && teamside = 1   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = Ifelse((Root,var(43)),27001,22001)
 id = 22001
 pos = 123,221
@@ -6749,7 +6839,10 @@ Supermovetime = -1
 ;------------------------ ÉOÉãÅ[Éîï\ãL
 [State -2, Explod(A-GROOVE)]
 type = Explod
-trigger1 = Time = 0 && teamside = 2
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(22001) = 0 && teamside = 2   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = Ifelse((Root,var(43)),27001,22001)
 id = 22001
 pos = -123,221
@@ -6859,6 +6952,56 @@ velset = 0,0
 ctrl = 0
 ownpal = 1
 
+
+;TAGFIX(P068): KO/bench sweep for this groove's gauge explods (was missing -> gauge lingered on KO)
+[State 23000, KO Sweep 23000]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611] || roundstate > 2 || !root,alive
+id = 23000
+ignorehitpause = 1
+
+[State 23000, KO Sweep 23001]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611] || roundstate > 2 || !root,alive
+id = 23001
+ignorehitpause = 1
+
+[State 23000, KO Sweep 23010]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611] || roundstate > 2 || !root,alive
+id = 23010
+ignorehitpause = 1
+
+[State 23000, KO Sweep 23020]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611] || roundstate > 2 || !root,alive
+id = 23020
+ignorehitpause = 1
+
+[State 23000, KO Sweep 23021]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611] || roundstate > 2 || !root,alive
+id = 23021
+ignorehitpause = 1
+
+[State 23000, KO Sweep 23022]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611] || roundstate > 2 || !root,alive
+id = 23022
+ignorehitpause = 1
+
+[State 23000, KO Sweep 23030]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611] || roundstate > 2 || !root,alive
+id = 23030
+ignorehitpause = 1
+
+[State 23000, KO Sweep 23040]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611] || roundstate > 2 || !root,alive
+id = 23040
+ignorehitpause = 1
+
 [State 5900, 1]
 type = ParentVarSet
 trigger1 = 1
@@ -6866,7 +7009,10 @@ var(30) = 3
 
 [State -2, Explod(P1)]
 type = Explod
-trigger1 = Time = 0 && teamside = 1
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(23010) = 0 && teamside = 1   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 23010
 id = 23010
 pos = 140,230
@@ -6882,7 +7028,10 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
-trigger1 = Time = 0 && teamside = 2
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(23010) = 0 && teamside = 2   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 23015
 id = 23010
 pos = -140,230
@@ -6912,7 +7061,10 @@ ignorehitpause = 1
 
 [State -2, Explod(P1)]
 type = Explod
-trigger1 = Time = 0 && teamside = 1
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(23020) = 0 && teamside = 1   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 23020
 id = 23020
 pos = 140,230
@@ -6928,7 +7080,10 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
-trigger1 = Time = 0 && teamside = 2
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(23020) = 0 && teamside = 2   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 23025
 id = 23020
 pos = -140,230
@@ -6958,7 +7113,10 @@ ignorehitpause = 1
 
 [State -2, Explod(P1)]
 type = Explod
-trigger1 = Time = 0 && teamside = 1
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(23021) = 0 && teamside = 1   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 23021
 id = 23021
 pos = 57,230
@@ -6974,7 +7132,10 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
-trigger1 = Time = 0 && teamside = 2
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(23021) = 0 && teamside = 2   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 23026
 id = 23021
 pos = -57,230
@@ -7005,7 +7166,10 @@ ignorehitpause = 1
 
 [State -2, Explod(P1)]
 type = Explod
-trigger1 = Time = 0 && teamside = 1
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(23022) = 0 && teamside = 1   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 23022
 id = 23022
 pos = 33,230
@@ -7021,7 +7185,10 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
-trigger1 = Time = 0 && teamside = 2
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(23022) = 0 && teamside = 2   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 23027
 id = 23022
 pos = -33,230
@@ -7052,7 +7219,10 @@ ignorehitpause = 1
 
 [State -2, Explod(P1)]
 type = Explod
-trigger1 = Time = 0 && teamside = 1
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(23030) = 0 && teamside = 1   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 23030
 id = 23030
 pos = 140,230
@@ -7068,7 +7238,10 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
-trigger1 = Time = 0 && teamside = 2
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(23030) = 0 && teamside = 2   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 23035
 id = 23030
 pos = -140,230
@@ -7099,7 +7272,10 @@ ignorehitpause = 1
 
 [State -2, Explod(P1)]
 type = Explod
-trigger1 = Time = 0 && teamside = 1
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(23000) = 0 && teamside = 1   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 23000
 id = 23000
 pos = 140,230
@@ -7115,7 +7291,10 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
-trigger1 = Time = 0 && teamside = 2
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(23000) = 0 && teamside = 2   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 23005
 id = 23000
 pos = -140,230
@@ -7145,7 +7324,10 @@ ignorehitpause = 1
 
 [State -2, Explod(P1)]
 type = Explod
-trigger1 = Time = 0 && teamside = 1
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(23040) = 0 && teamside = 1   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 23040
 id = 23040
 pos = 34,223
@@ -7161,7 +7343,10 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
-trigger1 = Time = 0 && teamside = 2
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(23040) = 0 && teamside = 2   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 23040
 id = 23040
 pos = -34,223
@@ -7213,7 +7398,10 @@ var(2) = floor(power/3000)
 ;------------------------ ÉOÉãÅ[Éîï\ãL
 [State -2, Explod(A-GROOVE)]
 type = Explod
-trigger1 = Time = 0 && teamside = 1
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(23001) = 0 && teamside = 1   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = Ifelse((Root,var(43)),27001,23001)
 id = 23001
 pos = 123,221
@@ -7230,7 +7418,10 @@ Supermovetime = -1
 ;------------------------ ÉOÉãÅ[Éîï\ãL
 [State -2, Explod(A-GROOVE)]
 type = Explod
-trigger1 = Time = 0 && teamside = 2
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(23001) = 0 && teamside = 2   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = Ifelse((Root,var(43)),27001,23001)
 id = 23001
 pos = -123,221
@@ -7281,6 +7472,50 @@ velset = 0,0
 ctrl = 0
 ownpal = 1
 
+
+;TAGFIX(P068): KO/bench sweep for this groove's gauge explods (was missing -> gauge lingered on KO)
+[State 24000, KO Sweep 24000]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611] || roundstate > 2 || !root,alive
+id = 24000
+ignorehitpause = 1
+
+[State 24000, KO Sweep 24001]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611] || roundstate > 2 || !root,alive
+id = 24001
+ignorehitpause = 1
+
+[State 24000, KO Sweep 24010]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611] || roundstate > 2 || !root,alive
+id = 24010
+ignorehitpause = 1
+
+[State 24000, KO Sweep 24020]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611] || roundstate > 2 || !root,alive
+id = 24020
+ignorehitpause = 1
+
+[State 24000, KO Sweep 24030]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611] || roundstate > 2 || !root,alive
+id = 24030
+ignorehitpause = 1
+
+[State 24000, KO Sweep 24031]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611] || roundstate > 2 || !root,alive
+id = 24031
+ignorehitpause = 1
+
+[State 24000, KO Sweep 25030]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611] || roundstate > 2 || !root,alive
+id = 25030
+ignorehitpause = 1
+
 [State 4000,ChangeState]
 type = ChangeState
 trigger1 = time = 0 && floor(Root,var(52)/10%10)=1
@@ -7308,7 +7543,10 @@ ignorehitpause = 1
 
 [State -2, Explod(P1)]
 type = Explod
-trigger1 = Time = 0 && teamside = 1
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(24010) = 0 && teamside = 1   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 24010
 id = 24010
 pos = 137,230
@@ -7325,7 +7563,10 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
-trigger1 = Time = 0 && teamside = 2
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(24010) = 0 && teamside = 2   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 24015
 id = 24010
 pos = -137,230
@@ -7356,7 +7597,10 @@ ignorehitpause = 1
 
 [State -2, Explod(P1)]
 type = Explod
-trigger1 = Time = 0 && teamside = 1
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(24020) = 0 && teamside = 1   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 24020
 id = 24020
 pos = 137,230
@@ -7373,7 +7617,10 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
-trigger1 = Time = 0 && teamside = 2
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(24020) = 0 && teamside = 2   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 24025
 id = 24020
 pos = -137,230
@@ -7404,7 +7651,10 @@ ignorehitpause = 1
 
 [State -2, Explod(P1)]
 type = Explod
-trigger1 = Time = 0 && teamside = 1
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(24000) = 0 && teamside = 1   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 24000
 id = 24000
 pos = 137,230
@@ -7421,7 +7671,10 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
-trigger1 = Time = 0 && teamside = 2
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(24000) = 0 && teamside = 2   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 24005
 id = 24000
 pos = -137,230
@@ -7452,7 +7705,10 @@ ignorehitpause = 1
 
 [State -2, Explod(P1)]
 type = Explod
-trigger1 = Time = 0 && teamside = 1
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(24030) = 0 && teamside = 1   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 24030
 id = 24030
 pos = 27,220
@@ -7469,7 +7725,10 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
-trigger1 = Time = 0 && teamside = 2
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(24030) = 0 && teamside = 2   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 24030
 id = 24030
 pos = -27,220
@@ -7501,7 +7760,10 @@ ignorehitpause = 1
 
 [State -2, Explod(P1)]
 type = Explod
-trigger1 = Time = 0 && teamside = 1
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(24031) = 0 && teamside = 1   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 24031
 id = 24031
 pos = 27,220
@@ -7518,7 +7780,10 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
-trigger1 = Time = 0 && teamside = 2
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(24031) = 0 && teamside = 2   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 24031
 id = 24031
 pos = -27,220
@@ -7551,7 +7816,10 @@ ignorehitpause = 1
 ;------------------------ ÉOÉãÅ[Éîï\ãL
 [State -2, Explod(A-GROOVE)]
 type = Explod
-trigger1 = Time = 0 && teamside = 1
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(24001) = 0 && teamside = 1   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = Ifelse((Root,var(43)),27001,24001)
 id = 24001
 pos = 123,221
@@ -7568,7 +7836,10 @@ Supermovetime = -1
 ;------------------------ ÉOÉãÅ[Éîï\ãL
 [State -2, Explod(A-GROOVE)]
 type = Explod
-trigger1 = Time = 0 && teamside = 2
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(24001) = 0 && teamside = 2   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = Ifelse((Root,var(43)),27001,24001)
 id = 24001
 pos = -123,221
@@ -7672,7 +7943,10 @@ ignorehitpause = 1
 
 [State -2, Explod(P1)]
 type = Explod
-trigger1 = Time = 0 && teamside = 1
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(24010) = 0 && teamside = 1   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 24010
 id = 24010
 pos = 137,230
@@ -7689,7 +7963,10 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
-trigger1 = Time = 0 && teamside = 2
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(24010) = 0 && teamside = 2   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 24015
 id = 24010
 pos = -137,230
@@ -7720,7 +7997,10 @@ ignorehitpause = 1
 
 [State -2, Explod(P1)]
 type = Explod
-trigger1 = Time = 0 && teamside = 1
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(24020) = 0 && teamside = 1   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 24020
 id = 24020
 pos = 125,230
@@ -7737,7 +8017,10 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
-trigger1 = Time = 0 && teamside = 2
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(24020) = 0 && teamside = 2   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 24025
 id = 24020
 pos = -125,230
@@ -7768,7 +8051,10 @@ ignorehitpause = 1
 
 [State -2, Explod(P1)]
 type = Explod
-trigger1 = Time = 0 && teamside = 1
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(24000) = 0 && teamside = 1   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 24100
 id = 24000
 pos = 125,230
@@ -7785,7 +8071,10 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
-trigger1 = Time = 0 && teamside = 2
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(24000) = 0 && teamside = 2   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 24105
 id = 24000
 pos = -125,230
@@ -7816,7 +8105,10 @@ ignorehitpause = 1
 
 [State -2, Explod(P1)]
 type = Explod
-trigger1 = Time = 0 && teamside = 1
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(24030) = 0 && teamside = 1   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 24030
 id = 24030
 pos = 27,220
@@ -7833,7 +8125,10 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
-trigger1 = Time = 0 && teamside = 2
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(24030) = 0 && teamside = 2   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 24030
 id = 24030
 pos = -27,220
@@ -7865,7 +8160,10 @@ ignorehitpause = 1
 
 [State -2, Explod(P1)]
 type = Explod
-trigger1 = Time = 0 && teamside = 1
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(24031) = 0 && teamside = 1   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 24031
 id = 24031
 pos = 27,220
@@ -7882,7 +8180,10 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
-trigger1 = Time = 0 && teamside = 2
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(24031) = 0 && teamside = 2   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 24031
 id = 24031
 pos = -27,220
@@ -7915,7 +8216,10 @@ ignorehitpause = 1
 ;------------------------ ÉOÉãÅ[Éîï\ãL
 [State -2, Explod(A-GROOVE)]
 type = Explod
-trigger1 = Time = 0 && teamside = 1
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(24001) = 0 && teamside = 1   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = Ifelse((Root,var(43)),27001,24001)
 id = 24001
 pos = 123,221
@@ -7932,7 +8236,10 @@ Supermovetime = -1
 ;------------------------ ÉOÉãÅ[Éîï\ãL
 [State -2, Explod(A-GROOVE)]
 type = Explod
-trigger1 = Time = 0 && teamside = 2
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(24001) = 0 && teamside = 2   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = Ifelse((Root,var(43)),27001,24001)
 id = 24001
 pos = -123,221
@@ -7962,7 +8269,10 @@ ignorehitpause = 1
 
 [State -2, Explod(P2)]
 type = Explod
-trigger1 = Time = 0 && teamside = 1
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(25030) = 0 && teamside = 1   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 25030
 id = 25030
 pos = 137,228
@@ -7979,7 +8289,10 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
-trigger1 = Time = 0 && teamside = 2
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(25030) = 0 && teamside = 2   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 25030
 id = 25030
 pos = -137,228
@@ -7996,7 +8309,10 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
-trigger1 = Time = 0 && teamside = 1
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(25030) = 0 && teamside = 1   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 25035
 id = 25030
 pos = 137,228
@@ -8013,7 +8329,10 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
-trigger1 = Time = 0 && teamside = 2
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(25030) = 0 && teamside = 2   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 25035
 id = 25030
 pos = -137,228
@@ -8117,6 +8436,62 @@ velset = 0,0
 ctrl = 0
 ownpal = 1
 
+
+;TAGFIX(P068): KO/bench sweep for this groove's gauge explods (was missing -> gauge lingered on KO)
+[State 25000, KO Sweep 25000]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611] || roundstate > 2 || !root,alive
+id = 25000
+ignorehitpause = 1
+
+[State 25000, KO Sweep 25001]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611] || roundstate > 2 || !root,alive
+id = 25001
+ignorehitpause = 1
+
+[State 25000, KO Sweep 25010]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611] || roundstate > 2 || !root,alive
+id = 25010
+ignorehitpause = 1
+
+[State 25000, KO Sweep 25020]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611] || roundstate > 2 || !root,alive
+id = 25020
+ignorehitpause = 1
+
+[State 25000, KO Sweep 25030]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611] || roundstate > 2 || !root,alive
+id = 25030
+ignorehitpause = 1
+
+[State 25000, KO Sweep 25031]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611] || roundstate > 2 || !root,alive
+id = 25031
+ignorehitpause = 1
+
+[State 25000, KO Sweep 25032]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611] || roundstate > 2 || !root,alive
+id = 25032
+ignorehitpause = 1
+
+[State 25000, KO Sweep 25040]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611] || roundstate > 2 || !root,alive
+id = 25040
+ignorehitpause = 1
+
+[State 25000, KO Sweep 25041]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611] || roundstate > 2 || !root,alive
+id = 25041
+ignorehitpause = 1
+
 [State 5900, 1]
 type = ParentVarSet
 trigger1 = 1
@@ -8124,7 +8499,10 @@ var(30) = 5
 
 [State -2, Explod(P1)]
 type = Explod
-trigger1 = Time = 0 && teamside = 1
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(25010) = 0 && teamside = 1   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 25010
 id = 25010
 pos = 114,230
@@ -8141,7 +8519,10 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
-trigger1 = Time = 0 && teamside = 2
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(25010) = 0 && teamside = 2   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 25015
 id = 25010
 pos = -114,230
@@ -8172,7 +8553,10 @@ ignorehitpause = 1
 
 [State -2, Explod(P1)]
 type = Explod
-trigger1 = Time = 0 && teamside = 1
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(25020) = 0 && teamside = 1   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 25020
 id = 25020
 pos = 114,230
@@ -8189,7 +8573,10 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
-trigger1 = Time = 0 && teamside = 2
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(25020) = 0 && teamside = 2   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 25025
 id = 25020
 pos = -114,230
@@ -8220,7 +8607,10 @@ ignorehitpause = 1
 
 [State -2, Explod(P1)]
 type = Explod
-trigger1 = Time = 0 && teamside = 1
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(25000) = 0 && teamside = 1   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 25000
 id = 25000
 pos = 114,230
@@ -8237,7 +8627,10 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
-trigger1 = Time = 0 && teamside = 2
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(25000) = 0 && teamside = 2   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 25005
 id = 25000
 pos = -114,230
@@ -8269,7 +8662,10 @@ ignorehitpause = 1
 ;------------------------ ÉOÉãÅ[Éîï\ãL
 [State -2, Explod(A-GROOVE)]
 type = Explod
-trigger1 = Time = 0 && teamside = 1
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(25001) = 0 && teamside = 1   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = Ifelse((Root,var(43)),27001,25001)
 id = 25001
 pos = 123,221
@@ -8286,7 +8682,10 @@ Supermovetime = -1
 ;------------------------ ÉOÉãÅ[Éîï\ãL
 [State -2, Explod(A-GROOVE)]
 type = Explod
-trigger1 = Time = 0 && teamside = 2
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(25001) = 0 && teamside = 2   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = Ifelse((Root,var(43)),27001,25001)
 id = 25001
 pos = -123,221
@@ -8316,7 +8715,10 @@ ignorehitpause = 1
 
 [State -2, Explod(P1)]
 type = Explod
-trigger1 = Time = 0 && teamside = 1
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(25040) = 0 && teamside = 1   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 25040
 id = 25040
 pos = 30,221
@@ -8333,7 +8735,10 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
-trigger1 = Time = 0 && teamside = 2
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(25040) = 0 && teamside = 2   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 25040
 id = 25040
 pos = -30,221
@@ -8365,7 +8770,10 @@ ignorehitpause = 1
 
 [State -2, Explod(P1)]
 type = Explod
-trigger1 = Time = 0 && teamside = 1
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(25041) = 0 && teamside = 1   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 25041
 id = 25041
 pos = 30,221
@@ -8382,7 +8790,10 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
-trigger1 = Time = 0 && teamside = 2
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(25041) = 0 && teamside = 2   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 25041
 id = 25041
 pos = -30,221
@@ -8414,7 +8825,10 @@ ignorehitpause = 1
 
 [State -2, Explod(P2)]
 type = Explod
-trigger1 = Time = 0 && teamside = 1
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(25030) = 0 && teamside = 1   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 25030
 id = 25030
 pos = 138,228
@@ -8431,7 +8845,10 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
-trigger1 = Time = 0 && teamside = 2
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(25030) = 0 && teamside = 2   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 25030
 id = 25030
 pos = -138,228
@@ -8448,7 +8865,10 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
-trigger1 = Time = 0 && teamside = 1
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(25030) = 0 && teamside = 1   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 25035
 id = 25030
 pos = 138,228
@@ -8465,7 +8885,10 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
-trigger1 = Time = 0 && teamside = 2
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(25030) = 0 && teamside = 2   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 25035
 id = 25030
 pos = -138,228
@@ -8497,7 +8920,10 @@ ignorehitpause = 1
 
 [State -2, Explod(P2)]
 type = Explod
-trigger1 = Time = 0 && teamside = 1
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(25031) = 0 && teamside = 1   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 25030
 id = 25031
 pos = 130,228
@@ -8514,7 +8940,10 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
-trigger1 = Time = 0 && teamside = 2
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(25031) = 0 && teamside = 2   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 25030
 id = 25031
 pos = -130,228
@@ -8531,7 +8960,10 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
-trigger1 = Time = 0 && teamside = 1
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(25031) = 0 && teamside = 1   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 25035
 id = 25031
 pos = 130,228
@@ -8548,7 +8980,10 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
-trigger1 = Time = 0 && teamside = 2
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(25031) = 0 && teamside = 2   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 25035
 id = 25031
 pos = -130,228
@@ -8580,7 +9015,10 @@ ignorehitpause = 1
 
 [State -2, Explod(P2)]
 type = Explod
-trigger1 = Time = 0 && teamside = 1
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(25032) = 0 && teamside = 1   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 25030
 id = 25032
 pos = 122,228
@@ -8597,7 +9035,10 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
-trigger1 = Time = 0 && teamside = 2
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(25032) = 0 && teamside = 2   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 25030
 id = 25032
 pos = -122,228
@@ -8614,7 +9055,10 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
-trigger1 = Time = 0 && teamside = 1
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(25032) = 0 && teamside = 1   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 25035
 id = 25032
 pos = 122,228
@@ -8631,7 +9075,10 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
-trigger1 = Time = 0 && teamside = 2
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(25032) = 0 && teamside = 2   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 25035
 id = 25032
 pos = -122,228
@@ -8729,7 +9176,10 @@ fvar(8) = 1
 
 [State -2, Explod(P1)]
 type = Explod
-trigger1 = Time = 0 && teamside = 1
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(25060) = 0 && teamside = 1   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 25060
 id = 25060
 pos = 142,214
@@ -8745,7 +9195,10 @@ Supermovetime = -1
 
 [State -2, Explod(P1)]
 type = Explod
-trigger1 = Time = 0 && teamside = 1
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(25060) = 0 && teamside = 1   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 25061
 id = 25060
 pos = 142,214
@@ -8761,7 +9214,10 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
-trigger1 = Time = 0 && teamside = 2
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(25060) = 0 && teamside = 2   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 25065
 id = 25060
 pos = -142,214
@@ -8777,7 +9233,10 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
-trigger1 = Time = 0 && teamside = 2
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(25060) = 0 && teamside = 2   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 25066
 id = 25060
 pos = -142,214
@@ -8793,7 +9252,10 @@ Supermovetime = -1
 
 [State -2, Explod(P1)]
 type = Explod
-trigger1 = Time = 0 && teamside = 1
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(25070) = 0 && teamside = 1   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 25070
 id = 25070
 pos = 142,214
@@ -8809,7 +9271,10 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
-trigger1 = Time = 0 && teamside = 2
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(25070) = 0 && teamside = 2   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 25075
 id = 25070
 pos = -142,214
@@ -8839,7 +9304,10 @@ ignorehitpause = 1
 
 [State -2, Explod(P1)]
 type = Explod
-trigger1 = Time = 0 && teamside = 1
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(25050) = 0 && teamside = 1   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 25050
 id = 25050
 pos = 142,214
@@ -8855,7 +9323,10 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
-trigger1 = Time = 0 && teamside = 2
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(25050) = 0 && teamside = 2   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 25055
 id = 25050
 pos = -142,214
@@ -8958,6 +9429,56 @@ velset = 0,0
 ctrl = 0
 ownpal = 1
 
+
+;TAGFIX(P068): KO/bench sweep for this groove's gauge explods (was missing -> gauge lingered on KO)
+[State 26000, KO Sweep 26000]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611] || roundstate > 2 || !root,alive
+id = 26000
+ignorehitpause = 1
+
+[State 26000, KO Sweep 26001]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611] || roundstate > 2 || !root,alive
+id = 26001
+ignorehitpause = 1
+
+[State 26000, KO Sweep 26010]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611] || roundstate > 2 || !root,alive
+id = 26010
+ignorehitpause = 1
+
+[State 26000, KO Sweep 26020]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611] || roundstate > 2 || !root,alive
+id = 26020
+ignorehitpause = 1
+
+[State 26000, KO Sweep 26030]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611] || roundstate > 2 || !root,alive
+id = 26030
+ignorehitpause = 1
+
+[State 26000, KO Sweep 26031]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611] || roundstate > 2 || !root,alive
+id = 26031
+ignorehitpause = 1
+
+[State 26000, KO Sweep 26035]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611] || roundstate > 2 || !root,alive
+id = 26035
+ignorehitpause = 1
+
+[State 26000, KO Sweep 26040]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611] || roundstate > 2 || !root,alive
+id = 26040
+ignorehitpause = 1
+
 [State 5900, 1]
 type = ParentVarSet
 trigger1 = 1
@@ -8970,7 +9491,10 @@ pos = 0,-60
 
 [State -2, Explod(P1)]
 type = Explod
-trigger1 = Time = 0 && teamside = 1
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(26010) = 0 && teamside = 1   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 26010
 id = 26010
 pos = 140,230
@@ -8987,7 +9511,10 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
-trigger1 = Time = 0 && teamside = 2
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(26010) = 0 && teamside = 2   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 26015
 id = 26010
 pos = -140,230
@@ -9018,7 +9545,10 @@ ignorehitpause = 1
 
 [State -2, Explod(P1)]
 type = Explod
-trigger1 = Time = 0 && teamside = 1
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(26020) = 0 && teamside = 1   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 26020
 id = 26020
 pos = 140,230
@@ -9035,7 +9565,10 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
-trigger1 = Time = 0 && teamside = 2
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(26020) = 0 && teamside = 2   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 26025
 id = 26020
 pos = -140,230
@@ -9066,7 +9599,10 @@ ignorehitpause = 1
 
 [State -2, Explod(P1)]
 type = Explod
-trigger1 = Time = 0 && teamside = 1
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(26000) = 0 && teamside = 1   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 26000
 id = 26000
 pos = 140,230
@@ -9083,7 +9619,10 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
-trigger1 = Time = 0 && teamside = 2
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(26000) = 0 && teamside = 2   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 26005
 id = 26000
 pos = -140,230
@@ -9115,7 +9654,10 @@ ignorehitpause = 1
 ;------------------------ ÉOÉãÅ[Éîï\ãL
 [State -2, Explod(K-GROOVE)]
 type = Explod
-trigger1 = Time = 0 && teamside = 1
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(26001) = 0 && teamside = 1   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = Ifelse((Root,var(43)),27001,26001)
 id = 26001
 pos = 123,221
@@ -9132,7 +9674,10 @@ Supermovetime = -1
 ;------------------------ ÉOÉãÅ[Éîï\ãL
 [State -2, Explod(K-GROOVE)]
 type = Explod
-trigger1 = Time = 0 && teamside = 2
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(26001) = 0 && teamside = 2   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = Ifelse((Root,var(43)),27001,26001)
 id = 26001
 pos = -123,221
@@ -9162,7 +9707,10 @@ ignorehitpause = 1
 
 [State -2, Explod(P1)]
 type = Explod
-trigger1 = Time = 0 && teamside = 1
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(26030) = 0 && teamside = 1   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 26030
 id = 26030
 pos = 22,225
@@ -9179,7 +9727,10 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
-trigger1 = Time = 0 && teamside = 2
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(26030) = 0 && teamside = 2   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 26030
 id = 26030
 pos = -22,225
@@ -9211,7 +9762,10 @@ ignorehitpause = 1
 
 [State -2, Explod(P1)]
 type = Explod
-trigger1 = Time = 0 && teamside = 1
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(26031) = 0 && teamside = 1   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 26031
 id = 26031
 pos = 22,225
@@ -9228,7 +9782,10 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
-trigger1 = Time = 0 && teamside = 2
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(26031) = 0 && teamside = 2   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 26031
 id = 26031
 pos = -22,225
@@ -9287,7 +9844,10 @@ var(1) = 0
 
 [State -2, Explod(P1)]
 type = Explod
-trigger1 = Time = 0 && teamside = 1
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(26035) = 0 && teamside = 1   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 26035
 id = 26035
 pos = 22,225
@@ -9304,7 +9864,10 @@ Supermovetime = -1
 
 [State -2, Explod(P2)]
 type = Explod
-trigger1 = Time = 0 && teamside = 2
+triggerall = root,stateno != [6565610, 6565611]
+triggerall = root,alive
+triggerall = roundstate <= 2
+trigger1 = numexplod(26035) = 0 && teamside = 2   ;TAGFIX(P069): self-respawn -> restores on tag-in (was Time=0 spawn-once -> never returned after P068 sweep)
 anim = 26035
 id = 26035
 pos = -22,225
@@ -9511,6 +10074,12 @@ trigger1 = P2movetype != H && Time >= 360
  
 ;---------------------------------------------------------------------------
 [Statedef -2] 
+
+[State -2, Hide Engine Power Bar]   ;TAGFIX(P069): MOVED here from Statedef 8000 (P068 put it in a move state -> only ran during that move). In -2 it runs every frame -> engine power bar stays suppressed.
+type = AssertSpecial
+trigger1 = 1
+flag = noPowerBarDisplay
+ignorehitpause = 1
 ;---------------------------------------------------------------------------
 	 
 ;---------------------------------------------------------------------
@@ -10583,7 +11152,8 @@ trigger1 = PrevStateNo = 5320
 trigger2 = var(0) && ((stateno=5001 || stateno=5011 || stateno=140) && HitOver || stateno=5120 && AnimTime = 0)
  
 ;---------------------------------------------------------------------
-; KOÉtÉBÉjÉbÉVÉÖèàóù 
+; KOÉtÉBÉjÉbÉVÉ
+èàóù 
 ;---------------------------------------------------------------------
 [State -2,çUåÇéÌóﬁîªï ]
 type = VarSet

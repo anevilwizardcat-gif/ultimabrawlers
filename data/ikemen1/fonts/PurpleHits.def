@@ -13,7 +13,7 @@
 ; FNT v2 version number.  Don't change this.
 fntversion = 2,00
 ; Name of this font.
-name = "Timer"
+name = "PurpleHits"
 ; This font contains the full ANSI character set.
 
 [Def]
@@ -28,7 +28,7 @@ Spacing = 0,0
 ; Drawing offset: x, y.
 Offset = 0,0
 ; Filename of the sff containing the glyphs.  Use sff v2 only.
-File = Timer.sff
+File = PurpleHits.sff
 
 ; Note: All units are in pixels.
 ; Text rendered with bitmap fonts may be in ASCII only.

@@ -39,7 +39,7 @@ airjuggle = 15        ; 空中コンボ
 sparkno = 2        ; 初期ヒットスパーク番号
 guard.sparkno = 40 ; 初期ガードスパーク番号
 KO.echo = 0          ; ＫＯボイスエコー（0:OFF、1:ON）
-volume = 100          ; キャラボイスボリューム値
+volume = 55          ; キャラボイスボリューム値
 IntPersistIndex = 30
 FloatPersistIndex = 30
 

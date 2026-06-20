@@ -43,7 +43,7 @@ font1 = ikemen1/fonts/Menu2.def
 font2 = ikemen1/fonts/Timer.def
 font3 = ikemen1/fonts/Arcade.def   ;<-- Jersey10 arcade-pixel (timer + level numbers)
 font4 = ikemen1/fonts/PowerbarNum.def
-font5 = ikemen1/fonts/ArcadeMsg.def   ;<-- Jersey10 arcade-pixel for in-round action popups (REVERSAL etc.)
+font5 = ikemen1/fonts/PurpleHits.def   ;<-- purple HITS! for combo counter (thick T)
 font6 = ikemen1/fonts/Arcade.def   ;<-- Jersey10 arcade-pixel (combo)
 font7 = ikemen1/fonts/HitNum.def
 font8 = ikemen1/fonts/Pixel.def
@@ -71,7 +71,7 @@ p1.top.xshear = 3
 p1.mid.spr = 12, 0
 p1.mid.offset = 0,0
 p1.mid.xshear = 3
-p1.mid.palfx.mul = 200, 200, 200
+p1.mid.palfx.mul = 256, 44, 28   ;<-- RED damage/HP-being-removed (P069)
 p1.mid.palfx.sinmul = 32, 32, 32, 5
 p1.front100.spr = 13,0
 p1.front100.offset = 0,0
@@ -106,7 +106,7 @@ p2.mid.spr = 12, 0
 p2.mid.offset = 0,0
 p2.mid.facing = -1
 p2.mid.xshear = -3
-p2.mid.palfx.mul = 200, 200, 200
+p2.mid.palfx.mul = 256, 44, 28   ;<-- RED damage/HP-being-removed (P069)
 p2.mid.palfx.sinmul = 32, 32, 32, 5
 p2.front100.spr = 13,0
 p2.front100.offset = 0,0
@@ -144,7 +144,7 @@ p1.top.xshear = 3
 p1.mid.spr = 12, 0
 p1.mid.offset = 0,0
 p1.mid.xshear = 3
-p1.mid.palfx.mul = 200, 200, 200
+p1.mid.palfx.mul = 256, 44, 28   ;<-- RED damage/HP-being-removed (P069)
 p1.mid.palfx.sinmul = 32, 32, 32, 5
 p1.front100.spr = 13,0
 p1.front100.offset = 0,0
@@ -179,7 +179,7 @@ p2.mid.spr = 12, 0
 p2.mid.offset = 0,0
 p2.mid.facing = -1
 p2.mid.xshear = -3
-p2.mid.palfx.mul = 200, 200, 200
+p2.mid.palfx.mul = 256, 44, 28   ;<-- RED damage/HP-being-removed (P069)
 p2.mid.palfx.sinmul = 32, 32, 32, 5
 p2.front100.spr = 13,0
 p2.front100.offset = 0,0
@@ -216,7 +216,7 @@ p3.top.xshear = 3
 p3.mid.spr = 22, 0
 p3.mid.offset = 0,0
 p3.mid.xshear = 3
-p3.mid.palfx.mul = 200, 200, 200
+p3.mid.palfx.mul = 256, 44, 28   ;<-- RED damage/HP-being-removed (P069)
 p3.mid.palfx.sinmul = 32, 32, 32, 5
 p3.front100.spr = 23,0
 p3.front100.offset = 0,0
@@ -251,7 +251,7 @@ p4.mid.spr = 22, 0
 p4.mid.offset = 0,0
 p4.mid.facing = -1
 p4.mid.xshear = -3
-p4.mid.palfx.mul = 200, 200, 200
+p4.mid.palfx.mul = 256, 44, 28   ;<-- RED damage/HP-being-removed (P069)
 p4.mid.palfx.sinmul = 32, 32, 32, 5
 p4.front100.spr = 23,0
 p4.front100.offset = 0,0
@@ -289,7 +289,7 @@ p1.top.xshear = 3
 p1.mid.spr = 12, 0
 p1.mid.offset = 0,0
 p1.mid.xshear = 3
-p1.mid.palfx.mul = 200, 200, 200
+p1.mid.palfx.mul = 256, 44, 28   ;<-- RED damage/HP-being-removed (P069)
 p1.mid.palfx.sinmul = 32, 32, 32, 5
 p1.front100.spr = 13,0
 p1.front100.offset = 0,0
@@ -324,7 +324,7 @@ p2.mid.spr = 12, 0
 p2.mid.offset = 0,0
 p2.mid.facing = -1
 p2.mid.xshear = -3
-p2.mid.palfx.mul = 200, 200, 200
+p2.mid.palfx.mul = 256, 44, 28   ;<-- RED damage/HP-being-removed (P069)
 p2.mid.palfx.sinmul = 32, 32, 32, 5
 p2.front100.spr = 13,0
 p2.front100.offset = 0,0
@@ -361,7 +361,7 @@ p3.top.xshear = 3
 p3.mid.spr = 22, 0
 p3.mid.offset = 0,0
 p3.mid.xshear = 3
-p3.mid.palfx.mul = 200, 200, 200
+p3.mid.palfx.mul = 256, 44, 28   ;<-- RED damage/HP-being-removed (P069)
 p3.mid.palfx.sinmul = 32, 32, 32, 5
 p3.front100.spr = 23,0
 p3.front100.offset = 0,0
@@ -396,7 +396,7 @@ p4.mid.spr = 22, 0
 p4.mid.offset = 0,0
 p4.mid.facing = -1
 p4.mid.xshear = -3
-p4.mid.palfx.mul = 200, 200, 200
+p4.mid.palfx.mul = 256, 44, 28   ;<-- RED damage/HP-being-removed (P069)
 p4.mid.palfx.sinmul = 32, 32, 32, 5
 p4.front100.spr = 23,0
 p4.front100.offset = 0,0
@@ -433,7 +433,7 @@ p5.top.xshear = 3
 p5.mid.spr = 22, 0
 p5.mid.offset = 0,0
 p5.mid.xshear = 3
-p5.mid.palfx.mul = 200, 200, 200
+p5.mid.palfx.mul = 256, 44, 28   ;<-- RED damage/HP-being-removed (P069)
 p5.mid.palfx.sinmul = 32, 32, 32, 5
 p5.front100.spr = 23,0
 p5.front100.offset = 0,0
@@ -468,7 +468,7 @@ p6.mid.spr = 22, 0
 p6.mid.offset = 0,0
 p6.mid.facing = -1
 p6.mid.xshear = -3
-p6.mid.palfx.mul = 200, 200, 200
+p6.mid.palfx.mul = 256, 44, 28   ;<-- RED damage/HP-being-removed (P069)
 p6.mid.palfx.sinmul = 32, 32, 32, 5
 p6.front100.spr = 23,0
 p6.front100.offset = 0,0
@@ -506,7 +506,7 @@ p1.top.xshear = 3
 p1.mid.spr = 22, 0
 p1.mid.offset = 0,0
 p1.mid.xshear = 3
-p1.mid.palfx.mul = 200, 200, 200
+p1.mid.palfx.mul = 256, 44, 28   ;<-- RED damage/HP-being-removed (P069)
 p1.mid.palfx.sinmul = 32, 32, 32, 5
 p1.front100.spr = 23,0
 p1.front100.offset = 0,0
@@ -541,7 +541,7 @@ p2.mid.spr = 22, 0
 p2.mid.offset = 0,0
 p2.mid.facing = -1
 p2.mid.xshear = -3
-p2.mid.palfx.mul = 200, 200, 200
+p2.mid.palfx.mul = 256, 44, 28   ;<-- RED damage/HP-being-removed (P069)
 p2.mid.palfx.sinmul = 32, 32, 32, 5
 p2.front100.spr = 23,0
 p2.front100.offset = 0,0
@@ -578,7 +578,7 @@ p3.top.xshear = 3
 p3.mid.spr = 22, 0
 p3.mid.offset = 0,0
 p3.mid.xshear = 3
-p3.mid.palfx.mul = 200, 200, 200
+p3.mid.palfx.mul = 256, 44, 28   ;<-- RED damage/HP-being-removed (P069)
 p3.mid.palfx.sinmul = 32, 32, 32, 5
 p3.front100.spr = 23,0
 p3.front100.offset = 0,0
@@ -613,7 +613,7 @@ p4.mid.spr = 22, 0
 p4.mid.offset = 0,0
 p4.mid.facing = -1
 p4.mid.xshear = -3
-p4.mid.palfx.mul = 200, 200, 200
+p4.mid.palfx.mul = 256, 44, 28   ;<-- RED damage/HP-being-removed (P069)
 p4.mid.palfx.sinmul = 32, 32, 32, 5
 p4.front100.spr = 23,0
 p4.front100.offset = 0,0
@@ -650,7 +650,7 @@ p5.top.xshear = 3
 p5.mid.spr = 22, 0
 p5.mid.offset = 0,0
 p5.mid.xshear = 3
-p5.mid.palfx.mul = 200, 200, 200
+p5.mid.palfx.mul = 256, 44, 28   ;<-- RED damage/HP-being-removed (P069)
 p5.mid.palfx.sinmul = 32, 32, 32, 5
 p5.front100.spr = 23,0
 p5.front100.offset = 0,0
@@ -685,7 +685,7 @@ p6.mid.spr = 22, 0
 p6.mid.offset = 0,0
 p6.mid.facing = -1
 p6.mid.xshear = -3
-p6.mid.palfx.mul = 200, 200, 200
+p6.mid.palfx.mul = 256, 44, 28   ;<-- RED damage/HP-being-removed (P069)
 p6.mid.palfx.sinmul = 32, 32, 32, 5
 p6.front100.spr = 23,0
 p6.front100.offset = 0,0
@@ -722,7 +722,7 @@ p7.top.xshear = 3
 p7.mid.spr = 22, 0
 p7.mid.offset = 0,0
 p7.mid.xshear = 3
-p7.mid.palfx.mul = 200, 200, 200
+p7.mid.palfx.mul = 256, 44, 28   ;<-- RED damage/HP-being-removed (P069)
 p7.mid.palfx.sinmul = 32, 32, 32, 5
 p7.front100.spr = 23,0
 p7.front100.offset = 0,0
@@ -757,7 +757,7 @@ p8.mid.spr = 22, 0
 p8.mid.offset = 0,0
 p8.mid.facing = -1
 p8.mid.xshear = -3
-p8.mid.palfx.mul = 200, 200, 200
+p8.mid.palfx.mul = 256, 44, 28   ;<-- RED damage/HP-being-removed (P069)
 p8.mid.palfx.sinmul = 32, 32, 32, 5
 p8.front100.spr = 23,0
 p8.front100.offset = 0,0
@@ -805,7 +805,7 @@ p1.mid.spr = 12, 0
 p1.mid.layerno = 2   ;<-- active bar drawn over bench
 p1.mid.offset = 0,0
 p1.mid.xshear = 3
-p1.mid.palfx.mul = 200, 200, 200
+p1.mid.palfx.mul = 256, 44, 28   ;<-- RED damage/HP-being-removed (P069)
 p1.mid.palfx.sinmul = 32, 32, 32, 5
 p1.red.spr = 14,0            
 p1.red.layerno = 2   ;<-- active bar drawn over bench
@@ -851,7 +851,7 @@ p2.mid.layerno = 2   ;<-- active bar drawn over bench
 p2.mid.offset = 0,0
 p2.mid.facing = -1
 p2.mid.xshear = -3
-p2.mid.palfx.mul = 200, 200, 200
+p2.mid.palfx.mul = 256, 44, 28   ;<-- RED damage/HP-being-removed (P069)
 p2.mid.palfx.sinmul = 32, 32, 32, 5
 p2.red.spr = 14,0            
 p2.red.layerno = 2   ;<-- active bar drawn over bench
@@ -900,7 +900,7 @@ p3.mid.spr = 22,0
 p3.mid.layerno = 1
 p3.mid.offset = 0,0
 p3.mid.xshear = 3
-p3.mid.palfx.mul = 200, 200, 200
+p3.mid.palfx.mul = 256, 44, 28   ;<-- RED damage/HP-being-removed (P069)
 p3.mid.palfx.sinmul = 32, 32, 32, 5
 p3.red.spr = 24,0
 p3.red.layerno = 1
@@ -946,7 +946,7 @@ p4.mid.layerno = 1
 p4.mid.offset = 0,0
 p4.mid.facing = -1
 p4.mid.xshear = -3
-p4.mid.palfx.mul = 200, 200, 200
+p4.mid.palfx.mul = 256, 44, 28   ;<-- RED damage/HP-being-removed (P069)
 p4.mid.palfx.sinmul = 32, 32, 32, 5
 p4.red.spr = 24,0
 p4.red.layerno = 1
@@ -999,7 +999,7 @@ p1.top.xshear = 3
 p1.mid.spr = 12, 0
 p1.mid.offset = 0,0
 p1.mid.xshear = 3
-p1.mid.palfx.mul = 200, 200, 200
+p1.mid.palfx.mul = 256, 44, 28   ;<-- RED damage/HP-being-removed (P069)
 p1.mid.palfx.sinmul = 32, 32, 32, 5
 p1.red.spr = 14,0            
 p1.red.offset = 0,0         
@@ -1037,7 +1037,7 @@ p2.mid.spr = 12, 0
 p2.mid.offset = 0,0
 p2.mid.facing = -1
 p2.mid.xshear = -3
-p2.mid.palfx.mul = 200, 200, 200
+p2.mid.palfx.mul = 256, 44, 28   ;<-- RED damage/HP-being-removed (P069)
 p2.mid.palfx.sinmul = 32, 32, 32, 5
 p2.red.spr = 14,0            
 p2.red.offset = 0,0         
@@ -1078,7 +1078,7 @@ p3.top.xshear = 3
 p3.mid.spr = 22, 0
 p3.mid.offset = 0,0
 p3.mid.xshear = 3
-p3.mid.palfx.mul = 200, 200, 200
+p3.mid.palfx.mul = 256, 44, 28   ;<-- RED damage/HP-being-removed (P069)
 p3.mid.palfx.sinmul = 32, 32, 32, 5
 p3.red.spr = 24,0            
 p3.red.offset = 0,0         
@@ -1116,7 +1116,7 @@ p4.mid.spr = 22, 0
 p4.mid.offset = 0,0
 p4.mid.facing = -1
 p4.mid.xshear = -3
-p4.mid.palfx.mul = 200, 200, 200
+p4.mid.palfx.mul = 256, 44, 28   ;<-- RED damage/HP-being-removed (P069)
 p4.mid.palfx.sinmul = 32, 32, 32, 5
 p4.red.spr = 24,0            
 p4.red.offset = 0,0         
@@ -1157,7 +1157,7 @@ p5.top.xshear = 3
 p5.mid.spr = 22, 0
 p5.mid.offset = 0,0
 p5.mid.xshear = 3
-p5.mid.palfx.mul = 200, 200, 200
+p5.mid.palfx.mul = 256, 44, 28   ;<-- RED damage/HP-being-removed (P069)
 p5.mid.palfx.sinmul = 32, 32, 32, 5
 p5.red.spr = 24,0            
 p5.red.offset = 0,0         
@@ -1195,7 +1195,7 @@ p6.mid.spr = 22, 0
 p6.mid.offset = 0,0
 p6.mid.facing = -1
 p6.mid.xshear = -3
-p6.mid.palfx.mul = 200, 200, 200
+p6.mid.palfx.mul = 256, 44, 28   ;<-- RED damage/HP-being-removed (P069)
 p6.mid.palfx.sinmul = 32, 32, 32, 5
 p6.red.spr = 24,0            
 p6.red.offset = 0,0         
@@ -1243,7 +1243,7 @@ p1.top.xshear = 3
 p1.mid.spr = 22, 0
 p1.mid.offset = 0,0
 p1.mid.xshear = 3
-p1.mid.palfx.mul = 200, 200, 200
+p1.mid.palfx.mul = 256, 44, 28   ;<-- RED damage/HP-being-removed (P069)
 p1.mid.palfx.sinmul = 32, 32, 32, 5
 p1.red.spr = 24,0            
 p1.red.offset = 0,0         
@@ -1281,7 +1281,7 @@ p2.mid.spr = 22, 0
 p2.mid.offset = 0,0
 p2.mid.facing = -1
 p2.mid.xshear = -3
-p2.mid.palfx.mul = 200, 200, 200
+p2.mid.palfx.mul = 256, 44, 28   ;<-- RED damage/HP-being-removed (P069)
 p2.mid.palfx.sinmul = 32, 32, 32, 5
 p2.red.spr = 24,0            
 p2.red.offset = 0,0         
@@ -1322,7 +1322,7 @@ p3.top.xshear = 3
 p3.mid.spr = 22, 0
 p3.mid.offset = 0,0
 p3.mid.xshear = 3
-p3.mid.palfx.mul = 200, 200, 200
+p3.mid.palfx.mul = 256, 44, 28   ;<-- RED damage/HP-being-removed (P069)
 p3.mid.palfx.sinmul = 32, 32, 32, 5
 p3.red.spr = 24,0            
 p3.red.offset = 0,0         
@@ -1360,7 +1360,7 @@ p4.mid.spr = 22, 0
 p4.mid.offset = 0,0
 p4.mid.facing = -1
 p4.mid.xshear = -3
-p4.mid.palfx.mul = 200, 200, 200
+p4.mid.palfx.mul = 256, 44, 28   ;<-- RED damage/HP-being-removed (P069)
 p4.mid.palfx.sinmul = 32, 32, 32, 5
 p4.red.spr = 24,0            
 p4.red.offset = 0,0         
@@ -1401,7 +1401,7 @@ p5.top.xshear = 3
 p5.mid.spr = 22, 0
 p5.mid.offset = 0,0
 p5.mid.xshear = 3
-p5.mid.palfx.mul = 200, 200, 200
+p5.mid.palfx.mul = 256, 44, 28   ;<-- RED damage/HP-being-removed (P069)
 p5.mid.palfx.sinmul = 32, 32, 32, 5
 p5.red.spr = 24,0            
 p5.red.offset = 0,0         
@@ -1439,7 +1439,7 @@ p6.mid.spr = 22, 0
 p6.mid.offset = 0,0
 p6.mid.facing = -1
 p6.mid.xshear = -3
-p6.mid.palfx.mul = 200, 200, 200
+p6.mid.palfx.mul = 256, 44, 28   ;<-- RED damage/HP-being-removed (P069)
 p6.mid.palfx.sinmul = 32, 32, 32, 5
 p6.red.spr = 24,0            
 p6.red.offset = 0,0         
@@ -1480,7 +1480,7 @@ p7.top.xshear = 3
 p7.mid.spr = 22, 0
 p7.mid.offset = 0,0
 p7.mid.xshear = 3
-p7.mid.palfx.mul = 200, 200, 200
+p7.mid.palfx.mul = 256, 44, 28   ;<-- RED damage/HP-being-removed (P069)
 p7.mid.palfx.sinmul = 32, 32, 32, 5
 p7.red.spr = 24,0            
 p7.red.offset = 0,0         
@@ -1518,7 +1518,7 @@ p8.mid.spr = 22, 0
 p8.mid.offset = 0,0
 p8.mid.facing = -1
 p8.mid.xshear = -3
-p8.mid.palfx.mul = 200, 200, 200
+p8.mid.palfx.mul = 256, 44, 28   ;<-- RED damage/HP-being-removed (P069)
 p8.mid.palfx.sinmul = 32, 32, 32, 5
 p8.red.spr = 24,0            
 p8.red.offset = 0,0         
@@ -1560,7 +1560,7 @@ p1.top.xshear = 3
 p1.mid.spr = 12, 0
 p1.mid.offset = 0,0
 p1.mid.xshear = 3
-p1.mid.palfx.mul = 200, 200, 200
+p1.mid.palfx.mul = 256, 44, 28   ;<-- RED damage/HP-being-removed (P069)
 p1.mid.palfx.sinmul = 32, 32, 32, 5
 p1.front100.spr = 13,0
 p1.front100.offset = 0,0
@@ -1592,7 +1592,7 @@ p2.mid.spr = 12, 0
 p2.mid.offset = 0,0
 p2.mid.facing = -1
 p2.mid.xshear = -3
-p2.mid.palfx.mul = 200, 200, 200
+p2.mid.palfx.mul = 256, 44, 28   ;<-- RED damage/HP-being-removed (P069)
 p2.mid.palfx.sinmul = 32, 32, 32, 5
 p2.front100.spr = 13,0
 p2.front100.offset = 0,0
@@ -2617,7 +2617,7 @@ pos = 640,105
 ;bg.spr = 
 ; Time count display
 counter.offset = 0,30
-counter.font = 3,0, 0
+counter.font = 2,0, 0   ;<-- font2=white Timer (P070)
 counter.scale = 1.02, 1.02
 counter.palfx.mul = 256,256,256
 ; Ticks for each count
@@ -2625,12 +2625,12 @@ framespercount = 60
 
 counter1.scale = 1.02, 1.02
 counter1.offset = 0, 30
-counter1.font = 3, 0, 0
+counter1.font = 2, 0, 0   ;<-- font2=white Timer (P070)
 counter1.palfx.mul = 256,256,256
 counter1.palfx.sinmul = 80, 80, 80, 20
 counter1.layerno = 0
 
-counter10.font = 3, 0, 0
+counter10.font = 2, 0, 0   ;<-- font2=white Timer (P070)
 counter10.offset = 0, 0
 counter10.scale = 1.02, 1.02
 counter10.palfx.mul = 256,256,256
@@ -2638,7 +2638,7 @@ counter10.palfx.sinmul = 80, 80, 80, 20
 counter10.layerno = 0
 
 counter11.offset = 0, 0
-counter11.font = 3, 0, 0, 255, 255, 255
+counter11.font = 2, 0, 0, 255, 255, 255   ;<-- font2=white Timer (P070)
 counter11.scale = 1.02, 1.02
 ;counter11.palfx.mul = 255,205,90
 counter11.layerno = 0
@@ -2647,6 +2647,11 @@ counter11.layerno = 0
 ;-----------------------------------------------------------
 [Combo]
 team1.pos = 130,224   ;<-- raised
+; --- RGB flame behind the combo counter (P070); offsets are screenshot-tunable ---
+team1.bg0.anim = 4131
+team1.bg0.offset = 0, 18
+team1.bg0.scale = 1.0, 1.0
+team1.bg0.layerno = 2
 team1.start.x = -240      ;Starting x-coords
 team1.counter.layerno = 2
 team1.counter.font = 6,0,0
@@ -2688,60 +2693,60 @@ team1.counter.mult = 0.05 ; counter shake intensity multiplier
 team1.text.layerno = 2
 ; (text format %i = combo count, %d = combo damage, %p = combo damage percentage)
 team1.text.text = "HITS!" ;You can use %i to show count in the text, eg "%i Hit!" ; ( %d d for damage, %p% for hit)
-team1.text.font = 6,0,0
+team1.text.font = 5,0,0
 team1.text.scale = 0.55, 0.55
-team1.text.palfx.mul = 255,205,90   ;<-- gold like our bars
-team1.text.offset = 8, 18
+team1.text.palfx.mul = 256, 256, 256   ;<-- gold like our bars
+team1.text.offset = 0, 42
 team1.text10.text = "HITS!" ;By inputting a number next to text, You can change certain elements of the combo text when a combo reaches a certain point.
-team1.text10.font = 6,0,0
+team1.text10.font = 5,0,0
 team1.text10.scale = 0.55, 0.55
-team1.text10.palfx.mul = 255,205,90   ;<-- gold like our bars
-team1.text10.offset = 8, 18
+team1.text10.palfx.mul = 256, 256, 256   ;<-- gold like our bars
+team1.text10.offset = 0, 42
 team1.text20.text = "HITS!"
-team1.text20.font = 6,0,0
+team1.text20.font = 5,0,0
 team1.text20.scale = 0.55, 0.55
-team1.text20.palfx.mul = 255,205,90   ;<-- gold like our bars
-team1.text20.offset = 8, 18
+team1.text20.palfx.mul = 256, 256, 256   ;<-- gold like our bars
+team1.text20.offset = 0, 42
 team1.text30.text = "HITS!"
-team1.text30.font = 6,0,0
+team1.text30.font = 5,0,0
 team1.text30.scale = 0.55, 0.55
-team1.text30.palfx.mul = 255,205,90   ;<-- gold like our bars
-team1.text30.offset = 8, 18
+team1.text30.palfx.mul = 256, 256, 256   ;<-- gold like our bars
+team1.text30.offset = 0, 42
 team1.text40.text = "HITS!"
-team1.text40.font = 6,0,0
+team1.text40.font = 5,0,0
 team1.text40.scale = 0.55, 0.55
-team1.text40.palfx.mul = 255,205,90   ;<-- gold like our bars
-team1.text40.offset = 8, 18
+team1.text40.palfx.mul = 256, 256, 256   ;<-- gold like our bars
+team1.text40.offset = 0, 42
 team1.text50.text = "HITS!"
-team1.text50.font = 6,0,0
+team1.text50.font = 5,0,0
 team1.text50.scale = 0.55, 0.55
-team1.text50.palfx.mul = 255,205,90   ;<-- gold like our bars
-team1.text50.offset = 8, 18
+team1.text50.palfx.mul = 256, 256, 256   ;<-- gold like our bars
+team1.text50.offset = 0, 42
 team1.text60.text = "HITS!"
-team1.text60.font = 6,0,0
+team1.text60.font = 5,0,0
 team1.text60.scale = 0.55, 0.55
-team1.text60.palfx.mul = 255,205,90   ;<-- gold like our bars
-team1.text60.offset = 8, 18
+team1.text60.palfx.mul = 256, 256, 256   ;<-- gold like our bars
+team1.text60.offset = 0, 42
 team1.text70.text = "HITS!"
-team1.text70.font = 6,0,0
+team1.text70.font = 5,0,0
 team1.text70.scale = 0.55, 0.55
-team1.text70.palfx.mul = 255,205,90   ;<-- gold like our bars
-team1.text70.offset = 8, 18
+team1.text70.palfx.mul = 256, 256, 256   ;<-- gold like our bars
+team1.text70.offset = 0, 42
 team1.text80.text = "HITS!"
-team1.text80.font = 6,0,0
+team1.text80.font = 5,0,0
 team1.text80.scale = 0.55, 0.55
-team1.text80.palfx.mul = 255,205,90   ;<-- gold like our bars
-team1.text80.offset = 8, 18
+team1.text80.palfx.mul = 256, 256, 256   ;<-- gold like our bars
+team1.text80.offset = 0, 42
 team1.text90.text = "HITS!"
-team1.text90.font = 6,0,0
+team1.text90.font = 5,0,0
 team1.text90.scale = 0.55, 0.55
-team1.text90.palfx.mul = 255,205,90   ;<-- gold like our bars
-team1.text90.offset = 8, 18
+team1.text90.palfx.mul = 256, 256, 256   ;<-- gold like our bars
+team1.text90.offset = 0, 42
 team1.text100.text = "HITS!"
-team1.text100.font = 6,0,0
+team1.text100.font = 5,0,0
 team1.text100.scale = 0.55, 0.55
-team1.text100.palfx.mul = 255,205,90   ;<-- gold like our bars
-team1.text100.offset = 8, 18
+team1.text100.palfx.mul = 256, 256, 256   ;<-- gold like our bars
+team1.text100.offset = 0, 42
 team1.text100.palfx.mul = 256, 256, 256
 team1.text100.palfx.sinmul = 90, 90, 90, 15
 team1.displaytime = 90    ;Time to show text
@@ -2750,6 +2755,11 @@ team1.hidespeed = 4       ; text hiding speed (the larger value, the faster spee
 team1.autoalign = 0
 
 team2.pos = 1150,224      ;Coords to show   ;<-- raised
+; --- RGB flame behind the combo counter (P070); offsets are screenshot-tunable ---
+team2.bg0.anim = 4131
+team2.bg0.offset = 0, 18
+team2.bg0.scale = 1.0, 1.0
+team2.bg0.layerno = 2
 team2.start.x = 1520      ;Starting x-coords
 team2.counter.layerno = 2
 team2.counter.font = 6,0,0
@@ -2791,60 +2801,60 @@ team2.counter.mult = 0.05 ; counter shake intensity multiplier
 team2.text.layerno = 2
 ;(text format %i = combo count, %d = combo damage, %p = combo damage percentage)
 team2.text.text = "HITS!" ;You can use %i to show count in the text, eg "%i Hit!"
-team2.text.font = 6,0,0
+team2.text.font = 5,0,0
 team2.text.scale = 0.55, 0.55
-team2.text.palfx.mul = 255,205,90   ;<-- gold like our bars
-team2.text.offset = 8, 18
+team2.text.palfx.mul = 256, 256, 256   ;<-- gold like our bars
+team2.text.offset = 0, 42
 team2.text10.text = "HITS!" ;By inputting a number next to text, You can change certain elements of the combo text when a combo reaches a certain point.
-team2.text10.font = 6,0,0
+team2.text10.font = 5,0,0
 team2.text10.scale = 0.55, 0.55
-team2.text10.palfx.mul = 255,205,90   ;<-- gold like our bars
-team2.text10.offset = 8, 18
+team2.text10.palfx.mul = 256, 256, 256   ;<-- gold like our bars
+team2.text10.offset = 0, 42
 team2.text20.text = "HITS!"
-team2.text20.font = 6,0,0
+team2.text20.font = 5,0,0
 team2.text20.scale = 0.55, 0.55
-team2.text20.palfx.mul = 255,205,90   ;<-- gold like our bars
-team2.text20.offset = 8, 18
+team2.text20.palfx.mul = 256, 256, 256   ;<-- gold like our bars
+team2.text20.offset = 0, 42
 team2.text30.text = "HITS!"
-team2.text30.font = 6,0,0
+team2.text30.font = 5,0,0
 team2.text30.scale = 0.55, 0.55
-team2.text30.palfx.mul = 255,205,90   ;<-- gold like our bars
-team2.text30.offset = 8, 18
+team2.text30.palfx.mul = 256, 256, 256   ;<-- gold like our bars
+team2.text30.offset = 0, 42
 team2.text40.text = "HITS!"
-team2.text40.font = 6,0,0
+team2.text40.font = 5,0,0
 team2.text40.scale = 0.55, 0.55
-team2.text40.palfx.mul = 255,205,90   ;<-- gold like our bars
-team2.text40.offset = 8, 18
+team2.text40.palfx.mul = 256, 256, 256   ;<-- gold like our bars
+team2.text40.offset = 0, 42
 team2.text50.text = "HITS!"
-team2.text50.font = 6,0,0
+team2.text50.font = 5,0,0
 team2.text50.scale = 0.55, 0.55
-team2.text50.palfx.mul = 255,205,90   ;<-- gold like our bars
-team2.text50.offset = 8, 18
+team2.text50.palfx.mul = 256, 256, 256   ;<-- gold like our bars
+team2.text50.offset = 0, 42
 team2.text60.text = "HITS!"
-team2.text60.font = 6,0,0
+team2.text60.font = 5,0,0
 team2.text60.scale = 0.55, 0.55
-team2.text60.palfx.mul = 255,205,90   ;<-- gold like our bars
-team2.text60.offset = 8, 18
+team2.text60.palfx.mul = 256, 256, 256   ;<-- gold like our bars
+team2.text60.offset = 0, 42
 team2.text70.text = "HITS!"
-team2.text70.font = 6,0,0
+team2.text70.font = 5,0,0
 team2.text70.scale = 0.55, 0.55
-team2.text70.palfx.mul = 255,205,90   ;<-- gold like our bars
-team2.text70.offset = 8, 18
+team2.text70.palfx.mul = 256, 256, 256   ;<-- gold like our bars
+team2.text70.offset = 0, 42
 team2.text80.text = "HITS!"
-team2.text80.font = 6,0,0
+team2.text80.font = 5,0,0
 team2.text80.scale = 0.55, 0.55
-team2.text80.palfx.mul = 255,205,90   ;<-- gold like our bars
-team2.text80.offset = 8, 18
+team2.text80.palfx.mul = 256, 256, 256   ;<-- gold like our bars
+team2.text80.offset = 0, 42
 team2.text90.text = "HITS!"
-team2.text90.font = 6,0,0
+team2.text90.font = 5,0,0
 team2.text90.scale = 0.55, 0.55
-team2.text90.palfx.mul = 255,205,90   ;<-- gold like our bars
-team2.text90.offset = 8, 18
+team2.text90.palfx.mul = 256, 256, 256   ;<-- gold like our bars
+team2.text90.offset = 0, 42
 team2.text100.text = "HITS!"
-team2.text100.font = 6,0,0
+team2.text100.font = 5,0,0
 team2.text100.scale = 0.55, 0.55
-team2.text100.palfx.mul = 255,205,90   ;<-- gold like our bars
-team2.text100.offset = 8, 18
+team2.text100.palfx.mul = 256, 256, 256   ;<-- gold like our bars
+team2.text100.offset = 0, 42
 team2.text100.palfx.mul = 256, 256, 256
 team2.text100.palfx.sinmul = 90, 90, 90, 15
 team2.displaytime = 90    ;Time to show text
@@ -2858,7 +2868,7 @@ format.decimal.separator = .
 
 ;-----------------------------------------------------------
 [Action]
-team1.pos = 30,377        ;Coords to show
+team1.pos = 30,440        ;Coords to show   ;<-- lowered, clear of heads (P070)
 team1.max = 8             ;Maximum simultaneous messages
 team1.spacing = 0,32      ;Spacing between messages
 team1.start.x = -240      ;Starting x-coords
@@ -2878,7 +2888,7 @@ team1.displaytime = 60    ;Time to show message
 team1.showspeed = 2       ;Message showing up speed (1 = instant)
 team1.hidespeed = 8       ;Message hiding speed (the larger value, the faster speed)
 
-team2.pos = 1250,377
+team2.pos = 1250,440   ;<-- lowered, clear of heads (P070)
 team2.max = 8
 team2.spacing = 0,32
 team2.start.x = 1520
@@ -3950,3 +3960,53 @@ demo.text.text = Demo Mode
 ;
 ; Some components have additional elements specific
 ; to themselves.
+
+[Begin Action 4120]   ;<-- animated rainbow ULTIMA COMBO (25+ hits); frames 412,0-13
+412,0, 0,0, 2
+412,1, 0,0, 2
+412,2, 0,0, 2
+412,3, 0,0, 2
+412,4, 0,0, 2
+412,5, 0,0, 2
+412,6, 0,0, 2
+412,7, 0,0, 2
+412,8, 0,0, 2
+412,9, 0,0, 2
+412,10, 0,0, 2
+412,11, 0,0, 2
+412,12, 0,0, 2
+412,13, 0,0, 2
+
+[Begin Action 4050]   ;<-- DANGER red pulse, frames 405,0-9
+405,0, 0,0, 3
+405,1, 0,0, 3
+405,2, 0,0, 3
+405,3, 0,0, 3
+405,4, 0,0, 3
+405,5, 0,0, 3
+405,6, 0,0, 3
+405,7, 0,0, 3
+405,8, 0,0, 3
+405,9, 0,0, 3
+
+[Begin Action 4130]   ;<-- ULTIMA flame under combo number (fight.sff 430,0-7)
+430,0, 0,0, 3
+430,1, 0,0, 3
+430,2, 0,0, 3
+430,3, 0,0, 3
+430,4, 0,0, 3
+430,5, 0,0, 3
+430,6, 0,0, 3
+430,7, 0,0, 3
+
+[Begin Action 4131] ;RGB flame behind combo counter (P070)
+431,0, 0,0, 4
+431,1, 0,0, 4
+431,2, 0,0, 4
+431,3, 0,0, 4
+431,4, 0,0, 4
+431,5, 0,0, 4
+431,6, 0,0, 4
+431,7, 0,0, 4
+431,8, 0,0, 4
+431,9, 0,0, 4

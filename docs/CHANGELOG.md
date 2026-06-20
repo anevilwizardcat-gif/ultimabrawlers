@@ -1057,3 +1057,220 @@ P059 (full arcade-pixel HUD font baked -> Jersey 10; combo + timer + level numbe
 - Popup text stays font8 (Pixel) - already arcade. LogoNum/Anton .def/.sff now orphaned (unreferenced, left in
   build, harmless). Per-element scales tunable.
 - SHIPPED: ikemen1/fonts/Arcade.def + Arcade.sff + fight.def.
+
+P060 (in-round action popups restyled -> ArcadeMsg pixel font + purple box; GLOBAL, no per-char edits)
+- SOURCE VERIFIED in engine (no guessing): "<< CHANGE >>" / REVERSAL / NICE COMBO / COUNTER HIT / DANGER /
+  TECHNICAL / DOWN popups are pushed by the LifebarAction state controller (bytecode.go:7374) -> char method
+  appendLifebarAction (char.go:5169). lifebar.go never populates [Action] (newLbMsg/insertLbMsg have zero callers
+  there); char.go is the only caller. appendLifebarAction reads team%v.bg. + team%v.text. from the [Action]
+  IniSection at runtime -> styling is GLOBAL via fight.def [Action]; the strings are sctrl params inside the
+  characters (custom; not in engine/base-Lua/fight.def) and need NOT be touched to restyle.
+- TEXT FONT (the actual miss in prior turns): [Action] team1/team2.text.font 8 (Pixel) -> 5. font5 was registered
+  to an UNUSED Action.def (no element referenced font 5) -> repointed font5 = ikemen1/fonts/ArcadeMsg.def.
+- ArcadeMsg.def/sff: NEW popup font, Jersey 10, full set A-Z 0-9 ! < > (39 glyphs), gold 2-tone + dark outline +
+  drop shadow + italic, baked LH=13/UP=4 (chunky-low-res so it stays pixel when small), native 40px. Built on
+  Arcade's confirmed-rendering PNG32 header. Chevrons present in Jersey10.
+- SIZE (non-intrusive): [Action] team1/team2.text.scale 0.85,0.95 -> 0.55,0.55 (~22px in the 28px box).
+- BOX: unchanged from P058 - sprite 400,0 (270x28 purple dotted/star panel, AS80D128 translucent). Confirmed
+  [Begin Action 400]="400,0,...,AS80D128" + decoded live sprite = purple. REQUIRES fight.sff applied.
+- HUD Arcade kept 44px (0-9+HITS!) on font3/font6 - full-alphabet bake was 52px and would grow combo/timer/level
+  ~18%, so popup font is a SEPARATE file. Fixed malformed team2.front.scale.
+- SHIPPED: fight.def + ArcadeMsg.def + ArcadeMsg.sff (+ Arcade.def/sff unchanged 44px). fight.sff (P058) needed for box.
+
+P061 (in-round action popups: REAL fix - box sprite 400,0 restyled on the LIVE fight.sff)
+- ROOT CAUSE of "zero visible changes" (verified against Raven's uploaded live build + matching Ikemen-GO source):
+  (1) These popups are NOT text. data/action.zss fires `lifebarAction{spr: const(MsgReversal), 0; top: 1}` etc.
+      -> the engine draws PRE-BAKED SPRITES from fight.sff: box = bg sprite 400,0, message = front sprite from
+      groups 401-425 (FIRST ATTACK, COUNTER HIT, REVERSAL, DANGER, NICE/GOOD/SWEET/GREAT/AMAZING/GDLK COMBO,
+      SPECIAL/SUPER FINISH, PERFECT, PARTNER ASSIST, << CHANGE >>, DOWN, ASSIST OK, ACTIVE/COUNTER SWITCH,
+      GUARD CRUSH, PARRYING, JUST DEFENDED, CLUTCH). Since spr (not text) is passed, the [Action] text.font is
+      never used -> ALL prior font edits (P060 font5/ArcadeMsg, [Action] text.font 8->5) are INERT (left in place,
+      harmless; revertible on request).
+  (2) Prior box edits (P058) were applied to a STALE outputs/data/fight.sff, NOT Raven's live file. Confirmed by
+      decoding the LIVE data/fight.sff (632248 b): sprite 400,0 was still the original dark-gray slanted panel.
+- FIX: re-fetched the LIVE fight.sff and rebuilt sprite 400,0 (270x28) = translucent purple, slanted (reused the
+  ORIGINAL alpha mask so the parallelogram slant is identical), dot grid + a few stars matching bar sprite 10,0
+  (sampled base purple (16,11,22), dot highlight (96,56,140); box uses base 72,38,122 / dot 132,86,188 / bevel
+  168,124,214). Drawn with the existing AS80D128 blend ([Begin Action 400]="400,0,...,AS80D128") -> translucent
+  purple. Append+repoint surgery on the live file. Output 633180 b.
+- Message text sprites (401-425) left as-is (their own colorful font). Offered: re-render all 25 in Jersey10
+  arcade gold to match the HUD.
+- SHIPPED: data/fight.sff (the live file + new box). No fight.def change needed (bg.anim=400 already correct).
+
+P062 (action popups: all 25 message sprites -> arcade gold + box reshaped to clean parallelogram)
+- MESSAGE SPRITES 401-425 re-rendered in Jersey 10 arcade gold (matches HUD font): gold 2-tone (255,238,150 ->
+  232,165,38) + dark outline (46,26,8) + drop shadow + italic shear 0.16, baked LH=11/UP=2 (~2px chunky pixels,
+  ~20-22px tall). Each kept center-anchored like the originals: axis=(w/2, h/2-14) reproduces the original
+  vertical seat (orig sprites were axis (w/2,-6) on 16px). All 25 fit (widest 215px vs ~257px box body):
+  401 FIRST ATTACK ... 425 CLUTCH (full set). Words rendered with their spaces; << CHANGE >> chevrons render.
+- BOX 400,0 reshaped: original was a converging TRAPEZOID (looked cut-off on the left). Now a clean right-leaning
+  PARALLELOGRAM (13px shear, both edges parallel) so the slant reads intentional like the bars. Kept translucent
+  purple + dot grid + stars + top bevel, axis (135,0), AS80D128 blend.
+- Done on the live fight.sff (P061 base). Output 644317 b. All text is now baked-gold; box restyled.
+- Open tuning (needs Raven's eyes): slant direction/amount (can flip or make left edge vertical); whether to add
+  color accents (e.g. DANGER red) vs all-gold; exact popup vertical seat.
+- SHIPPED: data/fight.sff (box 400,0 + messages 401-425).
+
+P063 (action popups: legibility fix - message sprites re-rendered hi-res; fight.sff re-packed clean)
+- PROBLEM: P062 messages baked chunky at LH=11/UP=2 (~9px caps). At that resolution Jersey 10's D is
+  indistinguishable from O -> "GDLK COMBO" read as "GOLK", same for DANGER/DOWN/GUARD/DEFENDED. Removing the
+  italic alone did NOT fix it (resolution-limited).
+- FIX: re-rendered all 25 message sprites (401-425) at higher logical resolution LH=26/UP=1 (crisp 1px pixels,
+  ~16px caps) + slight italic 0.06 (keeps HUD lean) + 1px letter spacing. D now reads clearly across all words.
+  Kept ~16px tall (= original size; not enlarged) and the gold/outline/shadow treatment. Widest word 194px
+  (box body ~257). Axis still (w/2, h/2-14) to hold vertical seat.
+- Also RE-PACKED fight.sff cleanly: dropped accumulated orphan sprite blocks from the P061/P062 append-surgery
+  (653871 -> 603172 bytes); all 118 referenced sprites preserved (fmt/axis/link intact).
+- Box 400,0 unchanged (P062 parallelogram, purple/dots/stars, AS80D128).
+- Note on the tradeoff: chunky 2px pixels can't render legible condensed-font caps inside the 28px box; the
+  finer 1px hi-res is the legible option (still crisp/no-AA = pixelated). Revertible to chunkier if desired but
+  the D/O ambiguity returns.
+- SHIPPED: data/fight.sff (messages 401-425 re-rendered; clean re-pack).
+
+P064 (ULTIMA COMBO animated rainbow tier + D-legibility fix)
+- ULTIMA COMBO (replaces "GDLK COMBO" at the 25+ hit tier): animated rainbow-wave text, like the menu ULTIMA.
+  * 14 frames baked as fight.sff sprites 412,0-13 (each = "ULTIMA COMBO" with per-letter rainbow hue cycling +
+    per-letter vertical sine-wave bob; canvas 165x24, axis (w/2,h/2-14) so it seats like other messages).
+  * fight.def: new [Begin Action 4120] cycles 412,0-13 @2 ticks/frame (loops ~2x over the popup's display).
+  * data/action.zss line 66: the 25+ branch changed from `lifebarAction{spr: const(MsgCombo25), 0; top: 1}`
+    to `lifebarAction{anim: 4120; top: 1}`. The bg box (anim 400) still draws behind it. Other combo tiers
+    (NICE/GOOD/SWEET/GREAT/AMAZING) unchanged.
+- D-LEGIBILITY FIX (user: D read as O; "DOWN" looked off): all static message sprites 401-411,413-425 re-rendered
+  with fix_D() - straightens the D's left edge + forces a solid 2px flat left vertical - and italic reduced
+  0.06 -> 0.04. D now reads clearly vs round O (verified DOWN/DANGER/GOOD/GUARD/DEFENDED). O untouched (round).
+- fight.sff re-packed clean: 118 -> 131 sprites, 618362 b.
+- REQUIRES ALL THREE FILES applied: data/fight.sff + data/fight.def + data/action.zss (the animation only plays
+  with all three). Tuning: anim speed (the "2" in [Begin Action 4120] frame lines), wave amplitude, rainbow
+  saturation. Can match the exact menu-ULTIMA style if pointed at that asset.
+- SHIPPED: data/fight.sff + data/fight.def + data/action.zss.
+
+P065 (DANGER red warning pulse + ULTIMA COMBO lingers longer)
+- DANGER (405): restored to RED and animated as a warning pulse. 10 frames baked as fight.sff sprites 405,0-9
+  (red 2-tone fill, brightness throbbing ~60-100% = alarm pulse; same outline/shadow/italic/D-fix treatment as
+  the other messages; canvas 89x16, axis (w/2,h/2-14) so it seats like the rest). fight.def: new [Begin Action
+  4050] cycles 405,0-9 @3 ticks. action.zss line 42: DANGER changed from `spr: const(MsgDanger), 0` to
+  `anim: 4050` (its existing timeMul: 2 kept).
+- ULTIMA COMBO lingers longer: action.zss line 66 added `timeMul: 2.5` (display ~150 ticks vs the prior 60) so
+  the rainbow animation has time to be enjoyed. SAFE re: other popups - each popup carries its OWN independent
+  resttime and they stack vertically via [Action] team*.spacing (0,32), so a longer ULTIMA does not shift or
+  overlap other messages' disappear timing. timeMul is the engine's intended knob for this (win messages use 3).
+- fight.sff re-packed clean: 131 -> 140 sprites, 623060 b.
+- REQUIRES all three files applied together: data/fight.sff + data/fight.def + data/action.zss.
+- Tuning: DANGER pulse speed = the "3" in [Begin Action 4050] frame lines (lower=faster); ULTIMA linger = the
+  2.5 in its timeMul (lower=shorter). Note: 2.5 is a float - if it ever fails to parse in-engine, fall back to
+  an int (2 or 3).
+- SHIPPED: data/fight.sff + data/fight.def + data/action.zss.
+
+P066 (cvsmai groove meter / clone fix - config.txt was missing [Statedef 30000])
+- SYMPTOM: selecting Mai spawned a visible Mai clone (helper name "groove", id 20000) standing behind her;
+  she showed the DEFAULT engine power bar instead of a groove gauge "like the other cvs guys"; console:
+  `WARNING: groove (..) in state 30000: changed to invalid state 30000 (from state 0)`.
+- ROOT CAUSE: cvsmai is Family B (cvs2_system). Its groove helper spawns (cvs2_system.cns L745/L10766) with
+  `ID=20000, stateno=30000, name="groove"`, gated `var(30) = 0`. State 30000 (the groove-SYSTEM config block)
+  lives in `config.txt` (st4) for this family. Honda's & Iori's config.txt are byte-identical (md5 10415e48)
+  and DO contain `[Statedef 30000]` (sets the groove vars, `var(30) = -1`, then ChangeState 20001 = groove
+  select). Mai's config.txt (2234 b) had been truncated/replaced with ONLY the groove-POINT display states
+  (10000/10010) and was MISSING [Statedef 30000]. So Mai's groove helper landed in a non-existent state ->
+  stuck in state 0 = her idle anim = the "clone"; var(30) never initialised -> stayed 0 -> (a) the var(30)=0
+  spawn trigger kept firing the broken helper, (b) no groove was selected so the 21000 gauge had no valid
+  groove state -> engine power-bar fallback, (c) the console warning. The P013 GP-OFF edit most likely
+  truncated the file.
+- FIX: rebuilt cvsmai/config.txt = the shared [Statedef 30000] block (verbatim from Honda/Iori) + Mai's
+  existing [Statedef 10000]/[10010] groove-point states (P013 GP-OFF preserved). Additive/surgical - nothing
+  removed. 11328 b. Restores the groove gauge, removes the clone, clears the warning.
+- LATENT (separate, NOT this bug): cvsmai.def [Files] references `Mai.cmd / Mai-N.cns / Mai-S.cns / Mai-H.cns`
+  but the actual repo files are lowercase `mai.cmd / mai-N.cns / mai-S.cns / mai-H.cns`. Loads on Windows
+  (case-insensitive); would FAIL to load on case-sensitive Steam Deck/Linux (Mai would break entirely). Since
+  Mai currently loads, the config.txt above IS the active bug. Offer: lowercase those 4 refs in the .def.
+- SHIPPED: cvsmai/config.txt.
+
+P067 (combo counter - overlap fixed + purple, thick-T "HITS!")
+- This is the fight.def [Combo] HUD element + its font - NOT the popup sprites (action.zss/400-425). Separate
+  subsystem; do not cross-apply.
+- OVERLAP: the combo number (font6 Arcade gold, scale 0.85 = ~37px tall, drawn from team*.pos y) overlapped
+  "HITS!" which sat only `text.offset = 8,18` below it. Pushed every combo text offset `8, 18 -> 8, 42`
+  (both teams, all tiers) so HITS clears the number with a small gap.
+- THIN T + PURPLE HITS (one asset): the number is digits-only, so HITS got its own font. Baked
+  ikemen1/fonts/PurpleHits.def + .sff = Jersey10, purple 2-tone (top 178,128,232 / bot 110,62,168), dark
+  outline 28,14,48, drop shadow, italic, glyphs H/I/T/S/! at ASCII image indices, 44px-tall PNG32 (header
+  cloned from Arcade.sff, SFFv2, 0 palettes). The T stem is thickened (+3px horizontal mask dilation) to match
+  the H/S weight - fixes the "T too thin" complaint. Pointed font5 (the now-orphaned ArcadeMsg popup font, inert
+  since popups became sprites in P061) -> PurpleHits.def. [Combo] team*.text*.font 6->5; gold text palfx
+  (255,205,90) neutralised to 256,256,256 so the purple shows true. The NUMBER stays font6 (gold Arcade) -
+  untouched (it has no T, so the thin-T fix never needed to touch the gold font).
+- Tuning: HITS x/y position = [Combo] team*.text.offset; purple shade / T weight = re-bake PurpleHits glyphs
+  (thick=N dilation). Only font0-9 load (P056) - font5 is a valid slot.
+- SHIPPED: data/fight.def + data/ikemen1/fonts/PurpleHits.def + data/ikemen1/fonts/PurpleHits.sff.
+
+P068 (feedback pass: Mai power-bar + KO-hide; combo font uniform+centered; ULTIMA flame v1)
+- MAI bug A (default power bar ON TOP of her gauge): Mai's cvs2_system.cns was MISSING the noPowerBarDisplay
+  assert entirely (Honda/Iori carry it; Honda's is deliberately disabled per P011, but Mai had none). Added
+  to Mai's [Statedef -2]: `AssertSpecial flag = noPowerBarDisplay, trigger1 = 1, ignorehitpause = 1`. Now that
+  she has a working groove gauge (P066), this suppresses the redundant engine bar.
+- MAI bug B (groove gauge doesn't hide on KO): only gauge state 21000 (C-groove) had the KO/bench RemoveExplod
+  sweep; states 22000/23000/24000/26000 had NONE and 25000 was partial, so on any other groove the persistent
+  (removetime=-1) gauge explods were never removed on KO. The spawn guards already block re-spawn on
+  KO/bench/roundstate (root,alive + roundstate<=2 + not-benched). Added a full KO/bench sweep
+  (`RemoveExplod ... trigger1 = root,stateno=[6565610,6565611] || roundstate>2 || !root,alive`) for every
+  spawn id in 22000-26000. All six gauge states now sweep on KO/bench/round-end.
+- COMBO FONT (PurpleHits.sff rebuilt): previous bake thickened ONLY the T (+3) -> the I read as skinny next to
+  it. Jersey10's natural stems are already uniform (6px); the fix is a UNIFORM pass - every glyph dilated by
+  the SAME +1 so all five (H I T S !) carry equal stroke weight (and the T no longer looks thin). Also centered
+  the number over HITS: combo text offset.x 8 -> 0 in fight.def (centers under the 2-digit ULTIMA range).
+- ULTIMA FLAME v1 (Raven supplied a placement mock): baked an 8-frame flickering flame (fight.sff group
+  430,0-7, axis bottom-centre), [Begin Action 4130] @3 ticks in fight.def. action.zss [-4] spawns it as an
+  explod at combo >= 25 (the ULTIMA threshold), one per side (teamSide 1 -> postype left pos 115,250 /
+  teamSide 2 -> postype right pos -115,250), ontop, removetime -1, and removeExplod{4130} when the combo drops
+  below 25 / ends. ** POSITION + SCALE + LAYER ARE A FIRST PASS ** - the lifebar is 1280x720 but explods draw
+  in each char's localcoord, so exact placement under the number needs one screenshot tune (per the
+  screenshots-beat-arithmetic rule). Tunables are commented inline (pos/scale; drop ontop or lower sprpriority
+  if it covers the number instead of sitting behind it). Reuses the bake->[Begin Action]->fire pattern.
+- SHIPPED: cvsmai/cvs2_system.cns + data/fight.def + data/fight.sff + data/action.zss + ikemen1/fonts/PurpleHits.sff.
+
+P069 (Mai default-bar real fix + gauge restore + lifebar red damage + ULTIMA flame that actually renders)
+- MAI bug A (engine power bar STILL showing after P068): ROOT CAUSE found - P068's noPowerBarDisplay assert was
+  inserted into [Statedef 8000] (a MOVE state), not [Statedef -2]. So it only suppressed the bar while Mai was
+  in that one move and showed otherwise. MOVED the assert to [Statedef -2] (runs every frame). Confirmed Iori
+  (settled/working) carries the same `ID<partner,ID` arbitration UNcommented and shows no default bar, so the
+  arbitration was never the cause - the misplaced statedef was. Engine bar now stays suppressed.
+- MAI gauge restore (removed on tag-out, didn't return - a REGRESSION introduced by P068): states 22000-26000
+  spawned their explods with `trigger1 = Time = 0` (once only). P068's KO/bench sweep removed them on tag-out and,
+  being Time=0, they never re-spawned -> gauge gone for good on those grooves. Converted all 104 explod spawns in
+  22000-26000 to the self-respawn pattern already proven on state 21000 (P013v2): `triggerall root,stateno !=
+  [6565610,6565611]` + `root,alive` + `roundstate<=2`, and `trigger1 = numexplod(<id>)=0 && teamside`. Now hides
+  on bench/KO (guard fail + sweep) AND restores on tag-in (numexplod re-spawn). NO ChangeState - respects the
+  P013 HARD LESSON (a ChangeState restore on Mai's gauge spawned an attacking clone).
+- LIFEBAR "HP being removed" -> RED: the mid layer (the damage-lag chunk draining behind front HP) used
+  `mid.palfx.mul = 200,200,200` (dimmed gold, same hue as the bars, so the loss didn't read). Changed all 40
+  mid.palfx.mul across the lifebar sections to `256,44,28` (red). Recoverable HP is a separate element - untouched.
+- ULTIMA FLAME - architectural finding + working solution. The P068 explod approach CANNOT work: a player explod
+  (fired from action.zss [-4]) renders from the OWNER CHARACTER's sff, never the lifebar's fight.sff, so anim 4130
+  (which lives in fight.sff) resolved to a nonexistent character anim -> invisible. (The groove-gauge explods only
+  work because their anims, e.g. 21010, ARE in the character's own sff.) The lifebar has no conditional anim slot
+  at the combo COUNTER, and lifebarAction draws fight.sff anims only at the single popup spot - so a flame *under
+  the counter* is not achievable with these tools. REVERTED the dead explod from action.zss. SOLUTION: composited
+  real flames INTO the ULTIMA COMBO popup frames (412,0-13 = anim 4120, which IS lifebar-drawn from fight.sff and
+  has worked since P064). The 14 frames are now 200x58 (were 165x24); text kept exactly in place via axis (100,14),
+  flames rise from below with a heat glow, text composited on top and fully legible. Fires at the existing >=25
+  ULTIMA threshold through the existing lifebarAction - no action.zss/fight.def change needed. fight.sff 148 spr.
+- SHIPPED: cvsmai/cvs2_system.cns + data/fight.def + data/fight.sff + data/action.zss.
+
+P070 (flame under combo counter as RGB + HITS heavier outline + white clock + lowered popups)
+- FLAME relocated from the ULTIMA COMBO popup to UNDER THE COMBO COUNTER, now RGB/rainbow. Engine fact (verified
+  in Ikemen-GO src/lifebar.go): the [Combo] section DOES support a background animation - LifeBarCombo has a
+  `bg AnimLayout` read from `team*.bg0.` keys and drawn at the counter position (co.bg.Draw at the counter x, pos.y,
+  behind the number). Added `team1.bg0.anim = 4131` + `team2.bg0.anim = 4131` (+ offset 0,18 / scale / layerno 2).
+  Baked a 10-frame RGB multi-tongue flame -> fight.sff group 431,0-9 (74x56, axis 37,52) + [Begin Action 4131].
+  CAVEAT (told Raven): the engine draws the combo bg for EVERY combo - the per-count tiers (counter10-100 / a tiered
+  bg) are INERT in this build - so the flame shows behind the counter for ALL combos, not only 30+ ultima. Gating to
+  30+ only is not possible through the combo bg; would need a different mechanism. Restored the ULTIMA COMBO popup
+  (412,0-13) to plain rainbow-wave text (re-baked fresh - the repo backup held only a single old 1-frame 412 sprite,
+  and P069 had composited flames into it). offset 0,18 is screenshot-tunable.
+- HITS text (PurpleHits.sff, font5): re-baked with a heavier outline (outline_w 1->2) while KEEPING the letter-body
+  weight (thick=1), and the 'I' made slightly thicker (thick=2). Purple 2-tone + italic preserved.
+- COUNTDOWN CLOCK -> white. The timer used font3 (gold Arcade), which is shared with the combo number (font6), so it
+  couldn't be recolored in place; and the engine's font color param is a setColor MULTIPLY (can't brighten gold to
+  white). Baked a white Jersey10 digit font into the FREE font2 slot (Timer.def + Timer.sff; font2's only prior ref
+  was commented out and Timer.def was missing) and switched [Time] counter*.font 3 -> 2. Combo number stays gold.
+- POPUPS lowered: [Action] team1/team2.pos.y 377 -> 440 (off the fighters' heads, still above the meter). Tunable.
+- SHIPPED: data/fight.def + data/fight.sff + data/ikemen1/fonts/{Timer.def, Timer.sff, PurpleHits.sff}.
