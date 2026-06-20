@@ -687,3 +687,373 @@ best-guesses that WILL need tuning from Raven's in-engine test. Bars/fills/meter
 hidden) - it's a clean INSTANT swap, NOT a sliding animation; a smooth slide needs a Lua mod to the lifebar
 draw script (offered as next step). Recoverable HP = tag red layer (14,0); exact regen depends on tag config.
 
+## [P042] Power bar — height + thickness + missing fill + MAX animation (one pass)
+Tested screenshots: my P041 engine power bar sat mid-screen, empty, no MAX (vs Chun-Li SF3 / Iori K-GROOVE
+which are thin + bottom = the target). Root causes + fixes:
+  - HEIGHT: P041 wrongly moved pos y 901 -> 668 thinking 901 was off-screen. On the 4:3 screen the lifebar
+    space is ~960 tall, so 901 IS the bottom. RESTORED pos to 574/706,901.
+  - MISSING FILL: P041 rewrite (axis 0,0 + positive range.x + front.offset) doesn't render. REVERTED to the
+    original working geometry: right-edge axis + range.x -9,-484 (p1) / 9,484 (p2). Fill now draws.
+  - STRETCH/BLUR + THICKNESS: every scale 2.35,1.4 -> 1,1, and re-authored sprites at final size but THIN
+    (~16px) to match Chun-Li/Iori. (range.x does NOT inherit element scale, per original author note, so it
+    stayed -9,-484 and still matches the 484px sprite at scale 1,1.)
+  - MAX ANIMATION: new dedicated bright fill sprite 43,1 (white-gold), wired to frontMax with palfx.add +
+    palfx.sinadd (pulsing additive glow) = the cool MAX strobe. Top charge tiers also ramp brighter.
+fight.sff: replaced 40,0 (490x16) + 43,0 (484x10) thin, added 43,1 (484x10 bright MAX). 118 sprites, all decode.
+fight.def: [Powerbar] rebuilt from the original (kept pos/range/counters/levelbars/level-snds), de-stretched,
+MAX enhanced, counters nudged for the thinner bar, stale 2.35 comments cleaned.
+Preview: menu_sprites/powerbar_fix_preview.png. SHIPPED data/fight.def + data/fight.sff.
+NOTE: fill grows from the inner edge outward (original range.x direction) - trivially flippable if wanted.
+Position/thickness should now match the custom meters; may need a small nudge from the next screenshot.
+
+## [P043] HOTFIX — startup crash (nil pointer in LifeBar.reset)
+Crash log: runtime nil pointer deref at fightscreen.go LifeBar.reset -> lb.bg0.Reset(). Cause = MY P042 sff
+rebuild: I rebuilt the node table from scratch and wrote the link field as a 4-byte int (-1), which set the
+SFFv2 link (a uint16 at node offset +12) to 65535 on ALL sprites. Ikemen treats any nonzero link as a LINKED
+sprite pointing to that index; #65535 doesn't exist, so the lifebar bg0 sprite (10,0) resolved to nil and
+reset() dereferenced nil -> crash on the first round, before the match could draw.
+FIX: zeroed the link field (uint16 @ +12) on all 118 nodes. Verified: link all 0, all sprites decode, and node
+metadata (link,fmt,coldepth,palidx,flags) now matches the original byte-for-byte (0 mismatches). fight.def
+unchanged (the def was fine; this was purely the sff). Re-shipped data/fight.sff.
+LEARNING (added to card): SFFv2 sprite-node link is a uint16 at +12 (NOT int32). A full node-table rebuild MUST
+keep link=0 (and palidx=0, flags=0) for normal fmt-12 sprites. Prefer in-place node edits (P041 method) over a
+from-scratch rebuild - the in-place method preserves these fields automatically and is why P041 didn't crash.
+
+## [P044] HOTFIX — round-start crash: 9 lifebar sections were deleted by the P042 regex
+After P043 (link fix) the game booted and select worked, but ENTERING a round still crashed in LifeBar.reset
+(same nil-deref). This was a SECOND, independent P042 bug. The [Powerbar] replacement regex
+`;?-*\s*Powerbar.*?\n\[Powerbar\]` (DOTALL) matched the word "Powerbar" INSIDE the [Files] line
+`font4 = ikemen1/fonts/PowerbarNum.def`, then `.*?` ate everything from there to the real [Powerbar] header —
+silently DELETING 9 sections: [FightFx], [Lifebar], [Simul Lifebar], [Simul_3P/4P Lifebar], [Tag Lifebar],
+[Tag_3P/4P Lifebar], [Turns Lifebar]. With no lifebar config, readLifeBar() built empty health bars whose
+bg0.anim was nil, and FightScreen.reset()'s unguarded loop (lifeBars[i][j].reset(), fightscreen.go:5483 ->
+LifeBar.reset:631 -> lb.bg0.Reset()) dereferenced the nil on round 1. (fight.def went 87 -> 78 sections; the
+font4 line was corrupted to `font4 = ikemen1/fonts/;----- Powerbar...`.)
+FIX: recovered the clean pre-corruption fight.def from repo git commit 23b9580 (87 sections) and rebuilt via a
+positional section merge: restored [Files] + the 9 deleted sections from the clean commit, and carried over
+every section I'd intentionally edited (de-stretched [Powerbar] with thin 40,0 + 43,0 fill + 43,1 MAX strobe;
+[WinIcon] at 150,82 below the HP bars; [Tag_2P Name] partner-name hide) from the live file. Verified: 87
+sections; all lifebar configs present and referencing the restyled sff sprites (10-14, xshear 3); [Files]
+font4=PowerbarNum.def with no junk; EVERY live bar/win sprite ref resolves in fight.sff (no nil-anim risk).
+fight.sff unchanged from P043.
+LEARNING: NEVER anchor a section-replacement regex on a bare keyword. The keyword can appear inside an
+unrelated line (here "Powerbar" inside the font filename "PowerbarNum.def"); with DOTALL the match then spans
+across whole sections and deletes them with no error. Always anchor section edits on the literal `[Header]`
+(e.g. `(?m)^\[Powerbar\][^\[]*`) or parse into sections and replace by exact name. The repo's git history
+is the recovery source when a file gets structurally corrupted (git show <commit>:data/fight.def).
+
+## [P045] Power bar: definitive fill mechanic + gold numbers + flashing-yellow MAX
+Investigated the recurring "fill stops at a set point, higher levels empty" bug against the Ikemen engine
+source (PowerBar.step/draw, resolvePBKey, calcBarFillRect), the DeepWiki Lifebar System doc
+(deepwiki.com/ikemen-engine/Ikemen-GO/6.1-lifebar-system), and the repo CvS reference chars (cvsryu etc.).
+ROOT MECHANIC (the thing I kept getting wrong): the fill's MAX REACH = range.x span x scale, INDEPENDENT of
+the sprite width. To lengthen the bar you must extend the frame sprite (40,0) + fill sprite (43,0/43,1) +
+range.x span TOGETHER; extend one alone and the fill stops at the shortest = the historical bug. Also:
+without levelbars, a high-powerMax char barely fills a continuous bar (reads as "stops early, levels empty").
+Current state already has levelbars=1 (CvS stocks, each level refills) + matched range.x (476 span vs 484 fill)
++ fully-opaque fill sprites (verified pixel-by-pixel), so the fill itself is correct now.
+CHANGES: (1) Level NUMBERS blue (palfx.mul 110,185,255) -> gold (255,205,90) on all 24 counter elements
+(counter + counter1000..10000 + counterMax, both sides); tunable. (2) MAX state: replaced the fast strobe
+(sinmul 48,48,48,6 + sinadd 140,110,30,5) with the LIFEBAR low-HP technique - a brightness pulse
+(palfx.sinmul 128,128,128,15, same period as the [Lifebar] front low-HP flash) + a subtle warm-yellow add, so
+MAX now "flashes yellow" like the lifebar at low HP instead of strobing. (3) Added a FILL MECHANIC doc block
+at the top of [Powerbar]. fight.sff unchanged.
+RECOVERY NOTE: an intermediate edit truncated fight.def to 0 bytes (a Python latin-1 write choked on an
+em-dash AFTER open('w') had already truncated the file). Rebuilt from git (clean 23b9580 base + my edits from
+b889bd2 via the P044 positional merge), re-applied, verified in a temp, then copied.
+LEARNING: writing Shift-JIS/latin-1 files in Python must be ASCII-safe - one non-latin char (em-dash) in a
+write() after open('w') truncates the file then raises, leaving it EMPTY. Always write a temp + verify +
+copy; never open('w') the live file with unverified content. Also keep '[' out of .def comments (it fools
+^\[ section-boundary regexes, incl. my own verify).
+
+
+
+## P046 - Power bar cleanup + lifebar color-tier fix + win-icon move + box restore
+ROOT CAUSE, "red HP appears at ~50%": engine picks the lifebar health tier as
+fv = largest key k where life >= k/100 (keys 100/50/25/0). So front50 shows 50-99%,
+front25 shows 25-49%, front (critical) shows 0-24%. front25's sprite was RED (13,2),
+so red appeared the instant HP dropped below 50%. And the 0-24% critical tier (front)
+used a GOLD sprite (13,3) + brightness pulse -> looked like a MAX-power flash, not danger.
+  FIX: front25 -> gold sprite 13,1 recolored ORANGE via palfx.mul 256,195,100.
+  front (0-24%) -> RED sprite 13,2 + faster brightness pulse sinmul 128,128,128,8 = flashing red.
+  Progression now: gold (50%+) -> orange (below 50%) -> flashing red (below 25%).
+POWER BAR rebuilt to the clean reference structure (data/ilifebar): removed all
+front500..front10000 + counter1000..counter10000 cruft (13 front elements -> 2). With
+levelbars=1 the single `front` (43,0) drives EVERY level's fill; `frontMax` (43,1) is the
+max skin. range.x=-9,-484, levelbars=1 unchanged. This removes the per-level front
+elements that were the likeliest cause of "fills level 0, then never fills" (any one of
+them failing to render leaves higher levels blank; `front` is known-good and used for all).
+RESTORED level-number box: sprite 44,0 (202x18) re-added as p1/p2.bg2 at the counter offset.
+All powerbar elements -> layerno=2 (consistent, above fighters); removed stale EXPERIMENT comments.
+WIN ICONS: outer ends (150/1130) -> inner ends (600/680), toward center.
+fight.sff unchanged. 87 sections. (9000,0 face refs load from each char's own sff - false positive in my sff check.)
+OPEN: "charges once then stops" is powerMax-dependent. levelbars refills per 1000 power; a
+char with powerMax=1000 maxes after ONE fill (looks like "never fills again"). SF3_Blanka_FRS
+= powerMax 2160 (fills twice then maxes). Family C (blanka/dhalsim) uses this default bar.
+NEED: which char shows the bug + its [Data] power= to confirm mis-build vs correct low-level behavior.
+
+
+## P047 - THE misalignment: 8 lifebar sections (tag mode != the section I was editing) + MAXIMUM-graphic glitch + empty-max
+CORE INSIGHT (why my P046 lifebar colors "didn't work" in game): Ikemen uses a DIFFERENT lifebar
+section per team mode. There are 8: [Lifebar] (1v1), [Simul Lifebar], [Simul_3P/4P Lifebar],
+[Tag Lifebar], [Tag_3P/4P Lifebar], [Turns Lifebar]. This is a 2v2 TAG game -> the active health
+bars come from [Tag Lifebar], which I never touched. There is only ONE [Powerbar] (shared), which
+is why the power changes DID show but the health colors did not. I had been fixing the 1v1 bar.
+  FIX: applied the tier recolor to ALL 8 sections and ALL players (p1..p4, incl. teammate prefixes):
+  front25 -> gold 13,1 + palfx.mul 256,195,100 (ORANGE, 25-49% HP); front (critical) -> red 13,2 +
+  sinmul 128,128,128,8 (flashing red, 0-24% HP). Confirmed via uploaded nightly src/fightscreen.go
+  that tier selection is fv = largest key k where life >= k/100 (front50=50-99, front25=25-49, front=0-24).
+MAXIMUM-GRAPHIC GLITCH (the red "MAXIMUM!" bar cut off on P1, visible on P2): sprite 44,0 (202x18,
+red, RGB 192,64,24) is the engine's "MAXIMUM!" indicator - the nightly uses it as frontMax.spr. In
+P046 I MISIDENTIFIED 44,0 as a "number box" and added it as p1/p2.bg2 at offset +/-515, so it rendered
+permanently, off-screen-left on P1 and visible on P2. There was never a 44,0 number box. REMOVED bg2.
+EMPTY MAX METER: engine clips even frontMax to the power-based fill rect; power = 1.0 at max for ANY
+powerMax (the level cap powerMax/1000-1 cancels). The cream sprite 43,1 I used for frontMax read as
+empty in game; switched frontMax.spr 43,1 -> 43,0 (the gold sprite that demonstrably fills as the bar
+charges) + keep the flashing palfx. Max should now be a full flashing gold bar.
+SCALING NOTE (user asked): localcoord=1280,720 (same in nightly). Powerbar pos y=901 sits BELOW the
+16:9 frame; it renders on the user's setup but the position is aspect-dependent - flag if aspect changes.
+fight.sff unchanged. 87 sections. ASCII-clean. (9000,0 = char-portrait from char's own sff; 42,0 = commented mid.)
+OPEN: (1) confirm empty-max fixed in game. (2) Power bar wanted THICKER + DIAGONAL/sheared box like the
+lifebar (xshear) and SF3 - sprite re-author of 40,0 frame + 43,0 fill, do after fill behavior confirmed.
+(3) nightly color-codes each level (front1000=blue..front3000=red etc.); mine is single gold - re-add if wanted.
+
+
+## P048 - empty-max ROOT CAUSE (layerno) + concept shape (diagonal + thicker)
+EMPTY MAX METER - real cause: frontMax was the ONLY powerbar element with no layerno line, so it
+defaulted to a hidden layer while bg0/bg1/front were layerno=2 -> at max the gold fill rendered behind
+everything = empty bar (frame still visible). The 43,1->43,0 sprite change in P047 was a red herring
+(both fill fine; the layer was the problem). FIX: added p1/p2.frontMax.layerno = 2. Max should now be
+a full gold bar flashing yellow (palfx.sinmul 128,128,128,15 + warm add), matching the old behavior.
+CONCEPT SHAPE implemented (colors were already on-concept: frame 40,0 = dark purple 59,41,47, fill
+43,0 = gold 242,192,97):
+  - DIAGONAL: added xshear to bg0/front/frontMax - p1.=3, p2.=-3 (mirrored exactly like [Tag Lifebar]
+    bg0/front which use xshear 3 / -3 + facing -1). xshear is a universal Lay property (anim.go ~1194 +
+    motif.go ini:"xshear"), so the powerbar honors it just like the lifebar. Bar now leans like SF3/lifebar.
+  - THICKER: scale.y 1->1.4 on bg0/front/frontMax. Sprites anchor axisY=0 (top) so growth is downward;
+    shifted offsets up (bg0 y:3->-3, front/frontMax y:4->0) to keep the bottom edge fixed (bar at y=901
+    is near the 4:3 bottom). range.x (horizontal fill reach) is unaffected by scale.y, so fill still works.
+fight.sff unchanged. 87 sections. ASCII-clean.
+OPEN/TUNE: confirm in-game - (a) max fills + flashes, (b) diagonal looks right, (c) thickness. scale.y
+and offsets are tunable; if the 1.4x vertical stretch looks soft, re-author 40,0 frame + 43,0 fill taller
+(native ~24px like lifebar 13,0) for crisp edges - that's the only remaining step for a pixel-perfect bar.
+
+
+## P049 - pixel font (timer/combo/alerts) + tag bench texture + tag z-order + win-icon nudge
+FONTS -> font8 (Pixel.def, the project pixel font):
+  - [Time]: timer counters font 2 (Timer.def) -> 8.
+  - [Combo]: counter numbers font 6 (ComboCounter.def) -> 8 AND combo text ("Hit!"/%) font 7 (HitNum.def)
+    -> 8, so the whole combo readout is the pixel font. Rainbow-by-count palfx (counter10..100) kept.
+  - [Action]: combat alert text font 5 (Action.def) -> 8.
+  Alt fonts available if a different look is wanted: font7 HitNum, font9 Round, font4 PowerbarNum.
+TAG BENCH (tagged-out) TEXTURE - root cause: bench bars p3/p4 use sprite GROUP 20-24 (435x11, untextured)
+  while active p1/p2 use textured 10-14 (435x24). P047 had half-fixed it (low-HP tiers pointed at 24px 13,x,
+  high-HP still on untextured 23,x) = inconsistent, untextured at high HP. FIX: pointed every bench element
+  at the matching ACTIVE textured sprite and scaled to bench height:
+    bg0 20->10, top 21->11, mid 22->12, red 24->14, front100 23,0->13,0, front50 23,1->13,1
+    (front25=13,1+orange, front=13,2+flash already correct from P047). Added scale = 1,0.46 to every bench
+    element (24px sprite -> ~11px, matching the native bench size). axisY=0 so it thins from the top, aligned.
+  Removed p3/p4.scalefill (was =1) so the bench CLIPS via range.x like the active bar (texture stays fixed
+  instead of stretching) - identical range.x=15,-460 to the active, so it clips the same way.
+TAG Z-ORDER (active over bench): tag bars had NO explicit layerno (all default = same layer, last-drawn p3/p4
+  bench covered the active). Set active p1/p2 elements layerno=2, bench p3/p4 elements layerno=1 -> the
+  tagged-in bar now always draws on top of the benched bar. (Tag convention: p1/p2 = point/active slots,
+  p3/p4 = assist/bench slots, engine tracks which char each shows, so active stays on top through tags.)
+WIN ICONS: p1/p2.pos -> 600,92 / 680,92 (nudged down to sit clearly under the lifebar). x/y still tunable.
+fight.sff UNCHANGED (texture done by sprite-ref remap, no re-author). 87 sections. ASCII-clean. All Tag
+Lifebar sprite refs resolve.
+OPEN/TUNE: confirm in-game - (a) bench textured + not stretching, (b) active overlaps bench on tag,
+(c) timer/combo/alerts in pixel font, (d) win-icon position. NOT YET DONE: same bench-texture + z-order pass
+on [Tag_3P Lifebar]/[Tag_4P Lifebar]/[Simul*] (only [Tag Lifebar]=2v2 done). Bench scale.y=0.46 is a 24->11px
+downscale - if it looks soft, re-author 20-24 natively at 11px. Timer COLOR (red/pink warning palfx) left as-is.
+
+
+## P050 - bench lifebar RE-AUTHORED (native 11px our-style sprites) + counter bump
+Why P049's bench fix didn't work: P049 pointed the bench at the active textures (10-14, 435x24) with
+scale = 1,0.46 to thin them. That render-time squish DESTROYED the outline box + texture detail, so at
+50-100% HP the bench read as a plain/"default" bar and only the orange palfx tier (25-49%) looked "ours".
+Squishing a 24px outlined frame to 11px is the wrong tool (same lesson as the bench in earlier notes).
+FIX = re-author the native bench sprite group 20-24 (435x11) to BE our style at crisp native size, then
+use it cleanly with no scale:
+  SFF SURGERY (fight.sff, append+repoint, no data shift):
+    - 20,0 frame: redrawn 435x11 solid dark-purple box (16,11,22) + crisp 1px light-purple outline (78,60,98)
+      = "our outline box" that survives at 11px (a downscale could not).
+    - 23,0-3 fills: LANCZOS downscale of active 13,0-3 (gold/red gradients downscale cleanly).
+    - 21,0 top<-11,0, 22,0 mid<-12,0, 24,0-1 red<-14,0-1 (downscaled).
+    - Method: SFFv2 PNG block = [4-byte uint32 LE raw-len = w*h*4][PNG]. Appended 9 blocks at file end,
+      set each node dataOffset=(pos-LD)/dataLength=len(block), extended ldata len @0x38, moved tdata off
+      @0x3C to new EOF (tdata was empty). fight.sff 629820 -> 631493 bytes (+1673). Old data orphaned, harmless.
+      Re-read all 9 sprites from the written file to confirm they decode.
+  CONFIG ([Tag Lifebar] p3/p4): reverted to native group (bg0 20,0 / top 21,0 / mid 22,0 / red 24,0 /
+    front100 23,0 / front50 23,1 / front25 23,1+orange / front 23,2+flash). REMOVED the 1,0.46 scale.
+    Restored scalefill=1 (match active fill behavior). Kept layerno=1 (under active p1/p2 = layerno 2).
+  Z-ORDER / RED POKE: native 11px = no scale property to misbehave (a likely cause of the bench rendering
+    tall and poking into p1 in red). Also aligned bench x to the active: p3 607,34 -> 595,34 (under p1),
+    p4 672,34 -> 684,34 (under p2), so the bench no longer juts past the active's right edge.
+WIN-ICON COUNTER (round-win count): p1/p2.counter.scale = 1.4,1.4 (larger) + offset 0,5 -> 0,-3 (raised).
+  NOTE: "the counter" assumed = the WinIcon round-win counter (no counter element exists in [Tag Lifebar]).
+87 sections, ASCII-clean, all Tag Lifebar sprite refs resolve, tier palfx (orange/flash) preserved.
+OPEN/CONFIRM: in-game - (a) bench is our box+gold at ALL hp (not just orange), (b) no red poke over p1,
+(c) counter size/height. If "the counter" meant something else, say which. NOT DONE: same native-sprite
+bench treatment is only on [Tag Lifebar]=2v2; Tag_3P/4P + Simul still use the old untextured 20-24 look
+(but the sprites themselves are now re-authored, so those modes get the new box too if they reference 20-24).
+
+
+## P051 - timer gold + names font + win counter bold + combo "HITS!" + powerbar fill slant
+TIMER ([Time]): all counter palfx.mul red/pink (256,0,0 / 256,128,128) -> GOLD 255,205,90. Low-time sinmul
+  pulse kept (now a gold pulse). (User offered gold OR white; went gold to match bars - white is a 1-line swap.)
+CHARACTER NAMES (under icons, all lifebar sections): font 3 (Menu2Small) -> font 8 (Pixel), colors/white kept.
+WIN COUNTER ([WinIcon] round-win count): font 4 (PowerbarNum) -> font 7 (HitNum, bold) per "bolder, not the
+  timer's font". scale 1.4 -> 1.15 (HitNum renders bigger). Position kept at 600/680 (inner ends = between bars).
+COMBO ([Combo]): text "H!\n%p%" -> "HITS!" (all tiers). counter (number) scale 1.6 = big. text (HITS!) palfx
+  gold 255,205,90 + offset 78,40 to sit to the RIGHT of the big number. team1/team2.pos raised y 260 -> 232.
+  Rainbow-by-count number palfx kept. NOTE: 78,40 offset is a first guess - combo layout needs in-game eyes.
+POWERBAR FILL SLANT ([Powerbar]): p1/p2 front + frontMax got scalefill = 1. WHY: the frame (bg0) shears via
+  xshear so the box leans, but the FILL used range.x clipping = vertical (straight) leading edge despite its
+  xshear. scalefill makes the sheared sprite scale to the power so its slanted edge becomes the leading edge
+  (exactly how the lifebar slants). EXPERIMENT/REVERSIBLE: powerbar also uses levelbars=1 (per-level sweep);
+  if the sweep renders wrong, delete the two scalefill lines. Flagged to user to test.
+87 sections, ASCII-clean.
+DEFERRED - LEVEL NUMBERS -> "logo text": the logo ("ARCADE ALLSTARS ULTIMA") is a CUSTOM GRAPHIC (bold
+  ITALIC, gold gradient, white outline, dark drop-shadow) - NOT a font. There is no logo font to point font4
+  at. To match it the power level numbers (counter/counterMax, currently font4 PowerbarNum) need custom 0-9
+  (+M) glyphs authored in that style as a NEW bitmap font (sff + .def in ikemen1/fonts/) - a self-contained
+  asset job. Planned as the next focused step (get the Ikemen bitmap-font format + glyph quality right).
+OPEN/TUNE: combo HITS! offset; win-counter exact spot/size; timer gold-vs-white; powerbar slant test.
+
+
+## P052 - level numbers -> custom "logo-style" bitmap font (LogoNum)
+The power level numbers wanted the LOGO look (bold ITALIC, gold gradient, white outline, dark drop-shadow).
+The logo is a custom graphic, and font4 (PowerbarNum) is a FNT v2 bitmap font of MONO glyphs tinted gold by
+palfx - a tint can't add a gradient/outline/shadow, those must be baked into the glyph art. So:
+NEW FONT LogoNum (drop-in, place both in ikemen1/fonts/):
+  - LogoNum.sff: 11 glyphs (group 0, ASCII 48-57 = 0-9, 77 = M), PNG32, 30px tall to match the originals.
+    Glyphs generated from DejaVuSans-BoldOblique (bold+italic) + baked: dark drop-shadow, 2px white outline,
+    vertical gold gradient (light gold 255,228,78 -> deep gold 201,138,28). Built by cloning PowerbarNum.sff
+    and swapping each glyph (append+repoint, axisX=0, axisY kept). Re-read all 11 to verify decode.
+  - LogoNum.def: FNT v2 bitmap, cloned from PowerbarNum.def (name + File -> LogoNum).
+fight.def: registered font10 = ikemen1/fonts/LogoNum.def. In [Powerbar] ONLY, p1/p2 counter + counterMax
+  font 4 -> 10, and palfx.mul 255,205,90 -> 256,256,256 (neutral: gold is baked into the glyphs now).
+  font4/PowerbarNum LEFT UNTOUCHED - AI win/lose messages still use it.
+NOTE: glyph horizontal anchor set to left (axisX=0); if a digit sits a few px off, nudge counter.offset.
+87 sections, ASCII-clean. fight.sff unchanged since P050.
+NEW DELIVERABLES the user must drop in: data/ikemen1/fonts/LogoNum.def + LogoNum.sff.
+
+P053 (combo + timer fonts; POWERBAR SLANT ROOT-CAUSE: xshear/scalefill are NO-OPS)
+- COMBO ([Combo]): number font 8(Pixel) -> 7(HitNum, bold), scale 1.6 -> 2.2; rainbow palfx kept.
+  HITS! text font 8 -> 1(Menu2), offset 78,40 -> 8,20 (tight gap + raise next to the number).
+  Engine (LifeBarCombo.draw): x is advanced by the number's TextWidth, number drawn right-aligned to x,
+  HITS! drawn at x + text.offset (AFTER the number's right edge). So HITS! follows the number width =>
+  no 999-hit overlap is possible regardless of digits. text.offset.x = gap after number; text.offset.y =
+  vertical sit. ALIGNMENT IS IN-GAME TUNING (text.offset x/y + counter.scale).
+- TIMER ([Time]): all counter*.font 8(Pixel) -> 10(LogoNum) = same font as the level numbers; palfx.mul ->
+  256,256,256 (neutral; gold/outline baked into glyphs); scale -> 1.5 (was tiny); cyan sinmul 0,128,128 ->
+  80,80,80 (brightness pulse, no color cast). LogoNum has 0-9 (timer digits fine). EDGE: infinite-time shows
+  "o" which LogoNum lacks - add an 'o' glyph if infinite rounds are used. framespercount=60 is STANDARD
+  (1s/tick @60fps); the "2s/tick" feel is a game-SPEED setting, NOT [Time] - do NOT touch framespercount.
+- POWERBAR SLANT - ROOT CAUSE (engine source common.go): **xshear AND scalefill are NOT real Ikemen-GO
+  Layout properties.** Layout struct (common.go ~565) = offset/facing/vfacing/layerno/scale/angle/window ONLY.
+  Layout.DrawAnim hardcodes the shear param to 0. So every xshear= and scalefill= line ever placed in
+  [Powerbar]/[*Lifebar] did NOTHING. Commented out 48 such no-op lines in [Powerbar].
+  MEASURED the sprites: frame bg0 40,0 = straight 490x16 rectangle (opaque edges AND gold-outline left edge
+  vertical at EVERY row); bg1 41,0 fully transparent; fill 43,0 = straight rectangle. => the power bar was
+  NEVER actually slanted - the prior xshear "slant the box" config was a no-op the whole time, and the fill
+  already matches the (straight) frame. TO ACTUALLY SLANT: bake a parallelogram into BOTH 40,0 and 43,0
+  sprites (real sprite re-author). Offered to Raven pending go-ahead on direction/amount.
+- fight.sff: a harmless +155-byte no-op (identical fill 43,0 re-appended during a 0-shear test) is in the
+  LOCAL copy only; NOT shipped; functionally identical to P050. Live fight.sff stays P050.
+- SHIPPED: data/fight.def ONLY. Combo uses fonts 7(HitNum)+1(Menu2), timer uses 10(LogoNum) - all already
+  registered/present (LogoNum from P052). No new sff/font files needed.
+
+P054 (combo tier-fix + win-pip reposition + POWERBAR SLANT BAKED IN)
+- COMBO 10-HIT GLITCH FIXED: [Combo] has TIER sub-elements counter10..counter100 (the rainbow) AND
+  text10..text100 (HITS! per tier). P053 only updated the BASE counter/text, so at 10 hits the engine
+  swapped to the stale tier (font8 pixel + offset 78,40) = the "revert to old look + lose color" the user saw.
+  Now ALL tiers updated: counter* -> font6 (ComboCounter) scale 0.9; text* -> font1 (Menu2) offset 8,20.
+  Rainbow palfx on the counter tiers KEPT (only font/scale changed). No more 10-hit revert.
+- COMBO FONT: number -> font6 ComboCounter = the closest match to LogoNum (same bold gradient+outline
+  treatment; silver vs gold, upright vs italic; the dedicated combo font; digits-only). Its light gradient
+  takes the rainbow palfx tints cleanly (tinted gradients with dark outlines). HITS! -> font1 Menu2
+  (ComboCounter has no letters). PIXEL-FONT ANSWER for Raven: the only LITERAL pixel font is "Pixel" (font8,
+  the basic blocky one he disliked); ComboCounter is closest IN SPIRIT to LogoNum but is smooth, not pixel.
+  counter.scale 0.9 is TUNABLE.
+- WIN PIPS ([WinIcon]): p1.pos 600->320, p2.pos 680->960 (y=92 kept) so the round-win icons sit under each
+  player's bar instead of clipping in the center gap. Bars: P1 right-edge x=595 (extends left), P2 left-edge
+  x=684 (extends right); localcoord 1280x720. X is TUNABLE.
+- POWERBAR SLANT BAKED (the real fix - xshear/scalefill are engine no-ops): sheared frame 40,0 (490x16->493x16)
+  and fill 43,0 (484x10->486x10) into matching "/" parallelograms, slope 0.2. RIGHT-EDGE ANCHOR PRESERVED:
+  canvas expanded leftward, axisX shifted by the lean (490->493, 484->486) so the bars render in the SAME spot.
+  Fill is windowed - clip still works (window is screen-space); body leans, charging leading edge stays a
+  vertical cut (natural). P2 mirrors via facing. NOTE: bg0/front scale 1,1.4 stretches vertically, so the
+  displayed lean is a touch shallower (~8deg) than the baked slope - raise the slope if more lean is wanted;
+  direction is "/" and easy to flip. fight.sff +600 bytes (2 appended sheared sprites).
+- SHIPPED: data/fight.def + data/fight.sff. ComboCounter/Menu2 already in the build (no new font files).
+
+P055 (combo font -> Anton bitmap font; smaller, no overlap)
+- Raven picked Anton from the P-preview. Baked a styled Anton bitmap font (FNT v2): glyphs 0-9 + H I T S !
+  (the combo number + "HITS!"). Italic skew baked (~0.17); DARK outline (so rainbow tier-tints keep contrast);
+  light white->silver gradient fill (so palfx tints show as colored gradients). Each glyph = tight bbox + 3px
+  right gap => cannot overlap. The old "too large + overlapped itself" was ComboCounter sizing/spacing, not the
+  font. ~43px native. NEW FILES: data/ikemen1/fonts/Anton.def + Anton.sff. Registered font11.
+- [Combo]: ALL tiers (counter + counter10..100, text + text10..100) -> font11. counter.scale 0.9->0.8 (number
+  ~34px); text.scale added 0.55 (HITS! ~24px, smaller than number); text.offset 8,20->8,10. Rainbow palfx on
+  counter tiers KEPT; gold palfx on HITS! KEPT (tintable gradient => both still color per tier).
+- TUNABLE: counter.scale (number size), text.scale (HITS! size), text.offset (gap x + baseline y).
+- NOTE: combo outline is DARK (needed so the rainbow fill keeps contrast); meter/LogoNum uses a WHITE outline.
+  For exact meter-match (gold fill + white outline) Raven would drop the rainbow = a re-bake. Glyph set is
+  digits+HITS! only; if the combo text changes, glyphs must be added.
+- SHIPPED: fight.def + ikemen1/fonts/Anton.def + Anton.sff. fight.sff unchanged this turn.
+
+P056 (font-slot cap discovery + remap; fixes invisible combo AND restores timer + level numbers)
+- ROOT CAUSE: Ikemen lifebar font slice is hard-capped -> `type Lifebar struct { ... fnt [10]*Fnt ... }`,
+  loader `for i := range l.fnt { LoadFile("font%v", i) }` => ONLY font0..font9 load. font10 + font11 are
+  NEVER loaded; any lifebar element pointing at them gets font[0]=-1 and is NOT drawn (lifebar.go ~162) =>
+  invisible. This silently broke the combo (font11, P055) AND the timer + powerbar level numbers (font10,
+  P052/P053) the whole time.
+- FIX (remap onto free in-range slots, fonts themselves unchanged):
+    font3 (was Menu2Small; free since names -> font8 in P051) -> LogoNum.def
+    font6 (was ComboCounter; free since combo moved off it in P055) -> Anton.def
+    all `.font = 10` refs -> 3 (timer + level numbers => LogoNum); all `.font = 11` refs -> 6 (combo => Anton)
+    font10/font11 [Files] lines commented DEAD.
+- RESULT: combo visible again (font6=Anton, loads) + timer & level numbers restored (font3=LogoNum, loads).
+- USABLE LIFEBAR FONT INDEXES = 0-9 ONLY. Remaining free slot: font5 (Action, unused). NEVER use font10+.
+- SHIPPED: fight.def + ikemen1/fonts/{Anton.def,Anton.sff,LogoNum.def,LogoNum.sff}. fight.sff unchanged.
+
+P057 (combo number raised + smidge larger; CORRECTION to combo-tier understanding; popup box identified)
+- Combo number was crowding "HITS!". Engine geometry (readLifeBarCombo + draw, lifebar.go ~1429/1516):
+  number drawn at pos.y; "HITS!" drawn to the RIGHT of the number at pos.y + text.offset.y. Raised the number
+  by lifting pos.y 232->224 and holding HITS via text.offset.y 10->18. counter.scale 0.8->0.85. team1+team2.
+- CORRECTION: readLifeBarCombo reads ONLY base `counter.` and `text.`. It does NOT read counter10..counter100
+  / text10..text100 and does NOT cycle palfx. So in stock Ikemen-GO master the combo number is a SINGLE color
+  and the numbered rainbow-tier lines are INERT. Prior "reverts at 10 hits / must hit every tier" note was
+  unverified. Kept tier edits in sync as belt-and-suspenders in case Raven's nightly differs. OPEN: confirm
+  whether the combo number actually changes color in-game.
+- Popups = lifebar [Action] element (fight.def ~2858). Box = sprite 400,0 (group 400) drawn translucent
+  AS80D128 ("shadow box"). Popup text font = font8 (Pixel). Message STRINGS are runtime-supplied (newLbMsg),
+  not stored in fight.def. NOTE: font8 is already the crispest/most-arcade font; the smooth-looking elements
+  are the Anton/LogoNum bakes (combo number, timer, level numbers).
+- SHIPPED: fight.def.
+
+P058 (popup [Action] box -> purple pixel panel, kept translucent; + arcade-pixel font direction set)
+- Replaced fight.sff sprite 400,0 (270x28, the [Action] popup "shadow box") with a purple PIXEL panel:
+  lighter-purple 1px border, vertical purple shade, subtle 2x2 dot grid, tiny pixel stars. Axis kept (135,0).
+  Kept AS80D128 translucent blend (Raven: this box stays translucent even in our style). SFFv2 append+repoint
+  (tdataLen was 0, clean append); verified decode 270x28. group 400 unused elsewhere -> safe.
+- TUNABLE: dot density, star count, purple shade, AS blend factors (in [Begin Action 400] line).
+- DIRECTION: going FULL ARCADE-PIXEL across the UI numbers. Popup text stays font8 (Pixel, already arcade).
+  Built 5-option pixel-font preview (PressStart2P, Silkscreen Bold, VT323, Jersey10, PixelifySans) w/ arcade
+  treatment. VT323 'S' mangled at small px -> dropped. AWAITING pick to re-bake combo (Anton/font6) +
+  timer&level numbers (LogoNum/font3) as crisp pixel. fight.sff bak /tmp/fight.sff.bak.
+- SHIPPED: fight.sff.
+
+P059 (full arcade-pixel HUD font baked -> Jersey 10; combo + timer + level numbers)
+- Raven picked Jersey 10 from the pixel-font preview. Baked Arcade.def + Arcade.sff (cloned Anton's PNG32
+  header - confirmed-rendering lineage): glyphs 0-9 + H I T S !, chunky pixel (logical render -> hard alpha
+  threshold to kill AA -> integer x4 upscale -> grid-stepped italic shear 0.18), gold 2-tone fill, hard dark
+  outline, drop shadow. Native glyph height 44px (~= Anton 43). 15/15 glyphs verified decode.
+- fight.def: font3 + font6 BOTH repointed to Arcade.def (one HUD pixel font for combo, timer, level numbers).
+  Combo scales KEPT (0.85/0.55; Arcade 44 ~= Anton 43). Timer counter.scale retuned 1.5->1.02; powerbar level
+  added p1/p2.counter.scale 0.68 (was default 1.0) - both x(LogoNum 30 / Arcade 44 = 0.682) to preserve sizes.
+- Popup text stays font8 (Pixel) - already arcade. LogoNum/Anton .def/.sff now orphaned (unreferenced, left in
+  build, harmless). Per-element scales tunable.
+- SHIPPED: ikemen1/fonts/Arcade.def + Arcade.sff + fight.def.
