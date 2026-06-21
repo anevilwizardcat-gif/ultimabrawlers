@@ -1274,3 +1274,444 @@ P070 (flame under combo counter as RGB + HITS heavier outline + white clock + lo
   was commented out and Timer.def was missing) and switched [Time] counter*.font 3 -> 2. Combo number stays gold.
 - POPUPS lowered: [Action] team1/team2.pos.y 377 -> 440 (off the fighters' heads, still above the meter). Tunable.
 - SHIPPED: data/fight.def + data/fight.sff + data/ikemen1/fonts/{Timer.def, Timer.sff, PurpleHits.sff}.
+
+P071 (REVERT: ULTIMA COMBO popup back to per-letter RGB vertical-bob — undo the P070 flat re-bake)
+- SCOPE: popup animation ONLY (Raven scoped this turn strictly to the ULTIMA COMBO message look). No flame,
+  no combo-counter hueshift, no lifebar/box changes. Glass-ornaments left untouched.
+- THE BREAK (diagnosed, not guessed): P069 composited flames into the popup frames; P070 then emergency
+  re-baked 412,0-13 "fresh" because the repo backup held only a single 1-frame 412 sprite. That re-bake kept
+  the traveling rainbow COLOR cycle but DROPPED the per-letter vertical BOB from P064, and shrank the canvas
+  165x24 -> 165x19 (no headroom to bob). Proof: extracted live 412,0-13 (was 165x19 png32) — all 14 frames
+  had ONE identical alpha shape (max per-column top-shift across frames = 0 = zero vertical motion). Phrase
+  itself was intact (full "ULTIMA COMBO"; an early 2-column contact-sheet misread was corrected — the word gap
+  lined up with the column split).
+- THE FIX (low-risk, faithful): REUSED the existing correct per-frame rainbow letterforms straight out of the
+  current 412 frames (so font / colors / bevel are preserved EXACTLY — no re-coloring, no re-typesetting),
+  segmented them into the 11 glyphs (U L T I M A [gap] C O M B O), and RE-ADDED the P064 per-letter vertical
+  traveling sine bob onto a taller canvas. Params: canvas 165x26, axisX=82, axisY=-1 (seats the 26px message
+  centered in the 28px box exactly like P064's centered 24px @ axisY -2), AMP=3px, PHASE_STEP=0.62 rad/letter,
+  14 frames, bob(f,j)=round(3*sin(2*pi*f/14 + j*0.62)), neutral row top=3. 14 frames now carry 14 UNIQUE alpha
+  shapes (bob restored). Verified via filmstrip-over-box previews + a motion GIF.
+- WIRING UNCHANGED: fight.def [Begin Action 4120] still cycles 412,0-13 @2 ticks; action.zss still fires
+  lifebarAction{anim:4120; timeMul:2.5; top:1} at combo >=25. Did NOT touch them.
+- SFF SURGERY: replaced 412,0-13 in data/fight.sff with new png32 blocks (fmt12; 4-byte LE uncompressed-length
+  prefix struct.pack('<I',165*26*4) before each PNG), copied EVERY other sprite byte-for-byte into a rebuilt
+  ldata, all flags=0, header [0..512) preserved, tofs->new EOF. ROUND-TRIP VERIFIED: 158 sprites both sides,
+  keys identical, 0 non-412 sprites changed (confirmed byte-identical: 431,0/431,9 RGB flame, 405,0 DANGER,
+  400,0 box, 411,0 / 407,0 messages). New 412,0 = 165x26 axis(82,-1) png32.
+- SHIPPED: data/fight.sff ONLY. fight.def + action.zss deliberately NOT shipped — their wiring is already
+  correct/unchanged and the repo copies are a previous-morning BACKUP, not live state; shipping them would risk
+  clobbering Raven's newer live def/zss. The sprite swap is self-contained.
+- EASY DIALS for Raven: bob HEIGHT = AMP (currently 3px); wave SPEED = the "2" tick value in [Begin Action 4120];
+  wave SPREAD across letters = PHASE_STEP (0.62 rad). All re-bakeable without touching wiring.
+- STILL PRESENT / NOT in this turn's scope (flagged to Raven, not silently changed): the 431 RGB flame under the
+  combo counter (P070) is untouched and still rendering for all combos; the deferred combo-COUNTER hueshift
+  feature (orange->red by hit 30, rainbow wave 34+, speed scaling to 99) is unbuilt. Ask before touching either.
+
+P072 (combo-counter: remove flame, enlarge HITS, ULTIMA threshold->35 + ARCHITECTURE FINDING on counter color)
+- SCOPE: the live combo HIT-COUNTER subsystem (fight.def [Combo] + action.zss), distinct from the ULTIMA popup.
+- *** KEY ARCHITECTURE FINDING (verified by reading src/lifebar.go, not guessed) ***
+  The combo COUNTER cannot be color-animated by count natively. Proof from engine source:
+    - LifeBarCombo.counter is a SINGLE LbText; readLifeBarCombo reads ONLY base "counter."/"text." — there is
+      NO counterNN/textNN tier loop for [Combo]. (Only [Time] has the `counter[0-9]+\.` regex + map.)
+    - LbText color = readLbText -> txt.palfx.setColor(font[3],font[4],font[5]) ONLY (one static tint).
+      Layout/ReadLayout carries NO palfx (offset/facing/layerno/scale/angle/window). Nothing reads
+      counter.palfx.mul / counter.palfx.sinmul for the counter TEXT. Those keys are never parsed.
+    - palfx.mul/add/sinmul are read ONLY for AnimLayout (bg0/top), i.e. the flame/overlay anims — not the number.
+    - Engine animates the counter ONLY via shake (counter.shake/time/mult): scale/pos pulse, no color motion.
+  => The P070 stepped-rainbow `counter10..counter100.palfx.mul` and `text10..text100` keys are ALL INERT
+     (engine ignores them). That's why the combo-counter hueshift was "deferred/unresolved": it never ran.
+  => Gold->red-by-hit, RGB color wave, per-digit bob, and count-scaled speed are NOT achievable on the engine
+     counter via fight.def / Lua / action.zss recolor. Requires a CUSTOM counter (baked colored digit sprites
+     driven by action.zss IkSys_ComboCount) — flagged to Raven, NOT built this turn (needs a prototype first).
+  => This is the cross-subsystem trap Raven warned about: tier logic valid for [Time] was wrongly applied to
+     [Combo] (P070). Documented fully in new card docs/cards/combo-counter.md + ATLAS row.
+- DELIVERED (all natively-supported, verified against the engine's actual key parsing):
+    1. FLAME REMOVED: commented out team1+team2 `bg0.anim=4131` (+offset/scale/layerno) in [Combo]. It was still
+       wired live (likely why Raven still saw it). [Begin Action 4131] def left intact; re-enable by uncommenting.
+    2. HITS TEXT ENLARGED: base `text.scale 0.55 -> 0.62`, `text.offset 0,42 -> 0,45` (both teams). Only the BASE
+       `text.` block matters (textNN tiers are inert). +3 offset guarantees the larger label never touches the number.
+    3. ULTIMA COMBO THRESHOLD 25 -> 35 (action.zss). Hits 20-34 now show AMAZING (MsgCombo20); ULTIMA fires at 35+.
+- SHIPPED: data/fight.def, data/action.zss. NOT fight.sff (popup sprites unchanged this turn). These two edits
+  assume repo-current def/zss (reflect through P070); if Raven has newer un-pushed local def/zss, flag to re-sync.
+- NOT CHANGED ON PURPOSE: inert counterNN/textNN tier blocks left in place (harmless) but annotated in-file as
+  inert so future edits don't trust them. Counter color still font-6 default; did not fake a gradient.
+- AWAITING RAVEN: pick a path for the counter color feature — (a) accept a single static counter color (native),
+  (b) greenlight a custom-counter prototype (baked digits + action.zss) for the gold->red->RGB-bob vision, or
+  (c) redirect the animated payoff onto the popup (already RGB-bobbing at 35+, P071).
+
+P073 (custom ANIMATED combo counter — Lua mod prototype, drawn BELOW default for comparison)
+- GOAL (Raven): own combo counter that animates "properly" - smooth gold->red over hits 1-34, then at 35+ the
+  number bobs with an RGB wave (per-digit, like the ULTIMA popup) whose speed scales with the combo up to ~99.
+  Placed UNDERNEATH the default counter to compare BEFORE replacing it. Closest possible, thorough, no breakage.
+- *** SUBSYSTEM CHECK (the thing that's burned us before): this is a NEW mechanism, not a reuse. ***
+  Verified from engine source which tool actually fits, and rejected the ones that don't:
+    - action.zss / lifebarAction -> REJECTED. LifeBarAction is a sliding banner-MESSAGE system (LbMsg list),
+      not a dynamic-number drawer. Can't compose live per-digit digits. (This is what the ULTIMA popup uses.)
+    - fight.def [Combo] -> REJECTED (P072 finding): single static color, no tiers, no oscillation for text.
+    - CNS/explods -> REJECTED: char-owned, world-space (move with camera), not HUD-locked.
+    - Lua HUD mod -> CHOSEN. Verified it can (a) run per match frame, (b) read live per-team combo, (c) draw
+      true-color per-digit text HUD-locked. Sources cross-checked (lifebar.go, char.go, script.go, font.go,
+      common.go, global.lua, main.lua). See new card docs/cards/lua-hud-mods.md for the full verified recipe.
+- VERIFIED FACTS used:
+    - hook: global.lua loop() -> hook.run("loop") every match frame; main.lua auto-loads external/mods/*.lua.
+    - combo: player(t) sets working char; combocount() = sys.lifebar.co[teamside].combo; char.go ~3959 does
+      `co[c.teamside].combo += h` per hit (lifebar.go only zeroes it -> a lifebar-only grep is misleading).
+    - draw: textImgNew/SetFont/Text/Color/Pos/Scale/Align/Draw. TextSprite.Draw uses DrawTtf(frgba) for TRUETYPE
+      fonts = true-color tint (clean rainbow); bitmap fonts only get multiply-palfx. => must use a TTF.
+    - ttf load: raw .ttf won't load via fontNew (loadFntV2 needs a [Def]); wrap in a .def Type=truetype, mirror
+      engine's own font/Open_Sans.def. .def in font/, ttf in font/<subdir>/.
+    - coords: fight.def [Info] localcoord == motif system.def localcoord == 1280x720; textImg coords map 1:1 to
+      the default counter pos (team1 130,224 / team2 1150,224). Drawn +72px below in compare mode.
+- DELIVERED (3 files, all shipped this turn):
+    - external/mods/ub_combo_counter.lua : auto-loaded mod. hook.add("loop",...). Reads per-team combo, draws a
+      per-digit number under the default. Phase1 (1..34) gold->red, no bob. Phase2 (>=35) per-digit rainbow wave
+      (hue starts at red) + vertical sine bob; wave speed lerps SPEED_MIN..SPEED_MAX over combo 35..99 (capped,
+      no strobe). Linger so it doesn't vanish instantly. All tunables at top (font, scale, digit advance, anchors,
+      offset_y, amp, hue spread, bob freq/spread, speeds, linger). HIDE_DEFAULT=false (compare mode).
+    - font/ub_combo.def : truetype wrapper (mirrors Open_Sans.def). File = ub_combo/ub_combo.ttf.
+    - font/ub_combo/ub_combo.ttf : prototype font (clean bold TTF; tints cleanly). To match the default arcade
+      look later, drop Jersey10.ttf in with the same filename — one-file swap, nothing else changes.
+- VALIDATION before shipping (no live engine here): compiled+loaded the Lua in lupa (LuaJIT) with stubbed engine
+  globals (no syntax/runtime errors), then simulated loop() across combos 1/17/34/35/50/99/137 and confirmed:
+  gold@1, orange@17, pure red@34, red->rainbow+bob@35, full rainbow w/ faster phase advance at higher combos,
+  team1 digits grow right from 130, team2 right-anchored at 1150 growing left, multi-digit spacing correct.
+- NOT DONE ON PURPOSE: default counter left visible (compare mode, as asked). Hiding it for full replacement is a
+  separate, to-be-verified fight.def step (don't guess the blank method). Aesthetic font swap (Jersey10) pending
+  a fetchable ttf (Google Fonts not reachable from here; repo has none). Flagged, not silently substituted.
+- HOW TO TRY: sync external/mods/ + font/ to the build (PC and Steam Deck via Drive). Watch CASE on Steam Deck:
+  font/ub_combo.def's `File = ub_combo/ub_combo.ttf` must match the real path casing exactly.
+
+P074 (HOTFIX: custom combo-counter mod caused ~15fps lag + drew nothing -> one-shot font load + fallback)
+- SYMPTOMS (Raven): no visible custom counter when comboing, AND the game dropped to ~15fps (unplayable).
+- ROOT CAUSE (diagnosed by elimination + simulation, not guessed):
+    The P073 mod lazy-loaded the font with: `if M.fnt==nil then local ok,f=pcall(fontNew,...); if ok and f
+    then M.fnt=f else return end end`. fontNew THROWS (panics) when the font file can't be resolved/loaded.
+    pcall caught the throw -> ok=false -> M.fnt stayed nil -> so fontNew was re-attempted EVERY FRAME (60x/sec:
+    disk search + parse + panic/recover). That sustained cost = the ~15fps. The same nil font = nothing drawn =
+    no visible counter. ONE cause, BOTH symptoms. Confirmed logically: once a font is cached the per-frame work
+    is ~6 text draws (trivial), so sustained 15fps can ONLY be a per-frame retry, which only happens when the
+    load throws. Most likely the custom font/ub_combo/ub_combo.ttf didn't sync to the build (nested new folder),
+    so LoadFntTtf failed on the missing ttf.
+- FIX (in external/mods/ub_combo_counter.lua):
+    1. ONE-SHOT font load behind M.fontTried -> the load is attempted exactly once total; it can NEVER be
+       retried per frame again (kills the lag regardless of why a font fails).
+    2. FALLBACK CHAIN M.FONT_CANDIDATES = {"ub_combo.def","Open_Sans.def"} tried in order, each in pcall, each
+       with a usability PROBE (fontGetTextWidth(f,"8")>0). Open_Sans.def is the engine's own bundled TTF
+       (confirmed present in repo at font/Open_Sans.def) -> guaranteed to load + tints cleanly -> counter now
+       actually renders even if the custom arcade font is missing/unsynced.
+    3. FAIL-SAFE: if no candidate is usable, ensureFont() sets M.ENABLED=false -> the loop does ZERO per-frame
+       work thereafter (no lag, draws nothing) instead of retrying.
+    4. GUARDED TICK: the per-frame body now runs inside pcall (M.loop -> M._tick); any unforeseen per-frame error
+       is caught, and after >30 caught errors the mod disables itself. No per-frame error can ever sustain lag
+       or crash the match.
+- VALIDATION (lupa / LuaJIT, before shipping; can't run Ikemen here): 
+    * worst case (every fontNew throws): fontNew called 2x across 300 frames (NOT 300), ENABLED->false, 0 draws.
+    * fallback (custom throws, Open_Sans ok): fontNew 2x, fontOK=true, renders every frame.
+    * per-frame draw error: errs capped ~31 then ENABLED->false.
+    * normal: combo 1/34/35/99 each draw the right digit count; animation logic unchanged from P073.
+- LESSON (added to cards/lua-hud-mods.md): in a per-frame hook NEVER retry an expensive load on failure; load
+  once behind a flag, fall back to a guaranteed engine asset, fail safe by disabling, and wrap the whole body in
+  pcall with an error cap. fontNew throws on bad files -> always pcall it and treat throw == not-usable.
+- SHIPPED: external/mods/ub_combo_counter.lua (fixed). Re-shipped font/ub_combo.def + font/ub_combo/ub_combo.ttf
+  (OPTIONAL now - the mod no longer depends on them; if synced they're used first, else Open_Sans). Default look
+  is Open_Sans until the arcade ttf is in place. CASE WARNING (Steam Deck): font/ub_combo.def's File path casing
+  must match the real file.
+
+P075 (combo counter STILL not visible after P074 -> coordinate-system finding + robust font + diagnostic overlay)
+- SYMPTOM: lag gone (P074 worked) but the custom counter draws nowhere visible.
+- WHAT I VERIFIED FROM SOURCE THIS TIME (the earlier assumption I should have checked):
+    * RENDER ORDER (system.go ~2112): each match frame the engine does s.draw() (scene+lifebar) ->
+      s.drawTop() (fade) -> THEN runs CommonLua (loop() -> hook.run("loop") -> our mod). Source comment:
+      "Lua code is executed after drawing the fade effects, so that the menus are on top of them." So our
+      loop-hook draws are ALREADY topmost -> the "move it to the top layer" idea is moot; layering isn't it.
+    * DrawTtf renders IMMEDIATELY (font.go, f.ttf.Printf), so loop draws composite on the presented frame.
+    * *** COORDINATE SYSTEMS ARE SEPARATE (key finding) ***: Lua draws (textImgSetPos/Scale, fillRect) use
+      sys.luaSpriteScale = SP_Viewport43[3]/320 (set in screenpack.lua) i.e. MOTIF localcoord (1280x720),
+      via the same convention as main.lua's text:create idiom (coords passed straight, scaleX~1, font via
+      fontNew(path,height)). This is NOT the lifebar's coordinate transform (sys.lifebarScale/OffsetX). Both
+      localcoords are 1280 here, but they are DIFFERENT systems -- I wrongly assumed 1:1 with the lifebar. My
+      1280 coords + scale 1.0 ARE valid on-screen motif coords (confirmed vs text:create), so coords were not
+      the bug -- but this is exactly the cross-subsystem assumption to avoid; documented in lua-hud-mods card.
+- LIKELY ACTUAL CAUSE of "no draw": the P074 usability probe (fontGetTextWidth>0) could throw or read 0 on a
+  freshly-loaded font and DISABLE the whole mod -> nothing drew, no lag (matches symptom exactly).
+- FIX + INSTRUMENTATION (P075 build):
+    * Font loader is now BEST-EFFORT: tries candidates once; uses the first that probes clean, else the first
+      that merely LOADED -> a buggy probe can no longer disable a usable font. Candidates: ub_combo.def,
+      Open_Sans.def (engine's bundled TTF, always present), f-4x6.def (bitmap last resort). Never self-disables
+      on font failure now (only the >60-error cap can).
+    * DIAGNOSTIC OVERLAY (M.DEBUG=true): every match frame draws a top-center status bar -- GREEN if a font
+      loaded, RED if all failed -- plus live "UBC <fontpath> [type]  C1:x  C2:y". This isolates, in ONE test:
+        - no bar at all      -> loop draws aren't reaching screen (deeper; unexpected per source)
+        - RED bar            -> every font load threw (missing ttf/path) -> fix font files
+        - GREEN, no text     -> font "loaded" but renders nothing (empty) -> font file issue
+        - GREEN + readout, C1/C2 change on combo, digits show below -> WORKING
+        - GREEN + readout but no digits below -> counter placement only (debug text proves text works)
+        - GREEN + readout but C1/C2 stay 0 while comboing -> combo read issue
+    * Counter now center-aligns each digit on its anchor; optional faint BACKING rect behind it so its position
+      is visible even mid-tuning. Set M.DEBUG=false once confirmed.
+- VALIDATION (lupa): all-fonts-fail -> 3 fontNew calls/120 frames (no per-frame retry), RED bar, no lag, mod
+  stays enabled to show the diagnostic. Custom-fail+Open_Sans-ok -> 2 calls, GREEN bar, readout + counter
+  digits render for combos 5/34/35/77. Compile clean.
+- NEXT: Raven runs it and reports the bar color + whether C1/C2 move when comboing. That single observation
+  pins the exact failure (or confirms it now works). NOT guessing past this point -- the overlay reports ground
+  truth from inside his build.
+
+P076 (combo counter STILL invisible incl. the diagnostic bar -> ISOLATION TEST for the draw foundation)
+- SYMPTOM: P075 showed NOTHING, not even the no-font status fillRect. "As if nothing was added."
+- REASONING CORRECTION: the P073 lag only proved the loop HOOK RUNS (per-frame fontNew = CPU cost). It NEVER
+  proved my DRAWS render. I'd been treating "loop runs" as "draws show" -- unproven. So the real unknown is
+  whether a draw issued from the hook.add("loop") callback actually composites during a match in THIS build,
+  or whether the mod even loads. Verified from source (and still consistent with "should work"):
+    * mod loader: main.lua ~4085 require()s every external/mods/*.lua and print()s "Loading module: <file>".
+    * render/present: system.go await() does gfx.EndFrame()+SwapBuffers() then DEFERS BeginFrame() (clear); the
+      frame loop is s.draw()->drawTop()->CommonLua(loop()->hook.run("loop"))->update()->await. So CommonLua
+      draws are issued before the present -> SHOULD show (dev comment: Lua drawn "on top").
+    * FillRect (render.go): trans<=0 draws NOTHING; trans==255 opaque. (My P075 green used trans=200=additive,
+      subtle; frame lines used 255=opaque.)
+  Everything says it SHOULD render, yet it doesn't -> can't resolve by reasoning, need evidence from the build.
+- ISOLATION BUILD (P076): added, as the VERY FIRST line of M.loop (before pcall, before font/combo/anything),
+  an UNCONDITIONAL opaque full-width magenta bar: pcall(fillRect,0,0,1280,110, 255,0,255, 255,0). Also a
+  load-time print("=== ub_combo_counter mod LOADED ==="). Validated in lupa: the bar draws every frame EVEN
+  when _tick throws on every call; load print fires.
+- THIS TEST DECIDES IT (one match):
+    * SEE magenta bar across the top  -> loop-hook draws DO render. Foundation is fine; the missing counter is
+      purely downstream (font/combo/coords) and I fix that next, fast.
+    * NO magenta bar, but log shows "Loading module: .../ub_combo_counter.lua" -> mod loads but loop-hook draws
+      do NOT render during fights here -> WRONG MECHANISM; pivot (investigate the correct in-fight draw hook,
+      e.g. how training-mode HUD or a real HUD mod draws). 
+    * NO magenta bar AND no "Loading module" log line -> the mod isn't being loaded at all (sync/path/location)
+      -> fix where the file lives, not the code.
+- Engine notes updated in cards/lua-hud-mods.md. No counter logic was lost; the full P075 counter remains below
+  the test bar. Once we know which of the 3 outcomes, the fix is targeted.
+
+P077 (FOUND IT: wrong registration mechanism -> rebuilt to mirror the build's own working mod)
+- Raven: no magenta bar AND no console line; but OTHER plugins (inputdisplay) DO load and work, and they don't
+  print a console line either. Also: his build is "IKEMEN - LATEST" (nightly) -> I'd been sourcing master,
+  which can differ. File is correctly at E:\...\IKEMEN - LATEST\external\mods\ub_combo_counter.lua.
+- ROOT CAUSE (sourced from HIS build's working mod external/mods/inputdisplay.lua, not master/old posts):
+    1. *** WRONG MECHANISM ***: I registered with hook.add("loop", ...). That does NOT fire in this build.
+       The PROVEN way (used by inputdisplay.lua) is `commonLuaInsert('someGlobalFunc()')`, which appends to
+       sys.commonLua (set once at startup, persists). hook.add into "loop" was the reason NOTHING of mine ran.
+    2. print() is invisible: inputdisplay.lua's own notes confirm print() goes to invisible stdout on a
+       double-clicked .exe and there's no Lua console hook. So "no console line" NEVER meant "not loaded" -- my
+       advice to check the console was wrong. (His loader DOES print 'Loading module', but it's invisible.)
+    3. font: the working mod NEVER calls fontNew. It reuses an existing motif text object,
+       motif.select_info.title.TextSpriteData (already owns a working font, engine's own text path). My fontNew
+       fight was unnecessary and a failure point.
+- FIX (P077, ub_combo_counter.lua fully rebuilt to MIRROR inputdisplay.lua):
+    * registers via commonLuaInsert('ubComboDraw()') (guarded by type check).
+    * draws via fillRect + reused motif.select_info.title.TextSpriteData (textImgSetText/Scale/Color/Pos+Draw).
+      NO fontNew, NO hook.add, NO custom font files needed.
+    * PROOF-FIRST: always-on cyan strip + "UBC C1:x C2:y" readout at top-left (same coord magnitudes as the
+      working input display => guaranteed on-screen). Then the animated counter (gold->red 1-34, rainbow wave +
+      bob 35+, speed scales to 99), per-digit via the reused sprite.
+    * combo read still player(1/2)+combocount(), pcall-guarded; the readout reveals if those return live values.
+- VALIDATION (lupa): registers 'ubComboDraw()', draws the strip every frame, readout renders "UBC C1:37 C2:0",
+  per-digit counter draws "37". Compile clean.
+- EXPECTED NOW: a cyan strip + "UBC C1:.. C2:.." at top-left during any match, and a number that animates when
+  comboing. If the strip shows but text doesn't -> the reused sprite's font path differs (I switch sprites). If
+  C1/C2 stay 0 while comboing -> swap combo source. But the cyan strip alone proves the mechanism is finally right.
+- DEAD ENDS REMOVED: hook.add("loop") approach, fontNew/ub_combo.def/ub_combo.ttf dependency, the magenta
+  isolation bar. (font/ub_combo.* can be deleted; the mod no longer references them.)
+
+P077 (BREAKTHROUGH: why nothing ever drew -> wrong APIs; rebuilt on verified ones, mirroring inputdisplay)
+- Studied the reference mods Raven pushed (docs/scoreattack/, and external/mods/inputdisplay.lua already in the
+  build) + the LIVE build scripts (external/script/main.lua, debug.lua, start.lua) + their bundled engine src.
+  This replaced my STALE master-era assumptions. Definitive file->purpose map written to
+  docs/cards/ikemen-latest-architecture.md (answers "what file changes what, and why").
+- ROOT CAUSES found (all verified, not guessed):
+  1. `commonLuaInsert` DOES NOT EXIST in this engine. inputdisplay.lua self-registers its draw via
+     `if type(commonLuaInsert)=='function' then commonLuaInsert(...) end` -> false -> never registers -> that's
+     why even inputdisplay "only shows the toggle, never draws." A contaminated combo-counter file in my workspace
+     had copied this same fabricated API. Discarded it.
+  2. `fontNew` was the prior draw failure point (load could fail/empty -> nothing visible). The engine-blessed way
+     (ScoreAttack + inputdisplay both do this) is to REUSE motif.select_info.title.TextSpriteData and draw via
+     textImgSet*/textImgDraw. No font loading.
+  3. The CORRECT per-frame registration is `hook.add("loop", name, fn)` -> fired by debug.lua's loop() (run by
+     config `[Common] Lua = loop()`) every match frame. Verified end-to-end; the old P073 lag had already proven a
+     "loop" callback runs. No config edit needed.
+- VERIFIED ENGINE FACTS (this build, nightly ~2026.04):
+  * external/script/main.lua ~3702: getDirectoryFiles (filepath.Walk, recursive) over external/mods, keeps *.lua,
+    require()s them -> BARE files AND folders both load (inputdisplay is a bare file and loads).
+  * loop() is in debug.lua (NOT global.lua, which no longer exists) and runs hook.run("loop")+hook.run("loop#"..mode).
+  * system.go renderFrame(): s.draw() (scene) -> luaFlushDrawQueue() -> drawTop(). Lua draws land ON TOP of the fight.
+  * config [Common]: States=(zss, per-frame in-fight), Modules=(extra module paths), Lua=(per-frame Lua code).
+- DELIVERED: external/mods/ub_combo_counter.lua (BARE, like inputdisplay). Registers via hook.add("loop"). Draws a
+  PROOF cyan strip + "UBC C1:x C2:y" readout (top-left, proven coords) every frame, plus the animated counter
+  (gold->red 1..34, rainbow wave + bob 35+, speed scaling to 99) near the default counter, all via the reused
+  TextSpriteData + fillRect. pcall-wrapped. Validated in lupa: compiles, hook registers, proof strip draws even
+  when the text sprite is missing (isolates hook-runs vs sprite), digits render for combo 47.
+- WHAT TO LOOK FOR: a cyan strip + "UBC C1.." at top-left during a match.
+  * see it -> the path works; combos make C1/C2 move and the counter animates. We then restyle/relocate.
+  * see nothing -> confirm save/config.ini [Common] has `Lua = loop()` (default, line ~24). If it's missing, that's
+    the gate. Fallback: add `Lua2 = ubComboDraw()` under [Common].
+- FILE->PURPOSE for future-me: passive in-fight HUD = module in external/mods + hook.add("loop") + reuse TextSpriteData;
+  it does NOT need a system.def or select.def line (those are for menus/modes/roster). See architecture card.
+
+P078 (mod LOADING clarified - 3 verified ways; config Lua line is crash-prone, do NOT edit it)
+- Raven: editing the config.ini loop/Lua line crashes; there's another way to load mods.
+- VERIFIED (main.lua ~3702-3717): modules are loaded from THREE sources into one require() list:
+  (1) external/mods/*.lua auto-load (recursive; bare files + folders; inputdisplay.lua proves auto-load works),
+  (2) config.ini [Common] Modules = <paths>, (3) system.def [Files] module = <path> (their ikemen1/system.def
+  has this line, empty). All just require the file -> run its top-level (hook.add goes there).
+- CONFIG Lua LINE: `[Common] Lua = loop()` values are run via raw DoString; any error -> RaiseError = FATAL crash.
+  That's why adding `Lua2 = ubComboDraw()` (my earlier bad suggestion) crashes. hook.add("loop") callbacks are
+  isolated from that. RULE: never edit the Lua line; rely on hook.add riding the existing default loop().
+- ACTION: ub_combo_counter.lua stays a bare file in external/mods/ (auto-loads like inputdisplay), registers via
+  hook.add("loop"), pcall-wrapped so it can't crash the match. NO config.ini change required. Documented all of
+  this in docs/cards/ikemen-latest-architecture.md so future-me stops relitigating loading.
+- TEST (no config edit): drop external/mods/ub_combo_counter.lua in, launch a match -> expect the cyan proof strip
+  + "UBC C1:x C2:y" at top-left. If still nothing, the open question is purely whether external/mods auto-load is
+  active in Raven's setup vs loading via Modules/motif module -- ask which way his loaded mods (inputdisplay) came in.
+
+P079 (GROUND-UP REBUILD of the combo counter on the fully-verified chain + a load-proof menu toggle)
+- Verified the ENTIRE per-frame draw chain in THIS build's system.go (see ikemen-latest-architecture card):
+  runMatch() -> s.action() -> Common.Lua loop() -> hook.run("loop") -> our callback;  then renderFrame() ->
+  s.draw() -> luaFlushDrawQueue() -> drawTop(). So hook.add("loop") fires every match frame AND Lua draws render
+  on top. The mechanism is 100% confirmed -> the only reason nothing showed before is the mod was not LOADING.
+- REBUILT external/mods/ub_combo_counter.lua to be STRUCTURALLY IDENTICAL to external/mods/inputdisplay.lua
+  (which is confirmed to load - its toggle shows), fixing inputdisplay's two bugs:
+    * registration via hook.add("loop", ...) (pcall-wrapped so it can't crash the match) - NOT the fake
+      commonLuaInsert (which is why inputdisplay never drew), and NOT a config.ini Lua edit (which crashes).
+    * text via reused motif.select_info.title.TextSpriteData (engine's own text path) - NOT fontNew.
+- ADDED a training-pause-menu toggle "Combo Counter" -> if it appears, the mod LOADED (proof that separates
+  not-loading from not-drawing). Plus a cyan proof strip + "UBC C1:x C2:y" readout (UBCOMBO_PROOF=true) ->
+  if those show, drawing works. Then the animated counter (gold->red 1..34, rainbow wave + bob 35+, speed to 99)
+  draws under the default counter for comparison.
+- VALIDATED in lupa: compiles, the menu toggle registers + appends to the training menu, the hook registers,
+  proof strip + readout draw at combo 0, digits render at combo 47, no crash.
+- INSTALL: drop external/mods/ub_combo_counter.lua in (auto-loads like inputdisplay). NO config.ini change.
+  Look for: (1) "Combo Counter" in the training pause menu = loaded; (2) cyan strip top-left in a match = drawing.
+
+P080 (ENGINE TRUTH: why the animated counter isn't a quick edit - read the actual draw code, stop assuming)
+- Raven confirmed: ub_combo_counter LOADS (training-menu toggle appears) but does NOT draw -> SAME as inputdisplay.
+  => EMPIRICAL PROOF that Lua mods cannot draw in-match HUD in this build. The source-traced hook.add("loop") +
+  fillRect/textImg path does not render in the running binary. Permanently abandoning the Lua-draw approach.
+- Read LifeBarCombo struct+step+draw IN FULL (lifebar.go). The counter NUMBER uses counter.palfx/frgba set ONCE at
+  load and never updated per-count/per-frame; only a shake-scale animates. No tiers, no per-count color. So a
+  gold->red->rainbow NUMBER is NOT possible via fight.def either. bg/top AnimLayouts animate but are count-
+  independent separate sprites. Documented in cards/combo-counter.md (ENGINE TRUTH section) + 3 real options.
+- The popup (baked sprite anim) works; the counter (live engine-typed number in a fixed-color font) cannot reuse
+  that technique - different systems (the exact architecture trap Raven warned about).
+- DECISION PENDING from Raven: (A) recolor counter + count-independent rainbow top-shimmer (fight.def, ships now),
+  (B) enhance the already-animated popup, or (C) build a count-driven animated number via screen-locked explods
+  from a common ZSS state (the super-meter/explod architecture that DOES render in-match; real engineering).
+  Will commit to ONE chosen path and verify its specifics before spending more usage. NO more Lua-draw attempts.
+
+P081 (EXPLOD path - verified architecture + a PROOF spawn before the full build)
+- Committed to the explod approach (the in-match sprite system super meters use; renders during a match unlike
+  Lua). VERIFIED against this build's source/data (NO guessing): explods can use SHARED fightfx sprites via
+  anim:F<n> (getDataPrefix 'f' -> sys.ffx); data/fightfx.sff + fightfx.air exist (free anims 9000+); Explod struct
+  supports postype screen-lock + palfx + pos/vel + scale + ontop + animelem; postype ZSS words front/back/left/
+  right/none; action.zss [StateDef -4], if playerNo=teamSide, already has the live combo in $ret. Full design +
+  syntax recorded in cards/combo-counter.md (EXPLOD-BASED COUNTER section) for future-me.
+- The explod compiler METHOD isn't in compiler.go (dispatched as c.explod, defined elsewhere I couldn't fetch),
+  so rather than guess a whole digit composer on unverified syntax and risk another "nothing shows", shipped a
+  PROOF first: action.zss now spawns a big spark (anim F0, postype p1, scale 3, ontop, removetime 2, re-spawned
+  each frame) above the comboing character whenever combo>0.
+- WHAT TO LOOK FOR: combo something -> a large spark appears above the attacker. 
+  * SHOWS -> explod path works in your build; next I bake 0-9 digit sprites into fightfx + spawn them screen-
+    locked under the default counter with per-frame palfx (gold->red 1..34, rainbow+bob 35+) = the real counter.
+  * DOESN'T show -> explod ZSS syntax/positioning needs a tweak (cheap), learned BEFORE the big build.
+- SHIPPED: data/action.zss only (no config change; action.zss is already loaded via [Common] States). No
+  sprite-baking yet - that's the next step once the proof confirms.
+- ARCHITECTURE NOTE for future-me: combo counter has now been correctly identified as belonging to the
+  EXPLOD/sprite + action.zss subsystem (like super meters / the popup), NOT Lua mods, NOT fight.def color, NOT
+  the lifebar counter element. Do not regress to those.
+
+P082 (DIAGNOSIS: verify the data/ channel - the basic thing never confirmed in 2 days)
+- Root realization: the ONLY change ever CONFIRMED visible was the Lua menu toggle (external/mods/, a separate
+  deploy path). NONE of my data/ edits (fight.def, fight.sff, action.zss) were ever confirmed to reach the build.
+  I kept building features on an unverified channel. Stopping to test the channel itself.
+- Mapped fight.def: counter.scale exists in [Powerbar],[Time],[Combo],[WinIcon] - the COMBO counter is
+  [Combo] team1/team2.counter (confirmed my edits target the right section; documented in combo-counter card).
+- SHIPPED: data/fight.def with [Combo] team1/team2.counter.scale = 2.4 (HUGE; was ~0.85) - pure fight.def test.
+  Also reverted P081 explod block from data/action.zss (possible invalid ZSS breaking action.zss compile).
+- DECISION TREE for Raven's next combo: HUGE counter -> data/ channel works (then animated number needs explods/
+  overlay, and P081 was a syntax issue); NORMAL-size counter -> my fight.def isn't the one rendering = sync/deploy
+  root cause; NO counter -> wrong lifebar layout active. This single test finally isolates the 2-day mystery.
+
+P083 (BREAKTHROUGH confirmed + explod test v2 with verified params)
+- *** Raven confirmed the P082 huge counter SHOWED UP -> editing data/fight.def DOES reach the build. *** Two
+  days of "nothing" on data/ files was the MECHANISM, not deployment. Reverted the diagnostic scale to 0.85.
+- Identified the combo counter correctly as the fight.def [Combo] lifebar element (NOT Lua, NOT super-meter/
+  explod logic) - the cross-subsystem confusion Raven warned about. Animated NUMBER specifically needs explods.
+- Verified explod ZSS params from char.go Explod struct + compiler.go (anim F<n> via getDataPrefix 'f';
+  space: screen = HUD-lock; postype; scale; sprpriority; ownpal; removetime; palfx.*). The P081 explod probably
+  broke action.zss COMPILE via `ontop` (legacy param) - silently killing it while fight.def kept working.
+- SHIPPED data/action.zss: explod TEST v2 using ONLY struct-confirmed params (no ontop): big spark (anim F0,
+  postype p1, scale 6, removetime 2, sprpriority 100) on the comboing char when combo>0.
+- NEXT: spark shows -> explods work -> bake 0-9 digits into fightfx.sff/air + spawn screen-locked under the
+  counter with per-frame palfx (gold->red 1..34, rainbow+bob 35+) = the real animated counter. Spark doesn't
+  show -> action.zss compile/apply issue to chase (fight.def already confirmed working).
+- Full explod design + verified params recorded in cards/combo-counter.md for future-me.
+
+P084 (the spark WORKS - fix the combo SOURCE so it persists + works for CPU)
+- Raven SAW the P083 spark - but only while PLAYING (training/arcade), never in watch mode, and as a 1-frame
+  flicker. => explods render in-match (CONFIRMED!) and action.zss applies; the problem was the COMBO SOURCE.
+- Read IkSys_ComboCount() in functions.zss: it returns the combo peak ONLY on the frame the combo ENDS (great
+  for the one-shot popup, wrong for a persistent counter = the flicker). The LIVE source is the built-in trigger
+  `comboCount` = sys.lifebar.co[teamside].combo = the SAME value the default counter uses, incremented for human
+  AND CPU hits = works in watch mode.
+- SHIPPED data/action.zss: moved the explod out of the IkSys (combo-end) gate into `if comboCount > 0 { explod }`
+  (live trigger, re-spawned each frame -> persists through the combo, CPU-inclusive). Popup still uses
+  IkSys_ComboCount(). Same minimal struct-confirmed explod params (anim F0, postype p1, scale 6, removetime 2).
+- EXPECTED now: a PERSISTENT spark on the comboing character for the WHOLE combo, in watch mode (CPU) too - not a
+  flicker. If yes -> source is right -> next: bake 0-9 digit sprites into fightfx + spawn them screen-locked
+  under the counter (space:screen + postype) with per-frame palfx (gold->red 1..34, rainbow+bob 35+) = the
+  real animated counter, working for CPU like the default.
+- Documented the live-comboCount vs IkSys_ComboCount distinction in cards/combo-counter.md (don't confuse again).
+
+P085 (REAL digit counter shipped - explods + baked fightfx digit sprites)
+- Built on the confirmed path (P084). fightfx.sff is SFFv1 (PCX/individual-palette) - wrote a v1 packer and baked
+  white digit sprites 0-9 at group 9000 (verified: PCX valid via PIL, 114 sprites, digits 0-9 present). Added
+  anims 9000-9009 to fightfx.air. action.zss now renders comboCount as explod digits (ones+tens, up to 99) above
+  the comboing char via an if/else ladder (explod anim must be literal F9000..F9009; position is an expression).
+- Fixed the gate to `comboCount > 1` (1-hit taps don't count as combos, per Raven).
+- Works for CPU + human (live comboCount source). White digits, postype p1 (proven-visible) for now.
+- SHIPPED: data/fightfx.sff, data/fightfx.air, data/action.zss.
+- TEST: combo in training/arcade AND watch (CPU) -> a white number should appear above the comboing char,
+  tracking the combo (e.g. 2..47..), persisting through the combo. (Size/position scale 2 / DW 34 / y -104 are
+  first-guesses - tunable.)
+- NEXT (documented in card): 1) move under the default counter (space:screen HUD position), 2) gold->red 1-34 +
+  rainbow 35+ color, 3) bob at 35+. DEFERRED: simultaneous P1/P2 counters, timestop freeze-then-ring-up.
+
+P086 (COLOR: gold->red + rainbow via per-frame explod palfx)
+- Verified (bytecode.go) explods embed palFX params -> `palfx.mul/add/hue/...` work on explods. Since digits are
+  re-spawned each frame, recomputing palfx each frame animates the color (no persistent-explod management).
+- action.zss now colors the counter: hits 1-34 gold->red (mul green 215->0), hits 35+ a 6-color rainbow cycle
+  whose speed scales up toward combo 99. Color stored in per-char map() vars (team1/team2 independent), applied
+  via palfx.mul on all digit explods. facing:1 to reduce mirroring. All ZSS features confirmed in functions.zss.
+- Kept postype p1 (working position) this pass - did NOT detach, to avoid moving the working counter off-screen
+  on unverified screen coords. SHIPPED: data/action.zss only (fightfx.sff/air unchanged from P085).
+- TEST: combo -> the number should go gold at low hits, shift toward red by ~34, then cycle rainbow at 35+
+  (faster the higher the combo). Works for CPU + human.
+- NEXT (documented): detach under the default counter (fixes flip + tag-team + position; needs coord tuning),
+  bob at 35+, per-digit rainbow wave, HITS labels, simultaneous P1/P2 check, timestop ring-up.
+
+P087 (FIX: P086 color never showed - palfx had no time)
+- Root cause (verified bytecode.go runSub @5915): explod palfx params parse into e.palfxdef; palFX_time sets
+  pfd.time, which DEFAULTS TO 0 = palfx inactive (0 frames) = no tint. P086 set palfx.mul but not palfx.time, so
+  the digits stayed white ("looks the same"). ownpal:1 was already correct (char.go 2049 enables palfx for
+  fightfx anims only when ownpal set).
+- FIX: added `palfx.time: -1` (active for the explod's life) before palfx.mul on all 20 digit explods. Only
+  data/action.zss changed.
+- RULE for future-me: explod/any palfx MUST set palfx.time (-1 permanent, or >0 frames) or it does nothing.
+
+P088 (DETACH: counter is now screen-anchored HUD, not tied to the character; + smaller)
+- Changed digit explods from postype:p1 (char-relative; slid off on tag-out, flipped) to space:screen +
+  postype:none = fixed HUD. Verified coord math in char.go setPos: pos.x = fraction*gameWidth (gameWidth is a ZSS
+  trigger; localscl=1 for 240-height chars), pos.y from screen center. team1 bx=gameWidth/10, team2=gameWidth*9/10,
+  by=-46, scale 0.5 (was 2). All tunable. Kept the gold->red/rainbow color. Only data/action.zss changed.
+- Explods visual-only -> AI can't perceive them. Fixes flip + tag-team slide-off.
+- TEST: combo -> number appears at a fixed spot near each side (no longer on the character, no flip, survives
+  tag), smaller. Tell me where it lands vs the default counter and I tune bx/by/scale.
+- NEXT: per-digit rainbow WAVE (currently a strobe) + vertical bounce, both speeding up with combo; timestop fix.
+
+P089 (REVERT P088 - detach went off-screen from unverified coords; restore visible counter)
+- P088 broke visibility: used trigger 'gameWidth' (real name is lowercase 'gamewidth', compiler.go 261/2560) AND
+  assumed space:screen Y-origin is center (unverified). Reverted to the proven postype:p1 render. Reduced scale
+  2 -> 0.7 (Raven: was "massive"). Color (gold->red/rainbow, palfx.time:-1) kept. Only data/action.zss changed.
+- LESSON: verify trigger names (case) and the space:screen coord origin by MEASURING in-engine before placing a
+  HUD explod - do not guess screen coords. Detach is a measure-then-place task (next).

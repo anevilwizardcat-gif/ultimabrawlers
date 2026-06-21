@@ -223,6 +223,8 @@ cvsguile, SF3 Battle Arena Rd 02.def
 cvszcammy, SF3 Battle Arena Rd 02.def
 cvs2_dhalsim, SF3 Battle Arena Rd 02.def
 cvsgouki, MemoriaTimeInterval.def
+cvsvega, MemoriaTimeInterval.def
+Bison1, MemoriaTimeInterval.def
 CFJ_JuriHan, SF3 Battle Arena Rd 02.def
 cvssakura, SF3 Battle Arena Rd 02.def
 jedah, LiveHousePurple.def
@@ -263,11 +265,11 @@ TifaLockhart, NibelReactorHR.def
 Squall, IceCavernIcicleFields.def
 Leon, BarricadedStation.def
 Wesker, BarricadedStation.def
-Dante, MemoriaTimeInterval.def
-Dante[Public], MemoriaTimeInterval.def
-Dante_KOF, MemoriaTimeInterval.def
-vergil, MemoriaTimeInterval.def
-nero_DMC4, MemoriaTimeInterval.def
+Dante, DMC3-Tower.def
+Dante[Public], DMC3-Tower.def
+Dante_KOF, DMC3-Tower.def
+vergil, DMC3-Tower.def
+nero_DMC4, DMC3-Tower.def
 KENSHIROU, MemoriaTimeInterval.def
 sf3_ryu, mvc2-training.def
 sf3_ken, mvc2-training.def
@@ -367,6 +369,7 @@ stages/FF7Arena.def
 stages/NibelReactorHR.def
 stages/MemoriaTimeInterval.def
 stages/IceCavernIcicleFields.def
+stages/DMC3-Tower.def
 stages/BarricadedStation.def
 stages/Slither Inc ZX.def
 ;stages/XX'KY'XX.def

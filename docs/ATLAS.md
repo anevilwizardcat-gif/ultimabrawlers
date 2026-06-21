@@ -48,8 +48,37 @@ Status legend: `card` = full detail card exists · `stub` = row only, write card
   repo-root screenshots instead.
 - **Lives in:** `fight.def`.
 - **DO-NOT-confuse-with:** per-char meter spawn/hide logic (that's CNS, this is motif coords). Editing
-  fight.def changes the *default engine* bar, not author custom meters.
-- **Card:** `cards/lifebar-layout.md` · **Status:** stub
+  fight.def changes the *default engine* bar, not author custom meters. Also holds the **combo-message popups**
+  (anim 4120 ULTIMA COMBO + 407-411 siblings): fight.sff frames + fight.def [Begin Action] + action.zss
+  lifebarAction. Popup 4120 ≠ counter-bg flame 4131 (different draw sites) — don't cross-wire.
+- **Card:** `cards/lifebar-layout.md` · **Status:** active — ULTIMA COMBO popup restored to RGB vertical-bob
+  (P071); power-bar/HUD redesign still in progress.
+
+### combo-counter — the live HIT-COUNT number + "HITS!" label (fight.def [Combo])
+- **Architecture:** engine-drawn live text via `LifeBarCombo` (src/lifebar.go). The counter is a **single
+  static-color `LbText`** (color = `counter.font` RGB slots only) + optional shake. **NOT the ULTIMA popup.**
+- **CRITICAL — verified vs source:** `[Combo]` has **NO `counterNN`/`textNN` tier loop** (only `[Time]` does),
+  and `LbText`/`Layout` **never read `palfx.mul`/`sinmul`** (those work only for AnimLayout `bg0`/`top`). So the
+  counter **cannot** do gold→red-by-count, color oscillation, rainbow, or per-digit bob natively. All
+  `counter10..100` / `text10..100` keys in fight.def are **INERT** (P070 leftovers). Count-driven animated
+  coloring needs a **custom counter** (baked digit sprites driven by action.zss) — NOT YET BUILT, don't claim it.
+- **Lives in:** `fight.def [Combo]`, `data/action.zss` (combo tier / popup threshold).
+- **DO-NOT-confuse-with:** the ULTIMA COMBO **popup** (baked sprites 412,*, anim 4120 — that one CAN do
+  anything because it's hand-painted). Tier logic from `[Time]` does NOT transfer here.
+- **Card:** `cards/combo-counter.md` · **Status:** active — native counter limits documented (P072); the
+  count-driven gold→red→rainbow-bob feature is BUILT as a Lua mod prototype (P073), drawn below the default.
+
+### lua-hud-mods — custom animated HUD over the fight via an auto-loaded Lua module
+- **Architecture:** a `.lua` in `external/mods/` (auto-loaded) registers `hook.add("loop", ...)`, which runs
+  every match frame (global.lua `loop()`), and draws HUD-locked with `textImg*` (+ a TTF for true-color tint).
+  Reads live per-team combo via `player(t); combocount()`. This is the ONLY way to do count-driven animated
+  HUD — the native lifebar can't. **NOT** the same as fight.sff/lifebarAction popups or fight.def [Combo] keys
+  or CNS/explods; do not cross-apply those here.
+- **Lives in:** `external/mods/*.lua`, font wrappers in `font/`. Verified vs ikemen source (lifebar/char/script/
+  font/common.go, global/main.lua).
+- **Gotchas:** raw .ttf won't load (needs a `[Def]` Type=truetype wrapper, mirror `font/Open_Sans.def`); bitmap
+  fonts only multiply-tint (use TTF for rainbows); coords are motif-localcoord (here 1280×720 = matches lifebar).
+- **Card:** `cards/lua-hud-mods.md` · **Status:** active — combo-counter prototype (P073); P074 killed a per-frame font-retry lag bug; P075 = coordinate-system finding (Lua draws use MOTIF localcoord via luaSpriteScale, separate from lifebar transform; loop draws are already topmost) + best-effort font loader + a DEBUG status overlay to pinpoint why the counter is invisible. Lessons: never retry an expensive load per-frame; instrument HUD draws instead of guessing. P076: nothing renders at all incl. a font-less rect -> shipped an unconditional magenta test bar + load print to decide draw-path-works vs wrong-mechanism vs not-loaded. The loop RUNNING (P073 lag) never proved draws RENDER. P077 BREAKTHROUGH: studied inputdisplay.lua + scoreattack -> commonLuaInsert is a FAKE api (why inputdisplay never drew); correct path = hook.add("loop") (fired by debug.lua loop() via config Lua=loop()) + draw via reused motif.select_info.title.TextSpriteData + fillRect (NOT fontNew). New card: ikemen-latest-architecture.md (definitive file->purpose map). P078: 3 verified mod-load ways (external/mods auto-load, [Common] Modules, system.def [Files] module); NEVER edit [Common] Lua=loop() (raw DoString -> fatal crash); hook.add("loop") rides the existing loop(), no config edit needed. P079: VERIFIED full chain runMatch->action->loop->hook->renderFrame flush (mechanism is 100% sound -> blank = not loading); rebuilt mod identical to inputdisplay (proven to load) + a training-menu toggle as load-proof.
 
 
 
