@@ -65,8 +65,12 @@ Status legend: `card` = full detail card exists · `stub` = row only, write card
 - **Lives in:** `fight.def [Combo]`, `data/action.zss` (combo tier / popup threshold).
 - **DO-NOT-confuse-with:** the ULTIMA COMBO **popup** (baked sprites 412,*, anim 4120 — that one CAN do
   anything because it's hand-painted). Tier logic from `[Time]` does NOT transfer here.
-- **Card:** `cards/combo-counter.md` · **Status:** active — native counter limits documented (P072); the
-  count-driven gold→red→rainbow-bob feature is BUILT as a Lua mod prototype (P073), drawn below the default.
+- **Card:** cards/combo-counter.md * **Status:** active - CUSTOM EXPLOD counter (action.zss). P092 detached under each default counter (measured TOP-LEFT origin). P093 count-up bounce. P094 = digits restyled to the default look (Jersey10 italic + outline, gold via palfx), purple HITS label, and a per-digit RGB WAVE + bob (replaced the strobe). P098/99 flowing RGB wave (baked phase frames) + eased 35+ onset. P100 zoom-immune (scale/camerazoom), pause-trail fixed (super/pausemovetime 999999 + removetime 1), DEFAULT counter retired (fight.def counter.font/text.font=-1), custom moved into its slot. P102 default hidden via off-screen pos + ours raised to by=gameheight/5. ZOOM IMMUNITY: explods are space:screen/postype:none, rendered through the camera at size*cam.Scale AND pos*cam.Scale (top-left origin); camerazoom=cam.Scale; divide BOTH scale (P100) and pos (P106) by camerazoom. Drift only shows on hard-zoom stages.
+
+### round-timer - the round clock count rate (engine, not data)
+- **What:** displayed clock = ceil(sys.time/framespercount); framespercount LIVE=60 (correct). sys.time-- fires ONCE PER COMPLETED MAIN-LOOP FRAME (system.go L1051), NOT scaled by turbo/GameSpeed.
+- **DO-NOT-confuse-with:** GameSpeed/turbo (those scale FIGHTERS via tickFrame, not the clock) and framespercount (correct). The clock is paced by how fast the loop finishes frames (render/VSync/refresh).
+- **Card:** `cards/round-timer.md` * **Status:** P104 investigation - clock-rate == achieved loop fps; ~2.5x slow => ~24fps loop (Steam-Deck VSync/compositor cap). Fix = config.ini VSync 1->0, Framerate 60, Deck 60Hz/no FPS cap. Awaiting Raven's FPS-overlay confirm.
 
 ### lua-hud-mods — custom animated HUD over the fight via an auto-loaded Lua module
 - **Architecture:** a `.lua` in `external/mods/` (auto-loaded) registers `hook.add("loop", ...)`, which runs
@@ -119,3 +123,7 @@ Status legend: `card` = full detail card exists · `stub` = row only, write card
   subsystem that shares NO logic with super meters. If I'm thinking "explods/states/RemoveExplod" here,
   I have crossed wires — stop.
 - **Status:** planned (illustrative; not requested yet)
+
+### menu-background - motif title/menu backdrop (data/ikemen1/system.sff, SFFv2)
+- The sliding menu 'stars' = scrolling BG layers spriteno 100,2 (slow) + 100,3 (fast). Static sky = 100,0 (baked gold deco + outlines + static stars).
+- **Card:** cards/menu-background.md * **Status:** active - TITLE (group 100): P103 detailed parallax starfield. CHAR-SELECT (group 101): P107 = SCRAPPED the front big-star layer (101,3 commented out); kept the SLOW back layer (101,2) and made it CRISP PIXEL (no AA, coarse-grid x NEAREST) with VARIED twinkle (static/blink/grow/shimmer) via type=anim actionno 250, frames 101,2/30/31/32. P105 stripped the big star outlines in select sky 101,0. Title=group100, select=group101 (don't cross-edit).

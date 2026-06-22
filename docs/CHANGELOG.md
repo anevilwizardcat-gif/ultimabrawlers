@@ -1,6 +1,6 @@
 # ultimabrawlers — CHANGELOG (append-only)
 
-Newest at top. **Grep this by subsystem ID; do not read it whole.** Each entry is one shipped change.
+Newest at the **BOTTOM** (this file is appended to). Find the latest by `tail`-ing the end, or grep by subsystem ID. **Do NOT read it whole.** Each entry is one shipped change.
 Entry format:
 
 ```
@@ -1715,3 +1715,148 @@ P089 (REVERT P088 - detach went off-screen from unverified coords; restore visib
   2 -> 0.7 (Raven: was "massive"). Color (gold->red/rainbow, palfx.time:-1) kept. Only data/action.zss changed.
 - LESSON: verify trigger names (case) and the space:screen coord origin by MEASURING in-engine before placing a
   HUD explod - do not guess screen coords. Detach is a measure-then-place task (next).
+
+
+P090 (DETACH attempt #2 - added ontop:1; STILL invisible. The occlusion theory was WRONG.)
+- Guessed P088's screen counter was hidden behind the lifebar (draw order sprites->lifebar(1)->topSprites->
+  lifebar(2)) and added ontop:1. Raven tested: still invisible -> the digits were OFF-SCREEN, not occluded.
+  Lesson: stop deriving screen coords from mainline source; measure them.
+
+P091 (CALIBRATION PROBE - measured the real HUD coordinate system in-engine)
+- Restored the visible on-character counter (postype:p1) and added 3 fixed white markers at pos(0,0),
+  (gamewidth/4,0), (0,gameheight/4). Screenshot: they landed at the TOP-LEFT (corner / top edge / left edge).
+  => screen-space explod origin is TOP-LEFT, NOT center. This is exactly what every prior detach got wrong.
+
+P092 (DETACH - FIXED with the measured top-left origin; counter now sits under each default counter)
+- Digit explods: postype:p1 (on char) -> space:screen + postype:none + ontop:1, positioned as fractions of the
+  gamewidth/gameheight triggers matching fight.def [Combo] 130/1150,224 @1280x720: P1 x=gamewidth*13/128,
+  P2 x=gamewidth*115/128, y=gameheight*13/36. scale 0.3 (matches the default counter's on-screen size; 0.7 was
+  "massive"). Detached -> no char-flip, survives tag-side-swap. CONFIRMED working by Raven. Only data/action.zss.
+- KNOWN QUIRK (unsolved): screen-space digits drift a little during stage zoom. Acceptable for now.
+
+P093 (count-up BOUNCE - matched to the default counter)
+- Default pop = fight.def counter.shake=1/time=7/mult=0.05 + lifebar.go (~1568) z=1+shaketime*mult*sin(shaketime*
+  pi/2.5), shaketime=7 on each new hit then -1/frame. Replicated in action.zss with map vars (_ubcN prev-count,
+  _ubcST timer); explod scale = 0.3*z; ZSS sin() is radians. Prev-count tracked EVERY frame so combo start/end is
+  correct. Only data/action.zss. NEXT: replace the 35+ RGB strobe with a per-digit rainbow WAVE + bob that speeds up.
+
+P094 (LOOK like the default: italic gold outlined digits + purple HITS label + RGB WAVE replaces strobe)
+- DIGITS re-baked to match the default counter design: rendered from the real Jersey10 typeface (font 6 =
+  Arcade.def is Jersey10), italic + black stroke OUTLINE, WHITE body so the existing palfx still tints it (gold at
+  low hits, rainbow at 35+); black outline stays black under multiply. Monospace cells (even spacing). Replaced
+  fightfx.sff group 9000 img 0-9 (SFFv1 re-serialized; round-trip verified - all 115 sprites + PCX decode OK).
+- HITS: purple "HITS!" baked at fightfx.sff group 9100 img 0 + fightfx.air anim 9100; drawn as a static explod
+  (id 8103, no palfx so it stays purple, no bounce) just under the number.
+- RGB WAVE (35+): replaced the STROBE (all digits one cycling color) with a per-place wave - ones (k0) and tens
+  (k1) get phase-offset colors (tens +2 steps) so the rainbow ripples across the number, plus a per-place vertical
+  BOB (3*sin), both speeding up toward combo 99. <35 stays gold->red. Count-up bounce (P093) kept.
+- SHIPPED: data/fightfx.sff + data/fightfx.air + data/action.zss (all three together). TUNE in action.zss:
+  digit scale 0.3 / tens gap -8 / HITS pos ($bx-5,$by+13) & scale 0.25 / bob amplitude 3 / wave offset +2.
+
+P095 (HOTFIX - P094 crashed on startup: action.zss:84 'Invalid data: dv')
+- Cause: a let-variable (dv) was referenced as `gameTime / dv` instead of `$dv`. ZSS requires the $ prefix on
+  EVERY use of a let var, including inside another let. I had split an inline divisor into `let dv` and missed
+  the $ on its 2 uses (the rest - $bs/$z/$by/$bx - were correct). Fixed both. Only data/action.zss.
+
+
+P096 (visual polish: anchored centering, lower number, 3-digit support to 999, slide in/out)
+- Centering: number now centers on a single anchor ($bx-4) via nd=digit count; ones x=anchor+(nd-1)*4, so 1/2/3
+  digits all center over HITS. Fixes single-digit sitting too far right (2-digit was already centered, unchanged).
+- Number lowered a touch (ny=$by+3) toward HITS.
+- 3 digits to 999: added hundreds place (id 8104, color k2 phase+4, bob+3.0) at ox-16; was breaking past 99 (only
+  ones+tens). count taken from latched map(_dispC).
+- SLIDE in/out instead of pop: integer frame counter map(_slf) 0..8 (ramps up while comboCount>1, down otherwise);
+  draw gated on slf>0 so it persists through slide-out; x offset so=(8-slf)*gamewidth/56 from the outer edge (P1
+  left, P2 right). map(_dispC) latches the count so the final number slides out (not 0). Used integer counter
+  because map() truncates floats. Only data/action.zss.
+- TUNE: anchor $bx-4, half-cell 4, number drop +3, slide frames 8 + distance gamewidth/7, HITS y $by+13.
+
+
+P097 (counter lingers like the default before sliding out)
+- Default LifeBarCombo defaults (lifebar.go): displaytime 90, showspeed 8, hidespeed 4. Added map(_hold):=90 while
+  comboCount>1; on end, hold counts down first (stays fully visible), THEN slf slides out at -2/frame (~4 frames,
+  faster than the 8-frame slide-in). Only data/action.zss.
+
+P098 (PROPER flowing-gradient rainbow wave, replaces the per-digit strobe)
+- palfx.mul is uniform per sprite + explods respawn each frame (auto-loop never advances), so a per-pixel flowing
+  gradient must be BAKED per phase and the frame chosen explicitly. Baked 10 digits x 12 phases = 120 frames at
+  fightfx.sff group 9200 (img = digit*12+phase), shared 66-colour rainbow palette, + air anims 9200..9319.
+- CONFIRMED from source (ffxRegexp '^(f)...', getDataPrefix): explod `anim: F(expr)` works - prefix stripped, rest
+  compiled as expression. So the whole counter is now 3 explods (ones/tens/huns) with anim COMPUTED, no ladders:
+  <35 anim=9000+digit (white + gold->red palfx); 35+ anim=9200+digit*12+phase (gradient, neutral palfx).
+- Flow: phase=(gameTime/fdiv)%12, tens/huns lead by +4/+8 so the rainbow flows across the number; fdiv 4->2 speeds
+  up past 100/220. Each digit shows a multi-colour gradient (span 0.6). Bob kept at 35+. Ships fightfx.sff +
+  fightfx.air + action.zss together. TUNE: phase span 0.6 / per-place lead +4 / fdiv / P=12 (in the bake script).
+
+
+P099 (ease the 35+ onset, ramp bob+rainbow speed with hits, HITS waves too, shorter linger)
+- Bob no longer slams in at full speed: bob speed bs=(min(99,c)-30)/280 (~0.018 at 35 -> ~0.25 high) and amp
+  =1+(min(99,c)-35)*2/64 (1->3). Rainbow flow ramps: fdiv=8-(min(99,c)-35)*6/64 (slow 8 -> fast 2). So motion
+  eases in at the threshold and climbs to ~the old default at high hits; rainbow also speeds up. Softens the
+  red->rgb transition (gentle onset) without a baked colour cross-fade.
+- HITS now waves at 35+ too: baked 12 gradient frames at fightfx.sff group 9300 + air 9300..9311 (shared rainbow
+  palette, span 2.2 to match digit flow). HITS anim = <35 9100 (purple) / 35+ 9300+phO (synced to ones).
+- Linger trimmed: hold 90 -> 60 (was a touch longer than the default). Ships fightfx.sff + air + action.zss.
+- TUNE: bob 280/amp divisor 64, fdiv slope 6/64, HITS span 2.2 (bake), hold 60.
+
+## P100 - zoom immunity + pause-trail fix + default counter retired (action.zss, fight.def)
+- ZOOM: explods DO pick up stage zoom in practice (engine renders them * sys.cam.Scale). `camerazoom` trigger == sys.cam.Scale (bytecode OC_camerazoom -> PushF(sys.cam.Scale)). Fix: divide every explod scale by camerazoom so render *cam.Scale cancels -> constant size. `sc = 0.3*z/camerazoom`, added `sh = 0.25/camerazoom` for HITS.
+- PAUSE TRAIL ("sandevistan"): explods FREEZE during a super/pause (removetime stops decrementing) so respawn-per-frame piles up old slide frames. Fix: supermovetime+pausemovetime = 999999 (explods age THROUGH pauses) + removetime 1 (>=1 alive, no pile-up). All 4 explods.
+- DEFAULT COUNTER retired: fight.def [Combo] team1.counter.font 6,0,0 -> -1,0,0 and team1.text.font -1,0,0. lifebar.go draw gates number (L1564) + text (L1535) on font[0]>=0, and bg/top already off -> both teams' default number+HITS hidden cleanly + reversibly.
+- Custom counter moved into the default's slot: by 13/36 -> 224/720 (matches old team1.pos y=224@720).
+- TUNE: by 224/720; super/pausemovetime 999999; removetime 1.
+
+## P101 - menu sliding-stars redux (data/ikemen1/system.sff)
+- The scrolling 'stars' = motif BG layers spriteno 100,2 (slow, velocity -0.1) + 100,3 (fast, -0.7) in system.sff. Old art = a flat grid of pale-purple diamonds (barely pop on the dark-plum sky).
+- Replaced both with scattered, varied, glowing starfields: parallax (dense small stars on the slow layer, larger sparkly stars + cross-glints on the fast layer), cool-white/pale-blue/lavender + a few warm-gold accents, seamless horizontal wrap (tile=1,0). Same canvas sizes so tile/scroll/window configs are unchanged - no system.def edit.
+- METHOD (SFFv2): motif sff is SFFv2 PNG32. Engine readV2 seeks dataOffset+4 and IGNORES the 4-byte prefix for PNG (fmt 10-12). Safe append-swap = append new [4-byte len][PNG] at EOF and patch ONLY the 2 sprite nodes' data-offset(+16) and length(+20), keep dims/format(12)/coldepth(32); all other 292 sprites byte-identical. Round-trip verified: all 271 PNG sprites decode.
+- LEFT ALONE: the STATIC sky (100,0) has baked deco (gold art-deco lines + halftone corner + big star OUTLINES + static diamond stars). Those don't slide, so out of scope unless asked.
+
+## P102 - default counter hidden robustly + custom counter raised (fight.def, action.zss)
+- The default [Combo] counter survived P100's counter.font=-1 (fight.def not reapplied, or this build ignores font=-1). ROBUST hide: set [Combo] team1.pos y off-screen (130,-9999). lifebar.go draws BOTH sides from team1.pos and uses pos/z, so one change hides both; counter.font/text.font=-1 kept as backup.
+- Measured (shot 1278x718, lifebar localcoord 1280,720): default base y=224 but shakes UP to ~151 mid-hit (y=pos[1]/z, z~1.48 = the gold counter seen). Our explod counter sat steady at ~234. Raised ours to where the default appears: by = gameheight/5 (was 224/720).
+- NOTE: the [Action] section's team1.pos=30,440 is the ULTIMA COMBO message popups, NOT the counter - left alone.
+
+## P103 - menu stars redux v2: detailed, not 'snowflake' (data/ikemen1/system.sff)
+- P101 used many small uniform 4-point sparkles -> read as low-res snowflakes. Rebuilt 100,2/100,3 as a proper starfield: majority clean glowing POINTS (varied size for depth), a minority with THIN TAPERED diffraction rays (not stubby crosses), and several larger color-tinted 'hero' stars with soft rings/halos (gold/cyan/pink/blue/lavender). Front layer (fast -0.7) carries the big detailed ones; back layer (slow -0.1) denser/smaller/fainter for parallax.
+- Rebuilt from the ORIGINAL system.sff (one dead-space set). Same canvas sizes/format -> no system.def change. SFFv2 append-swap; all 271 PNG sprites re-verified.
+
+
+## P104 - round timer slowness: engine investigation (no code change; config/Deck fix)
+- SYMPTOM: displayed clock counts ~2.5x too slow -> rounds ~2.5x too long. Raven's old "refresh rate" guess was essentially correct.
+- MECHANISM (engine source system.go + lifebar.go):
+  - Displayed time = ceil(sys.time / framespercount). LIVE fight.def [Time] framespercount = 60 (CORRECT, 1 count/60 ticks). NOT the cause.
+  - sys.time-- runs in s.action() (L1051), gated only by intro/timerfreeze/super-pause/pause = ONCE PER COMPLETED MAIN-LOOP FRAME, and is NOT scaled by turbo/gameSpeed.
+  - Loop (L2055+): s.action() each iteration; addFrameTime(s.turbo) advances tickCountF; update()->await(FPS=60) paces the loop (time.Sleep + frameSkip when behind; with VSync, SwapBuffers blocks on vblank).
+  - turbo = gameSpeed*accel scales CHARACTER logic (tickFrame-gated) but NOT sys.time-- (per-frame). So GameSpeed is NOT the clock fix (it speeds fighters, not the clock).
+- CONCLUSION: the clock loses exactly 1 count per FINISHED game frame -> clock-rate == achieved loop FPS. ~2.5x slow => the loop is running ~24fps. frameSkip is meant to keep logic at 60 by dropping renders; a slow clock means it is NOT compensating -> classic Steam-Deck VSync/compositor cap.
+- FIX LEVERS (edit config.ini LINES only, do NOT replace the file = keybinds): VSync 1 -> 0 (stop SwapBuffers blocking on vblank so await's own 60fps pacing + frameSkip hold the loop at true 60); confirm Framerate = 60; set Deck display to 60Hz with no per-game FPS cap (Gamescope). Repo config = GameSpeed 0 / Framerate 60 / VSync 1 -> VSync is the suspect; live Deck config may differ.
+- BAND-AID (NOT recommended; does not fix the slow-mo): lower fight.def framespercount so the clock counts faster.
+- DIAGNOSTIC asked: is the WHOLE game choppy/slow or ONLY the clock? Per source it should be whole-game low-fps; a Deck FPS overlay reading ~24fps is the smoking gun.
+- New card: cards/round-timer.md.
+
+## P105 - char-select TWINKLING stars + old big stars removed (data/ikemen1/system.sff, system.def)
+- Char select uses sprite GROUP 101 (not 100) -> P101/P103 (group 100 = Title) never touched it, so the old pixel stars persisted. [SelectBGdef]: sky 101,0; Clouds Top 101,2 (slow -0.1, back); Clouds Bottom 101,3 (fast -0.7, front).
+- "Old ugly big one" = two big lavender 5-point star OUTLINES baked into select sky 101,0 (+ small lavender crosses). Removed surgically: per-row gradient-median fill of star pixels, keeping gold deco lines + halftone (gold excluded from removal). Gradient + deco intact; a couple of tiny gold sparkles remain (read as deco).
+- NEW stars: 101,2 = detailed STATIC back starfield (dense/small/faint). 101,3 = detailed FRONT starfield, now TWINKLING via a 4-frame anim. Same look as P103 (clean glowing points + thin tapered diffraction rays + color hero stars w/ rings/halos).
+- TWINKLE math: ~32% of front stars flagged twinkle, each a random phase; per-frame brightness mult = 0.30 + 0.80*(0.5 + 0.5*sin(phase + k*pi/2)) (range 0.30..1.10), non-twinkle = 1.0. 4 frames = one sine period -> smooth shimmer. Frames = 101,3 + NEW 101,30 / 101,31 / 101,32.
+- SFFv2 surgery on the LIVE P103 sff: append-swap 101,0/101,2/101,3 + ADD 3 new sprites (clone the 101,3 node, set Number, point at appended PNG) -> NumberOfSprites 294 -> 297. Node table RELOCATED to EOF; header FirstSpriteHeaderOffset(@0x24) + NumberOfSprites(@0x28) updated; old table = dead space; lofs unchanged so existing offsets stay valid. VERIFIED: all 297 decode; the 23 non-PNG (fmt 1/4) nodes byte-identical to original; 6 targets PNG32 at correct dims.
+- system.def: [SelectBG Background Clouds Bottom] type=normal -> anim, spriteno 101,3 -> actionno 250; added [Begin Action 250] (LoopStart; 101,3 / 30 / 31 / 32 @ 8 ticks each). Clouds Top (101,2) left type=normal (static back). actionno 250 was unused (190 is the P2 Team cursor -> avoided).
+- TUNE: twinkle depth 0.30..1.10; 4 frames @ 8 ticks (~0.53s/cycle). Title screen (100,3) NOT twinkled (char-select only, per request); can mirror later if asked.
+
+
+## P106 - combo counter: residual stage-zoom DRIFT fixed (action.zss)
+- Counter explods are space:screen, postype:none, ontop:1 (NOT postype p1 - earlier notes were wrong; verified in live action.zss).
+- Engine: ontop -> topSprites; system.go draws topSprites with scale = (cam.Scale/cam.BaseScale())*cam.BaseScale() = cam.Scale (BaseScale cancels). camerazoom (bytecode OC_camerazoom L1207) = sys.cam.Scale. So rendered SIZE = explodscale*cam.Scale; P100's scale/camerazoom cancels it -> size already constant (that is why MOST zoom was killed).
+- RESIDUAL = POSITION: screen-space explods render at pos*cam.Scale from the TOP-LEFT origin (char.go epos = (pos+offset+off)*localscl, then the screen-space draw applies cam.Scale; the in-zss note 'pos(0,0)=top-left' confirms the origin). P100 never divided POS by zoom -> on a hard-zoom stage the counter drifts a smidge, proportional to its distance from the top-left corner * (cam.Scale-1). Universal, but only visible on a strong-zoom stage.
+- FIX: let cz = camerazoom; divide every explod pos x AND y by $cz (mirrors the scale comp). On-screen pos = (base/cz)*cam.Scale = base -> fixed. cam.Scale never 0 -> safe. Digit gaps (-8/-16) and bob also /cz -> spacing stays constant.
+- FIREWALL: this is the lifebar/EXPLOD path (action.zss + character SFF), NOT the motif. The /camerazoom trick is specific to screen-space explods rendered through the camera; do not carry it into motif system.def work.
+
+## P107 - char-select stars: front layer scrapped, crisp PIXEL back layer, VARIED twinkle (system.sff, system.def)
+- Per Raven: P105 stars too soft ('144p'), only some twinkled, and the FRONT (fast 101,3) big-star layer scrolled off-screen for good and read worse than the slow back layer.
+- SCRAPPED the front layer: [SelectBG Background Clouds Bottom] (101,3) commented out in system.def; sprite 101,3 left in the sff but unreferenced.
+- KEPT + upgraded the slow back layer (101,2): now type=anim actionno 250 (was static normal). It is the 'small slowly-moving' layer Raven prefers.
+- CRISP PIXEL art (no AA): rendered on a coarse 853x261 grid (853*3 = 2559 exactly -> seamless horizontal tile), hard-edged dot/plus/spark shapes, limited palette, NEAREST upscale x3 to 2559x782. Replaces the gaussian float-AA look that read as blurry.
+- VARIED twinkle: each star gets a type - static(26%) / blink(on-off) / grow(dot->plus->spark) / shimmer(bright<->dim) - with a random 4-frame phase, so they twinkle differently and most participate. 4 frames = 101,2 + reused 101,30/31/32 (overwritten, 2467x960 -> 2559x782). [Begin Action 250] cycles them @ 8 ticks.
+- SFFv2: pure OVERWRITE of 4 existing sprites (append-swap: append [4-byte len][PNG], patch node offset/len/dims, fmt 12 / cd 32, flags bit0=0). NumberOfSprites stays 297. All 297 decode-verified; non-PNG untouched.
+- Title screen (GROUP 100) untouched. FIREWALL: char-select = GROUP 101, title = GROUP 100 (separate sprites + separate [*BGdef] layers); a group-100 edit never touches char-select and vice-versa.
