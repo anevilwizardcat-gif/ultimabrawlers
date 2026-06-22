@@ -59,46 +59,81 @@ ignoreHitPause if !const(Default.Enable.Action) || isHelper || teamSide = 0 {
 	# code executed only by P1 and P2
 	if playerNo = teamSide {
 		# Combo Count
-		# === P088: CUSTOM ANIMATED COMBO COUNTER - SCREEN-ANCHORED (detached from char) ===
-		# space:screen + postype:none -> fixed HUD position (NOT tied to the character; survives tag-out, no flip).
-		# pos.x is a fraction of gameWidth (trigger) so it's aspect-robust; pos.y from center. TUNE bx10/bxh/by/scale.
-		# Explods are visual-only (no hitbox) so AI never perceives/interacts. Color = P086/P087 (gold->red / rainbow).
+		# === P092: DETACHED HUD counter under each default counter. ===
+		# Origin is TOP-LEFT (confirmed in-engine: a marker at pos(0,0) lands at the top-left corner; pos scales with
+		# the gamewidth/gameheight triggers). Earlier detaches assumed a CENTER origin -> wrong spot / off-screen.
+		# Default counter = fight.def [Combo] 130/1150 , 224 in 1280x720. Placed as fractions of gamewidth/gameheight
+		# (resolution-independent), just below it. space:screen+postype:none+ontop:1 = fixed HUD, no char-flip.
+		# TUNE: bx fractions (13/128 P1, 115/128 P2), by (13/36 ~just under), scale 0.3, tens gap (-7) - nudge by screenshot.
+		# === P093: count-up BOUNCE - matches the default counter (fight.def counter.shake=1 time=7 mult=0.05). ===
+		# Engine formula (lifebar.go): z = 1 + shaketime*mult*sin(shaketime*pi/2.5); shaketime resets to 7 each new
+		# hit, -1/frame. CONFIRMED in-engine. Re-spawned-each-frame explods just read the current scale.
+		if comboCount > map(_ubcN) { map(_ubcST) := 7; }   # new hit -> kick the bounce
+		map(_ubcN) := comboCount;                          # track prev count every frame (combo start/end stays correct)
+		if map(_ubcST) > 0 { map(_ubcST) := map(_ubcST) - 1; }
+		# slide + HOLD + latched count (P097/P098). Match default: showspeed 8, displaytime 90, hidespeed ~4.
 		if comboCount > 1 {
-			if comboCount < 35 {
-				map(_ubcR) := 256;
-				map(_ubcG) := 215 * (34 - comboCount) / 33;
-				map(_ubcB) := 0;
+			map(_dispC) := comboCount;
+			map(_hold) := 60;
+			if map(_slf) < 8 { map(_slf) := map(_slf) + 1; }
+		} else {
+			if map(_hold) > 0 { map(_hold) := map(_hold) - 1; }
+			else if map(_slf) > 1 { map(_slf) := map(_slf) - 2; }
+			else { map(_slf) := 0; }
+		}
+		if map(_slf) > 0 {
+			let c = map(_dispC);
+			let lo = ($c < 35);
+			# <35: white digits tinted gold->red. 35+: BAKED rainbow-gradient frames (multi-colour per digit), so
+			# palfx is neutral and the colour FLOWS via per-place animation phase. Vertical bob kept at 35+.
+			if $lo {
+				map(_ubcR0) := 256; map(_ubcG0) := 215 * (34 - $c) / 33; map(_ubcB0) := 0;
+				map(_ubcR1) := map(_ubcR0); map(_ubcG1) := map(_ubcG0); map(_ubcB1) := map(_ubcB0);
+				map(_ubcR2) := map(_ubcR0); map(_ubcG2) := map(_ubcG0); map(_ubcB2) := map(_ubcB0);
+				map(_dy0) := 0; map(_dy1) := 0; map(_dy2) := 0;
 			} else {
-				let ph = (gameTime / (4 + (99 - min(99, comboCount)) / 12)) % 6;
-				map(_ubcR) := 256 * (($ph = 0) || ($ph = 1) || ($ph = 5));
-				map(_ubcG) := 256 * (($ph = 1) || ($ph = 2) || ($ph = 3));
-				map(_ubcB) := 256 * (($ph = 3) || ($ph = 4) || ($ph = 5));
+				map(_ubcR0) := 256; map(_ubcG0) := 256; map(_ubcB0) := 256;
+				map(_ubcR1) := 256; map(_ubcG1) := 256; map(_ubcB1) := 256;
+				map(_ubcR2) := 256; map(_ubcG2) := 256; map(_ubcB2) := 256;
+				let bs = (min(99, $c) - 30) / 280.0;
+				let amp = 1 + (min(99, $c) - 35) * 2 / 64;
+				map(_dy0) := $amp * sin(gameTime * $bs);
+				map(_dy1) := $amp * sin(gameTime * $bs + 1.5);
+				map(_dy2) := $amp * sin(gameTime * $bs + 3.0);
 			}
-			let bx = (teamSide = 1) * (gameWidth / 10) + (teamSide = 2) * (gameWidth * 9 / 10);
-			let by = -46;
-			let ones = comboCount % 10;
-			if $ones = 0 { explod{ anim: F9000; id: 8101; space: screen; postype: none; pos: $bx, $by; scale: 0.5,0.5; removetime: 2; ownpal: 1; sprpriority: 100; palfx.time: -1; palfx.mul: map(_ubcR), map(_ubcG), map(_ubcB); } }
-			else if $ones = 1 { explod{ anim: F9001; id: 8101; space: screen; postype: none; pos: $bx, $by; scale: 0.5,0.5; removetime: 2; ownpal: 1; sprpriority: 100; palfx.time: -1; palfx.mul: map(_ubcR), map(_ubcG), map(_ubcB); } }
-			else if $ones = 2 { explod{ anim: F9002; id: 8101; space: screen; postype: none; pos: $bx, $by; scale: 0.5,0.5; removetime: 2; ownpal: 1; sprpriority: 100; palfx.time: -1; palfx.mul: map(_ubcR), map(_ubcG), map(_ubcB); } }
-			else if $ones = 3 { explod{ anim: F9003; id: 8101; space: screen; postype: none; pos: $bx, $by; scale: 0.5,0.5; removetime: 2; ownpal: 1; sprpriority: 100; palfx.time: -1; palfx.mul: map(_ubcR), map(_ubcG), map(_ubcB); } }
-			else if $ones = 4 { explod{ anim: F9004; id: 8101; space: screen; postype: none; pos: $bx, $by; scale: 0.5,0.5; removetime: 2; ownpal: 1; sprpriority: 100; palfx.time: -1; palfx.mul: map(_ubcR), map(_ubcG), map(_ubcB); } }
-			else if $ones = 5 { explod{ anim: F9005; id: 8101; space: screen; postype: none; pos: $bx, $by; scale: 0.5,0.5; removetime: 2; ownpal: 1; sprpriority: 100; palfx.time: -1; palfx.mul: map(_ubcR), map(_ubcG), map(_ubcB); } }
-			else if $ones = 6 { explod{ anim: F9006; id: 8101; space: screen; postype: none; pos: $bx, $by; scale: 0.5,0.5; removetime: 2; ownpal: 1; sprpriority: 100; palfx.time: -1; palfx.mul: map(_ubcR), map(_ubcG), map(_ubcB); } }
-			else if $ones = 7 { explod{ anim: F9007; id: 8101; space: screen; postype: none; pos: $bx, $by; scale: 0.5,0.5; removetime: 2; ownpal: 1; sprpriority: 100; palfx.time: -1; palfx.mul: map(_ubcR), map(_ubcG), map(_ubcB); } }
-			else if $ones = 8 { explod{ anim: F9008; id: 8101; space: screen; postype: none; pos: $bx, $by; scale: 0.5,0.5; removetime: 2; ownpal: 1; sprpriority: 100; palfx.time: -1; palfx.mul: map(_ubcR), map(_ubcG), map(_ubcB); } }
-			else if $ones = 9 { explod{ anim: F9009; id: 8101; space: screen; postype: none; pos: $bx, $by; scale: 0.5,0.5; removetime: 2; ownpal: 1; sprpriority: 100; palfx.time: -1; palfx.mul: map(_ubcR), map(_ubcG), map(_ubcB); } }
-			if comboCount >= 10 {
-				let tens = (comboCount / 10) % 10;
-			if $tens = 0 { explod{ anim: F9000; id: 8102; space: screen; postype: none; pos: $bx - 11, $by; scale: 0.5,0.5; removetime: 2; ownpal: 1; sprpriority: 100; palfx.time: -1; palfx.mul: map(_ubcR), map(_ubcG), map(_ubcB); } }
-			else if $tens = 1 { explod{ anim: F9001; id: 8102; space: screen; postype: none; pos: $bx - 11, $by; scale: 0.5,0.5; removetime: 2; ownpal: 1; sprpriority: 100; palfx.time: -1; palfx.mul: map(_ubcR), map(_ubcG), map(_ubcB); } }
-			else if $tens = 2 { explod{ anim: F9002; id: 8102; space: screen; postype: none; pos: $bx - 11, $by; scale: 0.5,0.5; removetime: 2; ownpal: 1; sprpriority: 100; palfx.time: -1; palfx.mul: map(_ubcR), map(_ubcG), map(_ubcB); } }
-			else if $tens = 3 { explod{ anim: F9003; id: 8102; space: screen; postype: none; pos: $bx - 11, $by; scale: 0.5,0.5; removetime: 2; ownpal: 1; sprpriority: 100; palfx.time: -1; palfx.mul: map(_ubcR), map(_ubcG), map(_ubcB); } }
-			else if $tens = 4 { explod{ anim: F9004; id: 8102; space: screen; postype: none; pos: $bx - 11, $by; scale: 0.5,0.5; removetime: 2; ownpal: 1; sprpriority: 100; palfx.time: -1; palfx.mul: map(_ubcR), map(_ubcG), map(_ubcB); } }
-			else if $tens = 5 { explod{ anim: F9005; id: 8102; space: screen; postype: none; pos: $bx - 11, $by; scale: 0.5,0.5; removetime: 2; ownpal: 1; sprpriority: 100; palfx.time: -1; palfx.mul: map(_ubcR), map(_ubcG), map(_ubcB); } }
-			else if $tens = 6 { explod{ anim: F9006; id: 8102; space: screen; postype: none; pos: $bx - 11, $by; scale: 0.5,0.5; removetime: 2; ownpal: 1; sprpriority: 100; palfx.time: -1; palfx.mul: map(_ubcR), map(_ubcG), map(_ubcB); } }
-			else if $tens = 7 { explod{ anim: F9007; id: 8102; space: screen; postype: none; pos: $bx - 11, $by; scale: 0.5,0.5; removetime: 2; ownpal: 1; sprpriority: 100; palfx.time: -1; palfx.mul: map(_ubcR), map(_ubcG), map(_ubcB); } }
-			else if $tens = 8 { explod{ anim: F9008; id: 8102; space: screen; postype: none; pos: $bx - 11, $by; scale: 0.5,0.5; removetime: 2; ownpal: 1; sprpriority: 100; palfx.time: -1; palfx.mul: map(_ubcR), map(_ubcG), map(_ubcB); } }
-			else if $tens = 9 { explod{ anim: F9009; id: 8102; space: screen; postype: none; pos: $bx - 11, $by; scale: 0.5,0.5; removetime: 2; ownpal: 1; sprpriority: 100; palfx.time: -1; palfx.mul: map(_ubcR), map(_ubcG), map(_ubcB); } }
+			# gradient flow phase (0..11): tens/huns lead by +4/+8 so the rainbow flows across the number; faster at high combo
+			let fdiv = 8 - (min(99, $c) - 35) * 6 / 64;
+			let phO = (gameTime / $fdiv) % 12;
+			let phT = (gameTime / $fdiv + 4) % 12;
+			let phH = (gameTime / $fdiv + 8) % 12;
+			let bx = (teamSide = 1) * (gamewidth * 13 / 128) + (teamSide = 2) * (gamewidth * 115 / 128);
+			let by = gameheight / 5;
+			let so = (8 - map(_slf)) * gamewidth / 56;
+			let ax = $bx - 4 - $so * (teamSide = 1) + $so * (teamSide = 2);
+			let nd = ($c >= 100) + ($c >= 10) + 1;
+			let ox = $ax + ($nd - 1) * 4;
+			let ny = $by + 3;
+			let z = 1 + map(_ubcST) * 0.05 * sin(map(_ubcST) * 1.25663706);
+			let sc = 0.3 * $z / camerazoom;
+			let sh = 0.25 / camerazoom;
+			let cz = camerazoom;   # P106: also divide POSITION by zoom (screen explods render pos*cam.Scale from top-left origin)
+			let oy = $ny + map(_dy0);
+			let ty = $ny + map(_dy1);
+			let hy = $ny + map(_dy2);
+			let ones = $c % 10;
+			let animO = $lo * (9000 + $ones) + (1 - $lo) * (9200 + $ones * 12 + $phO);
+			let animHits = $lo * 9100 + (1 - $lo) * (9300 + $phO);
+			explod{ anim: F($animHits); id: 8103; space: screen; postype: none; ontop: 1; pos: $ax / $cz, ($by + 13) / $cz; scale: $sh,$sh; removetime: 1; supermovetime: 999999; pausemovetime: 999999; ownpal: 1; sprpriority: 99; }
+			explod{ anim: F($animO); id: 8101; space: screen; postype: none; ontop: 1; pos: $ox / $cz, $oy / $cz; scale: $sc,$sc; removetime: 1; supermovetime: 999999; pausemovetime: 999999; ownpal: 1; sprpriority: 100; palfx.time: -1; palfx.mul: map(_ubcR0), map(_ubcG0), map(_ubcB0); }
+			if $c >= 10 {
+				let tens = ($c / 10) % 10;
+				let animT = $lo * (9000 + $tens) + (1 - $lo) * (9200 + $tens * 12 + $phT);
+				explod{ anim: F($animT); id: 8102; space: screen; postype: none; ontop: 1; pos: ($ox - 8) / $cz, $ty / $cz; scale: $sc,$sc; removetime: 1; supermovetime: 999999; pausemovetime: 999999; ownpal: 1; sprpriority: 100; palfx.time: -1; palfx.mul: map(_ubcR1), map(_ubcG1), map(_ubcB1); }
+			}
+			if $c >= 100 {
+				let huns = ($c / 100) % 10;
+				let animH = $lo * (9000 + $huns) + (1 - $lo) * (9200 + $huns * 12 + $phH);
+				explod{ anim: F($animH); id: 8104; space: screen; postype: none; ontop: 1; pos: ($ox - 16) / $cz, $hy / $cz; scale: $sc,$sc; removetime: 1; supermovetime: 999999; pausemovetime: 999999; ownpal: 1; sprpriority: 100; palfx.time: -1; palfx.mul: map(_ubcR2), map(_ubcG2), map(_ubcB2); }
 			}
 		}
 		let ret = call IkSys_ComboCount();

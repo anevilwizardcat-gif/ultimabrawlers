@@ -844,8 +844,8 @@ trans = add1
 mask = 1
 
 [SelectBG Background Clouds Top]
-type = normal
-spriteno = 101,2
+type = anim          ;P107: twinkling back starfield (slow layer kept; front scrapped)
+actionno = 250       ;P107: 4-frame varied twinkle (crisp pixel stars)
 layerno = 0
 start = -640, -50
 tile = 1,0
@@ -853,15 +853,24 @@ velocity = -0.1, 0
 window = 0,0, 1279,959
 mask = 1
 
-[SelectBG Background Clouds Bottom]
-type = normal
-spriteno = 101,3
-layerno = 0
-start = -640, 0
-tile = 1,0
-velocity = -0.7, 0
-window = 0,0, 1279,959
-mask = 1
+;P107: FRONT big-star layer (101,3) SCRAPPED - it scrolled off-screen permanently and
+;the slow back layer reads better. Layer removed; sprite 101,3 left in sff but unreferenced.
+;[SelectBG Background Clouds Bottom]
+;type = normal
+;spriteno = 101,3
+;layerno = 0
+;start = -640, 0
+;tile = 1,0
+;velocity = -0.7, 0
+;window = 0,0, 1279,959
+;mask = 1
+
+[Begin Action 250]   ;P107 char-select back-layer twinkle (varied: blink/grow/shimmer)
+LoopStart
+101,2,  0,0, 8
+101,30, 0,0, 8
+101,31, 0,0, 8
+101,32, 0,0, 8
 
 
 ;-------------------------------------------------------------------
