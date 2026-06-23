@@ -1,0 +1,29 @@
+; Definition file for player
+; Contains all the filenames needed for the character
+
+; Player information
+[Info]
+name = "Psylocke"        ;Name of character
+displayname = "Psylocke" ;Name of character to display
+versiondate =  7,21,2018  ;Version date of character
+mugenversion = 1.0 ;Version of M.U.G.E.N character works on
+author = "WhiteMagic2002"      ;Character author name
+Editor = "REDHOT"
+pal.defaults = 1,2,3,4,5,6
+
+; Files for the player
+[Files]
+cmd     = Psylocke.cmd   ;Command set
+cns      = Psylocke.cns
+st       = Psylocke.cns
+st1      = config.txt
+stcommon = common1.cns
+sprite   = Psylocke.sff
+anim     = Psylocke.air
+sound    = Psylocke.snd
+pal1     = Psylocke_01.act
+pal2     = Psylocke_02.act
+pal3     = Psylocke_03.act
+pal4     = Psylocke_04.act
+pal5     = Psylocke_05.act
+pal6     = Psylocke_06.act

@@ -1,0 +1,29 @@
+; Definition file for Hulk
+; Contains all the filenames needed for the character
+
+; Hulk information
+[Info]
+name = "Hulk"        ;Name of character
+displayname = "Hulk" ;Name of character to display
+versiondate = 2006,08,27      ;Version date of character
+mugenversion = 1.0
+author = "One Winged Angel" ; first edition: "Unkoman"
+Editor = "REDHOT"
+pal.defaults =  1,2,3,4,5,6
+
+; Files for the Hulk
+[Files]
+cmd      = CMND/Hulk.cmd
+cns      = CNS/Hulk.cns
+st       = CNS/Hulk.cns
+st1      = CNS/config.txt
+stcommon = CNS/common1.cns
+sprite   = SPRITES/Hulk.sff
+anim     = ANIMATIONS/Hulk.air
+sound    = SOUNDS/Hulk.snd
+pal1     = PALETTES/Hulk_01.act
+pal2     = PALETTES/Hulk_02.act
+pal3     = PALETTES/Hulk_03.act
+pal4     = PALETTES/Hulk_04.act
+pal5     = PALETTES/Hulk_05.act
+pal6     = PALETTES/Hulk_06.act

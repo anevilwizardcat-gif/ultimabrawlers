@@ -1,14 +1,27 @@
 {
-  "playtime": 45434.56,
+  "playtime": 62806.78,
   "modes": {
     "training": {
       "playtime": 0,
       "clear": 0
     },
     "arcade": {
-      "playtime": 508.91,
+      "playtime": 926.44,
       "clear": 0,
       "ranking": [
+        {
+          "score": 127700,
+          "time": 234.28,
+          "win": 2,
+          "lose": 1,
+          "consecutive": 0,
+          "name": "BAD",
+          "chars": [
+            "jotaro"
+          ],
+          "tmode": 0,
+          "ailevel": 8
+        },
         {
           "score": 116400,
           "time": 304.6,
@@ -47,16 +60,42 @@
           ],
           "tmode": 0,
           "ailevel": 5
+        },
+        {
+          "score": 4200,
+          "time": 55.2,
+          "win": 0,
+          "lose": 1,
+          "consecutive": 0,
+          "name": "",
+          "chars": [
+            "jotaro"
+          ],
+          "tmode": 0,
+          "ailevel": 8
+        },
+        {
+          "score": 2300,
+          "time": 56.8,
+          "win": 0,
+          "lose": 1,
+          "consecutive": 0,
+          "name": "",
+          "chars": [
+            "divinepsy"
+          ],
+          "tmode": 0,
+          "ailevel": 8
         }
       ]
     },
     "watch": {
-      "playtime": 44696.98,
-      "clear": 165,
+      "playtime": 61584.45,
+      "clear": 242,
       "clearcount": {
-        "jotaro": 38,
-        "dio": 17,
-        "mvc2_spiderman": 11,
+        "jotaro": 95,
+        "dio": 18,
+        "mvc2_spiderman": 17,
         "ryu_pots": 1,
         "sf3_ryu": 6,
         "sephiroth_ak": 1,
@@ -96,19 +135,25 @@
         "yu": 1,
         "cfj_jurihan": 1,
         "squall": 2,
-        "sentinel": 1,
+        "sentinel": 3,
         "cvsryu": 1,
         "cvwscorpion": 1,
         "cvsguile": 1,
         "cvsgouki": 4,
         "divinepsy": 1,
-        "cvs_honda": 1,
+        "cvs_honda": 2,
         "cvs2_dhalsim": 1,
-        "koldraptor": 2
+        "koldraptor": 4,
+        "dante_kof": 2,
+        "cvsgeese": 2,
+        "leon": 1,
+        "cvsvega": 1,
+        "mvc2_cable": 1,
+        "thanos": 1
       }
     },
     "survival": {
-      "playtime": 72.25,
+      "playtime": 139.47,
       "clear": 0,
       "ranking": [
         {
@@ -120,6 +165,19 @@
           "name": "DED",
           "chars": [
             "sephiroth_ak"
+          ],
+          "tmode": 0,
+          "ailevel": 8
+        },
+        {
+          "score": 10600,
+          "time": 67.22,
+          "win": 1,
+          "lose": 1,
+          "consecutive": 0,
+          "name": "",
+          "chars": [
+            "cvshaohmaru"
           ],
           "tmode": 0,
           "ailevel": 8

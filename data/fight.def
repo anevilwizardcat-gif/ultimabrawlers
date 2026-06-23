@@ -2661,34 +2661,34 @@ team1.counter.scale = 0.85, 0.85
 ; there is NO counterNN/textNN tier loop for [Combo] (unlike [Time]). ALL counter10..counter100 and
 ; text10..text100 keys below are INERT - the engine never reads them. Counter color = counter.font
 ; RGB slots only (one static color); no per-count gradient/rainbow is possible natively. See docs/cards/combo-counter.md
-team1.counter10.font = 6,0,0
+team1.counter10.font = -1,0,0
 team1.counter10.scale = 0.85, 0.85
 team1.counter10.palfx.mul = 255, 217, 179
-team1.counter20.font = 6,0,0
+team1.counter20.font = -1,0,0
 team1.counter20.scale = 0.85, 0.85
 team1.counter20.palfx.mul = 255, 153, 51
-team1.counter30.font = 6,0,0
+team1.counter30.font = -1,0,0
 team1.counter30.scale = 0.85, 0.85
 team1.counter30.palfx.mul = 255, 255, 77
-team1.counter40.font = 6,0,0
+team1.counter40.font = -1,0,0
 team1.counter40.scale = 0.85, 0.85
 team1.counter40.palfx.mul = 102, 255, 51
-team1.counter50.font = 6,0,0
+team1.counter50.font = -1,0,0
 team1.counter50.scale = 0.85, 0.85
 team1.counter50.palfx.mul = 51, 255, 214
-team1.counter60.font = 6,0,0
+team1.counter60.font = -1,0,0
 team1.counter60.scale = 0.85, 0.85
 team1.counter60.palfx.mul = 0, 153, 255
-team1.counter70.font = 6,0,0
+team1.counter70.font = -1,0,0
 team1.counter70.scale = 0.85, 0.85
 team1.counter70.palfx.mul = 204, 51, 255
-team1.counter80.font = 6,0,0
+team1.counter80.font = -1,0,0
 team1.counter80.scale = 0.85, 0.85
 team1.counter80.palfx.mul = 255, 26, 117
-team1.counter90.font = 6,0,0
+team1.counter90.font = -1,0,0
 team1.counter90.scale = 0.85, 0.85
 team1.counter90.palfx.mul = 255, 26, 26
-team1.counter100.font = 6,0,0
+team1.counter100.font = -1,0,0
 team1.counter100.scale = 0.85, 0.85
 team1.counter100.palfx.mul = 255, 26, 26
 team1.counter100.palfx.sinmul = 90, 90, 90, 15
@@ -2703,52 +2703,52 @@ team1.text.scale = 0.62, 0.62   ;<-- P072: bumped 0.55->0.62 (slightly larger HI
 team1.text.palfx.mul = 256, 256, 256   ; NOTE: INERT - engine LbText ignores palfx.mul (color via font slots 3-5 only)
 team1.text.offset = 0, 45   ;<-- P072: +3 clearance so larger HITS never touches the number
 team1.text10.text = "HITS!" ;By inputting a number next to text, You can change certain elements of the combo text when a combo reaches a certain point.
-team1.text10.font = 5,0,0
+team1.text10.font = -1,0,0
 team1.text10.scale = 0.55, 0.55
 team1.text10.palfx.mul = 256, 256, 256   ;<-- gold like our bars
 team1.text10.offset = 0, 42
 team1.text20.text = "HITS!"
-team1.text20.font = 5,0,0
+team1.text20.font = -1,0,0
 team1.text20.scale = 0.55, 0.55
 team1.text20.palfx.mul = 256, 256, 256   ;<-- gold like our bars
 team1.text20.offset = 0, 42
 team1.text30.text = "HITS!"
-team1.text30.font = 5,0,0
+team1.text30.font = -1,0,0
 team1.text30.scale = 0.55, 0.55
 team1.text30.palfx.mul = 256, 256, 256   ;<-- gold like our bars
 team1.text30.offset = 0, 42
 team1.text40.text = "HITS!"
-team1.text40.font = 5,0,0
+team1.text40.font = -1,0,0
 team1.text40.scale = 0.55, 0.55
 team1.text40.palfx.mul = 256, 256, 256   ;<-- gold like our bars
 team1.text40.offset = 0, 42
 team1.text50.text = "HITS!"
-team1.text50.font = 5,0,0
+team1.text50.font = -1,0,0
 team1.text50.scale = 0.55, 0.55
 team1.text50.palfx.mul = 256, 256, 256   ;<-- gold like our bars
 team1.text50.offset = 0, 42
 team1.text60.text = "HITS!"
-team1.text60.font = 5,0,0
+team1.text60.font = -1,0,0
 team1.text60.scale = 0.55, 0.55
 team1.text60.palfx.mul = 256, 256, 256   ;<-- gold like our bars
 team1.text60.offset = 0, 42
 team1.text70.text = "HITS!"
-team1.text70.font = 5,0,0
+team1.text70.font = -1,0,0
 team1.text70.scale = 0.55, 0.55
 team1.text70.palfx.mul = 256, 256, 256   ;<-- gold like our bars
 team1.text70.offset = 0, 42
 team1.text80.text = "HITS!"
-team1.text80.font = 5,0,0
+team1.text80.font = -1,0,0
 team1.text80.scale = 0.55, 0.55
 team1.text80.palfx.mul = 256, 256, 256   ;<-- gold like our bars
 team1.text80.offset = 0, 42
 team1.text90.text = "HITS!"
-team1.text90.font = 5,0,0
+team1.text90.font = -1,0,0
 team1.text90.scale = 0.55, 0.55
 team1.text90.palfx.mul = 256, 256, 256   ;<-- gold like our bars
 team1.text90.offset = 0, 42
 team1.text100.text = "HITS!"
-team1.text100.font = 5,0,0
+team1.text100.font = -1,0,0
 team1.text100.scale = 0.55, 0.55
 team1.text100.palfx.mul = 256, 256, 256   ;<-- gold like our bars
 team1.text100.offset = 0, 42
@@ -2759,7 +2759,7 @@ team1.showspeed = 8       ; text showing up speed (1 = instant)
 team1.hidespeed = 4       ; text hiding speed (the larger value, the faster speed)
 team1.autoalign = 0
 
-team2.pos = 1150,224      ;Coords to show   ;<-- raised
+team2.pos = 1150,-9999      ;Coords to show   ;<-- raised
 ; --- RGB flame behind combo counter REMOVED (P072); was P070 bg0.anim=4131. Re-enable by uncommenting. ---
 ;team2.bg0.anim = 4131
 ;team2.bg0.offset = 0, 18
@@ -2769,34 +2769,34 @@ team2.start.x = 1520      ;Starting x-coords
 team2.counter.layerno = 2
 team2.counter.font = -1,0,0   ;<-- P100 hidden
 team2.counter.scale = 0.85, 0.85
-team2.counter10.font = 6,0,0
+team2.counter10.font = -1,0,0
 team2.counter10.scale = 0.85, 0.85
 team2.counter10.palfx.mul = 255, 217, 179
-team2.counter20.font = 6,0,0
+team2.counter20.font = -1,0,0
 team2.counter20.scale = 0.85, 0.85
 team2.counter20.palfx.mul = 255, 153, 51
-team2.counter30.font = 6,0,0
+team2.counter30.font = -1,0,0
 team2.counter30.scale = 0.85, 0.85
 team2.counter30.palfx.mul = 255, 255, 77
-team2.counter40.font = 6,0,0
+team2.counter40.font = -1,0,0
 team2.counter40.scale = 0.85, 0.85
 team2.counter40.palfx.mul = 102, 255, 51
-team2.counter50.font = 6,0,0
+team2.counter50.font = -1,0,0
 team2.counter50.scale = 0.85, 0.85
 team2.counter50.palfx.mul = 51, 255, 214
-team2.counter60.font = 6,0,0
+team2.counter60.font = -1,0,0
 team2.counter60.scale = 0.85, 0.85
 team2.counter60.palfx.mul = 0, 153, 255
-team2.counter70.font = 6,0,0
+team2.counter70.font = -1,0,0
 team2.counter70.scale = 0.85, 0.85
 team2.counter70.palfx.mul = 204, 51, 255
-team2.counter80.font = 6,0,0
+team2.counter80.font = -1,0,0
 team2.counter80.scale = 0.85, 0.85
 team2.counter80.palfx.mul = 255, 26, 117
-team2.counter90.font = 6,0,0
+team2.counter90.font = -1,0,0
 team2.counter90.scale = 0.85, 0.85
 team2.counter90.palfx.mul = 255, 26, 26
-team2.counter100.font = 6,0,0
+team2.counter100.font = -1,0,0
 team2.counter100.scale = 0.85, 0.85
 team2.counter100.palfx.mul = 255, 26, 26
 team2.counter100.palfx.sinmul = 90, 90, 90, 15
@@ -2811,52 +2811,52 @@ team2.text.scale = 0.62, 0.62   ;<-- P072: bumped 0.55->0.62 (slightly larger HI
 team2.text.palfx.mul = 256, 256, 256   ; NOTE: INERT - engine LbText ignores palfx.mul (color via font slots 3-5 only)
 team2.text.offset = 0, 45   ;<-- P072: +3 clearance so larger HITS never touches the number
 team2.text10.text = "HITS!" ;By inputting a number next to text, You can change certain elements of the combo text when a combo reaches a certain point.
-team2.text10.font = 5,0,0
+team2.text10.font = -1,0,0
 team2.text10.scale = 0.55, 0.55
 team2.text10.palfx.mul = 256, 256, 256   ;<-- gold like our bars
 team2.text10.offset = 0, 42
 team2.text20.text = "HITS!"
-team2.text20.font = 5,0,0
+team2.text20.font = -1,0,0
 team2.text20.scale = 0.55, 0.55
 team2.text20.palfx.mul = 256, 256, 256   ;<-- gold like our bars
 team2.text20.offset = 0, 42
 team2.text30.text = "HITS!"
-team2.text30.font = 5,0,0
+team2.text30.font = -1,0,0
 team2.text30.scale = 0.55, 0.55
 team2.text30.palfx.mul = 256, 256, 256   ;<-- gold like our bars
 team2.text30.offset = 0, 42
 team2.text40.text = "HITS!"
-team2.text40.font = 5,0,0
+team2.text40.font = -1,0,0
 team2.text40.scale = 0.55, 0.55
 team2.text40.palfx.mul = 256, 256, 256   ;<-- gold like our bars
 team2.text40.offset = 0, 42
 team2.text50.text = "HITS!"
-team2.text50.font = 5,0,0
+team2.text50.font = -1,0,0
 team2.text50.scale = 0.55, 0.55
 team2.text50.palfx.mul = 256, 256, 256   ;<-- gold like our bars
 team2.text50.offset = 0, 42
 team2.text60.text = "HITS!"
-team2.text60.font = 5,0,0
+team2.text60.font = -1,0,0
 team2.text60.scale = 0.55, 0.55
 team2.text60.palfx.mul = 256, 256, 256   ;<-- gold like our bars
 team2.text60.offset = 0, 42
 team2.text70.text = "HITS!"
-team2.text70.font = 5,0,0
+team2.text70.font = -1,0,0
 team2.text70.scale = 0.55, 0.55
 team2.text70.palfx.mul = 256, 256, 256   ;<-- gold like our bars
 team2.text70.offset = 0, 42
 team2.text80.text = "HITS!"
-team2.text80.font = 5,0,0
+team2.text80.font = -1,0,0
 team2.text80.scale = 0.55, 0.55
 team2.text80.palfx.mul = 256, 256, 256   ;<-- gold like our bars
 team2.text80.offset = 0, 42
 team2.text90.text = "HITS!"
-team2.text90.font = 5,0,0
+team2.text90.font = -1,0,0
 team2.text90.scale = 0.55, 0.55
 team2.text90.palfx.mul = 256, 256, 256   ;<-- gold like our bars
 team2.text90.offset = 0, 42
 team2.text100.text = "HITS!"
-team2.text100.font = 5,0,0
+team2.text100.font = -1,0,0
 team2.text100.scale = 0.55, 0.55
 team2.text100.palfx.mul = 256, 256, 256   ;<-- gold like our bars
 team2.text100.offset = 0, 42
@@ -2932,7 +2932,7 @@ round.default.offset = 630, 480
 ; Default component to show for each round. Text can include a %i to
 ; the round number. Use "round.default.anim" for animation instead of
 ; text.
-round.default.text = "R   %i"
+round.default.text = ""
 ;round.default.anim = 500
 round.default.font = 9,0,0
 round.default.displaytime = 55
@@ -2975,7 +2975,7 @@ round9.offset = 640, 380
 
 round.single.offset = 640, 480
 round.single.font = 9, 0, 0
-round.single.text = "G   r"
+round.single.text = ""
 round.single.displaytime = 55
 round.single.scale = 1, 1
 round.single.snd = 0, 11
@@ -3011,9 +3011,9 @@ ctrl.time = 50              ;Time players get control after starting fight
 KO.time    = 0              ;Time to show KO component
 KO.offset  = 540, 400       ;Component for KO display
 KO.anim    = 529 		;Dummy Animation to let bg play out
-KO.bg0.anim = 533
+KO.bg0.anim = 529
 KO.bg0.offset  = 830, 400
-KO.bg1.anim = 532
+KO.bg1.anim = 529
 KO.bg1.offset  = 430, 400
 KO.bg2.anim = 529
 KO.bg2.offset  = 830, 400      
@@ -3057,9 +3057,9 @@ p1.win.bg1.anim = 580
 p1.win.bg1.offset = 540, 610
 p1.win.bg0.anim = 586
 p1.win.bg0.offset = 640, 690
-p1.win.font = 1,0,1
+p1.win.font = 3,6,1
 p1.win.text = "%s"
-p1.win.displaytime = 180
+p1.win.displaytime = 200
 p1.win.snd     = 2,3
 
 p2.win.offset = 1200, 705 
@@ -3067,9 +3067,9 @@ p2.win.bg1.anim = 581
 p2.win.bg1.offset = 740, 610
 p2.win.bg0.anim = 586
 p2.win.bg0.offset = 640, 690
-p2.win.font = 1,0,-1
+p2.win.font = 3,6,-1
 p2.win.text = "%s"
-p2.win.displaytime = 180
+p2.win.displaytime = 200
 p2.win.snd     = 2,3
 
 ; 2-player win text
@@ -3080,7 +3080,7 @@ p1.win2.bg0.anim = 586
 p1.win2.bg0.offset = 640, 690
 p1.win2.font = 1,0,1
 p1.win2.text = "%s and %s"
-p1.win2.displaytime = 180
+p1.win2.displaytime = 200
 p1.win2.snd     = 2,3
 
 p2.win2.offset = 1200, 705 
@@ -3090,7 +3090,7 @@ p2.win2.bg0.anim = 586
 p2.win2.bg0.offset = 640, 690
 p2.win2.font = 1,0,-1
 p2.win2.text = "%s and %s"
-p2.win2.displaytime = 180
+p2.win2.displaytime = 200
 p2.win2.snd     = 2,3
 
 ; 3-player win text
@@ -3101,7 +3101,7 @@ p1.win3.bg0.anim = 586
 p1.win3.bg0.offset = 640, 690
 p1.win3.font = 1,0,1
 p1.win3.text = "Team %s"
-p1.win3.displaytime = 180
+p1.win3.displaytime = 200
 p1.win3.snd     = 2,3
 
 p2.win3.offset = 1200, 705 
@@ -3111,7 +3111,7 @@ p2.win3.bg0.anim = 586
 p2.win3.bg0.offset = 640, 690
 p2.win3.font = 1,0,-1
 p2.win3.text = "Team %s"
-p2.win3.displaytime = 180
+p2.win3.displaytime = 200
 p2.win3.snd     = 2,3
 
 ; 4-player win text
@@ -3136,25 +3136,25 @@ p2.win4.displaytime = 180
 p2.win4.snd     = 2,3
 
 ; AI Win
-ai.win.displaytime = 170
+ai.win.displaytime = 200
 ai.win.offset = 640, 610
 ai.win.font = 4,0
 ai.win.scale = 1, 1
-ai.win.anim = 583
+ai.win.anim = 582
 ai.win.snd     = 2,4
 
-ai.win2.displaytime = 170
+ai.win2.displaytime = 200
 ai.win2.offset = 640, 610
 ai.win2.font = 4,0
 ai.win2.scale = 1, 1
-ai.win2.anim = 583
+ai.win2.anim = 582
 ai.win2.snd     = 2,4
 
-ai.win3.displaytime = 170
+ai.win3.displaytime = 200
 ai.win3.offset = 640, 610
 ai.win3.font = 4,0
 ai.win3.scale = 1, 1
-ai.win3.anim = 583
+ai.win3.anim = 582
 ai.win3.snd     = 2,4
 
 ai.win4.displaytime = 170
@@ -3165,18 +3165,18 @@ ai.win4.anim = 583
 ai.win4.snd     = 2,4
 
 ; AI Lose
-ai.lose.displaytime = 170
+ai.lose.displaytime = 200
 ai.lose.offset = 640, 610
 ai.lose.font = 4,0
 ai.lose.scale = 1, 1
-ai.lose.anim = 582
+ai.lose.anim = 580
 ai.lose.snd     = 2,3
 
-ai.lose2.displaytime = 170
+ai.lose2.displaytime = 200
 ai.lose2.offset = 640, 610
 ai.lose2.font = 4,0
 ai.lose2.scale = 1, 1
-ai.lose2.anim = 582
+ai.lose2.anim = 580
 ai.lose2.snd     = 2,3
 
 ai.lose3.displaytime = 170
@@ -3443,22 +3443,31 @@ Interpolate Offset
 
 ; K
 [Begin Action 530]
--1,0, 0,0, 40
+-1,0, 0,0, 8
 Interpolate Blend
 Interpolate Scale
-522,0, 0,0, 10, , AS0D256, 1.25,1.25
-Interpolate Blend
+522,0, 0,0, 5, , AS0D256, 2.2,2.2
 Interpolate Scale
-520,0, 0,0, 20
-520,0, 0,0, 10
-Interpolate Offset
-520,0, -10,-10, 50
-Interpolate Offset
-520,0, -10,-10, 10
-Interpolate Offset
-520,0, -640,-10, 1
+522,0, 0,0, 4, , , 0.88,0.88
+Interpolate Scale
+522,0, 0,0, 4, , , 1.06,1.06
+Interpolate Scale
+522,0, 0,0, 3, , , 1.0,1.0
+522,0, 0,0, 38
+522,0, 0,0, 10
+-1,0, 0,0, 9
+522,0, 0,0, 8
+-1,0, 0,0, 7
+522,0, 0,0, 6
+-1,0, 0,0, 5
+522,0, 0,0, 4
+-1,0, 0,0, 3
+522,0, 0,0, 3
+-1,0, 0,0, 2
+522,0, 0,0, 2
+-1,0, 0,0, 2
+-1,0, 0,0, -1
 
-; O
 [Begin Action 531]
 -1,0, 0,0, 40
 Interpolate Blend
@@ -3623,67 +3632,38 @@ Interpolate Blend
 560,3, 0,0, -1
 
 [Begin Action 580]
-530,10, -1200,0, 1
+530,10, -1200,0, 60
 Interpolate Offset
-530,10, -160,0, 14
-530,10, -160,0, 6
-530,11, -160,0, 6
-530,12, -160,0, 6
-530,13, -160,0, 6
-530,14, -160,0, 6
-530,15, -160,0, 6
-530,10, -160,0, 6
-530,11, -160,0, 6
-530,12, -160,0, 6
-530,13, -160,0, 6
-530,14, -160,0, 6
-530,15, -160,0, 6
-530,10, -160,0, 6
-530,11, -160,0, 6
-530,12, -160,0, 6
-530,13, -160,0, 6
-530,14, -160,0, 6
-530,15, -160,0, 6
+530,10, -1200,0, 10
 Interpolate Offset
-530,10, -1700,0, 16
--1,0, 0,0, -1
+530,10, -200,0, 150
+Interpolate Offset
+530,10, -160,0, 10
+Interpolate Offset
+530,10, 1200,0, -1
 
 [Begin Action 581]
-530,10, 1200,0, 1
+530,10, 1200,0, 60
 Interpolate Offset
-530,10, 160,0, 14
-530,10, 160,0, 6
-530,11, 160,0, 6
-530,12, 160,0, 6
-530,13, 160,0, 6
-530,14, 160,0, 6
-530,15, 160,0, 6
-530,10, 160,0, 6
-530,11, 160,0, 6
-530,12, 160,0, 6
-530,13, 160,0, 6
-530,14, 160,0, 6
-530,15, 160,0, 6
-530,10, 160,0, 6
-530,11, 160,0, 6
-530,12, 160,0, 6
-530,13, 160,0, 6
-530,14, 160,0, 6
-530,15, 160,0, 6
+530,10, 1200,0, 10
 Interpolate Offset
-530,10, 1700,0, 16
--1,0, 0,0, -1
+530,10, 200,0, 150
+Interpolate Offset
+530,10, 160,0, 10
+Interpolate Offset
+530,10, -1200,0, -1
 
 [Begin Action 582]
-530,20, -1400,0, 1
+530,20, -1200,0, 60
 Interpolate Offset
-530,20, 0,0, 16
-530,20, 0,0, 118
+530,20, -1200,0, 10
 Interpolate Offset
-530,20, -1400,0, 16
--1,0, 0,0, -1
+530,20, -200,0, 150
+Interpolate Offset
+530,20, -160,0, 10
+Interpolate Offset
+530,20, 1200,0, -1
 
-; YOU LOSE
 [Begin Action 583]
 530,20, -1400,0, 1
 Interpolate Offset

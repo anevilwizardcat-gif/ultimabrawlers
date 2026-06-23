@@ -1,0 +1,33 @@
+Version: nightly
+Build Time: 2026.06.07
+Platform: windows (amd64)
+OpenGL 3.3
+RAM in Use: 150 MB / OS Reserved: 297 MB
+Active Goroutines: 3
+Timestamp: 2026-06-21 15:30:31
+
+Engine error
+
+Error: external/script/main.lua:3230: data/action.zss:84:
+Invalid data: dv
+stack traceback:
+	[G]: in function 'game'
+	external/script/main.lua:3230: in function 'f'
+	external/script/main.lua:2438: in function 'loop'
+	external/script/main.lua:3757: in main chunk
+	[G]: ?
+
+Go stack traceback:
+goroutine 1 [running, locked to thread]:
+runtime/debug.Stack()
+	runtime/debug/stack.go:24 +0x65
+main.handlePanic({0x1407ce4a0?, 0xc004888140})
+	github.com/ikemen-engine/Ikemen-GO/src/main.go:362 +0x3e5
+main.realMain.func1()
+	github.com/ikemen-engine/Ikemen-GO/src/main.go:66 +0x2a
+panic({0x1407ce4a0, 0xc004888140})
+	runtime/panic.go:884 +0x213
+main.realMain()
+	github.com/ikemen-engine/Ikemen-GO/src/main.go:206 +0x573
+main.main()
+	github.com/ikemen-engine/Ikemen-GO/src/main.go:59 +0x17

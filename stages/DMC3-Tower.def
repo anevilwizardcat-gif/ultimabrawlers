@@ -1,0 +1,287 @@
+[Info]
+name = "Temen-ni-gru"
+OriginalGame = "Devil May Cry 3"
+author = "Teros"
+email = "inlineshadow@yahoo.com"
+versiondate = 11/28/2007
+mugenversion = 04,14,2001
+credits = kyo-k for rain, ALL sprites made by me, ask permission before use!!!
+
+[Camera]
+startx = 0
+starty = 0
+boundleft = -243
+boundright = 245
+boundhigh = -100
+boundlow = 0
+verticalfollow = 1
+floortension = 0
+tension = 60
+
+[PlayerInfo]
+p1startx = -70
+p1starty = 0
+p1startz = 0
+p1facing = 1
+p2startx = 70
+p2starty = 0
+p2startz = 0
+p2facing = -1
+
+leftbound = -1000
+rightbound = 1000
+topbound = 0
+botbound = 0
+
+[Scaling]
+topz = 0
+botz = 50
+topscale = 1
+botscale = 1.2
+
+[Bound]
+screenleft = 15
+screenright = 15
+
+[StageInfo]
+zoffset = 220
+autoturn = 1
+resetBG = 0
+
+[Shadow]
+color = 38,38,38
+yscale = 0
+
+[Reflection]
+intensity = 128
+
+[Music]
+bgmusic = DMC3-Tower.mp3
+bgvolume = 2
+
+[BGdef]
+spr = stages/DMC3-Tower.sff
+debugbg = 0
+
+[BG Moon]
+type = normal
+start = 0,0
+spriteno = 3,0
+mask = 1
+delta = .9,.4
+tile = 1,0
+layerno = 0
+
+[BG Moon Shine]
+type = normal
+start = 0,0
+spriteno = 3,1
+mask = 1
+delta = .9,.4
+tile = 1,0
+layerno = 0
+trans = add
+alpha = 156, 156
+
+[BG Clouds0]
+type = normal
+start = 30,-60
+spriteno = 4,0
+mask = 1
+delta = 1,1
+trans = addalpha
+alpha = 156, 156
+tile = 1,0
+velocity = .1,0
+
+[BG Clouds1]
+type = normal
+start = 0,0
+spriteno = 4,0
+mask = 1
+delta = 1,1
+trans = addalpha
+alpha = 156, 156
+tile = 1,0
+velocity = .1,0
+
+[BG Clouds2]
+type = normal
+start = 0,0
+spriteno = 4,1
+mask = 1
+delta = 1,1
+trans = addalpha
+alpha = 156, 156
+tile = 1,0
+velocity = .2,0
+
+[BG Clouds3]
+type = normal
+start = 0,0
+spriteno = 4,2
+mask = 1
+delta = 1,1
+trans = addalpha
+alpha = 156, 156
+tile = 1,0
+velocity = .3,0
+
+[BG Platform]
+type = normal
+spriteno = 0,0
+start = 0,0
+delta = 1,1
+mask = 1
+trans = none
+
+[BG Fog]
+type = normal
+start = -150,280
+spriteno = 2,2
+mask = 1
+delta = 1,1
+trans = add
+tile = 1,0
+layerno = 1
+velocity = 1.5,0
+
+[BG rain7]
+type  = anim
+actionno = 1
+start = -400, -120
+delta = 1.1, 1.1
+mask = 1
+layerno = 1
+
+[BG rain8]
+type  = anim
+actionno = 1
+start = 150, -120
+delta = 1.1, 1.1
+mask = 1
+layerno = 1
+
+[BG rain9]
+type  = anim
+actionno = 1
+layerno = 0
+start = -450, -25
+delta = 1.1, 1.1
+mask = 1
+
+[BG rain10]
+type  = anim
+actionno = 1
+layerno = 0
+start = 150, -25
+delta = 1.1, 1.1
+mask = 1
+
+[BG rain11]
+type  = anim
+actionno = 1
+layerno = 1
+start = -500, -10
+delta = 1.1, 1.1
+mask = 1
+
+[BG rain12]
+type  = anim
+actionno = 1
+layerno = 1
+start = 50, -10
+delta = 1.1, 1.1
+mask = 1
+
+[BG rain13]
+type  = anim
+actionno = 1
+layerno = 1
+start = -300, 0
+delta = 1.1, 1.1
+mask = 1
+
+[BG rain14]
+type  = anim
+actionno = 1
+layerno = 1
+start = 200, 0
+delta = 1.1, 1.1
+mask = 1
+
+[BG rain15]
+type  = anim
+actionno = 1
+start = -400, 10
+delta = 1.1, 1.1
+mask = 1
+layerno = 1
+
+[BG rain16]
+type  = anim
+actionno = 1
+start = 150, 10
+delta = 1.1, 1.1
+mask = 1
+layerno = 1
+
+[BG rain1]
+type  = anim
+actionno = 1
+layerno = 0
+start = -450, -75
+delta = 1.1, 1.1
+mask = 1
+
+[BG rain2]
+type  = anim
+actionno = 1
+layerno = 0
+start = 150, -75
+delta = 1.1, 1.1
+mask = 1
+
+[BG rain3]
+type  = anim
+actionno = 1
+layerno = 1
+start = -500, 20
+delta = 1.1, 1.1
+mask = 1
+
+[BG rain4]
+type  = anim
+actionno = 1
+layerno = 1
+start = 50, 20
+delta = 1.1, 1.1
+mask = 1
+
+[BG rain5]
+type  = anim
+actionno = 1
+layerno = 1
+start = -300, 20
+delta = 1.1, 1.1
+mask = 1
+
+[BG rain6]
+type  = anim
+actionno = 1
+layerno = 1
+start = 200, 20
+delta = 1.1, 1.1
+mask = 1
+
+[Begin Action 1]
+30,0, 0,0, 1,,A
+30,1, 0,0, 1,,A
+30,2, 0,0, 1,,A
+30,3, 0,0, 1,,A
+30,4, 0,0, 1,,A
+30,5, 0,0, 1,,A
+30,6, 0,0, 1,,A
+30,7, 0,0, 1,,A
+30,8, 0,0, 1,,A
+

@@ -202,16 +202,19 @@ dio, jjba-ctower2-alt.def
 shadowdio, jjba-ctower2-alt.def
 MVC2_Spiderman, DailyBugleRooftopsMVC.def
 Venom, DailyBugleRooftopsMVC.def
-IronMan, centralsuperheroes 1.1
-CaptainAmerica, centralsuperheroes 1.1
+IronMan, centralsuperheroes 1.1.def
+CaptainAmerica, centralsuperheroes 1.1.def
+Hulk, centralsuperheroes 1.1.def
 Wolverine, Onslaught.def
 Storm, Onslaught.def
 Cyclops, Onslaught.def
+Gambit, Onslaught.def
 MvC2_Cable, Onslaught.def
-DivinePsy, mshvsf_apocalypse_now.def
+Psylocke, mshvsf_apocalypse_now.def
 Magneto, mshvsf_apocalypse_now.def
 Sentinel, mshvsf_apocalypse_now.def
 DoctorDoom, mshvsf_apocalypse_now.def
+Thanos, mshvsf_apocalypse_now.def
 StriderHiryu, SF3 Battle Arena Rd 02.def
 Megaman, Slither Inc ZX.def
 cvsryu, SuzakuCastleWW.def
@@ -267,7 +270,6 @@ Squall, IceCavernIcicleFields.def
 Leon, BarricadedStation.def
 Wesker, BarricadedStation.def
 Dante, DMC3-Tower.def
-Dante[Public], DMC3-Tower.def
 Dante_KOF, DMC3-Tower.def
 vergil, DMC3-Tower.def
 nero_DMC4, DMC3-Tower.def
@@ -279,6 +281,7 @@ sf3_gouki, mvc2-training.def
 sf3_ibuki, mvc2-training.def
 PunchingBag, mvc2-training.def
 randomselect
+empty
 
 ;-------------------------------------------------------------------------------
 [ExtraStages]
@@ -356,7 +359,7 @@ stages/jjba-ctower.def
 stages/jjba-ctower2-alt.def
 stages/jjba-sewer.def
 stages/bridgemoon.def
-stages/centralsuperheroes 1.1
+stages/centralsuperheroes 1.1.def
 stages/DailyBugleRooftopsMVC.def
 stages/mshvsf_apocalypse_now.def
 stages/Onslaught.def
