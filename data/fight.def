@@ -2952,11 +2952,13 @@ round.sndtime = 0           ;Time to play the sounds
 ; Components to show for each round (optional, specify up to round 9)
 ; Uncomment to use
 round1.offset = 640, 380
-;round1.anim = 501
+round1.anim = 560
 round2.offset = 640, 380
-;round2.anim = 502
+round2.anim = 561
+round2.offset = 640, 380
 round3.offset = 640, 380
-;round3.anim = 503
+round3.anim = 562
+round3.offset = 640, 380
 round4.offset = 640, 380
 ;round4.anim = 504
 round5.offset = 640, 380
@@ -2982,7 +2984,7 @@ round.final.offset = 640, 480
 round.final.font = 9, 0, 0
 round.final.text = "F   R"
 round.final.text = " "
-;round.final.anim = 510
+round.final.anim = 563
 ;round.final.bg0.anim = 511
 ;round.final.bg0.offset = 640, 380
 round.final.displaytime = 55
@@ -3013,10 +3015,10 @@ KO.bg0.anim = 533
 KO.bg0.offset  = 830, 400
 KO.bg1.anim = 532
 KO.bg1.offset  = 430, 400
-KO.bg2.anim = 531
+KO.bg2.anim = 529
 KO.bg2.offset  = 830, 400      
 KO.bg3.anim = 530
-KO.bg3.offset  = 430, 400          
+KO.bg3.offset  = 640, 400          
 KO.snd     = 2,0            ;Sound to play for KO announcement
 
 ; Double KO
@@ -3608,62 +3610,99 @@ Interpolate Blend
 
 
 ; WINNER P1
+[Begin Action 560]
+560,0, 0,0, -1
+
+[Begin Action 561]
+560,1, 0,0, -1
+
+[Begin Action 562]
+560,2, 0,0, -1
+
+[Begin Action 563]
+560,3, 0,0, -1
+
 [Begin Action 580]
-530,0, -1200,0, 60
+530,10, -1200,0, 1
 Interpolate Offset
-530,0, -1200,0, 10
+530,10, -160,0, 14
+530,10, -160,0, 6
+530,11, -160,0, 6
+530,12, -160,0, 6
+530,13, -160,0, 6
+530,14, -160,0, 6
+530,15, -160,0, 6
+530,10, -160,0, 6
+530,11, -160,0, 6
+530,12, -160,0, 6
+530,13, -160,0, 6
+530,14, -160,0, 6
+530,15, -160,0, 6
+530,10, -160,0, 6
+530,11, -160,0, 6
+530,12, -160,0, 6
+530,13, -160,0, 6
+530,14, -160,0, 6
+530,15, -160,0, 6
 Interpolate Offset
-530,0, -200,0, 150
-Interpolate Offset
-530,0, -160,0, 10
-Interpolate Offset
-530,0, 1200,0, -1
+530,10, -1700,0, 16
+-1,0, 0,0, -1
 
-; WINNER P2
 [Begin Action 581]
--1,0, 0,0, 60
+530,10, 1200,0, 1
 Interpolate Offset
-530,0, 1200,0, 10
+530,10, 160,0, 14
+530,10, 160,0, 6
+530,11, 160,0, 6
+530,12, 160,0, 6
+530,13, 160,0, 6
+530,14, 160,0, 6
+530,15, 160,0, 6
+530,10, 160,0, 6
+530,11, 160,0, 6
+530,12, 160,0, 6
+530,13, 160,0, 6
+530,14, 160,0, 6
+530,15, 160,0, 6
+530,10, 160,0, 6
+530,11, 160,0, 6
+530,12, 160,0, 6
+530,13, 160,0, 6
+530,14, 160,0, 6
+530,15, 160,0, 6
 Interpolate Offset
-530,0, 200,0, 150
-Interpolate Offset
-530,0, 160,0, 10
-Interpolate Offset
-530,0, -1200,0, -1
+530,10, 1700,0, 16
+-1,0, 0,0, -1
 
-; YOU WIN
 [Begin Action 582]
+530,20, -1400,0, 1
 Interpolate Offset
-530,1, -1200,0, 10
+530,20, 0,0, 16
+530,20, 0,0, 118
 Interpolate Offset
-530,1, -20,0, 150
-Interpolate Offset
-530,1, 20,0, 10
-Interpolate Offset
-530,1, 1200,0, -1
+530,20, -1400,0, 16
+-1,0, 0,0, -1
 
 ; YOU LOSE
 [Begin Action 583]
+530,20, -1400,0, 1
 Interpolate Offset
-530,2, 1200,0, 10
+530,20, 0,0, 16
+530,20, 0,0, 118
 Interpolate Offset
-530,2, 20,0, 150
-Interpolate Offset
-530,2, -20,0, 10
-Interpolate Offset
-530,2, -1200,0, -1
+530,20, -1400,0, 16
+-1,0, 0,0, -1
 
 ; Name Banner
 [Begin Action 586]
-551,0, 0,0, 60, , AS0D256
-551,0, 0,0, 10, , AS0D256
-Interpolate Blend
-551,0, 0,0, 160, , AS256D0
-551,0, 0,0, 10, , AS256D0
-Interpolate Blend
-551,0, 0,0, -1, , AS0D256
+551,0, -1700,0, 1
+Interpolate Offset
+551,0, 0,0, 14
+551,0, 0,0, 132
+Interpolate Offset
+551,0, -1700,0, 14
+-1,0, 0,0, -1
 
-;-----------------------------------------------------------
 [WinIcon]
 p1.pos = 320,92   ;<-- moved under P1 bar (TUNE x)
 p2.pos = 960,92   ;<-- moved under P2 bar (TUNE x)

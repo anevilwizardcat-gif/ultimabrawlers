@@ -1,0 +1,543 @@
+;Cross-Over Combination Jump-In
+[Statedef 150000]
+type = A
+movetype = I
+physics = N
+anim = 42  ; <- Jumping In (Ready or not, I'm jumping in!!!)
+sprpriority = 2
+ctrl = 0
+
+[State 0, AssertSpecial]
+type = AssertSpecial
+trigger1 = time = 0
+flag = invisible
+ignorehitpause = 1
+
+; NEW !! Tag active definers --------------------------------
+[State 4701, 1a]
+type = VarSet
+triggerall = Palno = [1,4] 
+trigger1 = time = [0,1]         ;alpha-Assist (Projectile Type)
+var(33) = 3
+
+[State 4701, 1a]
+type = VarSet
+triggerall = Palno = [5,8]
+trigger1 = time = [0,1]          ;beta-Assist (Anti-Air Type)
+var(33) = 4
+
+[State 4701, 1a]
+type = VarSet
+triggerall = Palno = [9,12]
+trigger1 = time = [0,1]         ;gamma-Assist (Variety Type)
+var(33) = 5
+
+; -----------------------------------------------------------
+[State 4701, 2] ; Prevents the camera from following the char
+type = ScreenBound
+trigger1 = 1
+value = 0
+
+; Starting position
+[State 4701, 3]
+type = PosSet
+trigger1 = time = 0
+x = (partner, pos x) - (200*(facing)) ; variable pos
+y = -100
+
+; Attack velocity
+[State 4701, 4]
+type = VelSet
+trigger1 = Time = 0
+x = 15
+y = 7
+
+[State 4701, 5]
+type = PosSet
+trigger1 = Pos Y >= 0
+y = 0
+
+; --------------------------------------------------------------------
+; This part is customizable, you can add what you need to be done here
+
+; Do assist attack depending on what dir is holding the partner
+[State 4701, 6]
+type = ChangeState
+triggerall = Roundstate = [2,3]
+triggerall = Var(33) = [3,5]
+trigger1 = Pos Y >= 0
+trigger1 = Vel Y >= 0
+value = 170000
+ctrl = 0
+
+[State 0, SuperPause]
+type = SuperPause
+trigger1 = 1
+time = 37 
+anim = -1
+sound = -1
+pos = 0,0
+;movetime = 0
+darken = 0
+p2defmul = 1
+poweradd = 0
+;unhittable = 1
+;ignorehitpause = 
+persistent = 0
+
+[State 3000, Helper]
+type = Helper
+trigger1 = 1
+stateno = 150005
+supermovetime = 99999999
+pos = 0,ceil(-50*const(size.yscale))
+ownpal = 1
+id = 8500
+persistent = 0
+
+[Statedef 150005]
+type = A
+physics = N
+anim = 9999
+velset = 0,0
+ctrl = 0
+
+[State 8500, Explod]
+type = Explod
+trigger1 = time = 0
+anim = 8905
+sprpriority = 8
+pos = 60,162
+postype = back
+ontop = 1
+supermovetime = 37
+bindtime = 6
+removetime = 37
+vel = 0,0
+scale = 1,1
+ID = 8900
+ownpal = 1
+ignorehitpause = 1
+
+;[State 8500, Explod]
+;type = Explod
+;trigger1 = time = 0
+;anim = f9951
+;sprpriority = -2
+;postype = left
+;under = 1
+;supermove = 1
+;bindtime = -1
+;removetime = 37
+;scale = 1,1
+;ownpal = 1
+
+[State 9999,0]
+type = ModifyExplod
+trigger1 = time = [0,6]
+ID = 8900
+scale = .75- (.0415*time), .75- (.0415*time)
+sprpriority = -1
+ignorehitpause = 1
+under = 1
+
+[State 0, DestroySelf]
+type = DestroySelf
+trigger1 = Time = 37
+
+;Player X-Over Combo Trigger
+[Statedef 150099]
+type    = S
+movetype= I
+physics = S
+juggle= 0
+ctrl = 0
+velset = 0,0
+anim = 0
+sprpriority = 2
+
+[State 0, ChangeState]
+type = ChangeState
+trigger1 = 1
+value = 160000
+
+;Player X-Over Combo: Hyper Viper Beam
+[Statedef 160000]
+type    = S
+movetype= I
+physics = S
+juggle  = 0  
+velset = 0,0
+ctrl = 0
+anim = 3000
+sprpriority = 3
+
+[State 3000, Explod]
+type = Explod
+trigger1 = Time = 0
+anim = 8300
+id = 8300
+supermove = 1
+sprpriority = 4
+ownpal = 1
+
+[State 3000, VarSet]
+type = VarSet
+trigger1 = animelem = 2
+var(4) = 1
+
+[State 3000, Helper]
+type = Helper
+trigger1 = animelem = 2
+stateno = 8502
+supermovetime = 99999999
+pos = 0,ceil(-60*const(size.yscale))
+ownpal = 1
+id = 8500
+
+[State 3000, SuperPause]
+type = SuperPause
+trigger1 = animelem = 2
+time = 36
+movetime = 36
+darken = 1
+anim = -1
+p2defmul = 1
+poweradd = -2000
+
+[State 3000, PlaySnd]
+type = PlaySnd
+trigger1 = Animelem = 4
+value = S10,8
+volume = 255
+Channel = 0
+
+[State 3000, PlaySnd]
+type = PlaySnd
+trigger1 = Animelem = 9
+value = S10,15
+volume = 255
+Channel = 0
+
+[State 3000, Explod]
+type = Explod
+trigger1 = animelem = 10
+removetime = 9999
+id = 3001
+anim = 3002
+pos = 0, 0
+postype = p1
+sprpriority = 4
+ownpal = 1
+bindtime = -1
+supermove = 1
+supermovetime = 1
+scale = const(size.xscale) ,1
+ignorehitpause = 0
+
+[state 3107, 2]
+type = playsnd
+trigger1 = animelem = 10
+value = 20,5
+
+[State 1000, Helper]
+type = Helper
+trigger1 = AnimElem = 10
+stateno = 3005
+name = "Beam Source"
+ownpal = 1
+postype = p1
+pos = -5*const(size.xscale), 0
+size.xscale = const(size.xscale)
+
+[State 1000, Helper]
+type = Helper
+trigger1 = AnimElem = 10
+stateno = 3006
+ownpal = 1
+pos = 200*const(size.xscale), -60
+postype = p1
+name = "Beam Itself"
+size.xscale=const(size.xscale)
+
+[State 1000]
+type = varadd
+triggerall = var(26) =[-3,3]
+trigger1 = command = "x"
+trigger2 = command = "y"
+trigger3 = command = "z"
+v = 26
+value = -1*(command = "holddown")+1*(command = "holdup")
+
+[State 1000]
+type = varadd
+triggerall = var(26) =[-3,3]
+triggerall = (command != "holdup")&&(command != "holddown")
+trigger1 = command = "x"
+trigger2 = command = "y"
+trigger3 = command = "z"
+v = 26
+value = 1*var(27)
+
+[State 0]
+type = varadd
+trigger1 = timemod = 50,20
+trigger2 = timemod = 50,30
+v = 26
+value = -1
+
+[State 0]
+type = varadd
+trigger1 = timemod = 50,10
+trigger2 = timemod = 50,40
+v = 26
+value = 1
+
+[State 0]
+type = varadd
+trigger1 = var(26) != 0
+trigger1 = var(26) > 0
+trigger1 = timemod = 30,0
+v = 26
+value = -1
+
+[State 0]
+type = varadd
+trigger1 = var(26) != 0
+trigger1 = var(26) < 0
+trigger1 = timemod = 30,0
+v = 26
+value = 1
+
+[State 0]
+type = varadd
+trigger1 = command !="holdup"
+trigger1 = command !="holddown"
+v = 26
+value = Ifelse(var(26)>0,-1,1)
+
+[State 0]
+type = varset
+trigger1 = timemod = 80,0
+trigger1 = command !="holdup"
+trigger1 = command !="holddown"
+var(27) = -1
+
+[State 0]
+type = varset
+trigger1 = timemod = 80,40
+trigger1 = command !="holdup"
+trigger1 = command !="holddown"
+var(27) = 1
+
+[State 0]
+type = varset
+trigger1 = 1
+var(29) = stateno
+ignorehitpause = 1
+
+[State 1000]
+type = changestate
+trigger1 = animtime = 0
+value = 160001
+ctrl = 0
+
+
+;----------------------------------------------------------------------------------
+; Hyper Viper Beam End State
+[Statedef 160001]
+type    = S
+movetype= I
+physics = S
+velset = 0,0
+anim = 3001
+ctrl = 0
+sprpriority = 1
+
+[State 0, VarSet]
+type = VarSet
+trigger1 = time = 0
+var(4) = 0 
+
+
+[State 1000]
+type = changestate
+trigger1 = animtime = 0
+value = 0
+ctrl = 1
+
+;Partner X-Over Combo: Hyper Viper Beam
+[Statedef 170000]
+type    = S
+movetype= I
+physics = S
+juggle  = 0  
+velset = 0,0
+ctrl = 0
+anim = 3000
+sprpriority = 3
+
+
+
+[State 3000, Explod]
+type = Explod
+trigger1 = Time = 0
+anim = 8300
+id = 8300
+supermove = 1
+sprpriority = 4
+ownpal = 1
+
+[State 3000, PlaySnd]
+type = PlaySnd
+trigger1 = Animelem = 4
+value = S10,8
+volume = 255
+Channel = 0
+
+[State 3000, PlaySnd]
+type = PlaySnd
+trigger1 = Animelem = 9
+value = S10,15
+volume = 255
+Channel = 0
+
+[State 3000, Explod]
+type = Explod
+trigger1 = animelem = 10
+removetime = 9999
+id = 3002
+anim = 3002
+pos = 0, 0
+postype = p1
+sprpriority = 4
+ownpal = 1
+bindtime = -1
+supermove = 1
+supermovetime = 1
+scale = const(size.xscale) ,1
+ignorehitpause = 0
+
+[state 3107, 2]
+type = playsnd
+trigger1 = animelem = 10
+value = 20,5
+
+[State 1000, Helper]
+type = Helper
+trigger1 = AnimElem = 10
+stateno = 3005
+name = "Beam Source"
+ownpal = 1
+postype = p1
+pos = -5*const(size.xscale), 0
+size.xscale = const(size.xscale)
+
+[State 1000, Helper]
+type = Helper
+trigger1 = AnimElem = 10
+stateno = 3006
+ownpal = 1
+pos = 200*const(size.xscale), -60
+postype = p1
+name = "Beam Itself"
+size.xscale=const(size.xscale)
+
+[State 1000]
+type = varadd
+triggerall = var(26) =[-3,3]
+trigger1 = command = "x"
+trigger2 = command = "y"
+trigger3 = command = "z"
+v = 26
+value = -1*(command = "holddown")+1*(command = "holdup")
+
+[State 1000]
+type = varadd
+triggerall = var(26) =[-3,3]
+triggerall = (command != "holdup")&&(command != "holddown")
+trigger1 = command = "x"
+trigger2 = command = "y"
+trigger3 = command = "z"
+v = 26
+value = 1*var(27)
+
+[State 0]
+type = varadd
+trigger1 = timemod = 50,20
+trigger2 = timemod = 50,30
+v = 26
+value = -1
+
+[State 0]
+type = varadd
+trigger1 = timemod = 50,10
+trigger2 = timemod = 50,40
+v = 26
+value = 1
+
+[State 0]
+type = varadd
+trigger1 = var(26) != 0
+trigger1 = var(26) > 0
+trigger1 = timemod = 30,0
+v = 26
+value = -1
+
+[State 0]
+type = varadd
+trigger1 = var(26) != 0
+trigger1 = var(26) < 0
+trigger1 = timemod = 30,0
+v = 26
+value = 1
+
+[State 0]
+type = varadd
+trigger1 = command !="holdup"
+trigger1 = command !="holddown"
+v = 26
+value = Ifelse(var(26)>0,-1,1)
+
+[State 0]
+type = varset
+trigger1 = timemod = 80,0
+trigger1 = command !="holdup"
+trigger1 = command !="holddown"
+var(27) = -1
+
+[State 0]
+type = varset
+trigger1 = timemod = 80,40
+trigger1 = command !="holdup"
+trigger1 = command !="holddown"
+var(27) = 1
+
+[State 0]
+type = varset
+trigger1 = 1
+var(29) = stateno
+ignorehitpause = 1
+
+[State 1000]
+type = changestate
+trigger1 = animtime = 0
+value = 170001
+ctrl = 0
+
+;----------------------------------------------------------------------------------
+; Hyper Viper Beam End State
+[Statedef 170001]
+type    = S
+movetype= I
+physics = S
+velset = 0,0
+anim = 3001
+ctrl = 0
+sprpriority = 1
+
+[State 1001, 4]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = ifelse(Roundstate = 3,0,100511)
+ctrl = ifelse(RoundState = 3,1,0)

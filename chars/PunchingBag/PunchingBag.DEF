@@ -1,0 +1,34 @@
+
+;oooooooooooooooooooooooooooooooooooooo
+
+[Info]
+name = "ApeBag"
+displayname = "Punching Bag"
+author = "AnkokuApes: The Supreme Team"
+;Program: Ankoku AsurA
+;Grafics: Hades_Dios_Supremo
+
+;oooooooooooooooooooooooooooooooooooooo
+
+[Files]
+cmd      = CMD.txt
+cns      = cNS.cns   
+st       = CNS.cns 
+stcommon = common1.cns 
+sprite   = SFF.sff  
+anim     = AIR.air   
+sound    = SND.snd
+pal1     = 1.act
+pal2     = 2.act
+pal3     = 3.act
+pal4     = 4.act
+pal5     = 5.act
+pal6     = 6.act
+pal7     = 7.act
+pal8     = 8.act
+pal9     = 9.act
+pal10    = 10.act
+pal11    = 11.act
+pal12    = 12.act
+
+;oooooooooooooooooooooooooooooooooooooo

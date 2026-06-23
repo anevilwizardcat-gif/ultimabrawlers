@@ -267,8 +267,8 @@ layerno = 0
 start = -640,0
 
 [TitleBG Background Clouds Top]
-type = normal
-spriteno = 100,2
+type = anim          ;P109: twinkling back starfield (matches char-select)
+actionno = 251       ;P109: crisp pixel varied twinkle
 layerno = 0
 start = -640, -50
 tile = 1,0
@@ -276,9 +276,10 @@ velocity = -0.1, 0
 window = 0,0, 1279,959
 mask = 1
 
-[TitleBG Background Clouds Bottom]
-type = normal
-spriteno = 100,3
+;P109: FRONT big-star layer (100,3) SCRAPPED (same as char-select); sprite left unreferenced
+;[TitleBG Background Clouds Bottom]
+;type = normal
+;spriteno = 100,3
 layerno = 0
 start = -640, 0
 tile = 1,0
@@ -286,6 +287,13 @@ velocity = -0.7, 0
 window = 0,0, 1279,959
 mask = 1
 
+
+[Begin Action 251]   ;P109 title back-layer twinkle (varied: blink/grow/shimmer)
+LoopStart
+100,2,  0,0, 8
+100,30, 0,0, 8
+100,31, 0,0, 8
+100,32, 0,0, 8
 
 [TitleBG Background Black Bars]
 type = normal

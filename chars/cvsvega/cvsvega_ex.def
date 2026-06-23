@@ -1,0 +1,32 @@
+[Info]
+name = "cvsvega_ex"		;ファイナルベガ(cvs)
+displayname = "F.Vega"	;ファイナルベガ
+versiondate=09,08,2011	;Version date of character
+mugenversion=06,14,2003	;Version of M.U.G.E.N character works on
+author="Warusaki3"		;悪咲3号
+pal.Defaults=4,5
+
+[Files]
+cmd=cvsvega.cmd
+cns=cvsvega.cns
+st=cvsvega.cns
+st1=cvs_common.cns
+st2=groove.cns
+st3=config.txt
+st4=aura.cns
+stcommon=common1.cns
+sprite=cvsvega_ex.sff
+anim=cvsvega.air
+sound=cvsvega.snd
+pal1=act104.act;オリジナルカラー4
+pal2=act105.act;オリジナルカラー5
+pal3=act106.act;オリジナルカラー6
+pal4=act101.act;オリジナルカラー1
+pal5=act102.act;オリジナルカラー2
+pal6=act103.act;オリジナルカラー3
+pal7=act110.act;オリジナルカラー10
+pal8=act111.act;オリジナルカラー11
+pal9=act112.act;オリジナルカラー12
+pal10=act107.act;オリジナルカラー7
+pal11=act108.act;オリジナルカラー8
+pal12=act109.act;オリジナルカラー9

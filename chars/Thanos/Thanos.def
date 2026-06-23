@@ -1,0 +1,34 @@
+; Player information
+[Info]
+name ="Thanos"
+displayname ="Thanos"
+pal.defaults =1,2,3,4,5,6
+versiondate=03/10/2014
+mugenversion=1.0
+author="Whiplash, DarkWolf13-MVC2 & Walruslui"
+edited = "REDHOT"
+
+; Files for the player
+[Files]
+cmd     =CMND/Thanos.cmd
+cns     =CNS/Thanos.cns
+st      =CNS/Thanos.cns
+st1      = CNS/config.txt
+stcommon = CNS/common1.cns
+sprite  =SPRITES/Thanos.sff
+anim	=ANIMATIONS/Thanos.air
+sound   =SOUNDS/Thanos.snd
+pal1=PALETTES/Thanos_01.act
+pal2=PALETTES/Thanos_02.act
+pal3=PALETTES/Thanos_03.act
+pal4=PALETTES/Thanos_04.act
+pal5=PALETTES/Thanos_05.act
+pal6=PALETTES/Thanos_06.act
+
+
+; Arcade mode
+;[Arcade]
+;intro.storyboard=
+;ending.storyboard=
+;intro.storyboard =intro.def
+;ending.storyboard =ending.def

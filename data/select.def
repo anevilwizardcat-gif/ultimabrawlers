@@ -207,6 +207,7 @@ CaptainAmerica, centralsuperheroes 1.1
 Wolverine, Onslaught.def
 Storm, Onslaught.def
 Cyclops, Onslaught.def
+MvC2_Cable, Onslaught.def
 DivinePsy, mshvsf_apocalypse_now.def
 Magneto, mshvsf_apocalypse_now.def
 Sentinel, mshvsf_apocalypse_now.def
@@ -276,7 +277,7 @@ sf3_ken, mvc2-training.def
 sf3_chun-li, mvc2-training.def
 sf3_gouki, mvc2-training.def
 sf3_ibuki, mvc2-training.def
-KFMS combo dummy (EX version), mvc2-training.def
+PunchingBag, mvc2-training.def
 randomselect
 
 ;-------------------------------------------------------------------------------

@@ -1,0 +1,152 @@
+;=================================================
+;Configuration By: [»¦«]Ankoku AsurA[»¦«]
+;=================================================
+
+;()()()()()()()()()()()()()()()
+;[][][][][][][][][][][][][][][]
+;          AnkoAsuTS         []
+;[][][][][][][][][][][][][][][]
+;()()()()()()()()()()()()()()()
+[Command]
+name = "Ankoku-AsurA-TaG"
+command = s
+time = 1
+[Command]
+name =  "AsuAtras"
+command = B
+time = 1
+[Command]
+name =  "AsuAdelante"
+command = F
+time = 1
+[Command]
+name =  "AsuAbajo"
+command = D
+time = 1
+[Command]
+name =  "AsuArriba"
+command = U
+time = 1
+;()()()()()()()()()()()()()()()
+;[][][][][][][][][][][][][][][]
+;          AnkoAsuTS         []
+;[][][][][][][][][][][][][][][]
+;()()()()()()()()()()()()()()()
+
+;-| Double Tap |-----------------------------------------------------------
+[Command]
+name = "FF"     ;Required (do not remove)
+command = F, F
+time = 10
+
+[Command]
+name = "BB"     ;Required (do not remove)
+command = B, B
+time = 10
+
+;-| 2/3 Button Combination |-----------------------------------------------
+
+
+[Command]
+name = "recovery";Required (do not remove)
+command = a+x
+time = 1
+
+;-| Single Button |---------------------------------------------------------
+
+[Command]
+name = "s"
+command = s
+time = 1
+
+[Command]
+name = "a"
+command = a
+time = 1
+
+[Command]
+name = "b"
+command = b
+time = 1
+
+[Command]
+name = "c"
+command = c
+time = 1
+
+[Command]
+name = "x"
+command = x
+time = 1
+
+[Command]
+name = "y"
+command = y
+time = 1
+
+[Command]
+name = "z"
+command = z
+time = 1
+
+;-| Hold Dir |--------------------------------------------------------------
+[Command]
+name = "holdfwd";Required (do not remove)
+command = /$F
+time = 1
+
+[Command]
+name = "holdback";Required (do not remove)
+command = /$B
+time = 1
+
+[Command]
+name = "holdup" ;Required (do not remove)
+command = /$U
+time = 1
+
+[Command]
+name = "holddown";Required (do not remove)
+command = /$D
+time = 1
+
+[Command]
+name = "hold_a";Required (do not remove)
+command = /$a
+time = 1
+
+[Command]
+name = "hold_b";Required (do not remove)
+command = /$b
+time = 1
+
+[Command]
+name = "hold_x";Required (do not remove)
+command = /$x
+time = 1
+
+[Command]
+name = "hold_y";Required (do not remove)
+command = /$y
+time = 1
+
+[Command]
+name = "longjump"
+command = D, $U
+
+;ooooooooooooooooooooooooooooooooooooooooooooooooo
+[Statedef -1]
+;ooooooooooooooooooooooooooooooooooooooooooooooooo
+
+;********************
+[State 0]
+type = AssertSpecial
+trigger1 = 1
+flag  = timerfreeze
+flag2 = nostandguard
+supermovetime = 65535
+pausemovetime = 65535
+ignorehitpause = 1
+ignorepause = 1
+;********************
+

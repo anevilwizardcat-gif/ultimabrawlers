@@ -1,0 +1,51 @@
+;======================================
+;"Bison", from Street Fighter Alpha 3
+;======================================
+
+;----------------------------------------
+;Author:	FlowaGirl
+;		flowergirl@cutey.com
+;----------------------------------------
+
+;---------------------
+;Character Information
+;---------------------
+[Info]
+name			= "[Necromancer's] M. Bison"	;Name of character
+displayname		= "M. Bison"			;Name of character to display
+versiondate		= 01,02,2004			;Version date of character
+mugenversion	= 04,14,2002			;Version of M.U.G.E.N character works on
+author		= "The Necromancer"		;Character author name
+pal.defaults	= 1,2,3,4,5,6			;Default palettes in order of preference
+
+;---------------
+;Character Files 
+;---------------
+[Files]
+cmd			= BisonCMD.cmd			;Command Set
+cns			= BisonCNS.cns			;Data
+st			= BisonCNS.cns			;States
+stcommon		= BisonCNS.cns			;Common States
+sprite		= BisonSFF.sff			;Sprite
+anim			= BisonAIR.air			;Animation
+sound			= BisonSND.snd			;Sound
+
+;SFA Stance:
+pal1			= Bison01.act			;Red (SFA3)
+pal2			= Bison02.act			;Blue (SFA3)
+pal3			= Bison03.act			;White (XMvsSF)
+;pal4			= Bison04.act			;
+;pal5			= Bison05.act			;
+;pal6			= Bison06.act			;
+
+;XMvsSF Stance:
+pal7			= Bison01.act			;
+pal8			= Bison02.act			;
+pal9			= Bison03.act			;
+;pal10		= Bison04.act			;
+;pal11		= Bison05.act			;
+;pal12		= Bison06.act			;
+
+[Arcade]
+intro.storyboard = D:\MUGEN\extrastuff\add-ons\Intros&Endings\sfa2intro/introsfa2.def
+ending.storyboard = end/sfabisonend.def

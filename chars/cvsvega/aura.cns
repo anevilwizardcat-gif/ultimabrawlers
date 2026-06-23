@@ -1,0 +1,1477 @@
+;---------------------------------------------------------------------------
+;サイコパワーエフェクト（待機）
+[Statedef 7999]
+type = S
+movetype = I
+physics = N
+anim = 6900
+ctrl = 0
+
+[State 20000, Bind]
+type = BindToParent
+trigger1 = 1
+pos = 0,0
+
+[State 20000, ChangeState]
+type = ChangeState
+triggerall = root,movetype != H
+trigger1 = root,stateno = 200 && root,animelem = 1
+value = 7000
+
+[State 20000, ChangeState]
+type = ChangeState
+triggerall = root,movetype != H
+trigger1 = root,stateno = 201 && root,animelem = 1
+value = 7001
+
+[State 20000, ChangeState]
+type = ChangeState
+triggerall = root,movetype != H
+trigger1 = root,stateno = 210 && root,animelem = 1
+value = 7010
+
+[State 20000, ChangeState]
+type = ChangeState
+triggerall = root,movetype != H
+trigger1 = root,stateno = 211 && root,animelem = 2
+value = 7011
+
+[State 20000, ChangeState]
+type = ChangeState
+triggerall = root,movetype != H
+trigger1 = root,stateno = 220 && root,animelem = 2
+value = 7020
+
+[State 20000, ChangeState]
+type = ChangeState
+triggerall = root,movetype != H
+trigger1 = root,stateno = 221 && root,animelem = 2
+value = 7021
+
+[State 20000, ChangeState]
+type = ChangeState
+triggerall = root,movetype != H
+trigger1 = root,stateno = 400 && root,animelem = 1
+value = 7100
+
+[State 20000, ChangeState]
+type = ChangeState
+triggerall = root,movetype != H
+trigger1 = root,stateno = 410 && root,animelem = 3
+trigger2 = root,stateno = 420 && root,animelem = 3
+value = 7110
+
+[State 20000, ChangeState]
+type = ChangeState
+triggerall = root,movetype != H
+trigger1 = root,stateno = 600 && root,animelem = 2
+trigger2 = root,stateno = 1302 && root,animelem = 2
+value = 7200
+
+[State 20000, ChangeState]
+type = ChangeState
+triggerall = root,movetype != H
+trigger1 = root,stateno = 601 && root,animelem = 2
+trigger2 = root,stateno = 611 && root,animelem = 2
+value = 7201
+
+[State 20000, ChangeState]
+type = ChangeState
+triggerall = root,movetype != H
+trigger1 = root,stateno = 610 && root,animelem = 2
+value = 7210
+
+[State 20000, ChangeState]
+type = ChangeState
+triggerall = root,movetype != H
+trigger1 = root,stateno = 620 && root,animelem = 2
+value = 7220
+
+[State 20000, ChangeState]
+type = ChangeState
+triggerall = root,movetype != H
+trigger1 = root,stateno = 621 && root,animelem = 3
+value = 7221
+
+[State 20000, ChangeState]
+type = ChangeState
+triggerall = root,movetype != H
+trigger1 = root,stateno = 700 && root,animelem = 2
+value = 7230
+
+[State 20000, ChangeState]
+type = ChangeState
+triggerall = root,movetype != H
+trigger1 = root,stateno = 4000 && root,animelem = 1
+value = 7050
+
+[State 20000, ChangeState]
+type = ChangeState
+triggerall = root,movetype != H
+trigger1 = root,stateno = 4100 && root,animelem = 1
+value = 7150
+
+[State 20000, ChangeState]
+type = ChangeState
+triggerall = root,movetype != H
+trigger1 = root,stateno = 1200 && root,animelem = 1
+value = 7400
+
+[State 20000, ChangeState]
+type = ChangeState
+triggerall = root,movetype != H
+trigger1 = root,stateno = 1401 && root,animelem = 7
+value = 7250
+
+[State 20000, ChangeState]
+type = ChangeState
+triggerall = root,movetype != H
+trigger1 = root,stateno = 1800 && root,animelem = 9
+trigger2 = root,stateno = 2800 && root,animelem = 9
+value = 7600
+
+;---------------------------------------------------------------------------
+;サイコパワーエフェクト（遠距離立ち弱P）
+[Statedef 7000]
+type = S
+movetype = I
+physics = N
+anim = 7000
+ctrl = 0
+sprpriority = 5
+
+[State 20000, 1]
+type = VarSet
+trigger1 = time = 0
+var(0) = root,anim
+
+[State 20000, Bind]
+type = BindToParent
+trigger1 = 1
+pos = 0,0
+
+[State 20000, AssertSpecial]
+type = AssertSpecial
+trigger1 = 1
+flag = NoShadow
+
+[State 20000, Turn]
+type = Turn
+trigger1 = facing != root,facing
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(2) < 0
+value = anim
+elem = 1
+persistent = 1
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(2) >= 0
+trigger1 = root,animelemtime(3) < 0
+value = anim
+elem = 2
+persistent = 1
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(3) >= 0
+trigger1 = root,animelemtime(4) < 0
+value = anim
+elem = 3
+persistent = 1
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(4) >= 0
+trigger1 = root,animelemtime(5) < 0
+value = anim
+elem = 4
+persistent = 1
+
+[State 20000, ChangeState]
+type = ChangeState
+trigger1 = root,anim != var(0)
+trigger2 = root,animelem = 5
+value = 7999
+
+;---------------------------------------------------------------------------
+;サイコパワーエフェクト（近距離立ち弱P）
+[Statedef 7001]
+type = S
+movetype = I
+physics = N
+anim = 7001
+ctrl = 0
+sprpriority = 5
+
+[State 20000, 1]
+type = VarSet
+trigger1 = time = 0
+var(0) = root,anim
+
+[State 20000, Bind]
+type = BindToParent
+trigger1 = 1
+pos = 0,0
+
+[State 20000, AssertSpecial]
+type = AssertSpecial
+trigger1 = 1
+flag = NoShadow
+
+[State 20000, Turn]
+type = Turn
+trigger1 = facing != root,facing
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(2) < 0
+value = anim
+elem = 1
+persistent = 1
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(2) >= 0
+trigger1 = root,animelemtime(3) < 0
+value = anim
+elem = 2
+persistent = 1
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(3) >= 0
+trigger1 = root,animelemtime(4) < 0
+value = anim
+elem = 3
+persistent = 1
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(4) >= 0
+trigger1 = root,animelemtime(5) < 0
+value = anim
+elem = 4
+persistent = 1
+
+[State 20000, ChangeState]
+type = ChangeState
+trigger1 = root,anim != var(0)
+trigger2 = root,animelem = 5
+value = 7999
+
+;---------------------------------------------------------------------------
+;サイコパワーエフェクト（遠距離立ち中P）
+[Statedef 7010]
+type = S
+movetype = I
+physics = N
+anim = 7010
+ctrl = 0
+sprpriority = 5
+
+[State 20000, 1]
+type = VarSet
+trigger1 = time = 0
+var(0) = root,anim
+
+[State 20000, Bind]
+type = BindToParent
+trigger1 = 1
+pos = 0,0
+
+[State 20000, AssertSpecial]
+type = AssertSpecial
+trigger1 = 1
+flag = NoShadow
+
+[State 20000, Turn]
+type = Turn
+trigger1 = facing != root,facing
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(2) < 0
+value = anim
+elem = 1
+persistent = 1
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(2) >= 0
+trigger1 = root,animelemtime(3) < 0
+value = anim
+elem = 2
+persistent = 1
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(3) >= 0
+trigger1 = root,animelemtime(4) < 0
+value = anim
+elem = 3
+persistent = 1
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(4) >= 0
+trigger1 = root,animelemtime(5) < 0
+value = anim
+elem = 4
+persistent = 1
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(5) >= 0
+trigger1 = root,animelemtime(6) < 0
+value = anim
+elem = 5
+persistent = 1
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(6) >= 0
+trigger1 = root,animelemtime(7) < 0
+value = anim
+elem = 6
+persistent = 1
+
+[State 20000, ChangeState]
+type = ChangeState
+trigger1 = root,anim != var(0)
+trigger2 = root,animelem = 7
+value = 7999
+
+;---------------------------------------------------------------------------
+;サイコパワーエフェクト（近距離立ち中P）
+[Statedef 7011]
+type = S
+movetype = I
+physics = N
+anim = 7011
+ctrl = 0
+sprpriority = 5
+
+[State 20000, 1]
+type = VarSet
+trigger1 = time = 0
+var(0) = root,anim
+
+[State 20000, Bind]
+type = BindToParent
+trigger1 = 1
+pos = 0,0
+
+[State 20000, AssertSpecial]
+type = AssertSpecial
+trigger1 = 1
+flag = NoShadow
+
+[State 20000, Turn]
+type = Turn
+trigger1 = facing != root,facing
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(2) >= 0
+trigger1 = root,animelemtime(3) < 0
+value = anim
+elem = 1
+persistent = 1
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(3) >= 0
+trigger1 = root,animelemtime(4) < 0
+value = anim
+elem = 2
+persistent = 1
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(4) >= 0
+trigger1 = root,animelemtime(5) < 0
+value = anim
+elem = 3
+persistent = 1
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(5) >= 0
+trigger1 = root,animelemtime(6) < 0
+value = anim
+elem = 4
+persistent = 1
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(6) >= 0
+value = anim
+elem = 5
+persistent = 1
+
+[State 20000, ChangeState]
+type = ChangeState
+trigger1 = root,anim != var(0)
+value = 7999
+
+;---------------------------------------------------------------------------
+;サイコパワーエフェクト（遠距離立ち強P）
+[Statedef 7020]
+type = S
+movetype = I
+physics = N
+anim = 7020
+ctrl = 0
+sprpriority = 5
+
+[State 20000, 1]
+type = VarSet
+trigger1 = time = 0
+var(0) = root,anim
+
+[State 20000, Bind]
+type = BindToParent
+trigger1 = 1
+pos = 0,0
+
+[State 20000, AssertSpecial]
+type = AssertSpecial
+trigger1 = 1
+flag = NoShadow
+
+[State 20000, Turn]
+type = Turn
+trigger1 = facing != root,facing
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(2) >= 0
+trigger1 = root,animelemtime(3) < 0
+value = anim
+elem = 1
+persistent = 1
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(3) >= 0
+trigger1 = root,animelemtime(4) < 0
+value = anim
+elem = 2
+persistent = 1
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(4) >= 0
+trigger1 = root,animelemtime(5) < 0
+value = anim
+elem = 3
+persistent = 1
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(5) >= 0
+trigger1 = root,animelemtime(6) < 0
+value = anim
+elem = 4
+persistent = 1
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(6) >= 0
+trigger1 = root,animelemtime(7) < 0
+value = anim
+elem = 5
+persistent = 1
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(7) >= 0
+trigger1 = root,animelemtime(8) < 0
+value = anim
+elem = 6
+persistent = 1
+
+[State 20000, ChangeState]
+type = ChangeState
+trigger1 = root,anim != var(0)
+trigger2 = root,animelem = 8
+value = 7999
+
+;---------------------------------------------------------------------------
+;サイコパワーエフェクト（近距離立ち強P）
+[Statedef 7021]
+type = S
+movetype = I
+physics = N
+anim = 7021
+ctrl = 0
+sprpriority = 5
+
+[State 20000, 1]
+type = VarSet
+trigger1 = time = 0
+var(0) = root,anim
+
+[State 20000, Bind]
+type = BindToParent
+trigger1 = 1
+pos = 0,0
+
+[State 20000, AssertSpecial]
+type = AssertSpecial
+trigger1 = 1
+flag = NoShadow
+
+[State 20000, Turn]
+type = Turn
+trigger1 = facing != root,facing
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(2) >= 0
+trigger1 = root,animelemtime(3) < 0
+value = anim
+elem = 1
+persistent = 1
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(3) >= 0
+trigger1 = root,animelemtime(4) < 0
+value = anim
+elem = 2
+persistent = 1
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(4) >= 0
+trigger1 = root,animelemtime(5) < 0
+value = anim
+elem = 3
+persistent = 1
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(5) >= 0
+trigger1 = root,animelemtime(6) < 0
+value = anim
+elem = 4
+persistent = 1
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(6) >= 0
+trigger1 = root,animelemtime(7) < 0
+value = anim
+elem = 5
+persistent = 1
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(7) >= 0
+trigger1 = root,animelemtime(8) < 0
+value = anim
+elem = 6
+persistent = 1
+
+[State 20000, ChangeState]
+type = ChangeState
+trigger1 = root,anim != var(0)
+trigger2 = root,animelem = 8
+value = 7999
+
+;---------------------------------------------------------------------------
+;サイコパワーエフェクト（しゃがみ弱P）
+[Statedef 7100]
+type = S
+movetype = I
+physics = N
+anim = 7100
+ctrl = 0
+sprpriority = 5
+
+[State 20000, 1]
+type = VarSet
+trigger1 = time = 0
+var(0) = root,anim
+
+[State 20000, Bind]
+type = BindToParent
+trigger1 = 1
+pos = 0,0
+
+[State 20000, AssertSpecial]
+type = AssertSpecial
+trigger1 = 1
+flag = NoShadow
+
+[State 20000, Turn]
+type = Turn
+trigger1 = facing != root,facing
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(2) < 0
+value = anim
+elem = 1
+persistent = 1
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(2) >= 0
+trigger1 = root,animelemtime(3) < 0
+value = anim
+elem = 2
+persistent = 1
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(3) >= 0
+trigger1 = root,animelemtime(4) < 0
+value = anim
+elem = 3
+persistent = 1
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(4) >= 0
+trigger1 = root,animelemtime(5) < 0
+value = anim
+elem = 4
+persistent = 1
+
+[State 20000, ChangeState]
+type = ChangeState
+trigger1 = root,anim != var(0)
+trigger2 = root,animelem = 5
+value = 7999
+
+;---------------------------------------------------------------------------
+;サイコパワーエフェクト（しゃがみ中P）（しゃがみ強P）
+[Statedef 7110]
+type = S
+movetype = I
+physics = N
+anim = 7110
+ctrl = 0
+sprpriority = 5
+
+[State 20000, 1]
+type = VarSet
+trigger1 = time = 0
+var(0) = root,anim
+
+[State 20000, Bind]
+type = BindToParent
+trigger1 = 1
+pos = 0,0
+
+[State 20000, AssertSpecial]
+type = AssertSpecial
+trigger1 = 1
+flag = NoShadow
+
+[State 20000, Turn]
+type = Turn
+trigger1 = facing != root,facing
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(3) >= 0
+trigger1 = root,animelemtime(4) < 0
+value = anim
+elem = 1
+persistent = 1
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(4) >= 0
+trigger1 = root,animelemtime(5) < 0
+value = anim
+elem = 2
+persistent = 1
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(5) >= 0
+trigger1 = root,animelemtime(6) < 0
+value = anim
+elem = 3
+persistent = 1
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(6) >= 0
+trigger1 = root,animelemtime(7) < 0
+value = anim
+elem = 4
+persistent = 1
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(7) >= 0
+trigger1 = root,animelemtime(8) < 0
+value = anim
+elem = 5
+persistent = 1
+
+[State 20000, ChangeState]
+type = ChangeState
+trigger1 = root,anim != var(0)
+trigger2 = root,animelem = 8
+value = 7999
+
+;---------------------------------------------------------------------------
+;サイコパワーエフェクト（斜めジャンプ弱P）
+[Statedef 7200]
+type = S
+movetype = I
+physics = N
+anim = 7200
+ctrl = 0
+sprpriority = 5
+
+[State 20000, 1]
+type = VarSet
+trigger1 = time = 0
+var(0) = root,anim
+
+[State 20000, Bind]
+type = BindToParent
+trigger1 = 1
+pos = 0,0
+
+[State 20000, AssertSpecial]
+type = AssertSpecial
+trigger1 = 1
+flag = NoShadow
+
+[State 20000, Turn]
+type = Turn
+trigger1 = facing != root,facing
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(2) >= 0
+trigger1 = root,animelemtime(3) < 0
+value = anim
+elem = 1
+persistent = 1
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(3) >= 0
+trigger1 = root,animelemtime(4) < 0
+value = anim
+elem = 2
+persistent = 1
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(4) >= 0
+trigger1 = root,animelemtime(5) < 0
+value = anim
+elem = 3
+persistent = 1
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(5) >= 0
+trigger1 = root,animelemtime(6) < 0
+value = anim
+elem = 4
+persistent = 1
+
+[State 20000, ChangeState]
+type = ChangeState
+trigger1 = root,anim != var(0)
+trigger2 = root,animelem = 6
+value = 7999
+
+;---------------------------------------------------------------------------
+;サイコパワーエフェクト（垂直ジャンプ弱P）（垂直ジャンプ中P）
+[Statedef 7201]
+type = S
+movetype = I
+physics = N
+anim = 7201
+ctrl = 0
+sprpriority = 5
+
+[State 20000, 1]
+type = VarSet
+trigger1 = time = 0
+var(0) = root,anim
+
+[State 20000, Bind]
+type = BindToParent
+trigger1 = 1
+pos = 0,0
+
+[State 20000, AssertSpecial]
+type = AssertSpecial
+trigger1 = 1
+flag = NoShadow
+
+[State 20000, Turn]
+type = Turn
+trigger1 = facing != root,facing
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(2) >= 0
+trigger1 = root,animelemtime(3) < 0
+value = anim
+elem = 1
+persistent = 1
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(3) >= 0
+trigger1 = root,animelemtime(4) < 0
+value = anim
+elem = 2
+persistent = 1
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(4) >= 0
+trigger1 = root,animelemtime(5) < 0
+value = anim
+elem = 3
+persistent = 1
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(5) >= 0
+trigger1 = root,animelemtime(6) < 0
+value = anim
+elem = 4
+persistent = 1
+
+[State 20000, ChangeState]
+type = ChangeState
+trigger1 = root,anim != var(0)
+trigger2 = root,animelem = 6
+value = 7999
+
+;---------------------------------------------------------------------------
+;サイコパワーエフェクト（斜めジャンプ中P）
+[Statedef 7210]
+type = S
+movetype = I
+physics = N
+anim = 7201
+ctrl = 0
+sprpriority = 5
+
+[State 20000, 1]
+type = VarSet
+trigger1 = time = 0
+var(0) = root,anim
+
+[State 20000, Bind]
+type = BindToParent
+trigger1 = 1
+pos = 0,0
+
+[State 20000, AssertSpecial]
+type = AssertSpecial
+trigger1 = 1
+flag = NoShadow
+
+[State 20000, Turn]
+type = Turn
+trigger1 = facing != root,facing
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(2) >= 0
+trigger1 = root,animelemtime(3) < 0
+value = anim
+elem = 1
+persistent = 1
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(3) >= 0
+trigger1 = root,animelemtime(4) < 0
+value = anim
+elem = 2
+persistent = 1
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(4) >= 0
+trigger1 = root,animelemtime(5) < 0
+value = anim
+elem = 3
+persistent = 1
+
+[State 20000, ChangeState]
+type = ChangeState
+trigger1 = root,anim != var(0)
+trigger2 = root,animelem = 5
+value = 7999
+
+;---------------------------------------------------------------------------
+;サイコパワーエフェクト（斜めジャンプ強P）
+[Statedef 7220]
+type = S
+movetype = I
+physics = N
+anim = 7220
+ctrl = 0
+sprpriority = 5
+
+[State 20000, 1]
+type = VarSet
+trigger1 = time = 0
+var(0) = root,anim
+
+[State 20000, Bind]
+type = BindToParent
+trigger1 = 1
+pos = 0,0
+
+[State 20000, AssertSpecial]
+type = AssertSpecial
+trigger1 = 1
+flag = NoShadow
+
+[State 20000, Turn]
+type = Turn
+trigger1 = facing != root,facing
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(2) >= 0
+trigger1 = root,animelemtime(3) < 0
+value = anim
+elem = 1
+persistent = 1
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(3) >= 0
+trigger1 = root,animelemtime(4) < 0
+value = anim
+elem = 2
+persistent = 1
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(4) >= 0
+trigger1 = root,animelemtime(5) < 0
+value = anim
+elem = 3
+persistent = 1
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(5) >= 0
+trigger1 = root,animelemtime(6) < 0
+value = anim
+elem = 4
+persistent = 1
+
+[State 20000, ChangeState]
+type = ChangeState
+trigger1 = root,anim != var(0)
+trigger2 = root,animelem = 6
+value = 7999
+
+;---------------------------------------------------------------------------
+;サイコパワーエフェクト（垂直ジャンプ強P）
+[Statedef 7221]
+type = S
+movetype = I
+physics = N
+anim = 7221
+ctrl = 0
+sprpriority = 5
+
+[State 20000, 1]
+type = VarSet
+trigger1 = time = 0
+var(0) = root,anim
+
+[State 20000, Bind]
+type = BindToParent
+trigger1 = 1
+pos = 0,0
+
+[State 20000, AssertSpecial]
+type = AssertSpecial
+trigger1 = 1
+flag = NoShadow
+
+[State 20000, Turn]
+type = Turn
+trigger1 = facing != root,facing
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(3) >= 0
+trigger1 = root,animelemtime(4) < 0
+value = anim
+elem = 1
+persistent = 1
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(4) >= 0
+trigger1 = root,animelemtime(5) < 0
+value = anim
+elem = 2
+persistent = 1
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(5) >= 0
+trigger1 = root,animelemtime(6) < 0
+value = anim
+elem = 3
+persistent = 1
+
+[State 20000, ChangeState]
+type = ChangeState
+trigger1 = root,anim != var(0)
+trigger2 = root,animelem = 6
+value = 7999
+
+;---------------------------------------------------------------------------
+;サイコパワーエフェクト（ヘルアタック）
+[Statedef 7230]
+type = S
+movetype = I
+physics = N
+anim = 7221
+ctrl = 0
+sprpriority = 5
+
+[State 20000, 1]
+type = VarSet
+trigger1 = time = 0
+var(0) = root,anim
+
+[State 20000, Bind]
+type = BindToParent
+trigger1 = 1
+pos = 0,0
+
+[State 20000, AssertSpecial]
+type = AssertSpecial
+trigger1 = 1
+flag = NoShadow
+
+[State 20000, Turn]
+type = Turn
+trigger1 = facing != root,facing
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(2) >= 0
+trigger1 = root,animelemtime(3) < 0
+value = anim
+elem = 1
+persistent = 1
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(3) >= 0
+trigger1 = root,animelemtime(4) < 0
+value = anim
+elem = 2
+persistent = 1
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(4) >= 0
+trigger1 = root,animelemtime(5) < 0
+value = anim
+elem = 3
+persistent = 1
+
+[State 20000, ChangeState]
+type = ChangeState
+trigger1 = root,anim != var(0)
+trigger2 = root,animelem = 5
+value = 7999
+
+;---------------------------------------------------------------------------
+;サイコパワーエフェクト（立ちブロッキング）
+[Statedef 7050]
+type = S
+movetype = I
+physics = N
+anim = 7050
+ctrl = 0
+sprpriority = 5
+
+[State 20000, 1]
+type = VarSet
+trigger1 = time = 0
+var(0) = root,anim
+
+[State 20000, Bind]
+type = BindToParent
+trigger1 = 1
+pos = 0,0
+
+[State 20000, AssertSpecial]
+type = AssertSpecial
+trigger1 = 1
+flag = NoShadow
+
+[State 20000, Turn]
+type = Turn
+trigger1 = facing != root,facing
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(2) < 0
+value = anim
+elem = 1
+persistent = 1
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(2) >= 0
+trigger1 = root,animelemtime(3) < 0
+value = anim
+elem = 2
+persistent = 1
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(3) >= 0
+value = anim
+elem = 3
+persistent = 1
+
+[State 20000, ChangeState]
+type = ChangeState
+trigger1 = root,anim != var(0)
+value = 7999
+
+;---------------------------------------------------------------------------
+;サイコパワーエフェクト（しゃがみブロッキング）
+[Statedef 7150]
+type = S
+movetype = I
+physics = N
+anim = 7150
+ctrl = 0
+sprpriority = 5
+
+[State 20000, 1]
+type = VarSet
+trigger1 = time = 0
+var(0) = root,anim
+
+[State 20000, Bind]
+type = BindToParent
+trigger1 = 1
+pos = 0,0
+
+[State 20000, AssertSpecial]
+type = AssertSpecial
+trigger1 = 1
+flag = NoShadow
+
+[State 20000, Turn]
+type = Turn
+trigger1 = facing != root,facing
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(2) < 0
+value = anim
+elem = 1
+persistent = 1
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(2) >= 0
+trigger1 = root,animelemtime(3) < 0
+value = anim
+elem = 2
+persistent = 1
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(3) >= 0
+value = anim
+elem = 3
+persistent = 1
+
+[State 20000, ChangeState]
+type = ChangeState
+trigger1 = root,anim != var(0)
+value = 7999
+
+;---------------------------------------------------------------------------
+;サイコパワーエフェクト（サイコバニッシュ）
+[Statedef 7400]
+type = S
+movetype = I
+physics = N
+anim = 7400
+ctrl = 0
+sprpriority = 5
+
+[State 20000, 1]
+type = VarSet
+trigger1 = time = 0
+var(0) = root,anim
+
+[State 20000, Bind]
+type = BindToParent
+trigger1 = 1
+pos = 0,0
+
+[State 20000, AssertSpecial]
+type = AssertSpecial
+trigger1 = 1
+flag = NoShadow
+
+[State 20000, Turn]
+type = Turn
+trigger1 = facing != root,facing
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(2) < 0
+value = anim
+elem = 1
+persistent = 1
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(2) >= 0
+trigger1 = root,animelemtime(3) < 0
+value = anim
+elem = 2
+persistent = 1
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(3) >= 0
+trigger1 = root,animelemtime(4) < 0
+value = anim
+elem = 3
+persistent = 1
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(4) >= 0
+trigger1 = root,animelemtime(5) < 0
+value = anim
+elem = 4
+persistent = 1
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(5) >= 0
+trigger1 = root,animelemtime(6) < 0
+value = anim
+elem = 5
+persistent = 1
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(6) >= 0
+trigger1 = root,animelemtime(7) < 0
+value = anim
+elem = 6
+persistent = 1
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(7) >= 0
+trigger1 = root,animelemtime(8) < 0
+value = anim
+elem = 7
+persistent = 1
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(8) >= 0
+trigger1 = root,animelemtime(9) < 0
+value = anim
+elem = 8
+persistent = 1
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(9) >= 0
+trigger1 = root,animelemtime(10) < 0
+value = anim
+elem = 9
+persistent = 1
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(10) >= 0
+trigger1 = root,animelemtime(11) < 0
+value = anim
+elem = 10
+persistent = 1
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(11) >= 0
+trigger1 = root,animelemtime(12) < 0
+value = anim
+elem = 11
+persistent = 1
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(12) >= 0
+trigger1 = root,animelemtime(13) < 0
+value = anim
+elem = 12
+persistent = 1
+
+[State 20000, ChangeState]
+type = ChangeState
+trigger1 = root,anim != var(0)
+trigger2 = root,animelem = 13
+value = 7999
+
+;---------------------------------------------------------------------------
+;サイコパワーエフェクト（デビルリバース）
+[Statedef 7250]
+type = S
+movetype = I
+physics = N
+anim = 7250
+ctrl = 0
+sprpriority = 5
+
+[State 20000, 1]
+type = VarSet
+trigger1 = time = 0
+var(0) = root,anim
+
+[State 20000, Bind]
+type = BindToParent
+trigger1 = 1
+pos = 0,0
+
+[State 20000, AssertSpecial]
+type = AssertSpecial
+trigger1 = 1
+flag = NoShadow
+
+[State 20000, Turn]
+type = Turn
+trigger1 = facing != root,facing
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(7) >= 0
+trigger1 = root,animelemtime(8) < 0
+value = anim
+elem = 1
+persistent = 1
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(8) >= 0
+trigger1 = root,animelemtime(9) < 0
+value = anim
+elem = 2
+persistent = 1
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(9) >= 0
+trigger1 = root,animelemtime(10) < 0
+value = anim
+elem = 3
+persistent = 1
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(10) >= 0
+value = anim
+elem = 4
+persistent = 1
+
+[State 20000, ChangeState]
+type = ChangeState
+trigger1 = root,anim != var(0)
+value = 7999
+
+;---------------------------------------------------------------------------
+;サイコパワーエフェクト（ガードキャンセル攻撃）
+[Statedef 7600]
+type = S
+movetype = I
+physics = N
+anim = 7600
+ctrl = 0
+sprpriority = 5
+
+[State 20000, 1]
+type = VarSet
+trigger1 = time = 0
+var(0) = root,anim
+
+[State 20000, Bind]
+type = BindToParent
+trigger1 = 1
+pos = 0,0
+
+[State 20000, AssertSpecial]
+type = AssertSpecial
+trigger1 = 1
+flag = NoShadow
+
+[State 20000, Turn]
+type = Turn
+trigger1 = facing != root,facing
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(9) >= 0
+trigger1 = root,animelemtime(10) < 0
+value = anim
+elem = 1
+persistent = 1
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(10) >= 0
+trigger1 = root,animelemtime(11) < 0
+value = anim
+elem = 2
+persistent = 1
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(11) >= 0
+trigger1 = root,animelemtime(12) < 0
+value = anim
+elem = 3
+persistent = 1
+
+[State 20000, ChangeAnim]
+type = changeanim
+trigger1 = root,animelemtime(12) >= 0
+trigger1 = root,animelemtime(13) < 0
+value = anim
+elem = 4
+persistent = 1
+
+[State 20000, ChangeState]
+type = ChangeState
+trigger1 = root,anim != var(0)
+trigger2 = root,animelem = 13
+value = 7999

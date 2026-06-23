@@ -122,7 +122,7 @@ ignoreHitPause if !const(Default.Enable.Action) || isHelper || teamSide = 0 {
 			let hy = $ny + map(_dy2);
 			let ones = $c % 10;
 			let animO = $lo * (9000 + $ones) + (1 - $lo) * (9200 + $ones * 12 + $phO);
-			let animHits = $lo * 9100 + (1 - $lo) * (9300 + $phO);
+			let animHits = $lo * 9100 + (1 - $lo) * (9400 + $phO);
 			explod{ anim: F($animHits); id: 8103; space: screen; postype: none; ontop: 1; pos: $ax / $cz, ($by + 13) / $cz; scale: $sh,$sh; removetime: 1; supermovetime: 999999; pausemovetime: 999999; ownpal: 1; sprpriority: 99; }
 			explod{ anim: F($animO); id: 8101; space: screen; postype: none; ontop: 1; pos: $ox / $cz, $oy / $cz; scale: $sc,$sc; removetime: 1; supermovetime: 999999; pausemovetime: 999999; ownpal: 1; sprpriority: 100; palfx.time: -1; palfx.mul: map(_ubcR0), map(_ubcG0), map(_ubcB0); }
 			if $c >= 10 {

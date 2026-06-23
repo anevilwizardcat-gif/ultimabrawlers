@@ -1,0 +1,56 @@
+[Info]
+name = "Cable by Whiplash"       
+displayname = "Cable" 
+author = "DarkWolf13-MvC2"      
+pal.defaults = 1,2,3,4,5,6,7,8,9,10,11  
+;localcoord = 384,384
+
+[Files]
+cmd     	= Cable.cmd 
+cns     	= Cable.cns  
+st      	= Cable.cns  
+st1      = config.txt
+st2      = MvC2Tag.st
+st3      = SnapBackCounter.cns
+st4 = X-OverCombination.cns
+stcommon 	= Common1.cns
+sprite  	= Cable.sff   
+anim    	= Cable.air   
+sound  	= Cable.snd  
+pal1   	= Cable_1-1.act    
+pal2   	= Cable_1-2.act   
+pal3   	= Cable_1-3.act   
+pal4   	= Cable_1-4.act   
+pal5   	= Cable_1-5.act   
+pal6   	= Cable_1-6.act   
+pal7   	= Cable_1-7.act   
+pal8   	= Cable_1-8.act   
+pal9   	= Cable_1-9.act   
+pal10   	= Cable_1-10.act   
+pal11   	= Cable_1-11.act   
+pal12   	= Cable_1-12.act   
+
+[ja.Files]
+cmd     	= Cable.cmd 
+cns     	= Cable.cns  
+st      	= Cable.cns  
+st1      = configJPN.txt
+st2      = MvC2Tag.st
+st3      = SnapBackCounter.cns
+st4 = X-OverCombination.cns
+stcommon 	= Common1.cns
+sprite  	= Cable.sff   
+anim    	= Cable.air   
+sound  	= Cable.snd   
+pal1   	= Cable_1-1.act    
+pal2   	= Cable_1-2.act   
+pal3   	= Cable_1-3.act   
+pal4   	= Cable_1-4.act   
+pal5   	= Cable_1-5.act   
+pal6   	= Cable_1-6.act   
+pal7   	= Cable_1-7.act   
+pal8   	= Cable_1-8.act   
+pal9   	= Cable_1-9.act   
+pal10   	= Cable_1-10.act   
+pal11   	= Cable_1-11.act   
+pal12   	= Cable_1-12.act
