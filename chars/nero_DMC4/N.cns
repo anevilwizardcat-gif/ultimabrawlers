@@ -62,3 +62,4 @@ yaccel          = .8       ;Ｙ軸加速度（重力）
 stand.friction  = .8      ;立っている時の摩擦係数（ステートのPhysicsが「S」の時）
 crouch.friction = .85      ;しゃがんでいる時の摩擦係数（ステートのPhysicsが「C」の時）
 
+

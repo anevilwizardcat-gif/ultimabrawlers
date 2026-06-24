@@ -526,7 +526,7 @@ time = 1
 ; ステートエントリーパート（技などを出せるようにするための条件を設定）
 ;==============================================================================
 ;------------------------------------------------------------------------------
-; ■準常時監視ステート（－１）■
+; ■準常時監視ステート（‐１）■
 ; コマンドファイル（のステートエントリーパート）に必要な項目です。
 ; 絶対に消してはいけないので要注意。
 ;
@@ -557,7 +557,8 @@ time = 1
 type = ChangeState
 value = 1200
 triggerall = !var(59)
-triggerall = command = "236_x"
+triggerall = command = "x"
+triggerall = command = "holdback"
 triggerall = power >= 1000
 triggerall = var(0) = 0
 trigger1 = ctrl && statetype = S
@@ -568,21 +569,24 @@ trigger3 = stateno = 400 && movecontact
 type = ChangeState
 value = 300
 triggerall = !var(59)
-triggerall = command = "214_y"
+triggerall = command = "z"
+triggerall = command = "holdfwd"
 trigger1 = ctrl && statetype = S
 
 [State -1, シャッフル]
 type = ChangeState
 value = 310
 triggerall = !var(59)
-triggerall = command = "236_y"
+triggerall = command = "y"
+triggerall = command = "holdback"
 trigger1 = ctrl && statetype = S
 
 [State -1, バスター（アルト]
 type = ChangeState
 value = 810
 triggerall = !var(59)
-triggerall = command = "236_b"
+triggerall = command = "b"
+triggerall = command = "holdback"
 ;triggerall = power >= 1000
 trigger1 = statetype = S
 trigger1 = ctrl
@@ -595,9 +599,9 @@ trigger3 = numtarget(1230) > 0
 type = ChangeState
 value = ifelse(statetype = S, 825, 826)
 triggerall = !var(59)
-triggerall = command = "214_b"
+triggerall = command = "b"
 ;triggerall = power >= 1000
-trigger1 = (statetype = A) || (statetype = S)
+trigger1 = statetype = A
 trigger1 = ctrl
 trigger2 = stateno = 230
 trigger2 = numtarget(230) > 0
@@ -619,7 +623,7 @@ trigger2 = movehit > 0
 type = ChangeState
 value = 640
 triggerall = !var(59)
-triggerall = command = "214_y"
+triggerall = command = "z"
 trigger1 = pos Y < -15
 trigger1 = ctrl
 
@@ -657,7 +661,7 @@ triggerall = (command = "x") && (command != "holddown")
 trigger1 = (statetype = S) && (ctrl)
 trigger2 = stateno = 400 && movecontact
 
-[State -1, コンボＡ－１]
+[State -1, コンボＡ‐１]
 type = ChangeState
 value = 210
 triggerall = !var(59)
@@ -670,7 +674,7 @@ trigger1 = ctrl
 trigger2 = stateno = 200 && movecontact
 trigger3 = stateno = 230 && movecontact
 
-[State -1, コンボＡ－２]
+[State -1, コンボＡ‐２]
 type = ChangeState
 value = 215
 triggerall = !var(59)
@@ -681,6 +685,17 @@ trigger1 = statetype = S
 trigger1 = ctrl
 trigger2 = stateno = 200 && movecontact
 trigger3 = stateno = 230 && movecontact
+
+[State -1, コンボB]
+type = ChangeState
+value = 240
+triggerall = !var(59)
+triggerall = command = "z"
+triggerall = stateno != 240 && stateno != 245 && stateno != 250 && stateno != 255
+trigger1 = statetype = S
+trigger1 = ctrl
+trigger2 = stateno = 240 && movecontact
+trigger3 = stateno = 255 && movecontact
 
 [State -1, スナッチ]
 type = ChangeState
@@ -727,6 +742,26 @@ trigger1 = statetype = C
 trigger1 = ctrl
 trigger2 = (stateno = [210,220]) && movecontact
 
+;---------------------------------------------------------------------------
+[State -1, ハイローラー]
+type = ChangeState
+value = 415
+triggerall = var(59) = 0
+triggerall = command = "z"
+triggerall = command = "holddown"
+triggerall = statetype != A
+trigger1 = ctrl
+trigger2 = stateno = 213
+trigger2 = Time > 43
+trigger2 = movecontact
+trigger3 = stateno = [200,202]
+trigger3 = movecontact
+trigger4 = stateno = 203 || stateno = 213 || stateno = 400
+trigger4 = movecontact
+trigger5 = stateno = 1500
+trigger5 = ProjContactTime(1502) != -1 && ProjContactTime(1502) < 15
+
+;---------------------------------------------------------------------------
 [State -1, 小足]
 type = ChangeState
 value = 420
@@ -757,7 +792,7 @@ triggerall = command = "x"
 trigger1 = statetype = A
 trigger1 = ctrl
 
-[State -1, 空コンボ－１]
+[State -1, 空コンボ‐１]
 type = ChangeState
 value = 610
 triggerall = !var(59)
@@ -801,4 +836,3 @@ triggerall = !var(59)
 triggerall = command = "s"
 trigger1 = statetype != A
 trigger1 = ctrl
-

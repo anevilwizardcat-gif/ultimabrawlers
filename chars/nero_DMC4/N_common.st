@@ -1020,6 +1020,13 @@ trigger1 = 1
 value = SCA
 time = 1
 
+[State 170, ‰¹]
+type = PlaySnd
+trigger1 = animelemTime(6) = 0
+value = 170,0
+channel = 1
+;volume = 150
+
 ;---------------------------------------------------------------------------
 ;Ÿ—˜•ªŠò
 [Statedef 180]
@@ -1048,7 +1055,7 @@ time = 1
 type = PlaySnd
 trigger1 = animelemTime(6) = 0
 value = 181,0
-channel = 0
+channel = 1
 ;volume = 150
 
 ;---------------------------------------------------------------------------

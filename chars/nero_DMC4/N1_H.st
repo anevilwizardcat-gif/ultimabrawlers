@@ -798,7 +798,7 @@ type = ChangeAnim2
 trigger1 = Time = 0
 value = 813
 
-[State 812, ‰ñ“]]
+[State 812, ‰ñ“]
 type = AngleDraw
 trigger1 = animelemtime(5) >= 0 && animelemtime(6) < 0
 value = 90
@@ -814,21 +814,21 @@ type = veladd
 trigger1 = animelemtime(7) > 0 && animelemtime(10) < 0
 y = 0.4
 
-[State 812, ‰ñ“]]
+[State 812, ‰ñ“]
 type = AngleDraw
 trigger1 = animelemtime(7) >= 5 && animelemtime(7) < 9
 trigger2 = animelemtime(8) >= 5 && animelemtime(8) < 9
 trigger3 = animelemtime(9) >= 5 && animelemtime(9) < 9
 value = 45
 
-[State 812, ‰ñ“]]
+[State 812, ‰ñ“]
 type = AngleDraw
 trigger1 = animelemtime(7) >= 9 && animelemtime(7) < 13
 trigger2 = animelemtime(8) >= 9 && animelemtime(8) < 13
 trigger3 = animelemtime(9) >= 9 && animelemtime(10) < 0
 value = 90
 
-[State 812, ‰ñ“]]
+[State 812, ‰ñ“]
 type = AngleDraw
 trigger1 = animelemtime(7) >= 13 && animelemtime(8) < 0
 trigger2 = animelemtime(8) >= 13 && animelemtime(9) < 0
@@ -1333,13 +1333,13 @@ type = ChangeAnim2
 trigger1 = Time = 0
 value = 817
 
-[State 817, ‰ñ“]]
+[State 817, ‰ñ“]
 type = AngleDraw
 trigger1 = animelemtime(7) >= 0 && animelemtime(8) < 0
 trigger2 = animelemtime(16) >= 0 && GetHitVar(IsBound)
 value = 90
 
-[State 817, ‰ñ“]]
+[State 817, ‰ñ“]
 type = AngleDraw
 trigger1 = animelemtime(1) >= 0 && animelemtime(2) < 0
 trigger2 = animelemtime(3) >= 0 && animelemtime(6) < 0
@@ -1347,7 +1347,7 @@ trigger3 = animelemtime(9) >= 0 && animelemtime(10) < 0
 trigger4 = animelemtime(14) >= 0 && animelemtime(15) < 0
 value = 270
 
-[State 817, ‰ñ“]]
+[State 817, ‰ñ“]
 type = AngleDraw
 trigger1 = animelemtime(2) >= 0 && animelemtime(3) < 0
 trigger2 = animelemtime(6) >= 0 && animelemtime(7) < 0
@@ -1540,7 +1540,6 @@ type = null;ChangeState
 Trigger1 = AnimTime = 0
 value = 0
 ctrl = 1
-
 
 ;===========================================================================
 ;ƒ`ƒƒ[ƒW3

@@ -522,7 +522,7 @@ trigger1 = AnimTime = 0
 value = 0
 ctrl = 1
 
---------------------------------------------------------------------
+;--------------------------------------------------------------------
 ;スナッチ
 [Statedef 230]
 type    = S
@@ -631,6 +631,462 @@ value = 0
 ctrl = 1
 
 ;---------------------------------------------------------------------------
+[Statedef 240]
+type    = S
+movetype= A
+physics = S
+poweradd= 75
+ctrl = 0
+velset = 0,0
+anim = 240
+sprpriority = 0
+
+[State 240, 接地]
+type = posset
+trigger1 = time = 0
+y = 0
+
+[State 240, 移動]
+type = posadd
+trigger1 = animelemtime(4) = 0
+x = 5
+
+[State 240, 移動]
+type = posadd
+trigger1 = animelemtime(6) >= 0 && animelemtime(8) < 0
+x = 3
+
+[State 240, エフェクト]
+type = Explod
+trigger1 = animelemtime(7) = 0
+anim = 226
+id = 226
+pos = 0,0
+postype = p1
+bindtime = -1
+scale = 0.5,0.5
+sprpriority = 1
+removeongethit = 1
+
+[State 240, 音]
+type = PlaySnd
+trigger1 = animelem = 4
+value = 225, 1+random%2
+
+[State 240, 音]
+type = PlaySnd
+trigger1 = animelem = 14
+value = 210,4
+channel = 1
+
+[State 240, 揺れ]
+type = envshake
+trigger1 = animelemtime(6) = 0
+time = 10
+
+[State 240, ヒット定義]
+type = HitDef
+trigger1 = time = 0
+attr = S, NA
+animtype  = Medium
+damage    = ceil(fvar(0)*100),20
+guardflag = MA
+pausetime = 3,3
+sparkno = S6016
+sparkxy = -10,-70
+hitsound   = S0,1
+;guardsound = 6,0
+ground.type = High
+ground.slidetime = 25
+ground.hittime  = 25
+guard.slidetime = 24
+guard.hittime = 24
+ground.velocity = -4,-6
+guard.velocity = -4
+air.velocity = -2.5,-4
+fall = 1
+fall.recovertime = 25
+guard.kill = 1
+
+[State 240, コンボ補正]
+type = varset
+trigger1 = movehit
+fvar(0) = fvar(0)*var(3)*0.01
+ignorehitpause=0
+persistent = 0
+
+[State 240, ステート変更]
+type = ChangeState
+value = 245
+triggerall = command = "z"
+trigger1 = movecontact
+trigger2 = animelemtime(14) >= 0 ;&& animelemtime(14) < 0
+
+[State 240, ステート変更]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+;---------------------------------------------------------------------------
+[Statedef 245]
+type    = S
+movetype= A
+physics = S
+poweradd= 75
+ctrl = 0
+velset = 0,0
+anim = 245
+sprpriority = 0
+
+[State 245, 接地]
+type = posset
+trigger1 = time = 0
+y = 0
+
+[State 245, 移動]
+type = posadd
+trigger1 = animelemtime(4) = 0
+x = 5
+
+[State 245, 移動]
+type = posadd
+trigger1 = animelemtime(6) >= 0 && animelemtime(8) < 0
+x = 3
+
+[State 245, エフェクト]
+type = Explod
+trigger1 = animelemtime(6) = 0
+anim = 226
+id = 226
+pos = 0,0
+postype = p1
+bindtime = -1
+scale = 0.5,0.5
+sprpriority = 1
+removeongethit = 1
+
+[State 245, 音]
+type = PlaySnd
+trigger1 = animelem = 4
+value = 225, 1+random%2
+
+[State 245, 音]
+type = PlaySnd
+trigger1 = animelem = 14
+value = 210,4
+channel = 1
+
+[State 245, 揺れ]
+type = envshake
+trigger1 = animelemtime(6) = 0
+time = 10
+
+[State 245, ヒット定義]
+type = HitDef
+trigger1 = time = 0
+attr = S, NA
+animtype  = Medium
+damage    = ceil(fvar(0)*100),20
+guardflag = MA
+pausetime = 3,3
+sparkno = S6016
+sparkxy = -10,-70
+hitsound   = S0,1
+;guardsound = 6,0
+ground.type = High
+ground.slidetime = 25
+ground.hittime  = 25
+guard.slidetime = 24
+guard.hittime = 24
+ground.velocity = -4,-6
+guard.velocity = -4
+air.velocity = -2.5,-4
+fall = 1
+fall.recovertime = 25
+guard.kill = 1
+
+[State 245, コンボ補正]
+type = varset
+trigger1 = movehit
+fvar(0) = fvar(0)*var(3)*0.01
+ignorehitpause=0
+persistent = 0
+
+[State 245, ステート変更]
+type = ChangeState
+value = 250
+triggerall = command = "z"
+trigger1 = movecontact
+trigger2 = animelemtime(14) >= 0 ;&& animelemtime(14) < 0
+
+[State 245, ステート変更]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+;---------------------------------------------------------------------------
+[Statedef 250]
+type    = S
+movetype= A
+physics = S
+ctrl = 0
+velset = 0,0
+anim = 250
+sprpriority = 0
+poweradd= 45
+
+[State 250, 接地]
+type = posset
+trigger1 = time = 0
+y = 0
+
+[State 250, 移動]
+type = posadd
+trigger1 = animelemtime(2) >= 0 && animelemtime(7) < 0
+x = 2
+
+[State 250, 移動]
+type = posadd
+trigger1 = animelemtime(11) >= 0
+trigger1 = time%2
+x = 1
+
+[State 250, エフェクト]
+type = Explod
+trigger1 = animelemtime(11) = 1
+anim = 216
+id = 216
+pos = 0,0
+postype = p1
+bindtime = -1
+scale = 0.5,0.5
+sprpriority = 1
+removeongethit = 1
+
+[State 250, エフェクト]
+type = Explod
+trigger1 = animelemtime(11) = 0
+anim = 217
+id = 217
+pos = 0,0
+postype = p1
+bindtime = -1
+scale = 0.5,0.5
+sprpriority = 1
+removeongethit = 1
+
+[State 250, エフェクト]
+type = Explod
+trigger1 = animelemtime(11) = 0
+anim = 218
+pos = 0,0
+postype = p1
+bindtime = -1
+scale = 0.5,0.5
+sprpriority = 1
+removeongethit = 1
+
+[State 250, 音]
+type = PlaySnd
+trigger1 = animelem = 1
+value = 210, ifelse(random < 500, 0, 1+random%3)
+
+[State 250, 音]
+type = PlaySnd
+trigger1 = animelem = 18
+value = 212, 0
+
+[State 250, ヒット定義]
+type = HitDef
+trigger1 = time = 0
+attr = S, NA
+animtype  = Medium
+damage    = ceil(fvar(0)*60)
+guardflag = MA
+pausetime = ifelse(var(59),var(5),var(6)), ifelse(var(59),var(5),var(6))
+sparkno = S6017
+sparkxy = -10,-70
+hitsound   = S0,0
+;guardsound = 6,0
+ground.type = Low
+ground.slidetime = 15
+ground.hittime  = 15
+guard.slidetime = 14
+guard.hittime = 14
+ground.velocity = -3
+guard.velocity = -4
+air.velocity = -2.5,-4
+
+[State 250, コンボ補正]
+type = varset
+trigger1 = movehit
+fvar(0) = fvar(0)*var(3)*0.01
+ignorehitpause=1
+persistent = 0
+
+[State 250, ステート変更]
+type = ChangeState
+value = 255
+triggerall = command = "z"
+trigger1 = movecontact
+trigger2 = animelemtime(8) >= 2 ;&& animelemtime(14) < 0
+
+[State 250, コントロール]
+type = CtrlSet
+trigger1 = animelemtime(10) = 0
+value = 1
+
+[State 250, ステート変更]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+;---------------------------------------------------------------------------
+;ハイローラー
+[Statedef 255]
+type    = C
+movetype= A
+physics = C
+ctrl = 0
+anim = 255
+velset = 0,0
+sprpriority = 0
+poweradd= 67
+
+[State 255, 幅]
+type    = width
+trigger1 = AnimElemTime(1) >= 0
+player = 25,20
+
+[State 255, 接地]
+type = posset
+trigger1 = time = 0
+y = 0
+
+[State 255, キャンセル版]
+type = changeanim
+trigger1 = prevstateno = [200,230]
+trigger1 = time = 0
+value = 255
+elem = 3
+
+[State 255, 移動]
+type = posadd
+trigger1 = animelemtime(3) >= 0 && animelemtime(5) < 0
+trigger2 = animelemtime(9) >= 0 && animelemtime(12) < 0
+x = 1
+
+[State 255, 移動]
+type = posadd
+trigger1 = animelemtime(5) >= 0 && animelemtime(9) < 0
+x = 2
+
+[State 255, エフェクト]
+type = Explod
+trigger1 = animelemtime(3) = 0
+anim = 411
+id = 411
+pos = 0,0
+postype = p1
+bindtime = -1
+scale = 0.5,0.5
+sprpriority = 1
+removeongethit = 1
+
+[State 255, エフェクト]
+type = Explodbindtime
+trigger1 = movecontact
+id = 411
+time = 2
+
+[State 255, エフェクト]
+type = Explod
+trigger1 = animelemtime(7) = 0
+anim = 412
+id = 412
+pos = 0,0
+postype = p1
+bindtime = 1
+scale = 0.5,0.5
+sprpriority = 1
+removeongethit = 1
+
+[State 255, エフェクト]
+type = Explod
+trigger1 = animelemtime(5) = 0
+anim = 413
+id = 413
+pos = 0,0
+postype = p1
+bindtime = 1
+scale = 0.5,0.5
+sprpriority = 1
+
+[State 255, 音]
+type = PlaySnd
+trigger1 = animelem = 2
+value = 220, random%4 ;ifelse(random < 500, 0, 1+random%3)
+
+[State 255, むてき]
+type = nothitby
+trigger1 = animelemtime(3) >= 0 && animelemtime(6) < 0
+value = A,NA,SA,NT,ST,NP,SP
+
+[State 255, ヒット定義]
+type = HitDef
+trigger1 = time = 0
+attr = C, SA
+animtype  = hard
+damage    = ceil(fvar(0)*90),20
+guardflag = MA
+priority = 4,hit
+pausetime = ifelse(var(59),var(5),var(6)), ifelse(var(59),var(5),var(6))
+sparkno = S6003
+sparkxy = -10,-70
+hitsound   = S0,1
+;guardsound = 6,0
+ground.type = High
+ground.slidetime = 25
+ground.hittime  = 25
+guard.slidetime = 24
+guard.hittime = 24
+air.hittime = 25
+ground.velocity = -1.5,-8
+guard.velocity = -8
+air.velocity = -2,-8
+guard.kill = 0
+
+[State 255, コンボ補正]
+type = varset
+trigger1 = movehit
+fvar(0) = fvar(0)*var(3)*0.01
+ignorehitpause=1
+persistent = 0
+
+[State 255, コンボ]
+Type     = varset
+TriggerAll=var(59)&&RoundState = 2
+trigger1 = movehit
+var(9) = 255
+ignorehitpause = 1
+persistent = 0
+
+[State 255, ステート変更]
+type = ChangeState
+trigger1 = command = "holdup" && movehit
+value = 40
+ctrl = 1
+
+[State 255, ステート変更]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+;---------------------------------------------------------------------------
 ;レッドクイーンコンボＣ１
 [Statedef 260]
 type    = S
@@ -705,14 +1161,15 @@ sprpriority = 1
 removeongethit = 1
 
 [State 260, 音]
-type = null;PlaySnd
+type = PlaySnd
 trigger1 = animelem = 2
-value = 260, random%4 ;ifelse(random < 500, 0, 1+random%3)
+value = 210, 2 ;ifelse(random < 500, 0, 1+random%3)
 
 [State 260, 音]
 type = PlaySnd
 trigger1 = animelem = 14
-value = 210, 4
+value = 210,4
+channel = 1
 
 [State 260, ヒット定義]
 type = HitDef
@@ -769,13 +1226,397 @@ trigger1 = animelemtime(12) = 0
 value = 1
 
 [State 260, ステート変更]
-type = null;ChangeState
+type = ChangeState
 value = 265
 triggerall = command = "y"
 trigger1 = movecontact
-trigger2 = animelemtime(7) >= 2 ;&& animelemtime(14) < 0
+trigger2 = animelemtime(14) >= 0 ;&& animelemtime(14) < 0
 
 [State 260, ステート変更]
+type = ChangeState
+trigger1 = AnimTime = 3
+value = 0
+ctrl = 1
+
+;---------------------------------------------------------------------------
+
+[Statedef 265]
+type    = S
+movetype= A
+physics = S
+ctrl = 0
+velset = 0,0
+anim = 265
+sprpriority = 0
+poweradd= 30
+
+[State 265, 移動]
+type = posadd
+trigger1 = animelemtime(2) >= 4 & animelemtime(5) < 0
+x = 2
+
+[State 265, 移動]
+type = posadd
+trigger1 = animelemtime(5) >= 0 & animelemtime(6) < 0
+x = 7
+
+[State 265, 移動]
+type = posadd
+trigger1 = animelemtime(6) >= 0 & animelemtime(7) < 0
+x = 10
+
+[State 265, 移動]
+type = posadd
+trigger1 = animelemtime(7) >= 0 & animelemtime(8) < 0
+x = 4
+
+[State 265, 移動]
+type = posadd
+trigger1 = animelemtime(8) >= 0 & animelemtime(9) < 3
+trigger1 = time%2
+x = 1
+
+[State 265, エフェクト]
+type = Explod
+trigger1 = animelemtime(6) = 0
+anim = 301
+id = 301
+pos = 0,0
+postype = p1
+bindtime = -1
+scale = 0.5,0.5
+sprpriority = 1
+removeongethit = 1
+
+[State 265, 音]
+type = PlaySnd
+trigger1 = animelem = 5
+value = 220, 1 ;ifelse(random < 500, 0, 1+random%3)
+
+[State 265, 音]
+type = PlaySnd
+trigger1 = animelem = 17
+value = 210,4
+channel = 1
+
+[State 265, ヒット定義]
+type = HitDef
+trigger1 = time = 0
+attr = S, NA
+animtype  = Medium
+damage    = ceil(fvar(0)*40)
+guardflag = MA
+pausetime = 5,5
+sparkno = S6002
+sparkxy = -10,-70
+hitsound   = S0,0
+;guardsound = 6,0
+ground.type = High
+ground.slidetime = 15
+ground.hittime  = 15
+guard.slidetime = 14
+guard.hittime = 14
+ground.velocity = -2
+guard.velocity = -4
+air.velocity = -2.5,-4
+
+[State 265, ヒット定義]
+type = HitDef
+trigger1 = animelemtime(8) = 0
+attr = S, NA
+animtype  = Medium
+damage    = ceil(fvar(0)*40)
+guardflag = MA
+pausetime = ifelse(var(59),var(5),var(6)), ifelse(var(59),var(5),var(6))
+sparkno = S6003
+sparkxy = -10,-70
+hitsound   = S0,0
+;guardsound = 6,0
+ground.type = High
+ground.slidetime = 15
+ground.hittime  = 15
+guard.slidetime = 14
+guard.hittime = 14
+ground.velocity = -2
+guard.velocity = -4
+air.velocity = -2.5,-4
+
+[State 265, コンボ補正]
+type = varset
+trigger1 = movehit
+fvar(0) = fvar(0)*var(3)*0.01
+ignorehitpause=1
+persistent = 0
+
+[State 265, コントロール]
+type = CtrlSet
+trigger1 = animelemtime(12) = 0
+value = 1
+
+[State 265, ステート変更]
+type = ChangeState
+value = 270
+triggerall = command = "y"
+trigger1 = movecontact
+trigger2 = animelemtime(7) >= 0 ;&& animelemtime(14) < 0
+
+[State 265, ステート変更]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+;---------------------------------------------------------------------------
+
+[Statedef 270]
+type    = S
+movetype= A
+physics = S
+ctrl = 0
+velset = 0,0
+anim = 270
+sprpriority = 0
+poweradd= 30
+
+[State 270, 移動]
+type = posadd
+trigger1 = animelemtime(2) >= 4 & animelemtime(5) < 0
+x = 2
+
+[State 270, 移動]
+type = posadd
+trigger1 = animelemtime(5) >= 0 & animelemtime(6) < 0
+x = 7
+
+[State 270, 移動]
+type = posadd
+trigger1 = animelemtime(6) >= 0 & animelemtime(7) < 0
+x = 10
+
+[State 270, 移動]
+type = posadd
+trigger1 = animelemtime(7) >= 0 & animelemtime(8) < 0
+x = 4
+
+[State 270, 移動]
+type = posadd
+trigger1 = animelemtime(8) >= 0 & animelemtime(9) < 3
+trigger1 = time%2
+x = 1
+
+[State 270, エフェクト]
+type = Explod
+trigger1 = animelemtime(9) = 0
+anim = 271
+id = 271
+pos = 0,0
+postype = p1
+bindtime = -1
+scale = 0.5,0.5
+sprpriority = 1
+removeongethit = 1
+
+[State 270, 音]
+type = PlaySnd
+trigger1 = animelem = 5
+value = 210, 2 ;ifelse(random < 500, 0, 1+random%3)
+
+[State 270, 音]
+type = PlaySnd
+trigger1 = animelem = 17
+value = 210,4
+channel = 1
+
+[State 270, ヒット定義]
+type = HitDef
+trigger1 = time = 0
+attr = S, NA
+animtype  = Medium
+damage    = ceil(fvar(0)*40)
+guardflag = MA
+pausetime = 5,5
+sparkno = S6002
+sparkxy = -10,-70
+hitsound   = S0,0
+;guardsound = 6,0
+ground.type = High
+ground.slidetime = 15
+ground.hittime  = 15
+guard.slidetime = 14
+guard.hittime = 14
+ground.velocity = -2
+guard.velocity = -4
+air.velocity = -2.5,-4
+
+[State 270, ヒット定義]
+type = HitDef
+trigger1 = animelemtime(8) = 0
+attr = S, NA
+animtype  = Medium
+damage    = ceil(fvar(0)*40)
+guardflag = MA
+pausetime = ifelse(var(59),var(5),var(6)), ifelse(var(59),var(5),var(6))
+sparkno = S6003
+sparkxy = -10,-70
+hitsound   = S0,0
+;guardsound = 6,0
+ground.type = High
+ground.slidetime = 15
+ground.hittime  = 15
+guard.slidetime = 14
+guard.hittime = 14
+ground.velocity = -2
+guard.velocity = -4
+air.velocity = -2.5,-4
+
+[State 270, コンボ補正]
+type = varset
+trigger1 = movehit
+fvar(0) = fvar(0)*var(3)*0.01
+ignorehitpause=1
+persistent = 0
+
+[State 270, コントロール]
+type = CtrlSet
+trigger1 = animelemtime(12) = 0
+value = 1
+
+[State 270, ステート変更]
+type = ChangeState
+value = 275
+triggerall = command = "y"
+trigger1 = movecontact
+trigger2 = animelemtime(7) >= 0 ;&& animelemtime(14) < 0
+
+[State 270, ステート変更]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1
+
+;---------------------------------------------------------------------------
+
+[Statedef 275]
+type    = S
+movetype= A
+physics = S
+ctrl = 0
+velset = 0,0
+anim = 275
+sprpriority = 0
+poweradd= 30
+
+[State 275, 移動]
+type = posadd
+trigger1 = animelemtime(2) >= 4 & animelemtime(5) < 0
+x = 2
+
+[State 275, 移動]
+type = posadd
+trigger1 = animelemtime(5) >= 0 & animelemtime(6) < 0
+x = 7
+
+[State 275, 移動]
+type = posadd
+trigger1 = animelemtime(6) >= 0 & animelemtime(7) < 0
+x = 10
+
+[State 275, 移動]
+type = posadd
+trigger1 = animelemtime(7) >= 0 & animelemtime(8) < 0
+x = 4
+
+[State 275, 移動]
+type = posadd
+trigger1 = animelemtime(8) >= 0 & animelemtime(9) < 3
+trigger1 = time%2
+x = 1
+
+[State 275, エフェクト]
+type = Explod
+trigger1 = animelemtime(8) = 0
+anim = 642
+id = 642
+pos = 0,0
+postype = p1
+bindtime = -1
+scale = 0.5,0.5
+sprpriority = 1
+removeongethit = 1
+
+[State 275, 音]
+type = PlaySnd
+trigger1 = animelem = 7
+value = 620, 0 ;ifelse(random < 500, 0, 1+random%3)
+
+[State 275, 音]
+type = PlaySnd
+trigger1 = animelem = 19
+value = 210,4
+channel = 1
+
+[State 275, ヒット定義]
+type = HitDef
+trigger1 = time = 0
+attr = S, NA
+animtype  = Medium
+damage    = ceil(fvar(0)*40)
+guardflag = MA
+pausetime = 5,5
+sparkno = S6002
+sparkxy = -10,-70
+hitsound   = S0,0
+;guardsound = 6,0
+ground.type = High
+ground.slidetime = 15
+ground.hittime  = 15
+guard.slidetime = 14
+guard.hittime = 14
+ground.velocity = -2
+guard.velocity = -4
+air.velocity = -2.5,-4
+
+[State 275, ヒット定義]
+type = HitDef
+trigger1 = animelemtime(8) = 0
+attr = S, NA
+animtype  = Medium
+damage    = ceil(fvar(0)*40)
+guardflag = MA
+pausetime = ifelse(var(59),var(5),var(6)), ifelse(var(59),var(5),var(6))
+sparkno = S6003
+sparkxy = -10,-70
+hitsound   = S0,0
+;guardsound = 6,0
+ground.type = High
+ground.slidetime = 15
+ground.hittime  = 15
+guard.slidetime = 14
+guard.hittime = 14
+ground.velocity = -2
+guard.velocity = -4
+air.velocity = -2.5,-4
+
+[State 275, コンボ補正]
+type = varset
+trigger1 = movehit
+fvar(0) = fvar(0)*var(3)*0.01
+ignorehitpause=1
+persistent = 0
+
+[State 275, コントロール]
+type = CtrlSet
+trigger1 = animelemtime(12) = 0
+value = 1
+
+[State 275, ステート変更]
+type = null ;ChangeState
+value = 275
+triggerall = command = "y"
+trigger1 = movecontact
+trigger2 = animelemtime(7) >= 0 ;&& animelemtime(14) < 0
+
+[State 275, ステート変更]
 type = ChangeState
 trigger1 = AnimTime = 0
 value = 0
