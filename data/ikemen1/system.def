@@ -272,7 +272,8 @@ actionno = 251       ;P109: crisp pixel varied twinkle
 layerno = 0
 start = -640, -50
 tile = 1,0
-velocity = -0.1, 0
+velocity = 0, 0      ;P114: was -0.1 (constant vel -> bga.pos grows UNBOUNDED -> stars vanish after long AFK)
+sin.x = 300, 9000, 0 ;P114: bounded sine drift = perpetual slide that NEVER runs out
 window = 0,0, 1279,959
 mask = 1
 
@@ -857,7 +858,8 @@ actionno = 250       ;P107: 4-frame varied twinkle (crisp pixel stars)
 layerno = 0
 start = -640, -50
 tile = 1,0
-velocity = -0.1, 0
+velocity = 0, 0      ;P114: was -0.1 (constant vel -> bga.pos grows UNBOUNDED -> stars vanish after long AFK)
+sin.x = 300, 9000, 0 ;P114: bounded sine drift = perpetual slide that NEVER runs out
 window = 0,0, 1279,959
 mask = 1
 
@@ -1193,25 +1195,18 @@ layerno = 0
 start = -640,0
 
 [VersusBG Background Clouds Top]
-type = normal
-spriteno = 102,2
+type = anim          ;P114: SINGLE animated layer reusing char-select twinkle (anim 250 = frames 101,2/30/31/32)
+actionno = 250       ;P114: identical sparkle + identical (bigger) star size as char-select; no separate VS sprites
 layerno = 0
 start = -640, -50
 tile = 1,0
-velocity = -0.05, 0
-trans = add1
+velocity = 0, 0      ;P114: zero constant vel (bga.pos accumulates UNBOUNDED -> runs out after long AFK)
+sin.x = 300, 9000, 0 ;P114: bounded sine drift (amp 300px, ~150s period) = perpetual slide, NEVER runs out
 window = 0,0, 1279,959
 mask = 1
 
-[VersusBG Background Clouds Bottom]
-type = normal
-spriteno = 102,3
-layerno = 0
-start = -640, 0
-tile = 1,0
-velocity = -0.7, 0
-window = 0,0, 1279,959
-mask = 1
+;P114: second layer (102,3) REMOVED - user wants ONE moving star layer, matching char-select.
+;Old sprites 102,2/102,3 left in sff but unreferenced (harmless).
 
 [VersusBG Background Black Bars]
 type = normal

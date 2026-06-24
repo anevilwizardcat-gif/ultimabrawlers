@@ -228,7 +228,6 @@ cvszcammy, SF3 Battle Arena Rd 02.def
 cvs2_dhalsim, SF3 Battle Arena Rd 02.def
 cvsgouki, MemoriaTimeInterval.def
 cvsvega, MemoriaTimeInterval.def
-Bison1, MemoriaTimeInterval.def
 CFJ_JuriHan, SF3 Battle Arena Rd 02.def
 cvssakura, SF3 Battle Arena Rd 02.def
 jedah, LiveHousePurple.def
@@ -279,7 +278,6 @@ sf3_ken, mvc2-training.def
 sf3_chun-li, mvc2-training.def
 sf3_gouki, mvc2-training.def
 sf3_ibuki, mvc2-training.def
-PunchingBag, mvc2-training.def
 randomselect
 empty
 
