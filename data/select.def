@@ -202,9 +202,12 @@ dio, jjba-ctower2-alt.def
 shadowdio, jjba-ctower2-alt.def
 MVC2_Spiderman, DailyBugleRooftopsMVC.def
 Venom, DailyBugleRooftopsMVC.def
+Carnage [Symbiote Overhaul], DailyBugleRooftopsMVC.def
 IronMan, centralsuperheroes 1.1.def
 CaptainAmerica, centralsuperheroes 1.1.def
 Hulk, centralsuperheroes 1.1.def
+DoctorDoom, mshvsf_apocalypse_now.def
+Thanos, mshvsf_apocalypse_now.def
 Wolverine, Onslaught.def
 Storm, Onslaught.def
 Cyclops, Onslaught.def
@@ -213,23 +216,38 @@ MvC2_Cable, Onslaught.def
 Psylocke, mshvsf_apocalypse_now.def
 Magneto, mshvsf_apocalypse_now.def
 Sentinel, mshvsf_apocalypse_now.def
-DoctorDoom, mshvsf_apocalypse_now.def
-Thanos, mshvsf_apocalypse_now.def
 StriderHiryu, SF3 Battle Arena Rd 02.def
 Megaman, Slither Inc ZX.def
-cvsryu, SuzakuCastleWW.def
-cvsken, SuzakuCastleWW.def
-cvschunli, SF3 Battle Arena Rd 02.def
+slot = {
+cvsryu, SuzakuCastleWW.def, next = y
+sf3_ryu, mvc2-training.def, next = y
+}
+slot = {
+cvsken, SuzakuCastleWW.def, next = y
+sf3_ken, mvc2-training.def, next = y
+}
+slot = {
+cvschunli, SF3 Battle Arena Rd 02.def, next = y
+sf3_chun-li, mvc2-training.def, next = y
+}
 cvs_honda, TowerOfShogun.def
 cvszangief, TowerOfShogun.def
 cvs2_blanka, TowerOfShogun.def
 cvsguile, SF3 Battle Arena Rd 02.def
 cvszcammy, SF3 Battle Arena Rd 02.def
 cvs2_dhalsim, SF3 Battle Arena Rd 02.def
-cvsgouki, MemoriaTimeInterval.def
+slot = {
+cvsgouki, MemoriaTimeInterval.def, next = y
+sf3_gouki, mvc2-training.def, next = y
+}
 cvsvega, MemoriaTimeInterval.def
 CFJ_JuriHan, SF3 Battle Arena Rd 02.def
 cvssakura, SF3 Battle Arena Rd 02.def
+slot = {
+cvsalex, SF3 Battle Arena Rd 02.def, next = y
+sf3_alex, mvc2-training.def, next = y
+}
+sf3_ibuki, mvc2-training.def
 jedah, LiveHousePurple.def
 KoldRaptor, LiveHousePurple.def
 Morrigan, LiveHousePurple.def
@@ -268,16 +286,21 @@ TifaLockhart, NibelReactorHR.def
 Squall, IceCavernIcicleFields.def
 Leon, BarricadedStation.def
 Wesker, BarricadedStation.def
-Dante, DMC3-Tower.def
-Dante_KOF, DMC3-Tower.def
+slot = {
+Dante, DMC3-Tower.def, next = y
+Dante_KOF, DMC3-Tower.def, next = y
+}
+;Dante_KOF -> merged into the Dante variant slot (P134)
 vergil, DMC3-Tower.def
 nero_DMC4, DMC3-Tower.def
 KENSHIROU, MemoriaTimeInterval.def
-sf3_ryu, mvc2-training.def
-sf3_ken, mvc2-training.def
-sf3_chun-li, mvc2-training.def
-sf3_gouki, mvc2-training.def
-sf3_ibuki, mvc2-training.def
+;sf3_ryu -> merged into the cvsryu echo slot (P119); stripped at parse = no cell here
+;sf3_ken -> merged into the cvsken variant slot (P134)
+;sf3_chun-li -> merged into the cvschunli variant slot (P134)
+;sf3_gouki -> merged into the cvsgouki variant slot (P134)
+;sf3_alex -> merged into the cvsalex variant slot (P134)
+SCORPION_MK11, mvc2-training.def
+SUB-ZERO_MKDA, mvc2-training.def
 randomselect
 empty
 

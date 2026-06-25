@@ -1,0 +1,57 @@
+[Info]
+name = "cvsalex"
+displayname = "Alex"
+versiondate = 07,20,2011
+mugenversion = 1.0
+author = "Jesuszilla"
+pal.defaults = 4,5,6,1,2,3,10,11,12,7,8,9
+localcoord = 320,240
+; MUGEN doesn't parse these things but my page does
+system = "Capcom vs. SNK 2"
+
+[Files]
+sprite = cvsalex.sff
+anim = cvsalex.air
+sound = cvsalex.snd
+cmd = cvsalex.cmd
+cns = cvsalex.cns
+stcommon = common1.cns
+st = cvsalex.cns
+st1 = buffering.vns
+st2 = cvssystem.lol
+st3 = point.lol
+st4 = config.txt
+
+[Arcade]
+;intro.storyboard = 
+;ending.storyboard = 
+
+;Don't fuck with anything below unless you know what you're doing.
+[Palette Keymap]
+x = 4
+y = 5
+z = 6
+a = 1
+b = 2
+c = 3
+x2 = 10
+y2 = 11
+z2 = 12
+a2 = 7
+b2 = 8
+c2 = 9
+
+[PalInfo]
+1  = SF3:3S LK, Capcom
+2  = SF3:3S MK, Capcom
+3  = SF3:3S HK, Capcom
+4  = CFJ LP, Capcom
+5  = SF3:3S MP, Capcom
+6  = SF3:3S HP, Capcom
+7  = SF3:3S s+LK, Capcom
+8  = SF3:3S s+MK, Capcom
+9  = SF3:3S s+HK, Capcom
+10 = SF3:3S s+LP, Capcom
+11 = SF3:3S s+MP, Capcom
+12 = SF3:3S s+HP, Capcom
+

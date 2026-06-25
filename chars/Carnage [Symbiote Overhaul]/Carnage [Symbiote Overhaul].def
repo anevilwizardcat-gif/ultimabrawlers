@@ -1,0 +1,37 @@
+;***************************************************************************;
+;******************* Created in Fighter Factory Ultimate *******************;
+;*******************      http://www.virtualltek.com     *******************;
+;***************************************************************************;
+
+[Info]
+name ="Carnage [Symbiote Overhaul]"
+displayname ="Carnage"
+versiondate = 04,02,2026
+mugenversion =1.0
+author ="Lykempt,K99,theFuTuR3 and T.O.P.S"
+pal.defaults =1
+
+[Files]
+sprite =Carnage.sff
+anim =Carnage.air
+sound =Carnage.snd
+cmd =Carnage.cmd
+cns =Carnage.cns
+stcommon =common1.cns
+st =Carnage.cns
+st1=VS_Engine.cns
+
+; Maps character selection buttons to palette numbers.
+[Palette Keymap]
+x = 4 ;Press button X to select palette 1, etc.
+y = 5
+z = 6
+a = 1
+b = 2
+c = 3
+x2 = 12 ;Hold Start and press button X for palette 7, etc.
+y2 = 11
+z2 = 10
+a2 = 7
+b2 = 8
+c2 = 9

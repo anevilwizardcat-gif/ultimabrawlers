@@ -1,0 +1,259 @@
+                ______________________________________________________________
+               | Alex from Street Fighter 3: 3rd Strike + Capcom Fighting Jam |
+               |                 by Jesuszilla, for MUGEN 1.0                 |
+               |                      September 20, 2017                      |
+                --------------------------------------------------------------
+
+Thanks for downloading this character.
+
+Please do not illegally distribute this. Sure, you can send it via e-mail to friends when it's finished provided you either:
+1. Link to Trinity MUGEN http://www.trinitymugen.net
+2. In case the site is taken down for whatever reason, you may send the whole archive via e-mail. However, I, the creator, will try and find a host for my works ASAP in such a case, anyway.
+ _      _   ______   _____   ____   _   _   ____   _   _____
+| | || | | |  __  | |  _  | |  _ | | | | | |  _ | | | |  ___|
+| | || | | | |  | | | |_|_| | | || | | | | | | || | | | |  
+| | || | | | |__| | |  _ |  | | || | | | | | | || | | | |  _
+| | || | | |  __  | | | | | | | || | | | | | | || | | | | | | 
+| |_||_| | | |  | | | | | | | | ||_| | | | | | ||_| | | |_| |
+|________| |_|  |_| |_| |_| |_| |____| |_| |_| |____| |_____|
+ ___________________________________________________________
+|___________________________________________________________|
+
+***DO NOT WAREHOUSE THIS!!!****
+For the love of God, just link to the site. It will save me bitching and you bandwidth and storage.
+
+***********************************RULES***********************************
+ 1. You warehouse this or redistribute this without my permission, you die.
+ 2. You request a certain creation from me, you die.
+ 3. You ask me to make a certain character, you die.
+ 4. You use this in a "full game," you die.
+ 5. You ask me to use this in a "full game," you die.
+ 6. You patch this in any way (except addition of AI), you die.
+ 7. You expect a 100% accurate conversion, you die.
+ 8. You sell any part of this character, you die.
+**************************************************************************
+
+**********A FEW STATEMENTS FROM THE AUTHOR**********
+;QUESTIONS: 
+Q: Why didn't you use the CFJ boxes?
+A: Because they sucked and Alex needed some buffs.
+
+Special Thanks:
+N64Mario84 - Without you, I wouldn't have found out about MUGEN.
+Warusaki3 - For letting me use his CvS2 sprites and other STUFF.
+Vans1Belmont - For testing as well as hosting.
+Fusion - For being awesome and X Gon' Give it to Ya.
+Kung_Fu_Man - For the CvS2 ArtMoney table and help in various places.
+[Rolento] - Various STUFF, and for banning me from that hellhole that is #mugen.
+Zero de Armentis - Reshaded sprites.
+Lost Avenger - SFF
+T. Vinceson - Animation 5940
+Pepsi - For their kickass soda.
+Elecbyte - Thank you for so many years of fun!
+
+
+*****************************EXTREMELY SPECIAL THANKS*****************************
+balmsold - For the running animation and just being a cool guy!
+*****************************EXTREMELY SPECIAL THANKS*****************************
+
+
+All STUFF that isn't (C) Capcom is (C) 2006-2017 and forever Jesuszilla and Trinity MUGEN.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+There is really nothing interesting down here.
+
+
+
+
+

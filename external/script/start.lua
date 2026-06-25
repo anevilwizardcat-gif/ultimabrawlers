@@ -2612,12 +2612,64 @@ function start.f_selectScreen()
 			if tickScreenDelay(side) then
 				screenDelayInterrupted = true
 			end
-			--exit select screen
+			--P125 cancel/back chain (revised): Esc always exits. B (cancel.key, not in palette menu):
+			--steps back one committed pick, then returns to the team menu, then exits. Keeps the
+			--per-side state tables in sync (t_selTemp by member, t_selCmd, t_cursor) to avoid nil indexing.
+			--In modes where one controller drives multiple sides (Watch: f_menuCmd(2) returns 1, so
+			--BOTH sides' v.cmd is controller 1) a single B would fire the back-chain on both sides at
+			--once. Defer to a higher-index side that shares this controller AND is still actively
+			--selecting (at its team menu or mid char-select), so B only steps back the side currently
+			--in focus. Separate-controller play is unaffected (the commands differ, so no defer).
+			local deferB = false
+			for hs = side + 1, 2 do
+				if start.f_menuCmd(hs) == start.f_menuCmd(side)
+					and ((not start.p[hs].teamEnd)
+						or (not start.p[hs].selEnd and #start.p[hs].t_selCmd > 0)) then
+					deferB = true
+					break
+				end
+			end
 			for _, v in ipairs(start.p[side].t_selCmd) do
-				if not start.escFlag and (esc() or (getInput(v.cmd, motif.select_info.cancel.key) and not start.p[side].inPalMenu)) then
-					fadeOutInit(motif.select_info.fadeout.FadeData)
-					fadeOutStarted = true
-					start.escFlag = true
+				if not start.escFlag then
+					if esc() then
+						fadeOutInit(motif.select_info.fadeout.FadeData)
+						fadeOutStarted = true
+						start.escFlag = true
+					elseif not deferB and getInput(v.cmd, motif.select_info.cancel.key) and not start.p[side].inPalMenu then
+						if #start.p[side].t_selected > 0 then
+							--undo last committed pick; member = #t_selected + k, so this re-picks it.
+							--trim t_selTemp back to the new member count so the hover index stays valid.
+							table.remove(start.p[side].t_selected)
+							local target = #start.p[side].t_selected + #start.p[side].t_selCmd
+							while #start.p[side].t_selTemp > target do
+								table.remove(start.p[side].t_selTemp)
+							end
+							start.p[side].selEnd = false
+							start.p[side].inPalMenu = false
+							v.selectState = 0
+							start.needUpdateDrawList = true --force cell-art/portrait redraw so the undone slot clears
+							sndPlay(motif.Snd, motif.select_info.cancel.snd[1], motif.select_info.cancel.snd[2])
+							break
+						elseif start.p[side].teamEnd then
+							--nothing picked yet -> back to the team-mode menu. Clear the per-side
+							--select tables so re-confirming the mode rebuilds them cleanly (no dupes).
+							start.p[side].teamEnd = false
+							start.p[side].selEnd = false
+							start.p[side].inPalMenu = false
+							start.p[side].t_selected = {}
+							start.p[side].t_selTemp = {}
+							start.p[side].t_cursor = {}
+							start.p[side].t_selCmd = {}
+							start.needUpdateDrawList = true --force redraw so the side's stale portrait/cursor clears
+							sndPlay(motif.Snd, motif.select_info.cancel.snd[1], motif.select_info.cancel.snd[2])
+							break
+						else
+							--nothing to undo -> exit the select screen
+							fadeOutInit(motif.select_info.fadeout.FadeData)
+							fadeOutStarted = true
+							start.escFlag = true
+						end
+					end
 				end
 			end
 			if start.p[side].inPalMenu then

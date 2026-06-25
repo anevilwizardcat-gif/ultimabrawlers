@@ -1,0 +1,2029 @@
+;-------------------------------------------------------------------
+;BLOOD SPLAT 1 & 2
+[Statedef 11010]
+type = S
+movetype = I
+physics = N
+anim = 11010
+
+[State 1000, 3]
+type = SprPriority
+trigger1 = 1
+value = 30
+
+[State ]
+type = velset
+trigger1 = 1
+y = 0
+x = 0
+
+[State ]
+type = assertspecial
+trigger1 = 1
+flag = noshadow
+
+[State end]
+type = Destroyself
+trigger1 = animtime = 0
+
+;-------------------------------------------------------------
+;BLOOD BATH L
+[Statedef 11011]
+type    = A
+movetype= I
+physics = N
+velset = 0,0
+ctrl = 0
+sprpriority = 3
+
+[State y]
+type = VarRandom
+trigger1 = 1
+v = 0
+range = -3,-6
+[State x]
+type = VarRandom
+trigger1 = 1
+v = 1
+range = -1,-4
+
+[State ]
+type = velset
+trigger1 = time = 1
+y = var(0)
+x = var(1)
+
+[State end]
+type = changeanim
+trigger1 = time = 0
+value = 11011
+
+[State ]
+type = veladd
+trigger1 = time >= 3
+y = .1
+
+[State ]
+type = veladd
+trigger1 = time >= 10
+y = .2
+
+[State ]
+type = assertspecial
+trigger1 = 1
+flag = noshadow
+
+[State 1000, 3]
+type = SprPriority
+trigger1 = 1
+value = 20
+
+[State end]
+type = changestate
+triggerall = time >= 5
+trigger1 = (Vel Y > 0)&&(Pos Y >= 0)
+value = 11013
+
+;-------------------------------------------------------------
+;BLOOD BATH R
+[Statedef 11012]
+type    = A
+movetype= I
+physics = N
+velset = 0,0
+ctrl = 0
+sprpriority = 3
+
+[State 1000, 3]
+type = SprPriority
+trigger1 = 1
+value = 20
+
+[State y]
+type = VarRandom
+trigger1 = 1
+v = 0
+range = -3,-6
+[State x]
+type = VarRandom
+trigger1 = 1
+v = 1
+range = 1,4
+
+[State ]
+type = velset
+trigger1 = time = 1
+y = var(0)
+x = var(1)
+
+[State end]
+type = changeanim
+trigger1 = time = 0
+value = 11012
+
+[State ]
+type = veladd
+trigger1 = time >= 3
+y = .1
+
+[State ]
+type = veladd
+trigger1 = time >= 10
+y = .2
+
+[State ]
+type = assertspecial
+trigger1 = 1
+flag = noshadow
+
+[State end]
+type = changestate
+triggerall = time >= 5
+trigger1 = (Vel Y > 0)&&(Pos Y >= 0)
+value = 11013
+
+;****************************************************************
+;END BLOOD
+[Statedef 11013]
+type    = A
+movetype= I
+physics = N
+ctrl = 0
+anim = 11013
+sprpriority = 3
+
+[State 7, Blood_sound]
+type = PlaySnd
+trigger1 = animelem = 1
+value = S5,ifelse(random<=500,5,ifelse(random>500,5,6))
+volumescale = 90
+
+[State ]
+type = velset
+trigger1 = 1
+y = 0
+x = 0
+
+[State ]
+type = posset
+trigger1 = 1
+y = 6
+
+[State ]
+type = assertspecial
+trigger1 = 1
+flag = noshadow
+
+[State end]
+type = destroyself
+trigger1 = time = 35
+
+
+
+;========================<SPARKS>=============================
+;Guard Spark (Normal)
+[StateDef 8000]
+type = A
+physics = N
+moveType = I
+anim = 8000
+velset = 0,0
+sprPriority = 5
+
+[State 8000, Assert: No Shadow]
+type = AssertSpecial
+trigger1= 1
+flag = NoShadow
+
+[State 8000, Scale]
+type = AngleDraw
+trigger1 = 1
+scale = 0.125 + (0.046875 * Time), 0.125 + (0.046875 * Time)
+
+[State 8000, Transparency]
+type = Trans
+trigger1 = Time < 4
+trans = AddAlpha
+alpha = 256, 256
+
+[State 8000, Transparency]
+type = Trans
+trigger1 = Time >= 4
+trans = AddAlpha
+alpha = 256 - 64 * (Time - 4), 256
+
+[State 8000, End]
+type = DestroySelf
+trigger1 = Time >= 8
+
+
+;Guard Spark (Special)
+[StateDef 8001]
+type = A
+physics = N
+moveType = I
+anim = 8001
+velSet = 0,0
+sprPriority = 5
+
+[State 8001, Assert: NoShadow]
+type = AssertSpecial
+trigger1 = 1
+flag = NoShadow
+
+[State 8001, Scale]
+type = AngleDraw
+trigger1 = 1
+scale = 0.25 + (0.03125 * Time), 0.25 + (0.03125 * Time)
+
+[State 8001, Transparency]
+type = Trans
+trigger1 = time < 4
+trans = AddAlpha
+alpha = 256, 256
+
+[State 8001, Transparency]
+type = Trans
+trigger1 = Time >= 4
+trans = AddAlpha
+alpha = 256 - 64 * (Time - 4), 256
+
+[State 8001, End]
+type = DestroySelf
+trigger1 = Time >= 8
+
+
+;Weak Hit Spark
+[StateDef 8010]
+type = A
+physics = N
+moveType = I
+anim = 8010
+velSet = 0,0
+sprPriority = 5
+
+[State 8010, Assert: NoShadow]
+type = AssertSpecial
+trigger1 = 1
+flag = NoShadow
+
+[State 8010, AngleSet]
+type = AngleSet
+trigger1 = !Time
+value = 30 * (Random % 12)
+
+[State 8010, AngleAdd]
+type = AngleAdd
+trigger1 = 1
+value = 30
+
+[State 8010, Scale]
+type = AngleDraw
+trigger1 = Time < 10
+scale = 0.3 - (Time * 0.03), 0.3 - (Time * 0.03)
+
+[State 8010, Scale]
+type = AngleDraw
+trigger1 = Time >= 10
+scale = 0,0
+
+[State 8010, Transparency]
+type = Trans
+trigger1 = 1
+trans = AddAlpha
+alpha = 256,256
+
+[State 8010, Center Explod]
+type = Explod
+trigger1 = !Time
+anim = 8011
+ID = 1
+posType = P1
+facing = ifElse(Random < 500, -1, 1)
+vFacing = ifElse(Random < 500, -1, 1)
+sprPriority = 5
+removeTime = 16
+pauseMoveTime = -1
+superMoveTime = -1
+
+[State 8010, Scale Center Explod]
+type = ModifyExplod
+trigger1 = NumExplod(1)
+ID = 1
+scale = 0.15 + (0.009375 * Time), 0.15 + (0.009375 * Time)
+trans = AddAlpha
+alpha = 256 - (16 * Time),256
+
+[State 8010, Streaks Explod]
+type = Explod
+trigger1 = !Time
+anim = 8012
+ID = 2
+posType = P1
+facing = ifElse(Random < 500, -1, 1)
+vFacing = ifElse(Random < 500, -1, 1)
+sprPriority = 5
+removeTime = 16
+pauseMoveTime = -1
+superMoveTime = -1
+
+[State 8010, Scale Streaks Explod]
+type = ModifyExplod
+trigger1 = NumExplod(2)
+ID = 2
+scale = 0.15 + (0.009375 * Time), 0.15 + (0.009375 * Time)
+trans = AddAlpha
+alpha = 256 - (16 * Time), 256
+
+[State 8010, Impact Explod]
+type = Explod
+trigger1 = !Time
+anim = 8014
+ID = 4
+posType = P1
+facing = ifElse(Random < 500, -1, 1)
+vFacing = ifElse(Random < 500, -1, 1)
+sprPriority = 3
+removeTime = 8
+pauseMoveTime = -1
+superMoveTime = -1
+
+[State 8010, Scale Impact Explod]
+type = ModifyExplod
+trigger1 = NumExplod(4)
+ID = 4
+scale = 0.3 - (0.0375 * Time), 0.3 - (0.0375 * Time)
+trans = AddAlpha
+alpha = 128 - (16 * Time), 256
+
+[State 8010, Remove Explods]
+type = RemoveExplod
+trigger1 = Time >= 16
+
+[State 8010, End]
+type = DestroySelf
+trigger1 = Time >= 16
+
+
+;Medium Hit Spark
+[StateDef 8011]
+type = A
+physics = N
+moveType = I
+anim = 8010
+velSet = 0,0
+sprPriority = 5
+
+[State 8011, Assert: NoShadow]
+type = AssertSpecial
+trigger1 = 1
+flag = NoShadow
+
+[State 8011, AngleSet]
+type = AngleSet
+trigger1 = !Time
+value = 30 * (Random % 12)
+
+[State 8011, AngleAdd]
+type = AngleAdd
+trigger1 = 1
+value = 30
+
+[State 8011, Scale]
+type = AngleDraw
+trigger1 = Time < 10
+scale = 0.35 - (Time * 0.035), 0.35 - (Time * 0.035)
+
+[State 8011, Scale]
+type = AngleDraw
+trigger1 = Time >= 10
+scale = 0,0
+
+[State 8011, Transparency]
+type = Trans
+trigger1 = 1
+trans = AddAlpha
+alpha = 256,256
+
+[State 8011, Center]
+type = Explod
+trigger1 = !Time
+anim = 8011
+ID = 1
+posType = P1
+facing = ifElse(Random < 500, -1, 1)
+vFacing = ifElse(Random < 500, -1, 1)
+sprPriority = 5
+removetime = 16
+pauseMoveTime = -1
+superMoveTime = -1
+
+[State 8011, Scale Center Explod]
+type = ModifyExplod
+trigger1 = NumExplod(1)
+ID = 1
+scale = 0.175 + (0.0109375 * Time), 0.175 + (0.0109375 * Time)
+trans = AddAlpha
+alpha = 256 - (16 * Time), 256
+
+[State 8011, Streaks Explod]
+type = Explod
+trigger1 = !Time
+anim = 8012
+ID = 2
+posType = P1
+facing = ifElse(Random < 500, -1, 1)
+vFacing = ifElse(Random < 500, -1, 1)
+sprPriority = 5
+removeTime = 16
+pauseMoveTime = -1
+superMoveTime = -1
+
+[State 8011, Scale Streaks Explod]
+type = ModifyExplod
+trigger1 = NumExplod(2)
+ID = 2
+scale = 0.175 + (0.0109375 * Time), 0.175 + (0.0109375 * Time)
+trans = AddAlpha
+alpha = 256 - (16 * Time), 256
+
+[State 8011, Impact Explod]
+type = Explod
+trigger1 = !Time
+anim = 8014
+ID = 4
+posType = P1
+facing = ifElse(Random < 500, -1, 1)
+vFacing = ifElse(Random < 500, -1, 1)
+sprPriority = 3
+removeTime = 8
+pauseMoveTime = -1
+superMoveTime = -1
+
+[State 8011, Scale Impact Explod]
+type = ModifyExplod
+trigger1 = NumExplod(4)
+ID = 4
+scale = 0.35 - (0.04375 * Time), 0.35 - (0.04375 * Time)
+trans = AddAlpha
+alpha = 128 - (16 * Time), 256
+
+[State 8011, Remove Explods]
+type = RemoveExplod
+trigger1 = Time >= 16
+
+[State 8011, End]
+type = DestroySelf
+trigger1 = Time >= 16
+
+
+;Strong Hit Spark
+[StateDef 8012]
+type = A
+physics = N
+moveType = I
+anim = 8010
+velSet = 0,0
+sprPriority = 5
+
+[State 8012, Assert: NoShadow]
+type = AssertSpecial
+trigger1 = 1
+flag = NoShadow
+
+[State 8012, AngleSet]
+type = AngleSet
+trigger1 = !Time
+value = 30 * (Random % 12)
+
+[State 8012, AngleAdd]
+type = AngleAdd
+trigger1 = 1
+value = 30
+
+[State 8012, Scale]
+type = AngleDraw
+trigger1 = Time < 10
+scale = 0.4 - (Time * 0.04), 0.4 - (Time * 0.04)
+
+[State 8012, Scale]
+type = AngleDraw
+trigger1 = Time >= 10
+scale = 0,0
+
+[State 8012, Transparency]
+type = Trans
+trigger1 = 1
+trans = AddAlpha
+alpha = 256,256
+
+[State 8012, Center Explod]
+type = Explod
+trigger1 = !Time
+anim = 8011
+ID = 1
+posType = P1
+facing = ifElse(Random < 500, -1, 1)
+vFacing = ifElse(Random < 500, -1, 1)
+sprPriority = 5
+removeTime = 16
+pauseMoveTime = -1
+superMoveTime = -1
+
+[State 8012, Scale Center Explod]
+type = ModifyExplod
+trigger1 = NumExplod(1)
+ID = 1
+scale = 0.2 + (0.0125 * Time), 0.2 + (0.0125 * Time)
+trans = AddAlpha
+alpha = 256 - (16 * Time), 256
+
+[State 8012, Streaks Explod]
+type = Explod
+trigger1 = !time
+anim = 8012
+ID = 2
+posType = P1
+facing = ifElse(Random < 500, -1, 1)
+vFacing = ifElse(Random < 500, -1, 1)
+sprPriority = 5
+removeTime = 16
+pauseMoveTime = -1
+superMoveTime = -1
+
+[State 8012, Scale Streaks Explod]
+type = ModifyExplod
+trigger1 = NumExplod(2)
+ID = 2
+scale = 0.2 + (0.0125 * Time), 0.2 + (0.0125 * Time)
+trans = AddAlpha
+alpha = 256 - (16 * Time), 256
+
+[State 8012, Impact Explod]
+type = Explod
+trigger1 = !Time
+anim = 8014
+ID = 4
+posType = P1
+facing = ifElse(Random < 500, -1, 1)
+vFacing = ifElse(Random < 500, -1, 1)
+sprPriority = 3
+removeTime = 8
+pauseMoveTime = -1
+superMoveTime = -1
+
+[State 8012, Scale Impact Explod]
+type = ModifyExplod
+trigger1 = NumExplod(4)
+ID = 4
+scale = 0.4 - (0.05 * Time), 0.4 - (0.05 * Time)
+trans = AddAlpha
+alpha = 128 - (16 * Time), 256
+
+[State 8012, Remove Explods]
+type = RemoveExplod
+trigger1 = Time >= 16
+
+[State 8012, End]
+type = DestroySelf
+trigger1 = Time >= 16
+
+
+;Special Move Hit Spark
+[StateDef 8013]
+type = A
+physics = N
+moveType = I
+anim = 8010
+velSet = 0,0
+sprPriority = 5
+
+[State 8013, Assert: NoShadow]
+type = AssertSpecial
+trigger1 = 1
+flag = NoShadow
+
+[State 8013, AngleSet]
+type = AngleSet
+trigger1 = !Time
+value = 30 * (Random % 12)
+
+[State 8013, AngleAdd]
+type = AngleAdd
+trigger1 = 1
+value = 30
+
+[State 8013, Scale]
+type = AngleDraw
+trigger1 = Time < 10
+scale = 0.45 - (Time * 0.045), 0.45 - (Time * 0.045)
+
+[State 8012, Scale]
+type = AngleDraw
+trigger1 = Time >= 10
+scale = 0,0
+
+[State 8013, Transparency]
+type = Trans
+trigger1 = 1
+trans = AddAlpha
+alpha = 256,256
+
+[State 8013, Center Explod]
+type = Explod
+trigger1 = !Time
+anim = 8011
+ID = 1
+posType = P1
+facing = ifElse(Random < 500, -1, 1)
+vFacing = ifElse(Random < 500, -1, 1)
+sprPriority = 5
+removeTime = 16
+pauseMoveTime = -1
+superMoveTime = -1
+
+[State 8013, Scale Center Explod]
+type = ModifyExplod
+trigger1 = NumExplod(1)
+ID = 1
+scale = 0.225 + (0.0140625 * Time), 0.225 + (0.0140625 * Time)
+trans = AddAlpha
+alpha = 256 - (16 * Time), 256
+
+[State 8013, Streaks Explod]
+type = Explod
+trigger1 = !Time
+anim = 8012
+ID = 2
+posType = P1
+facing = ifElse(Random < 500, -1, 1)
+vFacing = ifElse(Random < 500, -1, 1)
+sprPriority = 5
+removeTime = 16
+pauseMoveTime = -1
+superMoveTime = -1
+
+[State 8013, Scale Streaks Explod]
+type = ModifyExplod
+trigger1 = NumExplod(2)
+ID = 2
+scale = 0.225 + (0.0140625 * Time), 0.225 + (0.0140625 * Time)
+trans = AddAlpha
+alpha = 256 - (16 * Time), 256
+
+[State 8013, P2 Back Explod]
+type = Explod
+trigger1 = !Time
+anim = 8013
+ID = 3
+posType = P1
+facing = -1
+vFacing = ifElse(Random < 500, -1, 1)
+sprPriority = -3
+removeTime = 8
+pauseMoveTime = -1
+superMoveTime = -1
+
+[State 8013, Scale P2 Back Explod]
+type = ModifyExplod
+trigger1= NumExplod(3)
+ID = 3
+scale = 0.4, 0.4
+trans = AddAlpha
+alpha = 256 - (32 * Time), 256
+
+[State 8013, Impact Explod]
+type = Explod
+trigger1 = !Time
+anim = 8014
+ID = 4
+posType = P1
+facing = ifElse(random < 500, -1, 1)
+vFacing = ifElse(random < 500, -1, 1)
+sprPriority=3
+removeTime=8
+pauseMoveTime = -1
+superMoveTime = -1
+
+[State 8013, Scale Impact Explod]
+type = ModifyExplod
+trigger1 = NumExplod(4)
+ID = 4
+scale = 0.45 - (0.05625 * Time), 0.45 - (0.05625 * Time)
+trans = AddAlpha
+alpha = 192 - (24 * Time), 256
+
+[State 8013, Remove Explods]
+type = RemoveExplod
+trigger1 = Time >= 16
+
+[State 8013, End]
+type = DestroySelf
+trigger1 = Time >= 16
+
+
+;Super Hit Spark
+[StateDef 8014]
+type = A
+physics = N
+moveType = I
+anim = 8010
+velSet = 0,0
+sprPriority = 5
+
+[State 8014, Assert: NoShadow]
+type = AssertSpecial
+trigger1 = 1
+flag = NoShadow
+
+[State 8014, AngleSet]
+type = AngleSet
+trigger1 = !Time
+value = 30 * (Random % 12)
+
+[State 8014, AngleAdd]
+type = AngleAdd
+trigger1 = 1
+value = 30
+
+[State 8014, Scale]
+type = AngleDraw
+trigger1 = Time < 10
+scale = 0.5 - (Time * 0.05), 0.5 - (Time * 0.05)
+
+[State 8012, Scale]
+type = AngleDraw
+trigger1 = Time >= 10
+scale = 0,0
+
+[State 8014, Transparency]
+type = Trans
+trigger1 = 1
+trans = AddAlpha
+alpha = 256,256
+
+[State 8014, Center Explod]
+type = Explod
+trigger1 = !Time
+anim = 8011
+ID = 1
+posType = P1
+facing = ifElse(Random < 500, -1, 1)
+vFacing = ifElse(Random < 500, -1, 1)
+sprPriority = 5
+removeTime = 16
+pauseMoveTime = -1
+superMoveTime = -1
+
+[State 8014, Scale Center Explod]
+type = ModifyExplod
+trigger1 = NumExplod(1)
+ID = 1
+scale = 0.25 + (0.015625 * Time), 0.25 + (0.015625 * Time)
+trans = AddAlpha
+alpha = 256 - (16 * Time), 256
+
+[State 8014, Streaks Explod]
+type = Explod
+trigger1 = !Time
+anim = 8012
+ID = 2
+posType = P1
+facing = ifElse(Random < 500, -1, 1)
+vFacing = ifElse(Random < 500, -1, 1)
+sprPriority = 5
+removeTime = 16
+pauseMoveTime = -1
+superMoveTime = -1
+
+[State 8014, Scale Streaks Explod]
+type = ModifyExplod
+trigger1 = NumExplod(2)
+ID = 2
+scale = 0.25 + (0.015625 * Time), 0.25 + (0.015625 * Time)
+trans = AddAlpha
+alpha = 256 - (16 * Time), 256
+
+[State 8014, P2 Back Explod]
+type = Explod
+trigger1 = !Time
+anim = 8013
+ID = 3
+posType = P1
+facing = -1;ifElse((Parent, StateNo = [3100,3150]), -1, 1)
+vFacing = ifElse(Random < 500, -1, 1)
+sprPriority = -3
+removeTime = 8
+pauseMoveTime = -1
+superMoveTime = -1
+
+[State 8014, Scale P2 Back Explod]
+type = ModifyExplod
+trigger1 = NumExplod(3)
+ID = 3
+scale = 0.5,0.5
+trans = AddAlpha
+alpha = 256 - (32 * Time), 256
+
+[State 8014, Impact Explod]
+type = Explod
+trigger1 = !Time
+anim = 8014
+ID = 4
+posType = P1
+facing = ifElse(Random < 500, -1, 1)
+vFacing = ifElse(Random < 500, -1, 1)
+sprPriority = 3
+removeTime = 8
+pauseMoveTime = -1
+superMoveTime = -1
+
+[State 8014, Scale Impact Explod]
+type = ModifyExplod
+trigger1 = NumExplod(4)
+ID = 4
+scale = 0.5 - (0.0625 * Time), 0.5 - (0.0625 * Time)
+trans = AddAlpha
+alpha = 256 - (32 * Time),256
+
+[State 8014, Remove Explods]
+type = RemoveExplod
+trigger1 = time >= 16
+
+[State 8014, End]
+type = DestroySelf
+trigger1 = Time >= 16
+
+
+;----------------------------------------------------------------
+;PUSH BACK
+[Statedef 123456]
+type    = S
+movetype= H
+physics = S
+poweradd= 0
+ctrl = 0
+velset = 0,0
+sprpriority = 2
+
+[State ]
+type = Posset
+trigger1 = time = 0
+y = 0
+
+[State ]
+type = velset
+trigger1 = 1
+x = -2.5
+
+[State 5120, 3]
+type = NotHitBy
+trigger1 = time <25
+value = SCA
+time = 1
+
+[State PUSH] 
+type = ChangeAnim
+triggerall = !time
+trigger1 = AuthorName = "OMEGAPSYCHO-MK"
+trigger2 = AuthorName = "OMEGAPSYCHO-MKSecret"
+value = 5400
+
+[State PUSH] 
+type = ChangeAnim2
+trigger1 = AuthorName != "OMEGAPSYCHO-MK"
+trigger1 = AuthorName != "OMEGAPSYCHO-MKSecret"
+trigger1 = !time
+value = 5401
+
+[State end]
+type = selfstate
+triggerall = animtime = 0
+trigger1 = alive = 1
+trigger2 = life>0
+value = 0
+Ctrl = 1
+
+[State end]
+type = selfstate
+triggerall = animtime = 0
+trigger1 = alive = 0
+trigger2 = life<=0
+value = 5050
+ctrl = 0
+
+;----------------------------------------------------------------
+;PUSH BACK by Strong Hit
+[Statedef 123457]
+type    = S
+movetype= H
+physics = S
+poweradd= 0
+ctrl = 0
+velset = 0,0
+sprpriority = 2
+
+[State 49999, 2]
+type = LifeAdd
+trigger1 = time = 0
+trigger1 = life >1
+trigger1 = enemynear,Var(58)=0
+value = -80
+[State 49999, 2]
+type = LifeSet
+trigger1 = time = 0
+trigger1 = life <=1
+trigger1 = enemynear,Var(58)=1
+value = 1
+
+[State ]
+type = Posset
+trigger1 = time = 0
+y = 0
+
+[State ]
+type = velset
+trigger1 = 1
+x = -2
+
+[State 5120, 3]
+type = NotHitBy
+trigger1 = time <25
+value = SCA
+time = 1
+
+[State PUSH] 
+type = ChangeAnim
+triggerall = !time
+trigger1 = AuthorName = "OMEGAPSYCHO-MK"
+trigger2 = AuthorName = "OMEGAPSYCHO-MKSecret"
+value = 5400
+
+[State PUSH] 
+type = ChangeAnim2
+trigger1 = AuthorName != "OMEGAPSYCHO-MK"
+trigger1 = AuthorName != "OMEGAPSYCHO-MKSecret"
+trigger1 = !time
+value = 5401
+
+[State end]
+type = selfstate
+triggerall = animtime = 0
+trigger1 = alive = 1
+trigger2 = life>0
+value = 0
+Ctrl = 1
+
+[State end]
+type = selfstate
+triggerall = animtime = 0
+trigger1 = alive = 0
+trigger2 = life<=0
+value = 5050
+ctrl = 0
+
+;----------------------------------------------------------------
+;PUSH BACK by Strong Hit
+[Statedef 123458]
+type    = S
+movetype= H
+physics = S
+ctrl = 0
+velset = 0,0
+sprpriority = 2
+
+[State 49999, 2]
+type = LifeAdd
+trigger1 = time = 0
+trigger1 = life >1
+trigger1 = enemynear,Var(58)=0
+value = -100
+[State 49999, 2]
+type = LifeSet
+trigger1 = time = 0
+trigger1 = life <=1
+trigger1 = enemynear,Var(58)=1
+value = 1
+
+[State ]
+type = Posset
+trigger1 = time = 0
+y = 0
+
+[State ]
+type = velset
+trigger1 = 1
+x = -3
+
+[State 5120, 3]
+type = NotHitBy
+trigger1 = time <25
+value = SCA
+time = 1
+
+[State PUSH] 
+type = ChangeAnim
+triggerall = !time
+trigger1 = AuthorName = "OMEGAPSYCHO-MK"
+trigger2 = AuthorName = "OMEGAPSYCHO-MKSecret"
+value = 5400
+
+[State PUSH] 
+type = ChangeAnim2
+trigger1 = AuthorName != "OMEGAPSYCHO-MK"
+trigger1 = AuthorName != "OMEGAPSYCHO-MKSecret"
+trigger1 = !time
+value = 5401
+
+[State end]
+type = selfstate
+triggerall = animtime = 0
+trigger1 = alive = 1
+trigger2 = life>0
+value = 0
+Ctrl = 1
+
+[State end]
+type = selfstate
+triggerall = animtime = 0
+trigger1 = alive = 0
+trigger2 = life<=0
+value = 5050
+ctrl = 0
+;---------------------------------------------------------------------------
+; P2 HITA_UP
+[Statedef 123459]
+type    = A
+movetype= H
+physics = N
+anim = 5030
+ctrl = 0
+
+[State 300, 4]
+type = CtrlSet
+Trigger1 = 1
+value = 0
+
+[State 5030, 1]
+type = VelAdd
+trigger1 = 1
+y = GetHitVar(yaccel)
+[State 5030, 2]
+type = HitVelSet
+trigger1 = Time = 0
+x = 2
+y = -2
+
+[State 5030, 4]
+type = SelfState
+trigger1 = 1
+trigger1 = Pos Y < 0
+value = 5030
+ctrl = 0
+
+[State 5030, 4]
+type = SelfState
+trigger1 = 1
+trigger1 = Pos Y >= 0
+value = 5110
+ctrl = 0
+
+
+;=============================================================================
+;What makes a crackhead grow?  Crack Crack Crack! wait... that isn't right lol
+;=============================================================================
+;Nice Blood splat A
+[Statedef 6000]
+type    = S
+movetype= I
+juggle  = 0
+anim = 6002
+velset = 0, 4.4
+ctrl = 0
+
+[State 6000, 1]
+type = VarRandom
+trigger1 = time = 0
+v = 11
+range = 1, 100
+
+
+[State 6000, 2]
+type = Velset
+trigger1 = time = 1
+trigger1 = Var(11) = [1, 24]
+X = -.1
+
+[State 6000, 2.5]
+type = Velset
+trigger1 = time = 1
+trigger1 = Var(11) = [25, 49]
+X = -.2
+
+[State 6000, 3]
+type = Velset
+trigger1 = time = 1
+trigger1 = Var(11) = [50, 74]
+X = -.5
+
+[State 6000, 3.5]
+type = Velset
+trigger1 = time = 1
+trigger1 = Var(11) = [75, 100]
+X = -1
+
+[State 6000, 4]
+type = Veladd
+trigger1 = time = [1, 10]
+X = -.05
+
+
+[State 6000, 5]
+type = Changestate
+trigger1 = Pos Y > 0
+value = 6001
+;------------------------------------------------------------------------
+;Nice Blood splat A lands
+[Statedef 6001]
+type    = S
+movetype= I
+juggle  = 0
+anim = 6003
+velset = 0,0
+ctrl = 0
+
+[State 6001, 0.5]
+type = Playsnd
+trigger1 = time = 0
+value = 5, 5
+
+
+[State 6001, 1]
+type = Destroyself
+trigger1 = animtime = 0
+;------------------------------------------------------------------------
+;Nice Blood splat A2
+[Statedef 6002]
+type    = S
+movetype= I
+juggle  = 0
+anim = 6000
+velset = 0, 4.4
+ctrl = 0
+
+[State 6002, 1]
+type = VarRandom
+trigger1 = time = 0
+v = 11
+range = 1, 100
+
+
+[State 6002, 2]
+type = Velset
+trigger1 = time = 1
+trigger1 = Var(11) = [1, 24]
+X = .1
+
+[State 6002, 2.5]
+type = Velset
+trigger1 = time = 1
+trigger1 = Var(11) = [25, 49]
+X = .2
+
+[State 6002, 3]
+type = Velset
+trigger1 = time = 1
+trigger1 = Var(11) = [50, 74]
+X = .5
+
+[State 6002, 3.5]
+type = Velset
+trigger1 = time = 1
+trigger1 = Var(11) = [75, 100]
+X = 1
+
+[State 6002, 4]
+type = Veladd
+trigger1 = time = [1, 10]
+X = .05
+
+
+[State 6002, 5]
+type = Changestate
+trigger1 = Pos Y > 0
+value = 6003
+;------------------------------------------------------------------------
+;Nice Blood splat A2 lands
+[Statedef 6003]
+type    = S
+movetype= I
+juggle  = 0
+anim = 6001
+velset = 0,0
+ctrl = 0
+
+[State 6003, 0.5]
+type = Playsnd
+trigger1 = time = 0
+value = 5, 6
+
+[State 6003, 1]
+type = Destroyself
+trigger1 = animtime = 0
+;------------------------------------------------------------------------
+;------------------------------------------------------------------------
+;Fatality A Spurt
+[Statedef 6010]
+type    = S
+movetype= I
+juggle  = 0
+anim = 6010
+velset = 0,0
+ctrl = 0
+
+[State 6010, 0.5]
+type = Targetbind
+trigger1 = time = [0, 2000]
+pos = 0,0
+
+
+[State 6010, 1]
+type = Playsnd
+trigger1 = animelem = 2
+value = 5,9
+
+
+[State 6010, 2]
+type = DestroySelf
+trigger1 = time = 160
+;------------------------------------------------------------------------
+;High Punch Blood
+[Statedef 6015]
+type    = S
+movetype= A
+juggle  = 0
+anim = 6015
+velset = 0, 0
+ctrl = 0
+
+[State 6015, 1]
+type = bindtotarget
+trigger1 = time = 0
+pos = 0,0,head
+
+
+[State 6015, 2]
+type = Helper
+trigger1 = animtime = 0
+stateno = 6002
+name = "Blood"
+pos = 60, 20
+helpertype = normal
+sprpriority = -1
+keyctrl = 0
+ownpal = 0
+under = 1
+
+[State 6015, 3]
+type = DestroySelf
+trigger1 = animtime = 0
+;=========================================================================
+;-------------------------------------------------------------------------
+;High Kick Blood
+[Statedef 6020]
+type    = S
+movetype= A
+juggle  = 0
+anim = 6020
+velset = 0, 0
+ctrl = 0
+
+[State 6020, .5]
+type = bindtotarget
+trigger1 = time = 0
+time = 1
+pos = 0,0,head
+
+[State 6020, 1]
+type = Helper
+trigger1 = animtime = 0
+stateno = 6002
+name = "BloodA"
+pos = 64, 15
+helpertype = normal
+sprpriority = -1
+keyctrl = 0
+ownpal = 0
+under = 1
+
+[State 6020, 2]
+type = Helper
+trigger1 = animtime = 0
+stateno = 6002
+name = "BloodB"
+pos = 94, 43
+helpertype = normal
+sprpriority = 2
+keyctrl = 0
+ownpal = 0
+under = 1
+
+[State 6020, 3]
+type = Helper
+trigger1 = animtime = 0
+stateno = 6002
+name = "BloodC"
+pos = 86, 51
+helpertype = normal
+sprpriority = -1
+keyctrl = 0
+ownpal = 0
+under = 1
+
+[State 6020, 4]
+type = Helper
+trigger1 = animtime = 0
+stateno = 6002
+name = "BloodD"
+pos = 61, 84
+helpertype = normal
+sprpriority = -1
+keyctrl = 0
+ownpal = 0
+under = 1
+
+[State 6020, 5]
+type = Helper
+trigger1 = animtime = 0
+stateno = 6002
+name = "BloodE"
+pos = 40, 42
+helpertype = normal
+sprpriority = -1
+keyctrl = 0
+ownpal = 0
+under = 1
+
+[State 6020, 7]
+type = DestroySelf
+trigger1 = animtime = 0
+;========================================================================
+;-------------------------------------------------------------------------
+;HARPOON
+[Statedef 6030]
+type    = S
+movetype= A
+juggle  = 0
+anim = 6030
+velset = 0, 0
+ctrl = 0
+
+[State 6030, 1]
+type = Helper
+trigger1 = animtime = 0
+stateno = 6031
+name = "BloodA"
+pos = -96, 33
+helpertype = normal
+sprpriority = -1
+keyctrl = 0
+ownpal = 0
+under = 1
+
+[State 6030, 2]
+type = Helper
+trigger1 = animtime = 0
+stateno = 6031
+name = "BloodB"
+pos = -72, 42
+helpertype = normal
+sprpriority = 2
+keyctrl = 0
+ownpal = 0
+under = 1
+
+[State 6020, 3]
+type = Helper
+trigger1 = animtime = 0
+stateno = 6031
+name = "BloodC"
+pos = -61, 40
+helpertype = normal
+sprpriority = -1
+keyctrl = 0
+ownpal = 0
+under = 1
+
+[State 6020, 4]
+type = Helper
+trigger1 = animtime = 0
+stateno = 6031
+name = "BloodD"
+pos = -60, 25
+helpertype = normal
+sprpriority = -1
+keyctrl = 0
+ownpal = 0
+under = 1
+
+[State 6020, 5]
+type = Helper
+trigger1 = animtime = 0
+stateno = 6031
+name = "BloodE"
+pos = -61, 23
+helpertype = normal
+sprpriority = -1
+keyctrl = 0
+ownpal = 0
+under = 1
+
+[State 6020, 6.4]
+type = Helper
+trigger1 = animtime = 0
+stateno = 6031
+name = "BloodD"
+pos = -45, 16
+helpertype = normal
+sprpriority = -1
+keyctrl = 0
+ownpal = 0
+under = 1
+
+[State 6020, 5]
+type = Helper
+trigger1 = animtime = 0
+stateno = 6031
+name = "BloodE"
+pos = -54, 18
+helpertype = normal
+sprpriority = -1
+keyctrl = 0
+ownpal = 0
+under = 1
+
+[State 6020, 7]
+type = DestroySelf
+trigger1 = animtime = 0
+;-------------------------------------------------------------------------
+;THE HAPPY BLOOD
+[Statedef 6031]
+type    = S
+movetype= I
+juggle  = 0
+anim = 6031
+velset = 0, 4.8
+ctrl = 0
+
+[State 6031, 1]
+type = VarRandom
+trigger1 = time = 0
+v = 11
+range = 1, 100
+
+
+[State 6031, 2]
+type = Velset
+trigger1 = time = 1
+trigger1 = Var(11) = [1, 24]
+X = -6.6
+
+[State 6031, 2.5]
+type = Velset
+trigger1 = time = 1
+trigger1 = Var(11) = [25, 49]
+X = -7.7
+
+[State 6031, 3]
+type = Velset
+trigger1 = time = 1
+trigger1 = Var(11) = [50, 74]
+X = -4.5
+
+[State 6031, 3.5]
+type = Velset
+trigger1 = time = 1
+trigger1 = Var(11) = [75, 100]
+X = -3.5
+
+[State 6031, 5]
+type = Changestate
+trigger1 = Pos Y > 0
+value = 6003
+;-------------------------------------------------------------------------
+;UPPERCUT
+[Statedef 6040]
+type    = S
+movetype= A
+juggle  = 0
+anim = 6040
+velset = 0, 0
+ctrl = 0
+
+[State 6040, 1]
+type = Helper
+trigger1 = animtime = 0
+stateno = 6002
+name = "BloodA"
+pos = 37, -18
+helpertype = normal
+sprpriority = -1
+keyctrl = 0
+ownpal = 0
+under = 1
+
+[State 6040, 2]
+type = Helper
+trigger1 = animtime = 0
+stateno = 6002
+name = "BloodB"
+pos = 42, -25
+helpertype = normal
+sprpriority = 2
+keyctrl = 0
+ownpal = 0
+under = 1
+
+[State 6040, 3]
+type = Helper
+trigger1 = animtime = 0
+stateno = 6002
+name = "BloodC"
+pos = 58, -51
+helpertype = normal
+sprpriority = -1
+keyctrl = 0
+ownpal = 0
+under = 1
+
+[State 6040, 4]
+type = Helper
+trigger1 = animtime = 0
+stateno = 6000
+name = "BloodD"
+pos = -37, -64
+helpertype = normal
+sprpriority = -1
+keyctrl = 0
+ownpal = 0
+under = 1
+
+[State 6040, 5]
+type = Helper
+trigger1 = animtime = 0
+stateno = 6000
+name = "BloodE"
+pos = -49, -44
+helpertype = normal
+sprpriority = -1
+keyctrl = 0
+ownpal = 0
+under = 1
+
+[State 6040, 7]
+type = DestroySelf
+trigger1 = animtime = 0
+
+;****************Bloody Brutality Text****************
+[Statedef 6045]
+type    = S
+movetype= A
+juggle  = 0
+anim = 7621
+velset = 0, 0
+ctrl = 0
+
+[State 6045, No Shadow]
+type = assertspecial
+flag = noshadow
+trigger1 = time = [0,5000]
+
+[State 6040, 1]
+type = Helper
+trigger1 = animelemtime(1) = 2
+stateno = 6040
+name = "BloodB"
+pos = -81, -4
+helpertype = normal
+sprpriority = -1
+keyctrl = 0
+ownpal = 0
+under = 1
+
+[State 6040, 2]
+type = Helper
+trigger1 = animelemtime(2) = 2
+stateno = 6040
+name = "BloodR"
+pos = -56, -4
+helpertype = normal
+sprpriority = 2
+keyctrl = 0
+ownpal = 0
+under = 1
+
+[State 6040, 3]
+type = Helper
+trigger1 = Animelemtime (3) = 2
+stateno = 6040
+name = "BloodU"
+pos = -36, -4
+helpertype = normal
+sprpriority = -1
+keyctrl = 0
+ownpal = 0
+under = 1
+
+[State 6040, 4]
+type = Helper
+trigger1 = animelemtime(4) = 2
+stateno = 6040
+name = "BloodT"
+pos = -15, -4
+helpertype = normal
+sprpriority = -1
+keyctrl = 0
+ownpal = 0
+under = 1
+
+[State 6040, 5]
+type = Helper
+trigger1 = animelemtime(5) = 2
+stateno = 6040
+name = "BloodA"
+pos = 5, -4
+helpertype = normal
+sprpriority = -1
+keyctrl = 0
+ownpal = 0
+under = 1
+
+[State 6040, 5]
+type = Helper
+trigger1 = animelemtime(6) = 2
+stateno = 6040
+name = "BloodL"
+pos = 25, -4
+helpertype = normal
+sprpriority = -1
+keyctrl = 0
+ownpal = 0
+under = 1
+
+[State 6040, 5]
+type = Helper
+trigger1 = Animelemtime(7) = 2
+stateno = 6040
+name = "BloodI"
+pos = 43, -4
+helpertype = normal
+sprpriority = -1
+keyctrl = 0
+ownpal = 0
+under = 1
+
+[State 6040, 5]
+type = Helper
+trigger1 = animelemtime(8) = 2
+stateno = 6040
+name = "BloodT"
+pos = 60, -4
+helpertype = normal
+sprpriority = -1
+keyctrl = 0
+ownpal = 0
+under = 1
+
+[State 6040, 5]
+type = Helper
+trigger1 = Animelemtime(9) = 2
+stateno = 6040
+name = "BloodY"
+pos = 81, -4
+helpertype = normal
+sprpriority = -1
+keyctrl = 0
+ownpal = 0
+under = 1
+
+[State 6040, 7]
+type = DestroySelf
+trigger1 = time = 5000
+;------------------------------------------------------------------------------------------
+;ACID
+[Statedef 6050]
+type    = S
+movetype= A
+juggle  = 0
+anim = 2201
+velset = 0, 0
+ctrl = 0
+
+[State 6050, 1]
+type = Helper
+trigger1 = animtime = 0
+stateno = 6062
+name = "AcidA"
+pos = 37, -18
+helpertype = normal
+sprpriority = -1
+keyctrl = 0
+ownpal = 0
+under = 1
+
+[State 6050, 2]
+type = Helper
+trigger1 = animtime = 0
+stateno = 6062
+name = "AcidB"
+pos = 42, -25
+helpertype = normal
+sprpriority = 2
+keyctrl = 0
+ownpal = 0
+under = 1
+
+[State 6050, 3]
+type = Helper
+trigger1 = animtime = 0
+stateno = 6062
+name = "AcidC"
+pos = 58, -51
+helpertype = normal
+sprpriority = -1
+keyctrl = 0
+ownpal = 0
+under = 1
+
+[State 6050, 4]
+type = Helper
+trigger1 = animtime = 0
+stateno = 6060
+name = "AcidD"
+pos = -37, -64
+helpertype = normal
+sprpriority = -1
+keyctrl = 0
+ownpal = 0
+under = 1
+
+[State 6050, 5]
+type = Helper
+trigger1 = animtime = 0
+stateno = 6060
+name = "AcidE"
+pos = -49, -44
+helpertype = normal
+sprpriority = -1
+keyctrl = 0
+ownpal = 0
+under = 1
+
+[State 6050, 6]
+type = Helper
+trigger1 = animtime = 0
+stateno = 6060
+name = "AcidF"
+pos = -55, -49
+helpertype = normal
+sprpriority = -1
+keyctrl = 0
+ownpal = 0
+under = 1
+
+[State 6050, 7]
+type = Helper
+trigger1 = animtime = 0
+stateno = 6060
+name = "AcidF"
+pos = -38, -52
+helpertype = normal
+sprpriority = -1
+keyctrl = 0
+ownpal = 0
+under = 1
+
+
+
+[State 6050, 7]
+type = DestroySelf
+trigger1 = animtime = 0
+
+;-----------------------------------------------
+;Nice Blood splat A
+[Statedef 6060]
+type    = S
+movetype= I
+juggle  = 0
+anim = 2204
+velset = 0, 4.4
+ctrl = 0
+
+[State 6060, 1]
+type = VarRandom
+trigger1 = time = 0
+v = 11
+range = 1, 100
+
+
+[State 6060, 2]
+type = Velset
+trigger1 = time = 1
+trigger1 = Var(11) = [1, 24]
+X = -.1
+
+[State 6060, 2.5]
+type = Velset
+trigger1 = time = 1
+trigger1 = Var(11) = [25, 49]
+X = -.2
+
+[State 6060, 3]
+type = Velset
+trigger1 = time = 1
+trigger1 = Var(11) = [50, 74]
+X = -.5
+
+[State 6060, 3.5]
+type = Velset
+trigger1 = time = 1
+trigger1 = Var(11) = [75, 100]
+X = -1
+
+[State 6060, 4]
+type = Veladd
+trigger1 = time = [1, 10]
+X = -.05
+
+
+[State 6060, 5]
+type = Changestate
+trigger1 = Pos Y > 0
+value = 6061
+;------------------------------------------------------------------------
+;Nice Blood splat A lands
+[Statedef 6061]
+type    = S
+movetype= I
+juggle  = 0
+anim = 2205
+velset = 0,0
+ctrl = 0
+
+[State 6061, 0.5]
+type = Playsnd
+trigger1 = time = 0
+value = 5, 5
+
+
+[State 6061, 1]
+type = Destroyself
+trigger1 = animtime = 0
+;------------------------------------------------------------------------
+;Nice Blood splat A2
+[Statedef 6062]
+type    = S
+movetype= I
+juggle  = 0
+anim = 2203
+velset = 0, 4.4
+ctrl = 0
+
+[State 6062, 1]
+type = VarRandom
+trigger1 = time = 0
+v = 11
+range = 1, 100
+
+
+[State 6062, 2]
+type = Velset
+trigger1 = time = 1
+trigger1 = Var(11) = [1, 24]
+X = .1
+
+[State 6062, 2.5]
+type = Velset
+trigger1 = time = 1
+trigger1 = Var(11) = [25, 49]
+X = .2
+
+[State 6062, 3]
+type = Velset
+trigger1 = time = 1
+trigger1 = Var(11) = [50, 74]
+X = .5
+
+[State 6062, 3.5]
+type = Velset
+trigger1 = time = 1
+trigger1 = Var(11) = [75, 100]
+X = 1
+
+[State 6062, 4]
+type = Veladd
+trigger1 = time = [1, 10]
+X = .05
+
+
+[State 6062, 5]
+type = Changestate
+trigger1 = Pos Y > 0
+value = 6063
+;------------------------------------------------------------------------
+;Nice Blood splat A2 lands
+[Statedef 6063]
+type    = S
+movetype= I
+juggle  = 0
+anim = 2205
+velset = 0,0
+ctrl = 0
+
+[State 6063, 0.5]
+type = Playsnd
+trigger1 = time = 0
+value = 5, 6
+
+[State 6063, 1]
+type = Destroyself
+trigger1 = animtime = 0
+
+
+[Statedef 6075]
+type    = S
+movetype= A
+juggle  = 0
+anim = 6040
+velset = 0, 0
+ctrl = 0
+
+[State 6075, 1]
+type = Helper
+trigger1 = animtime = 0
+stateno = 6002
+name = "BloodA"
+pos = 37, -18
+helpertype = normal
+sprpriority = -1
+keyctrl = 0
+ownpal = 0
+under = 1
+
+[State 6075, 2]
+type = Helper
+trigger1 = animtime = 0
+stateno = 6002
+name = "BloodB"
+pos = 42, -25
+helpertype = normal
+sprpriority = 2
+keyctrl = 0
+ownpal = 0
+under = 1
+
+[State 6075, 3]
+type = Helper
+trigger1 = animtime = 0
+stateno = 6002
+name = "BloodC"
+pos = 58, -51
+helpertype = normal
+sprpriority = -1
+keyctrl = 0
+ownpal = 0
+under = 1
+
+[State 6075, 4]
+type = Helper
+trigger1 = animtime = 0
+stateno = 6000
+name = "BloodD"
+pos = -37, -64
+helpertype = normal
+sprpriority = -1
+keyctrl = 0
+ownpal = 0
+under = 1
+
+[State 6075, 5]
+type = Helper
+trigger1 = animtime = 0
+stateno = 6000
+name = "BloodE"
+pos = -49, -44
+helpertype = normal
+sprpriority = -1
+keyctrl = 0
+ownpal = 0
+under = 1
+
+[State 6075, 7.7]
+type = bindtotarget
+trigger1 = time = 0
+bindtime = -1
+pos = 0, -6, mid
+
+[State 6075, 7]
+type = DestroySelf
+trigger1 = time = 130

@@ -380,6 +380,7 @@ fadein.time = 10
 fadeout.time = 10
 rows = 10
 columns = 8
+cancel.key = b   ;P125: B = back/cancel on the select screen
 wrapping = 0                       ;1 to let cursor wrap around
 pos = 448,118                      ;Position to draw to (grid centered for 1.75x cells)
 showemptyboxes = 1                 ;1 to show empty boxes
@@ -719,14 +720,14 @@ p2.palmenu.number.layerno = 2
 
 p1.palmenu.next.key = U, R
 p1.palmenu.previous.key = D, L
-p1.palmenu.done.key = a, b, c, x, y, z
-p1.palmenu.cancel.key = m
+p1.palmenu.done.key = a, c, x, y, z   ;P123: B removed (no longer confirms color)
+p1.palmenu.cancel.key = b, m   ;P123: B cancels color -> back to re-pick
 p1.palmenu.random.key = s
 p1.palmenu.random.text = ?
 p2.palmenu.next.key = U, R
 p2.palmenu.previous.key = D, L
-p2.palmenu.done.key = a, b, c, x, y, z
-p2.palmenu.cancel.key = m
+p2.palmenu.done.key = a, c, x, y, z   ;P123: B removed
+p2.palmenu.cancel.key = b, m   ;P123: B cancels
 p2.palmenu.random.key = s
 p2.palmenu.random.text = ?
 

@@ -1,0 +1,1174 @@
+;---------------------------------------------------------------------------
+;====================<_SyN_Meteor Storm Helper states below>===================
+;-----------------------------------------------
+;Top Level
+;-----------------------------------------------
+[Statedef 887702]
+type = s
+movetype = a
+physics = s
+anim = 666000
+
+[State 0, AssertSpecial]
+type = AssertSpecial
+trigger1 = 1
+flag = noshadow
+flag2 = invisible
+;flag3 = nofg
+
+[State 0, NotHitBy]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+
+[State 0, PlayerPush]
+type = PlayerPush
+trigger1 = 1
+value = 1
+
+[State 0, Bottom floor Helper]
+type = helper
+;triggerall = Floor(Pos Z = 3)
+trigger1 = 1 && !numhelper(887700)
+helpertype = normal
+id = 887700
+name = "Ground Level"
+pos = 0,9999999999
+stateno = 887700
+supermovetime = 999999999
+pausemovetime = 999999999
+ownpal = 0
+
+;------------------------------------<hit def to mimic desending>-----------------------
+[State 0, HitDef]
+type = HitDef
+triggerall = root,var(2) = 2 && !p2life = 0
+trigger1 = enemy,Movetype = H && enemy,Pos Y >= 0 && enemy,pos y > 12
+attr = S,NA        ;SCA,NA,SA,HA,NP,SP,HP,NT,ST,HT
+hitflag = MAF        ;HLAFD+-
+guardflag = MA         ;HLA
+animtype = light          ;light,medium,hard,back,up,diagup
+air.animtype = light
+damage = 0,0
+pausetime = 0,20
+sparkno = 0
+guard.sparkno = 0
+sparkxy = 0,-99999999999999
+hitsound = s0,0112233445566778899
+guardsound = 0,0112233445566778899
+p2stateno = 5504060
+persistent = 0
+
+[State 0, HitDef]
+type = HitDef
+trigger1 = root,stateno = 5504061
+attr = S,NA        ;SCA,NA,SA,HA,NP,SP,HP,NT,ST,HT
+hitflag = MAF        ;HLAFD+-
+guardflag = MA         ;HLA
+animtype = light          ;light,medium,hard,back,up,diagup
+air.animtype = light
+damage = 0,0
+pausetime = 0,20
+sparkno = 0
+guard.sparkno = 0
+sparkxy = 0,-99999999999999
+hitsound = s0,0112233445566778899
+guardsound = 0,0112233445566778899
+p2stateno = 6660021
+persistent = 0
+
+;-------------------------------<p1 falling states>--------------------------------------------
+[Statedef 5504061]
+type = s
+movetype = h
+physics = n
+
+[state 0, ChangeAnim2]
+type = changeanim2
+trigger1 = 1
+value = 666001
+persistent = 0
+
+[State 5040, Velset]
+type = Velset
+trigger1 = 1
+x = 0
+y = -.7
+persistent = 0
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = 1
+value = s11,0
+volume = 100
+channel = -1
+persistent = 0
+ignorehitpause = 0
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = 1
+value = s11,1
+volume = 100
+channel = -1
+persistent = 0
+ignorehitpause = 0
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = 1
+value = s110,0
+volume = 100
+channel = -1
+persistent = 0
+ignorehitpause = 0
+
+[State 5040, Velset]
+type = Velset
+trigger1 = var(3) >= 700
+x = 0
+y = 16.7
+persistent = 0
+
+[State 0, ChangeState]
+type = ChangeState
+triggerall = var(3) >= 700
+trigger1 = Pos Y > 0
+value = 5110
+ctrl = 0
+;-----------------------<p1 jumpdown states>--------------------------------
+[Statedef 6660020]
+type = a
+movetype = i
+physics = n
+
+[state 0, ChangeAnim]
+type = changeanim
+trigger1 = time = 0
+value = 41;ifelse(!AnimExist(44), 41, 44)
+persistent = 0
+
+[State 5040, Velset]
+type = Velset
+trigger1 = 1
+x = 0
+y = -.7
+persistent = 0
+
+[State 0, AllPalFX]
+type = AllPalFX
+trigger1 = time = 400
+time = 250
+add = 0,0,0
+mul = 256,256,256
+sinadd = 255,255,255,-500
+invertall = 0
+color = 256
+persistent = 0
+
+[State 5040, Velset]
+type = Velset
+trigger1 = var(3) >= 700
+x = 0
+y = 16.7
+persistent = 0
+
+[State 0, ChangeState]
+type = ChangeState
+trigger1 = Pos Y > 0
+value = 52
+ctrl = 0
+
+;-------------------------------<p2 jump down states>------------------------------------------
+[Statedef 6660021]
+type = a
+movetype = i
+physics = n
+
+[state 0, ChangeAnim]
+type = changeanim
+trigger1 = time = 0
+value = 41
+persistent = 0
+
+[State 5040, Velset]
+type = Velset
+trigger1 = 1
+x = 0
+y = -.7
+persistent = 0
+
+[State 0, AllPalFX]
+type = AllPalFX
+trigger1 = time = 400
+time = 250
+add = 0,0,0
+mul = 256,256,256
+sinadd = 255,255,255,-500
+invertall = 0
+color = 256
+persistent = 0
+
+[State 5040, Velset]
+type = Velset
+trigger1 = enemy,var(3) >= 700
+x = 0
+y = 16.7
+persistent = 0
+
+[State 0, SelfState]
+type = SelfState
+trigger1 = Pos Y > 0
+value = 52
+ctrl = 0
+;-------------------------------<p2 falling states>--------------------------------------------
+[Statedef 5504060]
+type = s
+movetype = h
+physics = n
+
+[state 0, ChangeAnim2]
+type = changeanim2
+trigger1 = 1
+value = 666001
+persistent = 0
+
+[State 5040, Velset]
+type = Velset
+trigger1 = 1
+x = 0
+y = -.7
+persistent = 0
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = 1
+value = s11,0
+volume = 100
+channel = -1
+persistent = 0
+ignorehitpause = 0
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = 1
+value = s11,1
+volume = 100
+channel = -1
+persistent = 0
+ignorehitpause = 0
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 = 1
+value = s110,0
+volume = 100
+channel = -1
+persistent = 0
+ignorehitpause = 0
+
+[State 5040, Velset]
+type = Velset
+trigger1 = enemy,var(3) >= 700
+x = 0
+y = 16.7
+persistent = 0
+
+[State 0, SelfState]
+type = SelfState
+triggerall = enemy,var(3) >= 700
+trigger1 = Pos Y > 0
+value = 5110
+ctrl = 0
+
+;-----------------------------------------------
+;Ground Level
+;-----------------------------------------------
+[Statedef 887700]
+type = s
+movetype = i
+
+[State 0, AssertSpecial]
+type = AssertSpecial
+trigger1 = 1
+flag = noshadow
+flag2 = invisible
+
+[State 0, NotHitBy]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+
+[State 0, PlayerPush]
+type = PlayerPush
+trigger1 = 1
+value = 1
+;-----------------<Top Level>---------------------------
+[State 0, Playsnd];explosion
+type = PlaySnd
+trigger1 = root,var(2) = 3
+value = f8000
+volume = 100
+persistent = 0
+
+[State 0, RemoveExplod];bridge
+type = RemoveExplod
+trigger1 = root,var(2) = 3
+ID = 8018
+
+[State 0, Explod];bridge
+type = Explod
+trigger1 = time = 1 && !numexplod(8018)
+anim = f8004
+ID = 8018
+pos = 259,288
+postype = left  ;p2,front,back,left,right
+facing = 1
+removetime = -1
+sprpriority = -3
+shadow = 0,0,0
+ownpal = 0
+scale = .8,.8
+bindtime = parent,time = -1
+
+;------------------------------------<exploding bridge>---------------------------------
+[State 0, Explod];explosion
+type = Explod
+trigger1 = root,var(2) = 3
+anim = f8005
+pos = 17,195
+postype = left  ;p2,front,back,left,right
+facing = 1
+removetime = 102
+sprpriority = 4
+shadow = 0,0,0
+ownpal = 0
+scale = .7,.7
+persistent = 0
+
+[State 0, Explod];explosion
+type = Explod
+trigger1 = root,var(2) = 3
+anim = f8005
+pos = -200,195
+postype = left  ;p2,front,back,left,right
+facing = 1
+removetime = 102
+sprpriority = 4
+shadow = 0,0,0
+ownpal = 0
+scale = .7,.7
+persistent = 0
+
+[State 0, Explod];explosion
+type = Explod
+trigger1 = root,var(2) = 3
+anim = f8005
+pos = 300,195
+postype = left  ;p2,front,back,left,right
+facing = 1
+removetime = 102
+sprpriority = 5
+shadow = 0,0,0
+ownpal = 0
+scale = .7,.7
+persistent = 0
+;-----------------------------<bridge breaking>----------------------------
+[State 0, Explod];explosion
+type = Explod
+trigger1 = root,var(2) = 3
+anim = f8007
+pos = -100,216
+postype = left  ;p2,front,back,left,right
+facing = 1
+removetime = 51
+sprpriority = 4
+shadow = 0,0,0
+ownpal = 0
+scale = .7,.7
+persistent = 0
+
+[State 0, Explod];explosion
+type = Explod
+trigger1 = root,var(2) = 3
+anim = f8007
+pos = 0,216
+postype = left  ;p2,front,back,left,right
+facing = 1
+removetime = 51
+sprpriority = 4
+shadow = 0,0,0
+ownpal = 0
+scale = .7,.7
+persistent = 0
+
+[State 0, Explod];explosion
+type = Explod
+trigger1 = root,var(2) = 3
+anim = f8007
+pos = 100,216
+postype = left  ;p2,front,back,left,right
+facing = 1
+removetime = 51
+sprpriority = 4
+shadow = 0,0,0
+ownpal = 0
+scale = .7,.7
+persistent = 0
+
+[State 0, Explod];explosion
+type = Explod
+trigger1 = root,var(2) = 3
+anim = f8007
+pos = 200,216
+postype = left  ;p2,front,back,left,right
+facing = 1
+removetime = 51
+sprpriority = 4
+shadow = 0,0,0
+ownpal = 0
+scale = .7,.7
+persistent = 0
+
+[State 0, Explod];explosion
+type = Explod
+trigger1 = root,var(2) = 3
+anim = f8007
+pos = 300,216
+postype = left  ;p2,front,back,left,right
+facing = 1
+removetime = 51
+sprpriority = 4
+shadow = 0,0,0
+ownpal = 0
+scale = .7,.7
+persistent = 0
+
+[State 0, Explod];explosion
+type = Explod
+trigger1 = root,var(2) = 3
+anim = f8007
+pos = 400,216
+postype = left  ;p2,front,back,left,right
+facing = 1
+removetime = 51
+sprpriority = 4
+shadow = 0,0,0
+ownpal = 0
+scale = .7,.7
+persistent = 0
+
+[State 0, Explod];explosion
+type = Explod
+trigger1 = root,var(2) = 3
+anim = f8007
+pos = 500,216
+postype = left  ;p2,front,back,left,right
+facing = 1
+removetime = 51
+sprpriority = 4
+shadow = 0,0,0
+ownpal = 0
+scale = .7,.7
+persistent = 0
+
+[State 0, Explod];explosion
+type = Explod
+trigger1 = root,var(2) = 3
+anim = f8007
+pos = 600,216
+postype = left  ;p2,front,back,left,right
+facing = 1
+removetime = 51
+sprpriority = 4
+shadow = 0,0,0
+ownpal = 0
+scale = .7,.7
+persistent = 0
+;------------------------------<end of top level>--------------------------
+
+[State 0, Explod];polls
+type = Explod
+trigger1 = time = 1 && !numexplod(8004)
+anim = f8008
+ID = 8004
+pos = 259,288
+postype = left  ;p2,front,back,left,right
+facing = 1
+removetime = -1
+sprpriority = -3
+shadow = 0,0,0
+ownpal = 0
+scale = .8,.8
+bindtime = parent,time = -1
+
+[State 0, ModifyExplod];polls
+type = ModifyExplod
+trigger1 = root,var(2) = 3
+ID = 8004
+pos = 259,288
+postype = left  ;p2,front,back,left,right
+facing = 1
+removetime = -1
+sprpriority = -2
+shadow = 0,0,0
+ownpal = 0
+scale = .8,.8
+vel = 0,-4
+bindtime = parent,time = -1
+
+[State 0, RemoveExplod];bridge
+type = RemoveExplod
+trigger1 = root,var(3) >= 550
+ID = 8004
+
+[State 0, Explod];ground
+type = Explod
+trigger1 = root,var(3) >= 600 && !numexplod(18000)
+anim = f8000
+ID = 18000
+pos = 0,195;347;195
+postype = left  ;p2,front,back,left,right
+facing = 1
+removetime = -1
+sprpriority = -3
+shadow = 0,0,0
+ownpal = 0
+scale = .5,.5
+bindtime = parent,time = -1
+
+;-------------------------------<flame urn 1>----------------------------
+[State 0, Explod];urn
+type = Explod
+trigger1 = root,var(3) >= 600
+anim = f8001
+pos = 100,194
+postype = left  ;p2,front,back,left,right
+facing = 1
+removetime = -1
+sprpriority = -4
+shadow = 0,0,0
+ownpal = 0
+scale = .5,.5
+persistent = 0
+ID = 8000
+bindtime = parent,time = -1
+
+[State 0, Explod];flame
+type = Explod
+triggerall = root,var(3) >= 700 && root,pos y >= 0
+trigger1 = root,stateno != 6660020 || enemy,stateno != 6660021
+trigger2 = root,roundno >= 2 && root,roundstate = 2
+anim = f8002
+pos = 100,154
+postype = left  ;p2,front,back,left,right
+facing = 1
+removetime = -1
+sprpriority = -4
+shadow = 0,0,0
+ownpal = 0
+scale = .5,.5
+persistent = 0
+ID = 8000
+bindtime = parent,time = -1
+;-------------------------------<flame urn 2>----------------------------
+[State 0, Explod];urn
+type = Explod
+trigger1 = root,var(3) >= 600
+anim = f8001
+pos = 300,190
+postype = left  ;p2,front,back,left,right
+facing = 1
+removetime = -1
+sprpriority = -4
+shadow = 0,0,0
+ownpal = 0
+scale = .5,.5
+persistent = 0
+ID = 8000
+bindtime = parent,time = -1
+
+[State 0, Explod];flame
+type = Explod
+triggerall = root,var(3) >= 700 && root,pos y >= 0
+trigger1 = root,stateno != 6660020 || enemy,stateno != 6660021
+trigger2 = root,roundno >= 2 && root,roundstate = 2
+anim = f8002
+pos = 300,150
+postype = left  ;p2,front,back,left,right
+facing = 1
+removetime = -1
+sprpriority = -4
+shadow = 0,0,0
+ownpal = 0
+scale = .5,.5
+persistent = 0
+ID = 8000
+bindtime = parent,time = -1
+;-------------------------------<flame urn 3>----------------------------
+[State 0, Explod];urn
+type = Explod
+trigger1 = root,var(3) >= 600
+anim = f8001
+pos = 500,196
+postype = left  ;p2,front,back,left,right
+facing = 1
+removetime = -1
+sprpriority = -4
+shadow = 0,0,0
+ownpal = 0
+scale = .5,.5
+persistent = 0
+ID = 8000
+bindtime = parent,time = -1
+
+[State 0, Explod];flame
+type = Explod
+triggerall = root,var(3) >= 700 && root,pos y >= 0
+trigger1 = root,stateno != 6660020 || enemy,stateno != 6660021
+trigger2 = root,roundno >= 2 && root,roundstate = 2
+anim = f8002
+pos = 500,156
+postype = left  ;p2,front,back,left,right
+facing = 1
+removetime = -1
+sprpriority = -4
+shadow = 0,0,0
+ownpal = 0
+scale = .5,.5
+persistent = 0
+ID = 8000
+bindtime = parent,time = -1
+;-------------------------------<flame urn 1 front>----------------------------
+[State 0, Explod];urn
+type = Explod
+trigger1 = root,var(3) >= 600
+anim = f8001
+pos = 20,294
+postype = left  ;p2,front,back,left,right
+facing = 1
+removetime = -1
+sprpriority = 2
+shadow = 0,0,0
+ownpal = 0
+scale = .7,.7
+persistent = 0
+ID = 8000
+bindtime = parent,time = -1
+
+[State 0, Explod];flame
+type = Explod
+triggerall = root,var(3) >= 700 && root,pos y >= 0
+trigger1 = root,stateno != 6660020 || enemy,stateno != 6660021
+trigger2 = root,roundno >= 2 && root,roundstate = 2
+anim = f8002
+pos = 20,254
+postype = left  ;p2,front,back,left,right
+facing = 1
+removetime = -1
+sprpriority = 1
+shadow = 0,0,0
+ownpal = 0
+scale = .6,.6
+persistent = 0
+ID = 8000
+bindtime = parent,time = -1
+;-------------------------------<flame urn 2 front>----------------------------
+[State 0, Explod];urn
+type = Explod
+trigger1 = root,var(3) >= 600
+anim = f8001
+pos = 300,300
+postype = left  ;p2,front,back,left,right
+facing = 1
+removetime = -1
+sprpriority = 2
+shadow = 0,0,0
+ownpal = 0
+scale = .7,.7
+persistent = 0
+ID = 8000
+bindtime = parent,time = -1
+
+[State 0, Explod];flame
+type = Explod
+triggerall = root,var(3) >= 700 && root,pos y >= 0
+trigger1 = root,stateno != 6660020 || enemy,stateno != 6660021
+trigger2 = root,roundno >= 2 && root,roundstate = 2
+anim = f8002
+pos = 300,260
+postype = left  ;p2,front,back,left,right
+facing = 1
+removetime = -1
+sprpriority = 1
+shadow = 0,0,0
+ownpal = 0
+scale = .6,.6
+persistent = 0
+ID = 8000
+bindtime = parent,time = -1
+;-------------------------------<flame urn 3 front>----------------------------
+[State 0, Explod];urn
+type = Explod
+trigger1 = root,var(3) >= 600
+anim = f8001
+pos = 570,294
+postype = left  ;p2,front,back,left,right
+facing = 1
+removetime = -1
+sprpriority = 2
+shadow = 0,0,0
+ownpal = 0
+scale = .7,.7
+persistent = 0
+ID = 8000
+bindtime = parent,time = -1
+
+[State 0, Explod];flame
+type = Explod
+triggerall = root,var(3) >= 700 && root,pos y >= 0
+trigger1 = root,stateno != 6660020 || enemy,stateno != 6660021
+trigger2 = root,roundno >= 2 && root,roundstate = 2
+anim = f8002
+pos = 570,254
+postype = left  ;p2,front,back,left,right
+facing = 1
+removetime = -1
+sprpriority = 1
+shadow = 0,0,0
+ownpal = 0
+scale = .6,.6
+persistent = 0
+ID = 8000
+bindtime = parent,time = -1
+
+[State 0, VarAdd]
+type = VarAdd
+triggerall = root,var(3) >= 700
+trigger1 = 1
+v = 1
+value = 1
+
+[State 0, PlaySnd]
+type = PlaySnd
+triggerall = root,var(3) >= 700 && root,pos y >= 0
+trigger1 = root,stateno != 6660020 || enemy,stateno != 6660021
+trigger2 = root,roundno >= 2 && root,roundstate = 2
+value = f8000,1
+volume = 0
+loop = 1
+channel = 4
+persistent = 0
+
+;-----------------------------------------------
+;Meteor Shower
+;-----------------------------------------------
+[Statedef 887701]
+type = s
+movetype = i
+
+[State 0, AssertSpecial]
+type = AssertSpecial
+trigger1 = 1
+flag = noshadow
+flag2 = invisible
+
+[State 0, NotHitBy]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+
+[State 0, PlayerPush]
+type = PlayerPush
+trigger1 = 1
+value = 1
+
+;====================================<meteor shower mid>=====================================
+[State 0, Explod];metor
+type = Explod
+trigger1 = (gametime%200) = 0 && !numexplod(8010)
+anim = f8003
+pos = 100,100
+postype = left  ;p2,front,back,left,right
+facing = 1
+removetime = 200
+sprpriority = -4
+shadow = 0,0,0
+ownpal = 0
+vel = 10,7
+scale = .5,.5
+random = 120,150
+id = 8010
+
+[State 0, Explod];metor
+type = Explod
+trigger1 = (gametime%300) = 0 && !numexplod(8011)
+anim = f8003
+pos = 100,100
+postype = left  ;p2,front,back,left,right
+facing = 1
+removetime = 300
+sprpriority = -4
+shadow = 0,0,0
+ownpal = 0
+vel = 10,7
+scale = .5,.5
+random = 120,150
+id = 8011
+
+[State 0, Explod];metor
+type = Explod
+trigger1 = (gametime%100) = 0 && !numexplod(8013)
+anim = f8003
+pos = 150,100
+postype = left  ;p2,front,back,left,right
+facing = 1
+removetime = 100
+sprpriority = -4
+shadow = 0,0,0
+ownpal = 0
+vel = 10,7
+scale = .5,.5
+random = 170,150
+id = 8012
+
+[State 0, Explod];metor
+type = Explod
+trigger1 = (gametime%400) = 0 && !numexplod(8013)
+anim = f8003
+pos = 180,100
+postype = left  ;p2,front,back,left,right
+facing = 1
+removetime = 300
+sprpriority = -4
+shadow = 0,0,0
+ownpal = 0
+vel = 10,7
+scale = .5,.5
+random = 200,150
+id = 8013
+;====================================<meteor shower far>=====================================
+[State 0, Explod];metor
+type = Explod
+trigger1 = (gametime%100) = 0 && !numexplod(8110)
+anim = f8003
+pos = -100,-100
+postype = left  ;p2,front,back,left,right
+facing = 1
+removetime = -1
+sprpriority = -4
+shadow = 0,0,0
+ownpal = 0
+vel = 1,.4
+scale = .1,.1
+random = -120,-150
+id = 8110
+
+[State 0, Explod];metor
+type = Explod
+trigger1 = (gametime%200) = 0 && !numexplod(8111)
+anim = f8003
+pos = -100,-100
+postype = left  ;p2,front,back,left,right
+facing = 1
+removetime = -1
+sprpriority = -4
+shadow = 0,0,0
+ownpal = 0
+vel = 1,.4
+scale = .1,.1
+random = -120,-150
+id = 8111
+
+[State 0, Explod];metor
+type = Explod
+trigger1 = (gametime%300) = 0 && !numexplod(8112)
+anim = f8003
+pos = -150,-100
+postype = left  ;p2,front,back,left,right
+facing = 1
+removetime = -1
+sprpriority = -4
+shadow = 0,0,0
+ownpal = 0
+vel = 1,.4
+scale = .1,.1
+random = -170,-150
+id = 8112
+
+[State 0, Explod];metor
+type = Explod
+trigger1 = (gametime%400) = 0 && !numexplod(8113)
+anim = f8003
+pos = -180,-100
+postype = left  ;p2,front,back,left,right
+facing = 1
+removetime = 400
+sprpriority = -1
+shadow = 0,0,0
+ownpal = 0
+vel = 1,.4
+scale = .1,.1
+random = -200,-150
+id = 8113
+
+;====================================<meteor shower front>=====================================
+[State 0, Explod];metor
+type = Explod
+trigger1 = (gametime%200) = 0 && !numexplod(8210)
+anim = f8003
+pos = 100,100
+postype = left  ;p2,front,back,left,right
+facing = 1
+removetime = 200
+sprpriority = 1
+shadow = 0,0,0
+ownpal = 0
+vel = 11,8
+scale = .7,.7
+;random = 120,150
+id = 8210
+
+[State 0, Explod];metor
+type = Explod
+trigger1 = (gametime%300) = 0 && !numexplod(8211)
+anim = f8003
+pos = 100,100
+postype = left  ;p2,front,back,left,right
+facing = 1
+removetime = 300
+sprpriority = 1
+shadow = 0,0,0
+ownpal = 0
+vel = 11,8
+scale = .7,.7
+;random = 120,150
+id = 8211
+
+[State 0, Explod];metor
+type = Explod
+trigger1 = (gametime%100) = 0 && !numexplod(8213)
+anim = f8003
+pos = 150,100
+postype = left  ;p2,front,back,left,right
+facing = 1
+removetime = 100
+sprpriority = 1
+shadow = 0,0,0
+ownpal = 0
+vel = 11,8
+scale = .7,.7
+;random = 170,150
+id = 8212
+
+[State 0, Explod];metor
+type = Explod
+trigger1 = (gametime%400) = 0 && !numexplod(8213)
+anim = f8003
+pos = 180,100
+postype = left  ;p2,front,back,left,right
+facing = 1
+removetime = 300
+sprpriority = 1
+shadow = 0,0,0
+ownpal = 0
+vel = 11,8
+scale = .7,.7
+;random = 200,150
+id = 8213
+
+[State 0, PlaySnd]
+type = PlaySnd
+trigger1 =  ((gametime%100) = 0 || (gametime%200) = 0 || (gametime%300) = 0 || (gametime%400) = 0)
+value = f8000,2
+volume = 100
+channel = -1
+
+;--------------------------------------------
+;Time stopped while falling
+;--------------------------------------------
+[Statedef 8877020]
+type = s
+movetype = i
+physics = n
+
+[State 0, ]
+type = AssertSpecial
+trigger1 = 1
+flag = noshadow
+flag2 = invisible
+
+[State 0]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+
+[State 0]
+type = PlayerPush
+trigger1 = 1
+value = 1
+
+[State 0, ]
+type = AssertSpecial
+triggerall = root,stateno = 6660020 || enemy,stateno = 6660021
+trigger1 = 1
+flag = timerfreeze
+
+;====================_SyN_RotD Helper states below===================
+;-----------------------------------------------------------------------
+;Sound and other effects helper states.
+;-----------------------------------------------------------------------
+[Statedef 666000]
+type = s
+movetype = i
+physics = n
+
+[State 0, ]
+type = AssertSpecial
+trigger1 = 1
+flag = noshadow  
+flag2 = invisible 
+
+[State 0]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+
+[State 0]
+type = PlayerPush
+trigger1 = 1
+value = 1
+
+[State 0];water in the BG
+type = PlaySnd
+trigger1 = time = 0
+value = f6000,0
+volume = 100
+channel = -1
+loop = 1
+ignorehitpause = 1
+
+;----------------------------------------------------------
+;these state controllers below are for the lighting effects
+;----------------------------------------------------------
+[State 0, ];timing variables
+type = VarAdd
+triggerall = root,Floor(Pos Z = 6)
+trigger1 = 1
+v =  1
+value = 1
+ignorehitpause = 1
+
+[State 0];lightning strikes
+type = PlaySnd
+trigger1 = var(1) = 100 || var(1) = 321
+value = f6000,2
+volume = 100
+channel = -1
+ignorehitpause = 1
+
+[State 0] 
+type = allpalfx
+triggerall = root,roundstate >= 2
+trigger1 = var(1) = 91 || var(1) = 312
+time = 5
+add = 0,0,0
+mul = 256,256,256
+sinadd = 0,0,0,1
+invertall = 1
+color = 256
+ignorehitpause = 1
+
+[State 0, ];resets everything above and the process starts over.
+type = Varset
+trigger1 = var(1) = 509
+v =  1
+value = 0
+ignorehitpause = 1
+
+;----------------------------------------------------------
+;splash sound effects state controllers
+;----------------------------------------------------------
+[State 0, ];timing variables
+type = VarAdd
+triggerall = root,Floor(Pos Z = 6)
+trigger1 = 1
+v =  2
+value = 1
+ignorehitpause = 1
+
+[State 0];splash soundFX
+type = PlaySnd
+trigger1 = var(2) = 200
+value = f6000,0
+volume = 100
+channel = -1
+loop = 1
+ignorehitpause = 1
+
+[State 0, ];resets everything above and the process starts over.
+type = Varset
+trigger1 = var(2) = 800
+v =  2
+value = 0
+ignorehitpause = 1
+
+;------------------------------------------------------------------
+;Vortex effects and sndFX
+;------------------------------------------------------------------
+[State 0, ];timing variables
+type = VarAdd
+triggerall = root,Floor(Pos Z = 6)
+trigger1 = 1
+v =  3
+value = 1
+ignorehitpause = 1
+
+[State 0];vortex open sndFX
+type = PlaySnd
+trigger1 = var(3) = 600 
+value = f6000,4
+volume = 100
+channel = -1
+ignorehitpause = 1
+
+[State 0];vortex close sndFX
+type = PlaySnd
+trigger1 = var(3) = 850
+value = f6000,3
+volume = 100
+channel = -1
+ignorehitpause = 1
+
+[State 0, ];resets everything above and the process starts over.
+type = Varset
+trigger1 = var(3) = 1340
+v =  3
+value = 0
+ignorehitpause = 1
+
+;------------------------------------------------------------------
+;Warlocks static sndFX
+;------------------------------------------------------------------
+[State 0, ];timing variables
+type = VarAdd
+triggerall = root,Floor(Pos Z = 6)
+trigger1 = 1
+v =  4
+value = 1
+ignorehitpause = 1
+
+[State 0];emits static sndfx
+type = PlaySnd
+trigger1 = var(4) = 550
+value = f6000,6
+volume = 100
+channel = -1
+ignorehitpause = 1
+
+[State 0, ];resets everything above and the process starts over.
+type = Varset
+trigger1 = var(4) = 1350
+v =  4
+value = 0
+ignorehitpause = 1
