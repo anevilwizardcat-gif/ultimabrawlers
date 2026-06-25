@@ -1,0 +1,29 @@
+;***************************************************************************;
+;******************* Created in Fighter Factory Ultimate *******************;
+;*******************      http://www.virtualltek.com     *******************;
+;***************************************************************************;
+
+[Info]
+name = "Rogue"       
+displayname = "Rogue" 
+versiondate = 11,22,2000 
+mugenversion = 1.0
+author = "Splode" 
+Editor = "REDHOT"
+pal.defaults = 1,2,3,4,5,6
+
+[Files]
+cmd     = CMND/Rogue.cmd   ;Command set
+cns      = CNS/Rogue.cns
+st       = CNS/Rogue.cns
+st1      = CNS/config.txt
+stcommon = CNS/common1.cns
+sprite   = SPRITES/Rogue.sff
+anim     = ANIMATIONS/Rogue.air
+sound    = SOUNDS/Rogue.snd
+pal1     = PALETTES/Rogue_01.act
+pal2     = PALETTES/Rogue_02.act
+pal3     = PALETTES/Rogue_03.act
+pal4     = PALETTES/Rogue_04.act
+pal5     = PALETTES/Rogue_05.act
+pal6     = PALETTES/Rogue_06.act
