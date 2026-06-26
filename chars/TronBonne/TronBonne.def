@@ -1,0 +1,33 @@
+;***************************************************************************;
+;******************* Created in Fighter Factory Ultimate *******************;
+;*******************      http://www.virtualltek.com     *******************;
+;***************************************************************************;
+
+[Info]
+Name         = "Tron Bonne"  
+DisplayName  = "T.Bonne"  
+mugenversion = 1.0
+Author       = "Beximus"
+editor = "REDHOT"
+pal.defaults = 1,2,3,4,5,6
+
+
+[Files]
+cmd      = CMND/TronBonne.cmd
+cns      = CNS/TronBonne.cns
+st       = CNS/TronBonne.cns
+st1      = CNS/config.txt
+stcommon = CNS/common1.cns
+sprite   = SPRITES/TronBonne.sff
+anim     = ANIMATIONS/TronBonne.air
+sound    = SOUNDS/TronBonne.snd
+pal1     = PALETTES/TronBonne_01.act
+pal2     = PALETTES/TronBonne_02.act
+pal3     = PALETTES/TronBonne_03.act
+pal4     = PALETTES/TronBonne_04.act
+pal5     = PALETTES/TronBonne_05.act
+pal6     = PALETTES/TronBonne_06.act
+
+[Arcade]
+intro.storyboard = 
+ending.storyboard = 

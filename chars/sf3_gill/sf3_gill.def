@@ -1,0 +1,42 @@
+[Info]
+name = "Gill"
+displayname = "Gill"
+versiondate = 2008/8/31
+mugenversion = 11,01,2001
+author = "GM"
+pal.defaults = 1,2,3,4,5,6,7,8,9,10,11,12
+
+
+[Files]
+sprite = sf3_gill.sff
+sound = sf3_gill.snd
+anim = sf3_gill.air
+cmd = sf3_gill.cmd
+cns = sf3_gill.cns
+st  = sf3_gill.cns
+st1 = sf3_gill_N1.cns
+st2 = sf3_gill_N2.cns
+st3 = sf3_gill_S1.cns
+st4 = sf3_gill_S2.cns
+st5 = sf3_gill_H1.cns
+st6 = sf3_gill_H2.cns
+st7 = sf3_gill_H3.cns
+st8 = sf3_gill-2-3.cns
+st9 = system_direction.cns
+stcommon = common.cns
+pal1 = act/gill01.act
+pal2 = act/gill02.act
+pal3 = act/gill03.act
+pal4 = act/gill04.act
+pal5 = act/gill05.act
+pal6 = act/gill06.act
+pal7 = act/gill07.act
+pal8 = act/gill08.act
+pal9 = act/gill09.act
+pal10 = act/gill10.act
+pal11 = act/gill11.act
+pal12 = act/gill12.act
+
+[Arcade]
+intro.storyboard =
+ending.storyboard =

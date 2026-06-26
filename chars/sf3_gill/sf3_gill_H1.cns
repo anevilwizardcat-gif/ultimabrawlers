@@ -1,0 +1,367 @@
+;☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆
+; ここからは超必殺技のステート
+;☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆
+;リザレクション
+[Statedef 3000]
+type    = L
+movetype = I
+physics = N
+anim = 3000+(facing=-1)*100000
+juggle = 0
+ctrl = 0
+velset = 0,0
+poweradd = -1280
+sprpriority = 0
+
+[State -2, VarSet]
+type = VarSet
+trigger1 = time = 0
+fvar(2) = 0
+
+[State -2, VarSet]
+type = VarSet
+trigger1 = time = 0
+var(45) = 2
+
+[State -2, VarSet]
+type = VarSet
+triggerall = time = 0
+trigger1 = numhelper(30000)
+trigger1 = helper(30000),var(13)
+trigger2 = numpartner
+var(45) = 0
+
+[state 3700]
+type = NotHitby
+trigger1 = animelemtime(11) < 10
+value = SCA
+
+[state 3700]
+type = SuperPause
+trigger1 = time = 0
+time = 50
+movetime = 50
+sound = s2000,1
+p2defmul = 1
+anim = -1
+
+[State 3000]
+type = explod
+trigger1 = time = 0
+anim = 7200
+pos = ceil(-25*const(size.xscale)),ceil(-15*const(size.yscale))
+postype = p1
+facing = facing*facing
+bindtime = -1
+supermove = 1
+sprpriority = 5
+ownpal = 1
+removeongethit = 1
+ignorehitpause = 1
+persistent = 0
+scale = const(size.xscale),const(size.yscale)
+
+[State 3000]
+type = explod
+trigger1 = time = 32
+anim = 7300
+pos = 160,floor(screenpos y)-ceil(15*const(size.yscale))
+postype = left
+bindtime = -1
+supermove = 1
+sprpriority = 5
+ownpal = 1
+removeongethit = 1
+ignorehitpause = 1
+persistent = 0
+scale = const(size.xscale),const(size.yscale)
+
+[State 3000]
+type = explod
+trigger1 = time = 43
+anim = 7400
+pos = 0, 0
+postype = p1
+facing = facing*facing
+bindtime = -1
+supermove = 1
+sprpriority = 5
+ownpal = 1
+removeongethit = 1
+ignorehitpause = 1
+persistent = 0
+scale = const(size.xscale),const(size.yscale)
+
+[State 4000, PalFX]
+type = PalFX
+trigger1 = time = 30
+time = 4
+color = 20
+add = 10,10,100
+sinadd = -20,-20,-110,10
+
+[State -2, AfterImage]
+type = AfterImage
+trigger1 = Time = 0
+time = 999999999
+trans = none
+length = 5
+timegap  = 3
+framegap = 1
+palcolor = 0
+palinvertall = 0
+palbright = 50,50,255
+palcontrast = 255,255,255
+palpostbright = 50,50,255
+PalAdd = -40,-40,0
+PalMul = 1,1,1
+
+[State -2, AfterImage]
+type = AfterImage
+trigger1 = animelemtime(12) = 4
+time = 0
+
+[State 1120, Position]
+type = PosSet
+trigger1 = Time = 0
+y = 0
+
+[state -2, helper]
+type = helper
+trigger1 = animelemtime(8) = 0
+postype = p1
+pos = ceil(-58*const(size.xscale)),ceil(5*const(size.yscale))
+stateno = 7900
+helpertype = normal
+name = "tuchikemuri"
+sprpriority = 10
+facing = 1
+ownpal = 1
+keyctrl = 0
+size.xscale = const(size.xscale)
+size.yscale = const(size.yscale)
+
+[state -2, helper]
+type = helper
+trigger1 = animelemtime(8) = 0
+postype = p1
+pos = ceil(58*const(size.xscale)),ceil(5*const(size.yscale))
+stateno = 7900
+helpertype = normal
+name = "tuchikemuri"
+sprpriority = 10
+facing = -1
+ownpal = 1
+keyctrl = 0
+size.xscale = const(size.xscale)
+size.yscale = const(size.yscale)
+
+[State -2, Helper]
+type = Helper
+trigger1 = !numhelper(3010)
+trigger1 = !numhelper(3011)
+trigger1 = animelemtime(8) >= 0
+trigger1 = animelemtime(11) < 48
+ame = "playerpush1"
+pos = ceil(p2dist X-(const(size.ground.front)+enemy,const(size.ground.front)+1)*ifelse(p2dist X<0,-1,1)),ceil(-pos Y)
+postype = p1
+ID = 3010+(p2dist X<0)
+stateno = 3010
+facing = ifelse(p2dist X<0,-1,1)
+helpertype = normal
+keyctrl = 0
+ownpal = 1
+size.height = 1000
+size.ground.back = const(size.ground.back)
+size.ground.front = const(size.ground.front)
+
+[State 3000]
+type = explod
+trigger1 = animelemtime(9) = 0
+anim = 2900
+pos = ceil(2*const(size.xscale)),ceil(-98*const(size.yscale))
+postype = p1
+facing = 1
+bindtime = -1
+sprpriority = -1
+ownpal = 1
+removeongethit = 1
+scale = const(size.xscale),const(size.yscale)
+
+[State 3000]
+type = explod
+trigger1 = animelemtime(10) = 0
+anim = 2901
+pos = ceil(2*const(size.xscale)),ceil(-98*const(size.yscale))
+postype = p1
+facing = 1
+bindtime = -1
+sprpriority = 1
+ownpal = 1
+removeongethit = 1
+scale = const(size.xscale),const(size.yscale)
+
+[State 1100, 音を鳴らす]
+type = playsnd
+trigger1 = animelemtime(10) = 0
+value = 0,6
+channel = 0
+
+[State 1110, 音を鳴らす]
+type = playsnd
+trigger1 = animelemtime(10) = 0
+value = 3200,0
+
+[State -2, StateType]
+type = StateTypeSet
+trigger1 = AnimElemTime(9) = 0
+StateType = A
+
+[State -2, posadd]
+type = posadd
+trigger1 = AnimElemTime(10) = 0
+trigger2 = AnimElemTime(10) = 1
+trigger3 = AnimElemTime(10) = 2
+trigger4 = AnimElemTime(10) = 3
+trigger5 = AnimElemTime(10) = 4
+trigger6 = AnimElemTime(11) = 0
+trigger7 = AnimElemTime(11) = 3
+trigger8 = AnimElemTime(11) = 6
+trigger9 = AnimElemTime(11) = 9
+trigger10 = AnimElemTime(11) = 14
+trigger11 = AnimElemTime(11) = 18
+trigger12 = AnimElemTime(11) = 22
+trigger13 = AnimElemTime(11) = 26
+trigger14 = AnimElemTime(11) = 30
+trigger15 = AnimElemTime(11) = 34
+trigger16 = AnimElemTime(11) = 38
+trigger17 = AnimElemTime(11) = 42
+trigger18 = AnimElemTime(11) = 46
+trigger19 = AnimElemTime(11) = 50
+trigger20 = AnimElemTime(11) = 54
+trigger21 = AnimElemTime(11) = 58
+trigger22 = AnimElemTime(11) = 62
+y = -1*const(size.yscale)
+
+[State -2, posadd]
+type = posadd
+trigger1 = AnimElemTime(12) = 2
+trigger2 = AnimElemTime(12) = 3
+trigger3 = AnimElemTime(12) = 4
+y = 1*const(size.yscale)
+
+[State -2, posadd]
+type = posadd
+trigger1 = AnimElemTime(12) = 5
+y = 2*const(size.yscale)
+
+[State -2, posadd]
+type = posadd
+trigger1 = AnimElemTime(12) = 6
+trigger2 = AnimElemTime(12) = 7
+trigger3 = AnimElemTime(12) = 8
+y = 3*const(size.yscale)
+
+[State -2, posadd]
+type = posadd
+trigger1 = AnimElemTime(12) = 9
+trigger2 = animtime = 0
+y = 4*const(size.yscale)
+
+[State -2, lifeadd]
+type = lifeadd
+trigger1 = AnimElemTime(8) >= 5
+trigger1 = AnimElemTime(12) < 0
+value = ceil(var(52)*0.014)
+
+[State 3000, changestate]
+type = changestate
+trigger1 = animtime = 0
+value = 3050
+
+;△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△
+;相手プッシュ
+[Statedef 3010]
+type = S
+physics = N
+anim = 3010
+ctrl = 0
+
+[State -2, Playerpush]
+type = Playerpush
+trigger1 = 1
+value = 1
+
+[State -2, NotHitBy]
+type = NotHitBy
+trigger1 = 1
+value = SCA
+
+[State -2, velset]
+type = velset
+trigger1 = abs(pos X-root,pos X) >= 160
+x = 0
+
+[State -2, velset]
+type = velset
+trigger1 = abs(pos X-root,pos X) < 160
+x = 2.0
+
+[State -2, DestroySelf]
+type = DestroySelf
+trigger1 = Ishelper(3010)
+trigger1 = root,p2dist X < 0
+trigger2 = Ishelper(3011)
+trigger2 = root,p2dist X >= 0
+trigger3 = root,stateno != 3000
+trigger4 = root,stateno = 3000
+trigger4 = root,animelemtime(11) >= 48
+
+;△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△△
+;リザレクション（着地）
+[Statedef 3050]
+type = S
+movetype = I
+physics = N
+ctrl = 0
+anim = 1250+(facing=-1)*100000
+
+[State -3, 音を鳴らす]
+type = PlaySnd
+trigger1 = Time = 0
+value = 52, 0
+
+[State 1150, 1]
+type = VelSet
+trigger1 = Time = 0
+x = 0
+y = 0
+
+[State 1150, 2]
+type = PosSet
+trigger1 = Time = 0
+y = 0
+
+[State -2, ChangeState]
+type = ChangeState
+trigger1 = fvar(2) = 72
+trigger1 = AnimElemTime(2) = 1
+value = 5300
+
+[State -2, ChangeState]
+type = ChangeState
+trigger1 = P2dist X < 0
+trigger1 = AnimElemTime(2) >= 1
+value = 0
+ctrl = 1
+
+[State 200, Ctrlset]
+type = Ctrlset
+trigger1 = AnimElemTime(2) >= 1
+value = 1
+
+[State 1150, 4]
+type = ChangeState
+trigger1 = AnimTime = 0
+value = 0
+ctrl = 1

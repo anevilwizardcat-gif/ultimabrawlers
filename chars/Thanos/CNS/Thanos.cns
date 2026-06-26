@@ -9494,7 +9494,13 @@ var(43) = 1
 
 [State 0, VarSet]
 type = VarSet
-trigger1 = partner,var(4) = 0 && var(43)
+; partner,var(4) guarded by numpartner (short-circuit) to stop per-frame "no partner" spam;
+; trigger2 preserves the original no-partner behavior (failed redirect counted as var(4)=0)
+trigger1 = var(43)
+trigger1 = numpartner
+trigger1 = partner,var(4) = 0
+trigger2 = var(43)
+trigger2 = !numpartner
 var(43) = 0
 
 [State -2, Remember the last Position (X)]
@@ -10127,8 +10133,14 @@ var(13) = 1
 type = VarAdd
 trigger1 = movehit = 1
 trigger2 = projhit = 1
-trigger3 = helper,movehit = 1
-trigger4 = helper,projhit = 1
+var(18) = 1
+
+[State -2, Combo count - helper hit (numhelper-guarded)]
+type = VarAdd
+triggerall = numhelper
+triggerall = !(movehit = 1 || projhit = 1)
+trigger1 = helper,movehit = 1
+trigger2 = helper,projhit = 1
 var(18) = 1
 
 [State -2, ƒRƒ“ƒ{”]

@@ -3010,23 +3010,23 @@ ctrl.time = 50              ;Time players get control after starting fight
 ; KO
 KO.time    = 0              ;Time to show KO component
 KO.offset  = 540, 400       ;Component for KO display
-KO.anim    = 529 		;Dummy Animation to let bg play out
-KO.bg0.anim = 529
-KO.bg0.offset  = 830, 400
-KO.bg1.anim = 529
-KO.bg1.offset  = 430, 400
+KO.anim    = 604 		;Dummy Animation to let bg play out
+KO.bg0.anim = 602
+KO.bg0.offset  = 640, 400
+KO.bg1.anim = 601
+KO.bg1.offset  = 640, 400
 KO.bg2.anim = 529
 KO.bg2.offset  = 830, 400      
-KO.bg3.anim = 530
+KO.bg3.anim = 600
 KO.bg3.offset  = 640, 400          
 KO.snd     = 2,0            ;Sound to play for KO announcement
 
 ; Double KO
 DKO.offset = 640, 400
 DKO.anim    = 534		;Dummy animation to let bg play out
-DKO.bg0.anim = 535
+DKO.bg0.anim = 600
 DKO.bg0.offset  = 640, 400
-DKO.bg1.anim = 536
+DKO.bg1.anim = 529
 DKO.bg1.offset  = 640, 400
 DKO.displaytime = 120
 DKO.snd    = 2,1
@@ -3442,6 +3442,80 @@ Interpolate Offset
 -1,0, 0,0, 141
 
 ; K
+[Begin Action 600]
+-1,0, 0,0, 8
+Interpolate Blend
+Interpolate Scale
+6000,0, 0,0, 5, , AS0D256, 2.2,2.2
+Interpolate Scale
+6000,0, 0,0, 4, , , 0.88,0.88
+Interpolate Scale
+6000,0, 0,0, 4, , , 1.06,1.06
+Interpolate Scale
+6000,0, 0,0, 3, , , 1.0,1.0
+6000,0, 7,-5, 2
+6000,0, -8,5, 2
+6000,0, 6,5, 2
+6000,0, -5,-4, 2
+6000,0, 3,3, 2
+6000,0, -2,-2, 2
+6000,0, 0,0, 8
+6000,1, 0,0, 4
+6000,2, 0,0, 4
+6000,3, 0,0, 4
+6000,0, 0,0, 30
+6000,1, 0,0, 4
+6000,2, 0,0, 4
+6000,3, 0,0, 4
+6000,0, 0,0, 8
+6000,0, 0,0, 12
+-1,0, 0,0, 10
+6000,0, 0,0, 10
+-1,0, 0,0, 8
+6000,0, 0,0, 8
+-1,0, 0,0, 6
+6000,0, 0,0, 6
+-1,0, 0,0, 5
+6000,0, 0,0, 5
+-1,0, 0,0, 4
+6000,0, 0,0, 4
+-1,0, 0,0, 3
+6000,0, 0,0, 3
+-1,0, 0,0, 3
+6000,0, 0,0, 3
+-1,0, 0,0, 2
+6000,0, 0,0, 2
+-1,0, 0,0, 2
+6000,0, 0,0, 2
+-1,0, 0,0, 1
+6000,0, 0,0, 1
+-1,0, 0,0, 1
+6000,0, 0,0, 1
+-1,0, 0,0, 1
+6000,0, 0,0, 1
+-1,0, 0,0, -1
+
+[Begin Action 601]
+-1,0, 0,0, 5
+Interpolate Scale
+6000,10, 0,0, 4, , A, 1.6,1.6
+Interpolate Scale
+6000,10, 0,0, 6, , A, 3.2,3.2
+6000,10, 0,0, 4, , AS96D256, 3.5,3.5
+-1,0, 0,0, -1
+
+[Begin Action 602]
+-1,0, 0,0, 8
+Interpolate Scale
+Interpolate Blend
+6000,11, 0,0, 4, , A, 0.3,0.3
+Interpolate Scale
+6000,11, 0,0, 9, , AS48D256, 2.8,2.8
+-1,0, 0,0, -1
+
+[Begin Action 604]
+-1,0, 0,0, 215
+
 [Begin Action 530]
 -1,0, 0,0, 8
 Interpolate Blend

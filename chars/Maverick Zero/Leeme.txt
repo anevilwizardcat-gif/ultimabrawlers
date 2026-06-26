@@ -1,0 +1,54 @@
+Maverick Hunter Zero : Beta 0.5
+Por Ddarkbeing.
+
+ Este es un proyecto para terminar al personaje "Alpha Xtreme" 
+de Ariel Co. El correspondiente Permiso Ha sido otrorgado por el
+Creador.
+
+Cambios :
+
+-Habilitados seis botones en el aire y suelo
+-Habilitado el Hurricane Fang
+-Habilitado el sonido
+-Cuatro Paletas mas
+
+Moves :
+
+A: Sable           /S,A  
+B: Puño (por ahora)/S,A
+C: Sable X6        /S,A
+X: Sable X4        /S,A,C 
+Y: Sable2 X4       /S,A,C
+Z: Sable3 X4       /S,A,C
+
+Especiales :
+
+Hadoken : D, F, x-y-z
+Hurricane Fang : D, F, a-b-c 
+Sho-Ryu-Ken : D, B, x-y-z
+
+Supers :
+Shinkuu Hadoken : D, F, x+y-y+z-x+z
+ Rayo de Energia
+
+Raging Demo : D, B, x+y-y+z-x+z
+ Soy Gouki!!
+
+Dark Hold : x+a 
+ Detiene el tiempo
+
+Que viene :
+
+-Seis botones agachado
+-Movimientos definitivos
+-Mas especiales
+-Mas supers
+-Iris
+-Cualquier cosa que se me ocurra
+
+-Gracias
+
+A Ses por el MCM
+A Capcom por razones obvias
+A Maleiva por su apoyo y ayuda en la creacion de este char
+A cualquiera que haya olvidado o dejado de mencionar

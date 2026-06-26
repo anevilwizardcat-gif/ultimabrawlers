@@ -31,8 +31,10 @@
 ;Var(30) = —§‚¿E‹ó’†ƒuƒƒRƒ}ƒ“ƒh”F¯
 ;Var(31) = ‹üƒuƒƒRƒ}ƒ“ƒh”F¯@
 ;Var(32) = ƒK[ƒhƒuƒ”F¯
-;Var(33) = ƒjƒ…[ƒgƒ‰ƒ‹–ß‚µŠm”F(—§‚¿E‹ó’†)
-;Var(34) = ƒjƒ…[ƒgƒ‰ƒ‹–ß‚µŠm”F(‹ü)
+;Var(33) = ƒjƒ
+[ƒgƒ‰ƒ‹–ß‚µŠm”F(—§‚¿E‹ó’†)
+;Var(34) = ƒjƒ
+[ƒgƒ‰ƒ‹–ß‚µŠm”F(‹ü)
 ;Var(35) = HitŠm”F
 ;Var(36) = HitShakeTime
 ;Var(37) = ƒ^[ƒQƒbƒgƒRƒ“ƒ{
@@ -57,7 +59,8 @@
 ;var(56) = æs“ü—Í‰ğœ
 ;var(57) = æs“ü—Í”F¯
 ;Var(58) = ’nãƒLƒƒƒ“ƒZƒ‹
-;Var(59) = SAƒtƒBƒjƒbƒVƒ…
+;Var(59) = SAƒtƒBƒjƒbƒVƒ
+
 
 ;fvar(0) = ƒRƒ“ƒ{ƒ_ƒ[ƒW•â³
 ;fvar(1) = ƒqƒbƒgƒoƒbƒN
@@ -163,7 +166,8 @@ crouch.friction = .82    ;‚µ‚á‚ª‚İó‘Ô‚Ì–€CŒW”
 
 
 ;™™™™™™™™™™™™™™™™™™™™™™™™™™™™™™™™™™™™™™™™
-; ‘Oƒ_ƒbƒVƒ…
+; ‘Oƒ_ƒbƒVƒ
+
 [Statedef 100]
 type = S
 physics = N
@@ -215,7 +219,8 @@ value = 0
 ctrl = 1
 
 ;¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢
-; Œãƒ_ƒbƒVƒ…
+; Œãƒ_ƒbƒVƒ
+
 [Statedef 105]
 type    = S
 physics = N
@@ -471,7 +476,8 @@ trigger1 = AnimTime = 0
 value = 0
 
 ;¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢
-;“ÁêƒCƒ“ƒgƒ(‘ÎƒŠƒ…ƒE)
+;“ÁêƒCƒ“ƒgƒ(‘ÎƒŠƒ
+ƒE)
 [Statedef 199]
 type = S
 physics = N
@@ -2234,25 +2240,26 @@ type = AssertSpecial
 trigger1 = 1
 flag = nomusic
 
-[State 10000, Explod]
-type = Explod
-trigger1 = parent,stateno != [3600,3610]
-trigger1 = time = 1
-anim = 11500
-id = 10000
-pos =  160,120
-postype = left
-sprpriority = 15
-facing = 1
-bindtime = -1
-ownpal = 1
-removetime = 999999999999
-pausemovetime = 99999999999999
-supermovetime = 99999999999999
-supermove = 1
-scale = 0.5*0.9,0.5*1.05
-ignorehitpause = 1
-persistent = 0
+; ----- [ultimabrawlers] SF3 finisher K.O.-text overlay disabled (global fight.def K.O. shows instead). Backdrop kept. Revert: uncomment block below. -----
+;[State 10000, Explod]
+;type = Explod
+;trigger1 = parent,stateno != [3600,3610]
+;trigger1 = time = 1
+;anim = 11500
+;id = 10000
+;pos =  160,120
+;postype = left
+;sprpriority = 15
+;facing = 1
+;bindtime = -1
+;ownpal = 1
+;removetime = 999999999999
+;pausemovetime = 99999999999999
+;supermovetime = 99999999999999
+;supermove = 1
+;scale = 0.5*0.9,0.5*1.05
+;ignorehitpause = 1
+;persistent = 0
 
 [State 10000, Explod]
 type = Explod

@@ -202,7 +202,10 @@ dio, jjba-ctower2-alt.def
 shadowdio, jjba-ctower2-alt.def
 MVC2_Spiderman, DailyBugleRooftopsMVC.def
 Venom, DailyBugleRooftopsMVC.def
-IronMan, centralsuperheroes 1.1.def
+slot = {
+IronMan, centralsuperheroes 1.1.def, next = y
+WarMachine, centralsuperheroes 1.1.def, next = y
+}
 CaptainAmerica, centralsuperheroes 1.1.def
 Hulk, centralsuperheroes 1.1.def
 DoctorDoom, mshvsf_apocalypse_now.def
@@ -246,8 +249,11 @@ cvsalex, SF3 Battle Arena Rd 02.def, next = y
 sf3_alex, mvc2-training.def, next = y
 }
 sf3_ibuki, mvc2-training.def
+sf3_gill, mvc2-training.def
 StriderHiryu, SF3 Battle Arena Rd 02.def
 Megaman, Slither Inc ZX.def
+Maverick Zero, Slither Inc ZX.def
+TronBonne, Slither Inc ZX.def
 jedah, LiveHousePurple.def
 KoldRaptor, LiveHousePurple.def
 Morrigan, LiveHousePurple.def

@@ -3,6 +3,12 @@
 ;☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆☆
 
 [Statedef -2]
+[State -2, Hide Engine Power Bar]
+type = AssertSpecial
+trigger1 = 1
+flag = noPowerBarDisplay
+ignorehitpause = 1
+
 
 ;デバック
 [State -2]
@@ -1399,34 +1405,34 @@ fvar(31) = 0.56
 
 [State -2, VarSet]
 type = VarSet
-triggerall = (enemy,teammode = single) || (enemy,teammode = turns)
+triggerall = (enemy,teammode = single) || (enemy,teammode = turns) || (enemy,teammode = tag)
 trigger1 = (100*enemy,life/enemy,const(data.life))>30
 fvar(31) = 1.0
 
 [State -2, VarSet]
 type = VarSet
-triggerall = (enemy,teammode = single) || (enemy,teammode = turns)
+triggerall = (enemy,teammode = single) || (enemy,teammode = turns) || (enemy,teammode = tag)
 trigger1 = (100*enemy,life/enemy,const(data.life))<=30
 trigger1 = (100*enemy,life/enemy,const(data.life))>20
 fvar(31) = 0.89
 
 [State -2, VarSet]
 type = VarSet
-triggerall = (enemy,teammode = single) || (enemy,teammode = turns)
+triggerall = (enemy,teammode = single) || (enemy,teammode = turns) || (enemy,teammode = tag)
 trigger1 = (100*enemy,life/enemy,const(data.life))<=20
 trigger1 = (100*enemy,life/enemy,const(data.life))>10
 fvar(31) = 0.78
 
 [State -2, VarSet]
 type = VarSet
-triggerall = (enemy,teammode = single) || (enemy,teammode = turns)
+triggerall = (enemy,teammode = single) || (enemy,teammode = turns) || (enemy,teammode = tag)
 trigger1 = (100*enemy,life/enemy,const(data.life))<=10
 trigger1 = (100*enemy,life/enemy,const(data.life))>5
 fvar(31) = 0.67
 
 [State -2, VarSet]
 type = VarSet
-triggerall = (enemy,teammode = single) || (enemy,teammode = turns)
+triggerall = (enemy,teammode = single) || (enemy,teammode = turns) || (enemy,teammode = tag)
 trigger1 = (100*enemy,life/enemy,const(data.life))<=5
 fvar(31) = 0.56
 
@@ -1629,6 +1635,7 @@ triggerall = numhelper(50000) = 0
 trigger1 = numpartner = 0
 trigger2 = numpartner && !fvar(29)
 trigger3 = fvar(29) && id < partner,id
+trigger4 = numpartner && teamMode = Tag ;<-- tag: every character hosts their OWN gauges
 name = "ゲージ"
 id = 50000
 pos =  0,0
@@ -1647,6 +1654,7 @@ triggerall = numhelper(25000) = 0
 trigger1 = numpartner = 0
 trigger2 = numpartner && !fvar(29)
 trigger3 = fvar(29) && id < partner,id
+trigger4 = numpartner && teamMode = Tag ;<-- tag: every character hosts their OWN gauges
 name = "ゲージ"
 id = 25000
 pos =  0,0

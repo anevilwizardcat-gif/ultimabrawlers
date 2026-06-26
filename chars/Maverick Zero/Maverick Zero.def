@@ -1,0 +1,28 @@
+; Archivo de Definiciones  para Alpha Extreme
+
+
+; Player information
+[Info]
+name = "Maverick Zero"               ;Name of character
+displayname = "Zero"   ;Name of character to display
+versiondate = 07,12,2002    ;Version date of character
+mugenversion = 04,14,2001  ;Version of M.U.G.E.N character works on
+author = "Ddarkbeing && Ariel Co"        ;Character author name
+pal.defaults = 1,2,3       ;Default palettes in order of preference
+
+; Files for the player
+[Files]
+cmd      = Mzero.cmd     ;Command set
+cns      = Mzero.cns     ;Constants
+st       = Mzero.cns     ;States
+stcommon = common1.cns   ;Common states
+sprite   = Mzero.sff   ;Sprite
+anim     = Mzero.air     ;Animation
+sound    = Mzero.snd     ;Sound  
+pal1     = red.act   ;Palettes
+pal2     = blue.act   ;Palettes
+pal3     = green.act     ;Palettes
+pal4     = gs.act     ;Palettes
+pal5     = grey.act     ;Palettes
+pal6     = black.act     ;Palettes
+
