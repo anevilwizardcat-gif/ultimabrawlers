@@ -127,3 +127,10 @@ Status legend: `card` = full detail card exists · `stub` = row only, write card
 ### menu-background - motif title/menu backdrop (data/ikemen1/system.sff, SFFv2)
 - The sliding menu 'stars' = scrolling BG layers spriteno 100,2 (slow) + 100,3 (fast). Static sky = 100,0 (baked gold deco + outlines + static stars).
 - **Card:** cards/menu-background.md * **Status:** active - TITLE (group 100): P103 detailed parallax starfield. CHAR-SELECT (group 101): P107 = SCRAPPED the front big-star layer (101,3 commented out); kept the SLOW back layer (101,2) and made it CRISP PIXEL (no AA, coarse-grid x NEAREST) with VARIED twinkle (static/blink/grow/shimmer) via type=anim actionno 250, frames 101,2/30/31/32. P105 stripped the big star outlines in select sky 101,0. Title=group100, select=group101 (don't cross-edit).
+
+### fight-announcements - KO/DKO/TimeOver/FIGHT/ROUND banners (data/fight.def [Round] + data/fight.sff, SFFv2)
+- Visible KO graphic = KO.bg3.anim (was 530, now 600 = gold pixel K.O. sprite 6000,0). bg0-2/anim=529 = dummy timing layers.
+  Motion lives in the [Begin Action]: single sprite, engine scale+blend+Interpolate (slam 2.2 AS0D256 -> 1.0, hold, flicker).
+- DKO graphic = DKO.bg0.anim (now 600). TO = TO.anim 540/541. slow.time=60 = final-KO slow-mo (separate system, stacks on top).
+- SFFv2 sprite encoding: [uint32 png_len][PNG], dofs rel to ldataoff, 28-byte node; append-only at file end is safe + reversible.
+- **Card:** cards/fight-announcements.md  **Status:** active - P157: global KO unchanged (P156 pixel crimson); SF3 finisher's own KO-text overlay (sprpriority=15 explod in [Statedef 10000], anim 8920/11500) disabled on ryu/ken/gouki/ibuki/alex so the global KO shows over their backdrop; chun-li has no such system.

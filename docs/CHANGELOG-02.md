@@ -475,3 +475,122 @@ _Continues `CHANGELOG.md`. New entries go HERE from now on._
     Dante "Dante (DMC)" / Dante_KOF "Dante (KOF)"   (DMC/KOF labels are my guess - adjust if wrong)
 - Byte-preserving edits (latin-1), only the two quoted values changed per file; comments/Shift-JIS bytes intact.
   Verified: exactly 2 changed lines per def, [Info] intact, line counts unchanged.
+
+## P152 - Gold pixel "K.O." announcement sprite, game-wide [data/fight.sff + data/fight.def]
+- Raven: replace the global KO announcement graphic with a gold pixel-arcade "K.O."; keep the old
+  one as fallback; "use your notes so I don't get blank/invisible results."
+- WHAT THE KO ANNOUNCEMENT IS (fight.def [Round], localcoord 1280x720):
+    KO.bg3.anim = 530 is the ONLY visible KO graphic; KO.anim/bg0/bg1/bg2 = 529 are DUMMY/blank
+    timing layers. [Begin Action 530] does the whole motion on a SINGLE sprite (522,0): slam at
+    scale 2.2 additive-blend (AS0D256) -> 0.88 -> 1.06 -> 1.0, hold 38, then flicker out. Engine
+    does the scale+blend+Interpolate -> you only need ONE clean sprite. DKO graphic = bg0 535/bg1 536.
+- NEW SPRITE: hand-drawn pixel-art gold "K.O." (PIL) 348x144 (matches 522,0's 354x174), axis center
+  (174,72): blocky K/O/period glyphs, gold vertical bevel gradient, dark outline (MaxFilter), top
+  highlight band, soft glow. Packed as sprite 6000,0.
+- WIRING: added [Begin Action 600] = exact copy of 530's slam/flash/flicker but sprite 6000,0.
+  KO.bg3.anim 530->600; DKO.bg0.anim 535->600 (double-KO shows gold KO too); DKO.bg1.anim 536->529
+  (blank old DKO 2nd graphic so one clean gold KO draws).
+- FALLBACK PRESERVED: action 530 + sprites 522,x + DKO 535/536 all left intact in-file.
+  Revert = KO.bg3.anim->530, DKO.bg0->535, DKO.bg1->536.
+- SFFv2 APPEND RECIPE (hard-won; avoids blank sprites):
+  * Sprite data = [uint32 = PNG byte length][PNG bytes]; dataOffset(node+16) RELATIVE to ldataoff.
+    (NOT w*h*4 - my first wrong guess gave a malformed sprite.)
+  * Node = 28 bytes '<HHHHhhHBBIIHH' = group,idx,w,h,axisx,axisy,linked,fmt(12=PNG32),coldepth(32),
+    dofs,dlen,palindex,flags. (First try was 26 bytes - missing palindex - caught by assert.)
+  * Node table is at END of file -> APPEND-ONLY is safe (no existing byte touched):
+    out = orig + newdata + copy-of-existing-nodes + new-node; header sproff=new table start (0x24),
+    nspr+1 (0x28); new dofs = orig_len - ldataoff. ALWAYS round-trip verify decode + existing intact.
+- Verified: nspr 169->170; 6000,0 decodes 348x144 RGBA non-empty; 522,0 & 530,0 intact; action 600
+  present; KO/DKO repointed; action 530 intact.
+- TUNABLE: bigger KO = regen sprite or scale the action; more flash = extra additive 6000,0 impact
+  frame; sheen = a 2nd sprite (6000,1) alternated in the action.
+
+## P153 - KO announcement: bolder font + glow + shake + sheen + shockwave [data/fight.sff + data/fight.def]
+- Raven (after P152 in game): font too thin/skinny/spaced-out vs demo; no impact shake; glow not
+  visible above the game; wants sheen + shockwave.
+- Uses the engine's KO bg-LAYER compositing (KO.bg0-3 each = own anim+offset; higher bg# = more
+  front; a single [Begin Action] CANNOT stack sprites - that's what the bg slots are for).
+  Repurposed the spare dummy layers (bg0/bg1 were 529 @830/@430):
+    KO.bg3.anim=600  K.O. (bolder sprite 6000,0): fade-in slam 2.2->0.88->1.06->1.0 + 6-frame
+                     position SHAKE + SHEEN sweep (6000,1/2/3) + flicker out.
+    KO.bg1.anim=601  impact GLOW flash (6000,10 radial gold blob, additive A, scale 1.6->3.5, fade) @640,400
+    KO.bg0.anim=602  SHOCKWAVE ring (6000,11, additive, Interpolate Scale 0.3->2.8, fade)           @640,400
+    bg2=529 dummy left as-is. DKO.bg0.anim=600 (gold KO+sheen+shake for double-KO too).
+- NEW SPRITES (PIL) group 6000: 0=main, 1/2/3=sheen (shine L/C/R), 10=glow blob, 11=ring. Font
+  redesigned BOLDER (3px stems) + TIGHTER (gap 1). Baked a semi-transparent DARK SEATING-HALO behind
+  the letters so the KO pops over bright stages (demo popped due to its dark panel; in-game there's
+  none) + brighter baked gold glow. 462x210 axis center.
+- Engine facts: AS0D256 + 'Interpolate Blend' = fade-in invisible->opaque (the slam "appear", NOT a
+  bright flash; the flash now = bg1 additive burst). Per-frame x,y in an action element = position
+  offset -> jitter for a fake impact shake (announcements can't EnvShake).
+- Verified: nspr 169->175, all 6 sprites decode non-empty, 522,0/530,0 intact; actions 600/601/602
+  present; KO.bg0/1/3 + DKO repointed; bg0/bg1 offsets centered 640,400; action 530 + old sprites intact.
+- Fallback: KO.bg3->530, KO.bg1->529@430, KO.bg0->529@830, DKO.bg0->535, DKO.bg1->536.
+- TUNABLE: shake amplitude (the 7,-5/-8,5... offsets); glow size/brightness (6000,10 scale+alpha);
+  shockwave speed (602 scale/time); sheen speed (sheen frame times); KO size (regen sprite or scale action).
+
+## P154 - KO polish: thicker font, vivid gradient, brighter sheen, longer linger, ramped flicker [fight.sff+fight.def]
+- Raven: linger ~1.5s longer before flicker; flicker START SLOW -> SPEED UP with MORE total flickers;
+  sheen more visible; more vibrant gradient + thicker font (match the demo).
+- SPRITES (group 6000) regen: THICKER glyphs (4px stem K / 3px-wall O, tight gap 1). VIVID gradient =
+  demo stops (cream 255,247,214 -> gold 255,212,60 -> orange 246,160,20 -> amber 212,126,16).
+  BRIGHTER+WIDER sheen band (near-white, width CELL*4.2). 460x196 axis center. glow/ring unchanged.
+- ACTION 600 retimed: slam+shake -> SHEEN sweep #1 (6000,1/2/3) -> linger -> SHEEN sweep #2 -> longer
+  linger (~1.5s extra) -> FLICKER ramped slow->fast (on/off 12/10,10/8,8/6,6/5,5/4,4/3,3/3,3/2,2/2,2/1,
+  1/1,1/1; ~13 cycles accelerating). Total ~258t (~4.3s).
+- DURATION FIX: KO.anim = the "dummy that lets bg layers play out" -> its blank length = how long the
+  banner stays. New [Begin Action 604] = -1,0,0,0,270 (was 529=141t); KO.anim 529->604. Banner ends
+  ~258t < over.time 300; win text is bottom-screen so no clash with center KO.
+- Layers unchanged from P153 (bg3=600, bg1=601 glow, bg0=602 shockwave, DKO.bg0=600).
+- Verified: nspr 175, all 6 decode, 522,0/530,0 intact; actions 600/601/602/604 present; KO.anim/bg0/
+  bg1/bg3 + DKO repointed; 530 intact.
+- Fallback: KO.anim->529, KO.bg3->530, KO.bg1->529@430, KO.bg0->529@830, DKO.bg0->535, DKO.bg1->536.
+- TUNABLE: linger = the two "6000,0 ...40/48" holds; flicker ramp = on/off pairs; banner cut early ->
+  raise 604's blank length (+ check for a win-sequence limiter).
+
+## P155 - KO: SF3 italic + white outline, crimson, trimmed linger [fight.sff+fight.def]
+- Raven: SF3 slanted/italic + outline vibe; recolor RED/crimson; lingers a tad too long - want the
+  final flicker finishing right as "YOU WIN!" appears.
+- SPRITES (6000,0/1/2/3) regen: CRIMSON vivid gradient (255,150,135 -> 238,46,52 -> 196,22,34 ->
+  150,12,28). SF3 OUTLINE = thick WHITE outline (MaxFilter 9) + thin dark edge (MaxFilter 13) + dark
+  seating-halo. ITALIC via 0.22 horizontal shear on the FINAL canvas (slants outline+fill+halo
+  together; AA on slanted edges = arcade look). 508x200, sheared-bbox axis (246,100). glow(6000,10) +
+  ring(6000,11) retinted red. Sheen kept (near-white, sweeps twice).
+- LINGER trimmed: action 600 holds 40->30 and 48->8 (~-50t) so the ramped flicker ends ~50t sooner
+  (~209t / 3.5s, was 4.3s). KO.anim dummy 604 = 215t (was 270).
+- Layers unchanged (bg3=600, bg1=601 glow, bg0=602 shockwave, DKO.bg0=600).
+- Verified: nspr 175, all 6 decode (axis 246,100), 522,0 intact; repoints + actions present; 530 intact.
+- Fallback: KO.anim->529, KO.bg3->530, KO.bg1->529@430, KO.bg0->529@830, DKO.bg0->535, DKO.bg1->536.
+- TUNABLE: flicker ends before/after YOU WIN -> nudge the two "6000,0 ...30/8" linger holds (+ match
+  604). Slant = SHEAR (0.22). Outline thickness = MaxFilter 9/13. Recolor = the STOPS gradient.
+
+## P156 - KO text pixelated (retro-arcade AA) [fight.sff only; fight.def unchanged from P155]
+- Raven: aesthetically perfect but the KO text is too "HD" - missing the anti-aliased pixel look of a
+  retro arcade game, so it clashes with the pixel-font win banners (YOU WIN / CLOSE ONE / etc.). Look
+  + animate the same, just pixel-fy.
+- FIX: pixelate the 4 crimson KO frames (6000,0/1/2/3) by downscale (LANCZOS) /4 then NEAREST upscale
+  x4 back to 508x200 -> chunky 4px pixel blocks with ANTI-ALIASED color steps on edges/gradient/slant
+  (the arcade look). Same size/axis (246,100) -> fight.def needs NO change. glow(6000,10)+ring(6000,11)
+  left SMOOTH (they're additive FX and get scaled by the action; pixelating them would chunk
+  scale-dependently).
+- Verified: nspr 175, all 6 decode, 6000,0 still 508x200 axis 246,100, 522,0 intact.
+- TUNABLE: pixel chunkiness = PX (currently 4; 3=finer, 5+=chunkier). To match the game's other text
+  exactly, set PX to that font's pixel size.
+
+## P157 - Disable SF3 finisher's own K.O.-text overlay so the global KO shows [5 SF3 char cns]
+- Raven: on SF3 chars whose super-finisher draws its OWN "K.O." sprite, disable just that sprite so
+  our new global fight.def K.O. shows instead - WITHOUT breaking the rest (backdrop swap, pause,
+  shake, sounds).
+- SYSTEM (per char, main cns [Statedef 10000] = helper "sa-ko" cinematic): 4 Explods. KO TEXT = the
+  lone sprpriority=15 FRONT explod (id 10000, trigger1=time=1, animated): anim 8920 on ryu/gouki/
+  ibuki, anim 11500 on ken/alex. Other 3 = sprpriority=-7 additive BACKDROP/BG swap (8900/8910/9960
+  or 10000/10500/11000). Helper anim 9999 = blank. Verified via .air (8920 = centered animated front
+  overlay; the -7 ones use additive blend = bg).
+- EDIT: commented ONLY the sprpriority=15 explod block in [Statedef 10000] for sf3_ryu, sf3_ken,
+  sf3_gouki, sf3_ibuki, sf3_alex (revert marker added above each). Untouched: backdrop explods, Pause
+  40, EnvShake, PlaySnd, parentVarSet fvar(6) winner-flash, AssertSpecial noFG/nomusic, RemoveExplod
+  (id 10000 still removes the remaining bg explods). Verified each: live explods 4 -> 3; backdrops intact.
+- sf3_chun-li (cns=chun-li.cns, different author) has NO [Statedef 10000] -> no finisher KO sprite,
+  no change.
+- Reversible: uncomment the marked block. Global KO = fight.def announcement; fires on these super-
+  finishes too, so it now shows over the SF3 backdrop.
