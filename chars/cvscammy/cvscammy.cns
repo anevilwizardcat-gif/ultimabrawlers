@@ -11693,6 +11693,12 @@ value = 5150
 [Statedef -2]
 
 ;configŒÄ‚Ño‚µ
+[State -2, Hide Engine Power Bar]
+type = AssertSpecial
+trigger1 = 1
+flag = noPowerBarDisplay
+ignorehitpause = 1
+
 [State 3001, Super]
 type = Helper
 triggerall = !NumHelper(10000)
@@ -11714,15 +11720,7 @@ type = helper
 triggerall = time = 0
 triggerall = roundstate = 0
 triggerall = roundsexisted <= 0
-trigger1 = numpartner
-trigger1 = ID>partner,ID
-trigger1 = !partner,authorname = "warusaki3"
-trigger1 = !(partner,authorname = "mouser" && partner,name = "Hibiki Takane")
-trigger1 = !partner,authorname = "Hh"
-trigger1 = !partner,authorname = "Jesuszilla"
-trigger2 = numpartner
-trigger2 = ID<partner,ID
-trigger3 = !numpartner
+trigger1 = 1  ;[ultimabrawlers P169] self-host gauge (relaxed ID<>partner so each teammate spawns own meter)
 ID = 6000
 stateno = 6000
 postype = p1
@@ -11737,15 +11735,7 @@ type = Helper
 triggerall = numenemy
 triggerall = !fvar(3)
 triggerall = !NumHelper(6500) && !NumHelper(6000)
-trigger1 = numpartner
-trigger1 = ID>partner,ID
-trigger1 = !partner,authorname = "warusaki3"
-trigger1 = !(partner,authorname = "mouser" && partner,name = "Hibiki Takane")
-trigger1 = !partner,authorname = "Hh"
-trigger1 = !partner,authorname = "Jesuszilla"
-trigger2 = numpartner
-trigger2 = ID<partner,ID
-trigger3 = !numpartner
+trigger1 = 1  ;[ultimabrawlers P169] self-host gauge (relaxed ID<>partner so each teammate spawns own meter)
 id = 6500
 name = "groove point"
 pos = 0,300
@@ -11922,15 +11912,7 @@ var(49) = 3
 type = Helper
 triggerall = !NumHelper(6100) && !NumHelper(6000)
 triggerall = numenemy
-trigger1 = numpartner
-trigger1 = ID>partner,ID
-trigger1 = !partner,authorname = "warusaki3"
-trigger1 = !(partner,authorname = "mouser" && partner,name = "Hibiki Takane")
-trigger1 = !partner,authorname = "Hh"
-trigger1 = !partner,authorname = "Jesuszilla"
-trigger2 = numpartner
-trigger2 = ID<partner,ID
-trigger3 = !numpartner
+trigger1 = 1  ;[ultimabrawlers P169] self-host gauge (relaxed ID<>partner so each teammate spawns own meter)
 id = 6100
 name = "gauge"
 pos = 0,300
@@ -12142,6 +12124,7 @@ trigger1 = P2movetype != H
 var(53) = P2life
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P017): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = numenemy
 triggerall = roundstate = 2
@@ -12196,6 +12179,7 @@ var(50) = -500
 persistent = 1
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P017): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = !(var(0)&2**13)
 triggerall = numenemy
@@ -12639,6 +12623,7 @@ fvar(8) = 10
 ignorehitpause = 1
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P017): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = var(58)&2**0
 triggerall = var(58)&2**1
@@ -12661,6 +12646,7 @@ supermovetime = 999999
 facing = facing*ifelse(teamside=1,1,-1)
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P017): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = var(58)&2**0
 triggerall = var(58)&2**1
@@ -12683,6 +12669,7 @@ supermovetime = 999999
 facing = facing*ifelse(teamside=1,1,-1)
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P017): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = var(58)&2**0
 triggerall = var(58)&2**1
@@ -12704,6 +12691,7 @@ supermovetime = 999999
 facing = facing*ifelse(teamside=1,1,-1)
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P017): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = var(58)&2**0
 triggerall = !(var(58)&2**1)
@@ -12724,6 +12712,7 @@ supermovetime = 999999
 facing = facing*ifelse(teamside=1,1,-1)
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P017): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = !(var(58)&2**0)
 triggerall = !NumHelper(6600)
@@ -12743,6 +12732,7 @@ supermovetime = 999999
 facing = facing*ifelse(teamside=1,1,-1)
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P017): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = var(58)&2**0
 triggerall = var(58)&2**1
@@ -12765,6 +12755,7 @@ supermovetime = 999999
 facing = facing*ifelse(teamside=1,1,-1)
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P017): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = var(58)&2**0
 triggerall = var(58)&2**1
@@ -12787,6 +12778,7 @@ supermovetime = 999999
 facing = facing*ifelse(teamside=1,1,-1)
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P017): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = var(58)&2**0
 triggerall = var(58)&2**1
@@ -12808,6 +12800,7 @@ supermovetime = 999999
 facing = facing*ifelse(teamside=1,1,-1)
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P017): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = var(58)&2**0
 triggerall = !(var(58)&2**1)
@@ -12828,6 +12821,7 @@ supermovetime = 999999
 facing = facing*ifelse(teamside=1,1,-1)
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P017): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = !(var(58)&2**0)
 triggerall = !NumHelper(6602)
@@ -12847,6 +12841,7 @@ supermovetime = 999999
 facing = facing*ifelse(teamside=1,1,-1)
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P017): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = var(58)&2**0
 triggerall = var(58)&2**1
@@ -12868,6 +12863,7 @@ supermovetime = 999999
 facing = facing*ifelse(teamside=1,1,-1)
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P017): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = var(58)&2**0
 triggerall = var(58)&2**1
@@ -12889,6 +12885,7 @@ supermovetime = 999999
 facing = facing*ifelse(teamside=1,1,-1)
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P017): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = var(58)&2**0
 triggerall = var(58)&2**1
@@ -12909,6 +12906,7 @@ supermovetime = 999999
 facing = facing*ifelse(teamside=1,1,-1)
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P017): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = var(58)&2**0
 triggerall = !(var(58)&2**1)
@@ -12928,6 +12926,7 @@ supermovetime = 999999
 facing = facing*ifelse(teamside=1,1,-1)
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P017): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = !(var(58)&2**0)
 triggerall = !NumHelper(6601)
@@ -12946,6 +12945,7 @@ supermovetime = 999999
 facing = facing*ifelse(teamside=1,1,-1)
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P017): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = var(58)&2**0
 triggerall = var(58)&2**1
@@ -12967,6 +12967,7 @@ supermovetime = 999999
 facing = facing*ifelse(teamside=1,1,-1)
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P017): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = var(58)&2**0
 triggerall = var(58)&2**1
@@ -12988,6 +12989,7 @@ supermovetime = 999999
 facing = facing*ifelse(teamside=1,1,-1)
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P017): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = var(58)&2**0
 triggerall = var(58)&2**1
@@ -13008,6 +13010,7 @@ supermovetime = 999999
 facing = facing*ifelse(teamside=1,1,-1)
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P017): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = var(58)&2**0
 triggerall = !(var(58)&2**1)
@@ -13027,6 +13030,7 @@ supermovetime = 999999
 facing = facing*ifelse(teamside=1,1,-1)
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P017): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = !(var(58)&2**0)
 triggerall = !NumHelper(6603)
@@ -13045,6 +13049,7 @@ supermovetime = 999999
 facing = facing*ifelse(teamside=1,1,-1)
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P017): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = var(58)&2**0
 triggerall = var(58)&2**1
@@ -13066,6 +13071,7 @@ supermovetime = 999999
 facing = facing*ifelse(teamside=1,1,-1)
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P017): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = var(58)&2**0
 triggerall = var(58)&2**1
@@ -13087,6 +13093,7 @@ supermovetime = 999999
 facing = facing*ifelse(teamside=1,1,-1)
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P017): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = var(58)&2**0
 triggerall = var(58)&2**1
@@ -13107,6 +13114,7 @@ supermovetime = 999999
 facing = facing*ifelse(teamside=1,1,-1)
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P017): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = var(58)&2**0
 triggerall = !(var(58)&2**1)
@@ -13126,6 +13134,7 @@ supermovetime = 999999
 facing = facing*ifelse(teamside=1,1,-1)
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P017): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = !(var(58)&2**0)
 triggerall = !NumHelper(6604)
@@ -13225,6 +13234,7 @@ fvar(9) = 3
 ignorehitpause = 1
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P017): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = var(58)&2**0
 triggerall = var(58)&2**1
@@ -13250,6 +13260,7 @@ supermovetime = 999999
 facing = facing*ifelse(teamside=1,1,-1)
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P017): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = var(58)&2**0
 triggerall = var(58)&2**1
@@ -13274,6 +13285,7 @@ supermovetime = 999999
 facing = facing*ifelse(teamside=1,1,-1)
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P017): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = var(58)&2**0
 triggerall = var(58)&2**1
@@ -13297,6 +13309,7 @@ supermovetime = 999999
 facing = facing*ifelse(teamside=1,1,-1)
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P017): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = var(58)&2**0
 triggerall = var(58)&2**1
@@ -13319,6 +13332,7 @@ supermovetime = 999999
 facing = facing*ifelse(teamside=1,1,-1)
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P017): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = var(58)&2**0
 triggerall = !(var(58)&2**1)
@@ -13340,6 +13354,7 @@ supermovetime = 999999
 facing = facing*ifelse(teamside=1,1,-1)
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P017): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = !(var(58)&2**0)
 triggerall = !NumHelper(6700)
@@ -13360,6 +13375,7 @@ supermovetime = 999999
 facing = facing*ifelse(teamside=1,1,-1)
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P017): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = var(58)&2**0
 triggerall = var(58)&2**1
@@ -13386,6 +13402,7 @@ supermovetime = 999999
 facing = facing*ifelse(teamside=1,1,-1)
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P017): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = var(58)&2**0
 triggerall = var(58)&2**1
@@ -13412,6 +13429,7 @@ supermovetime = 999999
 facing = facing*ifelse(teamside=1,1,-1)
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P017): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = var(58)&2**0
 triggerall = var(58)&2**1
@@ -13437,6 +13455,7 @@ supermovetime = 999999
 facing = facing*ifelse(teamside=1,1,-1)
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P017): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = var(58)&2**0
 triggerall = var(58)&2**1
@@ -13461,6 +13480,7 @@ supermovetime = 999999
 facing = facing*ifelse(teamside=1,1,-1)
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P017): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = var(58)&2**0
 triggerall = var(58)&2**1
@@ -13484,6 +13504,7 @@ supermovetime = 999999
 facing = facing*ifelse(teamside=1,1,-1)
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P017): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = var(58)&2**0
 triggerall = !(var(58)&2**1)
@@ -13506,6 +13527,7 @@ supermovetime = 999999
 facing = facing*ifelse(teamside=1,1,-1)
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P017): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = !(var(58)&2**0)
 triggerall = !NumHelper(6704)
@@ -13527,6 +13549,7 @@ supermovetime = 999999
 facing = facing*ifelse(teamside=1,1,-1)
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P017): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = !(var(58)&2**0)
 triggerall = !fvar(3)
@@ -13547,6 +13570,7 @@ supermovetime = 999999
 facing = facing*ifelse(teamside=1,1,-1)
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P017): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = !(var(58)&2**1)
 triggerall = !fvar(3)
@@ -13568,6 +13592,7 @@ supermovetime = 999999
 facing = facing*ifelse(teamside=1,1,-1)
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P017): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = !(var(58)&2**1)
 triggerall = !fvar(3)
@@ -13589,6 +13614,7 @@ supermovetime = 999999
 facing = facing*ifelse(teamside=1,1,-1)
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P017): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = !(var(58)&2**2)
 triggerall = !fvar(3)
@@ -13776,6 +13802,7 @@ var(17) = 1
 ignorehitpause = 1
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P017): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = numenemy
 triggerall = roundstate = 2
@@ -13801,6 +13828,7 @@ var(50) = 5000
 ignorehitpause = 1
 
 [State 3001, Super]
+triggerall = 0  ;TAGFIX(P017): char-side popup OFF (engine shows natively)
 type = Helper
 triggerall = numenemy
 triggerall = roundstate = 2
@@ -14606,6 +14634,7 @@ ignorehitpause = 1
 ownpal = 1
 
 [State -2, HyperComboFinish]
+triggerall = 0  ;TAGFIX(P017): char-side CvS announcer OFF (engine has its own)
 type = PlaySnd
 triggerall = roundstate >= 2
 trigger1 = WinKo && !var(32)
@@ -14613,6 +14642,7 @@ value = 9000,0
 ignorehitpause = 1
 
 [State 9020, PlaySnd]
+triggerall = 0  ;TAGFIX(P017): char-side CvS announcer OFF (engine has its own)
 type = PlaySnd
 triggerall = roundstate >= 2
 trigger1 = WinKo && !var(32)
@@ -14722,9 +14752,6 @@ triggerall = roundstate = 2
 trigger1 = enemy,authorname = "warusaki3" && enemy,fvar(39) = 1
 trigger2 = enemy,authorname = "Hh" && enemy,fvar(39) = 1
 trigger3 = enemy,authorname = "mouser" && (P2Name = "Hibiki Takane" || P4Name = "Hibiki Takane")
-trigger4 = enemy,authorname = "Jesuszilla" && enemy,fvar(17) = 1
-trigger5 = enemy,authorname = "N64Mario" && enemy, Name = "Zero" && enemy,fvar(17) = 1
-trigger6 = enemy,authorname = ".\/." && enemy,fvar(17) = 1
 var(0) = 2**20
 
 ;‚â‚ç‚ê‚ÉƒQ[ƒWÁ‹‚·‚é‘Šè“®ì‚Ì”»’è

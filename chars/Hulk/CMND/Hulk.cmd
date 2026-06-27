@@ -1342,3 +1342,154 @@ trigger1 = stateno = [100,102]
 trigger2 = stateno = [105,107]
 
 
+
+;======================================================================
+; HULK  ::  "Spider-Man HARD"-tier AI            [ultimabrawlers / Ikemen GO]
+; These blocks live at the end of the Statedef -1 command handler.
+; Activation + difficulty are AILevel-native:
+;   AILevel 0   = human (every block below is silent)
+;   AILevel 1-8 = engine AI slider; reactions/combos/guard scale with it
+;   AILevel >=6 = "boss" tier (Gamma-Up counter branch on guard)
+; No persistent vars used (Hulk already uses var(59)/var(10)); everything
+; gates on AILevel / stateno / movehit / p2 reads / power / ctrl.
+; Bound states: normals cLK430 cMP410 sHP220 ; GammaCharge 1000-1002 ;
+;   GammaUp(AA) 1106-1108 ; GammaThrow(grab) 1200 ; GammaWave 3000 ;
+;   GammaQuake 3200 / GammaCrush 3100 (cost 1000) ; guard 130/131/132.
+;======================================================================
+
+; ---- DEFENSE : AILevel-scaled auto-guard / parry (one mechanism) -----
+; arm-chance rises with AILevel (lo lvl = most hits land = beatable;
+; hi lvl = near-unblockable). AILevel>=6 turns ~45% of guards into a
+; Gamma-Up reversal. Throws NOT covered (command-grabbers can still grab).
+[State -1, AI Guard Stand]
+type = HitOverride
+triggerall = AILevel
+triggerall = roundstate = 2 && statetype = S
+trigger1 = random < (AILevel*110)
+attr = SCA, NA,SA,HA, NP,SP,HP, AA,AP
+stateno = ifelse(AILevel >= 6 && random < 450, 1106, 130)
+slot = 0
+time = 6
+
+[State -1, AI Guard Crouch]
+type = HitOverride
+triggerall = AILevel
+triggerall = roundstate = 2 && statetype = C
+trigger1 = random < (AILevel*110)
+attr = SCA, NA,SA,HA, NP,SP,HP, AA,AP
+stateno = ifelse(AILevel >= 6 && random < 450, 1106, 131)
+slot = 0
+time = 6
+
+[State -1, AI Guard Air]
+type = HitOverride
+triggerall = AILevel
+triggerall = roundstate = 2 && (statetype = A || pos y < 0)
+trigger1 = random < (AILevel*110)
+attr = SCA, NA,SA,HA, NP,SP,HP, AA,AP
+stateno = 132
+slot = 0
+time = 6
+
+; ---- COMBO : hit-confirm magic series -> Gamma Charge -> Super --------
+; Super-cancel (hit only + meter). Spend more at higher level.
+[State -1, AI Super-cancel GammaCharge->Super]
+type = ChangeState
+triggerall = AILevel
+triggerall = power >= 1000
+trigger1 = stateno = [1000,1002] && movehit
+trigger1 = random < (AILevel*120)
+value = ifelse(random < 500, 3200, 3100)
+
+; Special-cancel sHP -> Gamma Charge z (hit only; safe on block = stop)
+[State -1, AI Special-cancel sHP->GammaCharge]
+type = ChangeState
+triggerall = AILevel
+trigger1 = stateno = 220 && movehit
+value = 1002
+
+; Magic-series chain (contact = continue as block-string pressure too)
+[State -1, AI Chain cMP->sHP]
+type = ChangeState
+triggerall = AILevel
+trigger1 = stateno = 410 && movecontact
+value = 220
+
+[State -1, AI Chain cLK->cMP]
+type = ChangeState
+triggerall = AILevel
+trigger1 = stateno = 430 && movecontact
+value = 410
+
+; ---- REACTIVE : anti-air -------------------------------------------
+[State -1, AI Anti-Air Gamma Up]
+type = ChangeState
+triggerall = AILevel
+triggerall = ctrl && statetype != A
+triggerall = p2statetype = A
+triggerall = p2bodydist X <= 75
+trigger1 = p2movetype = A || (p2bodydist Y <= 5 && p2bodydist Y >= -110)
+trigger1 = random < (AILevel*110)
+value = ifelse(p2bodydist Y < -55, 1108, 1106)
+
+; ---- REACTIVE : command-grab mix-up (Hulk's terror, point-blank) -----
+[State -1, AI Command Grab]
+type = ChangeState
+triggerall = AILevel >= 3
+triggerall = ctrl && statetype != A
+triggerall = p2statetype != A && p2movetype != H
+triggerall = p2bodydist X <= 26
+trigger1 = random < (AILevel*70)
+value = 1200
+
+; ---- REACTIVE : reversal/punish on their attack (fair: needs startup) -
+[State -1, AI Reversal vs attack]
+type = ChangeState
+triggerall = AILevel >= 4
+triggerall = ctrl && statetype != A
+triggerall = p2movetype = A
+triggerall = enemynear, hitdefattr = SCA, NA,SA,HA, NP,SP,HP, AA,AP
+triggerall = p2bodydist X <= 60
+trigger1 = random < (AILevel*90)
+value = ifelse(power >= 1000 && random < 350, 3100, 1106)
+
+; ---- OFFENSE : point-blank low starter (opens the combo) -------------
+[State -1, AI Starter cLK]
+type = ChangeState
+triggerall = AILevel
+triggerall = ctrl && statetype != A
+triggerall = p2statetype != A && p2movetype != H
+triggerall = p2bodydist X <= 52 && p2bodydist X > 22
+trigger1 = random < (AILevel*60)
+value = 430
+
+; ---- NEUTRAL : counter-zone from afar (Gamma Wave) ------------------
+[State -1, AI Gamma Wave anti-zone]
+type = ChangeState
+triggerall = AILevel >= 4
+triggerall = ctrl && statetype != A
+triggerall = power >= 1000
+triggerall = p2bodydist X > 160 && p2movetype = A
+trigger1 = random < (AILevel*45)
+value = 3000
+
+; ---- NEUTRAL : close the gap (Gamma Charge when they're not poking) --
+[State -1, AI Gamma Charge approach]
+type = ChangeState
+triggerall = AILevel >= 4
+triggerall = ctrl && statetype != A
+triggerall = p2movetype != A
+triggerall = p2bodydist X > 95 && p2bodydist X <= 210
+trigger1 = random < (AILevel*30)
+value = 1001
+
+; ---- NEUTRAL : walk into range otherwise ---------------------------
+[State -1, AI Walk Forward]
+type = ChangeState
+triggerall = AILevel
+triggerall = ctrl && statetype = S
+triggerall = p2movetype != A
+triggerall = p2bodydist X > 52
+trigger1 = stateno != 20
+trigger1 = random < (AILevel*100)
+value = 20

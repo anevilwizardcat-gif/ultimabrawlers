@@ -10177,6 +10177,12 @@ channel = 0
 ; States that are always executed (use statedef -2)
 ;---------------------------------------------------------------------------
 [Statedef -2]
+[State -2, Hide Engine Power Bar]
+type = AssertSpecial
+trigger1 = 1
+flag = noPowerBarDisplay
+ignorehitpause = 1
+
 ;---------------------------------------------------------------------------
 ; DTC
 [State -2, Display to Clipboard]
@@ -10767,17 +10773,7 @@ triggerall = Time = 1
 triggerall = RoundState = 0
 triggerall = roundsexisted <= 0
 triggerall = Var(20) > -1
-trigger1 = numpartner
-trigger1 = ID>partner,ID
-trigger1 = !partner,authorname="warusaki3"
-trigger1 = !(partner,authorname = "mouser" && partner,name = "Hibiki Takane")
-trigger1 = !partner,authorname = "H”"
-trigger1 = !(partner,authorname="Jesuszilla" && partner,FVar(17) < 3)
-trigger1 = !partner,authorname=".\/."
-trigger1 = !(partner,authorname="N64Mario" && partner,name = "Zero")
-trigger2 = numpartner
-trigger2 = ID<partner,ID
-trigger3 = !numpartner
+trigger1 = 1  ;[ultimabrawlers P169] self-host gauge (relaxed ID<>partner so each teammate spawns own meter)
 ID = 6000
 stateno = 6000
 postype = p1
@@ -10795,17 +10791,7 @@ triggerall = Time = 1
 triggerall = RoundState = 0
 triggerall = roundsexisted <= 0
 triggerall = Var(20) > -1
-trigger1 = numpartner
-trigger1 = ID>partner,ID
-trigger1 = !partner,authorname="warusaki3"
-trigger1 = !(partner,authorname = "mouser" && partner,name = "Hibiki Takane")
-trigger1 = !partner,authorname = "H”"
-trigger1 = !(partner,authorname="Jesuszilla" && partner,FVar(17) < 3)
-trigger1 = !partner,authorname=".\/."
-trigger1 = !(partner,authorname="N64Mario" && partner,name = "Zero")
-trigger2 = numpartner
-trigger2 = ID<partner,ID
-trigger3 = !numpartner
+trigger1 = 1  ;[ultimabrawlers P169] self-host gauge (relaxed ID<>partner so each teammate spawns own meter)
 ID = 6050
 stateno = 6050
 postype = p1
@@ -10825,17 +10811,7 @@ triggerall = Time = 1
 triggerall = RoundState = 0
 triggerall = roundsexisted <= 0
 triggerall = Var(20) > -1
-trigger1 = numpartner
-trigger1 = ID>partner,ID
-trigger1 = !partner,authorname="warusaki3"
-trigger1 = !(partner,authorname = "mouser" && partner,name = "Hibiki Takane")
-trigger1 = !partner,authorname = "H”"
-trigger1 = !(partner,authorname="Jesuszilla" && partner,FVar(17) < 3)
-trigger1 = !partner,authorname=".\/."
-trigger1 = !(partner,authorname="N64Mario" && partner,name = "Zero")
-trigger2 = numpartner
-trigger2 = ID<partner,ID
-trigger3 = !numpartner
+trigger1 = 1  ;[ultimabrawlers P169] self-host gauge (relaxed ID<>partner so each teammate spawns own meter)
 ID = 6050
 stateno = 6055
 postype = p1
@@ -10850,41 +10826,42 @@ ownpal = 1
 
 ;----------------------------------------------------------------------------------
 ; Groove Point
-[State -2, Helper]
-type = Helper
-triggerall = NumEnemy
-triggerall = Var(20) > -1
-triggerall = FVar(20)
-triggerall = !NumHelper(6500) && !NumHelper(6000)
-triggerall = RoundState = 2
-trigger1 = numpartner
-trigger1 = ID>partner,ID
-trigger1 = !partner,authorname="warusaki3"
-trigger1 = !(partner,authorname = "mouser" && partner,name = "Hibiki Takane")
-trigger1 = !partner,authorname = "H”"
-trigger1 = !(partner,authorname="Jesuszilla" && partner,FVar(17) < 3)
-trigger1 = !partner,authorname=".\/."
-trigger1 = !(partner,authorname="N64Mario" && partner,name = "Zero")
-trigger2 = numpartner
-trigger2 = ID<partner,ID
-trigger3 = !numpartner
-ID = 6500
-name = "groove point"
-pos = 0,300
-postype = Left
-stateno = 6500
-helpertype = normal
-keyctrl = 0
-ownpal = 1
-ignorehitpause = 1
-persistent = 0
-pausemovetime = 99999999999999
-supermovetime = 99999999999999
-size.xscale = 1
-size.yscale = 1
+; ----- [ultimabrawlers P168] GP groove-point counter spawn disabled
+;[State -2, Helper]
+;type = Helper
+;triggerall = NumEnemy
+;triggerall = Var(20) > -1
+;triggerall = FVar(20)
+;triggerall = !NumHelper(6500) && !NumHelper(6000)
+;triggerall = RoundState = 2
+;trigger1 = numpartner
+;trigger1 = ID>partner,ID
+;trigger1 = !partner,authorname="warusaki3"
+;trigger1 = !(partner,authorname = "mouser" && partner,name = "Hibiki Takane")
+;trigger1 = !partner,authorname = "H”"
+;trigger1 = !(partner,authorname="Jesuszilla" && partner,FVar(17) < 3)
+;trigger1 = !partner,authorname=".\/."
+;trigger1 = !(partner,authorname="N64Mario" && partner,name = "Zero")
+;trigger2 = numpartner
+;trigger2 = ID<partner,ID
+;trigger3 = !numpartner
+;ID = 6500
+;name = "groove point"
+;pos = 0,300
+;postype = Left
+;stateno = 6500
+;helpertype = normal
+;keyctrl = 0
+;ownpal = 1
+;ignorehitpause = 1
+;persistent = 0
+;pausemovetime = 99999999999999
+;supermovetime = 99999999999999
+;size.xscale = 1
+;size.yscale = 1
 
-;----------------------------------------------------------------------------------
-; No Music
+;;----------------------------------------------------------------------------------
+;; No Music
 [State -2, AssertSpecial]
 type = AssertSpecial
 triggerall = roundno = 1
@@ -11018,17 +10995,7 @@ triggerall = Time
 triggerall = !NumHelper(6100) && !NumHelper(6000)
 triggerall = numenemy
 triggerall = Var(20) > -1
-trigger1 = numpartner
-trigger1 = ID>partner,ID
-trigger1 = !partner,authorname="warusaki3"
-trigger1 = !(partner,authorname = "mouser" && partner,name = "Hibiki Takane")
-trigger1 = !partner,authorname = "H”"
-trigger1 = !(partner,authorname="Jesuszilla" && partner,FVar(17) < 3)
-trigger1 = !partner,authorname=".\/."
-trigger1 = !(partner,authorname = "N64Mario" && partner,name = "Zero")
-trigger2 = numpartner
-trigger2 = ID<partner,ID
-trigger3 = !numpartner
+trigger1 = 1  ;[ultimabrawlers P169] self-host gauge (relaxed ID<>partner so each teammate spawns own meter)
 ID = 6100
 name = "gauge"
 pos = 0,300
@@ -11668,109 +11635,114 @@ pausemovetime = 999999
 supermovetime = 999999
 facing = facing*ifElse(teamside=1,1,-1)
 
-[State 3001, Super]
-type = Helper
-triggerall = (var(55)&1)
-triggerall = (var(55)&2)
-triggerall = (var(55)&4)
-triggerall = (var(55)&8)
-triggerall = FVar(20)
-triggerall = !NumHelper(6601)
-trigger1 = FVar(32) = 1 || FVar(32) = -2
-id = 6601
-name = "Counter Hit"
-pos =0,0
-postype = P1
-stateno = 6641
-helpertype = normal
-keyctrl = 0
-ownpal = 1
-ignorehitpause = 1
-pausemovetime = 999999
-supermovetime = 999999
-facing = facing*ifElse(teamside=1,1,-1)
+; ----- [ultimabrawlers P168] COUNTER/sense callout spawn disabled
+;[State 3001, Super]
+;type = Helper
+;triggerall = (var(55)&1)
+;triggerall = (var(55)&2)
+;triggerall = (var(55)&4)
+;triggerall = (var(55)&8)
+;triggerall = FVar(20)
+;triggerall = !NumHelper(6601)
+;trigger1 = FVar(32) = 1 || FVar(32) = -2
+;id = 6601
+;name = "Counter Hit"
+;pos =0,0
+;postype = P1
+;stateno = 6641
+;helpertype = normal
+;keyctrl = 0
+;ownpal = 1
+;ignorehitpause = 1
+;pausemovetime = 999999
+;supermovetime = 999999
+;facing = facing*ifElse(teamside=1,1,-1)
 
-[State 3001, Super]
-type = Helper
-triggerall = (var(55)&1)
-triggerall = (var(55)&2)
-triggerall = (var(55)&4)
-triggerall = !(var(55)&8)
-triggerall = FVar(20)
-triggerall = !NumHelper(6601)
-trigger1 = FVar(32) = 1 || FVar(32) = -2
-id = 6601
-name = "Counter Hit"
-pos =0,0
-postype = P1
-stateno = ifElse(Var(37)=0,6641,6631)
-helpertype = normal
-keyctrl = 0
-ownpal = 1
-ignorehitpause = 1
-pausemovetime = 999999
-supermovetime = 999999
-facing = facing*ifElse(teamside=1,1,-1)
+; ----- [ultimabrawlers P168] COUNTER/sense callout spawn disabled
+;[State 3001, Super]
+;type = Helper
+;triggerall = (var(55)&1)
+;triggerall = (var(55)&2)
+;triggerall = (var(55)&4)
+;triggerall = !(var(55)&8)
+;triggerall = FVar(20)
+;triggerall = !NumHelper(6601)
+;trigger1 = FVar(32) = 1 || FVar(32) = -2
+;id = 6601
+;name = "Counter Hit"
+;pos =0,0
+;postype = P1
+;stateno = ifElse(Var(37)=0,6641,6631)
+;helpertype = normal
+;keyctrl = 0
+;ownpal = 1
+;ignorehitpause = 1
+;pausemovetime = 999999
+;supermovetime = 999999
+;facing = facing*ifElse(teamside=1,1,-1)
 
-[State 3001, Super]
-type = Helper
-triggerall = (var(55)&1)
-triggerall = (var(55)&2)
-triggerall = !(var(55)&4)
-triggerall = FVar(20)
-triggerall = !NumHelper(6601)
-trigger1 = FVar(32) = 1 || FVar(32) = -2
-id = 6601
-name = "Counter Hit"
-pos =0,0
-postype = P1
-stateno = ifElse(Var(37)=0,6631,6621)
-helpertype = normal
-keyctrl = 0
-ownpal = 1
-ignorehitpause = 1
-pausemovetime = 999999
-supermovetime = 999999
-facing = facing*ifElse(teamside=1,1,-1)
+; ----- [ultimabrawlers P168] COUNTER/sense callout spawn disabled
+;[State 3001, Super]
+;type = Helper
+;triggerall = (var(55)&1)
+;triggerall = (var(55)&2)
+;triggerall = !(var(55)&4)
+;triggerall = FVar(20)
+;triggerall = !NumHelper(6601)
+;trigger1 = FVar(32) = 1 || FVar(32) = -2
+;id = 6601
+;name = "Counter Hit"
+;pos =0,0
+;postype = P1
+;stateno = ifElse(Var(37)=0,6631,6621)
+;helpertype = normal
+;keyctrl = 0
+;ownpal = 1
+;ignorehitpause = 1
+;pausemovetime = 999999
+;supermovetime = 999999
+;facing = facing*ifElse(teamside=1,1,-1)
 
-[State 3001, Super]
-type = Helper
-triggerall = (var(55)&1)
-triggerall = !(var(55)&2)
-triggerall = FVar(20)
-triggerall = !NumHelper(6601)
-trigger1 = FVar(32) = 1 || FVar(32) = -2
-id = 6601
-name = "Counter Hit"
-pos =0,0
-postype = P1
-stateno = ifElse(Var(37)=0,6621,6611)
-helpertype = normal
-keyctrl = 0
-ownpal = 1
-ignorehitpause = 1
-pausemovetime = 999999
-supermovetime = 999999
-facing = facing*ifElse(teamside=1,1,-1)
+; ----- [ultimabrawlers P168] COUNTER/sense callout spawn disabled
+;[State 3001, Super]
+;type = Helper
+;triggerall = (var(55)&1)
+;triggerall = !(var(55)&2)
+;triggerall = FVar(20)
+;triggerall = !NumHelper(6601)
+;trigger1 = FVar(32) = 1 || FVar(32) = -2
+;id = 6601
+;name = "Counter Hit"
+;pos =0,0
+;postype = P1
+;stateno = ifElse(Var(37)=0,6621,6611)
+;helpertype = normal
+;keyctrl = 0
+;ownpal = 1
+;ignorehitpause = 1
+;pausemovetime = 999999
+;supermovetime = 999999
+;facing = facing*ifElse(teamside=1,1,-1)
 
-[State 3001, Super]
-type = Helper
-triggerall = !(var(55)&1)
-triggerall = FVar(20)
-triggerall = !NumHelper(6601)
-trigger1 = FVar(32) = 1 || FVar(32) = -2
-id = 6601
-name = "Counter Hit"
-pos =0,0
-postype = P1
-stateno = ifElse(Var(37)=0,6611,6601)
-helpertype = normal
-keyctrl = 0
-ownpal = 1
-ignorehitpause = 1
-pausemovetime = 999999
-supermovetime = 999999
-facing = facing*ifElse(teamside=1,1,-1)
+; ----- [ultimabrawlers P168] COUNTER/sense callout spawn disabled
+;[State 3001, Super]
+;type = Helper
+;triggerall = !(var(55)&1)
+;triggerall = FVar(20)
+;triggerall = !NumHelper(6601)
+;trigger1 = FVar(32) = 1 || FVar(32) = -2
+;id = 6601
+;name = "Counter Hit"
+;pos =0,0
+;postype = P1
+;stateno = ifElse(Var(37)=0,6611,6601)
+;helpertype = normal
+;keyctrl = 0
+;ownpal = 1
+;ignorehitpause = 1
+;pausemovetime = 999999
+;supermovetime = 999999
+;facing = facing*ifElse(teamside=1,1,-1)
 
 [State 3001, Super]
 type = Helper

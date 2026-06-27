@@ -273,8 +273,16 @@ ctrl = 0
 anim = 1
 ownpal = 1
 
+[State, Bench UI Sweep]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611]
+trigger2 = roundstate > 2
+trigger3 = !root,alive
+ignorehitpause = 1
+
 [State 6100, Explod];TEXT1P
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive  ;[ultimabrawlers P169] bench-hide
 trigger1 = !NumExplod(69)
 trigger1 = teamside = 1
 anim = ifElse((root, Var(20) = 7),6956,6950)
@@ -291,6 +299,7 @@ supermovetime = -1
 
 [State 6100, Explod];TEXT2P
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive  ;[ultimabrawlers P169] bench-hide
 trigger1 = !NumExplod(69)
 trigger1 = teamside = 2
 anim = ifElse((root, Var(20) = 7),6956,6950)
@@ -307,6 +316,7 @@ supermovetime = -1
 
 [State 6100, Explod];BLACK
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive  ;[ultimabrawlers P169] bench-hide
 trigger1 = !NumExplod(6101)
 anim = 6012
 ID = 6101
@@ -321,6 +331,7 @@ pausemovetime=-1
 ;LV.1
 [State 6100, Explod];POWER
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive  ;[ultimabrawlers P169] bench-hide
 trigger1 = !NumExplod(6102)
 anim = 6010
 ID = 6102
@@ -335,6 +346,7 @@ scale = 1,5
 
 [State 6100, Explod];FULL
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive  ;[ultimabrawlers P169] bench-hide
 trigger1 = !NumExplod(6103)
 anim = 6011
 ID = 6103
@@ -352,6 +364,7 @@ scale = 1,5
 ;LV2
 [State 6100, Explod];POWER
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive  ;[ultimabrawlers P169] bench-hide
 trigger1 = !NumExplod(6104)
 anim = 6010
 ID = 6104
@@ -367,6 +380,7 @@ scale = 1,7
 
 [State 6100, Explod];FULL
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive  ;[ultimabrawlers P169] bench-hide
 trigger1 = !NumExplod(6105)
 anim = 6011
 ID = 6105
@@ -384,6 +398,7 @@ scale = 1,7
 ;LV3
 [State 6100, Explod];POWER
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive  ;[ultimabrawlers P169] bench-hide
 trigger1 = !NumExplod(6106)
 anim = 6010
 ID = 6106
@@ -399,6 +414,7 @@ scale = 1,8
 
 [State 6100, Explod];FULL
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive  ;[ultimabrawlers P169] bench-hide
 trigger1 = !NumExplod(6107)
 anim = 6011
 ID = 6107
@@ -415,6 +431,7 @@ scale = 1,8
 
 [State 6100, Explod];BAR1P
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive  ;[ultimabrawlers P169] bench-hide
 trigger1 = !NumExplod(6100)
 trigger1 = teamside = 1
 anim = 6013
@@ -432,6 +449,7 @@ scale = .5,.5
 
 [State 6100, Explod];BAR2P
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive  ;[ultimabrawlers P169] bench-hide
 trigger1 = !NumExplod(6100)
 trigger1 = teamside = 2
 anim = 6014
@@ -448,6 +466,7 @@ scale = .5,.5
 
 [State 6100, Explod];Lv.1_1P
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive  ;[ultimabrawlers P169] bench-hide
 trigger1 = !NumExplod(6201)
 trigger1 = teamside = 1
 anim = 6015
@@ -466,6 +485,7 @@ scale = .5,.5
 
 [State 6100, Explod];1_2P
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive  ;[ultimabrawlers P169] bench-hide
 trigger1 = !NumExplod(6201)
 trigger1 = teamside = 2
 anim = 6018
@@ -484,6 +504,7 @@ scale = .5,.5
 
 [State 6100, Explod];2_1P
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive  ;[ultimabrawlers P169] bench-hide
 trigger1 = !NumExplod(6202)
 trigger1 = teamside = 1
 anim = 6016
@@ -502,6 +523,7 @@ scale = .5,.5
 
 [State 6100, Explod];2_2P
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive  ;[ultimabrawlers P169] bench-hide
 trigger1 = !NumExplod(6202)
 trigger1 = teamside = 2
 anim = 6019
@@ -520,6 +542,7 @@ scale = .5,.5
 
 [State 6100, Explod];3_1P
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive  ;[ultimabrawlers P169] bench-hide
 trigger1 = !NumExplod(6203)
 trigger1 = teamside = 1
 anim = 6017
@@ -538,6 +561,7 @@ scale = .5,.5
 
 [State 6100, Explod];3_2P
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive  ;[ultimabrawlers P169] bench-hide
 trigger1 = !NumExplod(6203)
 trigger1 = teamside = 2
 anim = 6020
@@ -781,8 +805,16 @@ ignorehitpause = 1
 anim = 1
 ownpal = 1
 
+[State, Bench UI Sweep]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611]
+trigger2 = roundstate > 2
+trigger3 = !root,alive
+ignorehitpause = 1
+
 [State 6100, Explod];TEXT1P
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive  ;[ultimabrawlers P169] bench-hide
 trigger1 = !NumExplod(69)
 trigger1 = teamside = 1
 anim = ifElse((root, Var(20) = 7),6956,6951)
@@ -799,6 +831,7 @@ supermovetime = -1
 
 [State 6100, Explod];TEXT2P
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive  ;[ultimabrawlers P169] bench-hide
 trigger1 = !NumExplod(69)
 trigger1 = teamside = 2
 anim = ifElse((root, Var(20) = 7),6956,6951)
@@ -831,6 +864,7 @@ ignorehitpause = 1
 
 [State 6110, Explod];BLACK
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive  ;[ultimabrawlers P169] bench-hide
 trigger1 = !NumExplod(6111)
 anim = 6103
 ID = 6111
@@ -845,6 +879,7 @@ supermovetime = -1
 
 [State 6110, Explod];POWER
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive  ;[ultimabrawlers P169] bench-hide
 trigger1 = !NumExplod(6112)
 anim = 6101
 ID = 6112
@@ -860,6 +895,7 @@ scale = .5,.5
 
 [State 6110, Explod];POWER
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive  ;[ultimabrawlers P169] bench-hide
 trigger1 = !NumExplod(6113)
 anim = 6102
 ID = 6113
@@ -874,6 +910,7 @@ supermovetime = -1
 
 [State 6110, Explod];POWER
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive  ;[ultimabrawlers P169] bench-hide
 trigger1 = !NumExplod(6114)
 anim = 6100
 ID = 6114
@@ -889,6 +926,7 @@ scale = .5,.5
 
 [State 6110, Explod];BAR1P
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive  ;[ultimabrawlers P169] bench-hide
 trigger1 = !NumExplod(6110)
 trigger1 = teamside = 1
 anim = 6104
@@ -906,6 +944,7 @@ scale = 1,1
 
 [State 6110, Explod];BAR2P
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive  ;[ultimabrawlers P169] bench-hide
 trigger1 = !NumExplod(6110)
 trigger1 = teamside = 2
 anim = 6105
@@ -923,6 +962,7 @@ scale = .5,.5
 
 [State 6110, Explod];FULL
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive  ;[ultimabrawlers P169] bench-hide
 trigger1 = !NumExplod(6115)
 anim = 6106
 ID = 6115
@@ -1138,8 +1178,16 @@ ctrl = 0
 anim = 1
 ownpal = 1
 
+[State, Bench UI Sweep]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611]
+trigger2 = roundstate > 2
+trigger3 = !root,alive
+ignorehitpause = 1
+
 [State 6100, Explod];TEXT1P
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive  ;[ultimabrawlers P169] bench-hide
 trigger1 = !NumExplod(69)
 trigger1 = teamside = 1
 anim = ifElse((root, Var(20) = 7),6956,6952)
@@ -1156,6 +1204,7 @@ supermovetime = -1
 
 [State 6100, Explod];TEXT2P
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive  ;[ultimabrawlers P169] bench-hide
 trigger1 = !NumExplod(69)
 trigger1 = teamside = 2
 anim = ifElse((root, Var(20) = 7),6956,6952)
@@ -1172,6 +1221,7 @@ supermovetime = -1
 
 [State 6120, Explod];BLACK
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive  ;[ultimabrawlers P169] bench-hide
 trigger1 = !NumExplod(6125)
 anim = 6205
 ID = 6121
@@ -1186,6 +1236,7 @@ supermovetime = -1
 
 [State 6120, Explod];POWER
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive  ;[ultimabrawlers P169] bench-hide
 trigger1 = !NumExplod(6122)
 anim = 6200
 ID = 6122
@@ -1200,6 +1251,7 @@ supermovetime = -1
 
 [State 6120, Explod];POWER
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive  ;[ultimabrawlers P169] bench-hide
 trigger1 = !NumExplod(6123)
 anim = 6201
 ID = 6123
@@ -1214,6 +1266,7 @@ supermovetime = -1
 
 [State 6120, Explod];POWER
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive  ;[ultimabrawlers P169] bench-hide
 trigger1 = !NumExplod(6124)
 anim = 6202
 ID = 6124
@@ -1228,6 +1281,7 @@ supermovetime = -1
 
 [State 6120, Explod];MAX
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive  ;[ultimabrawlers P169] bench-hide
 trigger1 = !NumExplod(6125)
 anim = 6204
 ID = 6125
@@ -1243,6 +1297,7 @@ supermovetime = -1
 
 [State 6120, Explod];BAR1P
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive  ;[ultimabrawlers P169] bench-hide
 trigger1 = !NumExplod(6120)
 trigger1 = teamside = 1
 anim = 6207
@@ -1260,6 +1315,7 @@ scale = .5,.5
 
 [State 6120, Explod];BAR2P
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive  ;[ultimabrawlers P169] bench-hide
 trigger1 = !NumExplod(6120)
 trigger1 = teamside = 2
 anim = 6208
@@ -1277,6 +1333,7 @@ scale = .5,.5
 
 [State 6120, Explod];Super
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive  ;[ultimabrawlers P169] bench-hide
 trigger1 = !NumExplod(6126)
 anim = 6206
 ID = 6126
@@ -1452,8 +1509,16 @@ ctrl = 0
 anim = 1
 ownpal = 1
 
+[State, Bench UI Sweep]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611]
+trigger2 = roundstate > 2
+trigger3 = !root,alive
+ignorehitpause = 1
+
 [State 6100, Explod];TEXT1P
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive  ;[ultimabrawlers P169] bench-hide
 trigger1 = !NumExplod(69)
 trigger1 = teamside = 1
 anim = ifElse((root, Var(20) = 7),6956,6953)
@@ -1469,6 +1534,7 @@ supermovetime = -1
 
 [State 6100, Explod];TEXT2P
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive  ;[ultimabrawlers P169] bench-hide
 trigger1 = !NumExplod(69)
 trigger1 = teamside = 2
 anim = ifElse((root, Var(20) = 7),6956,6953)
@@ -1499,6 +1565,7 @@ ignorehitpause = 1
 
 [State 6130, Explod];BLACK
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive  ;[ultimabrawlers P169] bench-hide
 trigger1 = !NumExplod(6131)
 anim = 6301
 ID = 6131
@@ -1513,6 +1580,7 @@ supermovetime = -1
 
 [State 6130, Explod];POWER
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive  ;[ultimabrawlers P169] bench-hide
 trigger1 = !NumExplod(6132)
 anim = 6300
 ID = 6132
@@ -1527,6 +1595,7 @@ supermovetime = -1
 
 [State 6130, Explod];BAR1P
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive  ;[ultimabrawlers P169] bench-hide
 trigger1 = !NumExplod(6130)
 trigger1 = teamside = 1
 anim = 6302
@@ -1544,6 +1613,7 @@ scale = .5,.5
 
 [State 6130, Explod];BAR2P
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive  ;[ultimabrawlers P169] bench-hide
 trigger1 = !NumExplod(6130)
 trigger1 = teamside = 2
 anim = 6303
@@ -1561,6 +1631,7 @@ scale = .5,.5
 
 [State 6130, Explod];MAX
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive  ;[ultimabrawlers P169] bench-hide
 trigger1 = !NumExplod(6133)
 anim = 6304
 ID = 6133
@@ -1669,8 +1740,16 @@ ctrl = 0
 anim = 1
 ownpal = 1
 
+[State, Bench UI Sweep]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611]
+trigger2 = roundstate > 2
+trigger3 = !root,alive
+ignorehitpause = 1
+
 [State 6100, Explod];TEXT1P
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive  ;[ultimabrawlers P169] bench-hide
 trigger1 = !NumExplod(69)
 trigger1 = teamside = 1
 anim = ifElse((root, Var(20) = 7),6956,6954)
@@ -1687,6 +1766,7 @@ supermovetime = -1
 
 [State 6100, Explod];TEXT2P
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive  ;[ultimabrawlers P169] bench-hide
 trigger1 = !NumExplod(69)
 trigger1 = teamside = 2
 anim = ifElse((root, Var(20) = 7),6956,6954)
@@ -1703,6 +1783,7 @@ supermovetime = -1
 
 [State 6140, Explod];BLACK
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive  ;[ultimabrawlers P169] bench-hide
 trigger1 = !NumExplod(6141)
 anim = 6401
 ID = 6141
@@ -1717,6 +1798,7 @@ supermovetime = -1
 
 [State 6140, Explod];POWER
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive  ;[ultimabrawlers P169] bench-hide
 trigger1 = !NumExplod(6142)
 anim = 6400
 ID = 6142
@@ -1731,6 +1813,7 @@ supermovetime = -1
 
 [State 6140, Explod];BAR1P
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive  ;[ultimabrawlers P169] bench-hide
 trigger1 = !NumExplod(6140)
 trigger1 = teamside = 1
 anim = 6402
@@ -1748,6 +1831,7 @@ scale = .5,.5
 
 [State 6140, Explod];BAR2P
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive  ;[ultimabrawlers P169] bench-hide
 trigger1 = !NumExplod(6140)
 trigger1 = teamside = 2
 anim = 6403
@@ -1765,6 +1849,7 @@ scale = .5,.5
 
 [State 6140, Explod];POWERUP!
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive  ;[ultimabrawlers P169] bench-hide
 trigger1 = !NumExplod(6143)
 anim = 6404
 ID = 6143
@@ -1781,6 +1866,7 @@ scale = .5,.5
 
 [State 6140, Explod];LVL1
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive  ;[ultimabrawlers P169] bench-hide
 trigger1 = !NumExplod(6144)
 anim = 6405
 ID = 6144
@@ -1796,6 +1882,7 @@ scale = .5,.5
 
 [State 6140, Explod];LVL2
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive  ;[ultimabrawlers P169] bench-hide
 trigger1 = !NumExplod(6145)
 anim = 6405
 ID = 6145
@@ -1811,6 +1898,7 @@ scale = .5,.5
 
 [State 6140, Explod];LVL3
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive  ;[ultimabrawlers P169] bench-hide
 trigger1 = !NumExplod(6146)
 anim = 6405
 ID = 6146
@@ -1826,6 +1914,7 @@ scale = .5,.5
 
 [State 6140, Explod];BLINK1
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive  ;[ultimabrawlers P169] bench-hide
 trigger1 = !NumExplod(6147)
 anim = 6406
 ID = 6147
@@ -1842,6 +1931,7 @@ scale = .5,.5
 
 [State 6140, Explod];BLINK2
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive  ;[ultimabrawlers P169] bench-hide
 trigger1 = !NumExplod(6148)
 anim = 6406
 ID = 6148
@@ -1858,6 +1948,7 @@ scale = .5,.5
 
 [State 6140, Explod];BLINK3
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive  ;[ultimabrawlers P169] bench-hide
 trigger1 = !NumExplod(6149)
 anim = 6406
 ID = 6149
@@ -2111,8 +2202,16 @@ ctrl = 0
 anim = 1
 ownpal = 1
 
+[State, Bench UI Sweep]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611]
+trigger2 = roundstate > 2
+trigger3 = !root,alive
+ignorehitpause = 1
+
 [State 6100, Explod];TEXT1P
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive  ;[ultimabrawlers P169] bench-hide
 trigger1 = !NumExplod(69)
 trigger1 = teamside = 1
 anim = ifElse((root, Var(20) = 7),6956,6955)
@@ -2129,6 +2228,7 @@ supermovetime = -1
 
 [State 6100, Explod];TEXT2P
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive  ;[ultimabrawlers P169] bench-hide
 trigger1 = !NumExplod(69)
 trigger1 = teamside = 2
 anim = ifElse((root, Var(20) = 7),6956,6955)
@@ -2145,6 +2245,7 @@ supermovetime = -1
 
 [State 6150, Explod];BLACK
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive  ;[ultimabrawlers P169] bench-hide
 trigger1 = !NumExplod(6151)
 anim = 6501
 ID = 6151
@@ -2159,6 +2260,7 @@ supermovetime = -1
 
 [State 6150, Explod];POWER
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive  ;[ultimabrawlers P169] bench-hide
 trigger1 = !NumExplod(6152)
 anim = 6500
 ID = 6152
@@ -2173,6 +2275,7 @@ supermovetime = -1
 
 [State 6150, Explod];BAR1P
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive  ;[ultimabrawlers P169] bench-hide
 trigger1 = !NumExplod(6150)
 trigger1 = teamside = 1
 anim = 6502
@@ -2190,6 +2293,7 @@ scale = .5,.5
 
 [State 6150, Explod];BAR2P
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive  ;[ultimabrawlers P169] bench-hide
 trigger1 = !NumExplod(6150)
 trigger1 = teamside = 2
 anim = 6503
@@ -2207,6 +2311,7 @@ scale = .5,.5
 
 [State 6150, Explod];�g{
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive  ;[ultimabrawlers P169] bench-hide
 trigger1 = !NumExplod(6153)
 anim = 6504
 ID = 6153
@@ -2223,6 +2328,7 @@ scale = .5,.5
 
 [State 6150, Explod];FLAME
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive  ;[ultimabrawlers P169] bench-hide
 trigger1 = !NumExplod(6154)
 anim = 6506
 ID = 6154
@@ -2363,8 +2469,16 @@ ctrl = 0
 anim = 1
 ownpal = 1
 
+[State, Bench UI Sweep]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610, 6565611]
+trigger2 = roundstate > 2
+trigger3 = !root,alive
+ignorehitpause = 1
+
 [State 6170, Explod];BLACK
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive  ;[ultimabrawlers P169] bench-hide
 trigger1 = !NumExplod(6171)
 anim = 6407
 ID = 6171
@@ -2379,6 +2493,7 @@ supermovetime = -1
 
 [State 6170, Explod];GREY
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive  ;[ultimabrawlers P169] bench-hide
 trigger1 = !NumExplod(6172)
 anim = 6408
 ID = 6172
@@ -2393,6 +2508,7 @@ supermovetime = -1
 
 [State 6170, Explod];TIME
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive  ;[ultimabrawlers P169] bench-hide
 trigger1 = !NumExplod(6173)
 anim = 6409
 ID = 6173
@@ -2407,6 +2523,7 @@ supermovetime = -1
 
 [State 6170, Explod];BAR1P
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive  ;[ultimabrawlers P169] bench-hide
 trigger1 = !NumExplod(6170)
 trigger1 = teamside = 1
 anim = 6410
@@ -2424,6 +2541,7 @@ scale = .5,.5
 
 [State 6170, Explod];BAR2P
 type = Explod
+triggerall = root,stateno != [6565610, 6565611] && root,alive  ;[ultimabrawlers P169] bench-hide
 trigger1 = !NumExplod(6170)
 trigger1 = teamside = 2
 anim = 6411

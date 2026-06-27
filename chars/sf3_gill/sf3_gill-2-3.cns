@@ -1939,8 +1939,7 @@ fvar(1) = 8*const(size.xscale)
 ignorehitpause = 1
 
 ;¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢
-;ƒR[ƒi[ƒvƒbƒVƒ
-ˆ—
+;ƒR[ƒi[ƒvƒbƒVƒ…ˆ—
 [State -2, CornerPush]
 type = VarSet
 trigger1 = !var(13) && !var(25) && !var(48) && !fvar(6) && fvar(1) < 0.1
@@ -2371,8 +2370,7 @@ ID = 20030
 ignorehitpause = 1
 
 ;¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢
-;ƒX[ƒp[ƒA[ƒcƒtƒBƒjƒbƒVƒ
-ƒeƒLƒXƒg
+;ƒX[ƒp[ƒA[ƒcƒtƒBƒjƒbƒVƒ…ƒeƒLƒXƒg
 ;Super Arts Finish text (1p)
 [State -3, Explod]
 type = Explod
@@ -2437,8 +2435,7 @@ trigger1 = var(54) = 1
 var(54) = -1
 
 ;¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢
-;ƒX[ƒp[ƒA[ƒc@ƒtƒBƒjƒbƒVƒ
-
+;ƒX[ƒp[ƒA[ƒc@ƒtƒBƒjƒbƒVƒ…
 [State -3, VarSet]
 type = VarSet
 trigger1 = roundstate = 0
@@ -2570,8 +2567,7 @@ ownpal = 1
 scale = 0.5,0.5
 
 ;¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢¢
-;ƒm[ƒ}ƒ‹ƒtƒBƒjƒbƒVƒ
-
+;ƒm[ƒ}ƒ‹ƒtƒBƒjƒbƒVƒ…
 [state -3, VarSet]
 type = VarSet
 triggerall = var(59) = 0

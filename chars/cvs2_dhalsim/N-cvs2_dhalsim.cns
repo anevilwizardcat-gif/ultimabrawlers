@@ -7111,13 +7111,13 @@ params = var(15),var(16),var(6),var(7),fvar(0)
 ;^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 ;~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 [Statedef -2]
-;TAGFIX(P011): default power meter restored for this Gal129 char (no real custom gauge exists);
-;the engine power bar now shows + tag-in/out is handled natively. Block below disabled:
-;[State -2, Hide Engine Power Bar]
-;type = AssertSpecial
-;trigger1 = 1
-;flag = noPowerBarDisplay
-;ignorehitpause = 1
+
+;TAGFIX(P168): re-hidden per request (reverses P011 restore)
+[State -2, Hide Engine Power Bar]
+type = AssertSpecial
+trigger1 = 1
+flag = noPowerBarDisplay
+ignorehitpause = 1
 
 
 [State 0, DisplayToClipboard]
@@ -7267,12 +7267,7 @@ type = helper
 triggerall = time = 0
 triggerall = roundstate = 0 && roundsexisted <= 0
 triggerall = !NumHelper(8100)
-trigger1 = !numpartner
-trigger2 = numpartner
-trigger2 = !(partner,authorname="warusaki3"&&partner,fvar(39)=1)
-trigger2 = !(partner,authorname="Mouser"&&partner,name="Hibiki Takane")
-trigger2 = !(ID-partner,ID>0 && partner,authorname="rei"&&partner,fvar(39)=1)
-trigger2 = !(ID-partner,ID>0 && partner,authorname="gal129"&&partner,fvar(39)=1)
+trigger1 = 1  ;[ultimabrawlers P169] self-host gauge (relaxed arbitration; dh_system bench guards then hide per-char on tag-out)
 ID = 8100
 stateno = 8100+ifelse(fvar(37)=1,60,var(59)*10)
 postype = p1
@@ -7287,12 +7282,7 @@ type = helper
 triggerall = time = 0
 triggerall = roundstate = 0 && roundsexisted <= 0
 triggerall = !NumHelper(8000)
-trigger1 = !numpartner
-trigger2 = numpartner
-trigger2 = !(partner,authorname="warusaki3"&&partner,fvar(39)=1)
-trigger2 = !(partner,authorname="Mouser"&&partner,name="Hibiki Takane")
-trigger2 = !(ID-partner,ID>0 && partner,authorname="rei"&&partner,fvar(39)=1)
-trigger2 = !(ID-partner,ID>0 && partner,authorname="gal129"&&partner,fvar(39)=1)
+trigger1 = 1  ;[ultimabrawlers P169] self-host gauge (relaxed arbitration; dh_system bench guards then hide per-char on tag-out)
 ID = 8000
 stateno = 8000
 postype = p1
@@ -7335,12 +7325,7 @@ fvar(37)=((partner,var(59)!=[0,5])||partner,fvar(37)=1)
 type = Helper
 triggerall = !NumHelper(8200)
 triggerall = ifelse(NumHelper(8100),roundstate > 1,ifelse(fvar(37)=1,roundstate>0,1))
-trigger1 = !numpartner
-trigger2 = numpartner
-trigger2 = !(partner,authorname="warusaki3"&&partner,fvar(39)=1)
-trigger2 = !(partner,authorname="Mouser"&&partner,name="Hibiki Takane")
-trigger2 = !(ID-partner,ID>0 && partner,authorname="rei"&&partner,fvar(39)=1)
-trigger2 = !(ID-partner,ID>0 && partner,authorname="gal129"&&partner,fvar(39)=1)
+trigger1 = 1  ;[ultimabrawlers P169] self-host gauge (relaxed arbitration; dh_system bench guards then hide per-char on tag-out)
 id = 8200
 name = "gauge"
 pos = 0,250
@@ -7400,10 +7385,7 @@ triggerall = !NumHelper(8099)
 triggerall = numenemy
 triggerall = !(enemy,authorname="rei"&&enemy,fvar(39)=1)
 triggerall = !(enemy,authorname="gal129"&&enemy,fvar(39)=1)
-trigger1 = !numpartner
-trigger2 = numpartner
-trigger2 = !(ID-partner,ID>0 && partner,authorname="rei"&&partner,fvar(39)=1)
-trigger2 = !(ID-partner,ID>0 && partner,authorname="gal129"&&partner,fvar(39)=1)
+trigger1 = 1  ;[ultimabrawlers P169] self-host (relaxed arbitration; dh_system bench guards hide per-char on tag-out)
 ID = 8099
 stateno = 8099
 postype = p1

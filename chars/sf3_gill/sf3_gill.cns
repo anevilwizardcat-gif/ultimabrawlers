@@ -2783,22 +2783,23 @@ type = AssertSpecial
 trigger1 = 1
 flag = nomusic
 
-[State 10000, Explod]
-type = Explod
-trigger1 = time = 1
-anim = 8920
-id = 10000
-pos =  160,120
-postype = left
-sprpriority = 15
-facing = 1
-bindtime = -1
-ownpal = 1
-removetime = 999999999999
-pausemovetime = 99999999999999
-supermovetime = 99999999999999
-supermove = 1
-scale = 0.5*0.9,0.5*1.05
+; ----- [ultimabrawlers] SF3 finisher K.O.-text overlay disabled (global fight.def K.O. shows instead). Backdrop kept. Revert: uncomment block below. -----
+;[State 10000, Explod]
+;type = Explod
+;trigger1 = time = 1
+;anim = 8920
+;id = 10000
+;pos =  160,120
+;postype = left
+;sprpriority = 15
+;facing = 1
+;bindtime = -1
+;ownpal = 1
+;removetime = 999999999999
+;pausemovetime = 99999999999999
+;supermovetime = 99999999999999
+;supermove = 1
+;scale = 0.5*0.9,0.5*1.05
 
 [State 10000, Explod]
 type = Explod
@@ -3225,41 +3226,43 @@ ctrl = 0
 velset = 0,0
 
 ;ƒXƒ^ƒ“ƒQ[ƒW(‚P‚o‘¤)
-[State -2, Explod]
-type = Explod
-trigger1 = numhelper(30000)
-trigger1 = roundstate = 2
-trigger1 = numexplod(25000) = 0
-trigger1 = root,Var(1) = 1
-anim = 25000
-ID = 25000
-pos = helper(30000),var(22),helper(30000),var(23)
-postype = left
-pausemovetime = -1
-supermovetime = -1
-supermove = 1
-bindtime = -1
-sprpriority = -10
-ownpal = 1
-ignorehitpause = 1
-scale = 0.5,0.5
+; ----- [ultimabrawlers] Gill STUN bar removed (draws disabled). Revert: uncomment. -----
+;[State -2, Explod]
+;type = Explod
+;trigger1 = numhelper(30000)
+;trigger1 = roundstate = 2
+;trigger1 = numexplod(25000) = 0
+;trigger1 = root,Var(1) = 1
+;anim = 25000
+;ID = 25000
+;pos = helper(30000),var(22),helper(30000),var(23)
+;postype = left
+;pausemovetime = -1
+;supermovetime = -1
+;supermove = 1
+;bindtime = -1
+;sprpriority = -10
+;ownpal = 1
+;ignorehitpause = 1
+;scale = 0.5,0.5
 
-[State -2, Explod]
-type = Explod
-trigger1 = numhelper(30000)
-trigger1 = roundstate = 2
-trigger1 = numexplod(25002) = 0
-trigger1 = root,Var(1) = 1
-anim = 25002
-ID = 25002
-pos = helper(30000),var(22),helper(30000),var(23)
-postype = left
-pausemovetime = -1
-supermovetime = -1
-bindtime = -1
-sprpriority = -9
-ownpal = 1
-ignorehitpause = 1
+; ----- [ultimabrawlers] Gill STUN bar removed (draws disabled). Revert: uncomment. -----
+;[State -2, Explod]
+;type = Explod
+;trigger1 = numhelper(30000)
+;trigger1 = roundstate = 2
+;trigger1 = numexplod(25002) = 0
+;trigger1 = root,Var(1) = 1
+;anim = 25002
+;ID = 25002
+;pos = helper(30000),var(22),helper(30000),var(23)
+;postype = left
+;pausemovetime = -1
+;supermovetime = -1
+;bindtime = -1
+;sprpriority = -9
+;ownpal = 1
+;ignorehitpause = 1
 
 [State -2, ModifyExplod]
 type = ModifyExplod
@@ -3281,25 +3284,26 @@ trigger2 = roundstate > 2
 ID = 25002
 ignorehitpause = 1
 
-[State -2, Explod]
-type = Explod
-trigger1 = numhelper(30000)
-trigger1 = roundstate = 2
-trigger1 = numexplod(25003) = 0
-trigger1 = root,fvar(2) = 72
-trigger1 = root,Var(1) = 1
-anim = 25003
-ID = 25003
-pos = helper(30000),var(22),helper(30000),var(23)
-postype = left
-pausemovetime = 99999999999999
-supermovetime = 99999999999999
-supermove = 1
-bindtime = -1
-sprpriority = -9
-ownpal = 1
-ignorehitpause = 1
-scale = 0.5,0.5
+; ----- [ultimabrawlers] Gill STUN bar removed (draws disabled). Revert: uncomment. -----
+;[State -2, Explod]
+;type = Explod
+;trigger1 = numhelper(30000)
+;trigger1 = roundstate = 2
+;trigger1 = numexplod(25003) = 0
+;trigger1 = root,fvar(2) = 72
+;trigger1 = root,Var(1) = 1
+;anim = 25003
+;ID = 25003
+;pos = helper(30000),var(22),helper(30000),var(23)
+;postype = left
+;pausemovetime = 99999999999999
+;supermovetime = 99999999999999
+;supermove = 1
+;bindtime = -1
+;sprpriority = -9
+;ownpal = 1
+;ignorehitpause = 1
+;scale = 0.5,0.5
 
 [State -2, RemoveExplod]
 type = RemoveExplod
@@ -3309,41 +3313,43 @@ ID = 25003
 ignorehitpause = 1
 
 ;ƒXƒ^ƒ“ƒQ[ƒW(‚Q‚o‘¤)
-[State -2, Explod]
-type = Explod
-trigger1 = numhelper(30000)
-trigger1 = roundstate = 2
-trigger1 = numexplod(25001) = 0
-trigger1 = root,Var(1) = 2
-anim = 25001
-ID = 25001
-pos = -helper(30000),var(22),helper(30000),var(23)
-postype = right
-pausemovetime = -1
-supermovetime = -1
-supermove = 1
-bindtime = -1
-sprpriority = -10
-ownpal = 1
-ignorehitpause = 1
-scale = 0.5,0.5
+; ----- [ultimabrawlers] Gill STUN bar removed (draws disabled). Revert: uncomment. -----
+;[State -2, Explod]
+;type = Explod
+;trigger1 = numhelper(30000)
+;trigger1 = roundstate = 2
+;trigger1 = numexplod(25001) = 0
+;trigger1 = root,Var(1) = 2
+;anim = 25001
+;ID = 25001
+;pos = -helper(30000),var(22),helper(30000),var(23)
+;postype = right
+;pausemovetime = -1
+;supermovetime = -1
+;supermove = 1
+;bindtime = -1
+;sprpriority = -10
+;ownpal = 1
+;ignorehitpause = 1
+;scale = 0.5,0.5
 
-[State -2, Explod]
-type = Explod
-trigger1 = numhelper(30000)
-trigger1 = roundstate = 2
-trigger1 = numexplod(25004) = 0
-trigger1 = root,Var(1) = 2
-anim = 25004
-ID = 25004
-pos = -helper(30000),var(22),helper(30000),var(23)
-postype = right
-pausemovetime = -1
-supermovetime = -1
-bindtime = -1
-sprpriority = -9
-ownpal = 1
-ignorehitpause = 1
+; ----- [ultimabrawlers] Gill STUN bar removed (draws disabled). Revert: uncomment. -----
+;[State -2, Explod]
+;type = Explod
+;trigger1 = numhelper(30000)
+;trigger1 = roundstate = 2
+;trigger1 = numexplod(25004) = 0
+;trigger1 = root,Var(1) = 2
+;anim = 25004
+;ID = 25004
+;pos = -helper(30000),var(22),helper(30000),var(23)
+;postype = right
+;pausemovetime = -1
+;supermovetime = -1
+;bindtime = -1
+;sprpriority = -9
+;ownpal = 1
+;ignorehitpause = 1
 
 [State -2, ModifyExplod]
 type = ModifyExplod
@@ -3365,25 +3371,26 @@ trigger2 = roundstate > 2
 ID = 25004
 ignorehitpause = 1
 
-[State -2, Explod]
-type = Explod
-trigger1 = numhelper(30000)
-trigger1 = roundstate = 2
-trigger1 = numexplod(25005) = 0
-trigger1 = root,fvar(2) = 72
-trigger1 = root,Var(1) = 2
-anim = 25005
-ID = 25005
-pos = -helper(30000),var(22),helper(30000),var(23)
-postype = right
-pausemovetime = 99999999999999
-supermovetime = 99999999999999
-supermove = 1
-bindtime = -1
-sprpriority = -9
-ownpal = 1
-ignorehitpause = 1
-scale = 0.5,0.5
+; ----- [ultimabrawlers] Gill STUN bar removed (draws disabled). Revert: uncomment. -----
+;[State -2, Explod]
+;type = Explod
+;trigger1 = numhelper(30000)
+;trigger1 = roundstate = 2
+;trigger1 = numexplod(25005) = 0
+;trigger1 = root,fvar(2) = 72
+;trigger1 = root,Var(1) = 2
+;anim = 25005
+;ID = 25005
+;pos = -helper(30000),var(22),helper(30000),var(23)
+;postype = right
+;pausemovetime = 99999999999999
+;supermovetime = 99999999999999
+;supermove = 1
+;bindtime = -1
+;sprpriority = -9
+;ownpal = 1
+;ignorehitpause = 1
+;scale = 0.5,0.5
 
 [State -2, RemoveExplod]
 type = RemoveExplod
@@ -3399,6 +3406,12 @@ ignorehitpause = 1
 type = S
 anim = 9999
 
+[State 50000, Bench UI Sweep]
+type = RemoveExplod
+trigger1 = root,stateno = [6565610,6565611]
+trigger2 = roundstate > 2
+trigger3 = !root,alive
+
 [State -3, ‰¹‚ð–Â‚ç‚·]
 type = PlaySnd
 triggerall = roundstate >= 2
@@ -3411,6 +3424,7 @@ channel = 15
 
 [State -2, Explod]
 type = Explod
+triggerall = root,stateno != [6565610,6565611] && root,alive && roundstate <= 2
 trigger1 = numhelper(40000) = 0
 trigger1 = numexplod(35000) = 0
 trigger1 = root,var(1) = 1
@@ -3429,6 +3443,7 @@ scale = 0.5,0.5
 
 [State -2, Explod]
 type = Explod
+triggerall = root,stateno != [6565610,6565611] && root,alive && roundstate <= 2
 trigger1 = numhelper(40000) = 0
 trigger1 = numexplod(35000) = 0
 trigger1 = root,var(1) = 2
@@ -3447,6 +3462,7 @@ scale = 0.5,0.5
 
 [State -2, Explod]
 type = Explod
+triggerall = root,stateno != [6565610,6565611] && root,alive && roundstate <= 2
 triggerall = numexplod(35000)
 triggerall = numexplod(35100) = 0
 triggerall = root,var(1) = 1
@@ -3467,6 +3483,7 @@ scale = 0.5,0.5
 
 [State -2, Explod]
 type = Explod
+triggerall = root,stateno != [6565610,6565611] && root,alive && roundstate <= 2
 triggerall = numexplod(35000)
 triggerall = numexplod(35100) = 0
 triggerall = root,var(1) = 2
@@ -3487,6 +3504,7 @@ scale = 0.5,0.5
 
 [State -2, Explod]
 type = Explod
+triggerall = root,stateno != [6565610,6565611] && root,alive && roundstate <= 2
 triggerall = numexplod(35000)
 triggerall = numexplod(35101) = 0
 triggerall = root,var(1) = 1
@@ -3507,6 +3525,7 @@ scale = 0.5,0.5
 
 [State -2, Explod]
 type = Explod
+triggerall = root,stateno != [6565610,6565611] && root,alive && roundstate <= 2
 triggerall = numexplod(35000)
 triggerall = numexplod(35101) = 0
 triggerall = root,var(1) = 2
@@ -3527,6 +3546,7 @@ scale = 0.5,0.5
 
 [State -2, Explod]
 type = Explod
+triggerall = root,stateno != [6565610,6565611] && root,alive && roundstate <= 2
 trigger1 = numexplod(35000)
 trigger1 = numexplod(35200) = 0
 trigger1 = root,var(1) = 1
@@ -3546,6 +3566,7 @@ scale = 0.5,0.5
 
 [State -2, Explod]
 type = Explod
+triggerall = root,stateno != [6565610,6565611] && root,alive && roundstate <= 2
 trigger1 = numexplod(35000)
 trigger1 = numexplod(35200) = 0
 trigger1 = root,var(1) = 2
@@ -3565,6 +3586,7 @@ scale = 0.5,0.5
 
 [State -2, Explod]
 type = Explod
+triggerall = root,stateno != [6565610,6565611] && root,alive && roundstate <= 2
 trigger1 = numexplod(35000)
 trigger1 = numexplod(35300) = 0
 trigger1 = root,var(1) = 1
@@ -3583,6 +3605,7 @@ scale = 0.5,0.5
 
 [State -2, Explod]
 type = Explod
+triggerall = root,stateno != [6565610,6565611] && root,alive && roundstate <= 2
 trigger1 = numexplod(35000)
 trigger1 = numexplod(35300) = 0
 trigger1 = root,var(1) = 2

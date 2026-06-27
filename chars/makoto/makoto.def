@@ -1,0 +1,88 @@
+;var(1) ＴＣ連打判定
+;var(2) 疾風タメレベル
+;var(3) 土佐波画面端までの距離
+;var(4) 正中線、土佐ヒット
+;var(5) 土佐コマンド判別
+;var(6) 土佐丹田音声選択
+;var(7) ＨＪ入力
+;var(8) 丹田タイマー
+;var(9) 丹田時パワー保管
+;var(10) 前ブロ入力
+;var(11) 下ブロ入力
+;var(12) 前ブロ入力地対空
+;var(13) 赤前ブロ入力
+;var(14) 赤下ブロ入力
+;var(15) 疾風タメ増加ダメージ
+;var(16) コマンド判別
+
+;var(19) よろけＫＯ
+;var(20) グラップディフェンス
+;var(21) ディレイ用
+;var(22) ディレイ用
+;var(23) コマンド判別
+;var(24) コマンド判別
+;var(25) 正中線ヒット
+;var(26) 土佐波ヒット
+;var(27) 疾風ヒット
+;var(28) 吹上ヒット
+;var(29) 颪ヒット
+;var(30) ヒット数用フラグ
+;var(31) ヒット数
+;var(32) 浮かせフラグ
+;var(33) 唐草中
+;var(34) トレーニン
+;var(35) GetHitVar(hitshaketime)
+;var(36) スタン値
+;var(37) 相手のstatetype
+;var(38) ピヨリ中相手のレバガチャ
+;var(39) スタン封印フラグ
+
+
+;var(48) 弱キャン唐草がコンボにならないように 
+;var(49) 
+;var(50) 空手頭脳
+;var(51) ＳＡ選択
+
+;fvar(3) 丹田増加分
+;fvar(4) ＰＡ増加分
+;fvar(5) 相手体力少ないよ
+;fvar(6) コンボ補正ＳＡ以外
+;fvar(7) コンボ補正ＳＡ
+;fvar(10) パワー量
+;fvar(18) 土佐波補正
+
+[Info]
+name = "Makoto"
+displayname = "Makoto"
+versiondate = 04,14,2001
+mugenversion = 04,14,2001
+author = "NHK"
+pal.defaults = 6,3,4,2
+
+; Files for the player
+[Files]
+cmd     = makoto.cmd
+cns     = makoto.cns
+st      = makoto.cns
+st2     = makoto2.cns
+st3     = makoto3.cns
+st4     = makoto4.cns
+st5     = makoto5.cns
+st6     = stan.cns
+st7     = m-2.cns
+stcommon = mcommonw.cns
+sprite  = makoto.sff
+anim    = makoto.air
+sound   = makoto.snd
+pal1    = makoto2.act
+pal2    = makoto4.act
+pal3    = makoto6.act
+pal4    = makoto.act
+pal5    = makoto3.act
+pal6    = makoto5.act
+pal7    = makotoz.act
+
+; Arcade mode
+[Arcade]
+;intro.storyboard = intro.def
+;ending.storyboard = ending.def

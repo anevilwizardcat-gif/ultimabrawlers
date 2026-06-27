@@ -32,10 +32,8 @@
 ;Var(31) = KƒOƒ‹[ƒ”ƒ‰ƒCƒtc—Ê‚É‚æ‚éƒpƒ[‘‰Á—Ê•Ï“®
 ;Var(32) = roundstate3ŠÔŒo‰ß
 ;Var(33) = ¾•—Œ2”­–ÚX²
-;Var(34) = ‘OƒuƒƒbƒLƒ“ƒO“ü—ÍŒãƒjƒ
-[ƒgƒ‰ƒ‹‚É–ß‚µ‚½‚©”Û‚©
-;Var(35) = ‰ºƒuƒƒbƒLƒ“ƒO“ü—ÍŒãƒjƒ
-[ƒgƒ‰ƒ‹‚É–ß‚µ‚½‚©”Û‚©
+;Var(34) = ‘OƒuƒƒbƒLƒ“ƒO“ü—ÍŒãƒjƒ…[ƒgƒ‰ƒ‹‚É–ß‚µ‚½‚©”Û‚©
+;Var(35) = ‰ºƒuƒƒbƒLƒ“ƒO“ü—ÍŒãƒjƒ…[ƒgƒ‰ƒ‹‚É–ß‚µ‚½‚©”Û‚©
 ;Var(36) = Hit”»’è
 ;Var(37) = gethitvar(hitshaketime)
 ;Var(38) = ƒJƒEƒ“ƒ^[ƒqƒbƒgƒGƒtƒFƒNƒg•\¦ˆÊ’uiX²jiUŒ‚j
@@ -70,8 +68,7 @@
 ;fvar(6)  = ƒ{[ƒiƒXƒƒbƒZ[ƒWƒAƒCƒRƒ“•\¦“ñ’i–Ú—L–³
 ;fvar(7)  = ƒ{[ƒiƒXƒƒbƒZ[ƒWƒAƒCƒRƒ“•\¦O’i–Ú—L–³
 ;fvar(8)  = ƒAƒCƒRƒ“í—Ş
-;fvar(9)  = ƒtƒBƒjƒbƒVƒ
-ƒqƒbƒg”»’è
+;fvar(9)  = ƒtƒBƒjƒbƒVƒ…ƒqƒbƒg”»’è
 ;fvar(10) = UŒ‚—Í•â³
 ;fvar(11) = roundstate4Œo‰ßŠÔ
 ;fvar(12) = ƒ‰ƒCƒt
@@ -118,8 +115,7 @@ IntPersistIndex = 0
 FloatPersistIndex = 0
 
 [Size]
-xscale = 1			;
-•½•ûŒü‚ÌkÚi’Êí‚Pj
+xscale = 1			;…•½•ûŒü‚ÌkÚi’Êí‚Pj
 yscale = 1			;‚’¼•ûŒü‚ÌkÚi’Êí‚Pj
 ground.back = 15		;ƒLƒƒƒ‰‚Ì•(Œã•û,’nã)
 ground.front = 15		;ƒLƒƒƒ‰‚Ì•(‘O•û,’nã)
@@ -137,17 +133,13 @@ draw.offset = 0,0		;g—p‚µ‚È‚¢
 [Velocity]
 walk.fwd  = 2.5		;‘Oi‚Ì‘¬“x
 walk.back = -2.08		;Œã‘Ş‚Ì‘¬“x
-run.fwd  = 5.67, 0		;‘Oƒ_ƒbƒVƒ
-‚Ì‘¬“xiƒzƒbƒv‚·‚é‚Íy‚ğ-‚É‚·‚éj
-run.back = -4.8,-4.5		;Œãƒ_ƒbƒVƒ
-‚Ì‘¬“xiƒzƒbƒv‚·‚é‚Íy‚ğ-‚É‚·‚éj
+run.fwd  = 5.67, 0		;‘Oƒ_ƒbƒVƒ…‚Ì‘¬“xiƒzƒbƒv‚·‚é‚Íy‚ğ-‚É‚·‚éj
+run.back = -4.8,-4.5		;Œãƒ_ƒbƒVƒ…‚Ì‘¬“xiƒzƒbƒv‚·‚é‚Íy‚ğ-‚É‚·‚éj
 jump.neu = 0,-9.33		;‚’¼ƒWƒƒƒ“ƒv‚Ì‘¬“x
 jump.back = -3.95		;ŒãƒWƒƒƒ“ƒv‚Ì‘¬“x
 jump.fwd = 3.33		;‘OƒWƒƒƒ“ƒv‚Ì‘¬“x
-runjump.back = -5.93,-9.7	;Œãƒ_ƒbƒVƒ
-‚µ‚È‚ª‚ç‚ÌƒWƒƒƒ“ƒv‘¬“x(ƒIƒvƒVƒ‡ƒ“)
-runjump.fwd = 5.00,-9.7	;‘Oƒ_ƒbƒVƒ
-‚µ‚È‚ª‚ç‚ÌƒWƒƒƒ“ƒv‘¬“x(ƒIƒvƒVƒ‡ƒ“)
+runjump.back = -5.93,-9.7	;Œãƒ_ƒbƒVƒ…‚µ‚È‚ª‚ç‚ÌƒWƒƒƒ“ƒv‘¬“x(ƒIƒvƒVƒ‡ƒ“)
+runjump.fwd = 5.00,-9.7	;‘Oƒ_ƒbƒVƒ…‚µ‚È‚ª‚ç‚ÌƒWƒƒƒ“ƒv‘¬“x(ƒIƒvƒVƒ‡ƒ“)
 airjump.neu = 0,-6.5		;‚Q’iƒWƒƒƒ“ƒvˆÈ~‚Ì‚’¼ƒWƒƒƒ“ƒv‚Ì‘¬“x(ƒIƒvƒVƒ‡ƒ“)
 airjump.back = -2.8		;‚Q’iƒWƒƒƒ“ƒvˆÈ~‚ÌŒãƒWƒƒƒ“ƒv‚Ì‘¬“x(ƒIƒvƒVƒ‡ƒ“)
 airjump.fwd = 2.8		;‚Q’iƒWƒƒƒ“ƒvˆÈ~‚Ì‘OƒWƒƒƒ“ƒv‚Ì‘¬“x
@@ -356,8 +348,7 @@ trigger1 = animtime = 0
 value = 103
 
 ;---------------------------------------------------------------------------
-;ƒXƒeƒbƒv’
-’n
+;ƒXƒeƒbƒv’…’n
 [Statedef 103]
 type    = S
 physics = S
@@ -437,8 +428,7 @@ trigger1 = animtime = 0
 value = 106
 
 ;---------------------------------------------------------------------------
-;ƒoƒbƒNƒXƒeƒbƒvi’
-’nj
+;ƒoƒbƒNƒXƒeƒbƒvi’…’nj
 [Statedef 106]
 type    = S
 physics = S
@@ -6423,8 +6413,7 @@ trigger1 = Pos Y >= 0 && Vel Y > 0
 value = 1105
 
 ;---------------------------------------------------------------------------
-;¾•—Œi•\ji’
-’nj
+;¾•—Œi•\ji’…’nj
 [Statedef 1105]
 type    = S
 physics = S
@@ -10357,8 +10346,7 @@ type = DestroySelf
 trigger1 = animtime = 0
 
 ;---------------------------------------------------------------------------
-;—
-¶–å
+;—…¶–å
 [Statedef 3200]
 type    = S
 movetype = A
@@ -10526,8 +10514,7 @@ value = 0
 ctrl = 1
 
 ;---------------------------------------------------------------------------
-;—
-¶–åi”­“®j
+;—…¶–åi”­“®j
 [Statedef 3201]
 type    = S
 movetype= A
@@ -10663,8 +10650,7 @@ value = 0
 ctrl = 1
 
 ;---------------------------------------------------------------------------
-;—
-¶–åi”­“®ji‘Šèj1
+;—…¶–åi”­“®ji‘Šèj1
 [Statedef 3205]
 type    = A
 movetype= H
@@ -10739,8 +10725,7 @@ trigger1 = Pos Y >= 0
 value = 5100
 
 ;---------------------------------------------------------------------------
-;—
-¶–åi”­“®ji‘Šèj2
+;—…¶–åi”­“®ji‘Šèj2
 [Statedef 3206]
 type    = L
 movetype= H
@@ -10822,8 +10807,7 @@ trigger1 = Pos Y >= 0
 value = 5100
 
 ;---------------------------------------------------------------------------
-;—
-¶–åi”­“®ji‘Šèj3
+;—…¶–åi”­“®ji‘Šèj3
 [Statedef 3209]
 type    = A
 movetype = H
@@ -10843,8 +10827,7 @@ trigger1 = 1
 value = SCA
 
 ;---------------------------------------------------------------------------
-;—
-¶–åiI—¹j
+;—…¶–åiI—¹j
 [Statedef 3202]
 type = S
 ctrl = 0
@@ -10913,8 +10896,7 @@ trigger1 = animTime = 0
 value = 3203
 
 ;---------------------------------------------------------------------------
-;—
-¶–åiI—¹jiKO1j
+;—…¶–åiI—¹jiKO1j
 [Statedef 3203]
 type    = S
 movetype= I
@@ -10937,8 +10919,7 @@ value = 0
 ctrl = 1
 
 ;---------------------------------------------------------------------------
-;—
-¶–åiI—¹jiKO2j
+;—…¶–åiI—¹jiKO2j
 [Statedef 3204]
 type    = S
 movetype= I
@@ -12326,8 +12307,7 @@ value = 0
 ctrl = 1
 
 ;---------------------------------------------------------------------------
-;ˆ¢C—
-¾•—Œ
+;ˆ¢C—…¾•—Œ
 [Statedef 3400]
 type    = S
 movetype = A
@@ -12347,10 +12327,7 @@ triggerall = !var(59)
 triggerall = !var(15) && !var(16)
 triggerall = !var(20) || var(20) = 6
 trigger1 = Time = 0
-var(5) = ifelse((command = "ˆ¢C—
-¾•—Œ2" && Power >= 2000) || (command = "ˆ¢C—
-¾•—Œ3" && (Power >= 2000 && Power < 3000)), 1, ifelse(command = "ˆ¢C—
-¾•—Œ3" && Power >= 3000, 2, 0))
+var(5) = ifelse((command = "ˆ¢C—…¾•—Œ2" && Power >= 2000) || (command = "ˆ¢C—…¾•—Œ3" && (Power >= 2000 && Power < 3000)), 1, ifelse(command = "ˆ¢C—…¾•—Œ3" && Power >= 3000, 2, 0))
 
 [State 1100, VarSet]
 type = VarSet
@@ -12607,8 +12584,7 @@ value = 0
 ctrl = 1
 
 ;------------------------------------------------------------------------------------------
-;ˆ¢C—
-¾•—ŒiUŒ‚j
+;ˆ¢C—…¾•—ŒiUŒ‚j
 [Statedef 3401]
 type    = S
 movetype = A
@@ -12965,8 +12941,7 @@ value = 0
 ctrl = 1
 
 ;---------------------------------------------------------------------------
-;ˆ¢C—
-¾•—Œi”ò‚Ñ“¹‹ïj1
+;ˆ¢C—…¾•—Œi”ò‚Ñ“¹‹ïj1
 [Statedef 7150]
 type    = S
 movetype = I
@@ -13115,8 +13090,7 @@ trigger1 = !root,NumProjID(3405)
 value = 7105
 
 ;---------------------------------------------------------------------------
-;ˆ¢C—
-¾•—Œi”ò‚Ñ“¹‹ïj2
+;ˆ¢C—…¾•—Œi”ò‚Ñ“¹‹ïj2
 [Statedef 7151]
 type    = S
 movetype = I
@@ -13741,8 +13715,7 @@ trigger1 = 1
 x = 0.85
 
 ;---------------------------------------------------------------------------
-;ƒI[ƒ‰iƒjƒ
-[ƒgƒ‰ƒ‹j
+;ƒI[ƒ‰iƒjƒ…[ƒgƒ‰ƒ‹j
 [Statedef 7400]
 type    = S
 movetype = I
@@ -14112,8 +14085,7 @@ trigger4 = root,stateno = 5012
 value = 7441
 
 ;---------------------------------------------------------------------------
-;ƒI[ƒ‰iƒ_ƒbƒVƒ
-j
+;ƒI[ƒ‰iƒ_ƒbƒVƒ…j
 [Statedef 7420]
 type    = S
 movetype = I
@@ -14240,8 +14212,7 @@ trigger7 = root,stateno = 2900
 value = 7450
 
 ;---------------------------------------------------------------------------
-;ƒI[ƒ‰iƒoƒbƒNƒ_ƒbƒVƒ
-j
+;ƒI[ƒ‰iƒoƒbƒNƒ_ƒbƒVƒ…j
 [Statedef 7421]
 type    = S
 movetype = I
@@ -14876,15 +14847,7 @@ type = helper
 triggerall = time = 0
 triggerall = roundstate = 0
 triggerall = roundsexisted <= 0
-trigger1 = numpartner
-trigger1 = ID>partner,ID
-trigger1 = !partner,authorname = "warusaki3"
-trigger1 = !(partner,authorname = "mouser" && partner,name = "Hibiki Takane")
-trigger1 = !partner,authorname = "Hh"
-trigger1 = !partner,authorname = "Jesuszilla"
-trigger2 = numpartner
-trigger2 = ID<partner,ID
-trigger3 = !numpartner
+trigger1 = 1  ;[ultimabrawlers P169] self-host gauge (relaxed ID<>partner so each teammate spawns own meter)
 ID = 6000
 stateno = 6000
 postype = p1
@@ -14894,32 +14857,33 @@ pausemovetime = 99999999999999
 supermovetime = 99999999999999
 
 ;ƒOƒ‹[ƒ”ƒ|ƒCƒ“ƒg—pƒwƒ‹ƒp[
-[State 3001, Super]
-type = Helper
-triggerall = numenemy
-triggerall = !fvar(3)
-triggerall = !NumHelper(6500) && !NumHelper(6000)
-trigger1 = numpartner
-trigger1 = ID>partner,ID
-trigger1 = !partner,authorname = "warusaki3"
-trigger1 = !(partner,authorname = "mouser" && partner,name = "Hibiki Takane")
-trigger1 = !partner,authorname = "Hh"
-trigger1 = !partner,authorname = "Jesuszilla"
-trigger2 = numpartner
-trigger2 = ID<partner,ID
-trigger3 = !numpartner
-id = 6500
-name = "groove point"
-pos = 0,300
-postype = Left
-stateno = 6500
-helpertype = normal
-keyctrl = 0
-ownpal = 1
-pausemovetime = 99999999999999
-supermovetime = 99999999999999
+; ----- [ultimabrawlers] Geese GP (groove-point) counter+box spawn disabled (P167)
+;[State 3001, Super]
+;type = Helper
+;triggerall = numenemy
+;triggerall = !fvar(3)
+;triggerall = !NumHelper(6500) && !NumHelper(6000)
+;trigger1 = numpartner
+;trigger1 = ID>partner,ID
+;trigger1 = !partner,authorname = "warusaki3"
+;trigger1 = !(partner,authorname = "mouser" && partner,name = "Hibiki Takane")
+;trigger1 = !partner,authorname = "Hh"
+;trigger1 = !partner,authorname = "Jesuszilla"
+;trigger2 = numpartner
+;trigger2 = ID<partner,ID
+;trigger3 = !numpartner
+;id = 6500
+;name = "groove point"
+;pos = 0,300
+;postype = Left
+;stateno = 6500
+;helpertype = normal
+;keyctrl = 0
+;ownpal = 1
+;pausemovetime = 99999999999999
+;supermovetime = 99999999999999
 
-;AI”»•Ê
+;;AI”»•Ê
 [State -2, 3]
 type = VarSet
 trigger1 = IsHomeTeam && Roundstate = 0 && Pos X > 0
@@ -15109,8 +15073,7 @@ trigger1 = var(29) = 6
 var(29) = 0
 ignorehitpause = 1
 
-;ˆ¢C—
-¾•—ŒƒqƒbƒgŒø‰Ê
+;ˆ¢C—…¾•—ŒƒqƒbƒgŒø‰Ê
 [State 901, Throw]
 type = TargetState
 trigger1 = stateno = 3401
@@ -15268,15 +15231,7 @@ var(49) = 3
 type = Helper
 triggerall = !NumHelper(6100) && !NumHelper(6000)
 triggerall = numenemy
-trigger1 = numpartner
-trigger1 = ID>partner,ID
-trigger1 = !partner,authorname = "warusaki3"
-trigger1 = !(partner,authorname = "mouser" && partner,name = "Hibiki Takane")
-trigger1 = !partner,authorname = "Hh"
-trigger1 = !partner,authorname = "Jesuszilla"
-trigger2 = numpartner
-trigger2 = ID<partner,ID
-trigger3 = !numpartner
+trigger1 = 1  ;[ultimabrawlers P169] self-host gauge (relaxed ID<>partner so each teammate spawns own meter)
 id = 6100
 name = "gauge"
 pos = 0,300
@@ -16507,8 +16462,7 @@ trigger2 = (stateno = [1000,3999]) && time = 1
 fvar(23) = 0
 ignorehitpause = 1
 
-;ƒtƒBƒjƒbƒVƒ
-ƒqƒbƒg”»’è
+;ƒtƒBƒjƒbƒVƒ…ƒqƒbƒg”»’è
 [State 180, 1]
 type = VarSet
 triggerall = alive

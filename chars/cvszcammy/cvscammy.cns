@@ -11693,6 +11693,12 @@ value = 5150
 [Statedef -2]
 
 ;configŒÄ‚Ño‚µ
+[State -2, Hide Engine Power Bar]
+type = AssertSpecial
+trigger1 = 1
+flag = noPowerBarDisplay
+ignorehitpause = 1
+
 [State 3001, Super]
 type = Helper
 triggerall = !NumHelper(10000)

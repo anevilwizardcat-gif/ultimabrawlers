@@ -1,0 +1,37 @@
+
+; Player information
+[Info]
+name ="RAOH"
+displayname ="RAOH"
+versiondate =09,21,2007
+mugenversion =04,14,2001
+author ="Drowin hokuto"
+pal.defaults =4
+
+; Files for the player
+[Files]
+cmd     = raoh.cmd   ;Command set
+cns     = Seikimatuhasya.cns   ;Constants
+st      = SeikimatuHasya.cns   ;States
+st1     =hokuto.cns
+st2     =arcana.cns
+stcommon = Scommon.cns ;Common states
+sprite  = 00.sff;ken.sff   ;Sprite
+anim    = raoh.air   ;Animation
+sound   = raoh2.snd   ;Sound
+pal1    = raoh.act;a 
+pal2    = color/amecomi.act;b
+pal3    = color/blue.act;c
+pal4    = raoh.act;x
+pal5    = color/dark.act;y
+pal6    = color/black.act;z
+pal7    = color/SSJ.act;sa
+pal8    = color/red.act;sb
+pal9    = color/kishima.act;sc
+pal10   = color/poison.act; 
+pal11   = color/white.act
+pal12   = color/yellow.act
+
+[Arcade];
+intro.storyboard=
+ending.storyboard=
