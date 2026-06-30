@@ -52049,6 +52049,18 @@ value = 5110
 
 ;---------------------------------------------------------------------------
 [Statedef -2]
+[State -2, Stop-end safety net: end stop if duration ran out while off the stop sequence (prevents frozen-forever softlock)]
+type = ChangeState
+trigger1 = roundstate = 2 && var(0) = 1 && !var(2) && movetype != H && stateno != [3200, 3255]
+value = 3255
+ignorehitpause = 1
+
+[State -2, Tag transition var(0) reset]
+type = VarSet
+trigger1 = stateno = [6565610, 6565620]
+var(0) = 0
+ignorehitpause = 1
+
 [State -2, Voice Loop Failsafe]
 type = StopSnd
 triggerall = movetype = H
@@ -52111,9 +52123,8 @@ ignorehitpause = 1
 [State -2, Timestop Owner Flag]
 type = mapset
 trigger1 = !ishelper
-trigger1 = numhelper(3210)
 map = "ownStop"
-value = 1
+value = (var(0) > 0)
 ignorehitpause = 1
 
 

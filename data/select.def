@@ -234,15 +234,15 @@ sf3_chun-li, mvc2-training.def, next = y
 cvs_honda, TowerOfShogun.def
 cvszangief, TowerOfShogun.def
 cvs2_blanka, TowerOfShogun.def
+cvs2_dhalsim, SF3 Battle Arena Rd 02.def
 cvsguile, SF3 Battle Arena Rd 02.def
 cvszcammy, SF3 Battle Arena Rd 02.def
-cvs2_dhalsim, SF3 Battle Arena Rd 02.def
 slot = {
 cvsgouki, MemoriaTimeInterval.def, next = y
 sf3_gouki, mvc2-training.def, next = y
 }
 cvsvega, MemoriaTimeInterval.def
-CFJ_JuriHan, SF3 Battle Arena Rd 02.def
+makoto, SF3 Battle Arena Rd 02.def
 cvssakura, SF3 Battle Arena Rd 02.def
 slot = {
 cvsalex, SF3 Battle Arena Rd 02.def, next = y
@@ -300,6 +300,7 @@ Dante_KOF, DMC3-Tower.def, next = y
 vergil, DMC3-Tower.def
 nero_DMC4, DMC3-Tower.def
 KENSHIROU, MemoriaTimeInterval.def
+RAOH, MemoriaTimeInterval.def
 ;sf3_ryu -> merged into the cvsryu echo slot (P119); stripped at parse = no cell here
 ;sf3_ken -> merged into the cvsken variant slot (P134)
 ;sf3_chun-li -> merged into the cvschunli variant slot (P134)
@@ -394,9 +395,13 @@ stages/Hilltop.def
 stages/DeathValleyXvSF.def
 stages/LiveHousePurple.def
 stages/SF3 Battle Arena Rd 02.def
+stages/S3_Akuma.def
+stages/makotostage.def
 stages/TowerOfShogun.def
 stages/SuzakuCastleWW.def
 stages/DerelictChurch.def
+stages/Phantom_Train_OUT.def
+stages/Phantom_Train_IN.def
 stages/FF7Arena.def
 stages/NibelReactorHR.def
 stages/MemoriaTimeInterval.def

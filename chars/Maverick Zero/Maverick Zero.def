@@ -13,6 +13,7 @@ pal.defaults = 1,2,3       ;Default palettes in order of preference
 ; Files for the player
 [Files]
 cmd      = Mzero.cmd     ;Command set
+;cmd      = Mzero_medium.cmd     ;Command set
 cns      = Mzero.cns     ;Constants
 st       = Mzero.cns     ;States
 stcommon = common1.cns   ;Common states

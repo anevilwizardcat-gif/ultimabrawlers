@@ -727,118 +727,116 @@ trigger1 = stateno = [5001,5170]
 ;===========================================================================
 ;                         PRESENTED by Ariel Co.
 ;===========================================================================
-;======================================================================
-; MAVERICK ZERO  ::  Hard-tier AI  v5  (GROUND-ONLY, cold & accurate)
-; NO neutral jumps, NO air juggle, NO air projectiles in neutral.
-; Reliable string: cLP->cMP->cHP -> beam super (~11 hits) or Shoryuken.
-; Every neutral move requires foe grounded & NOT knocked down (p2statetype!=L).
-; AILevel-native (0 = human, silent).
-;======================================================================
 
-; ---- GROUND CHAIN cLP -> cMP -> cHP ----
+
+;======================================================================
+; MAVERICK ZERO  ::  MEDIUM-tier AI            [ultimabrawlers / Ikemen GO]
+; A clear step below the Hard cmd: NO auto-parry wall (guard never counters),
+; basic combo (cLP-cMP xx Shoryuken, rare super), reacts only to obvious
+; jumps/attacks, lighter pressure, hoards meter. AILevel-native (0=human).
+;======================================================================
+[State -1, AI Guard Stand]
+type = HitOverride
+triggerall = AILevel
+triggerall = roundstate = 2 && statetype = S
+trigger1 = random < (AILevel*45)
+attr = SCA, NA,SA,HA, NP,SP,HP, AA,AP
+stateno = 130
+slot = 0
+time = 4
+[State -1, AI Guard Crouch]
+type = HitOverride
+triggerall = AILevel
+triggerall = roundstate = 2 && statetype = C
+trigger1 = random < (AILevel*45)
+attr = SCA, NA,SA,HA, NP,SP,HP, AA,AP
+stateno = 131
+slot = 0
+time = 4
+[State -1, AI Guard Air]
+type = HitOverride
+triggerall = AILevel
+triggerall = roundstate = 2 && (statetype = A || pos y < 0)
+trigger1 = random < (AILevel*45)
+attr = SCA, NA,SA,HA, NP,SP,HP, AA,AP
+stateno = 132
+slot = 0
+time = 4
+
+; -- basic combo: cLP -> cMP xx Shoryuken (super only occasionally) --
 [State -1, AI Chain cLP->cMP]
 type = ChangeState
 triggerall = AILevel
 trigger1 = stateno = 400 && movecontact
 value = 410
-[State -1, AI lowkick->cMP]
-type = ChangeState
-triggerall = AILevel
-trigger1 = stateno = 309 && movecontact
-value = 410
-[State -1, AI Chain cMP->cHP]
-type = ChangeState
-triggerall = AILevel
-trigger1 = stateno = 410 && movecontact
-value = 430
-
-; ---- ENDERS off a connected heavy (cHP/HK) ----
-; metered -> beam super (the long, reliable ~11-hit combo)
-[State -1, AI ender beam (metered)]
+[State -1, AI Super-cancel (rare)]
 type = ChangeState
 triggerall = AILevel
 triggerall = power >= 1000
-trigger1 = (stateno = 420 || stateno = 430 || stateno = 450) && movehit
-trigger1 = random < (AILevel*72)
+trigger1 = stateno = 410 && movecontact
+trigger1 = random < (AILevel*35)
 value = 3000
-; otherwise -> Shoryuken knockdown
-[State -1, AI ender Shoryuken]
+[State -1, AI Cancel ->Shoryuken]
 type = ChangeState
 triggerall = AILevel
-trigger1 = (stateno = 420 || stateno = 430 || stateno = 450) && movehit
+trigger1 = stateno = 410 && movecontact
 value = 1000
 
-; ---- DEFENSE: anti-air DP only when it truly reaches (close & low) ----
-[State -1, AI Anti-Air Shoryuken (close/low)]
-type = ChangeState
-triggerall = AILevel
-triggerall = ctrl && statetype != A
-triggerall = p2statetype = A
-triggerall = p2bodydist X <= 68
-triggerall = p2bodydist Y <= -8 && p2bodydist Y >= -95
-trigger1 = random < (AILevel*55)
-value = 1000
-[State -1, AI Reversal (obvious only)]
-type = ChangeState
-triggerall = AILevel
-triggerall = ctrl && statetype != A
-triggerall = p2movetype = A
-triggerall = p2bodydist X <= 60
-trigger1 = random < (AILevel*28)
-value = 1000
-
-; ---- FOOTSIES (foe grounded, upright, hittable; no double-tap) ----
-[State -1, AI Footsie HK]
+; -- anti-air (sometimes; jumpable) --
+[State -1, AI Anti-Air Shoryuken]
 type = ChangeState
 triggerall = AILevel
 triggerall = ctrl && statetype = S
-triggerall = p2statetype != A && p2statetype != L && p2movetype != A
-triggerall = p2bodydist X > 45 && p2bodydist X <= 85
-triggerall = prevstateno != 420
-trigger1 = random < (AILevel*30)
-value = 420
-[State -1, AI Footsie cHP]
+triggerall = p2statetype = A
+triggerall = p2bodydist X <= 75
+trigger1 = p2movetype = A || (p2bodydist Y <= 10 && p2bodydist Y >= -110)
+trigger1 = random < (AILevel*65)
+value = 1000
+
+; -- reversal vs obvious attack (sometimes, Shoryuken only - no super) --
+[State -1, AI Reversal vs attack]
 type = ChangeState
-triggerall = AILevel
-triggerall = ctrl && statetype != A
-triggerall = p2statetype != A && p2statetype != L && p2movetype != A
-triggerall = p2bodydist X > 40 && p2bodydist X <= 75
-triggerall = prevstateno != 430
-trigger1 = random < (AILevel*26)
-value = 430
+triggerall = AILevel >= 4
+triggerall = ctrl && statetype = S
+triggerall = p2movetype = A
+triggerall = enemynear, hitdefattr = SCA, NA,SA,HA, NP,SP,HP, AA,AP
+triggerall = p2bodydist X <= 60
+trigger1 = random < (AILevel*50)
+value = 1000
+
+; -- light pressure / footsies --
 [State -1, AI Starter cLP]
 type = ChangeState
 triggerall = AILevel
 triggerall = ctrl && statetype = S
-triggerall = p2statetype != A && p2statetype != L && p2movetype != H
-triggerall = p2bodydist X <= 40
-trigger1 = random < (AILevel*70)
+triggerall = p2statetype != A && p2movetype != H
+triggerall = p2bodydist X <= 45
+trigger1 = random < (AILevel*55)
 value = 400
+[State -1, AI Footsie cMP]
+type = ChangeState
+triggerall = AILevel >= 3
+triggerall = ctrl && statetype = S
+triggerall = p2statetype != A && p2movetype != A
+triggerall = p2bodydist X > 45 && p2bodydist X <= 90
+trigger1 = random < (AILevel*30)
+value = 410
 
-; ---- NEUTRAL: ground Hadoken zoning (upright foe only) / approach ----
+; -- light zoning + walk-in (no super-jump / no back-dash) --
 [State -1, AI Hadoken zoning]
 type = ChangeState
 triggerall = AILevel
 triggerall = ctrl && statetype = S
-triggerall = p2statetype != A && p2statetype != L && p2movetype != A
-triggerall = p2movetype != H
-triggerall = p2bodydist X > 150
-trigger1 = random < (AILevel*24)
+triggerall = p2statetype != A && p2movetype != A
+triggerall = p2bodydist X > 130
+trigger1 = random < (AILevel*30)
 value = 1100
-[State -1, AI Dash-in]
-type = ChangeState
-triggerall = AILevel
-triggerall = ctrl && statetype = S && stateno != 680
-triggerall = p2movetype != A
-triggerall = p2bodydist X > 100 && p2bodydist X <= 175
-trigger1 = random < (AILevel*55)
-value = 680
 [State -1, AI Walk Forward]
 type = ChangeState
 triggerall = AILevel
 triggerall = ctrl && statetype = S
 triggerall = p2movetype != A
-triggerall = p2bodydist X > 100 && p2bodydist X <= 150
+triggerall = p2bodydist X > 90 && p2bodydist X <= 130
 trigger1 = stateno != 20
 trigger1 = random < (AILevel*45)
 value = 20

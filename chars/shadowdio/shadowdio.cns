@@ -16472,6 +16472,11 @@ anim = 6900
 velset = 0,0
 ctrl = 0
 
+[State 3210, Tag Bench Cleanup]
+type = DestroySelf
+trigger1 = root,stateno = [6565610, 6565611]
+ignorehitpause = 1
+
 [State 181, EnvColor]
 type = Bgpalfx
 trigger1 = 1
@@ -16499,6 +16504,11 @@ physics = N
 anim = 6900
 velset = 0,0
 ctrl = 0
+
+[State 3211, Tag Bench Cleanup]
+type = DestroySelf
+trigger1 = root,stateno = [6565610, 6565611]
+ignorehitpause = 1
 
 [State 220, Voice]
 type = PlaySnd
@@ -20049,6 +20059,33 @@ x = P2Dist x
 
 ;---------------------------------------------------------------------------
 [Statedef -2]
+[State -2, Stop-end safety net: end stop if duration ran out while off the stop sequence (prevents frozen-forever softlock)]
+type = ChangeState
+trigger1 = roundstate = 2 && var(0) = 1 && !var(2) && movetype != H && stateno != [3200, 3211]
+value = 3202
+ignorehitpause = 1
+
+
+[State -2, Tag transition var(0) reset]
+type = VarSet
+trigger1 = stateno = [6565610, 6565620]
+var(0) = 0
+ignorehitpause = 1
+
+[State -2, Timestop Owner Flag]
+type = mapset
+trigger1 = !ishelper
+map = "ownStop"
+value = (var(0) != 0)
+ignorehitpause = 1
+
+[State -2, OwnTandem Broadcast]
+type = mapset
+trigger1 = 1
+map = "ownTandem"
+value = (var(8) = 2)
+ignorehitpause = 1
+
 
 ;configåƒÇ—èoÇµ
 [State 3001, Super]

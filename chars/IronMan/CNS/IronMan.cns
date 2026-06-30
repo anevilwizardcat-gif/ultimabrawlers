@@ -9603,7 +9603,7 @@ pos = 0,80
 scale = .5,.5
 ignorehitpause = 1
 supermove = 1
-pausemovetime = 99999999
+pausemovetime = 0
 id = 8550
 
 [State -2, コンボメッセージ]
@@ -9620,7 +9620,7 @@ pos = 0,80
 scale = .5,.5
 ignorehitpause = 1
 supermove = 1
-pausemovetime = 99999999
+pausemovetime = 0
 id = 8550
 
 ; 2P側
@@ -9638,7 +9638,7 @@ pos = 0,80
 scale = .5,.5
 ignorehitpause = 1
 supermove = 1
-pausemovetime = 99999999
+pausemovetime = 0
 id = 8550
 
 [State -2, コンボメッセージ]
@@ -9655,7 +9655,7 @@ pos = 0,80
 scale = .5,.5
 ignorehitpause = 1
 supermove = 1
-pausemovetime = 99999999
+pausemovetime = 0
 id = 8550
 
 ; アナウンス
@@ -9689,7 +9689,7 @@ bindtime = -1
 pos = 0,80
 scale = .5,.5
 supermove = 1
-pausemovetime = 99999999
+pausemovetime = 0
 ignorehitpause = 1
 id = 8570
 
@@ -9706,7 +9706,7 @@ bindtime = -1
 pos = 0,80
 scale = .5,.5
 supermove = 1
-pausemovetime = 99999999
+pausemovetime = 0
 ignorehitpause = 1
 id = 8570
 
@@ -9744,7 +9744,7 @@ bindtime = -1
 pos = 0,80
 scale = .5,.5
 supermove = 1
-pausemovetime = 99999999
+pausemovetime = 0
 ignorehitpause = 1
 id = 8570
 
@@ -9760,7 +9760,7 @@ bindtime = -1
 pos = 0,80
 scale = .5,.5
 supermove = 1
-pausemovetime = 99999999
+pausemovetime = 0
 ignorehitpause = 1
 id = 8570
 
@@ -10449,7 +10449,7 @@ postype = left
 pos = floor(screenpos x),195
 scale = .5,.5
 supermove = 1
-pausemovetime = 99999999
+pausemovetime = 0
 ignorehitpause = 1
 id = 8590
 
@@ -10464,7 +10464,7 @@ postype = left
 pos = floor(screenpos x),5
 scale = .5,.5
 supermove = 1
-pausemovetime = 99999999
+pausemovetime = 0
 ignorehitpause = 1
 id = 8590
  
@@ -10486,7 +10486,7 @@ postype = left
 pos = floor(screenpos x),195
 scale = .25,.25
 supermove = 1
-pausemovetime = 99999999
+pausemovetime = 0
 ignorehitpause = 1
 id = 8596
 
@@ -10507,7 +10507,7 @@ postype = left
 pos = floor(screenpos x),5
 scale = .25,.25
 supermove = 1
-pausemovetime = 99999999
+pausemovetime = 0
 ignorehitpause = 1
 id = 8598
 
@@ -10556,7 +10556,7 @@ pos = floor(screenpos x),195
 scale = .25,.25
 facing = -var(20)
 supermove = 1
-pausemovetime = 99999999
+pausemovetime = 0
 ignorehitpause = 1
 id = 8594
 
@@ -10573,7 +10573,7 @@ pos = floor(screenpos x),5
 scale = .25,.25
 facing = -var(20)
 supermove = 1
-pausemovetime = 99999999
+pausemovetime = 0
 ignorehitpause = 1
 id = 8594
 
@@ -10594,7 +10594,7 @@ postype = left
 pos = floor(enemy,screenpos x),195
 scale = .5,.5
 supermove = 1
-pausemovetime = 99999999
+pausemovetime = 0
 ignorehitpause = 1
 id = 8590
 
@@ -10611,7 +10611,7 @@ postype = left
 pos = floor(enemy,screenpos x),5
 scale = .5,.5
 supermove = 1
-pausemovetime = 99999999
+pausemovetime = 0
 ignorehitpause = 1
 id = 8590
  
@@ -10635,7 +10635,7 @@ postype = left
 pos = floor(enemy,screenpos x),195
 scale = .25,.25
 supermove = 1
-pausemovetime = 99999999
+pausemovetime = 0
 ignorehitpause = 1
 id = 18596
 
@@ -10658,7 +10658,7 @@ postype = left
 pos = floor(enemy,screenpos x),5
 scale = .25,.25
 supermove = 1
-pausemovetime = 99999999
+pausemovetime = 0
 ignorehitpause = 1
 id = 18598
 
@@ -10709,7 +10709,7 @@ pos = floor(enemy,screenpos x),195
 scale = .25,.25
 facing = -var(21)
 supermove = 1
-pausemovetime = 99999999
+pausemovetime = 0
 ignorehitpause = 1
 id = 18594
 
@@ -10728,7 +10728,7 @@ pos = floor(enemy,screenpos x),5
 scale = .25,.25
 facing = -var(21)
 supermove = 1
-pausemovetime = 99999999
+pausemovetime = 0
 ignorehitpause = 1
 id = 18594
 

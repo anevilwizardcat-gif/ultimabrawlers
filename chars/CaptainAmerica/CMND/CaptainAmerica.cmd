@@ -516,6 +516,34 @@ time=1
 
 
 [Statedef -1]
+;==========================================================
+; AI super usage (added) -- AI flag var(59)>0; human inputs unaffected.
+; Reliable Hyper Charging Star (3100) on combo-confirm + some neutral,
+; plus anti-air Hyper Stars and Stripes (3200).
+;==========================================================
+[State -1, AI Hyper Charging Star]
+type = ChangeState
+value = 3100
+triggerall = AILevel > 0
+triggerall = var(43) = 0
+triggerall = power >= 1000
+triggerall = statetype != A
+triggerall = p2bodydist X <= 230
+trigger1 = movehit && (stateno = [200,450] || stateno = [1000,1100] || stateno = [1300,1320] || stateno = 1400 || stateno = 1410 || stateno = 1420)
+trigger2 = ctrl && p2statetype != A && p2bodydist X >= 30 && random < 30
+
+[State -1, AI Hyper Stars and Stripes (anti-air)]
+type = ChangeState
+value = 3200
+triggerall = AILevel > 0
+triggerall = var(43) = 0
+triggerall = power >= 1000
+triggerall = statetype != A
+triggerall = ctrl
+triggerall = p2statetype = A
+triggerall = p2bodydist X <= 85
+trigger1 = random < 50
+
 ;ƒRƒ}ƒ“ƒh------------------------------------------------------------------
 
 ;---------------------------------------------------------------------------

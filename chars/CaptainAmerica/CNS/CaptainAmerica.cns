@@ -1671,7 +1671,7 @@ id = 2+4
 [State G-FX, Hit/Guard Spark]
 type = Explod
 trigger1 = MoveContact
-anim = Cond(MoveHit, 8000, 32004)
+anim = Cond(MoveHit, 8000, 8050)
 postype = p1
 pos = Floor(P2Dist X - 10), Floor(P2Dist Y - 90)
 bindtime = 1
@@ -1786,7 +1786,7 @@ givepower= 21
 [State G-FX, Hit/Guard Spark]
 type = Explod
 trigger1 = MoveContact
-anim = Cond(MoveHit, 8001, 32004)
+anim = Cond(MoveHit, 8001, 8050)
 postype = p1
 pos = Floor(P2Dist X), Floor(P2Dist Y - 75)
 bindtime = 1
@@ -1899,7 +1899,7 @@ givepower= 35
 [State G-FX, Hit/Guard Spark]
 type = Explod
 trigger1 = MoveContact
-anim = Cond(MoveHit, 8004, 32004)
+anim = Cond(MoveHit, 8004, 8050)
 postype = p1
 pos = Floor(P2Dist X - 10), Floor(P2Dist Y - 41)
 bindtime = 1
@@ -1998,7 +1998,7 @@ givepower= 35
 [State G-FX, Hit/Guard Spark]
 type = Explod
 trigger1 = MoveContact
-anim = Cond(MoveHit, 8004, 32004)
+anim = Cond(MoveHit, 8004, 8050)
 postype = p1
 pos = Floor(P2Dist X - 10), Floor(P2Dist Y - 75)
 bindtime = 1
@@ -2105,7 +2105,7 @@ id = 2+4
 [State G-FX, Hit/Guard Spark]
 type = Explod
 trigger1 = MoveContact
-anim = Cond(MoveHit, 8000, 32004)
+anim = Cond(MoveHit, 8000, 8050)
 postype = p1
 pos = Floor(P2Dist X - 10), Floor(P2Dist Y - 20)
 bindtime = 1
@@ -2406,7 +2406,7 @@ givepower= 21
 [State G-FX, Hit/Guard Spark]
 type = Explod
 trigger1 = MoveContact
-anim = Cond(MoveHit, 8001, 32004)
+anim = Cond(MoveHit, 8001, 8050)
 postype = p1
 pos = Floor(P2Dist X), Floor(P2Dist Y - 85)
 bindtime = 1
@@ -2507,7 +2507,7 @@ givepower= 21
 [State G-FX, Hit/Guard Spark]
 type = Explod
 trigger1 = MoveContact
-anim = Cond(MoveHit, 8001, 32004)
+anim = Cond(MoveHit, 8001, 8050)
 postype = p1
 pos = Floor(P2Dist X), Floor(P2Dist Y - 45)
 bindtime = 1
@@ -2607,7 +2607,7 @@ givepower= 35
 [State G-FX, Hit/Guard Spark]
 type = Explod
 trigger1 = MoveContact
-anim = Cond(MoveHit, 8004, 32004)
+anim = Cond(MoveHit, 8004, 8050)
 postype = p1
 pos = Floor(P2Dist X - 10), Floor(P2Dist Y - 75)
 bindtime = 1
@@ -2706,7 +2706,7 @@ id = 2+4
 [State G-FX, Hit/Guard Spark]
 type = Explod
 trigger1 = MoveContact
-anim = Cond(MoveHit, 8000, 32004)
+anim = Cond(MoveHit, 8000, 8050)
 postype = p1
 pos = Floor(P2Dist X - 10), Floor(P2Dist Y - 40)
 bindtime = 1
@@ -2806,7 +2806,7 @@ givepower= 21
 [State G-FX, Hit/Guard Spark]
 type = Explod
 trigger1 = MoveContact
-anim = Cond(MoveHit, 8001, 32004)
+anim = Cond(MoveHit, 8001, 8050)
 postype = p1
 pos = Floor(P2Dist X), Floor(P2Dist Y - 25)
 bindtime = 1
@@ -2900,7 +2900,7 @@ id = 1
 [State G-FX, Hit/Guard Spark]
 type = Explod
 trigger1 = MoveContact
-anim = Cond(MoveHit, 8004, 32004)
+anim = Cond(MoveHit, 8004, 8050)
 postype = p1
 pos = Floor(P2Dist X - 10), Floor(P2Dist Y - 55)
 bindtime = 1
@@ -3007,7 +3007,7 @@ id = 1
 [State G-FX, Hit/Guard Spark]
 type = Explod
 trigger1 = MoveContact
-anim = Cond(MoveHit, 8004, 32004)
+anim = Cond(MoveHit, 8004, 8050)
 postype = p1
 pos = Floor(P2Dist X - 10), Floor(P2Dist Y - 55)
 bindtime = 1
@@ -3115,7 +3115,7 @@ id = 1
 [State G-FX, Hit/Guard Spark]
 type = Explod
 trigger1 = MoveContact
-anim = Cond(MoveHit, 8000, 32004)
+anim = Cond(MoveHit, 8000, 8050)
 postype = p1
 pos = Floor(P2Dist X - 10), Floor(P2Dist Y - 15)
 bindtime = 1
@@ -3207,7 +3207,7 @@ givepower= 21
 [State G-FX, Hit/Guard Spark]
 type = Explod
 trigger1 = MoveContact
-anim = Cond(MoveHit, 8001, 32004)
+anim = Cond(MoveHit, 8001, 8050)
 postype = p1
 pos = Floor(P2Dist X), Floor(P2Dist Y - 15)
 bindtime = 1
@@ -3312,7 +3312,7 @@ givepower= 35
 [State G-FX, Hit/Guard Spark]
 type = Explod
 trigger1 = MoveContact
-anim = Cond(MoveHit, 8004, 32004)
+anim = Cond(MoveHit, 8004, 8050)
 postype = p1
 pos = Floor(P2Dist X - 10), Floor(P2Dist Y - 15)
 bindtime = 1
@@ -3405,7 +3405,7 @@ p2facing = 1
 [State G-FX, Hit/Guard Spark]
 type = Explod
 trigger1 = MoveContact
-anim = Cond(MoveHit, 8000, 32004)
+anim = Cond(MoveHit, 8000, 8050)
 postype = p1
 pos = Floor(P2Dist X - 10),  -35
 bindtime = 1
@@ -3523,7 +3523,7 @@ id = 1
 [State G-FX, Hit/Guard Spark]
 type = Explod
 trigger1 = MoveContact
-anim = Cond(MoveHit, 8001, 32004)
+anim = Cond(MoveHit, 8001, 8050)
 postype = p1
 pos = Floor(P2Dist X - 10), -45
 bindtime = 1
@@ -3674,7 +3674,7 @@ id = 4+64
 [State G-FX, Hit/Guard Spark]
 type = Explod
 trigger1 = MoveContact
-anim = Cond(MoveHit, 8004, 32004)
+anim = Cond(MoveHit, 8004, 8050)
 postype = p1
 pos = Floor(P2Dist X - 10), -45
 bindtime = 1
@@ -3825,7 +3825,7 @@ id = 4+64
 [State G-FX, Hit/Guard Spark]
 type = Explod
 trigger1 = MoveContact
-anim = Cond(MoveHit, 8004, 32004)
+anim = Cond(MoveHit, 8004, 8050)
 postype = p1
 pos = Floor(P2Dist X - 10), -45
 bindtime = 1
@@ -3928,7 +3928,7 @@ p2facing = 1
 [State G-FX, Hit/Guard Spark]
 type = Explod
 trigger1 = MoveContact
-anim = Cond(MoveHit, 8000, 32004)
+anim = Cond(MoveHit, 8000, 8050)
 postype = p1
 pos = Floor(P2Dist X - 10),  -65
 bindtime = 1
@@ -4044,7 +4044,7 @@ id = 1
 [State G-FX, Hit/Guard Spark]
 type = Explod
 trigger1 = MoveContact
-anim = Cond(MoveHit, 8001, 32004)
+anim = Cond(MoveHit, 8001, 8050)
 postype = p1
 pos = Floor(P2Dist X - 10), -65
 bindtime = 1
@@ -4195,7 +4195,7 @@ id = 4+64
 [State G-FX, Hit/Guard Spark]
 type = Explod
 trigger1 = MoveContact
-anim = Cond(MoveHit, 8004, 32004)
+anim = Cond(MoveHit, 8004, 8050)
 postype = p1
 pos = Floor(P2Dist X - 10), -45
 bindtime = 1
@@ -4346,7 +4346,7 @@ id = 4+64
 [State G-FX, Hit/Guard Spark]
 type = Explod
 trigger1 = MoveContact
-anim = Cond(MoveHit, 8004, 32004)
+anim = Cond(MoveHit, 8004, 8050)
 postype = p1
 pos = Floor(P2Dist X - 10), -45
 bindtime = 1
@@ -4496,7 +4496,7 @@ id = 4+64
 [State G-FX, Hit/Guard Spark]
 type = Explod
 trigger1 = MoveContact
-anim = Cond(MoveHit, 8004, 32004)
+anim = Cond(MoveHit, 8004, 8050)
 postype = p1
 pos = Floor(P2Dist X - 10), -45
 bindtime = 1
@@ -5685,7 +5685,7 @@ id = 1+4
 [State G-FX, Hit/Guard Spark]
 type = Explod
 trigger1 = MoveContact
-anim = ifelse(MoveHit, 8006, 32004)
+anim = ifelse(MoveHit, 8006, 8050)
 postype = p1
 pos = Floor(P2Dist X - 10), Floor(P2Dist Y - 40)
 bindtime = 1
@@ -5786,7 +5786,7 @@ down.velocity = -4,-5.5
 [State G-FX, Hit/Guard Spark]
 type = Explod
 trigger1 = MoveContact
-anim = ifelse(MoveHit, 8006, 32004)
+anim = ifelse(MoveHit, 8006, 8050)
 postype = p1
 pos = Floor(P2Dist X - 10), Floor(P2Dist Y - 70)
 bindtime = 1
@@ -5885,7 +5885,7 @@ down.velocity = -4,-5.5
 [State G-FX, Hit/Guard Spark]
 type = Explod
 trigger1 = MoveContact
-anim = ifelse(MoveHit, 8006, 32004)
+anim = ifelse(MoveHit, 8006, 8050)
 postype = p1
 pos = Floor(P2Dist X - 10), Floor(P2Dist Y - 70)
 bindtime = 1
@@ -6004,7 +6004,7 @@ ID = 1+4
 [State G-FX, Hit/Guard Spark]
 type = Explod
 trigger1 = MoveContact
-anim = ifelse(MoveHit, 8006, 32004)
+anim = ifelse(MoveHit, 8006, 8050)
 postype = p1
 pos = Floor(P2Dist X - 10), Floor(P2Dist Y - 70)
 bindtime = 1
@@ -6132,7 +6132,7 @@ ID = 1+4
 [State G-FX, Hit/Guard Spark]
 type = Explod
 trigger1 = MoveContact
-anim = ifelse(MoveHit, 8006, 32004)
+anim = ifelse(MoveHit, 8006, 8050)
 postype = p1
 pos = Floor(P2Dist X - 10), Floor(P2Dist Y - 70)
 bindtime = 1
@@ -6259,7 +6259,7 @@ ID = 1+4
 [State G-FX, Hit/Guard Spark]
 type = Explod
 trigger1 = MoveContact
-anim = ifelse(MoveHit, 8006, 32004)
+anim = ifelse(MoveHit, 8006, 8050)
 postype = p1
 pos = Floor(P2Dist X - 10), Floor(P2Dist Y - 70)
 bindtime = 1
@@ -6521,7 +6521,7 @@ id = 1+4
 [State G-FX, Hit/Guard Spark]
 type = Explod
 trigger1 = MoveContact
-anim = ifelse(MoveHit, 8006, 32004)
+anim = ifelse(MoveHit, 8006, 8050)
 postype = p1
 pos = Floor(P2Dist X), Floor(P2Dist Y - 60)
 bindtime = 1
@@ -6836,7 +6836,7 @@ id = 1+4
 [State G-FX, Hit/Guard Spark]
 type = Explod
 trigger1 = MoveContact
-anim = ifelse(MoveHit, 8006, 32004)
+anim = ifelse(MoveHit, 8006, 8050)
 postype = p1
 pos = Floor(P2Dist X), Floor(P2Dist Y - 60)
 bindtime = 1
@@ -7151,7 +7151,7 @@ id = 1+4
 [State G-FX, Hit/Guard Spark]
 type = Explod
 trigger1 = MoveContact
-anim = ifelse(MoveHit, 8006, 32004)
+anim = ifelse(MoveHit, 8006, 8050)
 postype = p1
 pos = Floor(P2Dist X), Floor(P2Dist Y - 60)
 bindtime = 1
@@ -7399,7 +7399,7 @@ ID =1+4
 [State G-FX, Hit/Guard Spark]
 type = Explod
 trigger1 = MoveContact
-anim = ifelse(MoveHit, 8006, 32004)
+anim = ifelse(MoveHit, 8006, 8050)
 postype = p1
 pos = Floor(P2Dist X - 10), Floor(P2Dist Y - 40)
 bindtime = 1
@@ -7508,7 +7508,7 @@ ID =1+4
 [State G-FX, Hit/Guard Spark]
 type = Explod
 trigger1 = MoveContact
-anim = ifelse(MoveHit, 8006, 32004)
+anim = ifelse(MoveHit, 8006, 8050)
 postype = p1
 pos = Floor(P2Dist X - 10), Floor(P2Dist Y - 40)
 bindtime = 1
@@ -7677,7 +7677,7 @@ ID =1+4
 [State G-FX, Hit/Guard Spark]
 type = Explod
 trigger1 = MoveContact
-anim = ifelse(MoveHit, 8006, 32004)
+anim = ifelse(MoveHit, 8006, 8050)
 postype = p1
 pos = Floor(P2Dist X - 10), Floor(P2Dist Y - 40)
 bindtime = 1
@@ -7784,7 +7784,7 @@ ID =1+4
 [State G-FX, Hit/Guard Spark]
 type = Explod
 trigger1 = MoveContact
-anim = ifelse(MoveHit, 8006, 32004)
+anim = ifelse(MoveHit, 8006, 8050)
 postype = p1
 pos = Floor(P2Dist X - 10), Floor(P2Dist Y - 40)
 bindtime = 1
@@ -7923,7 +7923,7 @@ ID =1+4
 [State G-FX, Hit/Guard Spark]
 type = Explod
 trigger1 = MoveContact
-anim = ifelse(MoveHit, 8006, 32004)
+anim = ifelse(MoveHit, 8006, 8050)
 postype = p1
 pos = Floor(P2Dist X - 10), Floor(P2Dist Y - 40)
 bindtime = 1
@@ -8031,7 +8031,7 @@ ID =1+4
 [State G-FX, Hit/Guard Spark]
 type = Explod
 trigger1 = MoveContact
-anim = ifelse(MoveHit, 8006, 32004)
+anim = ifelse(MoveHit, 8006, 8050)
 postype = p1
 pos = Floor(P2Dist X - 10), Floor(P2Dist Y - 40)
 bindtime = 1
@@ -8454,7 +8454,7 @@ down.velocity = -4,-4
 [State G-FX, Hit/Guard Spark]
 type = Explod
 trigger1 = MoveContact && time = 1
-anim = ifelse(MoveHit, 8006, 32004)
+anim = ifelse(MoveHit, 8006, 8050)
 postype = p1
 pos = Floor(P2Dist X), Floor(P2Dist Y - 60)
 bindtime = 1
@@ -8682,7 +8682,7 @@ hitonce = 1
 [State G-FX, Hit/Guard Spark]
 type = Explod
 trigger1 = MoveContact
-anim = ifelse(MoveHit, 8001, 32004)
+anim = ifelse(MoveHit, 8001, 8050)
 postype = p1
 pos = Floor(P2Dist X), Floor(P2Dist Y - 60)
 bindtime = 1
@@ -9564,7 +9564,7 @@ id = 2+4
 [State G-FX, Hit/Guard Spark]
 type = Explod
 trigger1 = MoveContact
-anim = ifelse(MoveHit, 8006, 32004)
+anim = ifelse(MoveHit, 8006, 8050)
 postype = p1
 pos = Floor(P2Dist X), Floor(P2Dist Y - 60)
 bindtime = 1
@@ -9753,7 +9753,7 @@ airguard.cornerpush.veloff = -28
 [State G-FX, Hit/Guard Spark]
 type = Explod
 trigger1 = MoveContact
-anim = ifelse(MoveHit, 8006, 32004)
+anim = ifelse(MoveHit, 8006, 8050)
 postype = p1
 pos = Floor(P2Dist X), Floor(P2Dist Y - 60)
 bindtime = 1
@@ -9996,7 +9996,7 @@ airguard.cornerpush.veloff = -16
 [State G-FX, Hit/Guard Spark]
 type = Explod
 trigger1 = MoveContact
-anim = ifelse(MoveHit, 8006, 32004)
+anim = ifelse(MoveHit, 8006, 8050)
 postype = p1
 pos = Floor(P2Dist X), Floor(P2Dist Y - 40)
 bindtime = 1
@@ -10256,7 +10256,7 @@ ID =1+4
 [State G-FX, Hit/Guard Spark]
 type = Explod
 trigger1 = MoveContact
-anim = ifelse(MoveHit, 8006, 32004)
+anim = ifelse(MoveHit, 8006, 8050)
 postype = p1
 pos = Floor(P2Dist X), Floor(P2Dist Y - 40)
 bindtime = 1
@@ -13422,7 +13422,7 @@ ID = 1+4
 [State G-FX, Hit/Guard Spark]
 type = Explod
 trigger1 = MoveContact
-anim = ifelse(MoveHit, 8006, 32004)
+anim = ifelse(MoveHit, 8006, 8050)
 postype = p1
 pos = Floor(P2Dist X - 10), Floor(P2Dist Y - 25)
 bindtime = 1
@@ -13511,7 +13511,7 @@ ID = 1+4
 [State G-FX, Hit/Guard Spark]
 type = Explod
 trigger1 = MoveContact
-anim = ifelse(MoveHit, 8006, 32004)
+anim = ifelse(MoveHit, 8006, 8050)
 postype = p1
 pos = Floor(P2Dist X - 10), Floor(P2Dist Y - 75)
 bindtime = 1
@@ -13601,7 +13601,7 @@ ID = 1+4
 [State G-FX, Hit/Guard Spark]
 type = Explod
 trigger1 = MoveContact
-anim = ifelse(MoveHit, 8006, 32004)
+anim = ifelse(MoveHit, 8006, 8050)
 postype = p1
 pos = Floor(P2Dist X - 10), Floor(P2Dist Y - 75)
 bindtime = 1
@@ -13688,7 +13688,7 @@ ID = 1+4
 [State G-FX, Hit/Guard Spark]
 type = Explod
 trigger1 = MoveContact
-anim = ifelse(MoveHit, 8006, 32004)
+anim = ifelse(MoveHit, 8006, 8050)
 postype = p1
 pos = Floor(P2Dist X - 10), Floor(P2Dist Y - 75)
 bindtime = 1
@@ -13767,7 +13767,7 @@ ID = 1+4
 [State G-FX, Hit/Guard Spark]
 type = Explod
 trigger1 = MoveContact
-anim = ifelse(MoveHit, 8006, 32004)
+anim = ifelse(MoveHit, 8006, 8050)
 postype = p1
 pos = Floor(P2Dist X - 10), Floor(P2Dist Y - 75)
 bindtime = 1
@@ -13854,7 +13854,7 @@ ID = 1+4
 [State G-FX, Hit/Guard Spark]
 type = Explod
 trigger1 = MoveContact
-anim = ifelse(MoveHit, 8006, 32004)
+anim = ifelse(MoveHit, 8006, 8050)
 postype = p1
 pos = Floor(P2Dist X - 10), Floor(P2Dist Y - 75)
 bindtime = 1
@@ -14145,6 +14145,14 @@ physics = N
 anim = 9999
 velset = 0,0
 ctrl = 0
+
+[State 8500, tear down when owner is hit out of super]
+type = RemoveExplod
+trigger1 = root, movetype = H
+
+[State 8500, despawn fx when owner is hit out of super]
+type = DestroySelf
+trigger1 = root, movetype = H
 
 [State 8500, PlaySnd]
 type = PlaySnd
@@ -14551,7 +14559,7 @@ postype = left
 pos = floor(screenpos x),195
 scale = .5,.5
 supermove = 1
-pausemovetime = 99999999
+pausemovetime = 0
 ignorehitpause = 1
 id = 8590
 
@@ -14566,7 +14574,7 @@ postype = left
 pos = floor(screenpos x),5
 scale = .5,.5
 supermove = 1
-pausemovetime = 99999999
+pausemovetime = 0
 ignorehitpause = 1
 id = 8590
  
@@ -14588,7 +14596,7 @@ postype = left
 pos = floor(screenpos x),195
 scale = .25,.25
 supermove = 1
-pausemovetime = 99999999
+pausemovetime = 0
 ignorehitpause = 1
 id = 8596
 
@@ -14609,7 +14617,7 @@ postype = left
 pos = floor(screenpos x),5
 scale = .25,.25
 supermove = 1
-pausemovetime = 99999999
+pausemovetime = 0
 ignorehitpause = 1
 id = 8598
 
@@ -14658,7 +14666,7 @@ pos = floor(screenpos x),195
 scale = .25,.25
 facing = -var(13)
 supermove = 1
-pausemovetime = 99999999
+pausemovetime = 0
 ignorehitpause = 1
 id = 8594
 
@@ -14675,7 +14683,7 @@ pos = floor(screenpos x),5
 scale = .25,.25
 facing = -var(13)
 supermove = 1
-pausemovetime = 99999999
+pausemovetime = 0
 ignorehitpause = 1
 id = 8594
 
@@ -14696,7 +14704,7 @@ postype = left
 pos = floor(enemy,screenpos x),195
 scale = .5,.5
 supermove = 1
-pausemovetime = 99999999
+pausemovetime = 0
 ignorehitpause = 1
 id = 8590
 
@@ -14713,7 +14721,7 @@ postype = left
 pos = floor(enemy,screenpos x),5
 scale = .5,.5
 supermove = 1
-pausemovetime = 99999999
+pausemovetime = 0
 ignorehitpause = 1
 id = 8590
  
@@ -14737,7 +14745,7 @@ postype = left
 pos = floor(enemy,screenpos x),195
 scale = .25,.25
 supermove = 1
-pausemovetime = 99999999
+pausemovetime = 0
 ignorehitpause = 1
 id = 18596
 
@@ -14760,7 +14768,7 @@ postype = left
 pos = floor(enemy,screenpos x),5
 scale = .25,.25
 supermove = 1
-pausemovetime = 99999999
+pausemovetime = 0
 ignorehitpause = 1
 id = 18598
 
@@ -14811,7 +14819,7 @@ pos = floor(enemy,screenpos x),195
 scale = .25,.25
 facing = -var(8)
 supermove = 1
-pausemovetime = 99999999
+pausemovetime = 0
 ignorehitpause = 1
 id = 18594
 
@@ -14830,7 +14838,7 @@ pos = floor(enemy,screenpos x),5
 scale = .25,.25
 facing = -var(8)
 supermove = 1
-pausemovetime = 99999999
+pausemovetime = 0
 ignorehitpause = 1
 id = 18594
 
@@ -15523,7 +15531,7 @@ ownpal = 0
 size.ground.back = 20
 size.ground.front = 20
 supermovetime = 9999999999
-pausemovetime = 9999999999
+pausemovetime = 0
 IgnoreHitPause = 1
 
 
